@@ -231,6 +231,8 @@
 #define FUNCTION_CALL_DOUBLE_STATE(x) TA_##x##_State
 #define FUNCTION_CALL_STATE_INIT(x)        TA_##x##_StateInit
 #define FUNCTION_CALL_STATE_FREE(x)        TA_##x##_StateFree
+#define FUNCTION_CALL_STATE_SAVE(x)        TA_##x##_StateSave
+#define FUNCTION_CALL_STATE_LOAD(x)        TA_##x##_StateLoad
 
 /* min/max value for a TA_Integer */
 #define TA_INTEGER_MIN (INT_MIN+1)
@@ -273,6 +275,7 @@ ENUM_BEGIN( RetCode )
     /*     15 */  ENUM_DEFINE( TA_BAD_OBJECT, BadObject ),
     /*     16 */  ENUM_DEFINE( TA_NOT_SUPPORTED, NotSupported ),
     /*     17 */  ENUM_DEFINE( TA_NEED_MORE_DATA, NeedMoreData ),
+    /*     18 */  ENUM_DEFINE( TA_IO_FAILED, IOFailed ),
     /*   5000 */  ENUM_DEFINE( TA_INTERNAL_ERROR, InternalError ) = 5000,
     /* 0xFFFF */  ENUM_DEFINE( TA_UNKNOWN_ERR, UnknownErr ) = 0xFFFF
 ENUM_END( RetCode )

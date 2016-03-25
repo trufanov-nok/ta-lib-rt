@@ -590,7 +590,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                         test->optInTimePeriod,
                         &outBegIdx,
                         &outNbElement,
-                        gBuffer[0].out0 );
+                        gBuffer[0].out0,
+                        _tmp_state_file);
       break;
 
    case TA_ROC_TEST:
@@ -601,7 +602,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                         test->optInTimePeriod,
                         &outBegIdx,
                         &outNbElement,
-                        gBuffer[0].out0 );
+                        gBuffer[0].out0,
+                        _tmp_state_file);
       break;
    case TA_ROCR_TEST:
       retCode = TA_ROCR_StateTest(
@@ -611,7 +613,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                          test->optInTimePeriod,
                          &outBegIdx,
                          &outNbElement,
-                         gBuffer[0].out0 );
+                         gBuffer[0].out0,
+                         _tmp_state_file);
       break;
    case TA_ROCR100_TEST:
       retCode = TA_ROCR100_StateTest(
@@ -621,7 +624,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                             test->optInTimePeriod,
                             &outBegIdx,
                             &outNbElement,
-                            gBuffer[0].out0 );
+                            gBuffer[0].out0,
+                            _tmp_state_file);
       break;
 
    case TA_ROCP_TEST:
@@ -632,7 +636,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                          test->optInTimePeriod,
                          &outBegIdx,
                          &outNbElement,
-                         gBuffer[0].out0 );
+                         gBuffer[0].out0,
+                         _tmp_state_file);
       break;
 
    default:

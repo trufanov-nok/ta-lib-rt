@@ -98,6 +98,16 @@
 /* Generated */    return TA_ACCBANDS_StateFree( (struct TA_ACCBANDS_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_ACCBANDS_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_ACCBANDS_StateSave( *(struct TA_ACCBANDS_State**) &params->_state,
+/* Generated */                           _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_ACCBANDS_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_ACCBANDS_StateLoad( (struct TA_ACCBANDS_State**) &params->_state,
+/* Generated */                           _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_ACOS_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -134,6 +144,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_ACOS_StateFree( (struct TA_ACOS_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_ACOS_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_ACOS_StateSave( *(struct TA_ACOS_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_ACOS_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_ACOS_StateLoad( (struct TA_ACOS_State**) &params->_state,
+/* Generated */                       _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_AD_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -178,6 +200,18 @@
 /* Generated */    return TA_AD_StateFree( (struct TA_AD_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_AD_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_AD_StateSave( *(struct TA_AD_State**) &params->_state,
+/* Generated */                     _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_AD_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_AD_StateLoad( (struct TA_AD_State**) &params->_state,
+/* Generated */                     _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_ADD_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -216,6 +250,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_ADD_StateFree( (struct TA_ADD_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_ADD_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_ADD_StateSave( *(struct TA_ADD_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_ADD_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_ADD_StateLoad( (struct TA_ADD_State**) &params->_state,
+/* Generated */                      _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_ADOSC_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -260,6 +306,16 @@
 /* Generated */    return TA_ADOSC_StateFree( (struct TA_ADOSC_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_ADOSC_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_ADOSC_StateSave( *(struct TA_ADOSC_State**) &params->_state,
+/* Generated */                        _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_ADOSC_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_ADOSC_StateLoad( (struct TA_ADOSC_State**) &params->_state,
+/* Generated */                        _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_ADX_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -298,6 +354,16 @@
 /* Generated */    return TA_ADX_StateFree( (struct TA_ADX_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_ADX_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_ADX_StateSave( *(struct TA_ADX_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_ADX_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_ADX_StateLoad( (struct TA_ADX_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_ADXR_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -335,6 +401,16 @@
 /* Generated */ {
 /* Generated */    return TA_ADXR_StateFree( (struct TA_ADXR_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_ADXR_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_ADXR_StateSave( *(struct TA_ADXR_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_ADXR_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_ADXR_StateLoad( (struct TA_ADXR_State**) &params->_state,
+/* Generated */                       _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_APO_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -376,6 +452,16 @@
 /* Generated */    return TA_APO_StateFree( (struct TA_APO_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_APO_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_APO_StateSave( *(struct TA_APO_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_APO_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_APO_StateLoad( (struct TA_APO_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_AROON_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -414,6 +500,16 @@
 /* Generated */    return TA_AROON_StateFree( (struct TA_AROON_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_AROON_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_AROON_StateSave( *(struct TA_AROON_State**) &params->_state,
+/* Generated */                        _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_AROON_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_AROON_StateLoad( (struct TA_AROON_State**) &params->_state,
+/* Generated */                        _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_AROONOSC_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -449,6 +545,16 @@
 /* Generated */ {
 /* Generated */    return TA_AROONOSC_StateFree( (struct TA_AROONOSC_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_AROONOSC_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_AROONOSC_StateSave( *(struct TA_AROONOSC_State**) &params->_state,
+/* Generated */                           _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_AROONOSC_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_AROONOSC_StateLoad( (struct TA_AROONOSC_State**) &params->_state,
+/* Generated */                           _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_ASIN_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -487,6 +593,18 @@
 /* Generated */    return TA_ASIN_StateFree( (struct TA_ASIN_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_ASIN_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_ASIN_StateSave( *(struct TA_ASIN_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_ASIN_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_ASIN_StateLoad( (struct TA_ASIN_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_ATAN_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -523,6 +641,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_ATAN_StateFree( (struct TA_ATAN_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_ATAN_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_ATAN_StateSave( *(struct TA_ATAN_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_ATAN_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_ATAN_StateLoad( (struct TA_ATAN_State**) &params->_state,
+/* Generated */                       _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_ATR_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -561,6 +691,16 @@
 /* Generated */ {
 /* Generated */    return TA_ATR_StateFree( (struct TA_ATR_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_ATR_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_ATR_StateSave( *(struct TA_ATR_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_ATR_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_ATR_StateLoad( (struct TA_ATR_State**) &params->_state,
+/* Generated */                      _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_AVGPRICE_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -605,6 +745,18 @@
 /* Generated */    return TA_AVGPRICE_StateFree( (struct TA_AVGPRICE_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_AVGPRICE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_AVGPRICE_StateSave( *(struct TA_AVGPRICE_State**) &params->_state,
+/* Generated */                           _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_AVGPRICE_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_AVGPRICE_StateLoad( (struct TA_AVGPRICE_State**) &params->_state,
+/* Generated */                           _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_AVGDEV_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -638,6 +790,16 @@
 /* Generated */ {
 /* Generated */    return TA_AVGDEV_StateFree( (struct TA_AVGDEV_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_AVGDEV_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_AVGDEV_StateSave( *(struct TA_AVGDEV_State**) &params->_state,
+/* Generated */                         _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_AVGDEV_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_AVGDEV_StateLoad( (struct TA_AVGDEV_State**) &params->_state,
+/* Generated */                         _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_BBANDS_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -686,6 +848,16 @@
 /* Generated */    return TA_BBANDS_StateFree( (struct TA_BBANDS_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_BBANDS_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_BBANDS_StateSave( *(struct TA_BBANDS_State**) &params->_state,
+/* Generated */                         _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_BBANDS_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_BBANDS_StateLoad( (struct TA_BBANDS_State**) &params->_state,
+/* Generated */                         _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_BETA_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -721,6 +893,16 @@
 /* Generated */ {
 /* Generated */    return TA_BETA_StateFree( (struct TA_BETA_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_BETA_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_BETA_StateSave( *(struct TA_BETA_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_BETA_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_BETA_StateLoad( (struct TA_BETA_State**) &params->_state,
+/* Generated */                       _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_BOP_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -765,6 +947,18 @@
 /* Generated */    return TA_BOP_StateFree( (struct TA_BOP_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_BOP_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_BOP_StateSave( *(struct TA_BOP_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_BOP_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_BOP_StateLoad( (struct TA_BOP_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CCI_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -802,6 +996,16 @@
 /* Generated */ {
 /* Generated */    return TA_CCI_StateFree( (struct TA_CCI_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CCI_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_CCI_StateSave( *(struct TA_CCI_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CCI_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_CCI_StateLoad( (struct TA_CCI_State**) &params->_state,
+/* Generated */                      _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDL2CROWS_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -846,6 +1050,18 @@
 /* Generated */    return TA_CDL2CROWS_StateFree( (struct TA_CDL2CROWS_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDL2CROWS_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDL2CROWS_StateSave( *(struct TA_CDL2CROWS_State**) &params->_state,
+/* Generated */                            _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDL2CROWS_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDL2CROWS_StateLoad( (struct TA_CDL2CROWS_State**) &params->_state,
+/* Generated */                            _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDL3BLACKCROWS_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -888,6 +1104,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_CDL3BLACKCROWS_StateFree( (struct TA_CDL3BLACKCROWS_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDL3BLACKCROWS_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDL3BLACKCROWS_StateSave( *(struct TA_CDL3BLACKCROWS_State**) &params->_state,
+/* Generated */                                 _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDL3BLACKCROWS_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDL3BLACKCROWS_StateLoad( (struct TA_CDL3BLACKCROWS_State**) &params->_state,
+/* Generated */                                 _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDL3INSIDE_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -932,6 +1160,18 @@
 /* Generated */    return TA_CDL3INSIDE_StateFree( (struct TA_CDL3INSIDE_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDL3INSIDE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDL3INSIDE_StateSave( *(struct TA_CDL3INSIDE_State**) &params->_state,
+/* Generated */                             _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDL3INSIDE_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDL3INSIDE_StateLoad( (struct TA_CDL3INSIDE_State**) &params->_state,
+/* Generated */                             _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDL3LINESTRIKE_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -974,6 +1214,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_CDL3LINESTRIKE_StateFree( (struct TA_CDL3LINESTRIKE_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDL3LINESTRIKE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDL3LINESTRIKE_StateSave( *(struct TA_CDL3LINESTRIKE_State**) &params->_state,
+/* Generated */                                 _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDL3LINESTRIKE_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDL3LINESTRIKE_StateLoad( (struct TA_CDL3LINESTRIKE_State**) &params->_state,
+/* Generated */                                 _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDL3OUTSIDE_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -1018,6 +1270,18 @@
 /* Generated */    return TA_CDL3OUTSIDE_StateFree( (struct TA_CDL3OUTSIDE_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDL3OUTSIDE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDL3OUTSIDE_StateSave( *(struct TA_CDL3OUTSIDE_State**) &params->_state,
+/* Generated */                              _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDL3OUTSIDE_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDL3OUTSIDE_StateLoad( (struct TA_CDL3OUTSIDE_State**) &params->_state,
+/* Generated */                              _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDL3STARSINSOUTH_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -1060,6 +1324,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_CDL3STARSINSOUTH_StateFree( (struct TA_CDL3STARSINSOUTH_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDL3STARSINSOUTH_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDL3STARSINSOUTH_StateSave( *(struct TA_CDL3STARSINSOUTH_State**) &params->_state,
+/* Generated */                                   _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDL3STARSINSOUTH_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDL3STARSINSOUTH_StateLoad( (struct TA_CDL3STARSINSOUTH_State**) &params->_state,
+/* Generated */                                   _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDL3WHITESOLDIERS_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -1104,6 +1380,18 @@
 /* Generated */    return TA_CDL3WHITESOLDIERS_StateFree( (struct TA_CDL3WHITESOLDIERS_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDL3WHITESOLDIERS_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDL3WHITESOLDIERS_StateSave( *(struct TA_CDL3WHITESOLDIERS_State**) &params->_state,
+/* Generated */                                    _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDL3WHITESOLDIERS_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDL3WHITESOLDIERS_StateLoad( (struct TA_CDL3WHITESOLDIERS_State**) &params->_state,
+/* Generated */                                    _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLABANDONEDBABY_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -1143,6 +1431,16 @@
 /* Generated */ {
 /* Generated */    return TA_CDLABANDONEDBABY_StateFree( (struct TA_CDLABANDONEDBABY_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLABANDONEDBABY_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_CDLABANDONEDBABY_StateSave( *(struct TA_CDLABANDONEDBABY_State**) &params->_state,
+/* Generated */                                   _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLABANDONEDBABY_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_CDLABANDONEDBABY_StateLoad( (struct TA_CDLABANDONEDBABY_State**) &params->_state,
+/* Generated */                                   _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDLADVANCEBLOCK_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -1187,6 +1485,18 @@
 /* Generated */    return TA_CDLADVANCEBLOCK_StateFree( (struct TA_CDLADVANCEBLOCK_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLADVANCEBLOCK_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLADVANCEBLOCK_StateSave( *(struct TA_CDLADVANCEBLOCK_State**) &params->_state,
+/* Generated */                                  _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLADVANCEBLOCK_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLADVANCEBLOCK_StateLoad( (struct TA_CDLADVANCEBLOCK_State**) &params->_state,
+/* Generated */                                  _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLBELTHOLD_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -1229,6 +1539,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_CDLBELTHOLD_StateFree( (struct TA_CDLBELTHOLD_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLBELTHOLD_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLBELTHOLD_StateSave( *(struct TA_CDLBELTHOLD_State**) &params->_state,
+/* Generated */                              _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLBELTHOLD_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLBELTHOLD_StateLoad( (struct TA_CDLBELTHOLD_State**) &params->_state,
+/* Generated */                              _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDLBREAKAWAY_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -1273,6 +1595,18 @@
 /* Generated */    return TA_CDLBREAKAWAY_StateFree( (struct TA_CDLBREAKAWAY_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLBREAKAWAY_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLBREAKAWAY_StateSave( *(struct TA_CDLBREAKAWAY_State**) &params->_state,
+/* Generated */                               _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLBREAKAWAY_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLBREAKAWAY_StateLoad( (struct TA_CDLBREAKAWAY_State**) &params->_state,
+/* Generated */                               _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLCLOSINGMARUBOZU_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -1315,6 +1649,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_CDLCLOSINGMARUBOZU_StateFree( (struct TA_CDLCLOSINGMARUBOZU_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLCLOSINGMARUBOZU_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLCLOSINGMARUBOZU_StateSave( *(struct TA_CDLCLOSINGMARUBOZU_State**) &params->_state,
+/* Generated */                                     _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLCLOSINGMARUBOZU_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLCLOSINGMARUBOZU_StateLoad( (struct TA_CDLCLOSINGMARUBOZU_State**) &params->_state,
+/* Generated */                                     _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDLCONCEALBABYSWALL_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -1359,6 +1705,18 @@
 /* Generated */    return TA_CDLCONCEALBABYSWALL_StateFree( (struct TA_CDLCONCEALBABYSWALL_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLCONCEALBABYSWALL_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLCONCEALBABYSWALL_StateSave( *(struct TA_CDLCONCEALBABYSWALL_State**) &params->_state,
+/* Generated */                                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLCONCEALBABYSWALL_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLCONCEALBABYSWALL_StateLoad( (struct TA_CDLCONCEALBABYSWALL_State**) &params->_state,
+/* Generated */                                      _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLCOUNTERATTACK_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -1402,6 +1760,18 @@
 /* Generated */    return TA_CDLCOUNTERATTACK_StateFree( (struct TA_CDLCOUNTERATTACK_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLCOUNTERATTACK_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLCOUNTERATTACK_StateSave( *(struct TA_CDLCOUNTERATTACK_State**) &params->_state,
+/* Generated */                                   _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLCOUNTERATTACK_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLCOUNTERATTACK_StateLoad( (struct TA_CDLCOUNTERATTACK_State**) &params->_state,
+/* Generated */                                   _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLDARKCLOUDCOVER_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -1441,6 +1811,16 @@
 /* Generated */ {
 /* Generated */    return TA_CDLDARKCLOUDCOVER_StateFree( (struct TA_CDLDARKCLOUDCOVER_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLDARKCLOUDCOVER_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_CDLDARKCLOUDCOVER_StateSave( *(struct TA_CDLDARKCLOUDCOVER_State**) &params->_state,
+/* Generated */                                    _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLDARKCLOUDCOVER_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_CDLDARKCLOUDCOVER_StateLoad( (struct TA_CDLDARKCLOUDCOVER_State**) &params->_state,
+/* Generated */                                    _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDLDOJI_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -1485,6 +1865,18 @@
 /* Generated */    return TA_CDLDOJI_StateFree( (struct TA_CDLDOJI_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLDOJI_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLDOJI_StateSave( *(struct TA_CDLDOJI_State**) &params->_state,
+/* Generated */                          _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLDOJI_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLDOJI_StateLoad( (struct TA_CDLDOJI_State**) &params->_state,
+/* Generated */                          _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLDOJISTAR_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -1527,6 +1919,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_CDLDOJISTAR_StateFree( (struct TA_CDLDOJISTAR_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLDOJISTAR_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLDOJISTAR_StateSave( *(struct TA_CDLDOJISTAR_State**) &params->_state,
+/* Generated */                              _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLDOJISTAR_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLDOJISTAR_StateLoad( (struct TA_CDLDOJISTAR_State**) &params->_state,
+/* Generated */                              _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDLDRAGONFLYDOJI_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -1571,6 +1975,18 @@
 /* Generated */    return TA_CDLDRAGONFLYDOJI_StateFree( (struct TA_CDLDRAGONFLYDOJI_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLDRAGONFLYDOJI_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLDRAGONFLYDOJI_StateSave( *(struct TA_CDLDRAGONFLYDOJI_State**) &params->_state,
+/* Generated */                                   _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLDRAGONFLYDOJI_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLDRAGONFLYDOJI_StateLoad( (struct TA_CDLDRAGONFLYDOJI_State**) &params->_state,
+/* Generated */                                   _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLENGULFING_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -1614,6 +2030,18 @@
 /* Generated */    return TA_CDLENGULFING_StateFree( (struct TA_CDLENGULFING_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLENGULFING_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLENGULFING_StateSave( *(struct TA_CDLENGULFING_State**) &params->_state,
+/* Generated */                               _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLENGULFING_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLENGULFING_StateLoad( (struct TA_CDLENGULFING_State**) &params->_state,
+/* Generated */                               _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLEVENINGDOJISTAR_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -1654,6 +2082,16 @@
 /* Generated */    return TA_CDLEVENINGDOJISTAR_StateFree( (struct TA_CDLEVENINGDOJISTAR_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLEVENINGDOJISTAR_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_CDLEVENINGDOJISTAR_StateSave( *(struct TA_CDLEVENINGDOJISTAR_State**) &params->_state,
+/* Generated */                                     _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLEVENINGDOJISTAR_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_CDLEVENINGDOJISTAR_StateLoad( (struct TA_CDLEVENINGDOJISTAR_State**) &params->_state,
+/* Generated */                                     _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLEVENINGSTAR_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -1693,6 +2131,16 @@
 /* Generated */ {
 /* Generated */    return TA_CDLEVENINGSTAR_StateFree( (struct TA_CDLEVENINGSTAR_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLEVENINGSTAR_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_CDLEVENINGSTAR_StateSave( *(struct TA_CDLEVENINGSTAR_State**) &params->_state,
+/* Generated */                                 _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLEVENINGSTAR_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_CDLEVENINGSTAR_StateLoad( (struct TA_CDLEVENINGSTAR_State**) &params->_state,
+/* Generated */                                 _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDLGAPSIDESIDEWHITE_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -1737,6 +2185,18 @@
 /* Generated */    return TA_CDLGAPSIDESIDEWHITE_StateFree( (struct TA_CDLGAPSIDESIDEWHITE_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLGAPSIDESIDEWHITE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLGAPSIDESIDEWHITE_StateSave( *(struct TA_CDLGAPSIDESIDEWHITE_State**) &params->_state,
+/* Generated */                                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLGAPSIDESIDEWHITE_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLGAPSIDESIDEWHITE_StateLoad( (struct TA_CDLGAPSIDESIDEWHITE_State**) &params->_state,
+/* Generated */                                      _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLGRAVESTONEDOJI_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -1779,6 +2239,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_CDLGRAVESTONEDOJI_StateFree( (struct TA_CDLGRAVESTONEDOJI_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLGRAVESTONEDOJI_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLGRAVESTONEDOJI_StateSave( *(struct TA_CDLGRAVESTONEDOJI_State**) &params->_state,
+/* Generated */                                    _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLGRAVESTONEDOJI_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLGRAVESTONEDOJI_StateLoad( (struct TA_CDLGRAVESTONEDOJI_State**) &params->_state,
+/* Generated */                                    _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDLHAMMER_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -1823,6 +2295,18 @@
 /* Generated */    return TA_CDLHAMMER_StateFree( (struct TA_CDLHAMMER_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLHAMMER_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLHAMMER_StateSave( *(struct TA_CDLHAMMER_State**) &params->_state,
+/* Generated */                            _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLHAMMER_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLHAMMER_StateLoad( (struct TA_CDLHAMMER_State**) &params->_state,
+/* Generated */                            _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLHANGINGMAN_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -1865,6 +2349,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_CDLHANGINGMAN_StateFree( (struct TA_CDLHANGINGMAN_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLHANGINGMAN_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLHANGINGMAN_StateSave( *(struct TA_CDLHANGINGMAN_State**) &params->_state,
+/* Generated */                                _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLHANGINGMAN_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLHANGINGMAN_StateLoad( (struct TA_CDLHANGINGMAN_State**) &params->_state,
+/* Generated */                                _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDLHARAMI_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -1909,6 +2405,18 @@
 /* Generated */    return TA_CDLHARAMI_StateFree( (struct TA_CDLHARAMI_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLHARAMI_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLHARAMI_StateSave( *(struct TA_CDLHARAMI_State**) &params->_state,
+/* Generated */                            _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLHARAMI_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLHARAMI_StateLoad( (struct TA_CDLHARAMI_State**) &params->_state,
+/* Generated */                            _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLHARAMICROSS_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -1951,6 +2459,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_CDLHARAMICROSS_StateFree( (struct TA_CDLHARAMICROSS_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLHARAMICROSS_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLHARAMICROSS_StateSave( *(struct TA_CDLHARAMICROSS_State**) &params->_state,
+/* Generated */                                 _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLHARAMICROSS_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLHARAMICROSS_StateLoad( (struct TA_CDLHARAMICROSS_State**) &params->_state,
+/* Generated */                                 _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDLHIGHWAVE_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -1995,6 +2515,18 @@
 /* Generated */    return TA_CDLHIGHWAVE_StateFree( (struct TA_CDLHIGHWAVE_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLHIGHWAVE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLHIGHWAVE_StateSave( *(struct TA_CDLHIGHWAVE_State**) &params->_state,
+/* Generated */                              _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLHIGHWAVE_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLHIGHWAVE_StateLoad( (struct TA_CDLHIGHWAVE_State**) &params->_state,
+/* Generated */                              _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLHIKKAKE_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -2037,6 +2569,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_CDLHIKKAKE_StateFree( (struct TA_CDLHIKKAKE_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLHIKKAKE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLHIKKAKE_StateSave( *(struct TA_CDLHIKKAKE_State**) &params->_state,
+/* Generated */                             _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLHIKKAKE_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLHIKKAKE_StateLoad( (struct TA_CDLHIKKAKE_State**) &params->_state,
+/* Generated */                             _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDLHIKKAKEMOD_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -2081,6 +2625,18 @@
 /* Generated */    return TA_CDLHIKKAKEMOD_StateFree( (struct TA_CDLHIKKAKEMOD_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLHIKKAKEMOD_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLHIKKAKEMOD_StateSave( *(struct TA_CDLHIKKAKEMOD_State**) &params->_state,
+/* Generated */                                _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLHIKKAKEMOD_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLHIKKAKEMOD_StateLoad( (struct TA_CDLHIKKAKEMOD_State**) &params->_state,
+/* Generated */                                _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLHOMINGPIGEON_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -2123,6 +2679,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_CDLHOMINGPIGEON_StateFree( (struct TA_CDLHOMINGPIGEON_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLHOMINGPIGEON_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLHOMINGPIGEON_StateSave( *(struct TA_CDLHOMINGPIGEON_State**) &params->_state,
+/* Generated */                                  _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLHOMINGPIGEON_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLHOMINGPIGEON_StateLoad( (struct TA_CDLHOMINGPIGEON_State**) &params->_state,
+/* Generated */                                  _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDLIDENTICAL3CROWS_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -2167,6 +2735,18 @@
 /* Generated */    return TA_CDLIDENTICAL3CROWS_StateFree( (struct TA_CDLIDENTICAL3CROWS_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLIDENTICAL3CROWS_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLIDENTICAL3CROWS_StateSave( *(struct TA_CDLIDENTICAL3CROWS_State**) &params->_state,
+/* Generated */                                     _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLIDENTICAL3CROWS_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLIDENTICAL3CROWS_StateLoad( (struct TA_CDLIDENTICAL3CROWS_State**) &params->_state,
+/* Generated */                                     _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLINNECK_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -2209,6 +2789,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_CDLINNECK_StateFree( (struct TA_CDLINNECK_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLINNECK_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLINNECK_StateSave( *(struct TA_CDLINNECK_State**) &params->_state,
+/* Generated */                            _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLINNECK_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLINNECK_StateLoad( (struct TA_CDLINNECK_State**) &params->_state,
+/* Generated */                            _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDLINVERTEDHAMMER_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -2253,6 +2845,18 @@
 /* Generated */    return TA_CDLINVERTEDHAMMER_StateFree( (struct TA_CDLINVERTEDHAMMER_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLINVERTEDHAMMER_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLINVERTEDHAMMER_StateSave( *(struct TA_CDLINVERTEDHAMMER_State**) &params->_state,
+/* Generated */                                    _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLINVERTEDHAMMER_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLINVERTEDHAMMER_StateLoad( (struct TA_CDLINVERTEDHAMMER_State**) &params->_state,
+/* Generated */                                    _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLKICKING_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -2295,6 +2899,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_CDLKICKING_StateFree( (struct TA_CDLKICKING_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLKICKING_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLKICKING_StateSave( *(struct TA_CDLKICKING_State**) &params->_state,
+/* Generated */                             _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLKICKING_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLKICKING_StateLoad( (struct TA_CDLKICKING_State**) &params->_state,
+/* Generated */                             _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDLKICKINGBYLENGTH_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -2339,6 +2955,18 @@
 /* Generated */    return TA_CDLKICKINGBYLENGTH_StateFree( (struct TA_CDLKICKINGBYLENGTH_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLKICKINGBYLENGTH_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLKICKINGBYLENGTH_StateSave( *(struct TA_CDLKICKINGBYLENGTH_State**) &params->_state,
+/* Generated */                                     _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLKICKINGBYLENGTH_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLKICKINGBYLENGTH_StateLoad( (struct TA_CDLKICKINGBYLENGTH_State**) &params->_state,
+/* Generated */                                     _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLLADDERBOTTOM_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -2381,6 +3009,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_CDLLADDERBOTTOM_StateFree( (struct TA_CDLLADDERBOTTOM_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLLADDERBOTTOM_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLLADDERBOTTOM_StateSave( *(struct TA_CDLLADDERBOTTOM_State**) &params->_state,
+/* Generated */                                  _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLLADDERBOTTOM_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLLADDERBOTTOM_StateLoad( (struct TA_CDLLADDERBOTTOM_State**) &params->_state,
+/* Generated */                                  _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDLLONGLEGGEDDOJI_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -2425,6 +3065,18 @@
 /* Generated */    return TA_CDLLONGLEGGEDDOJI_StateFree( (struct TA_CDLLONGLEGGEDDOJI_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLLONGLEGGEDDOJI_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLLONGLEGGEDDOJI_StateSave( *(struct TA_CDLLONGLEGGEDDOJI_State**) &params->_state,
+/* Generated */                                    _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLLONGLEGGEDDOJI_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLLONGLEGGEDDOJI_StateLoad( (struct TA_CDLLONGLEGGEDDOJI_State**) &params->_state,
+/* Generated */                                    _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLLONGLINE_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -2467,6 +3119,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_CDLLONGLINE_StateFree( (struct TA_CDLLONGLINE_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLLONGLINE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLLONGLINE_StateSave( *(struct TA_CDLLONGLINE_State**) &params->_state,
+/* Generated */                              _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLLONGLINE_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLLONGLINE_StateLoad( (struct TA_CDLLONGLINE_State**) &params->_state,
+/* Generated */                              _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDLMARUBOZU_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -2511,6 +3175,18 @@
 /* Generated */    return TA_CDLMARUBOZU_StateFree( (struct TA_CDLMARUBOZU_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLMARUBOZU_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLMARUBOZU_StateSave( *(struct TA_CDLMARUBOZU_State**) &params->_state,
+/* Generated */                              _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLMARUBOZU_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLMARUBOZU_StateLoad( (struct TA_CDLMARUBOZU_State**) &params->_state,
+/* Generated */                              _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLMATCHINGLOW_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -2554,6 +3230,18 @@
 /* Generated */    return TA_CDLMATCHINGLOW_StateFree( (struct TA_CDLMATCHINGLOW_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLMATCHINGLOW_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLMATCHINGLOW_StateSave( *(struct TA_CDLMATCHINGLOW_State**) &params->_state,
+/* Generated */                                 _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLMATCHINGLOW_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLMATCHINGLOW_StateLoad( (struct TA_CDLMATCHINGLOW_State**) &params->_state,
+/* Generated */                                 _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLMATHOLD_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -2593,6 +3281,16 @@
 /* Generated */ {
 /* Generated */    return TA_CDLMATHOLD_StateFree( (struct TA_CDLMATHOLD_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLMATHOLD_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_CDLMATHOLD_StateSave( *(struct TA_CDLMATHOLD_State**) &params->_state,
+/* Generated */                             _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLMATHOLD_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_CDLMATHOLD_StateLoad( (struct TA_CDLMATHOLD_State**) &params->_state,
+/* Generated */                             _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDLMORNINGDOJISTAR_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -2634,6 +3332,16 @@
 /* Generated */    return TA_CDLMORNINGDOJISTAR_StateFree( (struct TA_CDLMORNINGDOJISTAR_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLMORNINGDOJISTAR_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_CDLMORNINGDOJISTAR_StateSave( *(struct TA_CDLMORNINGDOJISTAR_State**) &params->_state,
+/* Generated */                                     _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLMORNINGDOJISTAR_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_CDLMORNINGDOJISTAR_StateLoad( (struct TA_CDLMORNINGDOJISTAR_State**) &params->_state,
+/* Generated */                                     _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLMORNINGSTAR_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -2673,6 +3381,16 @@
 /* Generated */ {
 /* Generated */    return TA_CDLMORNINGSTAR_StateFree( (struct TA_CDLMORNINGSTAR_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLMORNINGSTAR_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_CDLMORNINGSTAR_StateSave( *(struct TA_CDLMORNINGSTAR_State**) &params->_state,
+/* Generated */                                 _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLMORNINGSTAR_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_CDLMORNINGSTAR_StateLoad( (struct TA_CDLMORNINGSTAR_State**) &params->_state,
+/* Generated */                                 _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDLONNECK_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -2717,6 +3435,18 @@
 /* Generated */    return TA_CDLONNECK_StateFree( (struct TA_CDLONNECK_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLONNECK_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLONNECK_StateSave( *(struct TA_CDLONNECK_State**) &params->_state,
+/* Generated */                            _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLONNECK_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLONNECK_StateLoad( (struct TA_CDLONNECK_State**) &params->_state,
+/* Generated */                            _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLPIERCING_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -2759,6 +3489,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_CDLPIERCING_StateFree( (struct TA_CDLPIERCING_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLPIERCING_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLPIERCING_StateSave( *(struct TA_CDLPIERCING_State**) &params->_state,
+/* Generated */                              _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLPIERCING_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLPIERCING_StateLoad( (struct TA_CDLPIERCING_State**) &params->_state,
+/* Generated */                              _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDLRICKSHAWMAN_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -2803,6 +3545,18 @@
 /* Generated */    return TA_CDLRICKSHAWMAN_StateFree( (struct TA_CDLRICKSHAWMAN_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLRICKSHAWMAN_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLRICKSHAWMAN_StateSave( *(struct TA_CDLRICKSHAWMAN_State**) &params->_state,
+/* Generated */                                 _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLRICKSHAWMAN_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLRICKSHAWMAN_StateLoad( (struct TA_CDLRICKSHAWMAN_State**) &params->_state,
+/* Generated */                                 _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLRISEFALL3METHODS_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -2845,6 +3599,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_CDLRISEFALL3METHODS_StateFree( (struct TA_CDLRISEFALL3METHODS_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLRISEFALL3METHODS_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLRISEFALL3METHODS_StateSave( *(struct TA_CDLRISEFALL3METHODS_State**) &params->_state,
+/* Generated */                                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLRISEFALL3METHODS_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLRISEFALL3METHODS_StateLoad( (struct TA_CDLRISEFALL3METHODS_State**) &params->_state,
+/* Generated */                                      _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDLSEPARATINGLINES_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -2889,6 +3655,18 @@
 /* Generated */    return TA_CDLSEPARATINGLINES_StateFree( (struct TA_CDLSEPARATINGLINES_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLSEPARATINGLINES_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLSEPARATINGLINES_StateSave( *(struct TA_CDLSEPARATINGLINES_State**) &params->_state,
+/* Generated */                                     _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLSEPARATINGLINES_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLSEPARATINGLINES_StateLoad( (struct TA_CDLSEPARATINGLINES_State**) &params->_state,
+/* Generated */                                     _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLSHOOTINGSTAR_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -2931,6 +3709,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_CDLSHOOTINGSTAR_StateFree( (struct TA_CDLSHOOTINGSTAR_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLSHOOTINGSTAR_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLSHOOTINGSTAR_StateSave( *(struct TA_CDLSHOOTINGSTAR_State**) &params->_state,
+/* Generated */                                  _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLSHOOTINGSTAR_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLSHOOTINGSTAR_StateLoad( (struct TA_CDLSHOOTINGSTAR_State**) &params->_state,
+/* Generated */                                  _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDLSHORTLINE_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -2975,6 +3765,18 @@
 /* Generated */    return TA_CDLSHORTLINE_StateFree( (struct TA_CDLSHORTLINE_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLSHORTLINE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLSHORTLINE_StateSave( *(struct TA_CDLSHORTLINE_State**) &params->_state,
+/* Generated */                               _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLSHORTLINE_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLSHORTLINE_StateLoad( (struct TA_CDLSHORTLINE_State**) &params->_state,
+/* Generated */                               _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLSPINNINGTOP_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -3017,6 +3819,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_CDLSPINNINGTOP_StateFree( (struct TA_CDLSPINNINGTOP_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLSPINNINGTOP_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLSPINNINGTOP_StateSave( *(struct TA_CDLSPINNINGTOP_State**) &params->_state,
+/* Generated */                                 _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLSPINNINGTOP_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLSPINNINGTOP_StateLoad( (struct TA_CDLSPINNINGTOP_State**) &params->_state,
+/* Generated */                                 _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDLSTALLEDPATTERN_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -3061,6 +3875,18 @@
 /* Generated */    return TA_CDLSTALLEDPATTERN_StateFree( (struct TA_CDLSTALLEDPATTERN_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLSTALLEDPATTERN_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLSTALLEDPATTERN_StateSave( *(struct TA_CDLSTALLEDPATTERN_State**) &params->_state,
+/* Generated */                                    _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLSTALLEDPATTERN_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLSTALLEDPATTERN_StateLoad( (struct TA_CDLSTALLEDPATTERN_State**) &params->_state,
+/* Generated */                                    _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLSTICKSANDWICH_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -3103,6 +3929,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_CDLSTICKSANDWICH_StateFree( (struct TA_CDLSTICKSANDWICH_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLSTICKSANDWICH_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLSTICKSANDWICH_StateSave( *(struct TA_CDLSTICKSANDWICH_State**) &params->_state,
+/* Generated */                                   _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLSTICKSANDWICH_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLSTICKSANDWICH_StateLoad( (struct TA_CDLSTICKSANDWICH_State**) &params->_state,
+/* Generated */                                   _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDLTAKURI_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -3147,6 +3985,18 @@
 /* Generated */    return TA_CDLTAKURI_StateFree( (struct TA_CDLTAKURI_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLTAKURI_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLTAKURI_StateSave( *(struct TA_CDLTAKURI_State**) &params->_state,
+/* Generated */                            _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLTAKURI_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLTAKURI_StateLoad( (struct TA_CDLTAKURI_State**) &params->_state,
+/* Generated */                            _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLTASUKIGAP_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -3189,6 +4039,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_CDLTASUKIGAP_StateFree( (struct TA_CDLTASUKIGAP_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLTASUKIGAP_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLTASUKIGAP_StateSave( *(struct TA_CDLTASUKIGAP_State**) &params->_state,
+/* Generated */                               _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLTASUKIGAP_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLTASUKIGAP_StateLoad( (struct TA_CDLTASUKIGAP_State**) &params->_state,
+/* Generated */                               _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDLTHRUSTING_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -3233,6 +4095,18 @@
 /* Generated */    return TA_CDLTHRUSTING_StateFree( (struct TA_CDLTHRUSTING_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLTHRUSTING_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLTHRUSTING_StateSave( *(struct TA_CDLTHRUSTING_State**) &params->_state,
+/* Generated */                               _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLTHRUSTING_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLTHRUSTING_StateLoad( (struct TA_CDLTHRUSTING_State**) &params->_state,
+/* Generated */                               _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLTRISTAR_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -3275,6 +4149,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_CDLTRISTAR_StateFree( (struct TA_CDLTRISTAR_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLTRISTAR_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLTRISTAR_StateSave( *(struct TA_CDLTRISTAR_State**) &params->_state,
+/* Generated */                             _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLTRISTAR_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLTRISTAR_StateLoad( (struct TA_CDLTRISTAR_State**) &params->_state,
+/* Generated */                             _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDLUNIQUE3RIVER_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -3319,6 +4205,18 @@
 /* Generated */    return TA_CDLUNIQUE3RIVER_StateFree( (struct TA_CDLUNIQUE3RIVER_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLUNIQUE3RIVER_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLUNIQUE3RIVER_StateSave( *(struct TA_CDLUNIQUE3RIVER_State**) &params->_state,
+/* Generated */                                  _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLUNIQUE3RIVER_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLUNIQUE3RIVER_StateLoad( (struct TA_CDLUNIQUE3RIVER_State**) &params->_state,
+/* Generated */                                  _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CDLUPSIDEGAP2CROWS_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -3361,6 +4259,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_CDLUPSIDEGAP2CROWS_StateFree( (struct TA_CDLUPSIDEGAP2CROWS_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLUPSIDEGAP2CROWS_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLUPSIDEGAP2CROWS_StateSave( *(struct TA_CDLUPSIDEGAP2CROWS_State**) &params->_state,
+/* Generated */                                     _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLUPSIDEGAP2CROWS_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLUPSIDEGAP2CROWS_StateLoad( (struct TA_CDLUPSIDEGAP2CROWS_State**) &params->_state,
+/* Generated */                                     _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CDLXSIDEGAP3METHODS_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -3405,6 +4315,18 @@
 /* Generated */    return TA_CDLXSIDEGAP3METHODS_StateFree( (struct TA_CDLXSIDEGAP3METHODS_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CDLXSIDEGAP3METHODS_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLXSIDEGAP3METHODS_StateSave( *(struct TA_CDLXSIDEGAP3METHODS_State**) &params->_state,
+/* Generated */                                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CDLXSIDEGAP3METHODS_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CDLXSIDEGAP3METHODS_StateLoad( (struct TA_CDLXSIDEGAP3METHODS_State**) &params->_state,
+/* Generated */                                      _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CEIL_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -3442,6 +4364,18 @@
 /* Generated */    return TA_CEIL_StateFree( (struct TA_CEIL_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_CEIL_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CEIL_StateSave( *(struct TA_CEIL_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CEIL_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_CEIL_StateLoad( (struct TA_CEIL_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CMO_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -3475,6 +4409,16 @@
 /* Generated */ {
 /* Generated */    return TA_CMO_StateFree( (struct TA_CMO_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CMO_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_CMO_StateSave( *(struct TA_CMO_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CMO_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_CMO_StateLoad( (struct TA_CMO_State**) &params->_state,
+/* Generated */                      _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_CORREL_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -3511,6 +4455,16 @@
 /* Generated */ {
 /* Generated */    return TA_CORREL_StateFree( (struct TA_CORREL_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_CORREL_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_CORREL_StateSave( *(struct TA_CORREL_State**) &params->_state,
+/* Generated */                         _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CORREL_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_CORREL_StateLoad( (struct TA_CORREL_State**) &params->_state,
+/* Generated */                         _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_COS_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -3549,6 +4503,18 @@
 /* Generated */    return TA_COS_StateFree( (struct TA_COS_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_COS_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_COS_StateSave( *(struct TA_COS_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_COS_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_COS_StateLoad( (struct TA_COS_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_COSH_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -3586,6 +4552,18 @@
 /* Generated */    return TA_COSH_StateFree( (struct TA_COSH_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_COSH_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_COSH_StateSave( *(struct TA_COSH_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_COSH_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_COSH_StateLoad( (struct TA_COSH_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_DEMA_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -3619,6 +4597,16 @@
 /* Generated */ {
 /* Generated */    return TA_DEMA_StateFree( (struct TA_DEMA_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_DEMA_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_DEMA_StateSave( *(struct TA_DEMA_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_DEMA_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_DEMA_StateLoad( (struct TA_DEMA_State**) &params->_state,
+/* Generated */                       _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_DIV_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -3659,6 +4647,18 @@
 /* Generated */    return TA_DIV_StateFree( (struct TA_DIV_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_DIV_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_DIV_StateSave( *(struct TA_DIV_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_DIV_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_DIV_StateLoad( (struct TA_DIV_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_DX_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -3697,6 +4697,16 @@
 /* Generated */    return TA_DX_StateFree( (struct TA_DX_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_DX_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_DX_StateSave( *(struct TA_DX_State**) &params->_state,
+/* Generated */                     _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_DX_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_DX_StateLoad( (struct TA_DX_State**) &params->_state,
+/* Generated */                     _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_EMA_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -3730,6 +4740,16 @@
 /* Generated */ {
 /* Generated */    return TA_EMA_StateFree( (struct TA_EMA_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_EMA_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_EMA_StateSave( *(struct TA_EMA_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_EMA_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_EMA_StateLoad( (struct TA_EMA_State**) &params->_state,
+/* Generated */                      _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_EXP_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -3768,6 +4788,18 @@
 /* Generated */    return TA_EXP_StateFree( (struct TA_EXP_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_EXP_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_EXP_StateSave( *(struct TA_EXP_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_EXP_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_EXP_StateLoad( (struct TA_EXP_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_FLOOR_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -3804,6 +4836,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_FLOOR_StateFree( (struct TA_FLOOR_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_FLOOR_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_FLOOR_StateSave( *(struct TA_FLOOR_State**) &params->_state,
+/* Generated */                        _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_FLOOR_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_FLOOR_StateLoad( (struct TA_FLOOR_State**) &params->_state,
+/* Generated */                        _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_HT_DCPERIOD_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -3842,6 +4886,18 @@
 /* Generated */    return TA_HT_DCPERIOD_StateFree( (struct TA_HT_DCPERIOD_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_HT_DCPERIOD_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_HT_DCPERIOD_StateSave( *(struct TA_HT_DCPERIOD_State**) &params->_state,
+/* Generated */                              _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_HT_DCPERIOD_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_HT_DCPERIOD_StateLoad( (struct TA_HT_DCPERIOD_State**) &params->_state,
+/* Generated */                              _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_HT_DCPHASE_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -3878,6 +4934,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_HT_DCPHASE_StateFree( (struct TA_HT_DCPHASE_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_HT_DCPHASE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_HT_DCPHASE_StateSave( *(struct TA_HT_DCPHASE_State**) &params->_state,
+/* Generated */                             _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_HT_DCPHASE_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_HT_DCPHASE_StateLoad( (struct TA_HT_DCPHASE_State**) &params->_state,
+/* Generated */                             _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_HT_PHASOR_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -3918,6 +4986,18 @@
 /* Generated */    return TA_HT_PHASOR_StateFree( (struct TA_HT_PHASOR_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_HT_PHASOR_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_HT_PHASOR_StateSave( *(struct TA_HT_PHASOR_State**) &params->_state,
+/* Generated */                            _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_HT_PHASOR_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_HT_PHASOR_StateLoad( (struct TA_HT_PHASOR_State**) &params->_state,
+/* Generated */                            _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_HT_SINE_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -3957,6 +5037,18 @@
 /* Generated */    return TA_HT_SINE_StateFree( (struct TA_HT_SINE_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_HT_SINE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_HT_SINE_StateSave( *(struct TA_HT_SINE_State**) &params->_state,
+/* Generated */                          _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_HT_SINE_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_HT_SINE_StateLoad( (struct TA_HT_SINE_State**) &params->_state,
+/* Generated */                          _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_HT_TRENDLINE_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -3993,6 +5085,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_HT_TRENDLINE_StateFree( (struct TA_HT_TRENDLINE_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_HT_TRENDLINE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_HT_TRENDLINE_StateSave( *(struct TA_HT_TRENDLINE_State**) &params->_state,
+/* Generated */                               _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_HT_TRENDLINE_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_HT_TRENDLINE_StateLoad( (struct TA_HT_TRENDLINE_State**) &params->_state,
+/* Generated */                               _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_HT_TRENDMODE_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -4031,6 +5135,18 @@
 /* Generated */    return TA_HT_TRENDMODE_StateFree( (struct TA_HT_TRENDMODE_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_HT_TRENDMODE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_HT_TRENDMODE_StateSave( *(struct TA_HT_TRENDMODE_State**) &params->_state,
+/* Generated */                               _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_HT_TRENDMODE_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_HT_TRENDMODE_StateLoad( (struct TA_HT_TRENDMODE_State**) &params->_state,
+/* Generated */                               _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_IMI_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -4067,6 +5183,16 @@
 /* Generated */    return TA_IMI_StateFree( (struct TA_IMI_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_IMI_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_IMI_StateSave( *(struct TA_IMI_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_IMI_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_IMI_StateLoad( (struct TA_IMI_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_KAMA_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -4100,6 +5226,16 @@
 /* Generated */ {
 /* Generated */    return TA_KAMA_StateFree( (struct TA_KAMA_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_KAMA_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_KAMA_StateSave( *(struct TA_KAMA_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_KAMA_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_KAMA_StateLoad( (struct TA_KAMA_State**) &params->_state,
+/* Generated */                       _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_LINEARREG_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -4135,6 +5271,16 @@
 /* Generated */    return TA_LINEARREG_StateFree( (struct TA_LINEARREG_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_LINEARREG_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_LINEARREG_StateSave( *(struct TA_LINEARREG_State**) &params->_state,
+/* Generated */                            _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_LINEARREG_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_LINEARREG_StateLoad( (struct TA_LINEARREG_State**) &params->_state,
+/* Generated */                            _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_LINEARREG_ANGLE_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -4168,6 +5314,16 @@
 /* Generated */ {
 /* Generated */    return TA_LINEARREG_ANGLE_StateFree( (struct TA_LINEARREG_ANGLE_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_LINEARREG_ANGLE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_LINEARREG_ANGLE_StateSave( *(struct TA_LINEARREG_ANGLE_State**) &params->_state,
+/* Generated */                                  _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_LINEARREG_ANGLE_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_LINEARREG_ANGLE_StateLoad( (struct TA_LINEARREG_ANGLE_State**) &params->_state,
+/* Generated */                                  _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_LINEARREG_INTERCEPT_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -4203,6 +5359,16 @@
 /* Generated */    return TA_LINEARREG_INTERCEPT_StateFree( (struct TA_LINEARREG_INTERCEPT_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_LINEARREG_INTERCEPT_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_LINEARREG_INTERCEPT_StateSave( *(struct TA_LINEARREG_INTERCEPT_State**) &params->_state,
+/* Generated */                                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_LINEARREG_INTERCEPT_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_LINEARREG_INTERCEPT_StateLoad( (struct TA_LINEARREG_INTERCEPT_State**) &params->_state,
+/* Generated */                                      _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_LINEARREG_SLOPE_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -4236,6 +5402,16 @@
 /* Generated */ {
 /* Generated */    return TA_LINEARREG_SLOPE_StateFree( (struct TA_LINEARREG_SLOPE_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_LINEARREG_SLOPE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_LINEARREG_SLOPE_StateSave( *(struct TA_LINEARREG_SLOPE_State**) &params->_state,
+/* Generated */                                  _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_LINEARREG_SLOPE_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_LINEARREG_SLOPE_StateLoad( (struct TA_LINEARREG_SLOPE_State**) &params->_state,
+/* Generated */                                  _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_LN_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -4274,6 +5450,18 @@
 /* Generated */    return TA_LN_StateFree( (struct TA_LN_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_LN_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_LN_StateSave( *(struct TA_LN_State**) &params->_state,
+/* Generated */                     _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_LN_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_LN_StateLoad( (struct TA_LN_State**) &params->_state,
+/* Generated */                     _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_LOG10_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -4311,6 +5499,18 @@
 /* Generated */    return TA_LOG10_StateFree( (struct TA_LOG10_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_LOG10_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_LOG10_StateSave( *(struct TA_LOG10_State**) &params->_state,
+/* Generated */                        _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_LOG10_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_LOG10_StateLoad( (struct TA_LOG10_State**) &params->_state,
+/* Generated */                        _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_MA_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -4347,6 +5547,16 @@
 /* Generated */ {
 /* Generated */    return TA_MA_StateFree( (struct TA_MA_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_MA_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MA_StateSave( *(struct TA_MA_State**) &params->_state,
+/* Generated */                     _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_MA_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MA_StateLoad( (struct TA_MA_State**) &params->_state,
+/* Generated */                     _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_MACD_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -4391,6 +5601,16 @@
 /* Generated */ {
 /* Generated */    return TA_MACD_StateFree( (struct TA_MACD_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_MACD_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MACD_StateSave( *(struct TA_MACD_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_MACD_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MACD_StateLoad( (struct TA_MACD_State**) &params->_state,
+/* Generated */                       _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_MACDEXT_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -4445,6 +5665,16 @@
 /* Generated */    return TA_MACDEXT_StateFree( (struct TA_MACDEXT_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_MACDEXT_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MACDEXT_StateSave( *(struct TA_MACDEXT_State**) &params->_state,
+/* Generated */                          _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_MACDEXT_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MACDEXT_StateLoad( (struct TA_MACDEXT_State**) &params->_state,
+/* Generated */                          _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_MACDFIX_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -4482,6 +5712,16 @@
 /* Generated */ {
 /* Generated */    return TA_MACDFIX_StateFree( (struct TA_MACDFIX_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_MACDFIX_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MACDFIX_StateSave( *(struct TA_MACDFIX_State**) &params->_state,
+/* Generated */                          _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_MACDFIX_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MACDFIX_StateLoad( (struct TA_MACDFIX_State**) &params->_state,
+/* Generated */                          _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_MAMA_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -4521,6 +5761,16 @@
 /* Generated */ {
 /* Generated */    return TA_MAMA_StateFree( (struct TA_MAMA_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_MAMA_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MAMA_StateSave( *(struct TA_MAMA_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_MAMA_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MAMA_StateLoad( (struct TA_MAMA_State**) &params->_state,
+/* Generated */                       _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_MAVP_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -4564,6 +5814,16 @@
 /* Generated */    return TA_MAVP_StateFree( (struct TA_MAVP_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_MAVP_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MAVP_StateSave( *(struct TA_MAVP_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_MAVP_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MAVP_StateLoad( (struct TA_MAVP_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_MAX_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -4598,6 +5858,16 @@
 /* Generated */    return TA_MAX_StateFree( (struct TA_MAX_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_MAX_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MAX_StateSave( *(struct TA_MAX_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_MAX_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MAX_StateLoad( (struct TA_MAX_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_MAXINDEX_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -4631,6 +5901,16 @@
 /* Generated */ {
 /* Generated */    return TA_MAXINDEX_StateFree( (struct TA_MAXINDEX_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_MAXINDEX_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MAXINDEX_StateSave( *(struct TA_MAXINDEX_State**) &params->_state,
+/* Generated */                           _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_MAXINDEX_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MAXINDEX_StateLoad( (struct TA_MAXINDEX_State**) &params->_state,
+/* Generated */                           _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_MEDPRICE_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -4670,6 +5950,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_MEDPRICE_StateFree( (struct TA_MEDPRICE_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_MEDPRICE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_MEDPRICE_StateSave( *(struct TA_MEDPRICE_State**) &params->_state,
+/* Generated */                           _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_MEDPRICE_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_MEDPRICE_StateLoad( (struct TA_MEDPRICE_State**) &params->_state,
+/* Generated */                           _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_MFI_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -4711,6 +6003,16 @@
 /* Generated */    return TA_MFI_StateFree( (struct TA_MFI_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_MFI_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MFI_StateSave( *(struct TA_MFI_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_MFI_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MFI_StateLoad( (struct TA_MFI_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_MIDPOINT_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -4744,6 +6046,16 @@
 /* Generated */ {
 /* Generated */    return TA_MIDPOINT_StateFree( (struct TA_MIDPOINT_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_MIDPOINT_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MIDPOINT_StateSave( *(struct TA_MIDPOINT_State**) &params->_state,
+/* Generated */                           _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_MIDPOINT_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MIDPOINT_StateLoad( (struct TA_MIDPOINT_State**) &params->_state,
+/* Generated */                           _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_MIDPRICE_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -4781,6 +6093,16 @@
 /* Generated */    return TA_MIDPRICE_StateFree( (struct TA_MIDPRICE_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_MIDPRICE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MIDPRICE_StateSave( *(struct TA_MIDPRICE_State**) &params->_state,
+/* Generated */                           _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_MIDPRICE_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MIDPRICE_StateLoad( (struct TA_MIDPRICE_State**) &params->_state,
+/* Generated */                           _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_MIN_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -4815,6 +6137,16 @@
 /* Generated */    return TA_MIN_StateFree( (struct TA_MIN_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_MIN_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MIN_StateSave( *(struct TA_MIN_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_MIN_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MIN_StateLoad( (struct TA_MIN_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_MININDEX_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -4848,6 +6180,16 @@
 /* Generated */ {
 /* Generated */    return TA_MININDEX_StateFree( (struct TA_MININDEX_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_MININDEX_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MININDEX_StateSave( *(struct TA_MININDEX_State**) &params->_state,
+/* Generated */                           _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_MININDEX_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MININDEX_StateLoad( (struct TA_MININDEX_State**) &params->_state,
+/* Generated */                           _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_MINMAX_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -4885,6 +6227,16 @@
 /* Generated */    return TA_MINMAX_StateFree( (struct TA_MINMAX_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_MINMAX_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MINMAX_StateSave( *(struct TA_MINMAX_State**) &params->_state,
+/* Generated */                         _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_MINMAX_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MINMAX_StateLoad( (struct TA_MINMAX_State**) &params->_state,
+/* Generated */                         _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_MINMAXINDEX_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -4920,6 +6272,16 @@
 /* Generated */ {
 /* Generated */    return TA_MINMAXINDEX_StateFree( (struct TA_MINMAXINDEX_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_MINMAXINDEX_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MINMAXINDEX_StateSave( *(struct TA_MINMAXINDEX_State**) &params->_state,
+/* Generated */                              _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_MINMAXINDEX_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MINMAXINDEX_StateLoad( (struct TA_MINMAXINDEX_State**) &params->_state,
+/* Generated */                              _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_MINUS_DI_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -4959,6 +6321,16 @@
 /* Generated */    return TA_MINUS_DI_StateFree( (struct TA_MINUS_DI_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_MINUS_DI_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MINUS_DI_StateSave( *(struct TA_MINUS_DI_State**) &params->_state,
+/* Generated */                           _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_MINUS_DI_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MINUS_DI_StateLoad( (struct TA_MINUS_DI_State**) &params->_state,
+/* Generated */                           _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_MINUS_DM_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -4995,6 +6367,16 @@
 /* Generated */    return TA_MINUS_DM_StateFree( (struct TA_MINUS_DM_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_MINUS_DM_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MINUS_DM_StateSave( *(struct TA_MINUS_DM_State**) &params->_state,
+/* Generated */                           _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_MINUS_DM_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MINUS_DM_StateLoad( (struct TA_MINUS_DM_State**) &params->_state,
+/* Generated */                           _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_MOM_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -5028,6 +6410,16 @@
 /* Generated */ {
 /* Generated */    return TA_MOM_StateFree( (struct TA_MOM_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_MOM_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MOM_StateSave( *(struct TA_MOM_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_MOM_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_MOM_StateLoad( (struct TA_MOM_State**) &params->_state,
+/* Generated */                      _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_MULT_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -5068,6 +6460,18 @@
 /* Generated */    return TA_MULT_StateFree( (struct TA_MULT_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_MULT_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_MULT_StateSave( *(struct TA_MULT_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_MULT_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_MULT_StateLoad( (struct TA_MULT_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_NATR_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -5105,6 +6509,16 @@
 /* Generated */ {
 /* Generated */    return TA_NATR_StateFree( (struct TA_NATR_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_NATR_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_NATR_StateSave( *(struct TA_NATR_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_NATR_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_NATR_StateLoad( (struct TA_NATR_State**) &params->_state,
+/* Generated */                       _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_OBV_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -5145,6 +6559,18 @@
 /* Generated */    return TA_OBV_StateFree( (struct TA_OBV_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_OBV_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_OBV_StateSave( *(struct TA_OBV_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_OBV_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_OBV_StateLoad( (struct TA_OBV_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_PLUS_DI_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -5183,6 +6609,16 @@
 /* Generated */    return TA_PLUS_DI_StateFree( (struct TA_PLUS_DI_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_PLUS_DI_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_PLUS_DI_StateSave( *(struct TA_PLUS_DI_State**) &params->_state,
+/* Generated */                          _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_PLUS_DI_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_PLUS_DI_StateLoad( (struct TA_PLUS_DI_State**) &params->_state,
+/* Generated */                          _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_PLUS_DM_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -5218,6 +6654,16 @@
 /* Generated */ {
 /* Generated */    return TA_PLUS_DM_StateFree( (struct TA_PLUS_DM_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_PLUS_DM_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_PLUS_DM_StateSave( *(struct TA_PLUS_DM_State**) &params->_state,
+/* Generated */                          _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_PLUS_DM_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_PLUS_DM_StateLoad( (struct TA_PLUS_DM_State**) &params->_state,
+/* Generated */                          _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_PPO_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -5259,6 +6705,16 @@
 /* Generated */    return TA_PPO_StateFree( (struct TA_PPO_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_PPO_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_PPO_StateSave( *(struct TA_PPO_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_PPO_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_PPO_StateLoad( (struct TA_PPO_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_ROC_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -5292,6 +6748,16 @@
 /* Generated */ {
 /* Generated */    return TA_ROC_StateFree( (struct TA_ROC_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_ROC_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_ROC_StateSave( *(struct TA_ROC_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_ROC_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_ROC_StateLoad( (struct TA_ROC_State**) &params->_state,
+/* Generated */                      _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_ROCP_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -5327,6 +6793,16 @@
 /* Generated */    return TA_ROCP_StateFree( (struct TA_ROCP_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_ROCP_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_ROCP_StateSave( *(struct TA_ROCP_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_ROCP_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_ROCP_StateLoad( (struct TA_ROCP_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_ROCR_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -5360,6 +6836,16 @@
 /* Generated */ {
 /* Generated */    return TA_ROCR_StateFree( (struct TA_ROCR_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_ROCR_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_ROCR_StateSave( *(struct TA_ROCR_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_ROCR_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_ROCR_StateLoad( (struct TA_ROCR_State**) &params->_state,
+/* Generated */                       _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_ROCR100_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -5395,6 +6881,16 @@
 /* Generated */    return TA_ROCR100_StateFree( (struct TA_ROCR100_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_ROCR100_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_ROCR100_StateSave( *(struct TA_ROCR100_State**) &params->_state,
+/* Generated */                          _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_ROCR100_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_ROCR100_StateLoad( (struct TA_ROCR100_State**) &params->_state,
+/* Generated */                          _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_RSI_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -5428,6 +6924,16 @@
 /* Generated */ {
 /* Generated */    return TA_RSI_StateFree( (struct TA_RSI_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_RSI_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_RSI_StateSave( *(struct TA_RSI_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_RSI_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_RSI_StateLoad( (struct TA_RSI_State**) &params->_state,
+/* Generated */                      _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_SAR_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -5467,6 +6973,16 @@
 /* Generated */ {
 /* Generated */    return TA_SAR_StateFree( (struct TA_SAR_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_SAR_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_SAR_StateSave( *(struct TA_SAR_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_SAR_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_SAR_StateLoad( (struct TA_SAR_State**) &params->_state,
+/* Generated */                      _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_SAREXT_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -5525,6 +7041,16 @@
 /* Generated */    return TA_SAREXT_StateFree( (struct TA_SAREXT_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_SAREXT_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_SAREXT_StateSave( *(struct TA_SAREXT_State**) &params->_state,
+/* Generated */                         _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_SAREXT_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_SAREXT_StateLoad( (struct TA_SAREXT_State**) &params->_state,
+/* Generated */                         _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_SIN_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -5561,6 +7087,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_SIN_StateFree( (struct TA_SIN_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_SIN_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_SIN_StateSave( *(struct TA_SIN_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_SIN_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_SIN_StateLoad( (struct TA_SIN_State**) &params->_state,
+/* Generated */                      _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_SINH_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -5599,6 +7137,18 @@
 /* Generated */    return TA_SINH_StateFree( (struct TA_SINH_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_SINH_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_SINH_StateSave( *(struct TA_SINH_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_SINH_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_SINH_StateLoad( (struct TA_SINH_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_SMA_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -5632,6 +7182,16 @@
 /* Generated */ {
 /* Generated */    return TA_SMA_StateFree( (struct TA_SMA_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_SMA_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_SMA_StateSave( *(struct TA_SMA_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_SMA_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_SMA_StateLoad( (struct TA_SMA_State**) &params->_state,
+/* Generated */                      _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_SQRT_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -5670,6 +7230,18 @@
 /* Generated */    return TA_SQRT_StateFree( (struct TA_SQRT_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_SQRT_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_SQRT_StateSave( *(struct TA_SQRT_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_SQRT_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_SQRT_StateLoad( (struct TA_SQRT_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_STDDEV_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -5706,6 +7278,16 @@
 /* Generated */ {
 /* Generated */    return TA_STDDEV_StateFree( (struct TA_STDDEV_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_STDDEV_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_STDDEV_StateSave( *(struct TA_STDDEV_State**) &params->_state,
+/* Generated */                         _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_STDDEV_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_STDDEV_StateLoad( (struct TA_STDDEV_State**) &params->_state,
+/* Generated */                         _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_STOCH_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -5759,6 +7341,16 @@
 /* Generated */    return TA_STOCH_StateFree( (struct TA_STOCH_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_STOCH_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_STOCH_StateSave( *(struct TA_STOCH_State**) &params->_state,
+/* Generated */                        _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_STOCH_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_STOCH_StateLoad( (struct TA_STOCH_State**) &params->_state,
+/* Generated */                        _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_STOCHF_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -5805,6 +7397,16 @@
 /* Generated */    return TA_STOCHF_StateFree( (struct TA_STOCHF_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_STOCHF_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_STOCHF_StateSave( *(struct TA_STOCHF_State**) &params->_state,
+/* Generated */                         _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_STOCHF_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_STOCHF_StateLoad( (struct TA_STOCHF_State**) &params->_state,
+/* Generated */                         _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_STOCHRSI_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -5850,6 +7452,16 @@
 /* Generated */    return TA_STOCHRSI_StateFree( (struct TA_STOCHRSI_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_STOCHRSI_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_STOCHRSI_StateSave( *(struct TA_STOCHRSI_State**) &params->_state,
+/* Generated */                           _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_STOCHRSI_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_STOCHRSI_StateLoad( (struct TA_STOCHRSI_State**) &params->_state,
+/* Generated */                           _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_SUB_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -5889,6 +7501,18 @@
 /* Generated */    return TA_SUB_StateFree( (struct TA_SUB_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_SUB_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_SUB_StateSave( *(struct TA_SUB_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_SUB_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_SUB_StateLoad( (struct TA_SUB_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_SUM_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -5922,6 +7546,16 @@
 /* Generated */ {
 /* Generated */    return TA_SUM_StateFree( (struct TA_SUM_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_SUM_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_SUM_StateSave( *(struct TA_SUM_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_SUM_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_SUM_StateLoad( (struct TA_SUM_State**) &params->_state,
+/* Generated */                      _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_T3_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -5960,6 +7594,16 @@
 /* Generated */    return TA_T3_StateFree( (struct TA_T3_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_T3_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_T3_StateSave( *(struct TA_T3_State**) &params->_state,
+/* Generated */                     _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_T3_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_T3_StateLoad( (struct TA_T3_State**) &params->_state,
+/* Generated */                     _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_TAN_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -5996,6 +7640,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_TAN_StateFree( (struct TA_TAN_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_TAN_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_TAN_StateSave( *(struct TA_TAN_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_TAN_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_TAN_StateLoad( (struct TA_TAN_State**) &params->_state,
+/* Generated */                      _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_TANH_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -6034,6 +7690,18 @@
 /* Generated */    return TA_TANH_StateFree( (struct TA_TANH_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_TANH_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_TANH_StateSave( *(struct TA_TANH_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_TANH_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_TANH_StateLoad( (struct TA_TANH_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_TEMA_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -6067,6 +7735,16 @@
 /* Generated */ {
 /* Generated */    return TA_TEMA_StateFree( (struct TA_TEMA_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_TEMA_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_TEMA_StateSave( *(struct TA_TEMA_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_TEMA_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_TEMA_StateLoad( (struct TA_TEMA_State**) &params->_state,
+/* Generated */                       _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_TRANGE_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -6109,6 +7787,18 @@
 /* Generated */    return TA_TRANGE_StateFree( (struct TA_TRANGE_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_TRANGE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_TRANGE_StateSave( *(struct TA_TRANGE_State**) &params->_state,
+/* Generated */                         _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_TRANGE_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_TRANGE_StateLoad( (struct TA_TRANGE_State**) &params->_state,
+/* Generated */                         _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_TRIMA_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -6142,6 +7832,16 @@
 /* Generated */ {
 /* Generated */    return TA_TRIMA_StateFree( (struct TA_TRIMA_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_TRIMA_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_TRIMA_StateSave( *(struct TA_TRIMA_State**) &params->_state,
+/* Generated */                        _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_TRIMA_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_TRIMA_StateLoad( (struct TA_TRIMA_State**) &params->_state,
+/* Generated */                        _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_TRIX_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -6177,6 +7877,16 @@
 /* Generated */    return TA_TRIX_StateFree( (struct TA_TRIX_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_TRIX_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_TRIX_StateSave( *(struct TA_TRIX_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_TRIX_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_TRIX_StateLoad( (struct TA_TRIX_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_TSF_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -6210,6 +7920,16 @@
 /* Generated */ {
 /* Generated */    return TA_TSF_StateFree( (struct TA_TSF_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_TSF_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_TSF_StateSave( *(struct TA_TSF_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_TSF_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_TSF_StateLoad( (struct TA_TSF_State**) &params->_state,
+/* Generated */                      _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_TYPPRICE_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -6251,6 +7971,18 @@
 /* Generated */    (void)params;
 /* Generated */    return TA_TYPPRICE_StateFree( (struct TA_TYPPRICE_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_TYPPRICE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_TYPPRICE_StateSave( *(struct TA_TYPPRICE_State**) &params->_state,
+/* Generated */                           _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_TYPPRICE_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_TYPPRICE_StateLoad( (struct TA_TYPPRICE_State**) &params->_state,
+/* Generated */                           _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_ULTOSC_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -6296,6 +8028,16 @@
 /* Generated */    return TA_ULTOSC_StateFree( (struct TA_ULTOSC_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_ULTOSC_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_ULTOSC_StateSave( *(struct TA_ULTOSC_State**) &params->_state,
+/* Generated */                         _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_ULTOSC_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_ULTOSC_StateLoad( (struct TA_ULTOSC_State**) &params->_state,
+/* Generated */                         _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_VAR_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -6332,6 +8074,16 @@
 /* Generated */ {
 /* Generated */    return TA_VAR_StateFree( (struct TA_VAR_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_VAR_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_VAR_StateSave( *(struct TA_VAR_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_VAR_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_VAR_StateLoad( (struct TA_VAR_State**) &params->_state,
+/* Generated */                      _file );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_WCLPRICE_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -6374,6 +8126,18 @@
 /* Generated */    return TA_WCLPRICE_StateFree( (struct TA_WCLPRICE_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_WCLPRICE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_WCLPRICE_StateSave( *(struct TA_WCLPRICE_State**) &params->_state,
+/* Generated */                           _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_WCLPRICE_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_WCLPRICE_StateLoad( (struct TA_WCLPRICE_State**) &params->_state,
+/* Generated */                           _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_WILLR_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -6412,6 +8176,16 @@
 /* Generated */    return TA_WILLR_StateFree( (struct TA_WILLR_State**) &params->_state
  );
 /* Generated */ }
+/* Generated */ unsigned int TA_WILLR_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_WILLR_StateSave( *(struct TA_WILLR_State**) &params->_state,
+/* Generated */                        _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_WILLR_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_WILLR_StateLoad( (struct TA_WILLR_State**) &params->_state,
+/* Generated */                        _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_WMA_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -6445,6 +8219,16 @@
 /* Generated */ {
 /* Generated */    return TA_WMA_StateFree( (struct TA_WMA_State**) &params->_state
  );
+/* Generated */ }
+/* Generated */ unsigned int TA_WMA_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_WMA_StateSave( *(struct TA_WMA_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_WMA_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_WMA_StateLoad( (struct TA_WMA_State**) &params->_state,
+/* Generated */                      _file );
 /* Generated */ }
 
 /***************/

@@ -634,6 +634,207 @@ if (retValue != ENUM_VALUE(RetCode,TA_SUCCESS,Success))
 
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
+/* Generated */ #if defined( _MANAGED )
+/* Generated */ int Core::MovingAverageStateSave( struct TA_MovingAverage_State* _state,
+/* Generated */                                 FILE* _file )
+/* Generated */ 
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public int movingAverageStateSave( struct TA_movingAverage_State* _state,
+/* Generated */                                  FILE* _file )
+/* Generated */ 
+/* Generated */ #else
+/* Generated */ TA_LIB_API int TA_MA_StateSave( struct TA_MA_State* _state,
+/* Generated */                                          FILE* _file )
+/* Generated */ 
+/* Generated */ #endif
+/**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
+
+{
+   /* insert local variable here */
+ENUM_DECLARATION(RetCode) retValue;
+/**** START GENCODE SECTION 12 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */ 
+/* Generated */     int io_res; int state_is_null; state_is_null = (_state == NULL);
+/* Generated */    io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    if (state_is_null) return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+/* Generated */    io_res = fwrite(&STATE.mem_index,sizeof(STATE.mem_index),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.mem_size,sizeof(STATE.mem_size),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    int memory_allocated;
+/* Generated */    memory_allocated = STATE.memory != NULL;
+/* Generated */    io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    if (memory_allocated && STATE.mem_size > 0) { io_res = fwrite(STATE.memory,sizeof(struct TA_MA_Data),STATE.mem_size,_file);
+/* Generated */    if (io_res < (int) STATE.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); }
+/* Generated */    io_res = fwrite(&STATE.optInTimePeriod,sizeof(STATE.optInTimePeriod),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.optInMAType,sizeof(STATE.optInMAType),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    // Warning: STATE.ta_state must be saved manually!
+/* Generated */ 
+/* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/**** END GENCODE SECTION 12 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state save code here. */
+
+
+
+//                if( STATE.optInTimePeriod != 1 )
+                {
+                    switch( STATE.optInMAType )
+                    {
+                    case ENUM_CASE(MAType, TA_MAType_SMA, Sma ):
+                        retValue = FUNCTION_CALL_STATE_SAVE(SMA)( (struct TA_SMA_State*) STATE.ta_state, _file);
+                        break;
+
+                    case ENUM_CASE(MAType, TA_MAType_EMA, Ema):
+                        retValue = FUNCTION_CALL_STATE_SAVE(EMA)( (struct TA_EMA_State*) STATE.ta_state, _file);
+                        break;
+
+                    case ENUM_CASE(MAType, TA_MAType_WMA, Wma):
+                        retValue = FUNCTION_CALL_STATE_SAVE(WMA)( (struct TA_WMA_State*) STATE.ta_state, _file);
+                        break;
+
+                    case ENUM_CASE(MAType, TA_MAType_DEMA, Dema):
+                        retValue = FUNCTION_CALL_STATE_SAVE(DEMA)( (struct TA_DEMA_State*) STATE.ta_state, _file);
+                        break;
+
+                    case ENUM_CASE(MAType, TA_MAType_TEMA, Tema ):
+                        retValue = FUNCTION_CALL_STATE_SAVE(TEMA)( (struct TA_TEMA_State*) STATE.ta_state, _file);
+                        break;
+
+                    case ENUM_CASE(MAType, TA_MAType_TRIMA, Trima ):
+                        retValue = FUNCTION_CALL_STATE_SAVE(TRIMA)( (struct TA_TRIMA_State*) STATE.ta_state, _file);
+                        break;
+
+                    case ENUM_CASE(MAType, TA_MAType_KAMA, Kama ):
+                        retValue = FUNCTION_CALL_STATE_SAVE(KAMA)( (struct TA_KAMA_State*) STATE.ta_state, _file);
+                        break;
+
+                    case ENUM_CASE(MAType, TA_MAType_MAMA, Mama ):
+                        retValue = FUNCTION_CALL_STATE_SAVE(MAMA)( (struct TA_MAMA_State*) STATE.ta_state, _file);
+                        break;
+
+                    case ENUM_CASE(MAType, TA_MAType_T3, T3):
+                        retValue = FUNCTION_CALL_STATE_SAVE(T3)( (struct TA_T3_State*) STATE.ta_state, _file);
+                        break;
+
+                    default:
+                        retValue = ENUM_VALUE(RetCode,TA_BAD_PARAM, BadParam);
+                    }
+                }
+
+   return retValue;
+}
+
+/**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #if defined( _MANAGED )
+/* Generated */ int Core::MovingAverageStateLoad( struct TA_MovingAverage_State** _state,
+/* Generated */                                 FILE* _file )
+/* Generated */ 
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public int movingAverageStateLoad( struct TA_movingAverage_State** _state,
+/* Generated */                                  FILE* _file )
+/* Generated */ 
+/* Generated */ #else
+/* Generated */ TA_LIB_API int TA_MA_StateLoad( struct TA_MA_State** _state,
+/* Generated */                                          FILE* _file )
+/* Generated */ 
+/* Generated */ #endif
+/**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
+{
+   /* insert local variable here */
+ENUM_DECLARATION(RetCode) retValue;
+/**** START GENCODE SECTION 14 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */ 
+/* Generated */    int io_res; int state_is_null;
+/* Generated */    io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    if (state_is_null) return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+/* Generated */    if (STATE != NULL) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    STATE = TA_Calloc(1, sizeof(struct TA_MA_State));
+/* Generated */    io_res = fread(&STATE_P.mem_index,sizeof(STATE_P.mem_index),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.mem_size,sizeof(STATE_P.mem_size),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    int memory_allocated;
+/* Generated */    io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    if (STATE_P.mem_size > 0 && memory_allocated) { STATE_P.memory = TA_Calloc(STATE_P.mem_size, sizeof(struct TA_MA_Data));
+/* Generated */    io_res = fread(STATE_P.memory,sizeof(struct TA_MA_Data),STATE_P.mem_size,_file);
+/* Generated */    if (io_res < (int) STATE_P.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); } 
+/* Generated */    io_res = fread(&STATE_P.optInTimePeriod,sizeof(STATE_P.optInTimePeriod),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.optInMAType,sizeof(STATE_P.optInMAType),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    // Warning: STATE_P.ta_state must be loaded manually!
+/* Generated */ 
+/* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/**** END GENCODE SECTION 14 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state load code here. */
+
+
+
+//                if( STATE_P.optInTimePeriod != 1 )
+                {
+                    switch( STATE_P.optInMAType )
+                    {
+                    case ENUM_CASE(MAType, TA_MAType_SMA, Sma ):
+                        retValue = FUNCTION_CALL_STATE_LOAD(SMA)( (struct TA_SMA_State**) &STATE_P.ta_state, _file);
+                        break;
+
+                    case ENUM_CASE(MAType, TA_MAType_EMA, Ema):
+                        retValue = FUNCTION_CALL_STATE_LOAD(EMA)( (struct TA_EMA_State**)  &STATE_P.ta_state, _file);
+                        break;
+
+                    case ENUM_CASE(MAType, TA_MAType_WMA, Wma):
+                        retValue = FUNCTION_CALL_STATE_LOAD(WMA)( (struct TA_WMA_State**) &STATE_P.ta_state, _file);
+                        break;
+
+                    case ENUM_CASE(MAType, TA_MAType_DEMA, Dema):
+                        retValue = FUNCTION_CALL_STATE_LOAD(DEMA)( (struct TA_DEMA_State**) &STATE_P.ta_state, _file);
+                        break;
+
+                    case ENUM_CASE(MAType, TA_MAType_TEMA, Tema ):
+                        retValue = FUNCTION_CALL_STATE_LOAD(TEMA)( (struct TA_TEMA_State**) &STATE_P.ta_state, _file);
+                        break;
+
+                    case ENUM_CASE(MAType, TA_MAType_TRIMA, Trima ):
+                        retValue = FUNCTION_CALL_STATE_LOAD(TRIMA)( (struct TA_TRIMA_State**) &STATE_P.ta_state, _file);
+                        break;
+
+                    case ENUM_CASE(MAType, TA_MAType_KAMA, Kama ):
+                        retValue = FUNCTION_CALL_STATE_LOAD(KAMA)( (struct TA_KAMA_State**) &STATE_P.ta_state, _file);
+                        break;
+
+                    case ENUM_CASE(MAType, TA_MAType_MAMA, Mama ):
+                        retValue = FUNCTION_CALL_STATE_LOAD(MAMA)( (struct TA_MAMA_State**) &STATE_P.ta_state, _file);
+                        break;
+
+                    case ENUM_CASE(MAType, TA_MAType_T3, T3):
+                        retValue = FUNCTION_CALL_STATE_LOAD(T3)( (struct TA_T3_State**) &STATE_P.ta_state, _file);
+                        break;
+
+                    default:
+                        retValue = ENUM_VALUE(RetCode,TA_BAD_PARAM, BadParam);
+                    }
+                }
+
+   return retValue;
+}
+
+/**** START GENCODE SECTION 15 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
 /* Generated */ #define  USE_SINGLE_PRECISION_INPUT
 /* Generated */ #undef  TA_LIB_PRO
 /* Generated */ #if !defined( _MANAGED ) && !defined( _JAVA )
@@ -768,5 +969,5 @@ if (retValue != ENUM_VALUE(RetCode,TA_SUCCESS,Success))
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ }}} // Close namespace TicTacTec.TA.Lib
 /* Generated */ #endif
-/**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
+/**** END GENCODE SECTION 15 - DO NOT DELETE THIS LINE ****/
 

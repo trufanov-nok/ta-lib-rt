@@ -385,7 +385,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                            test->optInTimePeriod,
                            &outBegIdx,
                            &outNbElement,
-                           gBuffer[0].out0 );
+                           gBuffer[0].out0,
+                           _tmp_state_file);
    }
    else
    {
@@ -396,7 +397,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                            gBuffer[2].in,
                            &outBegIdx,
                            &outNbElement,
-                           gBuffer[0].out0 );
+                           gBuffer[0].out0,
+                           _tmp_state_file);
    }
 
 

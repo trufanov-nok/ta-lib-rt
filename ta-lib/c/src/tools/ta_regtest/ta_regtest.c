@@ -83,6 +83,8 @@ double worstProfiledCall;
 int insufficientClockPrecision;
 int doExtensiveProfiling;
 
+FILE * _tmp_state_file;
+
 /**** Local declarations.              ****/
 /* None */
 
@@ -94,6 +96,8 @@ static void printUsage(void);
 /**** Local variables definitions.     ****/
 /* None */
 
+#define TEST_SAVE_LOAD_STATE
+
 /**** Global functions definitions.   ****/
 int main( int argc, char **argv )
 {
@@ -101,6 +105,13 @@ int main( int argc, char **argv )
 	LARGE_INTEGER QPFrequency;
 #endif
    double freq;
+
+   _tmp_state_file = NULL;
+#ifdef TEST_SAVE_LOAD_STATE
+   _tmp_state_file = tmpfile();
+   if (_tmp_state_file == NULL)
+   return;
+#endif
 
    ErrorNumber retValue;
 

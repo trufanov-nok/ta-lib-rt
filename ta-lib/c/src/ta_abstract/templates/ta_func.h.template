@@ -37,6 +37,8 @@
    #include "ta_common.h"
 #endif
 
+#include <stdio.h> // for Save\Load state funcs
+
 /* This header contains the prototype of all the Technical Analysis
  * function provided by TA-LIB.
  */

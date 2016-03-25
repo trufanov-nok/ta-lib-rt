@@ -132,3 +132,4 @@ TA_Compatibility TA_GetCompatibility( void )
 #if defined( _MANAGED )
 }}} // Close namespace TicTacTec::TA::Lib
 #endif
+

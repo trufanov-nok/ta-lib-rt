@@ -752,7 +752,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                         test->optInTimePeriod,
                         &outBegIdx,
                         &outNbElement,
-                        gBuffer[0].out0 );
+                        gBuffer[0].out0,
+                        _tmp_state_file);
       break;
    case TA_AD_TEST:
       retCode = TA_AD_StateTest( test->startIdx,
@@ -763,7 +764,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                        history->volume,
                        &outBegIdx,
                        &outNbElement,
-                       gBuffer[0].out0 );
+                       gBuffer[0].out0,
+                       _tmp_state_file);
       break;
 
    case TA_ADOSC_3_10_TEST:
@@ -776,7 +778,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                           3, 10,
                           &outBegIdx,
                           &outNbElement,
-                          gBuffer[0].out0 );
+                          gBuffer[0].out0,
+                          _tmp_state_file);
       break;
 
    case TA_ADOSC_5_2_TEST:
@@ -789,7 +792,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                           5, 2,
                           &outBegIdx,
                           &outNbElement,
-                          gBuffer[0].out0 );
+                          gBuffer[0].out0,
+                          _tmp_state_file);
       break;
    default:
       retCode = TA_INTERNAL_ERROR(133);

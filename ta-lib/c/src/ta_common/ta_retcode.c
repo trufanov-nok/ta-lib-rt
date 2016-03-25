@@ -67,6 +67,7 @@ static TA_InternalRetCodeInfo retCodeInfoTable[] = {
          {(TA_RetCode)15,"TA_BAD_OBJECT","No Info"},
          {(TA_RetCode)16,"TA_NOT_SUPPORTED","No Info"},
          {(TA_RetCode)17,"TA_NEED_MORE_DATA","No Info"},
+         {(TA_RetCode)18,"TA_IO_FAILED","No Info"},
          {(TA_RetCode)5000,"TA_INTERNAL_ERROR","No Info"},
          {(TA_RetCode)0xFFFF,"TA_UNKNOWN_ERR","Unknown Error"}
 };

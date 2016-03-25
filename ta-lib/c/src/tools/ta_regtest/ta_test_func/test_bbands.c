@@ -576,7 +576,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                         &outBegIdx, &outNbElement,
                         gBuffer[0].out0,
                         gBuffer[0].out1,
-                        gBuffer[0].out2 );
+                        gBuffer[0].out2,
+                        _tmp_state_file);
 
 
 

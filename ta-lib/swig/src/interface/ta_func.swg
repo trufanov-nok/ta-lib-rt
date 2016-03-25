@@ -97,6 +97,12 @@ int TA_ACCBANDS_State( struct TA_ACCBANDS_State* _state,
 
 int TA_ACCBANDS_StateFree( struct TA_ACCBANDS_State** _state );
 
+int TA_ACCBANDS_StateSave( struct TA_ACCBANDS_State* _state,
+                         FILE* _file );
+
+int TA_ACCBANDS_StateLoad( struct TA_ACCBANDS_State** _state,
+                         FILE* _file );
+
 
 /*
  * TA_ACOS - Vector Trigonometric ACos
@@ -133,6 +139,12 @@ int TA_ACOS_State( struct TA_ACOS_State* _state,
                  double        *outReal );
 
 int TA_ACOS_StateFree( struct TA_ACOS_State** _state );
+
+int TA_ACOS_StateSave( struct TA_ACOS_State* _state,
+                     FILE* _file );
+
+int TA_ACOS_StateLoad( struct TA_ACOS_State** _state,
+                     FILE* _file );
 
 
 /*
@@ -181,6 +193,12 @@ int TA_AD_State( struct TA_AD_State* _state,
 
 int TA_AD_StateFree( struct TA_AD_State** _state );
 
+int TA_AD_StateSave( struct TA_AD_State* _state,
+                   FILE* _file );
+
+int TA_AD_StateLoad( struct TA_AD_State** _state,
+                   FILE* _file );
+
 
 /*
  * TA_ADD - Vector Arithmetic Add
@@ -220,6 +238,12 @@ int TA_ADD_State( struct TA_ADD_State* _state,
                 double        *outReal );
 
 int TA_ADD_StateFree( struct TA_ADD_State** _state );
+
+int TA_ADD_StateSave( struct TA_ADD_State* _state,
+                    FILE* _file );
+
+int TA_ADD_StateLoad( struct TA_ADD_State** _state,
+                    FILE* _file );
 
 
 /*
@@ -290,6 +314,12 @@ int TA_ADOSC_State( struct TA_ADOSC_State* _state,
 
 int TA_ADOSC_StateFree( struct TA_ADOSC_State** _state );
 
+int TA_ADOSC_StateSave( struct TA_ADOSC_State* _state,
+                      FILE* _file );
+
+int TA_ADOSC_StateLoad( struct TA_ADOSC_State** _state,
+                      FILE* _file );
+
 
 /*
  * TA_ADX - Average Directional Movement Index
@@ -350,6 +380,12 @@ int TA_ADX_State( struct TA_ADX_State* _state,
 
 int TA_ADX_StateFree( struct TA_ADX_State** _state );
 
+int TA_ADX_StateSave( struct TA_ADX_State* _state,
+                    FILE* _file );
+
+int TA_ADX_StateLoad( struct TA_ADX_State** _state,
+                    FILE* _file );
+
 
 /*
  * TA_ADXR - Average Directional Movement Index Rating
@@ -402,6 +438,12 @@ int TA_ADXR_State( struct TA_ADXR_State* _state,
                  double        *outReal );
 
 int TA_ADXR_StateFree( struct TA_ADXR_State** _state );
+
+int TA_ADXR_StateSave( struct TA_ADXR_State* _state,
+                     FILE* _file );
+
+int TA_ADXR_StateLoad( struct TA_ADXR_State** _state,
+                     FILE* _file );
 
 
 /*
@@ -462,6 +504,12 @@ int TA_APO_State( struct TA_APO_State* _state,
 
 int TA_APO_StateFree( struct TA_APO_State** _state );
 
+int TA_APO_StateSave( struct TA_APO_State* _state,
+                    FILE* _file );
+
+int TA_APO_StateLoad( struct TA_APO_State** _state,
+                    FILE* _file );
+
 
 /*
  * TA_AROON - Aroon
@@ -518,6 +566,12 @@ int TA_AROON_State( struct TA_AROON_State* _state,
 
 int TA_AROON_StateFree( struct TA_AROON_State** _state );
 
+int TA_AROON_StateSave( struct TA_AROON_State* _state,
+                      FILE* _file );
+
+int TA_AROON_StateLoad( struct TA_AROON_State** _state,
+                      FILE* _file );
+
 
 /*
  * TA_AROONOSC - Aroon Oscillator
@@ -572,6 +626,12 @@ int TA_AROONOSC_State( struct TA_AROONOSC_State* _state,
 
 int TA_AROONOSC_StateFree( struct TA_AROONOSC_State** _state );
 
+int TA_AROONOSC_StateSave( struct TA_AROONOSC_State* _state,
+                         FILE* _file );
+
+int TA_AROONOSC_StateLoad( struct TA_AROONOSC_State** _state,
+                         FILE* _file );
+
 
 /*
  * TA_ASIN - Vector Trigonometric ASin
@@ -609,6 +669,12 @@ int TA_ASIN_State( struct TA_ASIN_State* _state,
 
 int TA_ASIN_StateFree( struct TA_ASIN_State** _state );
 
+int TA_ASIN_StateSave( struct TA_ASIN_State* _state,
+                     FILE* _file );
+
+int TA_ASIN_StateLoad( struct TA_ASIN_State** _state,
+                     FILE* _file );
+
 
 /*
  * TA_ATAN - Vector Trigonometric ATan
@@ -645,6 +711,12 @@ int TA_ATAN_State( struct TA_ATAN_State* _state,
                  double        *outReal );
 
 int TA_ATAN_StateFree( struct TA_ATAN_State** _state );
+
+int TA_ATAN_StateSave( struct TA_ATAN_State* _state,
+                     FILE* _file );
+
+int TA_ATAN_StateLoad( struct TA_ATAN_State** _state,
+                     FILE* _file );
 
 
 /*
@@ -702,6 +774,12 @@ int TA_ATR_State( struct TA_ATR_State* _state,
 
 int TA_ATR_StateFree( struct TA_ATR_State** _state );
 
+int TA_ATR_StateSave( struct TA_ATR_State* _state,
+                    FILE* _file );
+
+int TA_ATR_StateLoad( struct TA_ATR_State** _state,
+                    FILE* _file );
+
 
 /*
  * TA_AVGPRICE - Average Price
@@ -747,6 +825,12 @@ int TA_AVGPRICE_State( struct TA_AVGPRICE_State* _state,
                      double        *outReal );
 
 int TA_AVGPRICE_StateFree( struct TA_AVGPRICE_State** _state );
+
+int TA_AVGPRICE_StateSave( struct TA_AVGPRICE_State* _state,
+                         FILE* _file );
+
+int TA_AVGPRICE_StateLoad( struct TA_AVGPRICE_State** _state,
+                         FILE* _file );
 
 
 /*
@@ -794,6 +878,12 @@ int TA_AVGDEV_State( struct TA_AVGDEV_State* _state,
                    double        *outReal );
 
 int TA_AVGDEV_StateFree( struct TA_AVGDEV_State** _state );
+
+int TA_AVGDEV_StateSave( struct TA_AVGDEV_State* _state,
+                       FILE* _file );
+
+int TA_AVGDEV_StateLoad( struct TA_AVGDEV_State** _state,
+                       FILE* _file );
 
 
 /*
@@ -864,6 +954,12 @@ int TA_BBANDS_State( struct TA_BBANDS_State* _state,
 
 int TA_BBANDS_StateFree( struct TA_BBANDS_State** _state );
 
+int TA_BBANDS_StateSave( struct TA_BBANDS_State* _state,
+                       FILE* _file );
+
+int TA_BBANDS_StateLoad( struct TA_BBANDS_State** _state,
+                       FILE* _file );
+
 
 /*
  * TA_BETA - Beta
@@ -922,6 +1018,12 @@ int TA_BETA_State( struct TA_BETA_State* _state,
 
 int TA_BETA_StateFree( struct TA_BETA_State** _state );
 
+int TA_BETA_StateSave( struct TA_BETA_State* _state,
+                     FILE* _file );
+
+int TA_BETA_StateLoad( struct TA_BETA_State** _state,
+                     FILE* _file );
+
 
 /*
  * TA_BOP - Balance Of Power
@@ -967,6 +1069,12 @@ int TA_BOP_State( struct TA_BOP_State* _state,
                 double        *outReal );
 
 int TA_BOP_StateFree( struct TA_BOP_State** _state );
+
+int TA_BOP_StateSave( struct TA_BOP_State* _state,
+                    FILE* _file );
+
+int TA_BOP_StateLoad( struct TA_BOP_State** _state,
+                    FILE* _file );
 
 
 /*
@@ -1022,6 +1130,12 @@ int TA_CCI_State( struct TA_CCI_State* _state,
 
 int TA_CCI_StateFree( struct TA_CCI_State** _state );
 
+int TA_CCI_StateSave( struct TA_CCI_State* _state,
+                    FILE* _file );
+
+int TA_CCI_StateLoad( struct TA_CCI_State** _state,
+                    FILE* _file );
+
 
 /*
  * TA_CDL2CROWS - Two Crows
@@ -1068,6 +1182,12 @@ int TA_CDL2CROWS_State( struct TA_CDL2CROWS_State* _state,
                       int           *outInteger );
 
 int TA_CDL2CROWS_StateFree( struct TA_CDL2CROWS_State** _state );
+
+int TA_CDL2CROWS_StateSave( struct TA_CDL2CROWS_State* _state,
+                          FILE* _file );
+
+int TA_CDL2CROWS_StateLoad( struct TA_CDL2CROWS_State** _state,
+                          FILE* _file );
 
 
 /*
@@ -1119,6 +1239,12 @@ int TA_CDL3BLACKCROWS_State( struct TA_CDL3BLACKCROWS_State* _state,
 
 int TA_CDL3BLACKCROWS_StateFree( struct TA_CDL3BLACKCROWS_State** _state );
 
+int TA_CDL3BLACKCROWS_StateSave( struct TA_CDL3BLACKCROWS_State* _state,
+                               FILE* _file );
+
+int TA_CDL3BLACKCROWS_StateLoad( struct TA_CDL3BLACKCROWS_State** _state,
+                               FILE* _file );
+
 
 /*
  * TA_CDL3INSIDE - Three Inside Up/Down
@@ -1169,6 +1295,12 @@ int TA_CDL3INSIDE_State( struct TA_CDL3INSIDE_State* _state,
 
 int TA_CDL3INSIDE_StateFree( struct TA_CDL3INSIDE_State** _state );
 
+int TA_CDL3INSIDE_StateSave( struct TA_CDL3INSIDE_State* _state,
+                           FILE* _file );
+
+int TA_CDL3INSIDE_StateLoad( struct TA_CDL3INSIDE_State** _state,
+                           FILE* _file );
+
 
 /*
  * TA_CDL3LINESTRIKE - Three-Line Strike 
@@ -1218,6 +1350,12 @@ int TA_CDL3LINESTRIKE_State( struct TA_CDL3LINESTRIKE_State* _state,
 
 int TA_CDL3LINESTRIKE_StateFree( struct TA_CDL3LINESTRIKE_State** _state );
 
+int TA_CDL3LINESTRIKE_StateSave( struct TA_CDL3LINESTRIKE_State* _state,
+                               FILE* _file );
+
+int TA_CDL3LINESTRIKE_StateLoad( struct TA_CDL3LINESTRIKE_State** _state,
+                               FILE* _file );
+
 
 /*
  * TA_CDL3OUTSIDE - Three Outside Up/Down
@@ -1263,6 +1401,12 @@ int TA_CDL3OUTSIDE_State( struct TA_CDL3OUTSIDE_State* _state,
                         int           *outInteger );
 
 int TA_CDL3OUTSIDE_StateFree( struct TA_CDL3OUTSIDE_State** _state );
+
+int TA_CDL3OUTSIDE_StateSave( struct TA_CDL3OUTSIDE_State* _state,
+                            FILE* _file );
+
+int TA_CDL3OUTSIDE_StateLoad( struct TA_CDL3OUTSIDE_State** _state,
+                            FILE* _file );
 
 
 /*
@@ -1322,6 +1466,12 @@ int TA_CDL3STARSINSOUTH_State( struct TA_CDL3STARSINSOUTH_State* _state,
                              int           *outInteger );
 
 int TA_CDL3STARSINSOUTH_StateFree( struct TA_CDL3STARSINSOUTH_State** _state );
+
+int TA_CDL3STARSINSOUTH_StateSave( struct TA_CDL3STARSINSOUTH_State* _state,
+                                 FILE* _file );
+
+int TA_CDL3STARSINSOUTH_StateLoad( struct TA_CDL3STARSINSOUTH_State** _state,
+                                 FILE* _file );
 
 
 /*
@@ -1384,6 +1534,12 @@ int TA_CDL3WHITESOLDIERS_State( struct TA_CDL3WHITESOLDIERS_State* _state,
                               int           *outInteger );
 
 int TA_CDL3WHITESOLDIERS_StateFree( struct TA_CDL3WHITESOLDIERS_State** _state );
+
+int TA_CDL3WHITESOLDIERS_StateSave( struct TA_CDL3WHITESOLDIERS_State* _state,
+                                  FILE* _file );
+
+int TA_CDL3WHITESOLDIERS_StateLoad( struct TA_CDL3WHITESOLDIERS_State** _state,
+                                  FILE* _file );
 
 
 /*
@@ -1448,6 +1604,12 @@ int TA_CDLABANDONEDBABY_State( struct TA_CDLABANDONEDBABY_State* _state,
                              int           *outInteger );
 
 int TA_CDLABANDONEDBABY_StateFree( struct TA_CDLABANDONEDBABY_State** _state );
+
+int TA_CDLABANDONEDBABY_StateSave( struct TA_CDLABANDONEDBABY_State* _state,
+                                 FILE* _file );
+
+int TA_CDLABANDONEDBABY_StateLoad( struct TA_CDLABANDONEDBABY_State** _state,
+                                 FILE* _file );
 
 
 /*
@@ -1515,6 +1677,12 @@ int TA_CDLADVANCEBLOCK_State( struct TA_CDLADVANCEBLOCK_State* _state,
 
 int TA_CDLADVANCEBLOCK_StateFree( struct TA_CDLADVANCEBLOCK_State** _state );
 
+int TA_CDLADVANCEBLOCK_StateSave( struct TA_CDLADVANCEBLOCK_State* _state,
+                                FILE* _file );
+
+int TA_CDLADVANCEBLOCK_StateLoad( struct TA_CDLADVANCEBLOCK_State** _state,
+                                FILE* _file );
+
 
 /*
  * TA_CDLBELTHOLD - Belt-hold
@@ -1567,6 +1735,12 @@ int TA_CDLBELTHOLD_State( struct TA_CDLBELTHOLD_State* _state,
 
 int TA_CDLBELTHOLD_StateFree( struct TA_CDLBELTHOLD_State** _state );
 
+int TA_CDLBELTHOLD_StateSave( struct TA_CDLBELTHOLD_State* _state,
+                            FILE* _file );
+
+int TA_CDLBELTHOLD_StateLoad( struct TA_CDLBELTHOLD_State** _state,
+                            FILE* _file );
+
 
 /*
  * TA_CDLBREAKAWAY - Breakaway
@@ -1613,6 +1787,12 @@ int TA_CDLBREAKAWAY_State( struct TA_CDLBREAKAWAY_State* _state,
                          int           *outInteger );
 
 int TA_CDLBREAKAWAY_StateFree( struct TA_CDLBREAKAWAY_State** _state );
+
+int TA_CDLBREAKAWAY_StateSave( struct TA_CDLBREAKAWAY_State* _state,
+                             FILE* _file );
+
+int TA_CDLBREAKAWAY_StateLoad( struct TA_CDLBREAKAWAY_State** _state,
+                             FILE* _file );
 
 
 /*
@@ -1666,6 +1846,12 @@ int TA_CDLCLOSINGMARUBOZU_State( struct TA_CDLCLOSINGMARUBOZU_State* _state,
 
 int TA_CDLCLOSINGMARUBOZU_StateFree( struct TA_CDLCLOSINGMARUBOZU_State** _state );
 
+int TA_CDLCLOSINGMARUBOZU_StateSave( struct TA_CDLCLOSINGMARUBOZU_State* _state,
+                                   FILE* _file );
+
+int TA_CDLCLOSINGMARUBOZU_StateLoad( struct TA_CDLCLOSINGMARUBOZU_State** _state,
+                                   FILE* _file );
+
 
 /*
  * TA_CDLCONCEALBABYSWALL - Concealing Baby Swallow
@@ -1715,6 +1901,12 @@ int TA_CDLCONCEALBABYSWALL_State( struct TA_CDLCONCEALBABYSWALL_State* _state,
                                 int           *outInteger );
 
 int TA_CDLCONCEALBABYSWALL_StateFree( struct TA_CDLCONCEALBABYSWALL_State** _state );
+
+int TA_CDLCONCEALBABYSWALL_StateSave( struct TA_CDLCONCEALBABYSWALL_State* _state,
+                                    FILE* _file );
+
+int TA_CDLCONCEALBABYSWALL_StateLoad( struct TA_CDLCONCEALBABYSWALL_State** _state,
+                                    FILE* _file );
 
 
 /*
@@ -1768,6 +1960,12 @@ int TA_CDLCOUNTERATTACK_State( struct TA_CDLCOUNTERATTACK_State* _state,
                              int           *outInteger );
 
 int TA_CDLCOUNTERATTACK_StateFree( struct TA_CDLCOUNTERATTACK_State** _state );
+
+int TA_CDLCOUNTERATTACK_StateSave( struct TA_CDLCOUNTERATTACK_State* _state,
+                                 FILE* _file );
+
+int TA_CDLCOUNTERATTACK_StateLoad( struct TA_CDLCOUNTERATTACK_State** _state,
+                                 FILE* _file );
 
 
 /*
@@ -1826,6 +2024,12 @@ int TA_CDLDARKCLOUDCOVER_State( struct TA_CDLDARKCLOUDCOVER_State* _state,
 
 int TA_CDLDARKCLOUDCOVER_StateFree( struct TA_CDLDARKCLOUDCOVER_State** _state );
 
+int TA_CDLDARKCLOUDCOVER_StateSave( struct TA_CDLDARKCLOUDCOVER_State* _state,
+                                  FILE* _file );
+
+int TA_CDLDARKCLOUDCOVER_StateLoad( struct TA_CDLDARKCLOUDCOVER_State** _state,
+                                  FILE* _file );
+
 
 /*
  * TA_CDLDOJI - Doji
@@ -1872,6 +2076,12 @@ int TA_CDLDOJI_State( struct TA_CDLDOJI_State* _state,
                     int           *outInteger );
 
 int TA_CDLDOJI_StateFree( struct TA_CDLDOJI_State** _state );
+
+int TA_CDLDOJI_StateSave( struct TA_CDLDOJI_State* _state,
+                        FILE* _file );
+
+int TA_CDLDOJI_StateLoad( struct TA_CDLDOJI_State** _state,
+                        FILE* _file );
 
 
 /*
@@ -1925,6 +2135,12 @@ int TA_CDLDOJISTAR_State( struct TA_CDLDOJISTAR_State* _state,
 
 int TA_CDLDOJISTAR_StateFree( struct TA_CDLDOJISTAR_State** _state );
 
+int TA_CDLDOJISTAR_StateSave( struct TA_CDLDOJISTAR_State* _state,
+                            FILE* _file );
+
+int TA_CDLDOJISTAR_StateLoad( struct TA_CDLDOJISTAR_State** _state,
+                            FILE* _file );
+
 
 /*
  * TA_CDLDRAGONFLYDOJI - Dragonfly Doji
@@ -1977,6 +2193,12 @@ int TA_CDLDRAGONFLYDOJI_State( struct TA_CDLDRAGONFLYDOJI_State* _state,
 
 int TA_CDLDRAGONFLYDOJI_StateFree( struct TA_CDLDRAGONFLYDOJI_State** _state );
 
+int TA_CDLDRAGONFLYDOJI_StateSave( struct TA_CDLDRAGONFLYDOJI_State* _state,
+                                 FILE* _file );
+
+int TA_CDLDRAGONFLYDOJI_StateLoad( struct TA_CDLDRAGONFLYDOJI_State** _state,
+                                 FILE* _file );
+
 
 /*
  * TA_CDLENGULFING - Engulfing Pattern
@@ -2022,6 +2244,12 @@ int TA_CDLENGULFING_State( struct TA_CDLENGULFING_State* _state,
                          int           *outInteger );
 
 int TA_CDLENGULFING_StateFree( struct TA_CDLENGULFING_State** _state );
+
+int TA_CDLENGULFING_StateSave( struct TA_CDLENGULFING_State* _state,
+                             FILE* _file );
+
+int TA_CDLENGULFING_StateLoad( struct TA_CDLENGULFING_State** _state,
+                             FILE* _file );
 
 
 /*
@@ -2087,6 +2315,12 @@ int TA_CDLEVENINGDOJISTAR_State( struct TA_CDLEVENINGDOJISTAR_State* _state,
 
 int TA_CDLEVENINGDOJISTAR_StateFree( struct TA_CDLEVENINGDOJISTAR_State** _state );
 
+int TA_CDLEVENINGDOJISTAR_StateSave( struct TA_CDLEVENINGDOJISTAR_State* _state,
+                                   FILE* _file );
+
+int TA_CDLEVENINGDOJISTAR_StateLoad( struct TA_CDLEVENINGDOJISTAR_State** _state,
+                                   FILE* _file );
+
 
 /*
  * TA_CDLEVENINGSTAR - Evening Star
@@ -2149,6 +2383,12 @@ int TA_CDLEVENINGSTAR_State( struct TA_CDLEVENINGSTAR_State* _state,
 
 int TA_CDLEVENINGSTAR_StateFree( struct TA_CDLEVENINGSTAR_State** _state );
 
+int TA_CDLEVENINGSTAR_StateSave( struct TA_CDLEVENINGSTAR_State* _state,
+                               FILE* _file );
+
+int TA_CDLEVENINGSTAR_StateLoad( struct TA_CDLEVENINGSTAR_State** _state,
+                               FILE* _file );
+
 
 /*
  * TA_CDLGAPSIDESIDEWHITE - Up/Down-gap side-by-side white lines
@@ -2198,6 +2438,12 @@ int TA_CDLGAPSIDESIDEWHITE_State( struct TA_CDLGAPSIDESIDEWHITE_State* _state,
                                 int           *outInteger );
 
 int TA_CDLGAPSIDESIDEWHITE_StateFree( struct TA_CDLGAPSIDESIDEWHITE_State** _state );
+
+int TA_CDLGAPSIDESIDEWHITE_StateSave( struct TA_CDLGAPSIDESIDEWHITE_State* _state,
+                                    FILE* _file );
+
+int TA_CDLGAPSIDESIDEWHITE_StateLoad( struct TA_CDLGAPSIDESIDEWHITE_State** _state,
+                                    FILE* _file );
 
 
 /*
@@ -2250,6 +2496,12 @@ int TA_CDLGRAVESTONEDOJI_State( struct TA_CDLGRAVESTONEDOJI_State* _state,
                               int           *outInteger );
 
 int TA_CDLGRAVESTONEDOJI_StateFree( struct TA_CDLGRAVESTONEDOJI_State** _state );
+
+int TA_CDLGRAVESTONEDOJI_StateSave( struct TA_CDLGRAVESTONEDOJI_State* _state,
+                                  FILE* _file );
+
+int TA_CDLGRAVESTONEDOJI_StateLoad( struct TA_CDLGRAVESTONEDOJI_State** _state,
+                                  FILE* _file );
 
 
 /*
@@ -2309,6 +2561,12 @@ int TA_CDLHAMMER_State( struct TA_CDLHAMMER_State* _state,
 
 int TA_CDLHAMMER_StateFree( struct TA_CDLHAMMER_State** _state );
 
+int TA_CDLHAMMER_StateSave( struct TA_CDLHAMMER_State* _state,
+                          FILE* _file );
+
+int TA_CDLHAMMER_StateLoad( struct TA_CDLHAMMER_State** _state,
+                          FILE* _file );
+
 
 /*
  * TA_CDLHANGINGMAN - Hanging Man
@@ -2367,6 +2625,12 @@ int TA_CDLHANGINGMAN_State( struct TA_CDLHANGINGMAN_State* _state,
 
 int TA_CDLHANGINGMAN_StateFree( struct TA_CDLHANGINGMAN_State** _state );
 
+int TA_CDLHANGINGMAN_StateSave( struct TA_CDLHANGINGMAN_State* _state,
+                              FILE* _file );
+
+int TA_CDLHANGINGMAN_StateLoad( struct TA_CDLHANGINGMAN_State** _state,
+                              FILE* _file );
+
 
 /*
  * TA_CDLHARAMI - Harami Pattern
@@ -2418,6 +2682,12 @@ int TA_CDLHARAMI_State( struct TA_CDLHARAMI_State* _state,
                       int           *outInteger );
 
 int TA_CDLHARAMI_StateFree( struct TA_CDLHARAMI_State** _state );
+
+int TA_CDLHARAMI_StateSave( struct TA_CDLHARAMI_State* _state,
+                          FILE* _file );
+
+int TA_CDLHARAMI_StateLoad( struct TA_CDLHARAMI_State** _state,
+                          FILE* _file );
 
 
 /*
@@ -2471,6 +2741,12 @@ int TA_CDLHARAMICROSS_State( struct TA_CDLHARAMICROSS_State* _state,
 
 int TA_CDLHARAMICROSS_StateFree( struct TA_CDLHARAMICROSS_State** _state );
 
+int TA_CDLHARAMICROSS_StateSave( struct TA_CDLHARAMICROSS_State* _state,
+                               FILE* _file );
+
+int TA_CDLHARAMICROSS_StateLoad( struct TA_CDLHARAMICROSS_State** _state,
+                               FILE* _file );
+
 
 /*
  * TA_CDLHIGHWAVE - High-Wave Candle
@@ -2521,6 +2797,12 @@ int TA_CDLHIGHWAVE_State( struct TA_CDLHIGHWAVE_State* _state,
 
 int TA_CDLHIGHWAVE_StateFree( struct TA_CDLHIGHWAVE_State** _state );
 
+int TA_CDLHIGHWAVE_StateSave( struct TA_CDLHIGHWAVE_State* _state,
+                            FILE* _file );
+
+int TA_CDLHIGHWAVE_StateLoad( struct TA_CDLHIGHWAVE_State** _state,
+                            FILE* _file );
+
 
 /*
  * TA_CDLHIKKAKE - Hikkake Pattern
@@ -2570,6 +2852,12 @@ int TA_CDLHIKKAKE_State( struct TA_CDLHIKKAKE_State* _state,
                        int           *outInteger );
 
 int TA_CDLHIKKAKE_StateFree( struct TA_CDLHIKKAKE_State** _state );
+
+int TA_CDLHIKKAKE_StateSave( struct TA_CDLHIKKAKE_State* _state,
+                           FILE* _file );
+
+int TA_CDLHIKKAKE_StateLoad( struct TA_CDLHIKKAKE_State** _state,
+                           FILE* _file );
 
 
 /*
@@ -2624,6 +2912,12 @@ int TA_CDLHIKKAKEMOD_State( struct TA_CDLHIKKAKEMOD_State* _state,
 
 int TA_CDLHIKKAKEMOD_StateFree( struct TA_CDLHIKKAKEMOD_State** _state );
 
+int TA_CDLHIKKAKEMOD_StateSave( struct TA_CDLHIKKAKEMOD_State* _state,
+                              FILE* _file );
+
+int TA_CDLHIKKAKEMOD_StateLoad( struct TA_CDLHIKKAKEMOD_State** _state,
+                              FILE* _file );
+
 
 /*
  * TA_CDLHOMINGPIGEON - Homing Pigeon
@@ -2675,6 +2969,12 @@ int TA_CDLHOMINGPIGEON_State( struct TA_CDLHOMINGPIGEON_State* _state,
                             int           *outInteger );
 
 int TA_CDLHOMINGPIGEON_StateFree( struct TA_CDLHOMINGPIGEON_State** _state );
+
+int TA_CDLHOMINGPIGEON_StateSave( struct TA_CDLHOMINGPIGEON_State* _state,
+                                FILE* _file );
+
+int TA_CDLHOMINGPIGEON_StateLoad( struct TA_CDLHOMINGPIGEON_State** _state,
+                                FILE* _file );
 
 
 /*
@@ -2731,6 +3031,12 @@ int TA_CDLIDENTICAL3CROWS_State( struct TA_CDLIDENTICAL3CROWS_State* _state,
 
 int TA_CDLIDENTICAL3CROWS_StateFree( struct TA_CDLIDENTICAL3CROWS_State** _state );
 
+int TA_CDLIDENTICAL3CROWS_StateSave( struct TA_CDLIDENTICAL3CROWS_State* _state,
+                                   FILE* _file );
+
+int TA_CDLIDENTICAL3CROWS_StateLoad( struct TA_CDLIDENTICAL3CROWS_State** _state,
+                                   FILE* _file );
+
 
 /*
  * TA_CDLINNECK - In-Neck Pattern
@@ -2783,6 +3089,12 @@ int TA_CDLINNECK_State( struct TA_CDLINNECK_State* _state,
 
 int TA_CDLINNECK_StateFree( struct TA_CDLINNECK_State** _state );
 
+int TA_CDLINNECK_StateSave( struct TA_CDLINNECK_State* _state,
+                          FILE* _file );
+
+int TA_CDLINNECK_StateLoad( struct TA_CDLINNECK_State** _state,
+                          FILE* _file );
+
 
 /*
  * TA_CDLINVERTEDHAMMER - Inverted Hammer
@@ -2828,6 +3140,12 @@ int TA_CDLINVERTEDHAMMER_State( struct TA_CDLINVERTEDHAMMER_State* _state,
                               int           *outInteger );
 
 int TA_CDLINVERTEDHAMMER_StateFree( struct TA_CDLINVERTEDHAMMER_State** _state );
+
+int TA_CDLINVERTEDHAMMER_StateSave( struct TA_CDLINVERTEDHAMMER_State* _state,
+                                  FILE* _file );
+
+int TA_CDLINVERTEDHAMMER_StateLoad( struct TA_CDLINVERTEDHAMMER_State** _state,
+                                  FILE* _file );
 
 
 /*
@@ -2875,6 +3193,12 @@ int TA_CDLKICKING_State( struct TA_CDLKICKING_State* _state,
 
 int TA_CDLKICKING_StateFree( struct TA_CDLKICKING_State** _state );
 
+int TA_CDLKICKING_StateSave( struct TA_CDLKICKING_State* _state,
+                           FILE* _file );
+
+int TA_CDLKICKING_StateLoad( struct TA_CDLKICKING_State** _state,
+                           FILE* _file );
+
 
 /*
  * TA_CDLKICKINGBYLENGTH - Kicking - bull/bear determined by the longer marubozu
@@ -2921,6 +3245,12 @@ int TA_CDLKICKINGBYLENGTH_State( struct TA_CDLKICKINGBYLENGTH_State* _state,
 
 int TA_CDLKICKINGBYLENGTH_StateFree( struct TA_CDLKICKINGBYLENGTH_State** _state );
 
+int TA_CDLKICKINGBYLENGTH_StateSave( struct TA_CDLKICKINGBYLENGTH_State* _state,
+                                   FILE* _file );
+
+int TA_CDLKICKINGBYLENGTH_StateLoad( struct TA_CDLKICKINGBYLENGTH_State** _state,
+                                   FILE* _file );
+
 
 /*
  * TA_CDLLADDERBOTTOM - Ladder Bottom
@@ -2966,6 +3296,12 @@ int TA_CDLLADDERBOTTOM_State( struct TA_CDLLADDERBOTTOM_State* _state,
                             int           *outInteger );
 
 int TA_CDLLADDERBOTTOM_StateFree( struct TA_CDLLADDERBOTTOM_State** _state );
+
+int TA_CDLLADDERBOTTOM_StateSave( struct TA_CDLLADDERBOTTOM_State* _state,
+                                FILE* _file );
+
+int TA_CDLLADDERBOTTOM_StateLoad( struct TA_CDLLADDERBOTTOM_State** _state,
+                                FILE* _file );
 
 
 /*
@@ -3019,6 +3355,12 @@ int TA_CDLLONGLEGGEDDOJI_State( struct TA_CDLLONGLEGGEDDOJI_State* _state,
 
 int TA_CDLLONGLEGGEDDOJI_StateFree( struct TA_CDLLONGLEGGEDDOJI_State** _state );
 
+int TA_CDLLONGLEGGEDDOJI_StateSave( struct TA_CDLLONGLEGGEDDOJI_State* _state,
+                                  FILE* _file );
+
+int TA_CDLLONGLEGGEDDOJI_StateLoad( struct TA_CDLLONGLEGGEDDOJI_State** _state,
+                                  FILE* _file );
+
 
 /*
  * TA_CDLLONGLINE - Long Line Candle
@@ -3064,6 +3406,12 @@ int TA_CDLLONGLINE_State( struct TA_CDLLONGLINE_State* _state,
                         int           *outInteger );
 
 int TA_CDLLONGLINE_StateFree( struct TA_CDLLONGLINE_State** _state );
+
+int TA_CDLLONGLINE_StateSave( struct TA_CDLLONGLINE_State* _state,
+                            FILE* _file );
+
+int TA_CDLLONGLINE_StateLoad( struct TA_CDLLONGLINE_State** _state,
+                            FILE* _file );
 
 
 /*
@@ -3117,6 +3465,12 @@ int TA_CDLMARUBOZU_State( struct TA_CDLMARUBOZU_State* _state,
 
 int TA_CDLMARUBOZU_StateFree( struct TA_CDLMARUBOZU_State** _state );
 
+int TA_CDLMARUBOZU_StateSave( struct TA_CDLMARUBOZU_State* _state,
+                            FILE* _file );
+
+int TA_CDLMARUBOZU_StateLoad( struct TA_CDLMARUBOZU_State** _state,
+                            FILE* _file );
+
 
 /*
  * TA_CDLMATCHINGLOW - Matching Low
@@ -3162,6 +3516,12 @@ int TA_CDLMATCHINGLOW_State( struct TA_CDLMATCHINGLOW_State* _state,
                            int           *outInteger );
 
 int TA_CDLMATCHINGLOW_StateFree( struct TA_CDLMATCHINGLOW_State** _state );
+
+int TA_CDLMATCHINGLOW_StateSave( struct TA_CDLMATCHINGLOW_State* _state,
+                               FILE* _file );
+
+int TA_CDLMATCHINGLOW_StateLoad( struct TA_CDLMATCHINGLOW_State** _state,
+                               FILE* _file );
 
 
 /*
@@ -3217,6 +3577,12 @@ int TA_CDLMATHOLD_State( struct TA_CDLMATHOLD_State* _state,
                        int           *outInteger );
 
 int TA_CDLMATHOLD_StateFree( struct TA_CDLMATHOLD_State** _state );
+
+int TA_CDLMATHOLD_StateSave( struct TA_CDLMATHOLD_State* _state,
+                           FILE* _file );
+
+int TA_CDLMATHOLD_StateLoad( struct TA_CDLMATHOLD_State** _state,
+                           FILE* _file );
 
 
 /*
@@ -3282,6 +3648,12 @@ int TA_CDLMORNINGDOJISTAR_State( struct TA_CDLMORNINGDOJISTAR_State* _state,
 
 int TA_CDLMORNINGDOJISTAR_StateFree( struct TA_CDLMORNINGDOJISTAR_State** _state );
 
+int TA_CDLMORNINGDOJISTAR_StateSave( struct TA_CDLMORNINGDOJISTAR_State* _state,
+                                   FILE* _file );
+
+int TA_CDLMORNINGDOJISTAR_StateLoad( struct TA_CDLMORNINGDOJISTAR_State** _state,
+                                   FILE* _file );
+
 
 /*
  * TA_CDLMORNINGSTAR - Morning Star
@@ -3344,6 +3716,12 @@ int TA_CDLMORNINGSTAR_State( struct TA_CDLMORNINGSTAR_State* _state,
 
 int TA_CDLMORNINGSTAR_StateFree( struct TA_CDLMORNINGSTAR_State** _state );
 
+int TA_CDLMORNINGSTAR_StateSave( struct TA_CDLMORNINGSTAR_State* _state,
+                               FILE* _file );
+
+int TA_CDLMORNINGSTAR_StateLoad( struct TA_CDLMORNINGSTAR_State** _state,
+                               FILE* _file );
+
 
 /*
  * TA_CDLONNECK - On-Neck Pattern
@@ -3389,6 +3767,12 @@ int TA_CDLONNECK_State( struct TA_CDLONNECK_State* _state,
                       int           *outInteger );
 
 int TA_CDLONNECK_StateFree( struct TA_CDLONNECK_State** _state );
+
+int TA_CDLONNECK_StateSave( struct TA_CDLONNECK_State* _state,
+                          FILE* _file );
+
+int TA_CDLONNECK_StateLoad( struct TA_CDLONNECK_State** _state,
+                          FILE* _file );
 
 
 /*
@@ -3436,6 +3820,12 @@ int TA_CDLPIERCING_State( struct TA_CDLPIERCING_State* _state,
 
 int TA_CDLPIERCING_StateFree( struct TA_CDLPIERCING_State** _state );
 
+int TA_CDLPIERCING_StateSave( struct TA_CDLPIERCING_State* _state,
+                            FILE* _file );
+
+int TA_CDLPIERCING_StateLoad( struct TA_CDLPIERCING_State** _state,
+                            FILE* _file );
+
 
 /*
  * TA_CDLRICKSHAWMAN - Rickshaw Man
@@ -3481,6 +3871,12 @@ int TA_CDLRICKSHAWMAN_State( struct TA_CDLRICKSHAWMAN_State* _state,
                            int           *outInteger );
 
 int TA_CDLRICKSHAWMAN_StateFree( struct TA_CDLRICKSHAWMAN_State** _state );
+
+int TA_CDLRICKSHAWMAN_StateSave( struct TA_CDLRICKSHAWMAN_State* _state,
+                               FILE* _file );
+
+int TA_CDLRICKSHAWMAN_StateLoad( struct TA_CDLRICKSHAWMAN_State** _state,
+                               FILE* _file );
 
 
 /*
@@ -3528,6 +3924,12 @@ int TA_CDLRISEFALL3METHODS_State( struct TA_CDLRISEFALL3METHODS_State* _state,
 
 int TA_CDLRISEFALL3METHODS_StateFree( struct TA_CDLRISEFALL3METHODS_State** _state );
 
+int TA_CDLRISEFALL3METHODS_StateSave( struct TA_CDLRISEFALL3METHODS_State* _state,
+                                    FILE* _file );
+
+int TA_CDLRISEFALL3METHODS_StateLoad( struct TA_CDLRISEFALL3METHODS_State** _state,
+                                    FILE* _file );
+
 
 /*
  * TA_CDLSEPARATINGLINES - Separating Lines
@@ -3573,6 +3975,12 @@ int TA_CDLSEPARATINGLINES_State( struct TA_CDLSEPARATINGLINES_State* _state,
                                int           *outInteger );
 
 int TA_CDLSEPARATINGLINES_StateFree( struct TA_CDLSEPARATINGLINES_State** _state );
+
+int TA_CDLSEPARATINGLINES_StateSave( struct TA_CDLSEPARATINGLINES_State* _state,
+                                   FILE* _file );
+
+int TA_CDLSEPARATINGLINES_StateLoad( struct TA_CDLSEPARATINGLINES_State** _state,
+                                   FILE* _file );
 
 
 /*
@@ -3620,6 +4028,12 @@ int TA_CDLSHOOTINGSTAR_State( struct TA_CDLSHOOTINGSTAR_State* _state,
 
 int TA_CDLSHOOTINGSTAR_StateFree( struct TA_CDLSHOOTINGSTAR_State** _state );
 
+int TA_CDLSHOOTINGSTAR_StateSave( struct TA_CDLSHOOTINGSTAR_State* _state,
+                                FILE* _file );
+
+int TA_CDLSHOOTINGSTAR_StateLoad( struct TA_CDLSHOOTINGSTAR_State** _state,
+                                FILE* _file );
+
 
 /*
  * TA_CDLSHORTLINE - Short Line Candle
@@ -3665,6 +4079,12 @@ int TA_CDLSHORTLINE_State( struct TA_CDLSHORTLINE_State* _state,
                          int           *outInteger );
 
 int TA_CDLSHORTLINE_StateFree( struct TA_CDLSHORTLINE_State** _state );
+
+int TA_CDLSHORTLINE_StateSave( struct TA_CDLSHORTLINE_State* _state,
+                             FILE* _file );
+
+int TA_CDLSHORTLINE_StateLoad( struct TA_CDLSHORTLINE_State** _state,
+                             FILE* _file );
 
 
 /*
@@ -3712,6 +4132,12 @@ int TA_CDLSPINNINGTOP_State( struct TA_CDLSPINNINGTOP_State* _state,
 
 int TA_CDLSPINNINGTOP_StateFree( struct TA_CDLSPINNINGTOP_State** _state );
 
+int TA_CDLSPINNINGTOP_StateSave( struct TA_CDLSPINNINGTOP_State* _state,
+                               FILE* _file );
+
+int TA_CDLSPINNINGTOP_StateLoad( struct TA_CDLSPINNINGTOP_State** _state,
+                               FILE* _file );
+
 
 /*
  * TA_CDLSTALLEDPATTERN - Stalled Pattern
@@ -3757,6 +4183,12 @@ int TA_CDLSTALLEDPATTERN_State( struct TA_CDLSTALLEDPATTERN_State* _state,
                               int           *outInteger );
 
 int TA_CDLSTALLEDPATTERN_StateFree( struct TA_CDLSTALLEDPATTERN_State** _state );
+
+int TA_CDLSTALLEDPATTERN_StateSave( struct TA_CDLSTALLEDPATTERN_State* _state,
+                                  FILE* _file );
+
+int TA_CDLSTALLEDPATTERN_StateLoad( struct TA_CDLSTALLEDPATTERN_State** _state,
+                                  FILE* _file );
 
 
 /*
@@ -3804,6 +4236,12 @@ int TA_CDLSTICKSANDWICH_State( struct TA_CDLSTICKSANDWICH_State* _state,
 
 int TA_CDLSTICKSANDWICH_StateFree( struct TA_CDLSTICKSANDWICH_State** _state );
 
+int TA_CDLSTICKSANDWICH_StateSave( struct TA_CDLSTICKSANDWICH_State* _state,
+                                 FILE* _file );
+
+int TA_CDLSTICKSANDWICH_StateLoad( struct TA_CDLSTICKSANDWICH_State** _state,
+                                 FILE* _file );
+
 
 /*
  * TA_CDLTAKURI - Takuri (Dragonfly Doji with very long lower shadow)
@@ -3849,6 +4287,12 @@ int TA_CDLTAKURI_State( struct TA_CDLTAKURI_State* _state,
                       int           *outInteger );
 
 int TA_CDLTAKURI_StateFree( struct TA_CDLTAKURI_State** _state );
+
+int TA_CDLTAKURI_StateSave( struct TA_CDLTAKURI_State* _state,
+                          FILE* _file );
+
+int TA_CDLTAKURI_StateLoad( struct TA_CDLTAKURI_State** _state,
+                          FILE* _file );
 
 
 /*
@@ -3896,6 +4340,12 @@ int TA_CDLTASUKIGAP_State( struct TA_CDLTASUKIGAP_State* _state,
 
 int TA_CDLTASUKIGAP_StateFree( struct TA_CDLTASUKIGAP_State** _state );
 
+int TA_CDLTASUKIGAP_StateSave( struct TA_CDLTASUKIGAP_State* _state,
+                             FILE* _file );
+
+int TA_CDLTASUKIGAP_StateLoad( struct TA_CDLTASUKIGAP_State** _state,
+                             FILE* _file );
+
 
 /*
  * TA_CDLTHRUSTING - Thrusting Pattern
@@ -3941,6 +4391,12 @@ int TA_CDLTHRUSTING_State( struct TA_CDLTHRUSTING_State* _state,
                          int           *outInteger );
 
 int TA_CDLTHRUSTING_StateFree( struct TA_CDLTHRUSTING_State** _state );
+
+int TA_CDLTHRUSTING_StateSave( struct TA_CDLTHRUSTING_State* _state,
+                             FILE* _file );
+
+int TA_CDLTHRUSTING_StateLoad( struct TA_CDLTHRUSTING_State** _state,
+                             FILE* _file );
 
 
 /*
@@ -3988,6 +4444,12 @@ int TA_CDLTRISTAR_State( struct TA_CDLTRISTAR_State* _state,
 
 int TA_CDLTRISTAR_StateFree( struct TA_CDLTRISTAR_State** _state );
 
+int TA_CDLTRISTAR_StateSave( struct TA_CDLTRISTAR_State* _state,
+                           FILE* _file );
+
+int TA_CDLTRISTAR_StateLoad( struct TA_CDLTRISTAR_State** _state,
+                           FILE* _file );
+
 
 /*
  * TA_CDLUNIQUE3RIVER - Unique 3 River
@@ -4033,6 +4495,12 @@ int TA_CDLUNIQUE3RIVER_State( struct TA_CDLUNIQUE3RIVER_State* _state,
                             int           *outInteger );
 
 int TA_CDLUNIQUE3RIVER_StateFree( struct TA_CDLUNIQUE3RIVER_State** _state );
+
+int TA_CDLUNIQUE3RIVER_StateSave( struct TA_CDLUNIQUE3RIVER_State* _state,
+                                FILE* _file );
+
+int TA_CDLUNIQUE3RIVER_StateLoad( struct TA_CDLUNIQUE3RIVER_State** _state,
+                                FILE* _file );
 
 
 /*
@@ -4080,6 +4548,12 @@ int TA_CDLUPSIDEGAP2CROWS_State( struct TA_CDLUPSIDEGAP2CROWS_State* _state,
 
 int TA_CDLUPSIDEGAP2CROWS_StateFree( struct TA_CDLUPSIDEGAP2CROWS_State** _state );
 
+int TA_CDLUPSIDEGAP2CROWS_StateSave( struct TA_CDLUPSIDEGAP2CROWS_State* _state,
+                                   FILE* _file );
+
+int TA_CDLUPSIDEGAP2CROWS_StateLoad( struct TA_CDLUPSIDEGAP2CROWS_State** _state,
+                                   FILE* _file );
+
 
 /*
  * TA_CDLXSIDEGAP3METHODS - Upside/Downside Gap Three Methods
@@ -4126,6 +4600,12 @@ int TA_CDLXSIDEGAP3METHODS_State( struct TA_CDLXSIDEGAP3METHODS_State* _state,
 
 int TA_CDLXSIDEGAP3METHODS_StateFree( struct TA_CDLXSIDEGAP3METHODS_State** _state );
 
+int TA_CDLXSIDEGAP3METHODS_StateSave( struct TA_CDLXSIDEGAP3METHODS_State* _state,
+                                    FILE* _file );
+
+int TA_CDLXSIDEGAP3METHODS_StateLoad( struct TA_CDLXSIDEGAP3METHODS_State** _state,
+                                    FILE* _file );
+
 
 /*
  * TA_CEIL - Vector Ceil
@@ -4162,6 +4642,12 @@ int TA_CEIL_State( struct TA_CEIL_State* _state,
                  double        *outReal );
 
 int TA_CEIL_StateFree( struct TA_CEIL_State** _state );
+
+int TA_CEIL_StateSave( struct TA_CEIL_State* _state,
+                     FILE* _file );
+
+int TA_CEIL_StateLoad( struct TA_CEIL_State** _state,
+                     FILE* _file );
 
 
 /*
@@ -4212,6 +4698,12 @@ int TA_CMO_State( struct TA_CMO_State* _state,
                 double        *outReal );
 
 int TA_CMO_StateFree( struct TA_CMO_State** _state );
+
+int TA_CMO_StateSave( struct TA_CMO_State* _state,
+                    FILE* _file );
+
+int TA_CMO_StateLoad( struct TA_CMO_State** _state,
+                    FILE* _file );
 
 
 /*
@@ -4267,6 +4759,12 @@ int TA_CORREL_State( struct TA_CORREL_State* _state,
 
 int TA_CORREL_StateFree( struct TA_CORREL_State** _state );
 
+int TA_CORREL_StateSave( struct TA_CORREL_State* _state,
+                       FILE* _file );
+
+int TA_CORREL_StateLoad( struct TA_CORREL_State** _state,
+                       FILE* _file );
+
 
 /*
  * TA_COS - Vector Trigonometric Cos
@@ -4304,6 +4802,12 @@ int TA_COS_State( struct TA_COS_State* _state,
 
 int TA_COS_StateFree( struct TA_COS_State** _state );
 
+int TA_COS_StateSave( struct TA_COS_State* _state,
+                    FILE* _file );
+
+int TA_COS_StateLoad( struct TA_COS_State** _state,
+                    FILE* _file );
+
 
 /*
  * TA_COSH - Vector Trigonometric Cosh
@@ -4340,6 +4844,12 @@ int TA_COSH_State( struct TA_COSH_State* _state,
                  double        *outReal );
 
 int TA_COSH_StateFree( struct TA_COSH_State** _state );
+
+int TA_COSH_StateSave( struct TA_COSH_State* _state,
+                     FILE* _file );
+
+int TA_COSH_StateLoad( struct TA_COSH_State** _state,
+                     FILE* _file );
 
 
 /*
@@ -4389,6 +4899,12 @@ int TA_DEMA_State( struct TA_DEMA_State* _state,
 
 int TA_DEMA_StateFree( struct TA_DEMA_State** _state );
 
+int TA_DEMA_StateSave( struct TA_DEMA_State* _state,
+                     FILE* _file );
+
+int TA_DEMA_StateLoad( struct TA_DEMA_State** _state,
+                     FILE* _file );
+
 
 /*
  * TA_DIV - Vector Arithmetic Div
@@ -4428,6 +4944,12 @@ int TA_DIV_State( struct TA_DIV_State* _state,
                 double        *outReal );
 
 int TA_DIV_StateFree( struct TA_DIV_State** _state );
+
+int TA_DIV_StateSave( struct TA_DIV_State* _state,
+                    FILE* _file );
+
+int TA_DIV_StateLoad( struct TA_DIV_State** _state,
+                    FILE* _file );
 
 
 /*
@@ -4488,6 +5010,12 @@ int TA_DX_State( struct TA_DX_State* _state,
 
 int TA_DX_StateFree( struct TA_DX_State** _state );
 
+int TA_DX_StateSave( struct TA_DX_State* _state,
+                   FILE* _file );
+
+int TA_DX_StateLoad( struct TA_DX_State** _state,
+                   FILE* _file );
+
 
 /*
  * TA_EMA - Exponential Moving Average
@@ -4538,6 +5066,12 @@ int TA_EMA_State( struct TA_EMA_State* _state,
 
 int TA_EMA_StateFree( struct TA_EMA_State** _state );
 
+int TA_EMA_StateSave( struct TA_EMA_State* _state,
+                    FILE* _file );
+
+int TA_EMA_StateLoad( struct TA_EMA_State** _state,
+                    FILE* _file );
+
 
 /*
  * TA_EXP - Vector Arithmetic Exp
@@ -4575,6 +5109,12 @@ int TA_EXP_State( struct TA_EXP_State* _state,
 
 int TA_EXP_StateFree( struct TA_EXP_State** _state );
 
+int TA_EXP_StateSave( struct TA_EXP_State* _state,
+                    FILE* _file );
+
+int TA_EXP_StateLoad( struct TA_EXP_State** _state,
+                    FILE* _file );
+
 
 /*
  * TA_FLOOR - Vector Floor
@@ -4611,6 +5151,12 @@ int TA_FLOOR_State( struct TA_FLOOR_State* _state,
                   double        *outReal );
 
 int TA_FLOOR_StateFree( struct TA_FLOOR_State** _state );
+
+int TA_FLOOR_StateSave( struct TA_FLOOR_State* _state,
+                      FILE* _file );
+
+int TA_FLOOR_StateLoad( struct TA_FLOOR_State** _state,
+                      FILE* _file );
 
 
 /*
@@ -4669,6 +5215,12 @@ int TA_HT_DCPERIOD_State( struct TA_HT_DCPERIOD_State* _state,
                         double        *outReal );
 
 int TA_HT_DCPERIOD_StateFree( struct TA_HT_DCPERIOD_State** _state );
+
+int TA_HT_DCPERIOD_StateSave( struct TA_HT_DCPERIOD_State* _state,
+                            FILE* _file );
+
+int TA_HT_DCPERIOD_StateLoad( struct TA_HT_DCPERIOD_State** _state,
+                            FILE* _file );
 
 
 /*
@@ -4731,6 +5283,12 @@ int TA_HT_DCPHASE_State( struct TA_HT_DCPHASE_State* _state,
 
 int TA_HT_DCPHASE_StateFree( struct TA_HT_DCPHASE_State** _state );
 
+int TA_HT_DCPHASE_StateSave( struct TA_HT_DCPHASE_State* _state,
+                           FILE* _file );
+
+int TA_HT_DCPHASE_StateLoad( struct TA_HT_DCPHASE_State** _state,
+                           FILE* _file );
+
 
 /*
  * TA_HT_PHASOR - Hilbert Transform - Phasor Components
@@ -4789,6 +5347,12 @@ int TA_HT_PHASOR_State( struct TA_HT_PHASOR_State* _state,
                       double        *outQuadrature );
 
 int TA_HT_PHASOR_StateFree( struct TA_HT_PHASOR_State** _state );
+
+int TA_HT_PHASOR_StateSave( struct TA_HT_PHASOR_State* _state,
+                          FILE* _file );
+
+int TA_HT_PHASOR_StateLoad( struct TA_HT_PHASOR_State** _state,
+                          FILE* _file );
 
 
 /*
@@ -4854,6 +5418,12 @@ int TA_HT_SINE_State( struct TA_HT_SINE_State* _state,
 
 int TA_HT_SINE_StateFree( struct TA_HT_SINE_State** _state );
 
+int TA_HT_SINE_StateSave( struct TA_HT_SINE_State* _state,
+                        FILE* _file );
+
+int TA_HT_SINE_StateLoad( struct TA_HT_SINE_State** _state,
+                        FILE* _file );
+
 
 /*
  * TA_HT_TRENDLINE - Hilbert Transform - Instantaneous Trendline
@@ -4915,6 +5485,12 @@ int TA_HT_TRENDLINE_State( struct TA_HT_TRENDLINE_State* _state,
                          double        *outReal );
 
 int TA_HT_TRENDLINE_StateFree( struct TA_HT_TRENDLINE_State** _state );
+
+int TA_HT_TRENDLINE_StateSave( struct TA_HT_TRENDLINE_State* _state,
+                             FILE* _file );
+
+int TA_HT_TRENDLINE_StateLoad( struct TA_HT_TRENDLINE_State** _state,
+                             FILE* _file );
 
 
 /*
@@ -4985,6 +5561,12 @@ int TA_HT_TRENDMODE_State( struct TA_HT_TRENDMODE_State* _state,
 
 int TA_HT_TRENDMODE_StateFree( struct TA_HT_TRENDMODE_State** _state );
 
+int TA_HT_TRENDMODE_StateSave( struct TA_HT_TRENDMODE_State* _state,
+                             FILE* _file );
+
+int TA_HT_TRENDMODE_StateLoad( struct TA_HT_TRENDMODE_State** _state,
+                             FILE* _file );
+
 
 /*
  * TA_IMI - Intraday Momentum Index
@@ -5036,6 +5618,12 @@ int TA_IMI_State( struct TA_IMI_State* _state,
 
 int TA_IMI_StateFree( struct TA_IMI_State** _state );
 
+int TA_IMI_StateSave( struct TA_IMI_State* _state,
+                    FILE* _file );
+
+int TA_IMI_StateLoad( struct TA_IMI_State** _state,
+                    FILE* _file );
+
 
 /*
  * TA_KAMA - Kaufman Adaptive Moving Average
@@ -5085,6 +5673,12 @@ int TA_KAMA_State( struct TA_KAMA_State* _state,
                  double        *outReal );
 
 int TA_KAMA_StateFree( struct TA_KAMA_State** _state );
+
+int TA_KAMA_StateSave( struct TA_KAMA_State* _state,
+                     FILE* _file );
+
+int TA_KAMA_StateLoad( struct TA_KAMA_State** _state,
+                     FILE* _file );
 
 
 /*
@@ -5137,6 +5731,12 @@ int TA_LINEARREG_State( struct TA_LINEARREG_State* _state,
 
 int TA_LINEARREG_StateFree( struct TA_LINEARREG_State** _state );
 
+int TA_LINEARREG_StateSave( struct TA_LINEARREG_State* _state,
+                          FILE* _file );
+
+int TA_LINEARREG_StateLoad( struct TA_LINEARREG_State** _state,
+                          FILE* _file );
+
 
 /*
  * TA_LINEARREG_ANGLE - Linear Regression Angle
@@ -5187,6 +5787,12 @@ int TA_LINEARREG_ANGLE_State( struct TA_LINEARREG_ANGLE_State* _state,
                             double        *outReal );
 
 int TA_LINEARREG_ANGLE_StateFree( struct TA_LINEARREG_ANGLE_State** _state );
+
+int TA_LINEARREG_ANGLE_StateSave( struct TA_LINEARREG_ANGLE_State* _state,
+                                FILE* _file );
+
+int TA_LINEARREG_ANGLE_StateLoad( struct TA_LINEARREG_ANGLE_State** _state,
+                                FILE* _file );
 
 
 /*
@@ -5239,6 +5845,12 @@ int TA_LINEARREG_INTERCEPT_State( struct TA_LINEARREG_INTERCEPT_State* _state,
 
 int TA_LINEARREG_INTERCEPT_StateFree( struct TA_LINEARREG_INTERCEPT_State** _state );
 
+int TA_LINEARREG_INTERCEPT_StateSave( struct TA_LINEARREG_INTERCEPT_State* _state,
+                                    FILE* _file );
+
+int TA_LINEARREG_INTERCEPT_StateLoad( struct TA_LINEARREG_INTERCEPT_State** _state,
+                                    FILE* _file );
+
 
 /*
  * TA_LINEARREG_SLOPE - Linear Regression Slope
@@ -5290,6 +5902,12 @@ int TA_LINEARREG_SLOPE_State( struct TA_LINEARREG_SLOPE_State* _state,
 
 int TA_LINEARREG_SLOPE_StateFree( struct TA_LINEARREG_SLOPE_State** _state );
 
+int TA_LINEARREG_SLOPE_StateSave( struct TA_LINEARREG_SLOPE_State* _state,
+                                FILE* _file );
+
+int TA_LINEARREG_SLOPE_StateLoad( struct TA_LINEARREG_SLOPE_State** _state,
+                                FILE* _file );
+
 
 /*
  * TA_LN - Vector Log Natural
@@ -5327,6 +5945,12 @@ int TA_LN_State( struct TA_LN_State* _state,
 
 int TA_LN_StateFree( struct TA_LN_State** _state );
 
+int TA_LN_StateSave( struct TA_LN_State* _state,
+                   FILE* _file );
+
+int TA_LN_StateLoad( struct TA_LN_State** _state,
+                   FILE* _file );
+
 
 /*
  * TA_LOG10 - Vector Log10
@@ -5363,6 +5987,12 @@ int TA_LOG10_State( struct TA_LOG10_State* _state,
                   double        *outReal );
 
 int TA_LOG10_StateFree( struct TA_LOG10_State** _state );
+
+int TA_LOG10_StateSave( struct TA_LOG10_State* _state,
+                      FILE* _file );
+
+int TA_LOG10_StateLoad( struct TA_LOG10_State** _state,
+                      FILE* _file );
 
 
 /*
@@ -5413,6 +6043,12 @@ int TA_MA_State( struct TA_MA_State* _state,
                double        *outReal );
 
 int TA_MA_StateFree( struct TA_MA_State** _state );
+
+int TA_MA_StateSave( struct TA_MA_State* _state,
+                   FILE* _file );
+
+int TA_MA_StateLoad( struct TA_MA_State** _state,
+                   FILE* _file );
 
 
 /*
@@ -5481,6 +6117,12 @@ int TA_MACD_State( struct TA_MACD_State* _state,
                  double        *outMACDHist );
 
 int TA_MACD_StateFree( struct TA_MACD_State** _state );
+
+int TA_MACD_StateSave( struct TA_MACD_State* _state,
+                     FILE* _file );
+
+int TA_MACD_StateLoad( struct TA_MACD_State** _state,
+                     FILE* _file );
 
 
 /*
@@ -5559,6 +6201,12 @@ int TA_MACDEXT_State( struct TA_MACDEXT_State* _state,
 
 int TA_MACDEXT_StateFree( struct TA_MACDEXT_State** _state );
 
+int TA_MACDEXT_StateSave( struct TA_MACDEXT_State* _state,
+                        FILE* _file );
+
+int TA_MACDEXT_StateLoad( struct TA_MACDEXT_State** _state,
+                        FILE* _file );
+
 
 /*
  * TA_MACDFIX - Moving Average Convergence/Divergence Fix 12/26
@@ -5608,6 +6256,12 @@ int TA_MACDFIX_State( struct TA_MACDFIX_State* _state,
                     double        *outMACDHist );
 
 int TA_MACDFIX_StateFree( struct TA_MACDFIX_State** _state );
+
+int TA_MACDFIX_StateSave( struct TA_MACDFIX_State* _state,
+                        FILE* _file );
+
+int TA_MACDFIX_StateLoad( struct TA_MACDFIX_State** _state,
+                        FILE* _file );
 
 
 /*
@@ -5687,6 +6341,12 @@ int TA_MAMA_State( struct TA_MAMA_State* _state,
 
 int TA_MAMA_StateFree( struct TA_MAMA_State** _state );
 
+int TA_MAMA_StateSave( struct TA_MAMA_State* _state,
+                     FILE* _file );
+
+int TA_MAMA_StateLoad( struct TA_MAMA_State** _state,
+                     FILE* _file );
+
 
 /*
  * TA_MAVP - Moving average with variable period
@@ -5747,6 +6407,12 @@ int TA_MAVP_State( struct TA_MAVP_State* _state,
 
 int TA_MAVP_StateFree( struct TA_MAVP_State** _state );
 
+int TA_MAVP_StateSave( struct TA_MAVP_State* _state,
+                     FILE* _file );
+
+int TA_MAVP_StateLoad( struct TA_MAVP_State** _state,
+                     FILE* _file );
+
 
 /*
  * TA_MAX - Highest value over a specified period
@@ -5793,6 +6459,12 @@ int TA_MAX_State( struct TA_MAX_State* _state,
                 double        *outReal );
 
 int TA_MAX_StateFree( struct TA_MAX_State** _state );
+
+int TA_MAX_StateSave( struct TA_MAX_State* _state,
+                    FILE* _file );
+
+int TA_MAX_StateLoad( struct TA_MAX_State** _state,
+                    FILE* _file );
 
 
 /*
@@ -5843,6 +6515,12 @@ int TA_MAXINDEX_State( struct TA_MAXINDEX_State* _state,
 
 int TA_MAXINDEX_StateFree( struct TA_MAXINDEX_State** _state );
 
+int TA_MAXINDEX_StateSave( struct TA_MAXINDEX_State* _state,
+                         FILE* _file );
+
+int TA_MAXINDEX_StateLoad( struct TA_MAXINDEX_State** _state,
+                         FILE* _file );
+
 
 /*
  * TA_MEDPRICE - Median Price
@@ -5882,6 +6560,12 @@ int TA_MEDPRICE_State( struct TA_MEDPRICE_State* _state,
                      double        *outReal );
 
 int TA_MEDPRICE_StateFree( struct TA_MEDPRICE_State** _state );
+
+int TA_MEDPRICE_StateSave( struct TA_MEDPRICE_State* _state,
+                         FILE* _file );
+
+int TA_MEDPRICE_StateLoad( struct TA_MEDPRICE_State** _state,
+                         FILE* _file );
 
 
 /*
@@ -5942,6 +6626,12 @@ int TA_MFI_State( struct TA_MFI_State* _state,
 
 int TA_MFI_StateFree( struct TA_MFI_State** _state );
 
+int TA_MFI_StateSave( struct TA_MFI_State* _state,
+                    FILE* _file );
+
+int TA_MFI_StateLoad( struct TA_MFI_State** _state,
+                    FILE* _file );
+
 
 /*
  * TA_MIDPOINT - MidPoint over period
@@ -5989,6 +6679,12 @@ int TA_MIDPOINT_State( struct TA_MIDPOINT_State* _state,
                      double        *outReal );
 
 int TA_MIDPOINT_StateFree( struct TA_MIDPOINT_State** _state );
+
+int TA_MIDPOINT_StateSave( struct TA_MIDPOINT_State* _state,
+                         FILE* _file );
+
+int TA_MIDPOINT_StateLoad( struct TA_MIDPOINT_State** _state,
+                         FILE* _file );
 
 
 /*
@@ -6041,6 +6737,12 @@ int TA_MIDPRICE_State( struct TA_MIDPRICE_State* _state,
 
 int TA_MIDPRICE_StateFree( struct TA_MIDPRICE_State** _state );
 
+int TA_MIDPRICE_StateSave( struct TA_MIDPRICE_State* _state,
+                         FILE* _file );
+
+int TA_MIDPRICE_StateLoad( struct TA_MIDPRICE_State** _state,
+                         FILE* _file );
+
 
 /*
  * TA_MIN - Lowest value over a specified period
@@ -6087,6 +6789,12 @@ int TA_MIN_State( struct TA_MIN_State* _state,
                 double        *outReal );
 
 int TA_MIN_StateFree( struct TA_MIN_State** _state );
+
+int TA_MIN_StateSave( struct TA_MIN_State* _state,
+                    FILE* _file );
+
+int TA_MIN_StateLoad( struct TA_MIN_State** _state,
+                    FILE* _file );
 
 
 /*
@@ -6137,6 +6845,12 @@ int TA_MININDEX_State( struct TA_MININDEX_State* _state,
 
 int TA_MININDEX_StateFree( struct TA_MININDEX_State** _state );
 
+int TA_MININDEX_StateSave( struct TA_MININDEX_State* _state,
+                         FILE* _file );
+
+int TA_MININDEX_StateLoad( struct TA_MININDEX_State** _state,
+                         FILE* _file );
+
 
 /*
  * TA_MINMAX - Lowest and highest values over a specified period
@@ -6186,6 +6900,12 @@ int TA_MINMAX_State( struct TA_MINMAX_State* _state,
                    double        *outMax );
 
 int TA_MINMAX_StateFree( struct TA_MINMAX_State** _state );
+
+int TA_MINMAX_StateSave( struct TA_MINMAX_State* _state,
+                       FILE* _file );
+
+int TA_MINMAX_StateLoad( struct TA_MINMAX_State** _state,
+                       FILE* _file );
 
 
 /*
@@ -6239,6 +6959,12 @@ int TA_MINMAXINDEX_State( struct TA_MINMAXINDEX_State* _state,
                         int           *outMaxIdx );
 
 int TA_MINMAXINDEX_StateFree( struct TA_MINMAXINDEX_State** _state );
+
+int TA_MINMAXINDEX_StateSave( struct TA_MINMAXINDEX_State* _state,
+                            FILE* _file );
+
+int TA_MINMAXINDEX_StateLoad( struct TA_MINMAXINDEX_State** _state,
+                            FILE* _file );
 
 
 /*
@@ -6297,6 +7023,12 @@ int TA_MINUS_DI_State( struct TA_MINUS_DI_State* _state,
 
 int TA_MINUS_DI_StateFree( struct TA_MINUS_DI_State** _state );
 
+int TA_MINUS_DI_StateSave( struct TA_MINUS_DI_State* _state,
+                         FILE* _file );
+
+int TA_MINUS_DI_StateLoad( struct TA_MINUS_DI_State** _state,
+                         FILE* _file );
+
 
 /*
  * TA_MINUS_DM - Minus Directional Movement
@@ -6349,6 +7081,12 @@ int TA_MINUS_DM_State( struct TA_MINUS_DM_State* _state,
 
 int TA_MINUS_DM_StateFree( struct TA_MINUS_DM_State** _state );
 
+int TA_MINUS_DM_StateSave( struct TA_MINUS_DM_State* _state,
+                         FILE* _file );
+
+int TA_MINUS_DM_StateLoad( struct TA_MINUS_DM_State** _state,
+                         FILE* _file );
+
 
 /*
  * TA_MOM - Momentum
@@ -6395,6 +7133,12 @@ int TA_MOM_State( struct TA_MOM_State* _state,
 
 int TA_MOM_StateFree( struct TA_MOM_State** _state );
 
+int TA_MOM_StateSave( struct TA_MOM_State* _state,
+                    FILE* _file );
+
+int TA_MOM_StateLoad( struct TA_MOM_State** _state,
+                    FILE* _file );
+
 
 /*
  * TA_MULT - Vector Arithmetic Mult
@@ -6434,6 +7178,12 @@ int TA_MULT_State( struct TA_MULT_State* _state,
                  double        *outReal );
 
 int TA_MULT_StateFree( struct TA_MULT_State** _state );
+
+int TA_MULT_StateSave( struct TA_MULT_State* _state,
+                     FILE* _file );
+
+int TA_MULT_StateLoad( struct TA_MULT_State** _state,
+                     FILE* _file );
 
 
 /*
@@ -6491,6 +7241,12 @@ int TA_NATR_State( struct TA_NATR_State* _state,
 
 int TA_NATR_StateFree( struct TA_NATR_State** _state );
 
+int TA_NATR_StateSave( struct TA_NATR_State* _state,
+                     FILE* _file );
+
+int TA_NATR_StateLoad( struct TA_NATR_State** _state,
+                     FILE* _file );
+
 
 /*
  * TA_OBV - On Balance Volume
@@ -6532,6 +7288,12 @@ int TA_OBV_State( struct TA_OBV_State* _state,
                 double        *outReal );
 
 int TA_OBV_StateFree( struct TA_OBV_State** _state );
+
+int TA_OBV_StateSave( struct TA_OBV_State* _state,
+                    FILE* _file );
+
+int TA_OBV_StateLoad( struct TA_OBV_State** _state,
+                    FILE* _file );
 
 
 /*
@@ -6590,6 +7352,12 @@ int TA_PLUS_DI_State( struct TA_PLUS_DI_State* _state,
 
 int TA_PLUS_DI_StateFree( struct TA_PLUS_DI_State** _state );
 
+int TA_PLUS_DI_StateSave( struct TA_PLUS_DI_State* _state,
+                        FILE* _file );
+
+int TA_PLUS_DI_StateLoad( struct TA_PLUS_DI_State** _state,
+                        FILE* _file );
+
 
 /*
  * TA_PLUS_DM - Plus Directional Movement
@@ -6641,6 +7409,12 @@ int TA_PLUS_DM_State( struct TA_PLUS_DM_State* _state,
                     double        *outReal );
 
 int TA_PLUS_DM_StateFree( struct TA_PLUS_DM_State** _state );
+
+int TA_PLUS_DM_StateSave( struct TA_PLUS_DM_State* _state,
+                        FILE* _file );
+
+int TA_PLUS_DM_StateLoad( struct TA_PLUS_DM_State** _state,
+                        FILE* _file );
 
 
 /*
@@ -6698,6 +7472,12 @@ int TA_PPO_State( struct TA_PPO_State* _state,
 
 int TA_PPO_StateFree( struct TA_PPO_State** _state );
 
+int TA_PPO_StateSave( struct TA_PPO_State* _state,
+                    FILE* _file );
+
+int TA_PPO_StateLoad( struct TA_PPO_State** _state,
+                    FILE* _file );
+
 
 /*
  * TA_ROC - Rate of change : ((price/prevPrice)-1)*100
@@ -6743,6 +7523,12 @@ int TA_ROC_State( struct TA_ROC_State* _state,
                 double        *outReal );
 
 int TA_ROC_StateFree( struct TA_ROC_State** _state );
+
+int TA_ROC_StateSave( struct TA_ROC_State* _state,
+                    FILE* _file );
+
+int TA_ROC_StateLoad( struct TA_ROC_State** _state,
+                    FILE* _file );
 
 
 /*
@@ -6790,6 +7576,12 @@ int TA_ROCP_State( struct TA_ROCP_State* _state,
 
 int TA_ROCP_StateFree( struct TA_ROCP_State** _state );
 
+int TA_ROCP_StateSave( struct TA_ROCP_State* _state,
+                     FILE* _file );
+
+int TA_ROCP_StateLoad( struct TA_ROCP_State** _state,
+                     FILE* _file );
+
 
 /*
  * TA_ROCR - Rate of change ratio: (price/prevPrice)
@@ -6836,6 +7628,12 @@ int TA_ROCR_State( struct TA_ROCR_State* _state,
 
 int TA_ROCR_StateFree( struct TA_ROCR_State** _state );
 
+int TA_ROCR_StateSave( struct TA_ROCR_State* _state,
+                     FILE* _file );
+
+int TA_ROCR_StateLoad( struct TA_ROCR_State** _state,
+                     FILE* _file );
+
 
 /*
  * TA_ROCR100 - Rate of change ratio 100 scale: (price/prevPrice)*100
@@ -6881,6 +7679,12 @@ int TA_ROCR100_State( struct TA_ROCR100_State* _state,
                     double        *outReal );
 
 int TA_ROCR100_StateFree( struct TA_ROCR100_State** _state );
+
+int TA_ROCR100_StateSave( struct TA_ROCR100_State* _state,
+                        FILE* _file );
+
+int TA_ROCR100_StateLoad( struct TA_ROCR100_State** _state,
+                        FILE* _file );
 
 
 /*
@@ -6931,6 +7735,12 @@ int TA_RSI_State( struct TA_RSI_State* _state,
                 double        *outReal );
 
 int TA_RSI_StateFree( struct TA_RSI_State** _state );
+
+int TA_RSI_StateSave( struct TA_RSI_State* _state,
+                    FILE* _file );
+
+int TA_RSI_StateLoad( struct TA_RSI_State** _state,
+                    FILE* _file );
 
 
 /*
@@ -6996,6 +7806,12 @@ int TA_SAR_State( struct TA_SAR_State* _state,
                 double        *outReal );
 
 int TA_SAR_StateFree( struct TA_SAR_State** _state );
+
+int TA_SAR_StateSave( struct TA_SAR_State* _state,
+                    FILE* _file );
+
+int TA_SAR_StateLoad( struct TA_SAR_State** _state,
+                    FILE* _file );
 
 
 /*
@@ -7105,6 +7921,12 @@ int TA_SAREXT_State( struct TA_SAREXT_State* _state,
 
 int TA_SAREXT_StateFree( struct TA_SAREXT_State** _state );
 
+int TA_SAREXT_StateSave( struct TA_SAREXT_State* _state,
+                       FILE* _file );
+
+int TA_SAREXT_StateLoad( struct TA_SAREXT_State** _state,
+                       FILE* _file );
+
 
 /*
  * TA_SIN - Vector Trigonometric Sin
@@ -7142,6 +7964,12 @@ int TA_SIN_State( struct TA_SIN_State* _state,
 
 int TA_SIN_StateFree( struct TA_SIN_State** _state );
 
+int TA_SIN_StateSave( struct TA_SIN_State* _state,
+                    FILE* _file );
+
+int TA_SIN_StateLoad( struct TA_SIN_State** _state,
+                    FILE* _file );
+
 
 /*
  * TA_SINH - Vector Trigonometric Sinh
@@ -7178,6 +8006,12 @@ int TA_SINH_State( struct TA_SINH_State* _state,
                  double        *outReal );
 
 int TA_SINH_StateFree( struct TA_SINH_State** _state );
+
+int TA_SINH_StateSave( struct TA_SINH_State* _state,
+                     FILE* _file );
+
+int TA_SINH_StateLoad( struct TA_SINH_State** _state,
+                     FILE* _file );
 
 
 /*
@@ -7226,6 +8060,12 @@ int TA_SMA_State( struct TA_SMA_State* _state,
 
 int TA_SMA_StateFree( struct TA_SMA_State** _state );
 
+int TA_SMA_StateSave( struct TA_SMA_State* _state,
+                    FILE* _file );
+
+int TA_SMA_StateLoad( struct TA_SMA_State** _state,
+                    FILE* _file );
+
 
 /*
  * TA_SQRT - Vector Square Root
@@ -7262,6 +8102,12 @@ int TA_SQRT_State( struct TA_SQRT_State* _state,
                  double        *outReal );
 
 int TA_SQRT_StateFree( struct TA_SQRT_State** _state );
+
+int TA_SQRT_StateSave( struct TA_SQRT_State* _state,
+                     FILE* _file );
+
+int TA_SQRT_StateLoad( struct TA_SQRT_State** _state,
+                     FILE* _file );
 
 
 /*
@@ -7316,6 +8162,12 @@ int TA_STDDEV_State( struct TA_STDDEV_State* _state,
                    double        *outReal );
 
 int TA_STDDEV_StateFree( struct TA_STDDEV_State** _state );
+
+int TA_STDDEV_StateSave( struct TA_STDDEV_State* _state,
+                       FILE* _file );
+
+int TA_STDDEV_StateLoad( struct TA_STDDEV_State** _state,
+                       FILE* _file );
 
 
 /*
@@ -7397,6 +8249,12 @@ int TA_STOCH_State( struct TA_STOCH_State* _state,
 
 int TA_STOCH_StateFree( struct TA_STOCH_State** _state );
 
+int TA_STOCH_StateSave( struct TA_STOCH_State* _state,
+                      FILE* _file );
+
+int TA_STOCH_StateLoad( struct TA_STOCH_State** _state,
+                      FILE* _file );
+
 
 /*
  * TA_STOCHF - Stochastic Fast
@@ -7466,6 +8324,12 @@ int TA_STOCHF_State( struct TA_STOCHF_State* _state,
 
 int TA_STOCHF_StateFree( struct TA_STOCHF_State** _state );
 
+int TA_STOCHF_StateSave( struct TA_STOCHF_State* _state,
+                       FILE* _file );
+
+int TA_STOCHF_StateLoad( struct TA_STOCHF_State** _state,
+                       FILE* _file );
+
 
 /*
  * TA_STOCHRSI - Stochastic Relative Strength Index
@@ -7533,6 +8397,12 @@ int TA_STOCHRSI_State( struct TA_STOCHRSI_State* _state,
 
 int TA_STOCHRSI_StateFree( struct TA_STOCHRSI_State** _state );
 
+int TA_STOCHRSI_StateSave( struct TA_STOCHRSI_State* _state,
+                         FILE* _file );
+
+int TA_STOCHRSI_StateLoad( struct TA_STOCHRSI_State** _state,
+                         FILE* _file );
+
 
 /*
  * TA_SUB - Vector Arithmetic Substraction
@@ -7572,6 +8442,12 @@ int TA_SUB_State( struct TA_SUB_State* _state,
                 double        *outReal );
 
 int TA_SUB_StateFree( struct TA_SUB_State** _state );
+
+int TA_SUB_StateSave( struct TA_SUB_State* _state,
+                    FILE* _file );
+
+int TA_SUB_StateLoad( struct TA_SUB_State** _state,
+                    FILE* _file );
 
 
 /*
@@ -7619,6 +8495,12 @@ int TA_SUM_State( struct TA_SUM_State* _state,
                 double        *outReal );
 
 int TA_SUM_StateFree( struct TA_SUM_State** _state );
+
+int TA_SUM_StateSave( struct TA_SUM_State* _state,
+                    FILE* _file );
+
+int TA_SUM_StateLoad( struct TA_SUM_State** _state,
+                    FILE* _file );
 
 
 /*
@@ -7687,6 +8569,12 @@ int TA_T3_State( struct TA_T3_State* _state,
 
 int TA_T3_StateFree( struct TA_T3_State** _state );
 
+int TA_T3_StateSave( struct TA_T3_State* _state,
+                   FILE* _file );
+
+int TA_T3_StateLoad( struct TA_T3_State** _state,
+                   FILE* _file );
+
 
 /*
  * TA_TAN - Vector Trigonometric Tan
@@ -7724,6 +8612,12 @@ int TA_TAN_State( struct TA_TAN_State* _state,
 
 int TA_TAN_StateFree( struct TA_TAN_State** _state );
 
+int TA_TAN_StateSave( struct TA_TAN_State* _state,
+                    FILE* _file );
+
+int TA_TAN_StateLoad( struct TA_TAN_State** _state,
+                    FILE* _file );
+
 
 /*
  * TA_TANH - Vector Trigonometric Tanh
@@ -7760,6 +8654,12 @@ int TA_TANH_State( struct TA_TANH_State* _state,
                  double        *outReal );
 
 int TA_TANH_StateFree( struct TA_TANH_State** _state );
+
+int TA_TANH_StateSave( struct TA_TANH_State* _state,
+                     FILE* _file );
+
+int TA_TANH_StateLoad( struct TA_TANH_State** _state,
+                     FILE* _file );
 
 
 /*
@@ -7810,6 +8710,12 @@ int TA_TEMA_State( struct TA_TEMA_State* _state,
 
 int TA_TEMA_StateFree( struct TA_TEMA_State** _state );
 
+int TA_TEMA_StateSave( struct TA_TEMA_State* _state,
+                     FILE* _file );
+
+int TA_TEMA_StateLoad( struct TA_TEMA_State** _state,
+                     FILE* _file );
+
 
 /*
  * TA_TRANGE - True Range
@@ -7852,6 +8758,12 @@ int TA_TRANGE_State( struct TA_TRANGE_State* _state,
                    double        *outReal );
 
 int TA_TRANGE_StateFree( struct TA_TRANGE_State** _state );
+
+int TA_TRANGE_StateSave( struct TA_TRANGE_State* _state,
+                       FILE* _file );
+
+int TA_TRANGE_StateLoad( struct TA_TRANGE_State** _state,
+                       FILE* _file );
 
 
 /*
@@ -7904,6 +8816,12 @@ int TA_TRIMA_State( struct TA_TRIMA_State* _state,
 
 int TA_TRIMA_StateFree( struct TA_TRIMA_State** _state );
 
+int TA_TRIMA_StateSave( struct TA_TRIMA_State* _state,
+                      FILE* _file );
+
+int TA_TRIMA_StateLoad( struct TA_TRIMA_State** _state,
+                      FILE* _file );
+
 
 /*
  * TA_TRIX - 1-day Rate-Of-Change (ROC) of a Triple Smooth EMA
@@ -7953,6 +8871,12 @@ int TA_TRIX_State( struct TA_TRIX_State* _state,
                  double        *outReal );
 
 int TA_TRIX_StateFree( struct TA_TRIX_State** _state );
+
+int TA_TRIX_StateSave( struct TA_TRIX_State* _state,
+                     FILE* _file );
+
+int TA_TRIX_StateLoad( struct TA_TRIX_State** _state,
+                     FILE* _file );
 
 
 /*
@@ -8005,6 +8929,12 @@ int TA_TSF_State( struct TA_TSF_State* _state,
 
 int TA_TSF_StateFree( struct TA_TSF_State** _state );
 
+int TA_TSF_StateSave( struct TA_TSF_State* _state,
+                    FILE* _file );
+
+int TA_TSF_StateLoad( struct TA_TSF_State** _state,
+                    FILE* _file );
+
 
 /*
  * TA_TYPPRICE - Typical Price
@@ -8047,6 +8977,12 @@ int TA_TYPPRICE_State( struct TA_TYPPRICE_State* _state,
                      double        *outReal );
 
 int TA_TYPPRICE_StateFree( struct TA_TYPPRICE_State** _state );
+
+int TA_TYPPRICE_StateSave( struct TA_TYPPRICE_State* _state,
+                         FILE* _file );
+
+int TA_TYPPRICE_StateLoad( struct TA_TYPPRICE_State** _state,
+                         FILE* _file );
 
 
 /*
@@ -8125,6 +9061,12 @@ int TA_ULTOSC_State( struct TA_ULTOSC_State* _state,
 
 int TA_ULTOSC_StateFree( struct TA_ULTOSC_State** _state );
 
+int TA_ULTOSC_StateSave( struct TA_ULTOSC_State* _state,
+                       FILE* _file );
+
+int TA_ULTOSC_StateLoad( struct TA_ULTOSC_State** _state,
+                       FILE* _file );
+
 
 /*
  * TA_VAR - Variance
@@ -8180,6 +9122,12 @@ int TA_VAR_State( struct TA_VAR_State* _state,
 
 int TA_VAR_StateFree( struct TA_VAR_State** _state );
 
+int TA_VAR_StateSave( struct TA_VAR_State* _state,
+                    FILE* _file );
+
+int TA_VAR_StateLoad( struct TA_VAR_State** _state,
+                    FILE* _file );
+
 
 /*
  * TA_WCLPRICE - Weighted Close Price
@@ -8222,6 +9170,12 @@ int TA_WCLPRICE_State( struct TA_WCLPRICE_State* _state,
                      double        *outReal );
 
 int TA_WCLPRICE_StateFree( struct TA_WCLPRICE_State** _state );
+
+int TA_WCLPRICE_StateSave( struct TA_WCLPRICE_State* _state,
+                         FILE* _file );
+
+int TA_WCLPRICE_StateLoad( struct TA_WCLPRICE_State** _state,
+                         FILE* _file );
 
 
 /*
@@ -8279,6 +9233,12 @@ int TA_WILLR_State( struct TA_WILLR_State* _state,
 
 int TA_WILLR_StateFree( struct TA_WILLR_State** _state );
 
+int TA_WILLR_StateSave( struct TA_WILLR_State* _state,
+                      FILE* _file );
+
+int TA_WILLR_StateLoad( struct TA_WILLR_State** _state,
+                      FILE* _file );
+
 
 /*
  * TA_WMA - Weighted Moving Average
@@ -8327,6 +9287,12 @@ int TA_WMA_State( struct TA_WMA_State* _state,
                 double        *outReal );
 
 int TA_WMA_StateFree( struct TA_WMA_State** _state );
+
+int TA_WMA_StateSave( struct TA_WMA_State* _state,
+                    FILE* _file );
+
+int TA_WMA_StateLoad( struct TA_WMA_State** _state,
+                    FILE* _file );
 
 
 /* Some TA functions takes a certain amount of input data

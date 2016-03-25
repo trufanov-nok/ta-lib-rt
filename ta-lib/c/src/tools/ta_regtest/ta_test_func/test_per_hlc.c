@@ -522,7 +522,8 @@ static TA_RetCode do_call_state( const TA_Test *test,
                          test->optInTimePeriod1,
                          outBegIdx,
                          outNbElement,
-                         output );
+                         output,
+                         _tmp_state_file);
       break;
 
    case TA_CCI_TEST:
@@ -532,7 +533,8 @@ static TA_RetCode do_call_state( const TA_Test *test,
                         test->optInTimePeriod1,
                         outBegIdx,
                         outNbElement,
-                        output );
+                        output,
+                        _tmp_state_file);
       break;
 
    case TA_WILLR_TEST:
@@ -542,7 +544,8 @@ static TA_RetCode do_call_state( const TA_Test *test,
                           test->optInTimePeriod1,
                           outBegIdx,
                           outNbElement,
-                          output );
+                          output,
+                          _tmp_state_file);
       break;
 
    case TA_ULTOSC_TEST:
@@ -554,7 +557,8 @@ static TA_RetCode do_call_state( const TA_Test *test,
                            test->optInTimePeriod3,
                            outBegIdx,
                            outNbElement,
-                           output );
+                           output,
+                           _tmp_state_file);
       break;
 
    case TA_ACCBANDS_TEST:
@@ -564,7 +568,10 @@ static TA_RetCode do_call_state( const TA_Test *test,
                           test->optInTimePeriod1,
                           outBegIdx,
                           outNbElement,
-                          dummyBuffer1, output, dummyBuffer2 );
+                          dummyBuffer1,
+                          output,
+                          dummyBuffer2,
+                          _tmp_state_file);
       break;
 
    default:

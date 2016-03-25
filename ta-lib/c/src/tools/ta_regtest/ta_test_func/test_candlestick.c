@@ -783,7 +783,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                                     gBuffer[3].in, \
                                     &outBegIdx, \
                                     &outNbElement, \
-                                    gBuffer[0].out0 ); \
+                                    gBuffer[0].out0, \
+                                    _tmp_state_file);  \
                }
 
   #define TEST_4IN_1OPT(ta_func) \
@@ -800,7 +801,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                                   test->params[0], \
                                   &outBegIdx, \
                                   &outNbElement, \
-                                  gBuffer[0].out0 ); \
+                                  gBuffer[0].out0, \
+                                  _tmp_state_file);  \
              }
 
    /* Make a simple first call. */
@@ -860,7 +862,8 @@ static ErrorNumber do_test_state( const TA_History *history,
 //                      test->params[0],
                                 &outBegIdx,
                                 &outNbElement,
-                                gBuffer[0].out0 );
+                                gBuffer[0].out0,
+                                _tmp_state_file);
            }
 
 

@@ -556,7 +556,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                         test->optInTimePeriod,
                         &outBegIdx,
                         &outNbElement,
-                        gBuffer[0].out0 );
+                        gBuffer[0].out0,
+                        _tmp_state_file);
       break;
    case TA_CMO_TEST:
       retCode = TA_CMO_StateTest( test->startIdx,
@@ -565,7 +566,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                         test->optInTimePeriod,
                         &outBegIdx,
                         &outNbElement,
-                        gBuffer[0].out0 );
+                        gBuffer[0].out0,
+                        _tmp_state_file);
       break;
    default:
       retCode = TA_INTERNAL_ERROR(178);

@@ -291,6 +291,16 @@ void TA_S_INT_stddev_using_precalc_ma( const float  *inReal,
    double prev_input_Odd; \
    double prev_input_Even; };
 
+#define SAVE_HILBERT_VARIABLES_STRUCT(taFunc,var) { \
+    if (STATE.var == NULL) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam); \
+    if (fwrite(STATE.var,sizeof(struct TA_##taFunc##_HILBERT_STRUCT),1,_file) < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); }
+
+#define LOAD_HILBERT_VARIABLES_STRUCT(taFunc,var) { \
+    if (STATE_P.var != NULL) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam); \
+    CREATE_HILBERT_VARIABLES_STRUCT(taFunc,var) \
+    if (fread(STATE_P.var,sizeof(struct TA_##taFunc##_HILBERT_STRUCT),1,_file) < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); }
+
+
 #define CREATE_HILBERT_VARIABLES_STRUCT(taFunc,var) {\
     STATE_P.var = calloc(1, sizeof(struct TA_##taFunc##_HILBERT_STRUCT)); \
     if (STATE_P.var == NULL) return ENUM_VALUE(RetCode, TA_ALLOC_ERR, AllocErr ); }

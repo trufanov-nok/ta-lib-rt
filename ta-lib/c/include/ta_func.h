@@ -37,6 +37,8 @@
    #include "ta_common.h"
 #endif
 
+#include <stdio.h> // for Save\Load state funcs
+
 /* This header contains the prototype of all the Technical Analysis
  * function provided by TA-LIB.
  */
@@ -128,6 +130,12 @@ TA_LIB_API int TA_ACCBANDS_State( struct TA_ACCBANDS_State* _state,
 
 TA_LIB_API int TA_ACCBANDS_StateFree( struct TA_ACCBANDS_State** _state );
 
+TA_LIB_API int TA_ACCBANDS_StateSave( struct TA_ACCBANDS_State* _state,
+                                               FILE* _file );
+
+TA_LIB_API int TA_ACCBANDS_StateLoad( struct TA_ACCBANDS_State** _state,
+                                               FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_ACCBANDS_StateTest( int    startIdx,
 /* Generated */                                          int    endIdx,
@@ -139,7 +147,8 @@ TA_LIB_API int TA_ACCBANDS_StateFree( struct TA_ACCBANDS_State** _state );
 /* Generated */                                          int          *outNBElement,
 /* Generated */                                          double        outRealUpperBand[],
 /* Generated */                                          double        outRealMiddleBand[],
-/* Generated */                                          double        outRealLowerBand[] )
+/* Generated */                                          double        outRealLowerBand[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ACCBANDS(startIdx, endIdx, inHigh, inLow, inClose, optInTimePeriod, outBegIdx, outNBElement, outRealUpperBand, outRealMiddleBand, outRealLowerBand );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -155,10 +164,27 @@ TA_LIB_API int TA_ACCBANDS_StateFree( struct TA_ACCBANDS_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ACCBANDS
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_ACCBANDS_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_ACCBANDS_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outRealUpperBand_local;double  outRealMiddleBand_local;double  outRealLowerBand_local;
 /* Generated */     res = TA_ACCBANDS_State(state, inHigh[i], inLow[i], inClose[i], &outRealUpperBand_local, &outRealMiddleBand_local, &outRealLowerBand_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_ACCBANDS_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -217,13 +243,20 @@ TA_LIB_API int TA_ACOS_State( struct TA_ACOS_State* _state,
 
 TA_LIB_API int TA_ACOS_StateFree( struct TA_ACOS_State** _state );
 
+TA_LIB_API int TA_ACOS_StateSave( struct TA_ACOS_State* _state,
+                                           FILE* _file );
+
+TA_LIB_API int TA_ACOS_StateLoad( struct TA_ACOS_State** _state,
+                                           FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_ACOS_StateTest( int    startIdx,
 /* Generated */                                      int    endIdx,
 /* Generated */                                      const double inReal[],
 /* Generated */                                      int          *outBegIdx,
 /* Generated */                                      int          *outNBElement,
-/* Generated */                                      double        outReal[] )
+/* Generated */                                      double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ACOS(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -239,10 +272,27 @@ TA_LIB_API int TA_ACOS_StateFree( struct TA_ACOS_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ACOS
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_ACOS_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_ACOS_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_ACOS_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_ACOS_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -312,6 +362,12 @@ TA_LIB_API int TA_AD_State( struct TA_AD_State* _state,
 
 TA_LIB_API int TA_AD_StateFree( struct TA_AD_State** _state );
 
+TA_LIB_API int TA_AD_StateSave( struct TA_AD_State* _state,
+                                         FILE* _file );
+
+TA_LIB_API int TA_AD_StateLoad( struct TA_AD_State** _state,
+                                         FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_AD_StateTest( int    startIdx,
 /* Generated */                                    int    endIdx,
@@ -321,7 +377,8 @@ TA_LIB_API int TA_AD_StateFree( struct TA_AD_State** _state );
 /* Generated */                                    const double inVolume[],
 /* Generated */                                    int          *outBegIdx,
 /* Generated */                                    int          *outNBElement,
-/* Generated */                                    double        outReal[] )
+/* Generated */                                    double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_AD(startIdx, endIdx, inHigh, inLow, inClose, inVolume, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -337,10 +394,27 @@ TA_LIB_API int TA_AD_StateFree( struct TA_AD_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_AD
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_AD_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_AD_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_AD_State(state, inHigh[i], inLow[i], inClose[i], inVolume[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_AD_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -401,6 +475,12 @@ TA_LIB_API int TA_ADD_State( struct TA_ADD_State* _state,
 
 TA_LIB_API int TA_ADD_StateFree( struct TA_ADD_State** _state );
 
+TA_LIB_API int TA_ADD_StateSave( struct TA_ADD_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_ADD_StateLoad( struct TA_ADD_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_ADD_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
@@ -408,7 +488,8 @@ TA_LIB_API int TA_ADD_StateFree( struct TA_ADD_State** _state );
 /* Generated */                                     const double inReal1[],
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ADD(startIdx, endIdx, inReal0, inReal1, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -424,10 +505,27 @@ TA_LIB_API int TA_ADD_StateFree( struct TA_ADD_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ADD
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_ADD_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_ADD_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_ADD_State(state, inReal0[i], inReal1[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_ADD_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -521,6 +619,12 @@ TA_LIB_API int TA_ADOSC_State( struct TA_ADOSC_State* _state,
 
 TA_LIB_API int TA_ADOSC_StateFree( struct TA_ADOSC_State** _state );
 
+TA_LIB_API int TA_ADOSC_StateSave( struct TA_ADOSC_State* _state,
+                                            FILE* _file );
+
+TA_LIB_API int TA_ADOSC_StateLoad( struct TA_ADOSC_State** _state,
+                                            FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_ADOSC_StateTest( int    startIdx,
 /* Generated */                                       int    endIdx,
@@ -532,7 +636,8 @@ TA_LIB_API int TA_ADOSC_StateFree( struct TA_ADOSC_State** _state );
 /* Generated */                                       int           optInSlowPeriod, /* From 2 to 100000 */
 /* Generated */                                       int          *outBegIdx,
 /* Generated */                                       int          *outNBElement,
-/* Generated */                                       double        outReal[] )
+/* Generated */                                       double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ADOSC(startIdx, endIdx, inHigh, inLow, inClose, inVolume, optInFastPeriod, optInSlowPeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -548,10 +653,27 @@ TA_LIB_API int TA_ADOSC_StateFree( struct TA_ADOSC_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ADOSC
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_ADOSC_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_ADOSC_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_ADOSC_State(state, inHigh[i], inLow[i], inClose[i], inVolume[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_ADOSC_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -634,6 +756,12 @@ TA_LIB_API int TA_ADX_State( struct TA_ADX_State* _state,
 
 TA_LIB_API int TA_ADX_StateFree( struct TA_ADX_State** _state );
 
+TA_LIB_API int TA_ADX_StateSave( struct TA_ADX_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_ADX_StateLoad( struct TA_ADX_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_ADX_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
@@ -643,7 +771,8 @@ TA_LIB_API int TA_ADX_StateFree( struct TA_ADX_State** _state );
 /* Generated */                                     int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ADX(startIdx, endIdx, inHigh, inLow, inClose, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -659,10 +788,27 @@ TA_LIB_API int TA_ADX_StateFree( struct TA_ADX_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ADX
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_ADX_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_ADX_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_ADX_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_ADX_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -738,6 +884,12 @@ TA_LIB_API int TA_ADXR_State( struct TA_ADXR_State* _state,
 
 TA_LIB_API int TA_ADXR_StateFree( struct TA_ADXR_State** _state );
 
+TA_LIB_API int TA_ADXR_StateSave( struct TA_ADXR_State* _state,
+                                           FILE* _file );
+
+TA_LIB_API int TA_ADXR_StateLoad( struct TA_ADXR_State** _state,
+                                           FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_ADXR_StateTest( int    startIdx,
 /* Generated */                                      int    endIdx,
@@ -747,7 +899,8 @@ TA_LIB_API int TA_ADXR_StateFree( struct TA_ADXR_State** _state );
 /* Generated */                                      int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                      int          *outBegIdx,
 /* Generated */                                      int          *outNBElement,
-/* Generated */                                      double        outReal[] )
+/* Generated */                                      double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ADXR(startIdx, endIdx, inHigh, inLow, inClose, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -763,10 +916,27 @@ TA_LIB_API int TA_ADXR_StateFree( struct TA_ADXR_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ADXR
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_ADXR_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_ADXR_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_ADXR_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_ADXR_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -847,6 +1017,12 @@ TA_LIB_API int TA_APO_State( struct TA_APO_State* _state,
 
 TA_LIB_API int TA_APO_StateFree( struct TA_APO_State** _state );
 
+TA_LIB_API int TA_APO_StateSave( struct TA_APO_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_APO_StateLoad( struct TA_APO_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_APO_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
@@ -855,7 +1031,8 @@ TA_LIB_API int TA_APO_StateFree( struct TA_APO_State** _state );
 /* Generated */                                     int           optInSlowPeriod, /* From 2 to 100000 */
 /* Generated */                                     TA_MAType     optInMAType,/* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_APO(startIdx, endIdx, inReal, optInFastPeriod, optInSlowPeriod, optInMAType, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -871,10 +1048,27 @@ TA_LIB_API int TA_APO_StateFree( struct TA_APO_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_APO
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_APO_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_APO_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_APO_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_APO_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -953,6 +1147,12 @@ TA_LIB_API int TA_AROON_State( struct TA_AROON_State* _state,
 
 TA_LIB_API int TA_AROON_StateFree( struct TA_AROON_State** _state );
 
+TA_LIB_API int TA_AROON_StateSave( struct TA_AROON_State* _state,
+                                            FILE* _file );
+
+TA_LIB_API int TA_AROON_StateLoad( struct TA_AROON_State** _state,
+                                            FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_AROON_StateTest( int    startIdx,
 /* Generated */                                       int    endIdx,
@@ -962,7 +1162,8 @@ TA_LIB_API int TA_AROON_StateFree( struct TA_AROON_State** _state );
 /* Generated */                                       int          *outBegIdx,
 /* Generated */                                       int          *outNBElement,
 /* Generated */                                       double        outAroonDown[],
-/* Generated */                                       double        outAroonUp[] )
+/* Generated */                                       double        outAroonUp[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_AROON(startIdx, endIdx, inHigh, inLow, optInTimePeriod, outBegIdx, outNBElement, outAroonDown, outAroonUp );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -978,10 +1179,27 @@ TA_LIB_API int TA_AROON_StateFree( struct TA_AROON_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_AROON
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_AROON_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_AROON_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outAroonDown_local;double  outAroonUp_local;
 /* Generated */     res = TA_AROON_State(state, inHigh[i], inLow[i], &outAroonDown_local, &outAroonUp_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_AROON_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -1058,6 +1276,12 @@ TA_LIB_API int TA_AROONOSC_State( struct TA_AROONOSC_State* _state,
 
 TA_LIB_API int TA_AROONOSC_StateFree( struct TA_AROONOSC_State** _state );
 
+TA_LIB_API int TA_AROONOSC_StateSave( struct TA_AROONOSC_State* _state,
+                                               FILE* _file );
+
+TA_LIB_API int TA_AROONOSC_StateLoad( struct TA_AROONOSC_State** _state,
+                                               FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_AROONOSC_StateTest( int    startIdx,
 /* Generated */                                          int    endIdx,
@@ -1066,7 +1290,8 @@ TA_LIB_API int TA_AROONOSC_StateFree( struct TA_AROONOSC_State** _state );
 /* Generated */                                          int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                          int          *outBegIdx,
 /* Generated */                                          int          *outNBElement,
-/* Generated */                                          double        outReal[] )
+/* Generated */                                          double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_AROONOSC(startIdx, endIdx, inHigh, inLow, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -1082,10 +1307,27 @@ TA_LIB_API int TA_AROONOSC_StateFree( struct TA_AROONOSC_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_AROONOSC
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_AROONOSC_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_AROONOSC_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_AROONOSC_State(state, inHigh[i], inLow[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_AROONOSC_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -1142,13 +1384,20 @@ TA_LIB_API int TA_ASIN_State( struct TA_ASIN_State* _state,
 
 TA_LIB_API int TA_ASIN_StateFree( struct TA_ASIN_State** _state );
 
+TA_LIB_API int TA_ASIN_StateSave( struct TA_ASIN_State* _state,
+                                           FILE* _file );
+
+TA_LIB_API int TA_ASIN_StateLoad( struct TA_ASIN_State** _state,
+                                           FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_ASIN_StateTest( int    startIdx,
 /* Generated */                                      int    endIdx,
 /* Generated */                                      const double inReal[],
 /* Generated */                                      int          *outBegIdx,
 /* Generated */                                      int          *outNBElement,
-/* Generated */                                      double        outReal[] )
+/* Generated */                                      double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ASIN(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -1164,10 +1413,27 @@ TA_LIB_API int TA_ASIN_StateFree( struct TA_ASIN_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ASIN
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_ASIN_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_ASIN_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_ASIN_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_ASIN_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -1224,13 +1490,20 @@ TA_LIB_API int TA_ATAN_State( struct TA_ATAN_State* _state,
 
 TA_LIB_API int TA_ATAN_StateFree( struct TA_ATAN_State** _state );
 
+TA_LIB_API int TA_ATAN_StateSave( struct TA_ATAN_State* _state,
+                                           FILE* _file );
+
+TA_LIB_API int TA_ATAN_StateLoad( struct TA_ATAN_State** _state,
+                                           FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_ATAN_StateTest( int    startIdx,
 /* Generated */                                      int    endIdx,
 /* Generated */                                      const double inReal[],
 /* Generated */                                      int          *outBegIdx,
 /* Generated */                                      int          *outNBElement,
-/* Generated */                                      double        outReal[] )
+/* Generated */                                      double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ATAN(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -1246,10 +1519,27 @@ TA_LIB_API int TA_ATAN_StateFree( struct TA_ATAN_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ATAN
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_ATAN_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_ATAN_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_ATAN_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_ATAN_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -1328,6 +1618,12 @@ TA_LIB_API int TA_ATR_State( struct TA_ATR_State* _state,
 
 TA_LIB_API int TA_ATR_StateFree( struct TA_ATR_State** _state );
 
+TA_LIB_API int TA_ATR_StateSave( struct TA_ATR_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_ATR_StateLoad( struct TA_ATR_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_ATR_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
@@ -1337,7 +1633,8 @@ TA_LIB_API int TA_ATR_StateFree( struct TA_ATR_State** _state );
 /* Generated */                                     int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ATR(startIdx, endIdx, inHigh, inLow, inClose, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -1353,10 +1650,27 @@ TA_LIB_API int TA_ATR_StateFree( struct TA_ATR_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ATR
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_ATR_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_ATR_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_ATR_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_ATR_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -1425,6 +1739,12 @@ TA_LIB_API int TA_AVGPRICE_State( struct TA_AVGPRICE_State* _state,
 
 TA_LIB_API int TA_AVGPRICE_StateFree( struct TA_AVGPRICE_State** _state );
 
+TA_LIB_API int TA_AVGPRICE_StateSave( struct TA_AVGPRICE_State* _state,
+                                               FILE* _file );
+
+TA_LIB_API int TA_AVGPRICE_StateLoad( struct TA_AVGPRICE_State** _state,
+                                               FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_AVGPRICE_StateTest( int    startIdx,
 /* Generated */                                          int    endIdx,
@@ -1434,7 +1754,8 @@ TA_LIB_API int TA_AVGPRICE_StateFree( struct TA_AVGPRICE_State** _state );
 /* Generated */                                          const double inClose[],
 /* Generated */                                          int          *outBegIdx,
 /* Generated */                                          int          *outNBElement,
-/* Generated */                                          double        outReal[] )
+/* Generated */                                          double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_AVGPRICE(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -1450,10 +1771,27 @@ TA_LIB_API int TA_AVGPRICE_StateFree( struct TA_AVGPRICE_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_AVGPRICE
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_AVGPRICE_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_AVGPRICE_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_AVGPRICE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_AVGPRICE_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -1521,6 +1859,12 @@ TA_LIB_API int TA_AVGDEV_State( struct TA_AVGDEV_State* _state,
 
 TA_LIB_API int TA_AVGDEV_StateFree( struct TA_AVGDEV_State** _state );
 
+TA_LIB_API int TA_AVGDEV_StateSave( struct TA_AVGDEV_State* _state,
+                                             FILE* _file );
+
+TA_LIB_API int TA_AVGDEV_StateLoad( struct TA_AVGDEV_State** _state,
+                                             FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_AVGDEV_StateTest( int    startIdx,
 /* Generated */                                        int    endIdx,
@@ -1528,7 +1872,8 @@ TA_LIB_API int TA_AVGDEV_StateFree( struct TA_AVGDEV_State** _state );
 /* Generated */                                        int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                        int          *outBegIdx,
 /* Generated */                                        int          *outNBElement,
-/* Generated */                                        double        outReal[] )
+/* Generated */                                        double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_AVGDEV(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -1544,10 +1889,27 @@ TA_LIB_API int TA_AVGDEV_StateFree( struct TA_AVGDEV_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_AVGDEV
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_AVGDEV_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_AVGDEV_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_AVGDEV_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_AVGDEV_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -1641,6 +2003,12 @@ TA_LIB_API int TA_BBANDS_State( struct TA_BBANDS_State* _state,
 
 TA_LIB_API int TA_BBANDS_StateFree( struct TA_BBANDS_State** _state );
 
+TA_LIB_API int TA_BBANDS_StateSave( struct TA_BBANDS_State* _state,
+                                             FILE* _file );
+
+TA_LIB_API int TA_BBANDS_StateLoad( struct TA_BBANDS_State** _state,
+                                             FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_BBANDS_StateTest( int    startIdx,
 /* Generated */                                        int    endIdx,
@@ -1652,7 +2020,8 @@ TA_LIB_API int TA_BBANDS_StateFree( struct TA_BBANDS_State** _state );
 /* Generated */                                        int          *outNBElement,
 /* Generated */                                        double        outRealUpperBand[],
 /* Generated */                                        double        outRealMiddleBand[],
-/* Generated */                                        double        outRealLowerBand[] )
+/* Generated */                                        double        outRealLowerBand[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_BBANDS(startIdx, endIdx, inReal, optInTimePeriod, optInNbDevUp, optInNbDevDn, optInMAType, outBegIdx, outNBElement, outRealUpperBand, outRealMiddleBand, outRealLowerBand );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -1668,10 +2037,27 @@ TA_LIB_API int TA_BBANDS_StateFree( struct TA_BBANDS_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_BBANDS
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_BBANDS_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_BBANDS_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outRealUpperBand_local;double  outRealMiddleBand_local;double  outRealLowerBand_local;
 /* Generated */     res = TA_BBANDS_State(state, inReal[i], &outRealUpperBand_local, &outRealMiddleBand_local, &outRealLowerBand_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_BBANDS_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -1753,6 +2139,12 @@ TA_LIB_API int TA_BETA_State( struct TA_BETA_State* _state,
 
 TA_LIB_API int TA_BETA_StateFree( struct TA_BETA_State** _state );
 
+TA_LIB_API int TA_BETA_StateSave( struct TA_BETA_State* _state,
+                                           FILE* _file );
+
+TA_LIB_API int TA_BETA_StateLoad( struct TA_BETA_State** _state,
+                                           FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_BETA_StateTest( int    startIdx,
 /* Generated */                                      int    endIdx,
@@ -1761,7 +2153,8 @@ TA_LIB_API int TA_BETA_StateFree( struct TA_BETA_State** _state );
 /* Generated */                                      int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                      int          *outBegIdx,
 /* Generated */                                      int          *outNBElement,
-/* Generated */                                      double        outReal[] )
+/* Generated */                                      double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_BETA(startIdx, endIdx, inReal0, inReal1, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -1777,10 +2170,27 @@ TA_LIB_API int TA_BETA_StateFree( struct TA_BETA_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_BETA
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_BETA_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_BETA_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_BETA_State(state, inReal0[i], inReal1[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_BETA_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -1849,6 +2259,12 @@ TA_LIB_API int TA_BOP_State( struct TA_BOP_State* _state,
 
 TA_LIB_API int TA_BOP_StateFree( struct TA_BOP_State** _state );
 
+TA_LIB_API int TA_BOP_StateSave( struct TA_BOP_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_BOP_StateLoad( struct TA_BOP_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_BOP_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
@@ -1858,7 +2274,8 @@ TA_LIB_API int TA_BOP_StateFree( struct TA_BOP_State** _state );
 /* Generated */                                     const double inClose[],
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_BOP(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -1874,10 +2291,27 @@ TA_LIB_API int TA_BOP_StateFree( struct TA_BOP_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_BOP
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_BOP_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_BOP_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_BOP_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_BOP_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -1954,6 +2388,12 @@ TA_LIB_API int TA_CCI_State( struct TA_CCI_State* _state,
 
 TA_LIB_API int TA_CCI_StateFree( struct TA_CCI_State** _state );
 
+TA_LIB_API int TA_CCI_StateSave( struct TA_CCI_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_CCI_StateLoad( struct TA_CCI_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CCI_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
@@ -1963,7 +2403,8 @@ TA_LIB_API int TA_CCI_StateFree( struct TA_CCI_State** _state );
 /* Generated */                                     int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CCI(startIdx, endIdx, inHigh, inLow, inClose, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -1979,10 +2420,27 @@ TA_LIB_API int TA_CCI_StateFree( struct TA_CCI_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CCI
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CCI_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CCI_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_CCI_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CCI_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -2052,6 +2510,12 @@ TA_LIB_API int TA_CDL2CROWS_State( struct TA_CDL2CROWS_State* _state,
 
 TA_LIB_API int TA_CDL2CROWS_StateFree( struct TA_CDL2CROWS_State** _state );
 
+TA_LIB_API int TA_CDL2CROWS_StateSave( struct TA_CDL2CROWS_State* _state,
+                                                FILE* _file );
+
+TA_LIB_API int TA_CDL2CROWS_StateLoad( struct TA_CDL2CROWS_State** _state,
+                                                FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDL2CROWS_StateTest( int    startIdx,
 /* Generated */                                           int    endIdx,
@@ -2061,7 +2525,8 @@ TA_LIB_API int TA_CDL2CROWS_StateFree( struct TA_CDL2CROWS_State** _state );
 /* Generated */                                           const double inClose[],
 /* Generated */                                           int          *outBegIdx,
 /* Generated */                                           int          *outNBElement,
-/* Generated */                                           int           outInteger[] )
+/* Generated */                                           int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDL2CROWS(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -2077,10 +2542,27 @@ TA_LIB_API int TA_CDL2CROWS_StateFree( struct TA_CDL2CROWS_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDL2CROWS
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDL2CROWS_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDL2CROWS_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDL2CROWS_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDL2CROWS_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -2153,6 +2635,12 @@ TA_LIB_API int TA_CDL3BLACKCROWS_State( struct TA_CDL3BLACKCROWS_State* _state,
 
 TA_LIB_API int TA_CDL3BLACKCROWS_StateFree( struct TA_CDL3BLACKCROWS_State** _state );
 
+TA_LIB_API int TA_CDL3BLACKCROWS_StateSave( struct TA_CDL3BLACKCROWS_State* _state,
+                                                     FILE* _file );
+
+TA_LIB_API int TA_CDL3BLACKCROWS_StateLoad( struct TA_CDL3BLACKCROWS_State** _state,
+                                                     FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDL3BLACKCROWS_StateTest( int    startIdx,
 /* Generated */                                                int    endIdx,
@@ -2162,7 +2650,8 @@ TA_LIB_API int TA_CDL3BLACKCROWS_StateFree( struct TA_CDL3BLACKCROWS_State** _st
 /* Generated */                                                const double inClose[],
 /* Generated */                                                int          *outBegIdx,
 /* Generated */                                                int          *outNBElement,
-/* Generated */                                                int           outInteger[] )
+/* Generated */                                                int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDL3BLACKCROWS(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -2178,10 +2667,27 @@ TA_LIB_API int TA_CDL3BLACKCROWS_StateFree( struct TA_CDL3BLACKCROWS_State** _st
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDL3BLACKCROWS
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDL3BLACKCROWS_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDL3BLACKCROWS_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDL3BLACKCROWS_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDL3BLACKCROWS_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -2254,6 +2760,12 @@ TA_LIB_API int TA_CDL3INSIDE_State( struct TA_CDL3INSIDE_State* _state,
 
 TA_LIB_API int TA_CDL3INSIDE_StateFree( struct TA_CDL3INSIDE_State** _state );
 
+TA_LIB_API int TA_CDL3INSIDE_StateSave( struct TA_CDL3INSIDE_State* _state,
+                                                 FILE* _file );
+
+TA_LIB_API int TA_CDL3INSIDE_StateLoad( struct TA_CDL3INSIDE_State** _state,
+                                                 FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDL3INSIDE_StateTest( int    startIdx,
 /* Generated */                                            int    endIdx,
@@ -2263,7 +2775,8 @@ TA_LIB_API int TA_CDL3INSIDE_StateFree( struct TA_CDL3INSIDE_State** _state );
 /* Generated */                                            const double inClose[],
 /* Generated */                                            int          *outBegIdx,
 /* Generated */                                            int          *outNBElement,
-/* Generated */                                            int           outInteger[] )
+/* Generated */                                            int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDL3INSIDE(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -2279,10 +2792,27 @@ TA_LIB_API int TA_CDL3INSIDE_StateFree( struct TA_CDL3INSIDE_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDL3INSIDE
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDL3INSIDE_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDL3INSIDE_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDL3INSIDE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDL3INSIDE_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -2354,6 +2884,12 @@ TA_LIB_API int TA_CDL3LINESTRIKE_State( struct TA_CDL3LINESTRIKE_State* _state,
 
 TA_LIB_API int TA_CDL3LINESTRIKE_StateFree( struct TA_CDL3LINESTRIKE_State** _state );
 
+TA_LIB_API int TA_CDL3LINESTRIKE_StateSave( struct TA_CDL3LINESTRIKE_State* _state,
+                                                     FILE* _file );
+
+TA_LIB_API int TA_CDL3LINESTRIKE_StateLoad( struct TA_CDL3LINESTRIKE_State** _state,
+                                                     FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDL3LINESTRIKE_StateTest( int    startIdx,
 /* Generated */                                                int    endIdx,
@@ -2363,7 +2899,8 @@ TA_LIB_API int TA_CDL3LINESTRIKE_StateFree( struct TA_CDL3LINESTRIKE_State** _st
 /* Generated */                                                const double inClose[],
 /* Generated */                                                int          *outBegIdx,
 /* Generated */                                                int          *outNBElement,
-/* Generated */                                                int           outInteger[] )
+/* Generated */                                                int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDL3LINESTRIKE(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -2379,10 +2916,27 @@ TA_LIB_API int TA_CDL3LINESTRIKE_StateFree( struct TA_CDL3LINESTRIKE_State** _st
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDL3LINESTRIKE
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDL3LINESTRIKE_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDL3LINESTRIKE_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDL3LINESTRIKE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDL3LINESTRIKE_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -2451,6 +3005,12 @@ TA_LIB_API int TA_CDL3OUTSIDE_State( struct TA_CDL3OUTSIDE_State* _state,
 
 TA_LIB_API int TA_CDL3OUTSIDE_StateFree( struct TA_CDL3OUTSIDE_State** _state );
 
+TA_LIB_API int TA_CDL3OUTSIDE_StateSave( struct TA_CDL3OUTSIDE_State* _state,
+                                                  FILE* _file );
+
+TA_LIB_API int TA_CDL3OUTSIDE_StateLoad( struct TA_CDL3OUTSIDE_State** _state,
+                                                  FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDL3OUTSIDE_StateTest( int    startIdx,
 /* Generated */                                             int    endIdx,
@@ -2460,7 +3020,8 @@ TA_LIB_API int TA_CDL3OUTSIDE_StateFree( struct TA_CDL3OUTSIDE_State** _state );
 /* Generated */                                             const double inClose[],
 /* Generated */                                             int          *outBegIdx,
 /* Generated */                                             int          *outNBElement,
-/* Generated */                                             int           outInteger[] )
+/* Generated */                                             int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDL3OUTSIDE(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -2476,10 +3037,27 @@ TA_LIB_API int TA_CDL3OUTSIDE_StateFree( struct TA_CDL3OUTSIDE_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDL3OUTSIDE
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDL3OUTSIDE_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDL3OUTSIDE_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDL3OUTSIDE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDL3OUTSIDE_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -2561,6 +3139,12 @@ TA_LIB_API int TA_CDL3STARSINSOUTH_State( struct TA_CDL3STARSINSOUTH_State* _sta
 
 TA_LIB_API int TA_CDL3STARSINSOUTH_StateFree( struct TA_CDL3STARSINSOUTH_State** _state );
 
+TA_LIB_API int TA_CDL3STARSINSOUTH_StateSave( struct TA_CDL3STARSINSOUTH_State* _state,
+                                                       FILE* _file );
+
+TA_LIB_API int TA_CDL3STARSINSOUTH_StateLoad( struct TA_CDL3STARSINSOUTH_State** _state,
+                                                       FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDL3STARSINSOUTH_StateTest( int    startIdx,
 /* Generated */                                                  int    endIdx,
@@ -2570,7 +3154,8 @@ TA_LIB_API int TA_CDL3STARSINSOUTH_StateFree( struct TA_CDL3STARSINSOUTH_State**
 /* Generated */                                                  const double inClose[],
 /* Generated */                                                  int          *outBegIdx,
 /* Generated */                                                  int          *outNBElement,
-/* Generated */                                                  int           outInteger[] )
+/* Generated */                                                  int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDL3STARSINSOUTH(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -2586,10 +3171,27 @@ TA_LIB_API int TA_CDL3STARSINSOUTH_StateFree( struct TA_CDL3STARSINSOUTH_State**
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDL3STARSINSOUTH
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDL3STARSINSOUTH_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDL3STARSINSOUTH_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDL3STARSINSOUTH_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDL3STARSINSOUTH_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -2674,6 +3276,12 @@ TA_LIB_API int TA_CDL3WHITESOLDIERS_State( struct TA_CDL3WHITESOLDIERS_State* _s
 
 TA_LIB_API int TA_CDL3WHITESOLDIERS_StateFree( struct TA_CDL3WHITESOLDIERS_State** _state );
 
+TA_LIB_API int TA_CDL3WHITESOLDIERS_StateSave( struct TA_CDL3WHITESOLDIERS_State* _state,
+                                                        FILE* _file );
+
+TA_LIB_API int TA_CDL3WHITESOLDIERS_StateLoad( struct TA_CDL3WHITESOLDIERS_State** _state,
+                                                        FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDL3WHITESOLDIERS_StateTest( int    startIdx,
 /* Generated */                                                   int    endIdx,
@@ -2683,7 +3291,8 @@ TA_LIB_API int TA_CDL3WHITESOLDIERS_StateFree( struct TA_CDL3WHITESOLDIERS_State
 /* Generated */                                                   const double inClose[],
 /* Generated */                                                   int          *outBegIdx,
 /* Generated */                                                   int          *outNBElement,
-/* Generated */                                                   int           outInteger[] )
+/* Generated */                                                   int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDL3WHITESOLDIERS(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -2699,10 +3308,27 @@ TA_LIB_API int TA_CDL3WHITESOLDIERS_StateFree( struct TA_CDL3WHITESOLDIERS_State
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDL3WHITESOLDIERS
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDL3WHITESOLDIERS_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDL3WHITESOLDIERS_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDL3WHITESOLDIERS_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDL3WHITESOLDIERS_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -2790,6 +3416,12 @@ TA_LIB_API int TA_CDLABANDONEDBABY_State( struct TA_CDLABANDONEDBABY_State* _sta
 
 TA_LIB_API int TA_CDLABANDONEDBABY_StateFree( struct TA_CDLABANDONEDBABY_State** _state );
 
+TA_LIB_API int TA_CDLABANDONEDBABY_StateSave( struct TA_CDLABANDONEDBABY_State* _state,
+                                                       FILE* _file );
+
+TA_LIB_API int TA_CDLABANDONEDBABY_StateLoad( struct TA_CDLABANDONEDBABY_State** _state,
+                                                       FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLABANDONEDBABY_StateTest( int    startIdx,
 /* Generated */                                                  int    endIdx,
@@ -2800,7 +3432,8 @@ TA_LIB_API int TA_CDLABANDONEDBABY_StateFree( struct TA_CDLABANDONEDBABY_State**
 /* Generated */                                                  double        optInPenetration, /* From 0 to TA_REAL_MAX */
 /* Generated */                                                  int          *outBegIdx,
 /* Generated */                                                  int          *outNBElement,
-/* Generated */                                                  int           outInteger[] )
+/* Generated */                                                  int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLABANDONEDBABY(startIdx, endIdx, inOpen, inHigh, inLow, inClose, optInPenetration, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -2816,10 +3449,27 @@ TA_LIB_API int TA_CDLABANDONEDBABY_StateFree( struct TA_CDLABANDONEDBABY_State**
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLABANDONEDBABY
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLABANDONEDBABY_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLABANDONEDBABY_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLABANDONEDBABY_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLABANDONEDBABY_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -2908,6 +3558,12 @@ TA_LIB_API int TA_CDLADVANCEBLOCK_State( struct TA_CDLADVANCEBLOCK_State* _state
 
 TA_LIB_API int TA_CDLADVANCEBLOCK_StateFree( struct TA_CDLADVANCEBLOCK_State** _state );
 
+TA_LIB_API int TA_CDLADVANCEBLOCK_StateSave( struct TA_CDLADVANCEBLOCK_State* _state,
+                                                      FILE* _file );
+
+TA_LIB_API int TA_CDLADVANCEBLOCK_StateLoad( struct TA_CDLADVANCEBLOCK_State** _state,
+                                                      FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLADVANCEBLOCK_StateTest( int    startIdx,
 /* Generated */                                                 int    endIdx,
@@ -2917,7 +3573,8 @@ TA_LIB_API int TA_CDLADVANCEBLOCK_StateFree( struct TA_CDLADVANCEBLOCK_State** _
 /* Generated */                                                 const double inClose[],
 /* Generated */                                                 int          *outBegIdx,
 /* Generated */                                                 int          *outNBElement,
-/* Generated */                                                 int           outInteger[] )
+/* Generated */                                                 int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLADVANCEBLOCK(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -2933,10 +3590,27 @@ TA_LIB_API int TA_CDLADVANCEBLOCK_StateFree( struct TA_CDLADVANCEBLOCK_State** _
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLADVANCEBLOCK
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLADVANCEBLOCK_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLADVANCEBLOCK_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLADVANCEBLOCK_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLADVANCEBLOCK_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -3011,6 +3685,12 @@ TA_LIB_API int TA_CDLBELTHOLD_State( struct TA_CDLBELTHOLD_State* _state,
 
 TA_LIB_API int TA_CDLBELTHOLD_StateFree( struct TA_CDLBELTHOLD_State** _state );
 
+TA_LIB_API int TA_CDLBELTHOLD_StateSave( struct TA_CDLBELTHOLD_State* _state,
+                                                  FILE* _file );
+
+TA_LIB_API int TA_CDLBELTHOLD_StateLoad( struct TA_CDLBELTHOLD_State** _state,
+                                                  FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLBELTHOLD_StateTest( int    startIdx,
 /* Generated */                                             int    endIdx,
@@ -3020,7 +3700,8 @@ TA_LIB_API int TA_CDLBELTHOLD_StateFree( struct TA_CDLBELTHOLD_State** _state );
 /* Generated */                                             const double inClose[],
 /* Generated */                                             int          *outBegIdx,
 /* Generated */                                             int          *outNBElement,
-/* Generated */                                             int           outInteger[] )
+/* Generated */                                             int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLBELTHOLD(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -3036,10 +3717,27 @@ TA_LIB_API int TA_CDLBELTHOLD_StateFree( struct TA_CDLBELTHOLD_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLBELTHOLD
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLBELTHOLD_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLBELTHOLD_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLBELTHOLD_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLBELTHOLD_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -3109,6 +3807,12 @@ TA_LIB_API int TA_CDLBREAKAWAY_State( struct TA_CDLBREAKAWAY_State* _state,
 
 TA_LIB_API int TA_CDLBREAKAWAY_StateFree( struct TA_CDLBREAKAWAY_State** _state );
 
+TA_LIB_API int TA_CDLBREAKAWAY_StateSave( struct TA_CDLBREAKAWAY_State* _state,
+                                                   FILE* _file );
+
+TA_LIB_API int TA_CDLBREAKAWAY_StateLoad( struct TA_CDLBREAKAWAY_State** _state,
+                                                   FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLBREAKAWAY_StateTest( int    startIdx,
 /* Generated */                                              int    endIdx,
@@ -3118,7 +3822,8 @@ TA_LIB_API int TA_CDLBREAKAWAY_StateFree( struct TA_CDLBREAKAWAY_State** _state 
 /* Generated */                                              const double inClose[],
 /* Generated */                                              int          *outBegIdx,
 /* Generated */                                              int          *outNBElement,
-/* Generated */                                              int           outInteger[] )
+/* Generated */                                              int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLBREAKAWAY(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -3134,10 +3839,27 @@ TA_LIB_API int TA_CDLBREAKAWAY_StateFree( struct TA_CDLBREAKAWAY_State** _state 
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLBREAKAWAY
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLBREAKAWAY_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLBREAKAWAY_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLBREAKAWAY_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLBREAKAWAY_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -3212,6 +3934,12 @@ TA_LIB_API int TA_CDLCLOSINGMARUBOZU_State( struct TA_CDLCLOSINGMARUBOZU_State* 
 
 TA_LIB_API int TA_CDLCLOSINGMARUBOZU_StateFree( struct TA_CDLCLOSINGMARUBOZU_State** _state );
 
+TA_LIB_API int TA_CDLCLOSINGMARUBOZU_StateSave( struct TA_CDLCLOSINGMARUBOZU_State* _state,
+                                                         FILE* _file );
+
+TA_LIB_API int TA_CDLCLOSINGMARUBOZU_StateLoad( struct TA_CDLCLOSINGMARUBOZU_State** _state,
+                                                         FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLCLOSINGMARUBOZU_StateTest( int    startIdx,
 /* Generated */                                                    int    endIdx,
@@ -3221,7 +3949,8 @@ TA_LIB_API int TA_CDLCLOSINGMARUBOZU_StateFree( struct TA_CDLCLOSINGMARUBOZU_Sta
 /* Generated */                                                    const double inClose[],
 /* Generated */                                                    int          *outBegIdx,
 /* Generated */                                                    int          *outNBElement,
-/* Generated */                                                    int           outInteger[] )
+/* Generated */                                                    int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLCLOSINGMARUBOZU(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -3237,10 +3966,27 @@ TA_LIB_API int TA_CDLCLOSINGMARUBOZU_StateFree( struct TA_CDLCLOSINGMARUBOZU_Sta
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLCLOSINGMARUBOZU
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLCLOSINGMARUBOZU_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLCLOSINGMARUBOZU_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLCLOSINGMARUBOZU_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLCLOSINGMARUBOZU_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -3313,6 +4059,12 @@ TA_LIB_API int TA_CDLCONCEALBABYSWALL_State( struct TA_CDLCONCEALBABYSWALL_State
 
 TA_LIB_API int TA_CDLCONCEALBABYSWALL_StateFree( struct TA_CDLCONCEALBABYSWALL_State** _state );
 
+TA_LIB_API int TA_CDLCONCEALBABYSWALL_StateSave( struct TA_CDLCONCEALBABYSWALL_State* _state,
+                                                          FILE* _file );
+
+TA_LIB_API int TA_CDLCONCEALBABYSWALL_StateLoad( struct TA_CDLCONCEALBABYSWALL_State** _state,
+                                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLCONCEALBABYSWALL_StateTest( int    startIdx,
 /* Generated */                                                     int    endIdx,
@@ -3322,7 +4074,8 @@ TA_LIB_API int TA_CDLCONCEALBABYSWALL_StateFree( struct TA_CDLCONCEALBABYSWALL_S
 /* Generated */                                                     const double inClose[],
 /* Generated */                                                     int          *outBegIdx,
 /* Generated */                                                     int          *outNBElement,
-/* Generated */                                                     int           outInteger[] )
+/* Generated */                                                     int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLCONCEALBABYSWALL(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -3338,10 +4091,27 @@ TA_LIB_API int TA_CDLCONCEALBABYSWALL_StateFree( struct TA_CDLCONCEALBABYSWALL_S
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLCONCEALBABYSWALL
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLCONCEALBABYSWALL_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLCONCEALBABYSWALL_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLCONCEALBABYSWALL_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLCONCEALBABYSWALL_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -3417,6 +4187,12 @@ TA_LIB_API int TA_CDLCOUNTERATTACK_State( struct TA_CDLCOUNTERATTACK_State* _sta
 
 TA_LIB_API int TA_CDLCOUNTERATTACK_StateFree( struct TA_CDLCOUNTERATTACK_State** _state );
 
+TA_LIB_API int TA_CDLCOUNTERATTACK_StateSave( struct TA_CDLCOUNTERATTACK_State* _state,
+                                                       FILE* _file );
+
+TA_LIB_API int TA_CDLCOUNTERATTACK_StateLoad( struct TA_CDLCOUNTERATTACK_State** _state,
+                                                       FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLCOUNTERATTACK_StateTest( int    startIdx,
 /* Generated */                                                  int    endIdx,
@@ -3426,7 +4202,8 @@ TA_LIB_API int TA_CDLCOUNTERATTACK_StateFree( struct TA_CDLCOUNTERATTACK_State**
 /* Generated */                                                  const double inClose[],
 /* Generated */                                                  int          *outBegIdx,
 /* Generated */                                                  int          *outNBElement,
-/* Generated */                                                  int           outInteger[] )
+/* Generated */                                                  int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLCOUNTERATTACK(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -3442,10 +4219,27 @@ TA_LIB_API int TA_CDLCOUNTERATTACK_StateFree( struct TA_CDLCOUNTERATTACK_State**
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLCOUNTERATTACK
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLCOUNTERATTACK_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLCOUNTERATTACK_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLCOUNTERATTACK_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLCOUNTERATTACK_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -3526,6 +4320,12 @@ TA_LIB_API int TA_CDLDARKCLOUDCOVER_State( struct TA_CDLDARKCLOUDCOVER_State* _s
 
 TA_LIB_API int TA_CDLDARKCLOUDCOVER_StateFree( struct TA_CDLDARKCLOUDCOVER_State** _state );
 
+TA_LIB_API int TA_CDLDARKCLOUDCOVER_StateSave( struct TA_CDLDARKCLOUDCOVER_State* _state,
+                                                        FILE* _file );
+
+TA_LIB_API int TA_CDLDARKCLOUDCOVER_StateLoad( struct TA_CDLDARKCLOUDCOVER_State** _state,
+                                                        FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLDARKCLOUDCOVER_StateTest( int    startIdx,
 /* Generated */                                                   int    endIdx,
@@ -3536,7 +4336,8 @@ TA_LIB_API int TA_CDLDARKCLOUDCOVER_StateFree( struct TA_CDLDARKCLOUDCOVER_State
 /* Generated */                                                   double        optInPenetration, /* From 0 to TA_REAL_MAX */
 /* Generated */                                                   int          *outBegIdx,
 /* Generated */                                                   int          *outNBElement,
-/* Generated */                                                   int           outInteger[] )
+/* Generated */                                                   int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLDARKCLOUDCOVER(startIdx, endIdx, inOpen, inHigh, inLow, inClose, optInPenetration, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -3552,10 +4353,27 @@ TA_LIB_API int TA_CDLDARKCLOUDCOVER_StateFree( struct TA_CDLDARKCLOUDCOVER_State
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLDARKCLOUDCOVER
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLDARKCLOUDCOVER_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLDARKCLOUDCOVER_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLDARKCLOUDCOVER_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLDARKCLOUDCOVER_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -3625,6 +4443,12 @@ TA_LIB_API int TA_CDLDOJI_State( struct TA_CDLDOJI_State* _state,
 
 TA_LIB_API int TA_CDLDOJI_StateFree( struct TA_CDLDOJI_State** _state );
 
+TA_LIB_API int TA_CDLDOJI_StateSave( struct TA_CDLDOJI_State* _state,
+                                              FILE* _file );
+
+TA_LIB_API int TA_CDLDOJI_StateLoad( struct TA_CDLDOJI_State** _state,
+                                              FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLDOJI_StateTest( int    startIdx,
 /* Generated */                                         int    endIdx,
@@ -3634,7 +4458,8 @@ TA_LIB_API int TA_CDLDOJI_StateFree( struct TA_CDLDOJI_State** _state );
 /* Generated */                                         const double inClose[],
 /* Generated */                                         int          *outBegIdx,
 /* Generated */                                         int          *outNBElement,
-/* Generated */                                         int           outInteger[] )
+/* Generated */                                         int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLDOJI(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -3650,10 +4475,27 @@ TA_LIB_API int TA_CDLDOJI_StateFree( struct TA_CDLDOJI_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLDOJI
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLDOJI_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLDOJI_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLDOJI_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLDOJI_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -3728,6 +4570,12 @@ TA_LIB_API int TA_CDLDOJISTAR_State( struct TA_CDLDOJISTAR_State* _state,
 
 TA_LIB_API int TA_CDLDOJISTAR_StateFree( struct TA_CDLDOJISTAR_State** _state );
 
+TA_LIB_API int TA_CDLDOJISTAR_StateSave( struct TA_CDLDOJISTAR_State* _state,
+                                                  FILE* _file );
+
+TA_LIB_API int TA_CDLDOJISTAR_StateLoad( struct TA_CDLDOJISTAR_State** _state,
+                                                  FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLDOJISTAR_StateTest( int    startIdx,
 /* Generated */                                             int    endIdx,
@@ -3737,7 +4585,8 @@ TA_LIB_API int TA_CDLDOJISTAR_StateFree( struct TA_CDLDOJISTAR_State** _state );
 /* Generated */                                             const double inClose[],
 /* Generated */                                             int          *outBegIdx,
 /* Generated */                                             int          *outNBElement,
-/* Generated */                                             int           outInteger[] )
+/* Generated */                                             int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLDOJISTAR(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -3753,10 +4602,27 @@ TA_LIB_API int TA_CDLDOJISTAR_StateFree( struct TA_CDLDOJISTAR_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLDOJISTAR
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLDOJISTAR_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLDOJISTAR_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLDOJISTAR_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLDOJISTAR_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -3831,6 +4697,12 @@ TA_LIB_API int TA_CDLDRAGONFLYDOJI_State( struct TA_CDLDRAGONFLYDOJI_State* _sta
 
 TA_LIB_API int TA_CDLDRAGONFLYDOJI_StateFree( struct TA_CDLDRAGONFLYDOJI_State** _state );
 
+TA_LIB_API int TA_CDLDRAGONFLYDOJI_StateSave( struct TA_CDLDRAGONFLYDOJI_State* _state,
+                                                       FILE* _file );
+
+TA_LIB_API int TA_CDLDRAGONFLYDOJI_StateLoad( struct TA_CDLDRAGONFLYDOJI_State** _state,
+                                                       FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLDRAGONFLYDOJI_StateTest( int    startIdx,
 /* Generated */                                                  int    endIdx,
@@ -3840,7 +4712,8 @@ TA_LIB_API int TA_CDLDRAGONFLYDOJI_StateFree( struct TA_CDLDRAGONFLYDOJI_State**
 /* Generated */                                                  const double inClose[],
 /* Generated */                                                  int          *outBegIdx,
 /* Generated */                                                  int          *outNBElement,
-/* Generated */                                                  int           outInteger[] )
+/* Generated */                                                  int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLDRAGONFLYDOJI(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -3856,10 +4729,27 @@ TA_LIB_API int TA_CDLDRAGONFLYDOJI_StateFree( struct TA_CDLDRAGONFLYDOJI_State**
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLDRAGONFLYDOJI
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLDRAGONFLYDOJI_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLDRAGONFLYDOJI_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLDRAGONFLYDOJI_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLDRAGONFLYDOJI_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -3928,6 +4818,12 @@ TA_LIB_API int TA_CDLENGULFING_State( struct TA_CDLENGULFING_State* _state,
 
 TA_LIB_API int TA_CDLENGULFING_StateFree( struct TA_CDLENGULFING_State** _state );
 
+TA_LIB_API int TA_CDLENGULFING_StateSave( struct TA_CDLENGULFING_State* _state,
+                                                   FILE* _file );
+
+TA_LIB_API int TA_CDLENGULFING_StateLoad( struct TA_CDLENGULFING_State** _state,
+                                                   FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLENGULFING_StateTest( int    startIdx,
 /* Generated */                                              int    endIdx,
@@ -3937,7 +4833,8 @@ TA_LIB_API int TA_CDLENGULFING_StateFree( struct TA_CDLENGULFING_State** _state 
 /* Generated */                                              const double inClose[],
 /* Generated */                                              int          *outBegIdx,
 /* Generated */                                              int          *outNBElement,
-/* Generated */                                              int           outInteger[] )
+/* Generated */                                              int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLENGULFING(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -3953,10 +4850,27 @@ TA_LIB_API int TA_CDLENGULFING_StateFree( struct TA_CDLENGULFING_State** _state 
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLENGULFING
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLENGULFING_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLENGULFING_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLENGULFING_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLENGULFING_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -4044,6 +4958,12 @@ TA_LIB_API int TA_CDLEVENINGDOJISTAR_State( struct TA_CDLEVENINGDOJISTAR_State* 
 
 TA_LIB_API int TA_CDLEVENINGDOJISTAR_StateFree( struct TA_CDLEVENINGDOJISTAR_State** _state );
 
+TA_LIB_API int TA_CDLEVENINGDOJISTAR_StateSave( struct TA_CDLEVENINGDOJISTAR_State* _state,
+                                                         FILE* _file );
+
+TA_LIB_API int TA_CDLEVENINGDOJISTAR_StateLoad( struct TA_CDLEVENINGDOJISTAR_State** _state,
+                                                         FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLEVENINGDOJISTAR_StateTest( int    startIdx,
 /* Generated */                                                    int    endIdx,
@@ -4054,7 +4974,8 @@ TA_LIB_API int TA_CDLEVENINGDOJISTAR_StateFree( struct TA_CDLEVENINGDOJISTAR_Sta
 /* Generated */                                                    double        optInPenetration, /* From 0 to TA_REAL_MAX */
 /* Generated */                                                    int          *outBegIdx,
 /* Generated */                                                    int          *outNBElement,
-/* Generated */                                                    int           outInteger[] )
+/* Generated */                                                    int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLEVENINGDOJISTAR(startIdx, endIdx, inOpen, inHigh, inLow, inClose, optInPenetration, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -4070,10 +4991,27 @@ TA_LIB_API int TA_CDLEVENINGDOJISTAR_StateFree( struct TA_CDLEVENINGDOJISTAR_Sta
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLEVENINGDOJISTAR
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLEVENINGDOJISTAR_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLEVENINGDOJISTAR_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLEVENINGDOJISTAR_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLEVENINGDOJISTAR_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -4159,6 +5097,12 @@ TA_LIB_API int TA_CDLEVENINGSTAR_State( struct TA_CDLEVENINGSTAR_State* _state,
 
 TA_LIB_API int TA_CDLEVENINGSTAR_StateFree( struct TA_CDLEVENINGSTAR_State** _state );
 
+TA_LIB_API int TA_CDLEVENINGSTAR_StateSave( struct TA_CDLEVENINGSTAR_State* _state,
+                                                     FILE* _file );
+
+TA_LIB_API int TA_CDLEVENINGSTAR_StateLoad( struct TA_CDLEVENINGSTAR_State** _state,
+                                                     FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLEVENINGSTAR_StateTest( int    startIdx,
 /* Generated */                                                int    endIdx,
@@ -4169,7 +5113,8 @@ TA_LIB_API int TA_CDLEVENINGSTAR_StateFree( struct TA_CDLEVENINGSTAR_State** _st
 /* Generated */                                                double        optInPenetration, /* From 0 to TA_REAL_MAX */
 /* Generated */                                                int          *outBegIdx,
 /* Generated */                                                int          *outNBElement,
-/* Generated */                                                int           outInteger[] )
+/* Generated */                                                int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLEVENINGSTAR(startIdx, endIdx, inOpen, inHigh, inLow, inClose, optInPenetration, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -4185,10 +5130,27 @@ TA_LIB_API int TA_CDLEVENINGSTAR_StateFree( struct TA_CDLEVENINGSTAR_State** _st
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLEVENINGSTAR
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLEVENINGSTAR_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLEVENINGSTAR_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLEVENINGSTAR_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLEVENINGSTAR_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -4261,6 +5223,12 @@ TA_LIB_API int TA_CDLGAPSIDESIDEWHITE_State( struct TA_CDLGAPSIDESIDEWHITE_State
 
 TA_LIB_API int TA_CDLGAPSIDESIDEWHITE_StateFree( struct TA_CDLGAPSIDESIDEWHITE_State** _state );
 
+TA_LIB_API int TA_CDLGAPSIDESIDEWHITE_StateSave( struct TA_CDLGAPSIDESIDEWHITE_State* _state,
+                                                          FILE* _file );
+
+TA_LIB_API int TA_CDLGAPSIDESIDEWHITE_StateLoad( struct TA_CDLGAPSIDESIDEWHITE_State** _state,
+                                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLGAPSIDESIDEWHITE_StateTest( int    startIdx,
 /* Generated */                                                     int    endIdx,
@@ -4270,7 +5238,8 @@ TA_LIB_API int TA_CDLGAPSIDESIDEWHITE_StateFree( struct TA_CDLGAPSIDESIDEWHITE_S
 /* Generated */                                                     const double inClose[],
 /* Generated */                                                     int          *outBegIdx,
 /* Generated */                                                     int          *outNBElement,
-/* Generated */                                                     int           outInteger[] )
+/* Generated */                                                     int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLGAPSIDESIDEWHITE(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -4286,10 +5255,27 @@ TA_LIB_API int TA_CDLGAPSIDESIDEWHITE_StateFree( struct TA_CDLGAPSIDESIDEWHITE_S
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLGAPSIDESIDEWHITE
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLGAPSIDESIDEWHITE_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLGAPSIDESIDEWHITE_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLGAPSIDESIDEWHITE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLGAPSIDESIDEWHITE_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -4364,6 +5350,12 @@ TA_LIB_API int TA_CDLGRAVESTONEDOJI_State( struct TA_CDLGRAVESTONEDOJI_State* _s
 
 TA_LIB_API int TA_CDLGRAVESTONEDOJI_StateFree( struct TA_CDLGRAVESTONEDOJI_State** _state );
 
+TA_LIB_API int TA_CDLGRAVESTONEDOJI_StateSave( struct TA_CDLGRAVESTONEDOJI_State* _state,
+                                                        FILE* _file );
+
+TA_LIB_API int TA_CDLGRAVESTONEDOJI_StateLoad( struct TA_CDLGRAVESTONEDOJI_State** _state,
+                                                        FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLGRAVESTONEDOJI_StateTest( int    startIdx,
 /* Generated */                                                   int    endIdx,
@@ -4373,7 +5365,8 @@ TA_LIB_API int TA_CDLGRAVESTONEDOJI_StateFree( struct TA_CDLGRAVESTONEDOJI_State
 /* Generated */                                                   const double inClose[],
 /* Generated */                                                   int          *outBegIdx,
 /* Generated */                                                   int          *outNBElement,
-/* Generated */                                                   int           outInteger[] )
+/* Generated */                                                   int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLGRAVESTONEDOJI(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -4389,10 +5382,27 @@ TA_LIB_API int TA_CDLGRAVESTONEDOJI_StateFree( struct TA_CDLGRAVESTONEDOJI_State
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLGRAVESTONEDOJI
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLGRAVESTONEDOJI_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLGRAVESTONEDOJI_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLGRAVESTONEDOJI_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLGRAVESTONEDOJI_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -4473,6 +5483,12 @@ TA_LIB_API int TA_CDLHAMMER_State( struct TA_CDLHAMMER_State* _state,
 
 TA_LIB_API int TA_CDLHAMMER_StateFree( struct TA_CDLHAMMER_State** _state );
 
+TA_LIB_API int TA_CDLHAMMER_StateSave( struct TA_CDLHAMMER_State* _state,
+                                                FILE* _file );
+
+TA_LIB_API int TA_CDLHAMMER_StateLoad( struct TA_CDLHAMMER_State** _state,
+                                                FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLHAMMER_StateTest( int    startIdx,
 /* Generated */                                           int    endIdx,
@@ -4482,7 +5498,8 @@ TA_LIB_API int TA_CDLHAMMER_StateFree( struct TA_CDLHAMMER_State** _state );
 /* Generated */                                           const double inClose[],
 /* Generated */                                           int          *outBegIdx,
 /* Generated */                                           int          *outNBElement,
-/* Generated */                                           int           outInteger[] )
+/* Generated */                                           int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLHAMMER(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -4498,10 +5515,27 @@ TA_LIB_API int TA_CDLHAMMER_StateFree( struct TA_CDLHAMMER_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLHAMMER
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLHAMMER_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLHAMMER_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLHAMMER_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLHAMMER_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -4582,6 +5616,12 @@ TA_LIB_API int TA_CDLHANGINGMAN_State( struct TA_CDLHANGINGMAN_State* _state,
 
 TA_LIB_API int TA_CDLHANGINGMAN_StateFree( struct TA_CDLHANGINGMAN_State** _state );
 
+TA_LIB_API int TA_CDLHANGINGMAN_StateSave( struct TA_CDLHANGINGMAN_State* _state,
+                                                    FILE* _file );
+
+TA_LIB_API int TA_CDLHANGINGMAN_StateLoad( struct TA_CDLHANGINGMAN_State** _state,
+                                                    FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLHANGINGMAN_StateTest( int    startIdx,
 /* Generated */                                               int    endIdx,
@@ -4591,7 +5631,8 @@ TA_LIB_API int TA_CDLHANGINGMAN_StateFree( struct TA_CDLHANGINGMAN_State** _stat
 /* Generated */                                               const double inClose[],
 /* Generated */                                               int          *outBegIdx,
 /* Generated */                                               int          *outNBElement,
-/* Generated */                                               int           outInteger[] )
+/* Generated */                                               int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLHANGINGMAN(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -4607,10 +5648,27 @@ TA_LIB_API int TA_CDLHANGINGMAN_StateFree( struct TA_CDLHANGINGMAN_State** _stat
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLHANGINGMAN
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLHANGINGMAN_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLHANGINGMAN_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLHANGINGMAN_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLHANGINGMAN_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -4685,6 +5743,12 @@ TA_LIB_API int TA_CDLHARAMI_State( struct TA_CDLHARAMI_State* _state,
 
 TA_LIB_API int TA_CDLHARAMI_StateFree( struct TA_CDLHARAMI_State** _state );
 
+TA_LIB_API int TA_CDLHARAMI_StateSave( struct TA_CDLHARAMI_State* _state,
+                                                FILE* _file );
+
+TA_LIB_API int TA_CDLHARAMI_StateLoad( struct TA_CDLHARAMI_State** _state,
+                                                FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLHARAMI_StateTest( int    startIdx,
 /* Generated */                                           int    endIdx,
@@ -4694,7 +5758,8 @@ TA_LIB_API int TA_CDLHARAMI_StateFree( struct TA_CDLHARAMI_State** _state );
 /* Generated */                                           const double inClose[],
 /* Generated */                                           int          *outBegIdx,
 /* Generated */                                           int          *outNBElement,
-/* Generated */                                           int           outInteger[] )
+/* Generated */                                           int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLHARAMI(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -4710,10 +5775,27 @@ TA_LIB_API int TA_CDLHARAMI_StateFree( struct TA_CDLHARAMI_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLHARAMI
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLHARAMI_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLHARAMI_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLHARAMI_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLHARAMI_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -4788,6 +5870,12 @@ TA_LIB_API int TA_CDLHARAMICROSS_State( struct TA_CDLHARAMICROSS_State* _state,
 
 TA_LIB_API int TA_CDLHARAMICROSS_StateFree( struct TA_CDLHARAMICROSS_State** _state );
 
+TA_LIB_API int TA_CDLHARAMICROSS_StateSave( struct TA_CDLHARAMICROSS_State* _state,
+                                                     FILE* _file );
+
+TA_LIB_API int TA_CDLHARAMICROSS_StateLoad( struct TA_CDLHARAMICROSS_State** _state,
+                                                     FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLHARAMICROSS_StateTest( int    startIdx,
 /* Generated */                                                int    endIdx,
@@ -4797,7 +5885,8 @@ TA_LIB_API int TA_CDLHARAMICROSS_StateFree( struct TA_CDLHARAMICROSS_State** _st
 /* Generated */                                                const double inClose[],
 /* Generated */                                                int          *outBegIdx,
 /* Generated */                                                int          *outNBElement,
-/* Generated */                                                int           outInteger[] )
+/* Generated */                                                int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLHARAMICROSS(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -4813,10 +5902,27 @@ TA_LIB_API int TA_CDLHARAMICROSS_StateFree( struct TA_CDLHARAMICROSS_State** _st
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLHARAMICROSS
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLHARAMICROSS_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLHARAMICROSS_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLHARAMICROSS_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLHARAMICROSS_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -4889,6 +5995,12 @@ TA_LIB_API int TA_CDLHIGHWAVE_State( struct TA_CDLHIGHWAVE_State* _state,
 
 TA_LIB_API int TA_CDLHIGHWAVE_StateFree( struct TA_CDLHIGHWAVE_State** _state );
 
+TA_LIB_API int TA_CDLHIGHWAVE_StateSave( struct TA_CDLHIGHWAVE_State* _state,
+                                                  FILE* _file );
+
+TA_LIB_API int TA_CDLHIGHWAVE_StateLoad( struct TA_CDLHIGHWAVE_State** _state,
+                                                  FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLHIGHWAVE_StateTest( int    startIdx,
 /* Generated */                                             int    endIdx,
@@ -4898,7 +6010,8 @@ TA_LIB_API int TA_CDLHIGHWAVE_StateFree( struct TA_CDLHIGHWAVE_State** _state );
 /* Generated */                                             const double inClose[],
 /* Generated */                                             int          *outBegIdx,
 /* Generated */                                             int          *outNBElement,
-/* Generated */                                             int           outInteger[] )
+/* Generated */                                             int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLHIGHWAVE(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -4914,10 +6027,27 @@ TA_LIB_API int TA_CDLHIGHWAVE_StateFree( struct TA_CDLHIGHWAVE_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLHIGHWAVE
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLHIGHWAVE_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLHIGHWAVE_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLHIGHWAVE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLHIGHWAVE_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -4990,6 +6120,12 @@ TA_LIB_API int TA_CDLHIKKAKE_State( struct TA_CDLHIKKAKE_State* _state,
 
 TA_LIB_API int TA_CDLHIKKAKE_StateFree( struct TA_CDLHIKKAKE_State** _state );
 
+TA_LIB_API int TA_CDLHIKKAKE_StateSave( struct TA_CDLHIKKAKE_State* _state,
+                                                 FILE* _file );
+
+TA_LIB_API int TA_CDLHIKKAKE_StateLoad( struct TA_CDLHIKKAKE_State** _state,
+                                                 FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLHIKKAKE_StateTest( int    startIdx,
 /* Generated */                                            int    endIdx,
@@ -4999,7 +6135,8 @@ TA_LIB_API int TA_CDLHIKKAKE_StateFree( struct TA_CDLHIKKAKE_State** _state );
 /* Generated */                                            const double inClose[],
 /* Generated */                                            int          *outBegIdx,
 /* Generated */                                            int          *outNBElement,
-/* Generated */                                            int           outInteger[] )
+/* Generated */                                            int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLHIKKAKE(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -5015,10 +6152,27 @@ TA_LIB_API int TA_CDLHIKKAKE_StateFree( struct TA_CDLHIKKAKE_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLHIKKAKE
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLHIKKAKE_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLHIKKAKE_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLHIKKAKE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLHIKKAKE_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -5094,6 +6248,12 @@ TA_LIB_API int TA_CDLHIKKAKEMOD_State( struct TA_CDLHIKKAKEMOD_State* _state,
 
 TA_LIB_API int TA_CDLHIKKAKEMOD_StateFree( struct TA_CDLHIKKAKEMOD_State** _state );
 
+TA_LIB_API int TA_CDLHIKKAKEMOD_StateSave( struct TA_CDLHIKKAKEMOD_State* _state,
+                                                    FILE* _file );
+
+TA_LIB_API int TA_CDLHIKKAKEMOD_StateLoad( struct TA_CDLHIKKAKEMOD_State** _state,
+                                                    FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLHIKKAKEMOD_StateTest( int    startIdx,
 /* Generated */                                               int    endIdx,
@@ -5103,7 +6263,8 @@ TA_LIB_API int TA_CDLHIKKAKEMOD_StateFree( struct TA_CDLHIKKAKEMOD_State** _stat
 /* Generated */                                               const double inClose[],
 /* Generated */                                               int          *outBegIdx,
 /* Generated */                                               int          *outNBElement,
-/* Generated */                                               int           outInteger[] )
+/* Generated */                                               int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLHIKKAKEMOD(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -5119,10 +6280,27 @@ TA_LIB_API int TA_CDLHIKKAKEMOD_StateFree( struct TA_CDLHIKKAKEMOD_State** _stat
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLHIKKAKEMOD
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLHIKKAKEMOD_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLHIKKAKEMOD_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLHIKKAKEMOD_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLHIKKAKEMOD_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -5197,6 +6375,12 @@ TA_LIB_API int TA_CDLHOMINGPIGEON_State( struct TA_CDLHOMINGPIGEON_State* _state
 
 TA_LIB_API int TA_CDLHOMINGPIGEON_StateFree( struct TA_CDLHOMINGPIGEON_State** _state );
 
+TA_LIB_API int TA_CDLHOMINGPIGEON_StateSave( struct TA_CDLHOMINGPIGEON_State* _state,
+                                                      FILE* _file );
+
+TA_LIB_API int TA_CDLHOMINGPIGEON_StateLoad( struct TA_CDLHOMINGPIGEON_State** _state,
+                                                      FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLHOMINGPIGEON_StateTest( int    startIdx,
 /* Generated */                                                 int    endIdx,
@@ -5206,7 +6390,8 @@ TA_LIB_API int TA_CDLHOMINGPIGEON_StateFree( struct TA_CDLHOMINGPIGEON_State** _
 /* Generated */                                                 const double inClose[],
 /* Generated */                                                 int          *outBegIdx,
 /* Generated */                                                 int          *outNBElement,
-/* Generated */                                                 int           outInteger[] )
+/* Generated */                                                 int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLHOMINGPIGEON(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -5222,10 +6407,27 @@ TA_LIB_API int TA_CDLHOMINGPIGEON_StateFree( struct TA_CDLHOMINGPIGEON_State** _
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLHOMINGPIGEON
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLHOMINGPIGEON_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLHOMINGPIGEON_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLHOMINGPIGEON_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLHOMINGPIGEON_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -5303,6 +6505,12 @@ TA_LIB_API int TA_CDLIDENTICAL3CROWS_State( struct TA_CDLIDENTICAL3CROWS_State* 
 
 TA_LIB_API int TA_CDLIDENTICAL3CROWS_StateFree( struct TA_CDLIDENTICAL3CROWS_State** _state );
 
+TA_LIB_API int TA_CDLIDENTICAL3CROWS_StateSave( struct TA_CDLIDENTICAL3CROWS_State* _state,
+                                                         FILE* _file );
+
+TA_LIB_API int TA_CDLIDENTICAL3CROWS_StateLoad( struct TA_CDLIDENTICAL3CROWS_State** _state,
+                                                         FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLIDENTICAL3CROWS_StateTest( int    startIdx,
 /* Generated */                                                    int    endIdx,
@@ -5312,7 +6520,8 @@ TA_LIB_API int TA_CDLIDENTICAL3CROWS_StateFree( struct TA_CDLIDENTICAL3CROWS_Sta
 /* Generated */                                                    const double inClose[],
 /* Generated */                                                    int          *outBegIdx,
 /* Generated */                                                    int          *outNBElement,
-/* Generated */                                                    int           outInteger[] )
+/* Generated */                                                    int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLIDENTICAL3CROWS(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -5328,10 +6537,27 @@ TA_LIB_API int TA_CDLIDENTICAL3CROWS_StateFree( struct TA_CDLIDENTICAL3CROWS_Sta
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLIDENTICAL3CROWS
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLIDENTICAL3CROWS_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLIDENTICAL3CROWS_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLIDENTICAL3CROWS_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLIDENTICAL3CROWS_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -5406,6 +6632,12 @@ TA_LIB_API int TA_CDLINNECK_State( struct TA_CDLINNECK_State* _state,
 
 TA_LIB_API int TA_CDLINNECK_StateFree( struct TA_CDLINNECK_State** _state );
 
+TA_LIB_API int TA_CDLINNECK_StateSave( struct TA_CDLINNECK_State* _state,
+                                                FILE* _file );
+
+TA_LIB_API int TA_CDLINNECK_StateLoad( struct TA_CDLINNECK_State** _state,
+                                                FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLINNECK_StateTest( int    startIdx,
 /* Generated */                                           int    endIdx,
@@ -5415,7 +6647,8 @@ TA_LIB_API int TA_CDLINNECK_StateFree( struct TA_CDLINNECK_State** _state );
 /* Generated */                                           const double inClose[],
 /* Generated */                                           int          *outBegIdx,
 /* Generated */                                           int          *outNBElement,
-/* Generated */                                           int           outInteger[] )
+/* Generated */                                           int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLINNECK(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -5431,10 +6664,27 @@ TA_LIB_API int TA_CDLINNECK_StateFree( struct TA_CDLINNECK_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLINNECK
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLINNECK_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLINNECK_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLINNECK_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLINNECK_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -5503,6 +6753,12 @@ TA_LIB_API int TA_CDLINVERTEDHAMMER_State( struct TA_CDLINVERTEDHAMMER_State* _s
 
 TA_LIB_API int TA_CDLINVERTEDHAMMER_StateFree( struct TA_CDLINVERTEDHAMMER_State** _state );
 
+TA_LIB_API int TA_CDLINVERTEDHAMMER_StateSave( struct TA_CDLINVERTEDHAMMER_State* _state,
+                                                        FILE* _file );
+
+TA_LIB_API int TA_CDLINVERTEDHAMMER_StateLoad( struct TA_CDLINVERTEDHAMMER_State** _state,
+                                                        FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLINVERTEDHAMMER_StateTest( int    startIdx,
 /* Generated */                                                   int    endIdx,
@@ -5512,7 +6768,8 @@ TA_LIB_API int TA_CDLINVERTEDHAMMER_StateFree( struct TA_CDLINVERTEDHAMMER_State
 /* Generated */                                                   const double inClose[],
 /* Generated */                                                   int          *outBegIdx,
 /* Generated */                                                   int          *outNBElement,
-/* Generated */                                                   int           outInteger[] )
+/* Generated */                                                   int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLINVERTEDHAMMER(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -5528,10 +6785,27 @@ TA_LIB_API int TA_CDLINVERTEDHAMMER_StateFree( struct TA_CDLINVERTEDHAMMER_State
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLINVERTEDHAMMER
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLINVERTEDHAMMER_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLINVERTEDHAMMER_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLINVERTEDHAMMER_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLINVERTEDHAMMER_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -5600,6 +6874,12 @@ TA_LIB_API int TA_CDLKICKING_State( struct TA_CDLKICKING_State* _state,
 
 TA_LIB_API int TA_CDLKICKING_StateFree( struct TA_CDLKICKING_State** _state );
 
+TA_LIB_API int TA_CDLKICKING_StateSave( struct TA_CDLKICKING_State* _state,
+                                                 FILE* _file );
+
+TA_LIB_API int TA_CDLKICKING_StateLoad( struct TA_CDLKICKING_State** _state,
+                                                 FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLKICKING_StateTest( int    startIdx,
 /* Generated */                                            int    endIdx,
@@ -5609,7 +6889,8 @@ TA_LIB_API int TA_CDLKICKING_StateFree( struct TA_CDLKICKING_State** _state );
 /* Generated */                                            const double inClose[],
 /* Generated */                                            int          *outBegIdx,
 /* Generated */                                            int          *outNBElement,
-/* Generated */                                            int           outInteger[] )
+/* Generated */                                            int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLKICKING(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -5625,10 +6906,27 @@ TA_LIB_API int TA_CDLKICKING_StateFree( struct TA_CDLKICKING_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLKICKING
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLKICKING_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLKICKING_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLKICKING_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLKICKING_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -5697,6 +6995,12 @@ TA_LIB_API int TA_CDLKICKINGBYLENGTH_State( struct TA_CDLKICKINGBYLENGTH_State* 
 
 TA_LIB_API int TA_CDLKICKINGBYLENGTH_StateFree( struct TA_CDLKICKINGBYLENGTH_State** _state );
 
+TA_LIB_API int TA_CDLKICKINGBYLENGTH_StateSave( struct TA_CDLKICKINGBYLENGTH_State* _state,
+                                                         FILE* _file );
+
+TA_LIB_API int TA_CDLKICKINGBYLENGTH_StateLoad( struct TA_CDLKICKINGBYLENGTH_State** _state,
+                                                         FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLKICKINGBYLENGTH_StateTest( int    startIdx,
 /* Generated */                                                    int    endIdx,
@@ -5706,7 +7010,8 @@ TA_LIB_API int TA_CDLKICKINGBYLENGTH_StateFree( struct TA_CDLKICKINGBYLENGTH_Sta
 /* Generated */                                                    const double inClose[],
 /* Generated */                                                    int          *outBegIdx,
 /* Generated */                                                    int          *outNBElement,
-/* Generated */                                                    int           outInteger[] )
+/* Generated */                                                    int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLKICKINGBYLENGTH(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -5722,10 +7027,27 @@ TA_LIB_API int TA_CDLKICKINGBYLENGTH_StateFree( struct TA_CDLKICKINGBYLENGTH_Sta
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLKICKINGBYLENGTH
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLKICKINGBYLENGTH_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLKICKINGBYLENGTH_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLKICKINGBYLENGTH_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLKICKINGBYLENGTH_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -5794,6 +7116,12 @@ TA_LIB_API int TA_CDLLADDERBOTTOM_State( struct TA_CDLLADDERBOTTOM_State* _state
 
 TA_LIB_API int TA_CDLLADDERBOTTOM_StateFree( struct TA_CDLLADDERBOTTOM_State** _state );
 
+TA_LIB_API int TA_CDLLADDERBOTTOM_StateSave( struct TA_CDLLADDERBOTTOM_State* _state,
+                                                      FILE* _file );
+
+TA_LIB_API int TA_CDLLADDERBOTTOM_StateLoad( struct TA_CDLLADDERBOTTOM_State** _state,
+                                                      FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLLADDERBOTTOM_StateTest( int    startIdx,
 /* Generated */                                                 int    endIdx,
@@ -5803,7 +7131,8 @@ TA_LIB_API int TA_CDLLADDERBOTTOM_StateFree( struct TA_CDLLADDERBOTTOM_State** _
 /* Generated */                                                 const double inClose[],
 /* Generated */                                                 int          *outBegIdx,
 /* Generated */                                                 int          *outNBElement,
-/* Generated */                                                 int           outInteger[] )
+/* Generated */                                                 int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLLADDERBOTTOM(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -5819,10 +7148,27 @@ TA_LIB_API int TA_CDLLADDERBOTTOM_StateFree( struct TA_CDLLADDERBOTTOM_State** _
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLLADDERBOTTOM
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLLADDERBOTTOM_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLLADDERBOTTOM_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLLADDERBOTTOM_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLLADDERBOTTOM_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -5897,6 +7243,12 @@ TA_LIB_API int TA_CDLLONGLEGGEDDOJI_State( struct TA_CDLLONGLEGGEDDOJI_State* _s
 
 TA_LIB_API int TA_CDLLONGLEGGEDDOJI_StateFree( struct TA_CDLLONGLEGGEDDOJI_State** _state );
 
+TA_LIB_API int TA_CDLLONGLEGGEDDOJI_StateSave( struct TA_CDLLONGLEGGEDDOJI_State* _state,
+                                                        FILE* _file );
+
+TA_LIB_API int TA_CDLLONGLEGGEDDOJI_StateLoad( struct TA_CDLLONGLEGGEDDOJI_State** _state,
+                                                        FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLLONGLEGGEDDOJI_StateTest( int    startIdx,
 /* Generated */                                                   int    endIdx,
@@ -5906,7 +7258,8 @@ TA_LIB_API int TA_CDLLONGLEGGEDDOJI_StateFree( struct TA_CDLLONGLEGGEDDOJI_State
 /* Generated */                                                   const double inClose[],
 /* Generated */                                                   int          *outBegIdx,
 /* Generated */                                                   int          *outNBElement,
-/* Generated */                                                   int           outInteger[] )
+/* Generated */                                                   int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLLONGLEGGEDDOJI(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -5922,10 +7275,27 @@ TA_LIB_API int TA_CDLLONGLEGGEDDOJI_StateFree( struct TA_CDLLONGLEGGEDDOJI_State
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLLONGLEGGEDDOJI
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLLONGLEGGEDDOJI_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLLONGLEGGEDDOJI_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLLONGLEGGEDDOJI_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLLONGLEGGEDDOJI_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -5994,6 +7364,12 @@ TA_LIB_API int TA_CDLLONGLINE_State( struct TA_CDLLONGLINE_State* _state,
 
 TA_LIB_API int TA_CDLLONGLINE_StateFree( struct TA_CDLLONGLINE_State** _state );
 
+TA_LIB_API int TA_CDLLONGLINE_StateSave( struct TA_CDLLONGLINE_State* _state,
+                                                  FILE* _file );
+
+TA_LIB_API int TA_CDLLONGLINE_StateLoad( struct TA_CDLLONGLINE_State** _state,
+                                                  FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLLONGLINE_StateTest( int    startIdx,
 /* Generated */                                             int    endIdx,
@@ -6003,7 +7379,8 @@ TA_LIB_API int TA_CDLLONGLINE_StateFree( struct TA_CDLLONGLINE_State** _state );
 /* Generated */                                             const double inClose[],
 /* Generated */                                             int          *outBegIdx,
 /* Generated */                                             int          *outNBElement,
-/* Generated */                                             int           outInteger[] )
+/* Generated */                                             int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLLONGLINE(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -6019,10 +7396,27 @@ TA_LIB_API int TA_CDLLONGLINE_StateFree( struct TA_CDLLONGLINE_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLLONGLINE
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLLONGLINE_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLLONGLINE_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLLONGLINE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLLONGLINE_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -6097,6 +7491,12 @@ TA_LIB_API int TA_CDLMARUBOZU_State( struct TA_CDLMARUBOZU_State* _state,
 
 TA_LIB_API int TA_CDLMARUBOZU_StateFree( struct TA_CDLMARUBOZU_State** _state );
 
+TA_LIB_API int TA_CDLMARUBOZU_StateSave( struct TA_CDLMARUBOZU_State* _state,
+                                                  FILE* _file );
+
+TA_LIB_API int TA_CDLMARUBOZU_StateLoad( struct TA_CDLMARUBOZU_State** _state,
+                                                  FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLMARUBOZU_StateTest( int    startIdx,
 /* Generated */                                             int    endIdx,
@@ -6106,7 +7506,8 @@ TA_LIB_API int TA_CDLMARUBOZU_StateFree( struct TA_CDLMARUBOZU_State** _state );
 /* Generated */                                             const double inClose[],
 /* Generated */                                             int          *outBegIdx,
 /* Generated */                                             int          *outNBElement,
-/* Generated */                                             int           outInteger[] )
+/* Generated */                                             int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLMARUBOZU(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -6122,10 +7523,27 @@ TA_LIB_API int TA_CDLMARUBOZU_StateFree( struct TA_CDLMARUBOZU_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLMARUBOZU
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLMARUBOZU_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLMARUBOZU_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLMARUBOZU_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLMARUBOZU_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -6194,6 +7612,12 @@ TA_LIB_API int TA_CDLMATCHINGLOW_State( struct TA_CDLMATCHINGLOW_State* _state,
 
 TA_LIB_API int TA_CDLMATCHINGLOW_StateFree( struct TA_CDLMATCHINGLOW_State** _state );
 
+TA_LIB_API int TA_CDLMATCHINGLOW_StateSave( struct TA_CDLMATCHINGLOW_State* _state,
+                                                     FILE* _file );
+
+TA_LIB_API int TA_CDLMATCHINGLOW_StateLoad( struct TA_CDLMATCHINGLOW_State** _state,
+                                                     FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLMATCHINGLOW_StateTest( int    startIdx,
 /* Generated */                                                int    endIdx,
@@ -6203,7 +7627,8 @@ TA_LIB_API int TA_CDLMATCHINGLOW_StateFree( struct TA_CDLMATCHINGLOW_State** _st
 /* Generated */                                                const double inClose[],
 /* Generated */                                                int          *outBegIdx,
 /* Generated */                                                int          *outNBElement,
-/* Generated */                                                int           outInteger[] )
+/* Generated */                                                int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLMATCHINGLOW(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -6219,10 +7644,27 @@ TA_LIB_API int TA_CDLMATCHINGLOW_StateFree( struct TA_CDLMATCHINGLOW_State** _st
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLMATCHINGLOW
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLMATCHINGLOW_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLMATCHINGLOW_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLMATCHINGLOW_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLMATCHINGLOW_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -6301,6 +7743,12 @@ TA_LIB_API int TA_CDLMATHOLD_State( struct TA_CDLMATHOLD_State* _state,
 
 TA_LIB_API int TA_CDLMATHOLD_StateFree( struct TA_CDLMATHOLD_State** _state );
 
+TA_LIB_API int TA_CDLMATHOLD_StateSave( struct TA_CDLMATHOLD_State* _state,
+                                                 FILE* _file );
+
+TA_LIB_API int TA_CDLMATHOLD_StateLoad( struct TA_CDLMATHOLD_State** _state,
+                                                 FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLMATHOLD_StateTest( int    startIdx,
 /* Generated */                                            int    endIdx,
@@ -6311,7 +7759,8 @@ TA_LIB_API int TA_CDLMATHOLD_StateFree( struct TA_CDLMATHOLD_State** _state );
 /* Generated */                                            double        optInPenetration, /* From 0 to TA_REAL_MAX */
 /* Generated */                                            int          *outBegIdx,
 /* Generated */                                            int          *outNBElement,
-/* Generated */                                            int           outInteger[] )
+/* Generated */                                            int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLMATHOLD(startIdx, endIdx, inOpen, inHigh, inLow, inClose, optInPenetration, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -6327,10 +7776,27 @@ TA_LIB_API int TA_CDLMATHOLD_StateFree( struct TA_CDLMATHOLD_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLMATHOLD
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLMATHOLD_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLMATHOLD_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLMATHOLD_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLMATHOLD_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -6418,6 +7884,12 @@ TA_LIB_API int TA_CDLMORNINGDOJISTAR_State( struct TA_CDLMORNINGDOJISTAR_State* 
 
 TA_LIB_API int TA_CDLMORNINGDOJISTAR_StateFree( struct TA_CDLMORNINGDOJISTAR_State** _state );
 
+TA_LIB_API int TA_CDLMORNINGDOJISTAR_StateSave( struct TA_CDLMORNINGDOJISTAR_State* _state,
+                                                         FILE* _file );
+
+TA_LIB_API int TA_CDLMORNINGDOJISTAR_StateLoad( struct TA_CDLMORNINGDOJISTAR_State** _state,
+                                                         FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLMORNINGDOJISTAR_StateTest( int    startIdx,
 /* Generated */                                                    int    endIdx,
@@ -6428,7 +7900,8 @@ TA_LIB_API int TA_CDLMORNINGDOJISTAR_StateFree( struct TA_CDLMORNINGDOJISTAR_Sta
 /* Generated */                                                    double        optInPenetration, /* From 0 to TA_REAL_MAX */
 /* Generated */                                                    int          *outBegIdx,
 /* Generated */                                                    int          *outNBElement,
-/* Generated */                                                    int           outInteger[] )
+/* Generated */                                                    int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLMORNINGDOJISTAR(startIdx, endIdx, inOpen, inHigh, inLow, inClose, optInPenetration, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -6444,10 +7917,27 @@ TA_LIB_API int TA_CDLMORNINGDOJISTAR_StateFree( struct TA_CDLMORNINGDOJISTAR_Sta
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLMORNINGDOJISTAR
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLMORNINGDOJISTAR_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLMORNINGDOJISTAR_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLMORNINGDOJISTAR_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLMORNINGDOJISTAR_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -6533,6 +8023,12 @@ TA_LIB_API int TA_CDLMORNINGSTAR_State( struct TA_CDLMORNINGSTAR_State* _state,
 
 TA_LIB_API int TA_CDLMORNINGSTAR_StateFree( struct TA_CDLMORNINGSTAR_State** _state );
 
+TA_LIB_API int TA_CDLMORNINGSTAR_StateSave( struct TA_CDLMORNINGSTAR_State* _state,
+                                                     FILE* _file );
+
+TA_LIB_API int TA_CDLMORNINGSTAR_StateLoad( struct TA_CDLMORNINGSTAR_State** _state,
+                                                     FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLMORNINGSTAR_StateTest( int    startIdx,
 /* Generated */                                                int    endIdx,
@@ -6543,7 +8039,8 @@ TA_LIB_API int TA_CDLMORNINGSTAR_StateFree( struct TA_CDLMORNINGSTAR_State** _st
 /* Generated */                                                double        optInPenetration, /* From 0 to TA_REAL_MAX */
 /* Generated */                                                int          *outBegIdx,
 /* Generated */                                                int          *outNBElement,
-/* Generated */                                                int           outInteger[] )
+/* Generated */                                                int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLMORNINGSTAR(startIdx, endIdx, inOpen, inHigh, inLow, inClose, optInPenetration, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -6559,10 +8056,27 @@ TA_LIB_API int TA_CDLMORNINGSTAR_StateFree( struct TA_CDLMORNINGSTAR_State** _st
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLMORNINGSTAR
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLMORNINGSTAR_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLMORNINGSTAR_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLMORNINGSTAR_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLMORNINGSTAR_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -6631,6 +8145,12 @@ TA_LIB_API int TA_CDLONNECK_State( struct TA_CDLONNECK_State* _state,
 
 TA_LIB_API int TA_CDLONNECK_StateFree( struct TA_CDLONNECK_State** _state );
 
+TA_LIB_API int TA_CDLONNECK_StateSave( struct TA_CDLONNECK_State* _state,
+                                                FILE* _file );
+
+TA_LIB_API int TA_CDLONNECK_StateLoad( struct TA_CDLONNECK_State** _state,
+                                                FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLONNECK_StateTest( int    startIdx,
 /* Generated */                                           int    endIdx,
@@ -6640,7 +8160,8 @@ TA_LIB_API int TA_CDLONNECK_StateFree( struct TA_CDLONNECK_State** _state );
 /* Generated */                                           const double inClose[],
 /* Generated */                                           int          *outBegIdx,
 /* Generated */                                           int          *outNBElement,
-/* Generated */                                           int           outInteger[] )
+/* Generated */                                           int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLONNECK(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -6656,10 +8177,27 @@ TA_LIB_API int TA_CDLONNECK_StateFree( struct TA_CDLONNECK_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLONNECK
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLONNECK_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLONNECK_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLONNECK_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLONNECK_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -6728,6 +8266,12 @@ TA_LIB_API int TA_CDLPIERCING_State( struct TA_CDLPIERCING_State* _state,
 
 TA_LIB_API int TA_CDLPIERCING_StateFree( struct TA_CDLPIERCING_State** _state );
 
+TA_LIB_API int TA_CDLPIERCING_StateSave( struct TA_CDLPIERCING_State* _state,
+                                                  FILE* _file );
+
+TA_LIB_API int TA_CDLPIERCING_StateLoad( struct TA_CDLPIERCING_State** _state,
+                                                  FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLPIERCING_StateTest( int    startIdx,
 /* Generated */                                             int    endIdx,
@@ -6737,7 +8281,8 @@ TA_LIB_API int TA_CDLPIERCING_StateFree( struct TA_CDLPIERCING_State** _state );
 /* Generated */                                             const double inClose[],
 /* Generated */                                             int          *outBegIdx,
 /* Generated */                                             int          *outNBElement,
-/* Generated */                                             int           outInteger[] )
+/* Generated */                                             int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLPIERCING(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -6753,10 +8298,27 @@ TA_LIB_API int TA_CDLPIERCING_StateFree( struct TA_CDLPIERCING_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLPIERCING
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLPIERCING_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLPIERCING_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLPIERCING_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLPIERCING_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -6825,6 +8387,12 @@ TA_LIB_API int TA_CDLRICKSHAWMAN_State( struct TA_CDLRICKSHAWMAN_State* _state,
 
 TA_LIB_API int TA_CDLRICKSHAWMAN_StateFree( struct TA_CDLRICKSHAWMAN_State** _state );
 
+TA_LIB_API int TA_CDLRICKSHAWMAN_StateSave( struct TA_CDLRICKSHAWMAN_State* _state,
+                                                     FILE* _file );
+
+TA_LIB_API int TA_CDLRICKSHAWMAN_StateLoad( struct TA_CDLRICKSHAWMAN_State** _state,
+                                                     FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLRICKSHAWMAN_StateTest( int    startIdx,
 /* Generated */                                                int    endIdx,
@@ -6834,7 +8402,8 @@ TA_LIB_API int TA_CDLRICKSHAWMAN_StateFree( struct TA_CDLRICKSHAWMAN_State** _st
 /* Generated */                                                const double inClose[],
 /* Generated */                                                int          *outBegIdx,
 /* Generated */                                                int          *outNBElement,
-/* Generated */                                                int           outInteger[] )
+/* Generated */                                                int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLRICKSHAWMAN(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -6850,10 +8419,27 @@ TA_LIB_API int TA_CDLRICKSHAWMAN_StateFree( struct TA_CDLRICKSHAWMAN_State** _st
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLRICKSHAWMAN
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLRICKSHAWMAN_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLRICKSHAWMAN_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLRICKSHAWMAN_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLRICKSHAWMAN_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -6922,6 +8508,12 @@ TA_LIB_API int TA_CDLRISEFALL3METHODS_State( struct TA_CDLRISEFALL3METHODS_State
 
 TA_LIB_API int TA_CDLRISEFALL3METHODS_StateFree( struct TA_CDLRISEFALL3METHODS_State** _state );
 
+TA_LIB_API int TA_CDLRISEFALL3METHODS_StateSave( struct TA_CDLRISEFALL3METHODS_State* _state,
+                                                          FILE* _file );
+
+TA_LIB_API int TA_CDLRISEFALL3METHODS_StateLoad( struct TA_CDLRISEFALL3METHODS_State** _state,
+                                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLRISEFALL3METHODS_StateTest( int    startIdx,
 /* Generated */                                                     int    endIdx,
@@ -6931,7 +8523,8 @@ TA_LIB_API int TA_CDLRISEFALL3METHODS_StateFree( struct TA_CDLRISEFALL3METHODS_S
 /* Generated */                                                     const double inClose[],
 /* Generated */                                                     int          *outBegIdx,
 /* Generated */                                                     int          *outNBElement,
-/* Generated */                                                     int           outInteger[] )
+/* Generated */                                                     int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLRISEFALL3METHODS(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -6947,10 +8540,27 @@ TA_LIB_API int TA_CDLRISEFALL3METHODS_StateFree( struct TA_CDLRISEFALL3METHODS_S
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLRISEFALL3METHODS
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLRISEFALL3METHODS_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLRISEFALL3METHODS_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLRISEFALL3METHODS_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLRISEFALL3METHODS_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -7019,6 +8629,12 @@ TA_LIB_API int TA_CDLSEPARATINGLINES_State( struct TA_CDLSEPARATINGLINES_State* 
 
 TA_LIB_API int TA_CDLSEPARATINGLINES_StateFree( struct TA_CDLSEPARATINGLINES_State** _state );
 
+TA_LIB_API int TA_CDLSEPARATINGLINES_StateSave( struct TA_CDLSEPARATINGLINES_State* _state,
+                                                         FILE* _file );
+
+TA_LIB_API int TA_CDLSEPARATINGLINES_StateLoad( struct TA_CDLSEPARATINGLINES_State** _state,
+                                                         FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLSEPARATINGLINES_StateTest( int    startIdx,
 /* Generated */                                                    int    endIdx,
@@ -7028,7 +8644,8 @@ TA_LIB_API int TA_CDLSEPARATINGLINES_StateFree( struct TA_CDLSEPARATINGLINES_Sta
 /* Generated */                                                    const double inClose[],
 /* Generated */                                                    int          *outBegIdx,
 /* Generated */                                                    int          *outNBElement,
-/* Generated */                                                    int           outInteger[] )
+/* Generated */                                                    int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLSEPARATINGLINES(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -7044,10 +8661,27 @@ TA_LIB_API int TA_CDLSEPARATINGLINES_StateFree( struct TA_CDLSEPARATINGLINES_Sta
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLSEPARATINGLINES
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLSEPARATINGLINES_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLSEPARATINGLINES_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLSEPARATINGLINES_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLSEPARATINGLINES_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -7116,6 +8750,12 @@ TA_LIB_API int TA_CDLSHOOTINGSTAR_State( struct TA_CDLSHOOTINGSTAR_State* _state
 
 TA_LIB_API int TA_CDLSHOOTINGSTAR_StateFree( struct TA_CDLSHOOTINGSTAR_State** _state );
 
+TA_LIB_API int TA_CDLSHOOTINGSTAR_StateSave( struct TA_CDLSHOOTINGSTAR_State* _state,
+                                                      FILE* _file );
+
+TA_LIB_API int TA_CDLSHOOTINGSTAR_StateLoad( struct TA_CDLSHOOTINGSTAR_State** _state,
+                                                      FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLSHOOTINGSTAR_StateTest( int    startIdx,
 /* Generated */                                                 int    endIdx,
@@ -7125,7 +8765,8 @@ TA_LIB_API int TA_CDLSHOOTINGSTAR_StateFree( struct TA_CDLSHOOTINGSTAR_State** _
 /* Generated */                                                 const double inClose[],
 /* Generated */                                                 int          *outBegIdx,
 /* Generated */                                                 int          *outNBElement,
-/* Generated */                                                 int           outInteger[] )
+/* Generated */                                                 int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLSHOOTINGSTAR(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -7141,10 +8782,27 @@ TA_LIB_API int TA_CDLSHOOTINGSTAR_StateFree( struct TA_CDLSHOOTINGSTAR_State** _
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLSHOOTINGSTAR
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLSHOOTINGSTAR_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLSHOOTINGSTAR_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLSHOOTINGSTAR_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLSHOOTINGSTAR_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -7213,6 +8871,12 @@ TA_LIB_API int TA_CDLSHORTLINE_State( struct TA_CDLSHORTLINE_State* _state,
 
 TA_LIB_API int TA_CDLSHORTLINE_StateFree( struct TA_CDLSHORTLINE_State** _state );
 
+TA_LIB_API int TA_CDLSHORTLINE_StateSave( struct TA_CDLSHORTLINE_State* _state,
+                                                   FILE* _file );
+
+TA_LIB_API int TA_CDLSHORTLINE_StateLoad( struct TA_CDLSHORTLINE_State** _state,
+                                                   FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLSHORTLINE_StateTest( int    startIdx,
 /* Generated */                                              int    endIdx,
@@ -7222,7 +8886,8 @@ TA_LIB_API int TA_CDLSHORTLINE_StateFree( struct TA_CDLSHORTLINE_State** _state 
 /* Generated */                                              const double inClose[],
 /* Generated */                                              int          *outBegIdx,
 /* Generated */                                              int          *outNBElement,
-/* Generated */                                              int           outInteger[] )
+/* Generated */                                              int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLSHORTLINE(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -7238,10 +8903,27 @@ TA_LIB_API int TA_CDLSHORTLINE_StateFree( struct TA_CDLSHORTLINE_State** _state 
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLSHORTLINE
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLSHORTLINE_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLSHORTLINE_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLSHORTLINE_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLSHORTLINE_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -7310,6 +8992,12 @@ TA_LIB_API int TA_CDLSPINNINGTOP_State( struct TA_CDLSPINNINGTOP_State* _state,
 
 TA_LIB_API int TA_CDLSPINNINGTOP_StateFree( struct TA_CDLSPINNINGTOP_State** _state );
 
+TA_LIB_API int TA_CDLSPINNINGTOP_StateSave( struct TA_CDLSPINNINGTOP_State* _state,
+                                                     FILE* _file );
+
+TA_LIB_API int TA_CDLSPINNINGTOP_StateLoad( struct TA_CDLSPINNINGTOP_State** _state,
+                                                     FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLSPINNINGTOP_StateTest( int    startIdx,
 /* Generated */                                                int    endIdx,
@@ -7319,7 +9007,8 @@ TA_LIB_API int TA_CDLSPINNINGTOP_StateFree( struct TA_CDLSPINNINGTOP_State** _st
 /* Generated */                                                const double inClose[],
 /* Generated */                                                int          *outBegIdx,
 /* Generated */                                                int          *outNBElement,
-/* Generated */                                                int           outInteger[] )
+/* Generated */                                                int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLSPINNINGTOP(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -7335,10 +9024,27 @@ TA_LIB_API int TA_CDLSPINNINGTOP_StateFree( struct TA_CDLSPINNINGTOP_State** _st
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLSPINNINGTOP
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLSPINNINGTOP_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLSPINNINGTOP_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLSPINNINGTOP_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLSPINNINGTOP_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -7407,6 +9113,12 @@ TA_LIB_API int TA_CDLSTALLEDPATTERN_State( struct TA_CDLSTALLEDPATTERN_State* _s
 
 TA_LIB_API int TA_CDLSTALLEDPATTERN_StateFree( struct TA_CDLSTALLEDPATTERN_State** _state );
 
+TA_LIB_API int TA_CDLSTALLEDPATTERN_StateSave( struct TA_CDLSTALLEDPATTERN_State* _state,
+                                                        FILE* _file );
+
+TA_LIB_API int TA_CDLSTALLEDPATTERN_StateLoad( struct TA_CDLSTALLEDPATTERN_State** _state,
+                                                        FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLSTALLEDPATTERN_StateTest( int    startIdx,
 /* Generated */                                                   int    endIdx,
@@ -7416,7 +9128,8 @@ TA_LIB_API int TA_CDLSTALLEDPATTERN_StateFree( struct TA_CDLSTALLEDPATTERN_State
 /* Generated */                                                   const double inClose[],
 /* Generated */                                                   int          *outBegIdx,
 /* Generated */                                                   int          *outNBElement,
-/* Generated */                                                   int           outInteger[] )
+/* Generated */                                                   int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLSTALLEDPATTERN(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -7432,10 +9145,27 @@ TA_LIB_API int TA_CDLSTALLEDPATTERN_StateFree( struct TA_CDLSTALLEDPATTERN_State
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLSTALLEDPATTERN
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLSTALLEDPATTERN_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLSTALLEDPATTERN_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLSTALLEDPATTERN_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLSTALLEDPATTERN_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -7504,6 +9234,12 @@ TA_LIB_API int TA_CDLSTICKSANDWICH_State( struct TA_CDLSTICKSANDWICH_State* _sta
 
 TA_LIB_API int TA_CDLSTICKSANDWICH_StateFree( struct TA_CDLSTICKSANDWICH_State** _state );
 
+TA_LIB_API int TA_CDLSTICKSANDWICH_StateSave( struct TA_CDLSTICKSANDWICH_State* _state,
+                                                       FILE* _file );
+
+TA_LIB_API int TA_CDLSTICKSANDWICH_StateLoad( struct TA_CDLSTICKSANDWICH_State** _state,
+                                                       FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLSTICKSANDWICH_StateTest( int    startIdx,
 /* Generated */                                                  int    endIdx,
@@ -7513,7 +9249,8 @@ TA_LIB_API int TA_CDLSTICKSANDWICH_StateFree( struct TA_CDLSTICKSANDWICH_State**
 /* Generated */                                                  const double inClose[],
 /* Generated */                                                  int          *outBegIdx,
 /* Generated */                                                  int          *outNBElement,
-/* Generated */                                                  int           outInteger[] )
+/* Generated */                                                  int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLSTICKSANDWICH(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -7529,10 +9266,27 @@ TA_LIB_API int TA_CDLSTICKSANDWICH_StateFree( struct TA_CDLSTICKSANDWICH_State**
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLSTICKSANDWICH
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLSTICKSANDWICH_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLSTICKSANDWICH_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLSTICKSANDWICH_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLSTICKSANDWICH_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -7601,6 +9355,12 @@ TA_LIB_API int TA_CDLTAKURI_State( struct TA_CDLTAKURI_State* _state,
 
 TA_LIB_API int TA_CDLTAKURI_StateFree( struct TA_CDLTAKURI_State** _state );
 
+TA_LIB_API int TA_CDLTAKURI_StateSave( struct TA_CDLTAKURI_State* _state,
+                                                FILE* _file );
+
+TA_LIB_API int TA_CDLTAKURI_StateLoad( struct TA_CDLTAKURI_State** _state,
+                                                FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLTAKURI_StateTest( int    startIdx,
 /* Generated */                                           int    endIdx,
@@ -7610,7 +9370,8 @@ TA_LIB_API int TA_CDLTAKURI_StateFree( struct TA_CDLTAKURI_State** _state );
 /* Generated */                                           const double inClose[],
 /* Generated */                                           int          *outBegIdx,
 /* Generated */                                           int          *outNBElement,
-/* Generated */                                           int           outInteger[] )
+/* Generated */                                           int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLTAKURI(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -7626,10 +9387,27 @@ TA_LIB_API int TA_CDLTAKURI_StateFree( struct TA_CDLTAKURI_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLTAKURI
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLTAKURI_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLTAKURI_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLTAKURI_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLTAKURI_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -7698,6 +9476,12 @@ TA_LIB_API int TA_CDLTASUKIGAP_State( struct TA_CDLTASUKIGAP_State* _state,
 
 TA_LIB_API int TA_CDLTASUKIGAP_StateFree( struct TA_CDLTASUKIGAP_State** _state );
 
+TA_LIB_API int TA_CDLTASUKIGAP_StateSave( struct TA_CDLTASUKIGAP_State* _state,
+                                                   FILE* _file );
+
+TA_LIB_API int TA_CDLTASUKIGAP_StateLoad( struct TA_CDLTASUKIGAP_State** _state,
+                                                   FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLTASUKIGAP_StateTest( int    startIdx,
 /* Generated */                                              int    endIdx,
@@ -7707,7 +9491,8 @@ TA_LIB_API int TA_CDLTASUKIGAP_StateFree( struct TA_CDLTASUKIGAP_State** _state 
 /* Generated */                                              const double inClose[],
 /* Generated */                                              int          *outBegIdx,
 /* Generated */                                              int          *outNBElement,
-/* Generated */                                              int           outInteger[] )
+/* Generated */                                              int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLTASUKIGAP(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -7723,10 +9508,27 @@ TA_LIB_API int TA_CDLTASUKIGAP_StateFree( struct TA_CDLTASUKIGAP_State** _state 
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLTASUKIGAP
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLTASUKIGAP_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLTASUKIGAP_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLTASUKIGAP_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLTASUKIGAP_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -7795,6 +9597,12 @@ TA_LIB_API int TA_CDLTHRUSTING_State( struct TA_CDLTHRUSTING_State* _state,
 
 TA_LIB_API int TA_CDLTHRUSTING_StateFree( struct TA_CDLTHRUSTING_State** _state );
 
+TA_LIB_API int TA_CDLTHRUSTING_StateSave( struct TA_CDLTHRUSTING_State* _state,
+                                                   FILE* _file );
+
+TA_LIB_API int TA_CDLTHRUSTING_StateLoad( struct TA_CDLTHRUSTING_State** _state,
+                                                   FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLTHRUSTING_StateTest( int    startIdx,
 /* Generated */                                              int    endIdx,
@@ -7804,7 +9612,8 @@ TA_LIB_API int TA_CDLTHRUSTING_StateFree( struct TA_CDLTHRUSTING_State** _state 
 /* Generated */                                              const double inClose[],
 /* Generated */                                              int          *outBegIdx,
 /* Generated */                                              int          *outNBElement,
-/* Generated */                                              int           outInteger[] )
+/* Generated */                                              int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLTHRUSTING(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -7820,10 +9629,27 @@ TA_LIB_API int TA_CDLTHRUSTING_StateFree( struct TA_CDLTHRUSTING_State** _state 
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLTHRUSTING
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLTHRUSTING_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLTHRUSTING_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLTHRUSTING_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLTHRUSTING_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -7892,6 +9718,12 @@ TA_LIB_API int TA_CDLTRISTAR_State( struct TA_CDLTRISTAR_State* _state,
 
 TA_LIB_API int TA_CDLTRISTAR_StateFree( struct TA_CDLTRISTAR_State** _state );
 
+TA_LIB_API int TA_CDLTRISTAR_StateSave( struct TA_CDLTRISTAR_State* _state,
+                                                 FILE* _file );
+
+TA_LIB_API int TA_CDLTRISTAR_StateLoad( struct TA_CDLTRISTAR_State** _state,
+                                                 FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLTRISTAR_StateTest( int    startIdx,
 /* Generated */                                            int    endIdx,
@@ -7901,7 +9733,8 @@ TA_LIB_API int TA_CDLTRISTAR_StateFree( struct TA_CDLTRISTAR_State** _state );
 /* Generated */                                            const double inClose[],
 /* Generated */                                            int          *outBegIdx,
 /* Generated */                                            int          *outNBElement,
-/* Generated */                                            int           outInteger[] )
+/* Generated */                                            int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLTRISTAR(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -7917,10 +9750,27 @@ TA_LIB_API int TA_CDLTRISTAR_StateFree( struct TA_CDLTRISTAR_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLTRISTAR
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLTRISTAR_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLTRISTAR_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLTRISTAR_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLTRISTAR_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -7989,6 +9839,12 @@ TA_LIB_API int TA_CDLUNIQUE3RIVER_State( struct TA_CDLUNIQUE3RIVER_State* _state
 
 TA_LIB_API int TA_CDLUNIQUE3RIVER_StateFree( struct TA_CDLUNIQUE3RIVER_State** _state );
 
+TA_LIB_API int TA_CDLUNIQUE3RIVER_StateSave( struct TA_CDLUNIQUE3RIVER_State* _state,
+                                                      FILE* _file );
+
+TA_LIB_API int TA_CDLUNIQUE3RIVER_StateLoad( struct TA_CDLUNIQUE3RIVER_State** _state,
+                                                      FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLUNIQUE3RIVER_StateTest( int    startIdx,
 /* Generated */                                                 int    endIdx,
@@ -7998,7 +9854,8 @@ TA_LIB_API int TA_CDLUNIQUE3RIVER_StateFree( struct TA_CDLUNIQUE3RIVER_State** _
 /* Generated */                                                 const double inClose[],
 /* Generated */                                                 int          *outBegIdx,
 /* Generated */                                                 int          *outNBElement,
-/* Generated */                                                 int           outInteger[] )
+/* Generated */                                                 int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLUNIQUE3RIVER(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -8014,10 +9871,27 @@ TA_LIB_API int TA_CDLUNIQUE3RIVER_StateFree( struct TA_CDLUNIQUE3RIVER_State** _
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLUNIQUE3RIVER
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLUNIQUE3RIVER_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLUNIQUE3RIVER_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLUNIQUE3RIVER_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLUNIQUE3RIVER_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -8086,6 +9960,12 @@ TA_LIB_API int TA_CDLUPSIDEGAP2CROWS_State( struct TA_CDLUPSIDEGAP2CROWS_State* 
 
 TA_LIB_API int TA_CDLUPSIDEGAP2CROWS_StateFree( struct TA_CDLUPSIDEGAP2CROWS_State** _state );
 
+TA_LIB_API int TA_CDLUPSIDEGAP2CROWS_StateSave( struct TA_CDLUPSIDEGAP2CROWS_State* _state,
+                                                         FILE* _file );
+
+TA_LIB_API int TA_CDLUPSIDEGAP2CROWS_StateLoad( struct TA_CDLUPSIDEGAP2CROWS_State** _state,
+                                                         FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLUPSIDEGAP2CROWS_StateTest( int    startIdx,
 /* Generated */                                                    int    endIdx,
@@ -8095,7 +9975,8 @@ TA_LIB_API int TA_CDLUPSIDEGAP2CROWS_StateFree( struct TA_CDLUPSIDEGAP2CROWS_Sta
 /* Generated */                                                    const double inClose[],
 /* Generated */                                                    int          *outBegIdx,
 /* Generated */                                                    int          *outNBElement,
-/* Generated */                                                    int           outInteger[] )
+/* Generated */                                                    int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLUPSIDEGAP2CROWS(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -8111,10 +9992,27 @@ TA_LIB_API int TA_CDLUPSIDEGAP2CROWS_StateFree( struct TA_CDLUPSIDEGAP2CROWS_Sta
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLUPSIDEGAP2CROWS
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLUPSIDEGAP2CROWS_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLUPSIDEGAP2CROWS_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLUPSIDEGAP2CROWS_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLUPSIDEGAP2CROWS_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -8183,6 +10081,12 @@ TA_LIB_API int TA_CDLXSIDEGAP3METHODS_State( struct TA_CDLXSIDEGAP3METHODS_State
 
 TA_LIB_API int TA_CDLXSIDEGAP3METHODS_StateFree( struct TA_CDLXSIDEGAP3METHODS_State** _state );
 
+TA_LIB_API int TA_CDLXSIDEGAP3METHODS_StateSave( struct TA_CDLXSIDEGAP3METHODS_State* _state,
+                                                          FILE* _file );
+
+TA_LIB_API int TA_CDLXSIDEGAP3METHODS_StateLoad( struct TA_CDLXSIDEGAP3METHODS_State** _state,
+                                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CDLXSIDEGAP3METHODS_StateTest( int    startIdx,
 /* Generated */                                                     int    endIdx,
@@ -8192,7 +10096,8 @@ TA_LIB_API int TA_CDLXSIDEGAP3METHODS_StateFree( struct TA_CDLXSIDEGAP3METHODS_S
 /* Generated */                                                     const double inClose[],
 /* Generated */                                                     int          *outBegIdx,
 /* Generated */                                                     int          *outNBElement,
-/* Generated */                                                     int           outInteger[] )
+/* Generated */                                                     int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CDLXSIDEGAP3METHODS(startIdx, endIdx, inOpen, inHigh, inLow, inClose, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -8208,10 +10113,27 @@ TA_LIB_API int TA_CDLXSIDEGAP3METHODS_StateFree( struct TA_CDLXSIDEGAP3METHODS_S
 /* Generated */  #ifdef TEST_WHOLE_DATA_CDLXSIDEGAP3METHODS
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CDLXSIDEGAP3METHODS_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CDLXSIDEGAP3METHODS_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_CDLXSIDEGAP3METHODS_State(state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CDLXSIDEGAP3METHODS_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -8268,13 +10190,20 @@ TA_LIB_API int TA_CEIL_State( struct TA_CEIL_State* _state,
 
 TA_LIB_API int TA_CEIL_StateFree( struct TA_CEIL_State** _state );
 
+TA_LIB_API int TA_CEIL_StateSave( struct TA_CEIL_State* _state,
+                                           FILE* _file );
+
+TA_LIB_API int TA_CEIL_StateLoad( struct TA_CEIL_State** _state,
+                                           FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CEIL_StateTest( int    startIdx,
 /* Generated */                                      int    endIdx,
 /* Generated */                                      const double inReal[],
 /* Generated */                                      int          *outBegIdx,
 /* Generated */                                      int          *outNBElement,
-/* Generated */                                      double        outReal[] )
+/* Generated */                                      double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CEIL(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -8290,10 +10219,27 @@ TA_LIB_API int TA_CEIL_StateFree( struct TA_CEIL_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CEIL
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CEIL_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CEIL_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_CEIL_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CEIL_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -8364,6 +10310,12 @@ TA_LIB_API int TA_CMO_State( struct TA_CMO_State* _state,
 
 TA_LIB_API int TA_CMO_StateFree( struct TA_CMO_State** _state );
 
+TA_LIB_API int TA_CMO_StateSave( struct TA_CMO_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_CMO_StateLoad( struct TA_CMO_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CMO_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
@@ -8371,7 +10323,8 @@ TA_LIB_API int TA_CMO_StateFree( struct TA_CMO_State** _state );
 /* Generated */                                     int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CMO(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -8387,10 +10340,27 @@ TA_LIB_API int TA_CMO_StateFree( struct TA_CMO_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CMO
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CMO_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CMO_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_CMO_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CMO_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -8466,6 +10436,12 @@ TA_LIB_API int TA_CORREL_State( struct TA_CORREL_State* _state,
 
 TA_LIB_API int TA_CORREL_StateFree( struct TA_CORREL_State** _state );
 
+TA_LIB_API int TA_CORREL_StateSave( struct TA_CORREL_State* _state,
+                                             FILE* _file );
+
+TA_LIB_API int TA_CORREL_StateLoad( struct TA_CORREL_State** _state,
+                                             FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_CORREL_StateTest( int    startIdx,
 /* Generated */                                        int    endIdx,
@@ -8474,7 +10450,8 @@ TA_LIB_API int TA_CORREL_StateFree( struct TA_CORREL_State** _state );
 /* Generated */                                        int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                        int          *outBegIdx,
 /* Generated */                                        int          *outNBElement,
-/* Generated */                                        double        outReal[] )
+/* Generated */                                        double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_CORREL(startIdx, endIdx, inReal0, inReal1, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -8490,10 +10467,27 @@ TA_LIB_API int TA_CORREL_StateFree( struct TA_CORREL_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_CORREL
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_CORREL_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_CORREL_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_CORREL_State(state, inReal0[i], inReal1[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_CORREL_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -8550,13 +10544,20 @@ TA_LIB_API int TA_COS_State( struct TA_COS_State* _state,
 
 TA_LIB_API int TA_COS_StateFree( struct TA_COS_State** _state );
 
+TA_LIB_API int TA_COS_StateSave( struct TA_COS_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_COS_StateLoad( struct TA_COS_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_COS_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
 /* Generated */                                     const double inReal[],
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_COS(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -8572,10 +10573,27 @@ TA_LIB_API int TA_COS_StateFree( struct TA_COS_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_COS
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_COS_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_COS_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_COS_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_COS_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -8632,13 +10650,20 @@ TA_LIB_API int TA_COSH_State( struct TA_COSH_State* _state,
 
 TA_LIB_API int TA_COSH_StateFree( struct TA_COSH_State** _state );
 
+TA_LIB_API int TA_COSH_StateSave( struct TA_COSH_State* _state,
+                                           FILE* _file );
+
+TA_LIB_API int TA_COSH_StateLoad( struct TA_COSH_State** _state,
+                                           FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_COSH_StateTest( int    startIdx,
 /* Generated */                                      int    endIdx,
 /* Generated */                                      const double inReal[],
 /* Generated */                                      int          *outBegIdx,
 /* Generated */                                      int          *outNBElement,
-/* Generated */                                      double        outReal[] )
+/* Generated */                                      double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_COSH(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -8654,10 +10679,27 @@ TA_LIB_API int TA_COSH_StateFree( struct TA_COSH_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_COSH
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_COSH_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_COSH_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_COSH_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_COSH_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -8726,6 +10768,12 @@ TA_LIB_API int TA_DEMA_State( struct TA_DEMA_State* _state,
 
 TA_LIB_API int TA_DEMA_StateFree( struct TA_DEMA_State** _state );
 
+TA_LIB_API int TA_DEMA_StateSave( struct TA_DEMA_State* _state,
+                                           FILE* _file );
+
+TA_LIB_API int TA_DEMA_StateLoad( struct TA_DEMA_State** _state,
+                                           FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_DEMA_StateTest( int    startIdx,
 /* Generated */                                      int    endIdx,
@@ -8733,7 +10781,8 @@ TA_LIB_API int TA_DEMA_StateFree( struct TA_DEMA_State** _state );
 /* Generated */                                      int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                      int          *outBegIdx,
 /* Generated */                                      int          *outNBElement,
-/* Generated */                                      double        outReal[] )
+/* Generated */                                      double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_DEMA(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -8749,10 +10798,27 @@ TA_LIB_API int TA_DEMA_StateFree( struct TA_DEMA_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_DEMA
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_DEMA_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_DEMA_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_DEMA_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_DEMA_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -8813,6 +10879,12 @@ TA_LIB_API int TA_DIV_State( struct TA_DIV_State* _state,
 
 TA_LIB_API int TA_DIV_StateFree( struct TA_DIV_State** _state );
 
+TA_LIB_API int TA_DIV_StateSave( struct TA_DIV_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_DIV_StateLoad( struct TA_DIV_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_DIV_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
@@ -8820,7 +10892,8 @@ TA_LIB_API int TA_DIV_StateFree( struct TA_DIV_State** _state );
 /* Generated */                                     const double inReal1[],
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_DIV(startIdx, endIdx, inReal0, inReal1, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -8836,10 +10909,27 @@ TA_LIB_API int TA_DIV_StateFree( struct TA_DIV_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_DIV
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_DIV_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_DIV_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_DIV_State(state, inReal0[i], inReal1[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_DIV_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -8921,6 +11011,12 @@ TA_LIB_API int TA_DX_State( struct TA_DX_State* _state,
 
 TA_LIB_API int TA_DX_StateFree( struct TA_DX_State** _state );
 
+TA_LIB_API int TA_DX_StateSave( struct TA_DX_State* _state,
+                                         FILE* _file );
+
+TA_LIB_API int TA_DX_StateLoad( struct TA_DX_State** _state,
+                                         FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_DX_StateTest( int    startIdx,
 /* Generated */                                    int    endIdx,
@@ -8930,7 +11026,8 @@ TA_LIB_API int TA_DX_StateFree( struct TA_DX_State** _state );
 /* Generated */                                    int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                    int          *outBegIdx,
 /* Generated */                                    int          *outNBElement,
-/* Generated */                                    double        outReal[] )
+/* Generated */                                    double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_DX(startIdx, endIdx, inHigh, inLow, inClose, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -8946,10 +11043,27 @@ TA_LIB_API int TA_DX_StateFree( struct TA_DX_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_DX
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_DX_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_DX_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_DX_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_DX_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -9020,6 +11134,12 @@ TA_LIB_API int TA_EMA_State( struct TA_EMA_State* _state,
 
 TA_LIB_API int TA_EMA_StateFree( struct TA_EMA_State** _state );
 
+TA_LIB_API int TA_EMA_StateSave( struct TA_EMA_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_EMA_StateLoad( struct TA_EMA_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_EMA_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
@@ -9027,7 +11147,8 @@ TA_LIB_API int TA_EMA_StateFree( struct TA_EMA_State** _state );
 /* Generated */                                     int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_EMA(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -9043,10 +11164,27 @@ TA_LIB_API int TA_EMA_StateFree( struct TA_EMA_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_EMA
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_EMA_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_EMA_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_EMA_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_EMA_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -9103,13 +11241,20 @@ TA_LIB_API int TA_EXP_State( struct TA_EXP_State* _state,
 
 TA_LIB_API int TA_EXP_StateFree( struct TA_EXP_State** _state );
 
+TA_LIB_API int TA_EXP_StateSave( struct TA_EXP_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_EXP_StateLoad( struct TA_EXP_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_EXP_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
 /* Generated */                                     const double inReal[],
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_EXP(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -9125,10 +11270,27 @@ TA_LIB_API int TA_EXP_StateFree( struct TA_EXP_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_EXP
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_EXP_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_EXP_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_EXP_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_EXP_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -9185,13 +11347,20 @@ TA_LIB_API int TA_FLOOR_State( struct TA_FLOOR_State* _state,
 
 TA_LIB_API int TA_FLOOR_StateFree( struct TA_FLOOR_State** _state );
 
+TA_LIB_API int TA_FLOOR_StateSave( struct TA_FLOOR_State* _state,
+                                            FILE* _file );
+
+TA_LIB_API int TA_FLOOR_StateLoad( struct TA_FLOOR_State** _state,
+                                            FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_FLOOR_StateTest( int    startIdx,
 /* Generated */                                       int    endIdx,
 /* Generated */                                       const double inReal[],
 /* Generated */                                       int          *outBegIdx,
 /* Generated */                                       int          *outNBElement,
-/* Generated */                                       double        outReal[] )
+/* Generated */                                       double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_FLOOR(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -9207,10 +11376,27 @@ TA_LIB_API int TA_FLOOR_StateFree( struct TA_FLOOR_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_FLOOR
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_FLOOR_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_FLOOR_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_FLOOR_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_FLOOR_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -9288,13 +11474,20 @@ TA_LIB_API int TA_HT_DCPERIOD_State( struct TA_HT_DCPERIOD_State* _state,
 
 TA_LIB_API int TA_HT_DCPERIOD_StateFree( struct TA_HT_DCPERIOD_State** _state );
 
+TA_LIB_API int TA_HT_DCPERIOD_StateSave( struct TA_HT_DCPERIOD_State* _state,
+                                                  FILE* _file );
+
+TA_LIB_API int TA_HT_DCPERIOD_StateLoad( struct TA_HT_DCPERIOD_State** _state,
+                                                  FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_HT_DCPERIOD_StateTest( int    startIdx,
 /* Generated */                                             int    endIdx,
 /* Generated */                                             const double inReal[],
 /* Generated */                                             int          *outBegIdx,
 /* Generated */                                             int          *outNBElement,
-/* Generated */                                             double        outReal[] )
+/* Generated */                                             double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_HT_DCPERIOD(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -9310,10 +11503,27 @@ TA_LIB_API int TA_HT_DCPERIOD_StateFree( struct TA_HT_DCPERIOD_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_HT_DCPERIOD
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_HT_DCPERIOD_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_HT_DCPERIOD_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_HT_DCPERIOD_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_HT_DCPERIOD_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -9394,13 +11604,20 @@ TA_LIB_API int TA_HT_DCPHASE_State( struct TA_HT_DCPHASE_State* _state,
 
 TA_LIB_API int TA_HT_DCPHASE_StateFree( struct TA_HT_DCPHASE_State** _state );
 
+TA_LIB_API int TA_HT_DCPHASE_StateSave( struct TA_HT_DCPHASE_State* _state,
+                                                 FILE* _file );
+
+TA_LIB_API int TA_HT_DCPHASE_StateLoad( struct TA_HT_DCPHASE_State** _state,
+                                                 FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_HT_DCPHASE_StateTest( int    startIdx,
 /* Generated */                                            int    endIdx,
 /* Generated */                                            const double inReal[],
 /* Generated */                                            int          *outBegIdx,
 /* Generated */                                            int          *outNBElement,
-/* Generated */                                            double        outReal[] )
+/* Generated */                                            double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_HT_DCPHASE(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -9416,10 +11633,27 @@ TA_LIB_API int TA_HT_DCPHASE_StateFree( struct TA_HT_DCPHASE_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_HT_DCPHASE
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_HT_DCPHASE_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_HT_DCPHASE_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_HT_DCPHASE_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_HT_DCPHASE_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -9499,6 +11733,12 @@ TA_LIB_API int TA_HT_PHASOR_State( struct TA_HT_PHASOR_State* _state,
 
 TA_LIB_API int TA_HT_PHASOR_StateFree( struct TA_HT_PHASOR_State** _state );
 
+TA_LIB_API int TA_HT_PHASOR_StateSave( struct TA_HT_PHASOR_State* _state,
+                                                FILE* _file );
+
+TA_LIB_API int TA_HT_PHASOR_StateLoad( struct TA_HT_PHASOR_State** _state,
+                                                FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_HT_PHASOR_StateTest( int    startIdx,
 /* Generated */                                           int    endIdx,
@@ -9506,7 +11746,8 @@ TA_LIB_API int TA_HT_PHASOR_StateFree( struct TA_HT_PHASOR_State** _state );
 /* Generated */                                           int          *outBegIdx,
 /* Generated */                                           int          *outNBElement,
 /* Generated */                                           double        outInPhase[],
-/* Generated */                                           double        outQuadrature[] )
+/* Generated */                                           double        outQuadrature[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_HT_PHASOR(startIdx, endIdx, inReal, outBegIdx, outNBElement, outInPhase, outQuadrature );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -9522,10 +11763,27 @@ TA_LIB_API int TA_HT_PHASOR_StateFree( struct TA_HT_PHASOR_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_HT_PHASOR
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_HT_PHASOR_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_HT_PHASOR_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outInPhase_local;double  outQuadrature_local;
 /* Generated */     res = TA_HT_PHASOR_State(state, inReal[i], &outInPhase_local, &outQuadrature_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_HT_PHASOR_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -9611,6 +11869,12 @@ TA_LIB_API int TA_HT_SINE_State( struct TA_HT_SINE_State* _state,
 
 TA_LIB_API int TA_HT_SINE_StateFree( struct TA_HT_SINE_State** _state );
 
+TA_LIB_API int TA_HT_SINE_StateSave( struct TA_HT_SINE_State* _state,
+                                              FILE* _file );
+
+TA_LIB_API int TA_HT_SINE_StateLoad( struct TA_HT_SINE_State** _state,
+                                              FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_HT_SINE_StateTest( int    startIdx,
 /* Generated */                                         int    endIdx,
@@ -9618,7 +11882,8 @@ TA_LIB_API int TA_HT_SINE_StateFree( struct TA_HT_SINE_State** _state );
 /* Generated */                                         int          *outBegIdx,
 /* Generated */                                         int          *outNBElement,
 /* Generated */                                         double        outSine[],
-/* Generated */                                         double        outLeadSine[] )
+/* Generated */                                         double        outLeadSine[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_HT_SINE(startIdx, endIdx, inReal, outBegIdx, outNBElement, outSine, outLeadSine );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -9634,10 +11899,27 @@ TA_LIB_API int TA_HT_SINE_StateFree( struct TA_HT_SINE_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_HT_SINE
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_HT_SINE_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_HT_SINE_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outSine_local;double  outLeadSine_local;
 /* Generated */     res = TA_HT_SINE_State(state, inReal[i], &outSine_local, &outLeadSine_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_HT_SINE_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -9720,13 +12002,20 @@ TA_LIB_API int TA_HT_TRENDLINE_State( struct TA_HT_TRENDLINE_State* _state,
 
 TA_LIB_API int TA_HT_TRENDLINE_StateFree( struct TA_HT_TRENDLINE_State** _state );
 
+TA_LIB_API int TA_HT_TRENDLINE_StateSave( struct TA_HT_TRENDLINE_State* _state,
+                                                   FILE* _file );
+
+TA_LIB_API int TA_HT_TRENDLINE_StateLoad( struct TA_HT_TRENDLINE_State** _state,
+                                                   FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_HT_TRENDLINE_StateTest( int    startIdx,
 /* Generated */                                              int    endIdx,
 /* Generated */                                              const double inReal[],
 /* Generated */                                              int          *outBegIdx,
 /* Generated */                                              int          *outNBElement,
-/* Generated */                                              double        outReal[] )
+/* Generated */                                              double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_HT_TRENDLINE(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -9742,10 +12031,27 @@ TA_LIB_API int TA_HT_TRENDLINE_StateFree( struct TA_HT_TRENDLINE_State** _state 
 /* Generated */  #ifdef TEST_WHOLE_DATA_HT_TRENDLINE
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_HT_TRENDLINE_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_HT_TRENDLINE_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_HT_TRENDLINE_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_HT_TRENDLINE_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -9834,13 +12140,20 @@ TA_LIB_API int TA_HT_TRENDMODE_State( struct TA_HT_TRENDMODE_State* _state,
 
 TA_LIB_API int TA_HT_TRENDMODE_StateFree( struct TA_HT_TRENDMODE_State** _state );
 
+TA_LIB_API int TA_HT_TRENDMODE_StateSave( struct TA_HT_TRENDMODE_State* _state,
+                                                   FILE* _file );
+
+TA_LIB_API int TA_HT_TRENDMODE_StateLoad( struct TA_HT_TRENDMODE_State** _state,
+                                                   FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_HT_TRENDMODE_StateTest( int    startIdx,
 /* Generated */                                              int    endIdx,
 /* Generated */                                              const double inReal[],
 /* Generated */                                              int          *outBegIdx,
 /* Generated */                                              int          *outNBElement,
-/* Generated */                                              int           outInteger[] )
+/* Generated */                                              int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_HT_TRENDMODE(startIdx, endIdx, inReal, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -9856,10 +12169,27 @@ TA_LIB_API int TA_HT_TRENDMODE_StateFree( struct TA_HT_TRENDMODE_State** _state 
 /* Generated */  #ifdef TEST_WHOLE_DATA_HT_TRENDMODE
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_HT_TRENDMODE_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_HT_TRENDMODE_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_HT_TRENDMODE_State(state, inReal[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_HT_TRENDMODE_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -9932,6 +12262,12 @@ TA_LIB_API int TA_IMI_State( struct TA_IMI_State* _state,
 
 TA_LIB_API int TA_IMI_StateFree( struct TA_IMI_State** _state );
 
+TA_LIB_API int TA_IMI_StateSave( struct TA_IMI_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_IMI_StateLoad( struct TA_IMI_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_IMI_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
@@ -9940,7 +12276,8 @@ TA_LIB_API int TA_IMI_StateFree( struct TA_IMI_State** _state );
 /* Generated */                                     int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_IMI(startIdx, endIdx, inOpen, inClose, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -9956,10 +12293,27 @@ TA_LIB_API int TA_IMI_StateFree( struct TA_IMI_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_IMI
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_IMI_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_IMI_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_IMI_State(state, inOpen[i], inClose[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_IMI_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -10030,6 +12384,12 @@ TA_LIB_API int TA_KAMA_State( struct TA_KAMA_State* _state,
 
 TA_LIB_API int TA_KAMA_StateFree( struct TA_KAMA_State** _state );
 
+TA_LIB_API int TA_KAMA_StateSave( struct TA_KAMA_State* _state,
+                                           FILE* _file );
+
+TA_LIB_API int TA_KAMA_StateLoad( struct TA_KAMA_State** _state,
+                                           FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_KAMA_StateTest( int    startIdx,
 /* Generated */                                      int    endIdx,
@@ -10037,7 +12397,8 @@ TA_LIB_API int TA_KAMA_StateFree( struct TA_KAMA_State** _state );
 /* Generated */                                      int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                      int          *outBegIdx,
 /* Generated */                                      int          *outNBElement,
-/* Generated */                                      double        outReal[] )
+/* Generated */                                      double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_KAMA(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -10053,10 +12414,27 @@ TA_LIB_API int TA_KAMA_StateFree( struct TA_KAMA_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_KAMA
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_KAMA_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_KAMA_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_KAMA_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_KAMA_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -10128,6 +12506,12 @@ TA_LIB_API int TA_LINEARREG_State( struct TA_LINEARREG_State* _state,
 
 TA_LIB_API int TA_LINEARREG_StateFree( struct TA_LINEARREG_State** _state );
 
+TA_LIB_API int TA_LINEARREG_StateSave( struct TA_LINEARREG_State* _state,
+                                                FILE* _file );
+
+TA_LIB_API int TA_LINEARREG_StateLoad( struct TA_LINEARREG_State** _state,
+                                                FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_LINEARREG_StateTest( int    startIdx,
 /* Generated */                                           int    endIdx,
@@ -10135,7 +12519,8 @@ TA_LIB_API int TA_LINEARREG_StateFree( struct TA_LINEARREG_State** _state );
 /* Generated */                                           int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                           int          *outBegIdx,
 /* Generated */                                           int          *outNBElement,
-/* Generated */                                           double        outReal[] )
+/* Generated */                                           double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_LINEARREG(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -10151,10 +12536,27 @@ TA_LIB_API int TA_LINEARREG_StateFree( struct TA_LINEARREG_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_LINEARREG
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_LINEARREG_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_LINEARREG_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_LINEARREG_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_LINEARREG_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -10226,6 +12628,12 @@ TA_LIB_API int TA_LINEARREG_ANGLE_State( struct TA_LINEARREG_ANGLE_State* _state
 
 TA_LIB_API int TA_LINEARREG_ANGLE_StateFree( struct TA_LINEARREG_ANGLE_State** _state );
 
+TA_LIB_API int TA_LINEARREG_ANGLE_StateSave( struct TA_LINEARREG_ANGLE_State* _state,
+                                                      FILE* _file );
+
+TA_LIB_API int TA_LINEARREG_ANGLE_StateLoad( struct TA_LINEARREG_ANGLE_State** _state,
+                                                      FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_LINEARREG_ANGLE_StateTest( int    startIdx,
 /* Generated */                                                 int    endIdx,
@@ -10233,7 +12641,8 @@ TA_LIB_API int TA_LINEARREG_ANGLE_StateFree( struct TA_LINEARREG_ANGLE_State** _
 /* Generated */                                                 int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                                 int          *outBegIdx,
 /* Generated */                                                 int          *outNBElement,
-/* Generated */                                                 double        outReal[] )
+/* Generated */                                                 double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_LINEARREG_ANGLE(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -10249,10 +12658,27 @@ TA_LIB_API int TA_LINEARREG_ANGLE_StateFree( struct TA_LINEARREG_ANGLE_State** _
 /* Generated */  #ifdef TEST_WHOLE_DATA_LINEARREG_ANGLE
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_LINEARREG_ANGLE_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_LINEARREG_ANGLE_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_LINEARREG_ANGLE_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_LINEARREG_ANGLE_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -10324,6 +12750,12 @@ TA_LIB_API int TA_LINEARREG_INTERCEPT_State( struct TA_LINEARREG_INTERCEPT_State
 
 TA_LIB_API int TA_LINEARREG_INTERCEPT_StateFree( struct TA_LINEARREG_INTERCEPT_State** _state );
 
+TA_LIB_API int TA_LINEARREG_INTERCEPT_StateSave( struct TA_LINEARREG_INTERCEPT_State* _state,
+                                                          FILE* _file );
+
+TA_LIB_API int TA_LINEARREG_INTERCEPT_StateLoad( struct TA_LINEARREG_INTERCEPT_State** _state,
+                                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_LINEARREG_INTERCEPT_StateTest( int    startIdx,
 /* Generated */                                                     int    endIdx,
@@ -10331,7 +12763,8 @@ TA_LIB_API int TA_LINEARREG_INTERCEPT_StateFree( struct TA_LINEARREG_INTERCEPT_S
 /* Generated */                                                     int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                                     int          *outBegIdx,
 /* Generated */                                                     int          *outNBElement,
-/* Generated */                                                     double        outReal[] )
+/* Generated */                                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_LINEARREG_INTERCEPT(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -10347,10 +12780,27 @@ TA_LIB_API int TA_LINEARREG_INTERCEPT_StateFree( struct TA_LINEARREG_INTERCEPT_S
 /* Generated */  #ifdef TEST_WHOLE_DATA_LINEARREG_INTERCEPT
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_LINEARREG_INTERCEPT_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_LINEARREG_INTERCEPT_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_LINEARREG_INTERCEPT_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_LINEARREG_INTERCEPT_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -10422,6 +12872,12 @@ TA_LIB_API int TA_LINEARREG_SLOPE_State( struct TA_LINEARREG_SLOPE_State* _state
 
 TA_LIB_API int TA_LINEARREG_SLOPE_StateFree( struct TA_LINEARREG_SLOPE_State** _state );
 
+TA_LIB_API int TA_LINEARREG_SLOPE_StateSave( struct TA_LINEARREG_SLOPE_State* _state,
+                                                      FILE* _file );
+
+TA_LIB_API int TA_LINEARREG_SLOPE_StateLoad( struct TA_LINEARREG_SLOPE_State** _state,
+                                                      FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_LINEARREG_SLOPE_StateTest( int    startIdx,
 /* Generated */                                                 int    endIdx,
@@ -10429,7 +12885,8 @@ TA_LIB_API int TA_LINEARREG_SLOPE_StateFree( struct TA_LINEARREG_SLOPE_State** _
 /* Generated */                                                 int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                                 int          *outBegIdx,
 /* Generated */                                                 int          *outNBElement,
-/* Generated */                                                 double        outReal[] )
+/* Generated */                                                 double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_LINEARREG_SLOPE(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -10445,10 +12902,27 @@ TA_LIB_API int TA_LINEARREG_SLOPE_StateFree( struct TA_LINEARREG_SLOPE_State** _
 /* Generated */  #ifdef TEST_WHOLE_DATA_LINEARREG_SLOPE
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_LINEARREG_SLOPE_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_LINEARREG_SLOPE_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_LINEARREG_SLOPE_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_LINEARREG_SLOPE_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -10505,13 +12979,20 @@ TA_LIB_API int TA_LN_State( struct TA_LN_State* _state,
 
 TA_LIB_API int TA_LN_StateFree( struct TA_LN_State** _state );
 
+TA_LIB_API int TA_LN_StateSave( struct TA_LN_State* _state,
+                                         FILE* _file );
+
+TA_LIB_API int TA_LN_StateLoad( struct TA_LN_State** _state,
+                                         FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_LN_StateTest( int    startIdx,
 /* Generated */                                    int    endIdx,
 /* Generated */                                    const double inReal[],
 /* Generated */                                    int          *outBegIdx,
 /* Generated */                                    int          *outNBElement,
-/* Generated */                                    double        outReal[] )
+/* Generated */                                    double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_LN(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -10527,10 +13008,27 @@ TA_LIB_API int TA_LN_StateFree( struct TA_LN_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_LN
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_LN_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_LN_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_LN_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_LN_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -10587,13 +13085,20 @@ TA_LIB_API int TA_LOG10_State( struct TA_LOG10_State* _state,
 
 TA_LIB_API int TA_LOG10_StateFree( struct TA_LOG10_State** _state );
 
+TA_LIB_API int TA_LOG10_StateSave( struct TA_LOG10_State* _state,
+                                            FILE* _file );
+
+TA_LIB_API int TA_LOG10_StateLoad( struct TA_LOG10_State** _state,
+                                            FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_LOG10_StateTest( int    startIdx,
 /* Generated */                                       int    endIdx,
 /* Generated */                                       const double inReal[],
 /* Generated */                                       int          *outBegIdx,
 /* Generated */                                       int          *outNBElement,
-/* Generated */                                       double        outReal[] )
+/* Generated */                                       double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_LOG10(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -10609,10 +13114,27 @@ TA_LIB_API int TA_LOG10_StateFree( struct TA_LOG10_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_LOG10
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_LOG10_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_LOG10_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_LOG10_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_LOG10_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -10683,6 +13205,12 @@ TA_LIB_API int TA_MA_State( struct TA_MA_State* _state,
 
 TA_LIB_API int TA_MA_StateFree( struct TA_MA_State** _state );
 
+TA_LIB_API int TA_MA_StateSave( struct TA_MA_State* _state,
+                                         FILE* _file );
+
+TA_LIB_API int TA_MA_StateLoad( struct TA_MA_State** _state,
+                                         FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_MA_StateTest( int    startIdx,
 /* Generated */                                    int    endIdx,
@@ -10690,7 +13218,8 @@ TA_LIB_API int TA_MA_StateFree( struct TA_MA_State** _state );
 /* Generated */                                    int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                    TA_MAType     optInMAType,/* Generated */                                    int          *outBegIdx,
 /* Generated */                                    int          *outNBElement,
-/* Generated */                                    double        outReal[] )
+/* Generated */                                    double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MA(startIdx, endIdx, inReal, optInTimePeriod, optInMAType, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -10706,10 +13235,27 @@ TA_LIB_API int TA_MA_StateFree( struct TA_MA_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MA
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_MA_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_MA_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_MA_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_MA_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -10802,6 +13348,12 @@ TA_LIB_API int TA_MACD_State( struct TA_MACD_State* _state,
 
 TA_LIB_API int TA_MACD_StateFree( struct TA_MACD_State** _state );
 
+TA_LIB_API int TA_MACD_StateSave( struct TA_MACD_State* _state,
+                                           FILE* _file );
+
+TA_LIB_API int TA_MACD_StateLoad( struct TA_MACD_State** _state,
+                                           FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_MACD_StateTest( int    startIdx,
 /* Generated */                                      int    endIdx,
@@ -10813,7 +13365,8 @@ TA_LIB_API int TA_MACD_StateFree( struct TA_MACD_State** _state );
 /* Generated */                                      int          *outNBElement,
 /* Generated */                                      double        outMACD[],
 /* Generated */                                      double        outMACDSignal[],
-/* Generated */                                      double        outMACDHist[] )
+/* Generated */                                      double        outMACDHist[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MACD(startIdx, endIdx, inReal, optInFastPeriod, optInSlowPeriod, optInSignalPeriod, outBegIdx, outNBElement, outMACD, outMACDSignal, outMACDHist );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -10829,10 +13382,27 @@ TA_LIB_API int TA_MACD_StateFree( struct TA_MACD_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MACD
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_MACD_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_MACD_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outMACD_local;double  outMACDSignal_local;double  outMACDHist_local;
 /* Generated */     res = TA_MACD_State(state, inReal[i], &outMACD_local, &outMACDSignal_local, &outMACDHist_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_MACD_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -10936,6 +13506,12 @@ TA_LIB_API int TA_MACDEXT_State( struct TA_MACDEXT_State* _state,
 
 TA_LIB_API int TA_MACDEXT_StateFree( struct TA_MACDEXT_State** _state );
 
+TA_LIB_API int TA_MACDEXT_StateSave( struct TA_MACDEXT_State* _state,
+                                              FILE* _file );
+
+TA_LIB_API int TA_MACDEXT_StateLoad( struct TA_MACDEXT_State** _state,
+                                              FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_MACDEXT_StateTest( int    startIdx,
 /* Generated */                                         int    endIdx,
@@ -10947,7 +13523,8 @@ TA_LIB_API int TA_MACDEXT_StateFree( struct TA_MACDEXT_State** _state );
 /* Generated */                                         int          *outNBElement,
 /* Generated */                                         double        outMACD[],
 /* Generated */                                         double        outMACDSignal[],
-/* Generated */                                         double        outMACDHist[] )
+/* Generated */                                         double        outMACDHist[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MACDEXT(startIdx, endIdx, inReal, optInFastPeriod, optInFastMAType, optInSlowPeriod, optInSlowMAType, optInSignalPeriod, optInSignalMAType, outBegIdx, outNBElement, outMACD, outMACDSignal, outMACDHist );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -10963,10 +13540,27 @@ TA_LIB_API int TA_MACDEXT_StateFree( struct TA_MACDEXT_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MACDEXT
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_MACDEXT_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_MACDEXT_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outMACD_local;double  outMACDSignal_local;double  outMACDHist_local;
 /* Generated */     res = TA_MACDEXT_State(state, inReal[i], &outMACD_local, &outMACDSignal_local, &outMACDHist_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_MACDEXT_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -11041,6 +13635,12 @@ TA_LIB_API int TA_MACDFIX_State( struct TA_MACDFIX_State* _state,
 
 TA_LIB_API int TA_MACDFIX_StateFree( struct TA_MACDFIX_State** _state );
 
+TA_LIB_API int TA_MACDFIX_StateSave( struct TA_MACDFIX_State* _state,
+                                              FILE* _file );
+
+TA_LIB_API int TA_MACDFIX_StateLoad( struct TA_MACDFIX_State** _state,
+                                              FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_MACDFIX_StateTest( int    startIdx,
 /* Generated */                                         int    endIdx,
@@ -11050,7 +13650,8 @@ TA_LIB_API int TA_MACDFIX_StateFree( struct TA_MACDFIX_State** _state );
 /* Generated */                                         int          *outNBElement,
 /* Generated */                                         double        outMACD[],
 /* Generated */                                         double        outMACDSignal[],
-/* Generated */                                         double        outMACDHist[] )
+/* Generated */                                         double        outMACDHist[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MACDFIX(startIdx, endIdx, inReal, optInSignalPeriod, outBegIdx, outNBElement, outMACD, outMACDSignal, outMACDHist );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -11066,10 +13667,27 @@ TA_LIB_API int TA_MACDFIX_StateFree( struct TA_MACDFIX_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MACDFIX
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_MACDFIX_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_MACDFIX_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outMACD_local;double  outMACDSignal_local;double  outMACDHist_local;
 /* Generated */     res = TA_MACDFIX_State(state, inReal[i], &outMACD_local, &outMACDSignal_local, &outMACDHist_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_MACDFIX_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -11172,6 +13790,12 @@ TA_LIB_API int TA_MAMA_State( struct TA_MAMA_State* _state,
 
 TA_LIB_API int TA_MAMA_StateFree( struct TA_MAMA_State** _state );
 
+TA_LIB_API int TA_MAMA_StateSave( struct TA_MAMA_State* _state,
+                                           FILE* _file );
+
+TA_LIB_API int TA_MAMA_StateLoad( struct TA_MAMA_State** _state,
+                                           FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_MAMA_StateTest( int    startIdx,
 /* Generated */                                      int    endIdx,
@@ -11181,7 +13805,8 @@ TA_LIB_API int TA_MAMA_StateFree( struct TA_MAMA_State** _state );
 /* Generated */                                      int          *outBegIdx,
 /* Generated */                                      int          *outNBElement,
 /* Generated */                                      double        outMAMA[],
-/* Generated */                                      double        outFAMA[] )
+/* Generated */                                      double        outFAMA[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MAMA(startIdx, endIdx, inReal, optInFastLimit, optInSlowLimit, outBegIdx, outNBElement, outMAMA, outFAMA );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -11197,10 +13822,27 @@ TA_LIB_API int TA_MAMA_StateFree( struct TA_MAMA_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MAMA
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_MAMA_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_MAMA_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outMAMA_local;double  outFAMA_local;
 /* Generated */     res = TA_MAMA_State(state, inReal[i], &outMAMA_local, &outFAMA_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_MAMA_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -11284,6 +13926,12 @@ TA_LIB_API int TA_MAVP_State( struct TA_MAVP_State* _state,
 
 TA_LIB_API int TA_MAVP_StateFree( struct TA_MAVP_State** _state );
 
+TA_LIB_API int TA_MAVP_StateSave( struct TA_MAVP_State* _state,
+                                           FILE* _file );
+
+TA_LIB_API int TA_MAVP_StateLoad( struct TA_MAVP_State** _state,
+                                           FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_MAVP_StateTest( int    startIdx,
 /* Generated */                                      int    endIdx,
@@ -11293,7 +13941,8 @@ TA_LIB_API int TA_MAVP_StateFree( struct TA_MAVP_State** _state );
 /* Generated */                                      int           optInMaxPeriod, /* From 2 to 100000 */
 /* Generated */                                      TA_MAType     optInMAType,/* Generated */                                      int          *outBegIdx,
 /* Generated */                                      int          *outNBElement,
-/* Generated */                                      double        outReal[] )
+/* Generated */                                      double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MAVP(startIdx, endIdx, inReal, inPeriods, optInMinPeriod, optInMaxPeriod, optInMAType, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -11309,10 +13958,27 @@ TA_LIB_API int TA_MAVP_StateFree( struct TA_MAVP_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MAVP
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_MAVP_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_MAVP_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_MAVP_State(state, inReal[i], inPeriods[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_MAVP_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -11380,6 +14046,12 @@ TA_LIB_API int TA_MAX_State( struct TA_MAX_State* _state,
 
 TA_LIB_API int TA_MAX_StateFree( struct TA_MAX_State** _state );
 
+TA_LIB_API int TA_MAX_StateSave( struct TA_MAX_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_MAX_StateLoad( struct TA_MAX_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_MAX_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
@@ -11387,7 +14059,8 @@ TA_LIB_API int TA_MAX_StateFree( struct TA_MAX_State** _state );
 /* Generated */                                     int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MAX(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -11403,10 +14076,27 @@ TA_LIB_API int TA_MAX_StateFree( struct TA_MAX_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MAX
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_MAX_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_MAX_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_MAX_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_MAX_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -11476,6 +14166,12 @@ TA_LIB_API int TA_MAXINDEX_State( struct TA_MAXINDEX_State* _state,
 
 TA_LIB_API int TA_MAXINDEX_StateFree( struct TA_MAXINDEX_State** _state );
 
+TA_LIB_API int TA_MAXINDEX_StateSave( struct TA_MAXINDEX_State* _state,
+                                               FILE* _file );
+
+TA_LIB_API int TA_MAXINDEX_StateLoad( struct TA_MAXINDEX_State** _state,
+                                               FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_MAXINDEX_StateTest( int    startIdx,
 /* Generated */                                          int    endIdx,
@@ -11483,7 +14179,8 @@ TA_LIB_API int TA_MAXINDEX_StateFree( struct TA_MAXINDEX_State** _state );
 /* Generated */                                          int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                          int          *outBegIdx,
 /* Generated */                                          int          *outNBElement,
-/* Generated */                                          int           outInteger[] )
+/* Generated */                                          int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MAXINDEX(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -11499,10 +14196,27 @@ TA_LIB_API int TA_MAXINDEX_StateFree( struct TA_MAXINDEX_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MAXINDEX
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_MAXINDEX_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_MAXINDEX_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_MAXINDEX_State(state, inReal[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_MAXINDEX_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -11563,6 +14277,12 @@ TA_LIB_API int TA_MEDPRICE_State( struct TA_MEDPRICE_State* _state,
 
 TA_LIB_API int TA_MEDPRICE_StateFree( struct TA_MEDPRICE_State** _state );
 
+TA_LIB_API int TA_MEDPRICE_StateSave( struct TA_MEDPRICE_State* _state,
+                                               FILE* _file );
+
+TA_LIB_API int TA_MEDPRICE_StateLoad( struct TA_MEDPRICE_State** _state,
+                                               FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_MEDPRICE_StateTest( int    startIdx,
 /* Generated */                                          int    endIdx,
@@ -11570,7 +14290,8 @@ TA_LIB_API int TA_MEDPRICE_StateFree( struct TA_MEDPRICE_State** _state );
 /* Generated */                                          const double inLow[],
 /* Generated */                                          int          *outBegIdx,
 /* Generated */                                          int          *outNBElement,
-/* Generated */                                          double        outReal[] )
+/* Generated */                                          double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MEDPRICE(startIdx, endIdx, inHigh, inLow, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -11586,10 +14307,27 @@ TA_LIB_API int TA_MEDPRICE_StateFree( struct TA_MEDPRICE_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MEDPRICE
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_MEDPRICE_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_MEDPRICE_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_MEDPRICE_State(state, inHigh[i], inLow[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_MEDPRICE_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -11672,6 +14410,12 @@ TA_LIB_API int TA_MFI_State( struct TA_MFI_State* _state,
 
 TA_LIB_API int TA_MFI_StateFree( struct TA_MFI_State** _state );
 
+TA_LIB_API int TA_MFI_StateSave( struct TA_MFI_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_MFI_StateLoad( struct TA_MFI_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_MFI_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
@@ -11682,7 +14426,8 @@ TA_LIB_API int TA_MFI_StateFree( struct TA_MFI_State** _state );
 /* Generated */                                     int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MFI(startIdx, endIdx, inHigh, inLow, inClose, inVolume, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -11698,10 +14443,27 @@ TA_LIB_API int TA_MFI_StateFree( struct TA_MFI_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MFI
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_MFI_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_MFI_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_MFI_State(state, inHigh[i], inLow[i], inClose[i], inVolume[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_MFI_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -11770,6 +14532,12 @@ TA_LIB_API int TA_MIDPOINT_State( struct TA_MIDPOINT_State* _state,
 
 TA_LIB_API int TA_MIDPOINT_StateFree( struct TA_MIDPOINT_State** _state );
 
+TA_LIB_API int TA_MIDPOINT_StateSave( struct TA_MIDPOINT_State* _state,
+                                               FILE* _file );
+
+TA_LIB_API int TA_MIDPOINT_StateLoad( struct TA_MIDPOINT_State** _state,
+                                               FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_MIDPOINT_StateTest( int    startIdx,
 /* Generated */                                          int    endIdx,
@@ -11777,7 +14545,8 @@ TA_LIB_API int TA_MIDPOINT_StateFree( struct TA_MIDPOINT_State** _state );
 /* Generated */                                          int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                          int          *outBegIdx,
 /* Generated */                                          int          *outNBElement,
-/* Generated */                                          double        outReal[] )
+/* Generated */                                          double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MIDPOINT(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -11793,10 +14562,27 @@ TA_LIB_API int TA_MIDPOINT_StateFree( struct TA_MIDPOINT_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MIDPOINT
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_MIDPOINT_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_MIDPOINT_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_MIDPOINT_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_MIDPOINT_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -11869,6 +14655,12 @@ TA_LIB_API int TA_MIDPRICE_State( struct TA_MIDPRICE_State* _state,
 
 TA_LIB_API int TA_MIDPRICE_StateFree( struct TA_MIDPRICE_State** _state );
 
+TA_LIB_API int TA_MIDPRICE_StateSave( struct TA_MIDPRICE_State* _state,
+                                               FILE* _file );
+
+TA_LIB_API int TA_MIDPRICE_StateLoad( struct TA_MIDPRICE_State** _state,
+                                               FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_MIDPRICE_StateTest( int    startIdx,
 /* Generated */                                          int    endIdx,
@@ -11877,7 +14669,8 @@ TA_LIB_API int TA_MIDPRICE_StateFree( struct TA_MIDPRICE_State** _state );
 /* Generated */                                          int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                          int          *outBegIdx,
 /* Generated */                                          int          *outNBElement,
-/* Generated */                                          double        outReal[] )
+/* Generated */                                          double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MIDPRICE(startIdx, endIdx, inHigh, inLow, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -11893,10 +14686,27 @@ TA_LIB_API int TA_MIDPRICE_StateFree( struct TA_MIDPRICE_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MIDPRICE
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_MIDPRICE_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_MIDPRICE_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_MIDPRICE_State(state, inHigh[i], inLow[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_MIDPRICE_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -11964,6 +14774,12 @@ TA_LIB_API int TA_MIN_State( struct TA_MIN_State* _state,
 
 TA_LIB_API int TA_MIN_StateFree( struct TA_MIN_State** _state );
 
+TA_LIB_API int TA_MIN_StateSave( struct TA_MIN_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_MIN_StateLoad( struct TA_MIN_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_MIN_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
@@ -11971,7 +14787,8 @@ TA_LIB_API int TA_MIN_StateFree( struct TA_MIN_State** _state );
 /* Generated */                                     int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MIN(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -11987,10 +14804,27 @@ TA_LIB_API int TA_MIN_StateFree( struct TA_MIN_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MIN
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_MIN_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_MIN_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_MIN_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_MIN_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -12060,6 +14894,12 @@ TA_LIB_API int TA_MININDEX_State( struct TA_MININDEX_State* _state,
 
 TA_LIB_API int TA_MININDEX_StateFree( struct TA_MININDEX_State** _state );
 
+TA_LIB_API int TA_MININDEX_StateSave( struct TA_MININDEX_State* _state,
+                                               FILE* _file );
+
+TA_LIB_API int TA_MININDEX_StateLoad( struct TA_MININDEX_State** _state,
+                                               FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_MININDEX_StateTest( int    startIdx,
 /* Generated */                                          int    endIdx,
@@ -12067,7 +14907,8 @@ TA_LIB_API int TA_MININDEX_StateFree( struct TA_MININDEX_State** _state );
 /* Generated */                                          int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                          int          *outBegIdx,
 /* Generated */                                          int          *outNBElement,
-/* Generated */                                          int           outInteger[] )
+/* Generated */                                          int           outInteger[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MININDEX(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outInteger );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -12083,10 +14924,27 @@ TA_LIB_API int TA_MININDEX_StateFree( struct TA_MININDEX_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MININDEX
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_MININDEX_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_MININDEX_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outInteger_local;
 /* Generated */     res = TA_MININDEX_State(state, inReal[i], &outInteger_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_MININDEX_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -12158,6 +15016,12 @@ TA_LIB_API int TA_MINMAX_State( struct TA_MINMAX_State* _state,
 
 TA_LIB_API int TA_MINMAX_StateFree( struct TA_MINMAX_State** _state );
 
+TA_LIB_API int TA_MINMAX_StateSave( struct TA_MINMAX_State* _state,
+                                             FILE* _file );
+
+TA_LIB_API int TA_MINMAX_StateLoad( struct TA_MINMAX_State** _state,
+                                             FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_MINMAX_StateTest( int    startIdx,
 /* Generated */                                        int    endIdx,
@@ -12166,7 +15030,8 @@ TA_LIB_API int TA_MINMAX_StateFree( struct TA_MINMAX_State** _state );
 /* Generated */                                        int          *outBegIdx,
 /* Generated */                                        int          *outNBElement,
 /* Generated */                                        double        outMin[],
-/* Generated */                                        double        outMax[] )
+/* Generated */                                        double        outMax[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MINMAX(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outMin, outMax );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -12182,10 +15047,27 @@ TA_LIB_API int TA_MINMAX_StateFree( struct TA_MINMAX_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MINMAX
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_MINMAX_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_MINMAX_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outMin_local;double  outMax_local;
 /* Generated */     res = TA_MINMAX_State(state, inReal[i], &outMin_local, &outMax_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_MINMAX_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -12261,6 +15143,12 @@ TA_LIB_API int TA_MINMAXINDEX_State( struct TA_MINMAXINDEX_State* _state,
 
 TA_LIB_API int TA_MINMAXINDEX_StateFree( struct TA_MINMAXINDEX_State** _state );
 
+TA_LIB_API int TA_MINMAXINDEX_StateSave( struct TA_MINMAXINDEX_State* _state,
+                                                  FILE* _file );
+
+TA_LIB_API int TA_MINMAXINDEX_StateLoad( struct TA_MINMAXINDEX_State** _state,
+                                                  FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_MINMAXINDEX_StateTest( int    startIdx,
 /* Generated */                                             int    endIdx,
@@ -12269,7 +15157,8 @@ TA_LIB_API int TA_MINMAXINDEX_StateFree( struct TA_MINMAXINDEX_State** _state );
 /* Generated */                                             int          *outBegIdx,
 /* Generated */                                             int          *outNBElement,
 /* Generated */                                             int           outMinIdx[],
-/* Generated */                                             int           outMaxIdx[] )
+/* Generated */                                             int           outMaxIdx[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MINMAXINDEX(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outMinIdx, outMaxIdx );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -12285,10 +15174,27 @@ TA_LIB_API int TA_MINMAXINDEX_StateFree( struct TA_MINMAXINDEX_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MINMAXINDEX
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_MINMAXINDEX_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_MINMAXINDEX_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     int outMinIdx_local;int  outMaxIdx_local;
 /* Generated */     res = TA_MINMAXINDEX_State(state, inReal[i], &outMinIdx_local, &outMaxIdx_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_MINMAXINDEX_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -12369,6 +15275,12 @@ TA_LIB_API int TA_MINUS_DI_State( struct TA_MINUS_DI_State* _state,
 
 TA_LIB_API int TA_MINUS_DI_StateFree( struct TA_MINUS_DI_State** _state );
 
+TA_LIB_API int TA_MINUS_DI_StateSave( struct TA_MINUS_DI_State* _state,
+                                               FILE* _file );
+
+TA_LIB_API int TA_MINUS_DI_StateLoad( struct TA_MINUS_DI_State** _state,
+                                               FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_MINUS_DI_StateTest( int    startIdx,
 /* Generated */                                          int    endIdx,
@@ -12378,7 +15290,8 @@ TA_LIB_API int TA_MINUS_DI_StateFree( struct TA_MINUS_DI_State** _state );
 /* Generated */                                          int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                          int          *outBegIdx,
 /* Generated */                                          int          *outNBElement,
-/* Generated */                                          double        outReal[] )
+/* Generated */                                          double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MINUS_DI(startIdx, endIdx, inHigh, inLow, inClose, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -12394,10 +15307,27 @@ TA_LIB_API int TA_MINUS_DI_StateFree( struct TA_MINUS_DI_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MINUS_DI
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_MINUS_DI_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_MINUS_DI_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_MINUS_DI_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_MINUS_DI_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -12471,6 +15401,12 @@ TA_LIB_API int TA_MINUS_DM_State( struct TA_MINUS_DM_State* _state,
 
 TA_LIB_API int TA_MINUS_DM_StateFree( struct TA_MINUS_DM_State** _state );
 
+TA_LIB_API int TA_MINUS_DM_StateSave( struct TA_MINUS_DM_State* _state,
+                                               FILE* _file );
+
+TA_LIB_API int TA_MINUS_DM_StateLoad( struct TA_MINUS_DM_State** _state,
+                                               FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_MINUS_DM_StateTest( int    startIdx,
 /* Generated */                                          int    endIdx,
@@ -12479,7 +15415,8 @@ TA_LIB_API int TA_MINUS_DM_StateFree( struct TA_MINUS_DM_State** _state );
 /* Generated */                                          int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                          int          *outBegIdx,
 /* Generated */                                          int          *outNBElement,
-/* Generated */                                          double        outReal[] )
+/* Generated */                                          double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MINUS_DM(startIdx, endIdx, inHigh, inLow, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -12495,10 +15432,27 @@ TA_LIB_API int TA_MINUS_DM_StateFree( struct TA_MINUS_DM_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MINUS_DM
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_MINUS_DM_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_MINUS_DM_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_MINUS_DM_State(state, inHigh[i], inLow[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_MINUS_DM_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -12565,6 +15519,12 @@ TA_LIB_API int TA_MOM_State( struct TA_MOM_State* _state,
 
 TA_LIB_API int TA_MOM_StateFree( struct TA_MOM_State** _state );
 
+TA_LIB_API int TA_MOM_StateSave( struct TA_MOM_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_MOM_StateLoad( struct TA_MOM_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_MOM_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
@@ -12572,7 +15532,8 @@ TA_LIB_API int TA_MOM_StateFree( struct TA_MOM_State** _state );
 /* Generated */                                     int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MOM(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -12588,10 +15549,27 @@ TA_LIB_API int TA_MOM_StateFree( struct TA_MOM_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MOM
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_MOM_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_MOM_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_MOM_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_MOM_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -12652,6 +15630,12 @@ TA_LIB_API int TA_MULT_State( struct TA_MULT_State* _state,
 
 TA_LIB_API int TA_MULT_StateFree( struct TA_MULT_State** _state );
 
+TA_LIB_API int TA_MULT_StateSave( struct TA_MULT_State* _state,
+                                           FILE* _file );
+
+TA_LIB_API int TA_MULT_StateLoad( struct TA_MULT_State** _state,
+                                           FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_MULT_StateTest( int    startIdx,
 /* Generated */                                      int    endIdx,
@@ -12659,7 +15643,8 @@ TA_LIB_API int TA_MULT_StateFree( struct TA_MULT_State** _state );
 /* Generated */                                      const double inReal1[],
 /* Generated */                                      int          *outBegIdx,
 /* Generated */                                      int          *outNBElement,
-/* Generated */                                      double        outReal[] )
+/* Generated */                                      double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_MULT(startIdx, endIdx, inReal0, inReal1, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -12675,10 +15660,27 @@ TA_LIB_API int TA_MULT_StateFree( struct TA_MULT_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_MULT
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_MULT_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_MULT_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_MULT_State(state, inReal0[i], inReal1[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_MULT_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -12757,6 +15759,12 @@ TA_LIB_API int TA_NATR_State( struct TA_NATR_State* _state,
 
 TA_LIB_API int TA_NATR_StateFree( struct TA_NATR_State** _state );
 
+TA_LIB_API int TA_NATR_StateSave( struct TA_NATR_State* _state,
+                                           FILE* _file );
+
+TA_LIB_API int TA_NATR_StateLoad( struct TA_NATR_State** _state,
+                                           FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_NATR_StateTest( int    startIdx,
 /* Generated */                                      int    endIdx,
@@ -12766,7 +15774,8 @@ TA_LIB_API int TA_NATR_StateFree( struct TA_NATR_State** _state );
 /* Generated */                                      int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                      int          *outBegIdx,
 /* Generated */                                      int          *outNBElement,
-/* Generated */                                      double        outReal[] )
+/* Generated */                                      double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_NATR(startIdx, endIdx, inHigh, inLow, inClose, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -12782,10 +15791,27 @@ TA_LIB_API int TA_NATR_StateFree( struct TA_NATR_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_NATR
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_NATR_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_NATR_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_NATR_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_NATR_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -12848,6 +15874,12 @@ TA_LIB_API int TA_OBV_State( struct TA_OBV_State* _state,
 
 TA_LIB_API int TA_OBV_StateFree( struct TA_OBV_State** _state );
 
+TA_LIB_API int TA_OBV_StateSave( struct TA_OBV_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_OBV_StateLoad( struct TA_OBV_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_OBV_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
@@ -12855,7 +15887,8 @@ TA_LIB_API int TA_OBV_StateFree( struct TA_OBV_State** _state );
 /* Generated */                                     const double inVolume[],
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_OBV(startIdx, endIdx, inClose, inVolume, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -12871,10 +15904,27 @@ TA_LIB_API int TA_OBV_StateFree( struct TA_OBV_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_OBV
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_OBV_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_OBV_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_OBV_State(state, inClose[i], inVolume[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_OBV_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -12954,6 +16004,12 @@ TA_LIB_API int TA_PLUS_DI_State( struct TA_PLUS_DI_State* _state,
 
 TA_LIB_API int TA_PLUS_DI_StateFree( struct TA_PLUS_DI_State** _state );
 
+TA_LIB_API int TA_PLUS_DI_StateSave( struct TA_PLUS_DI_State* _state,
+                                              FILE* _file );
+
+TA_LIB_API int TA_PLUS_DI_StateLoad( struct TA_PLUS_DI_State** _state,
+                                              FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_PLUS_DI_StateTest( int    startIdx,
 /* Generated */                                         int    endIdx,
@@ -12963,7 +16019,8 @@ TA_LIB_API int TA_PLUS_DI_StateFree( struct TA_PLUS_DI_State** _state );
 /* Generated */                                         int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                         int          *outBegIdx,
 /* Generated */                                         int          *outNBElement,
-/* Generated */                                         double        outReal[] )
+/* Generated */                                         double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_PLUS_DI(startIdx, endIdx, inHigh, inLow, inClose, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -12979,10 +16036,27 @@ TA_LIB_API int TA_PLUS_DI_StateFree( struct TA_PLUS_DI_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_PLUS_DI
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_PLUS_DI_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_PLUS_DI_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_PLUS_DI_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_PLUS_DI_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -13056,6 +16130,12 @@ TA_LIB_API int TA_PLUS_DM_State( struct TA_PLUS_DM_State* _state,
 
 TA_LIB_API int TA_PLUS_DM_StateFree( struct TA_PLUS_DM_State** _state );
 
+TA_LIB_API int TA_PLUS_DM_StateSave( struct TA_PLUS_DM_State* _state,
+                                              FILE* _file );
+
+TA_LIB_API int TA_PLUS_DM_StateLoad( struct TA_PLUS_DM_State** _state,
+                                              FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_PLUS_DM_StateTest( int    startIdx,
 /* Generated */                                         int    endIdx,
@@ -13064,7 +16144,8 @@ TA_LIB_API int TA_PLUS_DM_StateFree( struct TA_PLUS_DM_State** _state );
 /* Generated */                                         int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                         int          *outBegIdx,
 /* Generated */                                         int          *outNBElement,
-/* Generated */                                         double        outReal[] )
+/* Generated */                                         double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_PLUS_DM(startIdx, endIdx, inHigh, inLow, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -13080,10 +16161,27 @@ TA_LIB_API int TA_PLUS_DM_StateFree( struct TA_PLUS_DM_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_PLUS_DM
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_PLUS_DM_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_PLUS_DM_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_PLUS_DM_State(state, inHigh[i], inLow[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_PLUS_DM_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -13161,6 +16259,12 @@ TA_LIB_API int TA_PPO_State( struct TA_PPO_State* _state,
 
 TA_LIB_API int TA_PPO_StateFree( struct TA_PPO_State** _state );
 
+TA_LIB_API int TA_PPO_StateSave( struct TA_PPO_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_PPO_StateLoad( struct TA_PPO_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_PPO_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
@@ -13169,7 +16273,8 @@ TA_LIB_API int TA_PPO_StateFree( struct TA_PPO_State** _state );
 /* Generated */                                     int           optInSlowPeriod, /* From 2 to 100000 */
 /* Generated */                                     TA_MAType     optInMAType,/* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_PPO(startIdx, endIdx, inReal, optInFastPeriod, optInSlowPeriod, optInMAType, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -13185,10 +16290,27 @@ TA_LIB_API int TA_PPO_StateFree( struct TA_PPO_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_PPO
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_PPO_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_PPO_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_PPO_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_PPO_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -13255,6 +16377,12 @@ TA_LIB_API int TA_ROC_State( struct TA_ROC_State* _state,
 
 TA_LIB_API int TA_ROC_StateFree( struct TA_ROC_State** _state );
 
+TA_LIB_API int TA_ROC_StateSave( struct TA_ROC_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_ROC_StateLoad( struct TA_ROC_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_ROC_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
@@ -13262,7 +16390,8 @@ TA_LIB_API int TA_ROC_StateFree( struct TA_ROC_State** _state );
 /* Generated */                                     int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ROC(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -13278,10 +16407,27 @@ TA_LIB_API int TA_ROC_StateFree( struct TA_ROC_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ROC
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_ROC_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_ROC_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_ROC_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_ROC_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -13348,6 +16494,12 @@ TA_LIB_API int TA_ROCP_State( struct TA_ROCP_State* _state,
 
 TA_LIB_API int TA_ROCP_StateFree( struct TA_ROCP_State** _state );
 
+TA_LIB_API int TA_ROCP_StateSave( struct TA_ROCP_State* _state,
+                                           FILE* _file );
+
+TA_LIB_API int TA_ROCP_StateLoad( struct TA_ROCP_State** _state,
+                                           FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_ROCP_StateTest( int    startIdx,
 /* Generated */                                      int    endIdx,
@@ -13355,7 +16507,8 @@ TA_LIB_API int TA_ROCP_StateFree( struct TA_ROCP_State** _state );
 /* Generated */                                      int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                      int          *outBegIdx,
 /* Generated */                                      int          *outNBElement,
-/* Generated */                                      double        outReal[] )
+/* Generated */                                      double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ROCP(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -13371,10 +16524,27 @@ TA_LIB_API int TA_ROCP_StateFree( struct TA_ROCP_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ROCP
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_ROCP_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_ROCP_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_ROCP_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_ROCP_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -13441,6 +16611,12 @@ TA_LIB_API int TA_ROCR_State( struct TA_ROCR_State* _state,
 
 TA_LIB_API int TA_ROCR_StateFree( struct TA_ROCR_State** _state );
 
+TA_LIB_API int TA_ROCR_StateSave( struct TA_ROCR_State* _state,
+                                           FILE* _file );
+
+TA_LIB_API int TA_ROCR_StateLoad( struct TA_ROCR_State** _state,
+                                           FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_ROCR_StateTest( int    startIdx,
 /* Generated */                                      int    endIdx,
@@ -13448,7 +16624,8 @@ TA_LIB_API int TA_ROCR_StateFree( struct TA_ROCR_State** _state );
 /* Generated */                                      int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                      int          *outBegIdx,
 /* Generated */                                      int          *outNBElement,
-/* Generated */                                      double        outReal[] )
+/* Generated */                                      double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ROCR(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -13464,10 +16641,27 @@ TA_LIB_API int TA_ROCR_StateFree( struct TA_ROCR_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ROCR
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_ROCR_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_ROCR_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_ROCR_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_ROCR_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -13534,6 +16728,12 @@ TA_LIB_API int TA_ROCR100_State( struct TA_ROCR100_State* _state,
 
 TA_LIB_API int TA_ROCR100_StateFree( struct TA_ROCR100_State** _state );
 
+TA_LIB_API int TA_ROCR100_StateSave( struct TA_ROCR100_State* _state,
+                                              FILE* _file );
+
+TA_LIB_API int TA_ROCR100_StateLoad( struct TA_ROCR100_State** _state,
+                                              FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_ROCR100_StateTest( int    startIdx,
 /* Generated */                                         int    endIdx,
@@ -13541,7 +16741,8 @@ TA_LIB_API int TA_ROCR100_StateFree( struct TA_ROCR100_State** _state );
 /* Generated */                                         int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                         int          *outBegIdx,
 /* Generated */                                         int          *outNBElement,
-/* Generated */                                         double        outReal[] )
+/* Generated */                                         double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ROCR100(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -13557,10 +16758,27 @@ TA_LIB_API int TA_ROCR100_StateFree( struct TA_ROCR100_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ROCR100
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_ROCR100_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_ROCR100_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_ROCR100_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_ROCR100_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -13631,6 +16849,12 @@ TA_LIB_API int TA_RSI_State( struct TA_RSI_State* _state,
 
 TA_LIB_API int TA_RSI_StateFree( struct TA_RSI_State** _state );
 
+TA_LIB_API int TA_RSI_StateSave( struct TA_RSI_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_RSI_StateLoad( struct TA_RSI_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_RSI_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
@@ -13638,7 +16862,8 @@ TA_LIB_API int TA_RSI_StateFree( struct TA_RSI_State** _state );
 /* Generated */                                     int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_RSI(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -13654,10 +16879,27 @@ TA_LIB_API int TA_RSI_StateFree( struct TA_RSI_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_RSI
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_RSI_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_RSI_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_RSI_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_RSI_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -13745,6 +16987,12 @@ TA_LIB_API int TA_SAR_State( struct TA_SAR_State* _state,
 
 TA_LIB_API int TA_SAR_StateFree( struct TA_SAR_State** _state );
 
+TA_LIB_API int TA_SAR_StateSave( struct TA_SAR_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_SAR_StateLoad( struct TA_SAR_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_SAR_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
@@ -13754,7 +17002,8 @@ TA_LIB_API int TA_SAR_StateFree( struct TA_SAR_State** _state );
 /* Generated */                                     double        optInMaximum, /* From 0 to TA_REAL_MAX */
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_SAR(startIdx, endIdx, inHigh, inLow, optInAcceleration, optInMaximum, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -13770,10 +17019,27 @@ TA_LIB_API int TA_SAR_StateFree( struct TA_SAR_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_SAR
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_SAR_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_SAR_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_SAR_State(state, inHigh[i], inLow[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_SAR_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -13910,6 +17176,12 @@ TA_LIB_API int TA_SAREXT_State( struct TA_SAREXT_State* _state,
 
 TA_LIB_API int TA_SAREXT_StateFree( struct TA_SAREXT_State** _state );
 
+TA_LIB_API int TA_SAREXT_StateSave( struct TA_SAREXT_State* _state,
+                                             FILE* _file );
+
+TA_LIB_API int TA_SAREXT_StateLoad( struct TA_SAREXT_State** _state,
+                                             FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_SAREXT_StateTest( int    startIdx,
 /* Generated */                                        int    endIdx,
@@ -13925,7 +17197,8 @@ TA_LIB_API int TA_SAREXT_StateFree( struct TA_SAREXT_State** _state );
 /* Generated */                                        double        optInAccelerationMaxShort, /* From 0 to TA_REAL_MAX */
 /* Generated */                                        int          *outBegIdx,
 /* Generated */                                        int          *outNBElement,
-/* Generated */                                        double        outReal[] )
+/* Generated */                                        double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_SAREXT(startIdx, endIdx, inHigh, inLow, optInStartValue, optInOffsetOnReverse, optInAccelerationInitLong, optInAccelerationLong, optInAccelerationMaxLong, optInAccelerationInitShort, optInAccelerationShort, optInAccelerationMaxShort, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -13941,10 +17214,27 @@ TA_LIB_API int TA_SAREXT_StateFree( struct TA_SAREXT_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_SAREXT
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_SAREXT_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_SAREXT_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_SAREXT_State(state, inHigh[i], inLow[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_SAREXT_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -14001,13 +17291,20 @@ TA_LIB_API int TA_SIN_State( struct TA_SIN_State* _state,
 
 TA_LIB_API int TA_SIN_StateFree( struct TA_SIN_State** _state );
 
+TA_LIB_API int TA_SIN_StateSave( struct TA_SIN_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_SIN_StateLoad( struct TA_SIN_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_SIN_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
 /* Generated */                                     const double inReal[],
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_SIN(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -14023,10 +17320,27 @@ TA_LIB_API int TA_SIN_StateFree( struct TA_SIN_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_SIN
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_SIN_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_SIN_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_SIN_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_SIN_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -14083,13 +17397,20 @@ TA_LIB_API int TA_SINH_State( struct TA_SINH_State* _state,
 
 TA_LIB_API int TA_SINH_StateFree( struct TA_SINH_State** _state );
 
+TA_LIB_API int TA_SINH_StateSave( struct TA_SINH_State* _state,
+                                           FILE* _file );
+
+TA_LIB_API int TA_SINH_StateLoad( struct TA_SINH_State** _state,
+                                           FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_SINH_StateTest( int    startIdx,
 /* Generated */                                      int    endIdx,
 /* Generated */                                      const double inReal[],
 /* Generated */                                      int          *outBegIdx,
 /* Generated */                                      int          *outNBElement,
-/* Generated */                                      double        outReal[] )
+/* Generated */                                      double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_SINH(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -14105,10 +17426,27 @@ TA_LIB_API int TA_SINH_StateFree( struct TA_SINH_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_SINH
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_SINH_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_SINH_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_SINH_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_SINH_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -14176,6 +17514,12 @@ TA_LIB_API int TA_SMA_State( struct TA_SMA_State* _state,
 
 TA_LIB_API int TA_SMA_StateFree( struct TA_SMA_State** _state );
 
+TA_LIB_API int TA_SMA_StateSave( struct TA_SMA_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_SMA_StateLoad( struct TA_SMA_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_SMA_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
@@ -14183,7 +17527,8 @@ TA_LIB_API int TA_SMA_StateFree( struct TA_SMA_State** _state );
 /* Generated */                                     int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_SMA(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -14199,10 +17544,27 @@ TA_LIB_API int TA_SMA_StateFree( struct TA_SMA_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_SMA
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_SMA_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_SMA_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_SMA_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_SMA_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -14259,13 +17621,20 @@ TA_LIB_API int TA_SQRT_State( struct TA_SQRT_State* _state,
 
 TA_LIB_API int TA_SQRT_StateFree( struct TA_SQRT_State** _state );
 
+TA_LIB_API int TA_SQRT_StateSave( struct TA_SQRT_State* _state,
+                                           FILE* _file );
+
+TA_LIB_API int TA_SQRT_StateLoad( struct TA_SQRT_State** _state,
+                                           FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_SQRT_StateTest( int    startIdx,
 /* Generated */                                      int    endIdx,
 /* Generated */                                      const double inReal[],
 /* Generated */                                      int          *outBegIdx,
 /* Generated */                                      int          *outNBElement,
-/* Generated */                                      double        outReal[] )
+/* Generated */                                      double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_SQRT(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -14281,10 +17650,27 @@ TA_LIB_API int TA_SQRT_StateFree( struct TA_SQRT_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_SQRT
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_SQRT_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_SQRT_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_SQRT_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_SQRT_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -14360,6 +17746,12 @@ TA_LIB_API int TA_STDDEV_State( struct TA_STDDEV_State* _state,
 
 TA_LIB_API int TA_STDDEV_StateFree( struct TA_STDDEV_State** _state );
 
+TA_LIB_API int TA_STDDEV_StateSave( struct TA_STDDEV_State* _state,
+                                             FILE* _file );
+
+TA_LIB_API int TA_STDDEV_StateLoad( struct TA_STDDEV_State** _state,
+                                             FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_STDDEV_StateTest( int    startIdx,
 /* Generated */                                        int    endIdx,
@@ -14368,7 +17760,8 @@ TA_LIB_API int TA_STDDEV_StateFree( struct TA_STDDEV_State** _state );
 /* Generated */                                        double        optInNbDev, /* From TA_REAL_MIN to TA_REAL_MAX */
 /* Generated */                                        int          *outBegIdx,
 /* Generated */                                        int          *outNBElement,
-/* Generated */                                        double        outReal[] )
+/* Generated */                                        double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_STDDEV(startIdx, endIdx, inReal, optInTimePeriod, optInNbDev, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -14384,10 +17777,27 @@ TA_LIB_API int TA_STDDEV_StateFree( struct TA_STDDEV_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_STDDEV
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_STDDEV_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_STDDEV_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_STDDEV_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_STDDEV_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -14493,6 +17903,12 @@ TA_LIB_API int TA_STOCH_State( struct TA_STOCH_State* _state,
 
 TA_LIB_API int TA_STOCH_StateFree( struct TA_STOCH_State** _state );
 
+TA_LIB_API int TA_STOCH_StateSave( struct TA_STOCH_State* _state,
+                                            FILE* _file );
+
+TA_LIB_API int TA_STOCH_StateLoad( struct TA_STOCH_State** _state,
+                                            FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_STOCH_StateTest( int    startIdx,
 /* Generated */                                       int    endIdx,
@@ -14505,7 +17921,8 @@ TA_LIB_API int TA_STOCH_StateFree( struct TA_STOCH_State** _state );
 /* Generated */                                       TA_MAType     optInSlowD_MAType,/* Generated */                                       int          *outBegIdx,
 /* Generated */                                       int          *outNBElement,
 /* Generated */                                       double        outSlowK[],
-/* Generated */                                       double        outSlowD[] )
+/* Generated */                                       double        outSlowD[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_STOCH(startIdx, endIdx, inHigh, inLow, inClose, optInFastK_Period, optInSlowK_Period, optInSlowK_MAType, optInSlowD_Period, optInSlowD_MAType, outBegIdx, outNBElement, outSlowK, outSlowD );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -14521,10 +17938,27 @@ TA_LIB_API int TA_STOCH_StateFree( struct TA_STOCH_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_STOCH
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_STOCH_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_STOCH_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outSlowK_local;double  outSlowD_local;
 /* Generated */     res = TA_STOCH_State(state, inHigh[i], inLow[i], inClose[i], &outSlowK_local, &outSlowD_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_STOCH_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -14619,6 +18053,12 @@ TA_LIB_API int TA_STOCHF_State( struct TA_STOCHF_State* _state,
 
 TA_LIB_API int TA_STOCHF_StateFree( struct TA_STOCHF_State** _state );
 
+TA_LIB_API int TA_STOCHF_StateSave( struct TA_STOCHF_State* _state,
+                                             FILE* _file );
+
+TA_LIB_API int TA_STOCHF_StateLoad( struct TA_STOCHF_State** _state,
+                                             FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_STOCHF_StateTest( int    startIdx,
 /* Generated */                                        int    endIdx,
@@ -14630,7 +18070,8 @@ TA_LIB_API int TA_STOCHF_StateFree( struct TA_STOCHF_State** _state );
 /* Generated */                                        TA_MAType     optInFastD_MAType,/* Generated */                                        int          *outBegIdx,
 /* Generated */                                        int          *outNBElement,
 /* Generated */                                        double        outFastK[],
-/* Generated */                                        double        outFastD[] )
+/* Generated */                                        double        outFastD[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_STOCHF(startIdx, endIdx, inHigh, inLow, inClose, optInFastK_Period, optInFastD_Period, optInFastD_MAType, outBegIdx, outNBElement, outFastK, outFastD );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -14646,10 +18087,27 @@ TA_LIB_API int TA_STOCHF_StateFree( struct TA_STOCHF_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_STOCHF
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_STOCHF_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_STOCHF_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outFastK_local;double  outFastD_local;
 /* Generated */     res = TA_STOCHF_State(state, inHigh[i], inLow[i], inClose[i], &outFastK_local, &outFastD_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_STOCHF_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -14741,6 +18199,12 @@ TA_LIB_API int TA_STOCHRSI_State( struct TA_STOCHRSI_State* _state,
 
 TA_LIB_API int TA_STOCHRSI_StateFree( struct TA_STOCHRSI_State** _state );
 
+TA_LIB_API int TA_STOCHRSI_StateSave( struct TA_STOCHRSI_State* _state,
+                                               FILE* _file );
+
+TA_LIB_API int TA_STOCHRSI_StateLoad( struct TA_STOCHRSI_State** _state,
+                                               FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_STOCHRSI_StateTest( int    startIdx,
 /* Generated */                                          int    endIdx,
@@ -14751,7 +18215,8 @@ TA_LIB_API int TA_STOCHRSI_StateFree( struct TA_STOCHRSI_State** _state );
 /* Generated */                                          TA_MAType     optInFastD_MAType,/* Generated */                                          int          *outBegIdx,
 /* Generated */                                          int          *outNBElement,
 /* Generated */                                          double        outFastK[],
-/* Generated */                                          double        outFastD[] )
+/* Generated */                                          double        outFastD[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_STOCHRSI(startIdx, endIdx, inReal, optInTimePeriod, optInFastK_Period, optInFastD_Period, optInFastD_MAType, outBegIdx, outNBElement, outFastK, outFastD );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -14767,10 +18232,27 @@ TA_LIB_API int TA_STOCHRSI_StateFree( struct TA_STOCHRSI_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_STOCHRSI
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_STOCHRSI_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_STOCHRSI_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outFastK_local;double  outFastD_local;
 /* Generated */     res = TA_STOCHRSI_State(state, inReal[i], &outFastK_local, &outFastD_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_STOCHRSI_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -14832,6 +18314,12 @@ TA_LIB_API int TA_SUB_State( struct TA_SUB_State* _state,
 
 TA_LIB_API int TA_SUB_StateFree( struct TA_SUB_State** _state );
 
+TA_LIB_API int TA_SUB_StateSave( struct TA_SUB_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_SUB_StateLoad( struct TA_SUB_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_SUB_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
@@ -14839,7 +18327,8 @@ TA_LIB_API int TA_SUB_StateFree( struct TA_SUB_State** _state );
 /* Generated */                                     const double inReal1[],
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_SUB(startIdx, endIdx, inReal0, inReal1, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -14855,10 +18344,27 @@ TA_LIB_API int TA_SUB_StateFree( struct TA_SUB_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_SUB
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_SUB_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_SUB_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_SUB_State(state, inReal0[i], inReal1[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_SUB_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -14926,6 +18432,12 @@ TA_LIB_API int TA_SUM_State( struct TA_SUM_State* _state,
 
 TA_LIB_API int TA_SUM_StateFree( struct TA_SUM_State** _state );
 
+TA_LIB_API int TA_SUM_StateSave( struct TA_SUM_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_SUM_StateLoad( struct TA_SUM_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_SUM_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
@@ -14933,7 +18445,8 @@ TA_LIB_API int TA_SUM_StateFree( struct TA_SUM_State** _state );
 /* Generated */                                     int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_SUM(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -14949,10 +18462,27 @@ TA_LIB_API int TA_SUM_StateFree( struct TA_SUM_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_SUM
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_SUM_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_SUM_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_SUM_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_SUM_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -15041,6 +18571,12 @@ TA_LIB_API int TA_T3_State( struct TA_T3_State* _state,
 
 TA_LIB_API int TA_T3_StateFree( struct TA_T3_State** _state );
 
+TA_LIB_API int TA_T3_StateSave( struct TA_T3_State* _state,
+                                         FILE* _file );
+
+TA_LIB_API int TA_T3_StateLoad( struct TA_T3_State** _state,
+                                         FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_T3_StateTest( int    startIdx,
 /* Generated */                                    int    endIdx,
@@ -15049,7 +18585,8 @@ TA_LIB_API int TA_T3_StateFree( struct TA_T3_State** _state );
 /* Generated */                                    double        optInVFactor, /* From 0 to 1 */
 /* Generated */                                    int          *outBegIdx,
 /* Generated */                                    int          *outNBElement,
-/* Generated */                                    double        outReal[] )
+/* Generated */                                    double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_T3(startIdx, endIdx, inReal, optInTimePeriod, optInVFactor, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -15065,10 +18602,27 @@ TA_LIB_API int TA_T3_StateFree( struct TA_T3_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_T3
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_T3_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_T3_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_T3_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_T3_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -15125,13 +18679,20 @@ TA_LIB_API int TA_TAN_State( struct TA_TAN_State* _state,
 
 TA_LIB_API int TA_TAN_StateFree( struct TA_TAN_State** _state );
 
+TA_LIB_API int TA_TAN_StateSave( struct TA_TAN_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_TAN_StateLoad( struct TA_TAN_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_TAN_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
 /* Generated */                                     const double inReal[],
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_TAN(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -15147,10 +18708,27 @@ TA_LIB_API int TA_TAN_StateFree( struct TA_TAN_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_TAN
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_TAN_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_TAN_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_TAN_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_TAN_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -15207,13 +18785,20 @@ TA_LIB_API int TA_TANH_State( struct TA_TANH_State* _state,
 
 TA_LIB_API int TA_TANH_StateFree( struct TA_TANH_State** _state );
 
+TA_LIB_API int TA_TANH_StateSave( struct TA_TANH_State* _state,
+                                           FILE* _file );
+
+TA_LIB_API int TA_TANH_StateLoad( struct TA_TANH_State** _state,
+                                           FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_TANH_StateTest( int    startIdx,
 /* Generated */                                      int    endIdx,
 /* Generated */                                      const double inReal[],
 /* Generated */                                      int          *outBegIdx,
 /* Generated */                                      int          *outNBElement,
-/* Generated */                                      double        outReal[] )
+/* Generated */                                      double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_TANH(startIdx, endIdx, inReal, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -15229,10 +18814,27 @@ TA_LIB_API int TA_TANH_StateFree( struct TA_TANH_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_TANH
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_TANH_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_TANH_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_TANH_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_TANH_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -15302,6 +18904,12 @@ TA_LIB_API int TA_TEMA_State( struct TA_TEMA_State* _state,
 
 TA_LIB_API int TA_TEMA_StateFree( struct TA_TEMA_State** _state );
 
+TA_LIB_API int TA_TEMA_StateSave( struct TA_TEMA_State* _state,
+                                           FILE* _file );
+
+TA_LIB_API int TA_TEMA_StateLoad( struct TA_TEMA_State** _state,
+                                           FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_TEMA_StateTest( int    startIdx,
 /* Generated */                                      int    endIdx,
@@ -15309,7 +18917,8 @@ TA_LIB_API int TA_TEMA_StateFree( struct TA_TEMA_State** _state );
 /* Generated */                                      int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                      int          *outBegIdx,
 /* Generated */                                      int          *outNBElement,
-/* Generated */                                      double        outReal[] )
+/* Generated */                                      double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_TEMA(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -15325,10 +18934,27 @@ TA_LIB_API int TA_TEMA_StateFree( struct TA_TEMA_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_TEMA
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_TEMA_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_TEMA_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_TEMA_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_TEMA_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -15393,6 +19019,12 @@ TA_LIB_API int TA_TRANGE_State( struct TA_TRANGE_State* _state,
 
 TA_LIB_API int TA_TRANGE_StateFree( struct TA_TRANGE_State** _state );
 
+TA_LIB_API int TA_TRANGE_StateSave( struct TA_TRANGE_State* _state,
+                                             FILE* _file );
+
+TA_LIB_API int TA_TRANGE_StateLoad( struct TA_TRANGE_State** _state,
+                                             FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_TRANGE_StateTest( int    startIdx,
 /* Generated */                                        int    endIdx,
@@ -15401,7 +19033,8 @@ TA_LIB_API int TA_TRANGE_StateFree( struct TA_TRANGE_State** _state );
 /* Generated */                                        const double inClose[],
 /* Generated */                                        int          *outBegIdx,
 /* Generated */                                        int          *outNBElement,
-/* Generated */                                        double        outReal[] )
+/* Generated */                                        double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_TRANGE(startIdx, endIdx, inHigh, inLow, inClose, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -15417,10 +19050,27 @@ TA_LIB_API int TA_TRANGE_StateFree( struct TA_TRANGE_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_TRANGE
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_TRANGE_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_TRANGE_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_TRANGE_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_TRANGE_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -15492,6 +19142,12 @@ TA_LIB_API int TA_TRIMA_State( struct TA_TRIMA_State* _state,
 
 TA_LIB_API int TA_TRIMA_StateFree( struct TA_TRIMA_State** _state );
 
+TA_LIB_API int TA_TRIMA_StateSave( struct TA_TRIMA_State* _state,
+                                            FILE* _file );
+
+TA_LIB_API int TA_TRIMA_StateLoad( struct TA_TRIMA_State** _state,
+                                            FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_TRIMA_StateTest( int    startIdx,
 /* Generated */                                       int    endIdx,
@@ -15499,7 +19155,8 @@ TA_LIB_API int TA_TRIMA_StateFree( struct TA_TRIMA_State** _state );
 /* Generated */                                       int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                       int          *outBegIdx,
 /* Generated */                                       int          *outNBElement,
-/* Generated */                                       double        outReal[] )
+/* Generated */                                       double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_TRIMA(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -15515,10 +19172,27 @@ TA_LIB_API int TA_TRIMA_StateFree( struct TA_TRIMA_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_TRIMA
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_TRIMA_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_TRIMA_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_TRIMA_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_TRIMA_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -15589,6 +19263,12 @@ TA_LIB_API int TA_TRIX_State( struct TA_TRIX_State* _state,
 
 TA_LIB_API int TA_TRIX_StateFree( struct TA_TRIX_State** _state );
 
+TA_LIB_API int TA_TRIX_StateSave( struct TA_TRIX_State* _state,
+                                           FILE* _file );
+
+TA_LIB_API int TA_TRIX_StateLoad( struct TA_TRIX_State** _state,
+                                           FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_TRIX_StateTest( int    startIdx,
 /* Generated */                                      int    endIdx,
@@ -15596,7 +19276,8 @@ TA_LIB_API int TA_TRIX_StateFree( struct TA_TRIX_State** _state );
 /* Generated */                                      int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                      int          *outBegIdx,
 /* Generated */                                      int          *outNBElement,
-/* Generated */                                      double        outReal[] )
+/* Generated */                                      double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_TRIX(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -15612,10 +19293,27 @@ TA_LIB_API int TA_TRIX_StateFree( struct TA_TRIX_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_TRIX
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_TRIX_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_TRIX_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_TRIX_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_TRIX_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -15687,6 +19385,12 @@ TA_LIB_API int TA_TSF_State( struct TA_TSF_State* _state,
 
 TA_LIB_API int TA_TSF_StateFree( struct TA_TSF_State** _state );
 
+TA_LIB_API int TA_TSF_StateSave( struct TA_TSF_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_TSF_StateLoad( struct TA_TSF_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_TSF_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
@@ -15694,7 +19398,8 @@ TA_LIB_API int TA_TSF_StateFree( struct TA_TSF_State** _state );
 /* Generated */                                     int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_TSF(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -15710,10 +19415,27 @@ TA_LIB_API int TA_TSF_StateFree( struct TA_TSF_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_TSF
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_TSF_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_TSF_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_TSF_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_TSF_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -15778,6 +19500,12 @@ TA_LIB_API int TA_TYPPRICE_State( struct TA_TYPPRICE_State* _state,
 
 TA_LIB_API int TA_TYPPRICE_StateFree( struct TA_TYPPRICE_State** _state );
 
+TA_LIB_API int TA_TYPPRICE_StateSave( struct TA_TYPPRICE_State* _state,
+                                               FILE* _file );
+
+TA_LIB_API int TA_TYPPRICE_StateLoad( struct TA_TYPPRICE_State** _state,
+                                               FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_TYPPRICE_StateTest( int    startIdx,
 /* Generated */                                          int    endIdx,
@@ -15786,7 +19514,8 @@ TA_LIB_API int TA_TYPPRICE_StateFree( struct TA_TYPPRICE_State** _state );
 /* Generated */                                          const double inClose[],
 /* Generated */                                          int          *outBegIdx,
 /* Generated */                                          int          *outNBElement,
-/* Generated */                                          double        outReal[] )
+/* Generated */                                          double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_TYPPRICE(startIdx, endIdx, inHigh, inLow, inClose, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -15802,10 +19531,27 @@ TA_LIB_API int TA_TYPPRICE_StateFree( struct TA_TYPPRICE_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_TYPPRICE
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_TYPPRICE_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_TYPPRICE_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_TYPPRICE_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_TYPPRICE_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -15907,6 +19653,12 @@ TA_LIB_API int TA_ULTOSC_State( struct TA_ULTOSC_State* _state,
 
 TA_LIB_API int TA_ULTOSC_StateFree( struct TA_ULTOSC_State** _state );
 
+TA_LIB_API int TA_ULTOSC_StateSave( struct TA_ULTOSC_State* _state,
+                                             FILE* _file );
+
+TA_LIB_API int TA_ULTOSC_StateLoad( struct TA_ULTOSC_State** _state,
+                                             FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_ULTOSC_StateTest( int    startIdx,
 /* Generated */                                        int    endIdx,
@@ -15918,7 +19670,8 @@ TA_LIB_API int TA_ULTOSC_StateFree( struct TA_ULTOSC_State** _state );
 /* Generated */                                        int           optInTimePeriod3, /* From 1 to 100000 */
 /* Generated */                                        int          *outBegIdx,
 /* Generated */                                        int          *outNBElement,
-/* Generated */                                        double        outReal[] )
+/* Generated */                                        double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_ULTOSC(startIdx, endIdx, inHigh, inLow, inClose, optInTimePeriod1, optInTimePeriod2, optInTimePeriod3, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -15934,10 +19687,27 @@ TA_LIB_API int TA_ULTOSC_StateFree( struct TA_ULTOSC_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_ULTOSC
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_ULTOSC_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_ULTOSC_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_ULTOSC_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_ULTOSC_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -16014,6 +19784,12 @@ TA_LIB_API int TA_VAR_State( struct TA_VAR_State* _state,
 
 TA_LIB_API int TA_VAR_StateFree( struct TA_VAR_State** _state );
 
+TA_LIB_API int TA_VAR_StateSave( struct TA_VAR_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_VAR_StateLoad( struct TA_VAR_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_VAR_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
@@ -16022,7 +19798,8 @@ TA_LIB_API int TA_VAR_StateFree( struct TA_VAR_State** _state );
 /* Generated */                                     double        optInNbDev, /* From TA_REAL_MIN to TA_REAL_MAX */
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_VAR(startIdx, endIdx, inReal, optInTimePeriod, optInNbDev, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -16038,10 +19815,27 @@ TA_LIB_API int TA_VAR_StateFree( struct TA_VAR_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_VAR
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_VAR_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_VAR_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_VAR_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_VAR_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -16106,6 +19900,12 @@ TA_LIB_API int TA_WCLPRICE_State( struct TA_WCLPRICE_State* _state,
 
 TA_LIB_API int TA_WCLPRICE_StateFree( struct TA_WCLPRICE_State** _state );
 
+TA_LIB_API int TA_WCLPRICE_StateSave( struct TA_WCLPRICE_State* _state,
+                                               FILE* _file );
+
+TA_LIB_API int TA_WCLPRICE_StateLoad( struct TA_WCLPRICE_State** _state,
+                                               FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_WCLPRICE_StateTest( int    startIdx,
 /* Generated */                                          int    endIdx,
@@ -16114,7 +19914,8 @@ TA_LIB_API int TA_WCLPRICE_StateFree( struct TA_WCLPRICE_State** _state );
 /* Generated */                                          const double inClose[],
 /* Generated */                                          int          *outBegIdx,
 /* Generated */                                          int          *outNBElement,
-/* Generated */                                          double        outReal[] )
+/* Generated */                                          double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_WCLPRICE(startIdx, endIdx, inHigh, inLow, inClose, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -16130,10 +19931,27 @@ TA_LIB_API int TA_WCLPRICE_StateFree( struct TA_WCLPRICE_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_WCLPRICE
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_WCLPRICE_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_WCLPRICE_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_WCLPRICE_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_WCLPRICE_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -16212,6 +20030,12 @@ TA_LIB_API int TA_WILLR_State( struct TA_WILLR_State* _state,
 
 TA_LIB_API int TA_WILLR_StateFree( struct TA_WILLR_State** _state );
 
+TA_LIB_API int TA_WILLR_StateSave( struct TA_WILLR_State* _state,
+                                            FILE* _file );
+
+TA_LIB_API int TA_WILLR_StateLoad( struct TA_WILLR_State** _state,
+                                            FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_WILLR_StateTest( int    startIdx,
 /* Generated */                                       int    endIdx,
@@ -16221,7 +20045,8 @@ TA_LIB_API int TA_WILLR_StateFree( struct TA_WILLR_State** _state );
 /* Generated */                                       int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                       int          *outBegIdx,
 /* Generated */                                       int          *outNBElement,
-/* Generated */                                       double        outReal[] )
+/* Generated */                                       double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_WILLR(startIdx, endIdx, inHigh, inLow, inClose, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -16237,10 +20062,27 @@ TA_LIB_API int TA_WILLR_StateFree( struct TA_WILLR_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_WILLR
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_WILLR_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_WILLR_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_WILLR_State(state, inHigh[i], inLow[i], inClose[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_WILLR_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
@@ -16310,6 +20152,12 @@ TA_LIB_API int TA_WMA_State( struct TA_WMA_State* _state,
 
 TA_LIB_API int TA_WMA_StateFree( struct TA_WMA_State** _state );
 
+TA_LIB_API int TA_WMA_StateSave( struct TA_WMA_State* _state,
+                                          FILE* _file );
+
+TA_LIB_API int TA_WMA_StateLoad( struct TA_WMA_State** _state,
+                                          FILE* _file );
+
 /* Generated */ #ifdef TEST_STATE_FUNCS
 /* Generated */ static TA_RetCode TA_WMA_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
@@ -16317,7 +20165,8 @@ TA_LIB_API int TA_WMA_StateFree( struct TA_WMA_State** _state );
 /* Generated */                                     int           optInTimePeriod, /* From 2 to 100000 */
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
-/* Generated */                                     double        outReal[] )
+/* Generated */                                     double        outReal[],
+FILE* _file )
 /* Generated */ {
 /* Generated */  TA_RetCode res = TA_WMA(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
 /* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
@@ -16333,10 +20182,27 @@ TA_LIB_API int TA_WMA_StateFree( struct TA_WMA_State** _state );
 /* Generated */  #ifdef TEST_WHOLE_DATA_WMA
 /* Generated */    i = 0;
 /* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
 /* Generated */  while (i <= endIdx)
 /* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_WMA_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_WMA_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
 /* Generated */     double outReal_local;
 /* Generated */     res = TA_WMA_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_WMA_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
 /* Generated */     if (i++ < startIdx) continue;
 /* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
 /* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;

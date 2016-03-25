@@ -126,4 +126,32 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 %%%GENCODE%%%
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 12 - DO NOT DELETE THIS LINE ****/
+%%%GENCODE%%%
+/**** END GENCODE SECTION 12 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state save code here. */   
+   return 0;
+}
+
+/**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
+%%%GENCODE%%%
+/**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 14 - DO NOT DELETE THIS LINE ****/
+%%%GENCODE%%%
+/**** END GENCODE SECTION 14 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state load code here. */   
+   return 0;
+}
+
+/**** START GENCODE SECTION 15 - DO NOT DELETE THIS LINE ****/
+%%%GENCODE%%%
+/**** END GENCODE SECTION 15 - DO NOT DELETE THIS LINE ****/
 

@@ -403,6 +403,113 @@
 
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
+/* Generated */ #if defined( _MANAGED )
+/* Generated */ int Core::MidPointStateSave( struct TA_MidPoint_State* _state,
+/* Generated */                            FILE* _file )
+/* Generated */ 
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public int midPointStateSave( struct TA_midPoint_State* _state,
+/* Generated */                             FILE* _file )
+/* Generated */ 
+/* Generated */ #else
+/* Generated */ TA_LIB_API int TA_MIDPOINT_StateSave( struct TA_MIDPOINT_State* _state,
+/* Generated */                                                FILE* _file )
+/* Generated */ 
+/* Generated */ #endif
+/**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
+
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 12 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */ 
+/* Generated */     int io_res; int state_is_null; state_is_null = (_state == NULL);
+/* Generated */    io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    if (state_is_null) return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+/* Generated */    io_res = fwrite(&STATE.mem_index,sizeof(STATE.mem_index),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.mem_size,sizeof(STATE.mem_size),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    int memory_allocated;
+/* Generated */    memory_allocated = STATE.memory != NULL;
+/* Generated */    io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    if (memory_allocated && STATE.mem_size > 0) { io_res = fwrite(STATE.memory,sizeof(struct TA_MIDPOINT_Data),STATE.mem_size,_file);
+/* Generated */    if (io_res < (int) STATE.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); }
+/* Generated */    io_res = fwrite(&STATE.optInTimePeriod,sizeof(STATE.optInTimePeriod),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.highest,sizeof(STATE.highest),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.lowest,sizeof(STATE.lowest),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */ 
+/* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/**** END GENCODE SECTION 12 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state save code here. */   
+   return 0;
+}
+
+/**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #if defined( _MANAGED )
+/* Generated */ int Core::MidPointStateLoad( struct TA_MidPoint_State** _state,
+/* Generated */                            FILE* _file )
+/* Generated */ 
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public int midPointStateLoad( struct TA_midPoint_State** _state,
+/* Generated */                             FILE* _file )
+/* Generated */ 
+/* Generated */ #else
+/* Generated */ TA_LIB_API int TA_MIDPOINT_StateLoad( struct TA_MIDPOINT_State** _state,
+/* Generated */                                                FILE* _file )
+/* Generated */ 
+/* Generated */ #endif
+/**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 14 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */ 
+/* Generated */    int io_res; int state_is_null;
+/* Generated */    io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    if (state_is_null) return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+/* Generated */    if (STATE != NULL) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    STATE = TA_Calloc(1, sizeof(struct TA_MIDPOINT_State));
+/* Generated */    io_res = fread(&STATE_P.mem_index,sizeof(STATE_P.mem_index),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.mem_size,sizeof(STATE_P.mem_size),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    int memory_allocated;
+/* Generated */    io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    if (STATE_P.mem_size > 0 && memory_allocated) { STATE_P.memory = TA_Calloc(STATE_P.mem_size, sizeof(struct TA_MIDPOINT_Data));
+/* Generated */    io_res = fread(STATE_P.memory,sizeof(struct TA_MIDPOINT_Data),STATE_P.mem_size,_file);
+/* Generated */    if (io_res < (int) STATE_P.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); } 
+/* Generated */    io_res = fread(&STATE_P.optInTimePeriod,sizeof(STATE_P.optInTimePeriod),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.highest,sizeof(STATE_P.highest),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.lowest,sizeof(STATE_P.lowest),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */ 
+/* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/**** END GENCODE SECTION 14 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state load code here. */   
+   return 0;
+}
+
+/**** START GENCODE SECTION 15 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
 /* Generated */ #define  USE_SINGLE_PRECISION_INPUT
 /* Generated */ #undef  TA_LIB_PRO
 /* Generated */ #if !defined( _MANAGED ) && !defined( _JAVA )
@@ -498,5 +605,5 @@
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ }}} // Close namespace TicTacTec.TA.Lib
 /* Generated */ #endif
-/**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
+/**** END GENCODE SECTION 15 - DO NOT DELETE THIS LINE ****/
 

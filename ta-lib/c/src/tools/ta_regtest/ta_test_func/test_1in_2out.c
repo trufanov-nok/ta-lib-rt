@@ -523,7 +523,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                               &outBegIdx,
                               &outNbElement,
                               gBuffer[0].out0,
-                              gBuffer[0].out1 );
+                              gBuffer[0].out1,
+                              _tmp_state_file);
       break;
    case TA_HT_SINE_TEST:
       retCode = TA_HT_SINE_StateTest( test->startIdx,
@@ -532,7 +533,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                             &outBegIdx,
                             &outNbElement,
                             gBuffer[0].out0,
-                            gBuffer[0].out1 );
+                            gBuffer[0].out1,
+                            _tmp_state_file);
       break;
    default:
       retCode = TA_INTERNAL_ERROR(133);

@@ -341,7 +341,8 @@ static ErrorNumber do_test_per_ema_state( const TA_History *history,
                          test->optInTimePeriod,
                          &outBegIdx,
                          &outNbElement,
-                         gBuffer[0].out0 );
+                         gBuffer[0].out0,
+                         _tmp_state_file);
 
    }
 

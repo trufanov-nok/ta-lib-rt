@@ -910,6 +910,229 @@ double sine, leadSine;
 
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
+/* Generated */ #if defined( _MANAGED )
+/* Generated */ int Core::HtTrendModeStateSave( struct TA_HtTrendMode_State* _state,
+/* Generated */                               FILE* _file )
+/* Generated */ 
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public int htTrendModeStateSave( struct TA_htTrendMode_State* _state,
+/* Generated */                                FILE* _file )
+/* Generated */ 
+/* Generated */ #else
+/* Generated */ TA_LIB_API int TA_HT_TRENDMODE_StateSave( struct TA_HT_TRENDMODE_State* _state,
+/* Generated */                                                    FILE* _file )
+/* Generated */ 
+/* Generated */ #endif
+/**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
+
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 12 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */ 
+/* Generated */     int io_res; int state_is_null; state_is_null = (_state == NULL);
+/* Generated */    io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    if (state_is_null) return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+/* Generated */    io_res = fwrite(&STATE.mem_index,sizeof(STATE.mem_index),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.mem_size,sizeof(STATE.mem_size),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    int memory_allocated;
+/* Generated */    memory_allocated = STATE.memory != NULL;
+/* Generated */    io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    if (memory_allocated && STATE.mem_size > 0) { io_res = fwrite(STATE.memory,sizeof(struct TA_HT_TRENDMODE_Data),STATE.mem_size,_file);
+/* Generated */    if (io_res < (int) STATE.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); }
+/* Generated */    // Warning: STATE.detrender must be saved manually!
+/* Generated */    // Warning: STATE.Q1 must be saved manually!
+/* Generated */    // Warning: STATE.jI must be saved manually!
+/* Generated */    // Warning: STATE.jQ must be saved manually!
+/* Generated */    io_res = fwrite(&STATE.hilbertIdx,sizeof(STATE.hilbertIdx),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.periodWMASub,sizeof(STATE.periodWMASub),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.periodWMASum,sizeof(STATE.periodWMASum),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.period,sizeof(STATE.period),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.I1ForOddPrev2,sizeof(STATE.I1ForOddPrev2),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.I1ForEvenPrev2,sizeof(STATE.I1ForEvenPrev2),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.I1ForOddPrev3,sizeof(STATE.I1ForOddPrev3),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.I1ForEvenPrev3,sizeof(STATE.I1ForEvenPrev3),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.prevI2,sizeof(STATE.prevI2),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.prevQ2,sizeof(STATE.prevQ2),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.smoothPeriod,sizeof(STATE.smoothPeriod),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    // Warning: STATE.circBuf must be saved manually!
+/* Generated */    io_res = fwrite(&STATE.DCPhase,sizeof(STATE.DCPhase),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.Im,sizeof(STATE.Im),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.Re,sizeof(STATE.Re),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.trailingWMAValue,sizeof(STATE.trailingWMAValue),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.rad2Deg,sizeof(STATE.rad2Deg),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.a,sizeof(STATE.a),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.b,sizeof(STATE.b),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.constDeg2RadBy360,sizeof(STATE.constDeg2RadBy360),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.deg2Rad,sizeof(STATE.deg2Rad),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.iTrend1,sizeof(STATE.iTrend1),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.iTrend2,sizeof(STATE.iTrend2),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.iTrend3,sizeof(STATE.iTrend3),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.daysInTrend,sizeof(STATE.daysInTrend),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.prevDCPhase,sizeof(STATE.prevDCPhase),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.prevSine,sizeof(STATE.prevSine),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.prevLeadSine,sizeof(STATE.prevLeadSine),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */ 
+/* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/**** END GENCODE SECTION 12 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state save code here. */   
+            SAVE_HILBERT_VARIABLES_STRUCT(HT_TRENDMODE,detrender)
+            SAVE_HILBERT_VARIABLES_STRUCT(HT_TRENDMODE,Q1)
+            SAVE_HILBERT_VARIABLES_STRUCT(HT_TRENDMODE,jI)
+            SAVE_HILBERT_VARIABLES_STRUCT(HT_TRENDMODE,jQ)
+            CIRCBUF_STRUCT_SAVE(HT_TRENDMODE, circBuf)
+   return 0;
+}
+
+/**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #if defined( _MANAGED )
+/* Generated */ int Core::HtTrendModeStateLoad( struct TA_HtTrendMode_State** _state,
+/* Generated */                               FILE* _file )
+/* Generated */ 
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public int htTrendModeStateLoad( struct TA_htTrendMode_State** _state,
+/* Generated */                                FILE* _file )
+/* Generated */ 
+/* Generated */ #else
+/* Generated */ TA_LIB_API int TA_HT_TRENDMODE_StateLoad( struct TA_HT_TRENDMODE_State** _state,
+/* Generated */                                                    FILE* _file )
+/* Generated */ 
+/* Generated */ #endif
+/**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 14 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */ 
+/* Generated */    int io_res; int state_is_null;
+/* Generated */    io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    if (state_is_null) return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+/* Generated */    if (STATE != NULL) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    STATE = TA_Calloc(1, sizeof(struct TA_HT_TRENDMODE_State));
+/* Generated */    io_res = fread(&STATE_P.mem_index,sizeof(STATE_P.mem_index),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.mem_size,sizeof(STATE_P.mem_size),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    int memory_allocated;
+/* Generated */    io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    if (STATE_P.mem_size > 0 && memory_allocated) { STATE_P.memory = TA_Calloc(STATE_P.mem_size, sizeof(struct TA_HT_TRENDMODE_Data));
+/* Generated */    io_res = fread(STATE_P.memory,sizeof(struct TA_HT_TRENDMODE_Data),STATE_P.mem_size,_file);
+/* Generated */    if (io_res < (int) STATE_P.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); } 
+/* Generated */    // Warning: STATE_P.detrender must be loaded manually!
+/* Generated */    // Warning: STATE_P.Q1 must be loaded manually!
+/* Generated */    // Warning: STATE_P.jI must be loaded manually!
+/* Generated */    // Warning: STATE_P.jQ must be loaded manually!
+/* Generated */    io_res = fread(&STATE_P.hilbertIdx,sizeof(STATE_P.hilbertIdx),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.periodWMASub,sizeof(STATE_P.periodWMASub),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.periodWMASum,sizeof(STATE_P.periodWMASum),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.period,sizeof(STATE_P.period),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.I1ForOddPrev2,sizeof(STATE_P.I1ForOddPrev2),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.I1ForEvenPrev2,sizeof(STATE_P.I1ForEvenPrev2),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.I1ForOddPrev3,sizeof(STATE_P.I1ForOddPrev3),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.I1ForEvenPrev3,sizeof(STATE_P.I1ForEvenPrev3),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.prevI2,sizeof(STATE_P.prevI2),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.prevQ2,sizeof(STATE_P.prevQ2),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.smoothPeriod,sizeof(STATE_P.smoothPeriod),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    // Warning: STATE_P.circBuf must be loaded manually!
+/* Generated */    io_res = fread(&STATE_P.DCPhase,sizeof(STATE_P.DCPhase),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.Im,sizeof(STATE_P.Im),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.Re,sizeof(STATE_P.Re),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.trailingWMAValue,sizeof(STATE_P.trailingWMAValue),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.rad2Deg,sizeof(STATE_P.rad2Deg),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.a,sizeof(STATE_P.a),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.b,sizeof(STATE_P.b),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.constDeg2RadBy360,sizeof(STATE_P.constDeg2RadBy360),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.deg2Rad,sizeof(STATE_P.deg2Rad),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.iTrend1,sizeof(STATE_P.iTrend1),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.iTrend2,sizeof(STATE_P.iTrend2),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.iTrend3,sizeof(STATE_P.iTrend3),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.daysInTrend,sizeof(STATE_P.daysInTrend),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.prevDCPhase,sizeof(STATE_P.prevDCPhase),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.prevSine,sizeof(STATE_P.prevSine),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.prevLeadSine,sizeof(STATE_P.prevLeadSine),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */ 
+/* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/**** END GENCODE SECTION 14 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state load code here. */   
+            LOAD_HILBERT_VARIABLES_STRUCT(HT_TRENDMODE,detrender)
+            LOAD_HILBERT_VARIABLES_STRUCT(HT_TRENDMODE,Q1)
+            LOAD_HILBERT_VARIABLES_STRUCT(HT_TRENDMODE,jI)
+            LOAD_HILBERT_VARIABLES_STRUCT(HT_TRENDMODE,jQ)
+            CIRCBUF_STRUCT_LOAD(HT_TRENDMODE, circBuf, double)
+   return 0;
+}
+
+/**** START GENCODE SECTION 15 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
 /* Generated */ #define  USE_SINGLE_PRECISION_INPUT
 /* Generated */ #undef  TA_LIB_PRO
 /* Generated */ #if !defined( _MANAGED ) && !defined( _JAVA )
@@ -1190,5 +1413,5 @@ double sine, leadSine;
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ }}} // Close namespace TicTacTec.TA.Lib
 /* Generated */ #endif
-/**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
+/**** END GENCODE SECTION 15 - DO NOT DELETE THIS LINE ****/
 

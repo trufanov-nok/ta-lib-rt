@@ -725,7 +725,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                              test->optInTimePeriod,
                              &outBegIdx,
                              &outNbElement,
-                             gBuffer[0].out0 );
+                             gBuffer[0].out0,
+                             _tmp_state_file);
       break;
 
    case TST_MINUS_DI:
@@ -742,7 +743,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                              test->optInTimePeriod,
                              &outBegIdx,
                              &outNbElement,
-                             gBuffer[0].out0 );
+                             gBuffer[0].out0,
+                             _tmp_state_file);
       break;
 
    case TST_DX:
@@ -759,7 +761,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                        test->optInTimePeriod,
                        &outBegIdx,
                        &outNbElement,
-                       gBuffer[0].out0 );
+                       gBuffer[0].out0,
+                       _tmp_state_file);
       break;
 
    case TST_ADX:
@@ -776,7 +779,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                         test->optInTimePeriod,
                         &outBegIdx,
                         &outNbElement,
-                        gBuffer[0].out0 );
+                        gBuffer[0].out0,
+                        _tmp_state_file);
       break;
 
    case TST_PLUS_DM:
@@ -792,7 +796,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                             test->optInTimePeriod,
                             &outBegIdx,
                             &outNbElement,
-                            gBuffer[0].out0 );
+                            gBuffer[0].out0,
+                            _tmp_state_file);
       break;
 
    case TST_PLUS_DI:
@@ -809,7 +814,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                             test->optInTimePeriod,
                             &outBegIdx,
                             &outNbElement,
-                            gBuffer[0].out0 );
+                            gBuffer[0].out0,
+                            _tmp_state_file);
       break;
 
    case TST_ADXR:
@@ -826,7 +832,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                          test->optInTimePeriod,
                          &outBegIdx,
                          &outNbElement,
-                         gBuffer[0].out0 );
+                         gBuffer[0].out0,
+                         _tmp_state_file);
       break;
    default:
       retCode = TA_BAD_PARAM;

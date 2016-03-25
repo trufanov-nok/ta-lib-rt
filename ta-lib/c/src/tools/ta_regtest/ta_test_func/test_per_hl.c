@@ -672,8 +672,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                           &outBegIdx,
                           &outNbElement,
                           gBuffer[1].out0,
-                          gBuffer[0].out0
-                        );
+                          gBuffer[0].out0,
+                          _tmp_state_file);
       break;
 
    case TA_AROON_DOWN_TEST:
@@ -685,8 +685,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                           &outBegIdx,
                           &outNbElement,
                           gBuffer[0].out0,
-                          gBuffer[1].out0
-                        );
+                          gBuffer[1].out0,
+                          _tmp_state_file);
       break;
 
    case TA_AROONOSC_TEST:
@@ -697,8 +697,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                              test->optInTimePeriod,
                              &outBegIdx,
                              &outNbElement,
-                             gBuffer[0].out0
-                           );
+                             gBuffer[0].out0,
+                             _tmp_state_file);
       break;
 
    case TA_CORREL_TEST:
@@ -709,8 +709,8 @@ static ErrorNumber do_test_state( const TA_History *history,
 //                           test->optInTimePeriod,
 //                           &outBegIdx,
 //                           &outNbElement,
-//                           gBuffer[0].out0
-//                         );
+//                           gBuffer[0].out0,
+//                          _tmp_state_file);
       break;
 
    case TA_BETA_TEST:
@@ -721,8 +721,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                          test->optInTimePeriod,
                          &outBegIdx,
                          &outNbElement,
-                         gBuffer[0].out0
-                         );
+                         gBuffer[0].out0,
+                         _tmp_state_file);
       break;
 
    default:

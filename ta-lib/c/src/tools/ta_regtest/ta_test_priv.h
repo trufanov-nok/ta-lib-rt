@@ -12,6 +12,9 @@
    #include "ta_error_number.h"
 #endif
 
+   #include <stdio.h>
+   extern FILE * _tmp_state_file;
+
 typedef struct
 {
    unsigned int nbBars; /* Nb of element into the following arrays. */

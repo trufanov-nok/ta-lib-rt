@@ -355,6 +355,64 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int accbandsStateSave( struct TA_accbands_State* _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_ACCBANDS_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_SMA_StateSave ( (struct sma *) _state.value .stateSMA1, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_SMA_StateSave ( (struct sma *) _state.value .stateSMA2, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_SMA_StateSave ( (struct sma *) _state.value .stateSMA3, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
+   public int accbandsStateLoad( struct TA_accbands_State** _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct accbands ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_ACCBANDS_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_ACCBANDS_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_SMA_StateLoad ( (struct sma **) & _state.value .value .stateSMA1, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_SMA_StateLoad ( (struct sma **) & _state.value .value .stateSMA2, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_SMA_StateLoad ( (struct sma **) & _state.value .value .stateSMA3, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
    public RetCode accbands( int startIdx,
       int endIdx,
       float inHigh[],
@@ -505,6 +563,46 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int acosStateSave( struct TA_acos_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_ACOS_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int acosStateLoad( struct TA_acos_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct acos ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_ACOS_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_ACOS_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
    public RetCode acos( int startIdx,
       int endIdx,
       float inReal[],
@@ -618,6 +716,50 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int adStateSave( struct TA_ad_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_AD_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .ad,sizeof( _state.value .ad),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int adStateLoad( struct TA_ad_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct ad ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_AD_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_AD_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .ad,sizeof( _state.value .value .ad),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode ad( int startIdx,
       int endIdx,
       float inHigh[],
@@ -719,6 +861,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int addStateSave( struct TA_add_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_ADD_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int addStateLoad( struct TA_add_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct add ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_ADD_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_ADD_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode add( int startIdx,
       int endIdx,
@@ -892,6 +1074,82 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int adOscStateSave( struct TA_adOsc_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_ADOSC_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInFastPeriod,sizeof( _state.value .optInFastPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInSlowPeriod,sizeof( _state.value .optInSlowPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .slowk,sizeof( _state.value .slowk),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .one_minus_slowk,sizeof( _state.value .one_minus_slowk),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .fastk,sizeof( _state.value .fastk),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .one_minus_fastk,sizeof( _state.value .one_minus_fastk),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ad,sizeof( _state.value .ad),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .fastEMA,sizeof( _state.value .fastEMA),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .slowEMA,sizeof( _state.value .slowEMA),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int adOscStateLoad( struct TA_adOsc_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct adOsc ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_ADOSC_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_ADOSC_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInFastPeriod,sizeof( _state.value .value .optInFastPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInSlowPeriod,sizeof( _state.value .value .optInSlowPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .slowk,sizeof( _state.value .value .slowk),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .one_minus_slowk,sizeof( _state.value .value .one_minus_slowk),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .fastk,sizeof( _state.value .value .fastk),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .one_minus_fastk,sizeof( _state.value .value .one_minus_fastk),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ad,sizeof( _state.value .value .ad),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .fastEMA,sizeof( _state.value .value .fastEMA),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .slowEMA,sizeof( _state.value .value .slowEMA),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode adOsc( int startIdx,
       int endIdx,
@@ -1242,6 +1500,82 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int adxStateSave( struct TA_adx_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_ADX_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevHigh,sizeof( _state.value .prevHigh),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevLow,sizeof( _state.value .prevLow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevClose,sizeof( _state.value .prevClose),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevMinusDM,sizeof( _state.value .prevMinusDM),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevPlusDM,sizeof( _state.value .prevPlusDM),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevTR,sizeof( _state.value .prevTR),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevADX,sizeof( _state.value .prevADX),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .sumDX,sizeof( _state.value .sumDX),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int adxStateLoad( struct TA_adx_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct adx ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_ADX_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_ADX_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevHigh,sizeof( _state.value .value .prevHigh),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevLow,sizeof( _state.value .value .prevLow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevClose,sizeof( _state.value .value .prevClose),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevMinusDM,sizeof( _state.value .value .prevMinusDM),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevPlusDM,sizeof( _state.value .value .prevPlusDM),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevTR,sizeof( _state.value .value .prevTR),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevADX,sizeof( _state.value .value .prevADX),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .sumDX,sizeof( _state.value .value .sumDX),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode adx( int startIdx,
       int endIdx,
       float inHigh[],
@@ -1539,6 +1873,56 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int adxrStateSave( struct TA_adxr_State* _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_ADXR_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_ADX_StateSave ( (struct adx *) _state.value .ADXState, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
+   public int adxrStateLoad( struct TA_adxr_State** _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct adxr ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_ADXR_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_ADXR_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_ADX_StateLoad ( (struct adx **) & _state.value .value .ADXState, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
    public RetCode adxr( int startIdx,
       int endIdx,
       float inHigh[],
@@ -1789,6 +2173,72 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int apoStateSave( struct TA_apo_State* _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_APO_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInFastPeriod,sizeof( _state.value .optInFastPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInSlowPeriod,sizeof( _state.value .optInSlowPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInMAType,sizeof( _state.value .optInMAType),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .doPercentageOutput,sizeof( _state.value .doPercentageOutput),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_MA_StateSave ( (struct movingAverage *) _state.value .fastMAState, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_MA_StateSave ( (struct movingAverage *) _state.value .slowMAState, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
+   public int apoStateLoad( struct TA_apo_State** _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct apo ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_APO_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_APO_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInFastPeriod,sizeof( _state.value .value .optInFastPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInSlowPeriod,sizeof( _state.value .value .optInSlowPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInMAType,sizeof( _state.value .value .optInMAType),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .doPercentageOutput,sizeof( _state.value .value .doPercentageOutput),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_MA_StateLoad ( (struct movingAverage **) & _state.value .value .fastMAState, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_MA_StateLoad ( (struct movingAverage **) & _state.value .value .slowMAState, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
    }
    public RetCode apo( int startIdx,
       int endIdx,
@@ -2097,6 +2547,70 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int aroonStateSave( struct TA_aroon_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_AROON_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .lowest,sizeof( _state.value .lowest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .highest,sizeof( _state.value .highest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .lowest_exp,sizeof( _state.value .lowest_exp),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .highest_exp,sizeof( _state.value .highest_exp),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .factor,sizeof( _state.value .factor),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int aroonStateLoad( struct TA_aroon_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct aroon ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_AROON_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_AROON_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .lowest,sizeof( _state.value .value .lowest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .highest,sizeof( _state.value .value .highest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .lowest_exp,sizeof( _state.value .value .lowest_exp),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .highest_exp,sizeof( _state.value .value .highest_exp),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .factor,sizeof( _state.value .value .factor),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode aroon( int startIdx,
       int endIdx,
       float inHigh[],
@@ -2386,6 +2900,70 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int aroonOscStateSave( struct TA_aroonOsc_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_AROONOSC_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .lowest,sizeof( _state.value .lowest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .highest,sizeof( _state.value .highest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .lowest_exp,sizeof( _state.value .lowest_exp),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .highest_exp,sizeof( _state.value .highest_exp),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .factor,sizeof( _state.value .factor),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int aroonOscStateLoad( struct TA_aroonOsc_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct aroonOsc ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_AROONOSC_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_AROONOSC_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .lowest,sizeof( _state.value .value .lowest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .highest,sizeof( _state.value .value .highest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .lowest_exp,sizeof( _state.value .value .lowest_exp),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .highest_exp,sizeof( _state.value .value .highest_exp),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .factor,sizeof( _state.value .value .factor),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode aroonOsc( int startIdx,
       int endIdx,
       float inHigh[],
@@ -2538,6 +3116,46 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int asinStateSave( struct TA_asin_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_ASIN_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int asinStateLoad( struct TA_asin_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct asin ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_ASIN_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_ASIN_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
    public RetCode asin( int startIdx,
       int endIdx,
       float inReal[],
@@ -2620,6 +3238,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int atanStateSave( struct TA_atan_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_ATAN_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int atanStateLoad( struct TA_atan_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct atan ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_ATAN_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_ATAN_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode atan( int startIdx,
       int endIdx,
@@ -2814,6 +3472,68 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int atrStateSave( struct TA_atr_State* _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_ATR_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevATR,sizeof( _state.value .prevATR),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .firstATR,sizeof( _state.value .firstATR),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_TRANGE_StateSave ( (struct trueRange *) _state.value .StateTRANGE, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_SMA_StateSave ( (struct sma *) _state.value .StateSMA, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
+   public int atrStateLoad( struct TA_atr_State** _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct atr ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_ATR_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_ATR_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevATR,sizeof( _state.value .value .prevATR),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .firstATR,sizeof( _state.value .value .firstATR),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_TRANGE_StateLoad ( (struct trueRange **) & _state.value .value .StateTRANGE, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_SMA_StateLoad ( (struct sma **) & _state.value .value .StateSMA, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
    public RetCode atr( int startIdx,
       int endIdx,
       float inHigh[],
@@ -2969,6 +3689,46 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int avgPriceStateSave( struct TA_avgPrice_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_AVGPRICE_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int avgPriceStateLoad( struct TA_avgPrice_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct avgPrice ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_AVGPRICE_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_AVGPRICE_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
    public RetCode avgPrice( int startIdx,
       int endIdx,
       float inOpen[],
@@ -3107,6 +3867,54 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int avgDevStateSave( struct TA_avgDev_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_AVGDEV_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .sum,sizeof( _state.value .sum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int avgDevStateLoad( struct TA_avgDev_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct avgDev ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_AVGDEV_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_AVGDEV_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .sum,sizeof( _state.value .value .sum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode avgDev( int startIdx,
       int endIdx,
@@ -3408,6 +4216,72 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int bbandsStateSave( struct TA_bbands_State* _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_BBANDS_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInNbDevUp,sizeof( _state.value .optInNbDevUp),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInNbDevDn,sizeof( _state.value .optInNbDevDn),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInMAType,sizeof( _state.value .optInMAType),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_MA_StateSave ( (struct movingAverage *) _state.value .stateMA, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_STDDEV_StateSave ( (struct stdDev *) _state.value .stateSTDDEV, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
+   public int bbandsStateLoad( struct TA_bbands_State** _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct bbands ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_BBANDS_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_BBANDS_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInNbDevUp,sizeof( _state.value .value .optInNbDevUp),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInNbDevDn,sizeof( _state.value .value .optInNbDevDn),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInMAType,sizeof( _state.value .value .optInMAType),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_MA_StateLoad ( (struct movingAverage **) & _state.value .value .stateMA, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_STDDEV_StateLoad ( (struct stdDev **) & _state.value .value .stateSTDDEV, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
    }
    public RetCode bbands( int startIdx,
       int endIdx,
@@ -3739,6 +4613,86 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int betaStateSave( struct TA_beta_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_BETA_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .S_xx,sizeof( _state.value .S_xx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .S_xy,sizeof( _state.value .S_xy),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .S_x,sizeof( _state.value .S_x),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .S_y,sizeof( _state.value .S_y),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prev_price_x,sizeof( _state.value .prev_price_x),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prev_price_y,sizeof( _state.value .prev_price_y),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .last_price_x,sizeof( _state.value .last_price_x),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .last_price_y,sizeof( _state.value .last_price_y),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .initialized,sizeof( _state.value .initialized),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int betaStateLoad( struct TA_beta_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct beta ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_BETA_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_BETA_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .S_xx,sizeof( _state.value .value .S_xx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .S_xy,sizeof( _state.value .value .S_xy),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .S_x,sizeof( _state.value .value .S_x),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .S_y,sizeof( _state.value .value .S_y),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prev_price_x,sizeof( _state.value .value .prev_price_x),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prev_price_y,sizeof( _state.value .value .prev_price_y),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .last_price_x,sizeof( _state.value .value .last_price_x),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .last_price_y,sizeof( _state.value .value .last_price_y),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .initialized,sizeof( _state.value .value .initialized),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode beta( int startIdx,
       int endIdx,
       float inReal0[],
@@ -3929,6 +4883,46 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int bopStateSave( struct TA_bop_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_BOP_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int bopStateLoad( struct TA_bop_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct bop ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_BOP_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_BOP_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
    public RetCode bop( int startIdx,
       int endIdx,
       float inOpen[],
@@ -4099,6 +5093,56 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cciStateSave( struct TA_cci_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CCI_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .theAverage,sizeof( _state.value .theAverage),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      { int io_circbuf_res; struct TA_CCI_STATE_CIRCBUF * str_circbuf = _state.value .circBuf; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      return 0;
+   }
+   public int cciStateLoad( struct TA_cci_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cci ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CCI_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CCI_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .theAverage,sizeof( _state.value .value .theAverage),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      { int io_circbuf_res; int circbuf_idx; int circbuf_size; if ( _state.value .value .circBuf != NULL) return RetCode.BadParam ; io_circbuf_res = fread(&circbuf_idx,sizeof(circbuf_idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fread(&circbuf_size,sizeof(circbuf_size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; { _state.value .value .circBuf = calloc(1, sizeof(struct TA_CCI_STATE_CIRCBUF )); if ( _state.value .value .circBuf == NULL) return RetCode.AllocErr ; struct TA_CCI_STATE_CIRCBUF * buf = (struct TA_CCI_STATE_CIRCBUF *) _state.value .value .circBuf; buf->idx = 0; buf->size = circbuf_size; buf->circbuf = calloc(circbuf_size, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} struct TA_CCI_STATE_CIRCBUF * str_circbuf = _state.value .value .circBuf; str_circbuf->idx = circbuf_idx; if (str_circbuf->size > 0) { io_circbuf_res = fread(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      return 0;
    }
    public RetCode cci( int startIdx,
       int endIdx,
@@ -4288,6 +5332,50 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdl2CrowsStateSave( struct TA_cdl2Crows_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDL2CROWS_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .BodyLongPeriodTotal,sizeof( _state.value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdl2CrowsStateLoad( struct TA_cdl2Crows_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdl2Crows ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDL2CROWS_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDL2CROWS_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .BodyLongPeriodTotal,sizeof( _state.value .value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode cdl2Crows( int startIdx,
       int endIdx,
@@ -4493,6 +5581,62 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdl3BlackCrowsStateSave( struct TA_cdl3BlackCrows_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDL3BLACKCROWS_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal0,sizeof( _state.value .ShadowVeryShortPeriodTotal0),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal1,sizeof( _state.value .ShadowVeryShortPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal2,sizeof( _state.value .ShadowVeryShortPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowVeryShort,sizeof( _state.value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdl3BlackCrowsStateLoad( struct TA_cdl3BlackCrows_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdl3BlackCrows ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDL3BLACKCROWS_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDL3BLACKCROWS_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal0,sizeof( _state.value .value .ShadowVeryShortPeriodTotal0),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal1,sizeof( _state.value .value .ShadowVeryShortPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal2,sizeof( _state.value .value .ShadowVeryShortPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowVeryShort,sizeof( _state.value .value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode cdl3BlackCrows( int startIdx,
       int endIdx,
@@ -4707,6 +5851,62 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdl3InsideStateSave( struct TA_cdl3Inside_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDL3INSIDE_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .BodyLongPeriodTotal,sizeof( _state.value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyShortPeriodTotal,sizeof( _state.value .BodyShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyLong,sizeof( _state.value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyShort,sizeof( _state.value .periodBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdl3InsideStateLoad( struct TA_cdl3Inside_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdl3Inside ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDL3INSIDE_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDL3INSIDE_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .BodyLongPeriodTotal,sizeof( _state.value .value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyShortPeriodTotal,sizeof( _state.value .value .BodyShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyLong,sizeof( _state.value .value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyShort,sizeof( _state.value .value .periodBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode cdl3Inside( int startIdx,
       int endIdx,
@@ -4939,6 +6139,58 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdl3LineStrikeStateSave( struct TA_cdl3LineStrike_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDL3LINESTRIKE_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .NearPeriodTotal3,sizeof( _state.value .NearPeriodTotal3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .NearPeriodTotal2,sizeof( _state.value .NearPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodNear,sizeof( _state.value .periodNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdl3LineStrikeStateLoad( struct TA_cdl3LineStrike_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdl3LineStrike ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDL3LINESTRIKE_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDL3LINESTRIKE_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .NearPeriodTotal3,sizeof( _state.value .value .NearPeriodTotal3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .NearPeriodTotal2,sizeof( _state.value .value .NearPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodNear,sizeof( _state.value .value .periodNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode cdl3LineStrike( int startIdx,
       int endIdx,
       float inOpen[],
@@ -5124,6 +6376,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdl3OutsideStateSave( struct TA_cdl3Outside_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDL3OUTSIDE_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int cdl3OutsideStateLoad( struct TA_cdl3Outside_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdl3Outside ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDL3OUTSIDE_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDL3OUTSIDE_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode cdl3Outside( int startIdx,
       int endIdx,
@@ -5382,6 +6674,98 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdl3StarsInSouthStateSave( struct TA_cdl3StarsInSouth_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDL3STARSINSOUTH_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .BodyLongPeriodTotal,sizeof( _state.value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowLongPeriodTotal,sizeof( _state.value .ShadowLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal1,sizeof( _state.value .ShadowVeryShortPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal0,sizeof( _state.value .ShadowVeryShortPeriodTotal0),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyShortPeriodTotal,sizeof( _state.value .BodyShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyLong,sizeof( _state.value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowLong,sizeof( _state.value .periodShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowVeryShort,sizeof( _state.value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyShort,sizeof( _state.value .periodBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyLong,sizeof( _state.value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadowLong,sizeof( _state.value .gapShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadowVeryShort,sizeof( _state.value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyShort,sizeof( _state.value .gapBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdl3StarsInSouthStateLoad( struct TA_cdl3StarsInSouth_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdl3StarsInSouth ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDL3STARSINSOUTH_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDL3STARSINSOUTH_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .BodyLongPeriodTotal,sizeof( _state.value .value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowLongPeriodTotal,sizeof( _state.value .value .ShadowLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal1,sizeof( _state.value .value .ShadowVeryShortPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal0,sizeof( _state.value .value .ShadowVeryShortPeriodTotal0),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyShortPeriodTotal,sizeof( _state.value .value .BodyShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyLong,sizeof( _state.value .value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowLong,sizeof( _state.value .value .periodShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowVeryShort,sizeof( _state.value .value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyShort,sizeof( _state.value .value .periodBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyLong,sizeof( _state.value .value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadowLong,sizeof( _state.value .value .gapShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadowVeryShort,sizeof( _state.value .value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyShort,sizeof( _state.value .value .gapBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode cdl3StarsInSouth( int startIdx,
       int endIdx,
@@ -5709,6 +7093,110 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdl3WhiteSoldiersStateSave( struct TA_cdl3WhiteSoldiers_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDL3WHITESOLDIERS_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal0,sizeof( _state.value .ShadowVeryShortPeriodTotal0),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal1,sizeof( _state.value .ShadowVeryShortPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal2,sizeof( _state.value .ShadowVeryShortPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .NearPeriodTotal1,sizeof( _state.value .NearPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .NearPeriodTotal2,sizeof( _state.value .NearPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .FarPeriodTotal1,sizeof( _state.value .FarPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .FarPeriodTotal2,sizeof( _state.value .FarPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyShortPeriodTotal,sizeof( _state.value .BodyShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadowVeryShort,sizeof( _state.value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowVeryShort,sizeof( _state.value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapNear,sizeof( _state.value .gapNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodNear,sizeof( _state.value .periodNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapFar,sizeof( _state.value .gapFar),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodFar,sizeof( _state.value .periodFar),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyShort,sizeof( _state.value .gapBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyShort,sizeof( _state.value .periodBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdl3WhiteSoldiersStateLoad( struct TA_cdl3WhiteSoldiers_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdl3WhiteSoldiers ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDL3WHITESOLDIERS_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDL3WHITESOLDIERS_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal0,sizeof( _state.value .value .ShadowVeryShortPeriodTotal0),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal1,sizeof( _state.value .value .ShadowVeryShortPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal2,sizeof( _state.value .value .ShadowVeryShortPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .NearPeriodTotal1,sizeof( _state.value .value .NearPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .NearPeriodTotal2,sizeof( _state.value .value .NearPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .FarPeriodTotal1,sizeof( _state.value .value .FarPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .FarPeriodTotal2,sizeof( _state.value .value .FarPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyShortPeriodTotal,sizeof( _state.value .value .BodyShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadowVeryShort,sizeof( _state.value .value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowVeryShort,sizeof( _state.value .value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapNear,sizeof( _state.value .value .gapNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodNear,sizeof( _state.value .value .periodNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapFar,sizeof( _state.value .value .gapFar),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodFar,sizeof( _state.value .value .periodFar),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyShort,sizeof( _state.value .value .gapBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyShort,sizeof( _state.value .value .periodBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode cdl3WhiteSoldiers( int startIdx,
       int endIdx,
       float inOpen[],
@@ -6025,6 +7513,86 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdlAbandonedBabyStateSave( struct TA_cdlAbandonedBaby_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLABANDONEDBABY_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInPenetration,sizeof( _state.value .optInPenetration),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyLongPeriodTotal,sizeof( _state.value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyDojiPeriodTotal,sizeof( _state.value .BodyDojiPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyShortPeriodTotal,sizeof( _state.value .BodyShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyLong,sizeof( _state.value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyLong,sizeof( _state.value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyDoji,sizeof( _state.value .gapBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyDoji,sizeof( _state.value .periodBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyShort,sizeof( _state.value .gapBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyShort,sizeof( _state.value .periodBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlAbandonedBabyStateLoad( struct TA_cdlAbandonedBaby_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlAbandonedBaby ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLABANDONEDBABY_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLABANDONEDBABY_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInPenetration,sizeof( _state.value .value .optInPenetration),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyLongPeriodTotal,sizeof( _state.value .value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyDojiPeriodTotal,sizeof( _state.value .value .BodyDojiPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyShortPeriodTotal,sizeof( _state.value .value .BodyShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyLong,sizeof( _state.value .value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyLong,sizeof( _state.value .value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyDoji,sizeof( _state.value .value .gapBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyDoji,sizeof( _state.value .value .periodBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyShort,sizeof( _state.value .value .gapBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyShort,sizeof( _state.value .value .periodBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode cdlAbandonedBaby( int startIdx,
       int endIdx,
@@ -6407,6 +7975,126 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlAdvanceBlockStateSave( struct TA_cdlAdvanceBlock_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLADVANCEBLOCK_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .ShadowShortPeriodTotal0,sizeof( _state.value .ShadowShortPeriodTotal0),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowShortPeriodTotal1,sizeof( _state.value .ShadowShortPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowShortPeriodTotal2,sizeof( _state.value .ShadowShortPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowLongPeriodTotal0,sizeof( _state.value .ShadowLongPeriodTotal0),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowLongPeriodTotal1,sizeof( _state.value .ShadowLongPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .NearPeriodTotal1,sizeof( _state.value .NearPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .NearPeriodTotal2,sizeof( _state.value .NearPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .FarPeriodTotal1,sizeof( _state.value .FarPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .FarPeriodTotal2,sizeof( _state.value .FarPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyLongPeriodTotal,sizeof( _state.value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadowShort,sizeof( _state.value .gapShadowShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowShort,sizeof( _state.value .periodShadowShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadowLong,sizeof( _state.value .gapShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowLong,sizeof( _state.value .periodShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapNear,sizeof( _state.value .gapNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodNear,sizeof( _state.value .periodNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapFar,sizeof( _state.value .gapFar),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodFar,sizeof( _state.value .periodFar),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyLong,sizeof( _state.value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyLong,sizeof( _state.value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlAdvanceBlockStateLoad( struct TA_cdlAdvanceBlock_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlAdvanceBlock ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLADVANCEBLOCK_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLADVANCEBLOCK_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .ShadowShortPeriodTotal0,sizeof( _state.value .value .ShadowShortPeriodTotal0),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowShortPeriodTotal1,sizeof( _state.value .value .ShadowShortPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowShortPeriodTotal2,sizeof( _state.value .value .ShadowShortPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowLongPeriodTotal0,sizeof( _state.value .value .ShadowLongPeriodTotal0),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowLongPeriodTotal1,sizeof( _state.value .value .ShadowLongPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .NearPeriodTotal1,sizeof( _state.value .value .NearPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .NearPeriodTotal2,sizeof( _state.value .value .NearPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .FarPeriodTotal1,sizeof( _state.value .value .FarPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .FarPeriodTotal2,sizeof( _state.value .value .FarPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyLongPeriodTotal,sizeof( _state.value .value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadowShort,sizeof( _state.value .value .gapShadowShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowShort,sizeof( _state.value .value .periodShadowShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadowLong,sizeof( _state.value .value .gapShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowLong,sizeof( _state.value .value .periodShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapNear,sizeof( _state.value .value .gapNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodNear,sizeof( _state.value .value .periodNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapFar,sizeof( _state.value .value .gapFar),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodFar,sizeof( _state.value .value .periodFar),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyLong,sizeof( _state.value .value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyLong,sizeof( _state.value .value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode cdlAdvanceBlock( int startIdx,
       int endIdx,
       float inOpen[],
@@ -6701,6 +8389,70 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlBeltHoldStateSave( struct TA_cdlBeltHold_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLBELTHOLD_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal,sizeof( _state.value .ShadowVeryShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyLongPeriodTotal,sizeof( _state.value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadowVeryShort,sizeof( _state.value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowVeryShort,sizeof( _state.value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyLong,sizeof( _state.value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyLong,sizeof( _state.value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlBeltHoldStateLoad( struct TA_cdlBeltHold_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlBeltHold ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLBELTHOLD_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLBELTHOLD_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal,sizeof( _state.value .value .ShadowVeryShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyLongPeriodTotal,sizeof( _state.value .value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadowVeryShort,sizeof( _state.value .value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowVeryShort,sizeof( _state.value .value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyLong,sizeof( _state.value .value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyLong,sizeof( _state.value .value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode cdlBeltHold( int startIdx,
       int endIdx,
       float inOpen[],
@@ -6924,6 +8676,50 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlBreakawayStateSave( struct TA_cdlBreakaway_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLBREAKAWAY_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .BodyLongPeriodTotal,sizeof( _state.value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlBreakawayStateLoad( struct TA_cdlBreakaway_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlBreakaway ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLBREAKAWAY_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLBREAKAWAY_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .BodyLongPeriodTotal,sizeof( _state.value .value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode cdlBreakaway( int startIdx,
       int endIdx,
       float inOpen[],
@@ -7146,6 +8942,70 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlClosingMarubozuStateSave( struct TA_cdlClosingMarubozu_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLCLOSINGMARUBOZU_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal,sizeof( _state.value .ShadowVeryShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyLongPeriodTotal,sizeof( _state.value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadowVeryShort,sizeof( _state.value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowVeryShort,sizeof( _state.value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyLong,sizeof( _state.value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyLong,sizeof( _state.value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlClosingMarubozuStateLoad( struct TA_cdlClosingMarubozu_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlClosingMarubozu ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLCLOSINGMARUBOZU_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLCLOSINGMARUBOZU_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal,sizeof( _state.value .value .ShadowVeryShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyLongPeriodTotal,sizeof( _state.value .value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadowVeryShort,sizeof( _state.value .value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowVeryShort,sizeof( _state.value .value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyLong,sizeof( _state.value .value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyLong,sizeof( _state.value .value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode cdlClosingMarubozu( int startIdx,
       int endIdx,
       float inOpen[],
@@ -7366,6 +9226,62 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlConcealBabysWallStateSave( struct TA_cdlConcealBabysWall_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLCONCEALBABYSWALL_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal1,sizeof( _state.value .ShadowVeryShortPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal2,sizeof( _state.value .ShadowVeryShortPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal3,sizeof( _state.value .ShadowVeryShortPeriodTotal3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowVeryShort,sizeof( _state.value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlConcealBabysWallStateLoad( struct TA_cdlConcealBabysWall_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlConcealBabysWall ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLCONCEALBABYSWALL_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLCONCEALBABYSWALL_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal1,sizeof( _state.value .value .ShadowVeryShortPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal2,sizeof( _state.value .value .ShadowVeryShortPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal3,sizeof( _state.value .value .ShadowVeryShortPeriodTotal3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowVeryShort,sizeof( _state.value .value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode cdlConcealBabysWall( int startIdx,
       int endIdx,
       float inOpen[],
@@ -7584,6 +9500,74 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlCounterAttackStateSave( struct TA_cdlCounterAttack_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLCOUNTERATTACK_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .BodyLongPeriodTotal0,sizeof( _state.value .BodyLongPeriodTotal0),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyLongPeriodTotal1,sizeof( _state.value .BodyLongPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .EqualPeriodTotal,sizeof( _state.value .EqualPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyLong,sizeof( _state.value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyLong,sizeof( _state.value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodEqual,sizeof( _state.value .periodEqual),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapEqual,sizeof( _state.value .gapEqual),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlCounterAttackStateLoad( struct TA_cdlCounterAttack_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlCounterAttack ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLCOUNTERATTACK_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLCOUNTERATTACK_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .BodyLongPeriodTotal0,sizeof( _state.value .value .BodyLongPeriodTotal0),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyLongPeriodTotal1,sizeof( _state.value .value .BodyLongPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .EqualPeriodTotal,sizeof( _state.value .value .EqualPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyLong,sizeof( _state.value .value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyLong,sizeof( _state.value .value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodEqual,sizeof( _state.value .value .periodEqual),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapEqual,sizeof( _state.value .value .gapEqual),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode cdlCounterAttack( int startIdx,
       int endIdx,
       float inOpen[],
@@ -7793,6 +9777,58 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlDarkCloudCoverStateSave( struct TA_cdlDarkCloudCover_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLDARKCLOUDCOVER_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInPenetration,sizeof( _state.value .optInPenetration),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyLongPeriodTotal,sizeof( _state.value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyLong,sizeof( _state.value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlDarkCloudCoverStateLoad( struct TA_cdlDarkCloudCover_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlDarkCloudCover ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLDARKCLOUDCOVER_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLDARKCLOUDCOVER_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInPenetration,sizeof( _state.value .value .optInPenetration),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyLongPeriodTotal,sizeof( _state.value .value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyLong,sizeof( _state.value .value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode cdlDarkCloudCover( int startIdx,
       int endIdx,
       float inOpen[],
@@ -7962,6 +9998,50 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdlDojiStateSave( struct TA_cdlDoji_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLDOJI_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .BodyDojiPeriodTotal,sizeof( _state.value .BodyDojiPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlDojiStateLoad( struct TA_cdlDoji_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlDoji ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLDOJI_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLDOJI_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .BodyDojiPeriodTotal,sizeof( _state.value .value .BodyDojiPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode cdlDoji( int startIdx,
       int endIdx,
@@ -8148,6 +10228,70 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdlDojiStarStateSave( struct TA_cdlDojiStar_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLDOJISTAR_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .DojiPeriodTotal,sizeof( _state.value .DojiPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyLongPeriodTotal,sizeof( _state.value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyLong,sizeof( _state.value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyLong,sizeof( _state.value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodDoji,sizeof( _state.value .periodDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapDoji,sizeof( _state.value .gapDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlDojiStarStateLoad( struct TA_cdlDojiStar_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlDojiStar ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLDOJISTAR_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLDOJISTAR_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .DojiPeriodTotal,sizeof( _state.value .value .DojiPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyLongPeriodTotal,sizeof( _state.value .value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyLong,sizeof( _state.value .value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyLong,sizeof( _state.value .value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodDoji,sizeof( _state.value .value .periodDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapDoji,sizeof( _state.value .value .gapDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode cdlDojiStar( int startIdx,
       int endIdx,
@@ -8350,6 +10494,70 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlDragonflyDojiStateSave( struct TA_cdlDragonflyDoji_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLDRAGONFLYDOJI_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .BodyDojiPeriodTotal,sizeof( _state.value .BodyDojiPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal,sizeof( _state.value .ShadowVeryShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowVeryShort,sizeof( _state.value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadowVeryShort,sizeof( _state.value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyDoji,sizeof( _state.value .periodBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyDoji,sizeof( _state.value .gapBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlDragonflyDojiStateLoad( struct TA_cdlDragonflyDoji_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlDragonflyDoji ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLDRAGONFLYDOJI_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLDRAGONFLYDOJI_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .BodyDojiPeriodTotal,sizeof( _state.value .value .BodyDojiPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal,sizeof( _state.value .value .ShadowVeryShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowVeryShort,sizeof( _state.value .value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadowVeryShort,sizeof( _state.value .value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyDoji,sizeof( _state.value .value .periodBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyDoji,sizeof( _state.value .value .gapBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode cdlDragonflyDoji( int startIdx,
       int endIdx,
       float inOpen[],
@@ -8531,6 +10739,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdlEngulfingStateSave( struct TA_cdlEngulfing_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLENGULFING_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int cdlEngulfingStateLoad( struct TA_cdlEngulfing_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlEngulfing ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLENGULFING_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLENGULFING_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode cdlEngulfing( int startIdx,
       int endIdx,
@@ -8764,6 +11012,86 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdlEveningDojiStarStateSave( struct TA_cdlEveningDojiStar_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLEVENINGDOJISTAR_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInPenetration,sizeof( _state.value .optInPenetration),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyDojiPeriodTotal,sizeof( _state.value .BodyDojiPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyLongPeriodTotal,sizeof( _state.value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyShortPeriodTotal,sizeof( _state.value .BodyShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyLong,sizeof( _state.value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyLong,sizeof( _state.value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyShort,sizeof( _state.value .periodBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyShort,sizeof( _state.value .gapBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyDoji,sizeof( _state.value .periodBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyDoji,sizeof( _state.value .gapBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlEveningDojiStarStateLoad( struct TA_cdlEveningDojiStar_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlEveningDojiStar ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLEVENINGDOJISTAR_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLEVENINGDOJISTAR_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInPenetration,sizeof( _state.value .value .optInPenetration),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyDojiPeriodTotal,sizeof( _state.value .value .BodyDojiPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyLongPeriodTotal,sizeof( _state.value .value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyShortPeriodTotal,sizeof( _state.value .value .BodyShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyLong,sizeof( _state.value .value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyLong,sizeof( _state.value .value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyShort,sizeof( _state.value .value .periodBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyShort,sizeof( _state.value .value .gapBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyDoji,sizeof( _state.value .value .periodBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyDoji,sizeof( _state.value .value .gapBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode cdlEveningDojiStar( int startIdx,
       int endIdx,
@@ -9012,6 +11340,78 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlEveningStarStateSave( struct TA_cdlEveningStar_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLEVENINGSTAR_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInPenetration,sizeof( _state.value .optInPenetration),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyShortPeriodTotal2,sizeof( _state.value .BodyShortPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyLongPeriodTotal,sizeof( _state.value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyShortPeriodTotal,sizeof( _state.value .BodyShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyLong,sizeof( _state.value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyLong,sizeof( _state.value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyShort,sizeof( _state.value .periodBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyShort,sizeof( _state.value .gapBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlEveningStarStateLoad( struct TA_cdlEveningStar_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlEveningStar ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLEVENINGSTAR_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLEVENINGSTAR_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInPenetration,sizeof( _state.value .value .optInPenetration),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyShortPeriodTotal2,sizeof( _state.value .value .BodyShortPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyLongPeriodTotal,sizeof( _state.value .value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyShortPeriodTotal,sizeof( _state.value .value .BodyShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyLong,sizeof( _state.value .value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyLong,sizeof( _state.value .value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyShort,sizeof( _state.value .value .periodBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyShort,sizeof( _state.value .value .gapBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode cdlEveningStar( int startIdx,
       int endIdx,
       float inOpen[],
@@ -9243,6 +11643,62 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlGapSideSideWhiteStateSave( struct TA_cdlGapSideSideWhite_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLGAPSIDESIDEWHITE_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .NearPeriodTotal,sizeof( _state.value .NearPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .EqualPeriodTotal,sizeof( _state.value .EqualPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodNear,sizeof( _state.value .periodNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodEqual,sizeof( _state.value .periodEqual),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlGapSideSideWhiteStateLoad( struct TA_cdlGapSideSideWhite_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlGapSideSideWhite ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLGAPSIDESIDEWHITE_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLGAPSIDESIDEWHITE_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .NearPeriodTotal,sizeof( _state.value .value .NearPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .EqualPeriodTotal,sizeof( _state.value .value .EqualPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodNear,sizeof( _state.value .value .periodNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodEqual,sizeof( _state.value .value .periodEqual),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode cdlGapSideSideWhite( int startIdx,
       int endIdx,
       float inOpen[],
@@ -9451,6 +11907,70 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdlGravestoneDojiStateSave( struct TA_cdlGravestoneDoji_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLGRAVESTONEDOJI_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .BodyDojiPeriodTotal,sizeof( _state.value .BodyDojiPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal,sizeof( _state.value .ShadowVeryShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowVeryShort,sizeof( _state.value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadowVeryShort,sizeof( _state.value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyDoji,sizeof( _state.value .periodBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyDoji,sizeof( _state.value .gapBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlGravestoneDojiStateLoad( struct TA_cdlGravestoneDoji_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlGravestoneDoji ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLGRAVESTONEDOJI_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLGRAVESTONEDOJI_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .BodyDojiPeriodTotal,sizeof( _state.value .value .BodyDojiPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal,sizeof( _state.value .value .ShadowVeryShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowVeryShort,sizeof( _state.value .value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadowVeryShort,sizeof( _state.value .value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyDoji,sizeof( _state.value .value .periodBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyDoji,sizeof( _state.value .value .gapBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode cdlGravestoneDoji( int startIdx,
       int endIdx,
@@ -9691,6 +12211,94 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdlHammerStateSave( struct TA_cdlHammer_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLHAMMER_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .BodyPeriodTotal,sizeof( _state.value .BodyPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal,sizeof( _state.value .ShadowVeryShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowLongPeriodTotal,sizeof( _state.value .ShadowLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .NearPeriodTotal,sizeof( _state.value .NearPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowVeryShort,sizeof( _state.value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadowVeryShort,sizeof( _state.value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBody,sizeof( _state.value .periodBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBody,sizeof( _state.value .gapBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowLong,sizeof( _state.value .periodShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadowLong,sizeof( _state.value .gapShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodNear,sizeof( _state.value .periodNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapNear,sizeof( _state.value .gapNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlHammerStateLoad( struct TA_cdlHammer_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlHammer ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLHAMMER_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLHAMMER_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .BodyPeriodTotal,sizeof( _state.value .value .BodyPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal,sizeof( _state.value .value .ShadowVeryShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowLongPeriodTotal,sizeof( _state.value .value .ShadowLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .NearPeriodTotal,sizeof( _state.value .value .NearPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowVeryShort,sizeof( _state.value .value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadowVeryShort,sizeof( _state.value .value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBody,sizeof( _state.value .value .periodBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBody,sizeof( _state.value .value .gapBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowLong,sizeof( _state.value .value .periodShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadowLong,sizeof( _state.value .value .gapShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodNear,sizeof( _state.value .value .periodNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapNear,sizeof( _state.value .value .gapNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode cdlHammer( int startIdx,
       int endIdx,
@@ -9955,6 +12563,94 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlHangingManStateSave( struct TA_cdlHangingMan_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLHANGINGMAN_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .BodyPeriodTotal,sizeof( _state.value .BodyPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal,sizeof( _state.value .ShadowVeryShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowLongPeriodTotal,sizeof( _state.value .ShadowLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .NearPeriodTotal,sizeof( _state.value .NearPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowVeryShort,sizeof( _state.value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadowVeryShort,sizeof( _state.value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBody,sizeof( _state.value .periodBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBody,sizeof( _state.value .gapBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowLong,sizeof( _state.value .periodShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadowLong,sizeof( _state.value .gapShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodNear,sizeof( _state.value .periodNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapNear,sizeof( _state.value .gapNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlHangingManStateLoad( struct TA_cdlHangingMan_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlHangingMan ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLHANGINGMAN_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLHANGINGMAN_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .BodyPeriodTotal,sizeof( _state.value .value .BodyPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal,sizeof( _state.value .value .ShadowVeryShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowLongPeriodTotal,sizeof( _state.value .value .ShadowLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .NearPeriodTotal,sizeof( _state.value .value .NearPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowVeryShort,sizeof( _state.value .value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadowVeryShort,sizeof( _state.value .value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBody,sizeof( _state.value .value .periodBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBody,sizeof( _state.value .value .gapBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowLong,sizeof( _state.value .value .periodShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadowLong,sizeof( _state.value .value .gapShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodNear,sizeof( _state.value .value .periodNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapNear,sizeof( _state.value .value .gapNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode cdlHangingMan( int startIdx,
       int endIdx,
       float inOpen[],
@@ -10195,6 +12891,70 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlHaramiStateSave( struct TA_cdlHarami_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLHARAMI_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .BodyShortPeriodTotal,sizeof( _state.value .BodyShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyLongPeriodTotal,sizeof( _state.value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyLong,sizeof( _state.value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyLong,sizeof( _state.value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyShort,sizeof( _state.value .periodBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyShort,sizeof( _state.value .gapBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlHaramiStateLoad( struct TA_cdlHarami_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlHarami ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLHARAMI_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLHARAMI_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .BodyShortPeriodTotal,sizeof( _state.value .value .BodyShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyLongPeriodTotal,sizeof( _state.value .value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyLong,sizeof( _state.value .value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyLong,sizeof( _state.value .value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyShort,sizeof( _state.value .value .periodBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyShort,sizeof( _state.value .value .gapBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode cdlHarami( int startIdx,
       int endIdx,
       float inOpen[],
@@ -10420,6 +13180,70 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlHaramiCrossStateSave( struct TA_cdlHaramiCross_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLHARAMICROSS_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .BodyDojiPeriodTotal,sizeof( _state.value .BodyDojiPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyLongPeriodTotal,sizeof( _state.value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyLong,sizeof( _state.value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyLong,sizeof( _state.value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyDoji,sizeof( _state.value .periodBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyDoji,sizeof( _state.value .gapBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlHaramiCrossStateLoad( struct TA_cdlHaramiCross_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlHaramiCross ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLHARAMICROSS_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLHARAMICROSS_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .BodyDojiPeriodTotal,sizeof( _state.value .value .BodyDojiPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyLongPeriodTotal,sizeof( _state.value .value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyLong,sizeof( _state.value .value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyLong,sizeof( _state.value .value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyDoji,sizeof( _state.value .value .periodBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyDoji,sizeof( _state.value .value .gapBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode cdlHaramiCross( int startIdx,
       int endIdx,
       float inOpen[],
@@ -10614,6 +13438,62 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdlHignWaveStateSave( struct TA_cdlHignWave_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLHIGHWAVE_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .BodyPeriodTotal,sizeof( _state.value .BodyPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowPeriodTotal,sizeof( _state.value .ShadowPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBody,sizeof( _state.value .periodBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadow,sizeof( _state.value .periodShadow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlHignWaveStateLoad( struct TA_cdlHignWave_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlHignWave ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLHIGHWAVE_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLHIGHWAVE_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .BodyPeriodTotal,sizeof( _state.value .value .BodyPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowPeriodTotal,sizeof( _state.value .value .ShadowPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBody,sizeof( _state.value .value .periodBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadow,sizeof( _state.value .value .periodShadow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode cdlHignWave( int startIdx,
       int endIdx,
@@ -10830,6 +13710,62 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdlHikkakeStateSave( struct TA_cdlHikkake_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLHIKKAKE_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .patternResult,sizeof( _state.value .patternResult),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .patternIdx,sizeof( _state.value .patternIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .patternHigh,sizeof( _state.value .patternHigh),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .patternLow,sizeof( _state.value .patternLow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlHikkakeStateLoad( struct TA_cdlHikkake_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlHikkake ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLHIKKAKE_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLHIKKAKE_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .patternResult,sizeof( _state.value .value .patternResult),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .patternIdx,sizeof( _state.value .value .patternIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .patternHigh,sizeof( _state.value .value .patternHigh),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .patternLow,sizeof( _state.value .value .patternLow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode cdlHikkake( int startIdx,
       int endIdx,
@@ -11100,6 +14036,74 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlHikkakeModStateSave( struct TA_cdlHikkakeMod_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLHIKKAKEMOD_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .patternResult,sizeof( _state.value .patternResult),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .patternIdx,sizeof( _state.value .patternIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .patternHigh,sizeof( _state.value .patternHigh),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .patternLow,sizeof( _state.value .patternLow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .NearPeriodTotal,sizeof( _state.value .NearPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodNear,sizeof( _state.value .periodNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapNear,sizeof( _state.value .gapNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlHikkakeModStateLoad( struct TA_cdlHikkakeMod_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlHikkakeMod ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLHIKKAKEMOD_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLHIKKAKEMOD_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .patternResult,sizeof( _state.value .value .patternResult),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .patternIdx,sizeof( _state.value .value .patternIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .patternHigh,sizeof( _state.value .value .patternHigh),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .patternLow,sizeof( _state.value .value .patternLow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .NearPeriodTotal,sizeof( _state.value .value .NearPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodNear,sizeof( _state.value .value .periodNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapNear,sizeof( _state.value .value .gapNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode cdlHikkakeMod( int startIdx,
       int endIdx,
       float inOpen[],
@@ -11342,6 +14346,70 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdlHomingPigeonStateSave( struct TA_cdlHomingPigeon_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLHOMINGPIGEON_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .BodyLongPeriodTotal,sizeof( _state.value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyShortPeriodTotal,sizeof( _state.value .BodyShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyLong,sizeof( _state.value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyShort,sizeof( _state.value .periodBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyLong,sizeof( _state.value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyShort,sizeof( _state.value .gapBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlHomingPigeonStateLoad( struct TA_cdlHomingPigeon_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlHomingPigeon ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLHOMINGPIGEON_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLHOMINGPIGEON_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .BodyLongPeriodTotal,sizeof( _state.value .value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyShortPeriodTotal,sizeof( _state.value .value .BodyShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyLong,sizeof( _state.value .value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyShort,sizeof( _state.value .value .periodBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyLong,sizeof( _state.value .value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyShort,sizeof( _state.value .value .gapBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode cdlHomingPigeon( int startIdx,
       int endIdx,
@@ -11586,6 +14654,82 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlIdentical3CrowsStateSave( struct TA_cdlIdentical3Crows_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLIDENTICAL3CROWS_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal0,sizeof( _state.value .ShadowVeryShortPeriodTotal0),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal1,sizeof( _state.value .ShadowVeryShortPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal2,sizeof( _state.value .ShadowVeryShortPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .EqualPeriodTotal1,sizeof( _state.value .EqualPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .EqualPeriodTotal2,sizeof( _state.value .EqualPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadowVeryShort,sizeof( _state.value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowVeryShort,sizeof( _state.value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapEqual,sizeof( _state.value .gapEqual),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodEqual,sizeof( _state.value .periodEqual),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlIdentical3CrowsStateLoad( struct TA_cdlIdentical3Crows_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlIdentical3Crows ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLIDENTICAL3CROWS_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLIDENTICAL3CROWS_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal0,sizeof( _state.value .value .ShadowVeryShortPeriodTotal0),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal1,sizeof( _state.value .value .ShadowVeryShortPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal2,sizeof( _state.value .value .ShadowVeryShortPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .EqualPeriodTotal1,sizeof( _state.value .value .EqualPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .EqualPeriodTotal2,sizeof( _state.value .value .EqualPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadowVeryShort,sizeof( _state.value .value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowVeryShort,sizeof( _state.value .value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapEqual,sizeof( _state.value .value .gapEqual),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodEqual,sizeof( _state.value .value .periodEqual),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode cdlIdentical3Crows( int startIdx,
       int endIdx,
       float inOpen[],
@@ -11814,6 +14958,70 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlInNeckStateSave( struct TA_cdlInNeck_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLINNECK_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .BodyLongPeriodTotal,sizeof( _state.value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .EqualPeriodTotal,sizeof( _state.value .EqualPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyLong,sizeof( _state.value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyLong,sizeof( _state.value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodEqual,sizeof( _state.value .periodEqual),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapEqual,sizeof( _state.value .gapEqual),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlInNeckStateLoad( struct TA_cdlInNeck_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlInNeck ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLINNECK_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLINNECK_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .BodyLongPeriodTotal,sizeof( _state.value .value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .EqualPeriodTotal,sizeof( _state.value .value .EqualPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyLong,sizeof( _state.value .value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyLong,sizeof( _state.value .value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodEqual,sizeof( _state.value .value .periodEqual),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapEqual,sizeof( _state.value .value .gapEqual),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode cdlInNeck( int startIdx,
       int endIdx,
       float inOpen[],
@@ -11995,6 +15203,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdlInvertedHammerStateSave( struct TA_cdlInvertedHammer_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLINVERTEDHAMMER_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int cdlInvertedHammerStateLoad( struct TA_cdlInvertedHammer_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlInvertedHammer ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLINVERTEDHAMMER_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLINVERTEDHAMMER_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode cdlInvertedHammer( int startIdx,
       int endIdx,
@@ -12191,6 +15439,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdlKickingStateSave( struct TA_cdlKicking_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLKICKING_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int cdlKickingStateLoad( struct TA_cdlKicking_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlKicking ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLKICKING_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLKICKING_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode cdlKicking( int startIdx,
       int endIdx,
@@ -12395,6 +15683,46 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlKickingByLengthStateSave( struct TA_cdlKickingByLength_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLKICKINGBYLENGTH_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int cdlKickingByLengthStateLoad( struct TA_cdlKickingByLength_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlKickingByLength ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLKICKINGBYLENGTH_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLKICKINGBYLENGTH_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
    public RetCode cdlKickingByLength( int startIdx,
       int endIdx,
       float inOpen[],
@@ -12576,6 +15904,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdlLadderBottomStateSave( struct TA_cdlLadderBottom_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLLADDERBOTTOM_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int cdlLadderBottomStateLoad( struct TA_cdlLadderBottom_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlLadderBottom ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLLADDERBOTTOM_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLLADDERBOTTOM_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode cdlLadderBottom( int startIdx,
       int endIdx,
@@ -12775,6 +16143,70 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlLongLeggedDojiStateSave( struct TA_cdlLongLeggedDoji_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLLONGLEGGEDDOJI_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .BodyDojiPeriodTotal,sizeof( _state.value .BodyDojiPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowLongPeriodTotal,sizeof( _state.value .ShadowLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowLong,sizeof( _state.value .periodShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadowLong,sizeof( _state.value .gapShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyDoji,sizeof( _state.value .periodBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyDoji,sizeof( _state.value .gapBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlLongLeggedDojiStateLoad( struct TA_cdlLongLeggedDoji_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlLongLeggedDoji ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLLONGLEGGEDDOJI_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLLONGLEGGEDDOJI_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .BodyDojiPeriodTotal,sizeof( _state.value .value .BodyDojiPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowLongPeriodTotal,sizeof( _state.value .value .ShadowLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowLong,sizeof( _state.value .value .periodShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadowLong,sizeof( _state.value .value .gapShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyDoji,sizeof( _state.value .value .periodBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyDoji,sizeof( _state.value .value .gapBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode cdlLongLeggedDoji( int startIdx,
       int endIdx,
       float inOpen[],
@@ -12939,6 +16371,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdlLongLineStateSave( struct TA_cdlLongLine_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLLONGLINE_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int cdlLongLineStateLoad( struct TA_cdlLongLine_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlLongLine ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLLONGLINE_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLLONGLINE_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode cdlLongLine( int startIdx,
       int endIdx,
@@ -13136,6 +16608,70 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlMarubozuStateSave( struct TA_cdlMarubozu_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLMARUBOZU_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal,sizeof( _state.value .ShadowVeryShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyLongPeriodTotal,sizeof( _state.value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadowVeryShort,sizeof( _state.value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowVeryShort,sizeof( _state.value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyLong,sizeof( _state.value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyLong,sizeof( _state.value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlMarubozuStateLoad( struct TA_cdlMarubozu_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlMarubozu ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLMARUBOZU_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLMARUBOZU_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal,sizeof( _state.value .value .ShadowVeryShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyLongPeriodTotal,sizeof( _state.value .value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadowVeryShort,sizeof( _state.value .value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowVeryShort,sizeof( _state.value .value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyLong,sizeof( _state.value .value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyLong,sizeof( _state.value .value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode cdlMarubozu( int startIdx,
       int endIdx,
       float inOpen[],
@@ -13292,6 +16828,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdlMatchingLowStateSave( struct TA_cdlMatchingLow_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLMATCHINGLOW_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int cdlMatchingLowStateLoad( struct TA_cdlMatchingLow_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlMatchingLow ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLMATCHINGLOW_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLMATCHINGLOW_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode cdlMatchingLow( int startIdx,
       int endIdx,
@@ -13486,6 +17062,50 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdlMatHoldStateSave( struct TA_cdlMatHold_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLMATHOLD_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInPenetration,sizeof( _state.value .optInPenetration),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlMatHoldStateLoad( struct TA_cdlMatHold_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlMatHold ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLMATHOLD_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLMATHOLD_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInPenetration,sizeof( _state.value .value .optInPenetration),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode cdlMatHold( int startIdx,
       int endIdx,
@@ -13754,6 +17374,86 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlMorningDojiStarStateSave( struct TA_cdlMorningDojiStar_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLMORNINGDOJISTAR_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInPenetration,sizeof( _state.value .optInPenetration),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyDojiPeriodTotal,sizeof( _state.value .BodyDojiPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyLongPeriodTotal,sizeof( _state.value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyShortPeriodTotal,sizeof( _state.value .BodyShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyLong,sizeof( _state.value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyLong,sizeof( _state.value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyShort,sizeof( _state.value .periodBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyShort,sizeof( _state.value .gapBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyDoji,sizeof( _state.value .periodBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyDoji,sizeof( _state.value .gapBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlMorningDojiStarStateLoad( struct TA_cdlMorningDojiStar_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlMorningDojiStar ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLMORNINGDOJISTAR_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLMORNINGDOJISTAR_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInPenetration,sizeof( _state.value .value .optInPenetration),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyDojiPeriodTotal,sizeof( _state.value .value .BodyDojiPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyLongPeriodTotal,sizeof( _state.value .value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyShortPeriodTotal,sizeof( _state.value .value .BodyShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyLong,sizeof( _state.value .value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyLong,sizeof( _state.value .value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyShort,sizeof( _state.value .value .periodBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyShort,sizeof( _state.value .value .gapBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyDoji,sizeof( _state.value .value .periodBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyDoji,sizeof( _state.value .value .gapBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode cdlMorningDojiStar( int startIdx,
       int endIdx,
       float inOpen[],
@@ -14001,6 +17701,78 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlMorningStarStateSave( struct TA_cdlMorningStar_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLMORNINGSTAR_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInPenetration,sizeof( _state.value .optInPenetration),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyShortPeriodTotal2,sizeof( _state.value .BodyShortPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyLongPeriodTotal,sizeof( _state.value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyShortPeriodTotal,sizeof( _state.value .BodyShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyLong,sizeof( _state.value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyLong,sizeof( _state.value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyShort,sizeof( _state.value .periodBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyShort,sizeof( _state.value .gapBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cdlMorningStarStateLoad( struct TA_cdlMorningStar_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlMorningStar ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLMORNINGSTAR_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLMORNINGSTAR_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInPenetration,sizeof( _state.value .value .optInPenetration),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyShortPeriodTotal2,sizeof( _state.value .value .BodyShortPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyLongPeriodTotal,sizeof( _state.value .value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyShortPeriodTotal,sizeof( _state.value .value .BodyShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyLong,sizeof( _state.value .value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyLong,sizeof( _state.value .value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyShort,sizeof( _state.value .value .periodBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyShort,sizeof( _state.value .value .gapBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode cdlMorningStar( int startIdx,
       int endIdx,
       float inOpen[],
@@ -14184,6 +17956,46 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlOnNeckStateSave( struct TA_cdlOnNeck_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLONNECK_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int cdlOnNeckStateLoad( struct TA_cdlOnNeck_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlOnNeck ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLONNECK_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLONNECK_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
    public RetCode cdlOnNeck( int startIdx,
       int endIdx,
       float inOpen[],
@@ -14352,6 +18164,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdlPiercingStateSave( struct TA_cdlPiercing_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLPIERCING_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int cdlPiercingStateLoad( struct TA_cdlPiercing_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlPiercing ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLPIERCING_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLPIERCING_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode cdlPiercing( int startIdx,
       int endIdx,
@@ -14532,6 +18384,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdlRickshawManStateSave( struct TA_cdlRickshawMan_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLRICKSHAWMAN_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int cdlRickshawManStateLoad( struct TA_cdlRickshawMan_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlRickshawMan ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLRICKSHAWMAN_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLRICKSHAWMAN_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode cdlRickshawMan( int startIdx,
       int endIdx,
@@ -14736,6 +18628,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdlRiseFall3MethodsStateSave( struct TA_cdlRiseFall3Methods_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLRISEFALL3METHODS_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int cdlRiseFall3MethodsStateLoad( struct TA_cdlRiseFall3Methods_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlRiseFall3Methods ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLRISEFALL3METHODS_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLRISEFALL3METHODS_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode cdlRiseFall3Methods( int startIdx,
       int endIdx,
@@ -14947,6 +18879,46 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlSeperatingLinesStateSave( struct TA_cdlSeperatingLines_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLSEPARATINGLINES_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int cdlSeperatingLinesStateLoad( struct TA_cdlSeperatingLines_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlSeperatingLines ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLSEPARATINGLINES_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLSEPARATINGLINES_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
    public RetCode cdlSeperatingLines( int startIdx,
       int endIdx,
       float inOpen[],
@@ -15145,6 +19117,46 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlShootingStarStateSave( struct TA_cdlShootingStar_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLSHOOTINGSTAR_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int cdlShootingStarStateLoad( struct TA_cdlShootingStar_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlShootingStar ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLSHOOTINGSTAR_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLSHOOTINGSTAR_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
    public RetCode cdlShootingStar( int startIdx,
       int endIdx,
       float inOpen[],
@@ -15320,6 +19332,46 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlShortLineStateSave( struct TA_cdlShortLine_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLSHORTLINE_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int cdlShortLineStateLoad( struct TA_cdlShortLine_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlShortLine ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLSHORTLINE_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLSHORTLINE_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
    public RetCode cdlShortLine( int startIdx,
       int endIdx,
       float inOpen[],
@@ -15473,6 +19525,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdlSpinningTopStateSave( struct TA_cdlSpinningTop_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLSPINNINGTOP_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int cdlSpinningTopStateLoad( struct TA_cdlSpinningTop_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlSpinningTop ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLSPINNINGTOP_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLSPINNINGTOP_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode cdlSpinningTop( int startIdx,
       int endIdx,
@@ -15670,6 +19762,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdlStalledPatternStateSave( struct TA_cdlStalledPattern_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLSTALLEDPATTERN_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int cdlStalledPatternStateLoad( struct TA_cdlStalledPattern_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlStalledPattern ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLSTALLEDPATTERN_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLSTALLEDPATTERN_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode cdlStalledPattern( int startIdx,
       int endIdx,
@@ -15871,6 +20003,46 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlStickSandwhichStateSave( struct TA_cdlStickSandwhich_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLSTICKSANDWICH_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int cdlStickSandwhichStateLoad( struct TA_cdlStickSandwhich_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlStickSandwhich ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLSTICKSANDWICH_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLSTICKSANDWICH_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
    public RetCode cdlStickSandwhich( int startIdx,
       int endIdx,
       float inOpen[],
@@ -16040,6 +20212,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdlTakuriStateSave( struct TA_cdlTakuri_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLTAKURI_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int cdlTakuriStateLoad( struct TA_cdlTakuri_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlTakuri ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLTAKURI_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLTAKURI_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode cdlTakuri( int startIdx,
       int endIdx,
@@ -16224,6 +20436,46 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlTasukiGapStateSave( struct TA_cdlTasukiGap_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLTASUKIGAP_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int cdlTasukiGapStateLoad( struct TA_cdlTasukiGap_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlTasukiGap ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLTASUKIGAP_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLTASUKIGAP_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
    public RetCode cdlTasukiGap( int startIdx,
       int endIdx,
       float inOpen[],
@@ -16402,6 +20654,46 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlThrustingStateSave( struct TA_cdlThrusting_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLTHRUSTING_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int cdlThrustingStateLoad( struct TA_cdlThrusting_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlThrusting ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLTHRUSTING_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLTHRUSTING_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
    public RetCode cdlThrusting( int startIdx,
       int endIdx,
       float inOpen[],
@@ -16573,6 +20865,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdlTristarStateSave( struct TA_cdlTristar_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLTRISTAR_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int cdlTristarStateLoad( struct TA_cdlTristar_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlTristar ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLTRISTAR_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLTRISTAR_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode cdlTristar( int startIdx,
       int endIdx,
@@ -16746,6 +21078,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cdlUnique3RiverStateSave( struct TA_cdlUnique3River_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLUNIQUE3RIVER_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int cdlUnique3RiverStateLoad( struct TA_cdlUnique3River_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlUnique3River ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLUNIQUE3RIVER_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLUNIQUE3RIVER_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode cdlUnique3River( int startIdx,
       int endIdx,
@@ -16923,6 +21295,46 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlUpsideGap2CrowsStateSave( struct TA_cdlUpsideGap2Crows_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLUPSIDEGAP2CROWS_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int cdlUpsideGap2CrowsStateLoad( struct TA_cdlUpsideGap2Crows_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlUpsideGap2Crows ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLUPSIDEGAP2CROWS_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLUPSIDEGAP2CROWS_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
    public RetCode cdlUpsideGap2Crows( int startIdx,
       int endIdx,
       float inOpen[],
@@ -17087,6 +21499,46 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cdlXSideGap3MethodsStateSave( struct TA_cdlXSideGap3Methods_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLXSIDEGAP3METHODS_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int cdlXSideGap3MethodsStateLoad( struct TA_cdlXSideGap3Methods_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cdlXSideGap3Methods ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLXSIDEGAP3METHODS_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLXSIDEGAP3METHODS_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
    public RetCode cdlXSideGap3Methods( int startIdx,
       int endIdx,
       float inOpen[],
@@ -17201,6 +21653,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int ceilStateSave( struct TA_ceil_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CEIL_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int ceilStateLoad( struct TA_ceil_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct ceil ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CEIL_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CEIL_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode ceil( int startIdx,
       int endIdx,
@@ -17448,6 +21940,66 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int cmoStateSave( struct TA_cmo_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CMO_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .MetastockMode,sizeof( _state.value .MetastockMode),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevGain,sizeof( _state.value .prevGain),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevLoss,sizeof( _state.value .prevLoss),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevValue,sizeof( _state.value .prevValue),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int cmoStateLoad( struct TA_cmo_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cmo ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CMO_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CMO_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .MetastockMode,sizeof( _state.value .value .MetastockMode),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevGain,sizeof( _state.value .value .prevGain),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevLoss,sizeof( _state.value .value .prevLoss),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevValue,sizeof( _state.value .value .prevValue),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode cmo( int startIdx,
       int endIdx,
@@ -17735,6 +22287,70 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int correlStateSave( struct TA_correl_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CORREL_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .sumXY,sizeof( _state.value .sumXY),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .sumX,sizeof( _state.value .sumX),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .sumY,sizeof( _state.value .sumY),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .sumX2,sizeof( _state.value .sumX2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .sumY2,sizeof( _state.value .sumY2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int correlStateLoad( struct TA_correl_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct correl ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CORREL_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_CORREL_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .sumXY,sizeof( _state.value .value .sumXY),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .sumX,sizeof( _state.value .value .sumX),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .sumY,sizeof( _state.value .value .sumY),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .sumX2,sizeof( _state.value .value .sumX2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .sumY2,sizeof( _state.value .value .sumY2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode correl( int startIdx,
       int endIdx,
       float inReal0[],
@@ -17872,6 +22488,46 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int cosStateSave( struct TA_cos_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_COS_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int cosStateLoad( struct TA_cos_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cos ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_COS_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_COS_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
    public RetCode cos( int startIdx,
       int endIdx,
       float inReal[],
@@ -17954,6 +22610,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int coshStateSave( struct TA_cosh_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_COSH_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int coshStateLoad( struct TA_cosh_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct cosh ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_COSH_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_COSH_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode cosh( int startIdx,
       int endIdx,
@@ -18109,6 +22805,60 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return res;
    }
+   public int demaStateSave( struct TA_dema_State* _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_DEMA_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_EMA_StateSave ( (struct ema *) _state.value .state_EMA, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_EMA_StateSave ( (struct ema *) _state.value .state_EMA2, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
+   public int demaStateLoad( struct TA_dema_State** _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct dema ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_DEMA_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_DEMA_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_EMA_StateLoad ( (struct ema **) & _state.value .value .state_EMA, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_EMA_StateLoad ( (struct ema **) & _state.value .value .state_EMA2, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
    public RetCode dema( int startIdx,
       int endIdx,
       float inReal[],
@@ -18237,6 +22987,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int divStateSave( struct TA_div_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_DIV_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int divStateLoad( struct TA_div_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct div ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_DIV_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_DIV_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode div( int startIdx,
       int endIdx,
@@ -18500,6 +23290,78 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int dxStateSave( struct TA_dx_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_DX_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevHigh,sizeof( _state.value .prevHigh),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevLow,sizeof( _state.value .prevLow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevClose,sizeof( _state.value .prevClose),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevMinusDM,sizeof( _state.value .prevMinusDM),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevPlusDM,sizeof( _state.value .prevPlusDM),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevTR,sizeof( _state.value .prevTR),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevOutReal,sizeof( _state.value .prevOutReal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int dxStateLoad( struct TA_dx_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct dx ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_DX_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_DX_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevHigh,sizeof( _state.value .value .prevHigh),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevLow,sizeof( _state.value .value .prevLow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevClose,sizeof( _state.value .value .prevClose),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevMinusDM,sizeof( _state.value .value .prevMinusDM),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevPlusDM,sizeof( _state.value .value .prevPlusDM),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevTR,sizeof( _state.value .value .prevTR),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevOutReal,sizeof( _state.value .value .prevOutReal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode dx( int startIdx,
       int endIdx,
@@ -18796,6 +23658,66 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int emaStateSave( struct TA_ema_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_EMA_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevMA,sizeof( _state.value .prevMA),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .tempSum,sizeof( _state.value .tempSum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .preprRes,sizeof( _state.value .preprRes),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInK_1,sizeof( _state.value .optInK_1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int emaStateLoad( struct TA_ema_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct ema ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_EMA_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_EMA_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevMA,sizeof( _state.value .value .prevMA),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .tempSum,sizeof( _state.value .value .tempSum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .preprRes,sizeof( _state.value .value .preprRes),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInK_1,sizeof( _state.value .value .optInK_1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode ema( int startIdx,
       int endIdx,
       float inReal[],
@@ -18926,6 +23848,46 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int expStateSave( struct TA_exp_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_EXP_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int expStateLoad( struct TA_exp_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct exp ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_EXP_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_EXP_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
    public RetCode exp( int startIdx,
       int endIdx,
       float inReal[],
@@ -19008,6 +23970,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int floorStateSave( struct TA_floor_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_FLOOR_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int floorStateLoad( struct TA_floor_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct floor ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_FLOOR_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_FLOOR_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode floor( int startIdx,
       int endIdx,
@@ -19294,6 +24296,122 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int htDcPeriodStateSave( struct TA_htDcPeriod_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_HT_DCPERIOD_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .hilbertIdx,sizeof( _state.value .hilbertIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodWMASub,sizeof( _state.value .periodWMASub),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodWMASum,sizeof( _state.value .periodWMASum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .period,sizeof( _state.value .period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForOddPrev2,sizeof( _state.value .I1ForOddPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForEvenPrev2,sizeof( _state.value .I1ForEvenPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForOddPrev3,sizeof( _state.value .I1ForOddPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForEvenPrev3,sizeof( _state.value .I1ForEvenPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevI2,sizeof( _state.value .prevI2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevQ2,sizeof( _state.value .prevQ2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .smoothPeriod,sizeof( _state.value .smoothPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .Im,sizeof( _state.value .Im),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .Re,sizeof( _state.value .Re),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .trailingWMAValue,sizeof( _state.value .trailingWMAValue),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .rad2Deg,sizeof( _state.value .rad2Deg),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .a,sizeof( _state.value .a),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .b,sizeof( _state.value .b),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      { if ( _state.value .detrender == NULL) return RetCode.BadParam ; if (fwrite( _state.value .detrender,sizeof(struct TA_HT_DCPERIOD_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .Q1 == NULL) return RetCode.BadParam ; if (fwrite( _state.value .Q1,sizeof(struct TA_HT_DCPERIOD_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .jI == NULL) return RetCode.BadParam ; if (fwrite( _state.value .jI,sizeof(struct TA_HT_DCPERIOD_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .jQ == NULL) return RetCode.BadParam ; if (fwrite( _state.value .jQ,sizeof(struct TA_HT_DCPERIOD_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int htDcPeriodStateLoad( struct TA_htDcPeriod_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct htDcPeriod ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_HT_DCPERIOD_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_HT_DCPERIOD_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .hilbertIdx,sizeof( _state.value .value .hilbertIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodWMASub,sizeof( _state.value .value .periodWMASub),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodWMASum,sizeof( _state.value .value .periodWMASum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .period,sizeof( _state.value .value .period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForOddPrev2,sizeof( _state.value .value .I1ForOddPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForEvenPrev2,sizeof( _state.value .value .I1ForEvenPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForOddPrev3,sizeof( _state.value .value .I1ForOddPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForEvenPrev3,sizeof( _state.value .value .I1ForEvenPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevI2,sizeof( _state.value .value .prevI2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevQ2,sizeof( _state.value .value .prevQ2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .smoothPeriod,sizeof( _state.value .value .smoothPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .Im,sizeof( _state.value .value .Im),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .Re,sizeof( _state.value .value .Re),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .trailingWMAValue,sizeof( _state.value .value .trailingWMAValue),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .rad2Deg,sizeof( _state.value .value .rad2Deg),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .a,sizeof( _state.value .value .a),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .b,sizeof( _state.value .value .b),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      { if ( _state.value .value .detrender != NULL) return RetCode.BadParam ; { _state.value .value .detrender = calloc(1, sizeof(struct TA_HT_DCPERIOD_HILBERT_STRUCT )); if ( _state.value .value .detrender == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .detrender,sizeof(struct TA_HT_DCPERIOD_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .value .Q1 != NULL) return RetCode.BadParam ; { _state.value .value .Q1 = calloc(1, sizeof(struct TA_HT_DCPERIOD_HILBERT_STRUCT )); if ( _state.value .value .Q1 == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .Q1,sizeof(struct TA_HT_DCPERIOD_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .value .jI != NULL) return RetCode.BadParam ; { _state.value .value .jI = calloc(1, sizeof(struct TA_HT_DCPERIOD_HILBERT_STRUCT )); if ( _state.value .value .jI == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .jI,sizeof(struct TA_HT_DCPERIOD_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .value .jQ != NULL) return RetCode.BadParam ; { _state.value .value .jQ = calloc(1, sizeof(struct TA_HT_DCPERIOD_HILBERT_STRUCT )); if ( _state.value .value .jQ == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .jQ,sizeof(struct TA_HT_DCPERIOD_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode htDcPeriod( int startIdx,
       int endIdx,
@@ -19775,6 +24893,132 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int htDcPhaseStateSave( struct TA_htDcPhase_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_HT_DCPHASE_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .hilbertIdx,sizeof( _state.value .hilbertIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodWMASub,sizeof( _state.value .periodWMASub),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodWMASum,sizeof( _state.value .periodWMASum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .period,sizeof( _state.value .period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForOddPrev2,sizeof( _state.value .I1ForOddPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForEvenPrev2,sizeof( _state.value .I1ForEvenPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForOddPrev3,sizeof( _state.value .I1ForOddPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForEvenPrev3,sizeof( _state.value .I1ForEvenPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevI2,sizeof( _state.value .prevI2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevQ2,sizeof( _state.value .prevQ2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .smoothPeriod,sizeof( _state.value .smoothPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .DCPhase,sizeof( _state.value .DCPhase),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .Im,sizeof( _state.value .Im),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .Re,sizeof( _state.value .Re),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .trailingWMAValue,sizeof( _state.value .trailingWMAValue),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .rad2Deg,sizeof( _state.value .rad2Deg),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .a,sizeof( _state.value .a),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .b,sizeof( _state.value .b),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .constDeg2RadBy360,sizeof( _state.value .constDeg2RadBy360),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      { if ( _state.value .detrender == NULL) return RetCode.BadParam ; if (fwrite( _state.value .detrender,sizeof(struct TA_HT_DCPHASE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .Q1 == NULL) return RetCode.BadParam ; if (fwrite( _state.value .Q1,sizeof(struct TA_HT_DCPHASE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .jI == NULL) return RetCode.BadParam ; if (fwrite( _state.value .jI,sizeof(struct TA_HT_DCPHASE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .jQ == NULL) return RetCode.BadParam ; if (fwrite( _state.value .jQ,sizeof(struct TA_HT_DCPHASE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { int io_circbuf_res; struct TA_HT_DCPHASE_STATE_CIRCBUF * str_circbuf = _state.value .circBuf; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      return 0;
+   }
+   public int htDcPhaseStateLoad( struct TA_htDcPhase_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct htDcPhase ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_HT_DCPHASE_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_HT_DCPHASE_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .hilbertIdx,sizeof( _state.value .value .hilbertIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodWMASub,sizeof( _state.value .value .periodWMASub),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodWMASum,sizeof( _state.value .value .periodWMASum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .period,sizeof( _state.value .value .period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForOddPrev2,sizeof( _state.value .value .I1ForOddPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForEvenPrev2,sizeof( _state.value .value .I1ForEvenPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForOddPrev3,sizeof( _state.value .value .I1ForOddPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForEvenPrev3,sizeof( _state.value .value .I1ForEvenPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevI2,sizeof( _state.value .value .prevI2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevQ2,sizeof( _state.value .value .prevQ2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .smoothPeriod,sizeof( _state.value .value .smoothPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .DCPhase,sizeof( _state.value .value .DCPhase),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .Im,sizeof( _state.value .value .Im),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .Re,sizeof( _state.value .value .Re),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .trailingWMAValue,sizeof( _state.value .value .trailingWMAValue),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .rad2Deg,sizeof( _state.value .value .rad2Deg),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .a,sizeof( _state.value .value .a),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .b,sizeof( _state.value .value .b),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .constDeg2RadBy360,sizeof( _state.value .value .constDeg2RadBy360),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      { if ( _state.value .value .detrender != NULL) return RetCode.BadParam ; { _state.value .value .detrender = calloc(1, sizeof(struct TA_HT_DCPHASE_HILBERT_STRUCT )); if ( _state.value .value .detrender == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .detrender,sizeof(struct TA_HT_DCPHASE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .value .Q1 != NULL) return RetCode.BadParam ; { _state.value .value .Q1 = calloc(1, sizeof(struct TA_HT_DCPHASE_HILBERT_STRUCT )); if ( _state.value .value .Q1 == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .Q1,sizeof(struct TA_HT_DCPHASE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .value .jI != NULL) return RetCode.BadParam ; { _state.value .value .jI = calloc(1, sizeof(struct TA_HT_DCPHASE_HILBERT_STRUCT )); if ( _state.value .value .jI == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .jI,sizeof(struct TA_HT_DCPHASE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .value .jQ != NULL) return RetCode.BadParam ; { _state.value .value .jQ = calloc(1, sizeof(struct TA_HT_DCPHASE_HILBERT_STRUCT )); if ( _state.value .value .jQ == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .jQ,sizeof(struct TA_HT_DCPHASE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { int io_circbuf_res; int circbuf_idx; int circbuf_size; if ( _state.value .value .circBuf != NULL) return RetCode.BadParam ; io_circbuf_res = fread(&circbuf_idx,sizeof(circbuf_idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fread(&circbuf_size,sizeof(circbuf_size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; { _state.value .value .circBuf = calloc(1, sizeof(struct TA_HT_DCPHASE_STATE_CIRCBUF )); if ( _state.value .value .circBuf == NULL) return RetCode.AllocErr ; struct TA_HT_DCPHASE_STATE_CIRCBUF * buf = (struct TA_HT_DCPHASE_STATE_CIRCBUF *) _state.value .value .circBuf; buf->idx = 0; buf->size = circbuf_size; buf->circbuf = calloc(circbuf_size, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} struct TA_HT_DCPHASE_STATE_CIRCBUF * str_circbuf = _state.value .value .circBuf; str_circbuf->idx = circbuf_idx; if (str_circbuf->size > 0) { io_circbuf_res = fread(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      return 0;
+   }
    public RetCode htDcPhase( int startIdx,
       int endIdx,
       float inReal[],
@@ -20225,6 +25469,118 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int htPhasorStateSave( struct TA_htPhasor_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_HT_PHASOR_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .hilbertIdx,sizeof( _state.value .hilbertIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodWMASub,sizeof( _state.value .periodWMASub),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodWMASum,sizeof( _state.value .periodWMASum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .period,sizeof( _state.value .period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForOddPrev2,sizeof( _state.value .I1ForOddPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForEvenPrev2,sizeof( _state.value .I1ForEvenPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForOddPrev3,sizeof( _state.value .I1ForOddPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForEvenPrev3,sizeof( _state.value .I1ForEvenPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevI2,sizeof( _state.value .prevI2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevQ2,sizeof( _state.value .prevQ2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .Im,sizeof( _state.value .Im),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .Re,sizeof( _state.value .Re),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .trailingWMAValue,sizeof( _state.value .trailingWMAValue),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .rad2Deg,sizeof( _state.value .rad2Deg),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .a,sizeof( _state.value .a),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .b,sizeof( _state.value .b),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      { if ( _state.value .detrender == NULL) return RetCode.BadParam ; if (fwrite( _state.value .detrender,sizeof(struct TA_HT_PHASOR_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .Q1 == NULL) return RetCode.BadParam ; if (fwrite( _state.value .Q1,sizeof(struct TA_HT_PHASOR_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .jI == NULL) return RetCode.BadParam ; if (fwrite( _state.value .jI,sizeof(struct TA_HT_PHASOR_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .jQ == NULL) return RetCode.BadParam ; if (fwrite( _state.value .jQ,sizeof(struct TA_HT_PHASOR_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int htPhasorStateLoad( struct TA_htPhasor_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct htPhasor ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_HT_PHASOR_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_HT_PHASOR_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .hilbertIdx,sizeof( _state.value .value .hilbertIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodWMASub,sizeof( _state.value .value .periodWMASub),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodWMASum,sizeof( _state.value .value .periodWMASum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .period,sizeof( _state.value .value .period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForOddPrev2,sizeof( _state.value .value .I1ForOddPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForEvenPrev2,sizeof( _state.value .value .I1ForEvenPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForOddPrev3,sizeof( _state.value .value .I1ForOddPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForEvenPrev3,sizeof( _state.value .value .I1ForEvenPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevI2,sizeof( _state.value .value .prevI2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevQ2,sizeof( _state.value .value .prevQ2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .Im,sizeof( _state.value .value .Im),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .Re,sizeof( _state.value .value .Re),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .trailingWMAValue,sizeof( _state.value .value .trailingWMAValue),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .rad2Deg,sizeof( _state.value .value .rad2Deg),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .a,sizeof( _state.value .value .a),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .b,sizeof( _state.value .value .b),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      { if ( _state.value .value .detrender != NULL) return RetCode.BadParam ; { _state.value .value .detrender = calloc(1, sizeof(struct TA_HT_PHASOR_HILBERT_STRUCT )); if ( _state.value .value .detrender == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .detrender,sizeof(struct TA_HT_PHASOR_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .value .Q1 != NULL) return RetCode.BadParam ; { _state.value .value .Q1 = calloc(1, sizeof(struct TA_HT_PHASOR_HILBERT_STRUCT )); if ( _state.value .value .Q1 == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .Q1,sizeof(struct TA_HT_PHASOR_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .value .jI != NULL) return RetCode.BadParam ; { _state.value .value .jI = calloc(1, sizeof(struct TA_HT_PHASOR_HILBERT_STRUCT )); if ( _state.value .value .jI == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .jI,sizeof(struct TA_HT_PHASOR_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .value .jQ != NULL) return RetCode.BadParam ; { _state.value .value .jQ = calloc(1, sizeof(struct TA_HT_PHASOR_HILBERT_STRUCT )); if ( _state.value .value .jQ == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .jQ,sizeof(struct TA_HT_PHASOR_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode htPhasor( int startIdx,
       int endIdx,
@@ -20718,6 +26074,136 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int htSineStateSave( struct TA_htSine_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_HT_SINE_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .hilbertIdx,sizeof( _state.value .hilbertIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodWMASub,sizeof( _state.value .periodWMASub),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodWMASum,sizeof( _state.value .periodWMASum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .period,sizeof( _state.value .period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForOddPrev2,sizeof( _state.value .I1ForOddPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForEvenPrev2,sizeof( _state.value .I1ForEvenPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForOddPrev3,sizeof( _state.value .I1ForOddPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForEvenPrev3,sizeof( _state.value .I1ForEvenPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevI2,sizeof( _state.value .prevI2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevQ2,sizeof( _state.value .prevQ2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .smoothPeriod,sizeof( _state.value .smoothPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .DCPhase,sizeof( _state.value .DCPhase),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .Im,sizeof( _state.value .Im),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .Re,sizeof( _state.value .Re),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .trailingWMAValue,sizeof( _state.value .trailingWMAValue),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .rad2Deg,sizeof( _state.value .rad2Deg),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .a,sizeof( _state.value .a),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .b,sizeof( _state.value .b),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .constDeg2RadBy360,sizeof( _state.value .constDeg2RadBy360),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .deg2Rad,sizeof( _state.value .deg2Rad),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      { if ( _state.value .detrender == NULL) return RetCode.BadParam ; if (fwrite( _state.value .detrender,sizeof(struct TA_HT_SINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .Q1 == NULL) return RetCode.BadParam ; if (fwrite( _state.value .Q1,sizeof(struct TA_HT_SINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .jI == NULL) return RetCode.BadParam ; if (fwrite( _state.value .jI,sizeof(struct TA_HT_SINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .jQ == NULL) return RetCode.BadParam ; if (fwrite( _state.value .jQ,sizeof(struct TA_HT_SINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { int io_circbuf_res; struct TA_HT_SINE_STATE_CIRCBUF * str_circbuf = _state.value .circBuf; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      return 0;
+   }
+   public int htSineStateLoad( struct TA_htSine_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct htSine ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_HT_SINE_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_HT_SINE_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .hilbertIdx,sizeof( _state.value .value .hilbertIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodWMASub,sizeof( _state.value .value .periodWMASub),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodWMASum,sizeof( _state.value .value .periodWMASum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .period,sizeof( _state.value .value .period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForOddPrev2,sizeof( _state.value .value .I1ForOddPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForEvenPrev2,sizeof( _state.value .value .I1ForEvenPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForOddPrev3,sizeof( _state.value .value .I1ForOddPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForEvenPrev3,sizeof( _state.value .value .I1ForEvenPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevI2,sizeof( _state.value .value .prevI2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevQ2,sizeof( _state.value .value .prevQ2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .smoothPeriod,sizeof( _state.value .value .smoothPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .DCPhase,sizeof( _state.value .value .DCPhase),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .Im,sizeof( _state.value .value .Im),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .Re,sizeof( _state.value .value .Re),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .trailingWMAValue,sizeof( _state.value .value .trailingWMAValue),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .rad2Deg,sizeof( _state.value .value .rad2Deg),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .a,sizeof( _state.value .value .a),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .b,sizeof( _state.value .value .b),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .constDeg2RadBy360,sizeof( _state.value .value .constDeg2RadBy360),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .deg2Rad,sizeof( _state.value .value .deg2Rad),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      { if ( _state.value .value .detrender != NULL) return RetCode.BadParam ; { _state.value .value .detrender = calloc(1, sizeof(struct TA_HT_SINE_HILBERT_STRUCT )); if ( _state.value .value .detrender == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .detrender,sizeof(struct TA_HT_SINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .value .Q1 != NULL) return RetCode.BadParam ; { _state.value .value .Q1 = calloc(1, sizeof(struct TA_HT_SINE_HILBERT_STRUCT )); if ( _state.value .value .Q1 == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .Q1,sizeof(struct TA_HT_SINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .value .jI != NULL) return RetCode.BadParam ; { _state.value .value .jI = calloc(1, sizeof(struct TA_HT_SINE_HILBERT_STRUCT )); if ( _state.value .value .jI == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .jI,sizeof(struct TA_HT_SINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .value .jQ != NULL) return RetCode.BadParam ; { _state.value .value .jQ = calloc(1, sizeof(struct TA_HT_SINE_HILBERT_STRUCT )); if ( _state.value .value .jQ == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .jQ,sizeof(struct TA_HT_SINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { int io_circbuf_res; int circbuf_idx; int circbuf_size; if ( _state.value .value .circBuf != NULL) return RetCode.BadParam ; io_circbuf_res = fread(&circbuf_idx,sizeof(circbuf_idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fread(&circbuf_size,sizeof(circbuf_size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; { _state.value .value .circBuf = calloc(1, sizeof(struct TA_HT_SINE_STATE_CIRCBUF )); if ( _state.value .value .circBuf == NULL) return RetCode.AllocErr ; struct TA_HT_SINE_STATE_CIRCBUF * buf = (struct TA_HT_SINE_STATE_CIRCBUF *) _state.value .value .circBuf; buf->idx = 0; buf->size = circbuf_size; buf->circbuf = calloc(circbuf_size, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} struct TA_HT_SINE_STATE_CIRCBUF * str_circbuf = _state.value .value .circBuf; str_circbuf->idx = circbuf_idx; if (str_circbuf->size > 0) { io_circbuf_res = fread(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      return 0;
+   }
    public RetCode htSine( int startIdx,
       int endIdx,
       float inReal[],
@@ -21206,6 +26692,136 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int htTrendlineStateSave( struct TA_htTrendline_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_HT_TRENDLINE_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .hilbertIdx,sizeof( _state.value .hilbertIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodWMASub,sizeof( _state.value .periodWMASub),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodWMASum,sizeof( _state.value .periodWMASum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .period,sizeof( _state.value .period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForOddPrev2,sizeof( _state.value .I1ForOddPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForEvenPrev2,sizeof( _state.value .I1ForEvenPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForOddPrev3,sizeof( _state.value .I1ForOddPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForEvenPrev3,sizeof( _state.value .I1ForEvenPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevI2,sizeof( _state.value .prevI2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevQ2,sizeof( _state.value .prevQ2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .smoothPeriod,sizeof( _state.value .smoothPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .Im,sizeof( _state.value .Im),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .Re,sizeof( _state.value .Re),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .trailingWMAValue,sizeof( _state.value .trailingWMAValue),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .rad2Deg,sizeof( _state.value .rad2Deg),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .a,sizeof( _state.value .a),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .b,sizeof( _state.value .b),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .iTrend1,sizeof( _state.value .iTrend1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .iTrend2,sizeof( _state.value .iTrend2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .iTrend3,sizeof( _state.value .iTrend3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      { if ( _state.value .detrender == NULL) return RetCode.BadParam ; if (fwrite( _state.value .detrender,sizeof(struct TA_HT_TRENDLINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .Q1 == NULL) return RetCode.BadParam ; if (fwrite( _state.value .Q1,sizeof(struct TA_HT_TRENDLINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .jI == NULL) return RetCode.BadParam ; if (fwrite( _state.value .jI,sizeof(struct TA_HT_TRENDLINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .jQ == NULL) return RetCode.BadParam ; if (fwrite( _state.value .jQ,sizeof(struct TA_HT_TRENDLINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { int io_circbuf_res; struct TA_HT_TRENDLINE_STATE_CIRCBUF * str_circbuf = _state.value .circBuf; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      return 0;
+   }
+   public int htTrendlineStateLoad( struct TA_htTrendline_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct htTrendline ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_HT_TRENDLINE_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_HT_TRENDLINE_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .hilbertIdx,sizeof( _state.value .value .hilbertIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodWMASub,sizeof( _state.value .value .periodWMASub),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodWMASum,sizeof( _state.value .value .periodWMASum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .period,sizeof( _state.value .value .period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForOddPrev2,sizeof( _state.value .value .I1ForOddPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForEvenPrev2,sizeof( _state.value .value .I1ForEvenPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForOddPrev3,sizeof( _state.value .value .I1ForOddPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForEvenPrev3,sizeof( _state.value .value .I1ForEvenPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevI2,sizeof( _state.value .value .prevI2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevQ2,sizeof( _state.value .value .prevQ2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .smoothPeriod,sizeof( _state.value .value .smoothPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .Im,sizeof( _state.value .value .Im),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .Re,sizeof( _state.value .value .Re),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .trailingWMAValue,sizeof( _state.value .value .trailingWMAValue),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .rad2Deg,sizeof( _state.value .value .rad2Deg),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .a,sizeof( _state.value .value .a),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .b,sizeof( _state.value .value .b),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .iTrend1,sizeof( _state.value .value .iTrend1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .iTrend2,sizeof( _state.value .value .iTrend2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .iTrend3,sizeof( _state.value .value .iTrend3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      { if ( _state.value .value .detrender != NULL) return RetCode.BadParam ; { _state.value .value .detrender = calloc(1, sizeof(struct TA_HT_TRENDLINE_HILBERT_STRUCT )); if ( _state.value .value .detrender == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .detrender,sizeof(struct TA_HT_TRENDLINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .value .Q1 != NULL) return RetCode.BadParam ; { _state.value .value .Q1 = calloc(1, sizeof(struct TA_HT_TRENDLINE_HILBERT_STRUCT )); if ( _state.value .value .Q1 == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .Q1,sizeof(struct TA_HT_TRENDLINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .value .jI != NULL) return RetCode.BadParam ; { _state.value .value .jI = calloc(1, sizeof(struct TA_HT_TRENDLINE_HILBERT_STRUCT )); if ( _state.value .value .jI == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .jI,sizeof(struct TA_HT_TRENDLINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .value .jQ != NULL) return RetCode.BadParam ; { _state.value .value .jQ = calloc(1, sizeof(struct TA_HT_TRENDLINE_HILBERT_STRUCT )); if ( _state.value .value .jQ == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .jQ,sizeof(struct TA_HT_TRENDLINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { int io_circbuf_res; int circbuf_idx; int circbuf_size; if ( _state.value .value .circBuf != NULL) return RetCode.BadParam ; io_circbuf_res = fread(&circbuf_idx,sizeof(circbuf_idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fread(&circbuf_size,sizeof(circbuf_size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; { _state.value .value .circBuf = calloc(1, sizeof(struct TA_HT_TRENDLINE_STATE_CIRCBUF )); if ( _state.value .value .circBuf == NULL) return RetCode.AllocErr ; struct TA_HT_TRENDLINE_STATE_CIRCBUF * buf = (struct TA_HT_TRENDLINE_STATE_CIRCBUF *) _state.value .value .circBuf; buf->idx = 0; buf->size = circbuf_size; buf->circbuf = calloc(circbuf_size, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} struct TA_HT_TRENDLINE_STATE_CIRCBUF * str_circbuf = _state.value .value .circBuf; str_circbuf->idx = circbuf_idx; if (str_circbuf->size > 0) { io_circbuf_res = fread(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      return 0;
    }
    public RetCode htTrendline( int startIdx,
       int endIdx,
@@ -21803,6 +27419,164 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int htTrendModeStateSave( struct TA_htTrendMode_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_HT_TRENDMODE_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .hilbertIdx,sizeof( _state.value .hilbertIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodWMASub,sizeof( _state.value .periodWMASub),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodWMASum,sizeof( _state.value .periodWMASum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .period,sizeof( _state.value .period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForOddPrev2,sizeof( _state.value .I1ForOddPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForEvenPrev2,sizeof( _state.value .I1ForEvenPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForOddPrev3,sizeof( _state.value .I1ForOddPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForEvenPrev3,sizeof( _state.value .I1ForEvenPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevI2,sizeof( _state.value .prevI2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevQ2,sizeof( _state.value .prevQ2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .smoothPeriod,sizeof( _state.value .smoothPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .DCPhase,sizeof( _state.value .DCPhase),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .Im,sizeof( _state.value .Im),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .Re,sizeof( _state.value .Re),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .trailingWMAValue,sizeof( _state.value .trailingWMAValue),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .rad2Deg,sizeof( _state.value .rad2Deg),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .a,sizeof( _state.value .a),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .b,sizeof( _state.value .b),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .constDeg2RadBy360,sizeof( _state.value .constDeg2RadBy360),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .deg2Rad,sizeof( _state.value .deg2Rad),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .iTrend1,sizeof( _state.value .iTrend1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .iTrend2,sizeof( _state.value .iTrend2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .iTrend3,sizeof( _state.value .iTrend3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .daysInTrend,sizeof( _state.value .daysInTrend),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevDCPhase,sizeof( _state.value .prevDCPhase),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevSine,sizeof( _state.value .prevSine),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevLeadSine,sizeof( _state.value .prevLeadSine),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      { if ( _state.value .detrender == NULL) return RetCode.BadParam ; if (fwrite( _state.value .detrender,sizeof(struct TA_HT_TRENDMODE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .Q1 == NULL) return RetCode.BadParam ; if (fwrite( _state.value .Q1,sizeof(struct TA_HT_TRENDMODE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .jI == NULL) return RetCode.BadParam ; if (fwrite( _state.value .jI,sizeof(struct TA_HT_TRENDMODE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .jQ == NULL) return RetCode.BadParam ; if (fwrite( _state.value .jQ,sizeof(struct TA_HT_TRENDMODE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { int io_circbuf_res; struct TA_HT_TRENDMODE_STATE_CIRCBUF * str_circbuf = _state.value .circBuf; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      return 0;
+   }
+   public int htTrendModeStateLoad( struct TA_htTrendMode_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct htTrendMode ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_HT_TRENDMODE_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_HT_TRENDMODE_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .hilbertIdx,sizeof( _state.value .value .hilbertIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodWMASub,sizeof( _state.value .value .periodWMASub),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodWMASum,sizeof( _state.value .value .periodWMASum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .period,sizeof( _state.value .value .period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForOddPrev2,sizeof( _state.value .value .I1ForOddPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForEvenPrev2,sizeof( _state.value .value .I1ForEvenPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForOddPrev3,sizeof( _state.value .value .I1ForOddPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForEvenPrev3,sizeof( _state.value .value .I1ForEvenPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevI2,sizeof( _state.value .value .prevI2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevQ2,sizeof( _state.value .value .prevQ2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .smoothPeriod,sizeof( _state.value .value .smoothPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .DCPhase,sizeof( _state.value .value .DCPhase),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .Im,sizeof( _state.value .value .Im),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .Re,sizeof( _state.value .value .Re),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .trailingWMAValue,sizeof( _state.value .value .trailingWMAValue),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .rad2Deg,sizeof( _state.value .value .rad2Deg),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .a,sizeof( _state.value .value .a),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .b,sizeof( _state.value .value .b),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .constDeg2RadBy360,sizeof( _state.value .value .constDeg2RadBy360),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .deg2Rad,sizeof( _state.value .value .deg2Rad),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .iTrend1,sizeof( _state.value .value .iTrend1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .iTrend2,sizeof( _state.value .value .iTrend2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .iTrend3,sizeof( _state.value .value .iTrend3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .daysInTrend,sizeof( _state.value .value .daysInTrend),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevDCPhase,sizeof( _state.value .value .prevDCPhase),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevSine,sizeof( _state.value .value .prevSine),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevLeadSine,sizeof( _state.value .value .prevLeadSine),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      { if ( _state.value .value .detrender != NULL) return RetCode.BadParam ; { _state.value .value .detrender = calloc(1, sizeof(struct TA_HT_TRENDMODE_HILBERT_STRUCT )); if ( _state.value .value .detrender == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .detrender,sizeof(struct TA_HT_TRENDMODE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .value .Q1 != NULL) return RetCode.BadParam ; { _state.value .value .Q1 = calloc(1, sizeof(struct TA_HT_TRENDMODE_HILBERT_STRUCT )); if ( _state.value .value .Q1 == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .Q1,sizeof(struct TA_HT_TRENDMODE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .value .jI != NULL) return RetCode.BadParam ; { _state.value .value .jI = calloc(1, sizeof(struct TA_HT_TRENDMODE_HILBERT_STRUCT )); if ( _state.value .value .jI == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .jI,sizeof(struct TA_HT_TRENDMODE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .value .jQ != NULL) return RetCode.BadParam ; { _state.value .value .jQ = calloc(1, sizeof(struct TA_HT_TRENDMODE_HILBERT_STRUCT )); if ( _state.value .value .jQ == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .jQ,sizeof(struct TA_HT_TRENDMODE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { int io_circbuf_res; int circbuf_idx; int circbuf_size; if ( _state.value .value .circBuf != NULL) return RetCode.BadParam ; io_circbuf_res = fread(&circbuf_idx,sizeof(circbuf_idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fread(&circbuf_size,sizeof(circbuf_size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; { _state.value .value .circBuf = calloc(1, sizeof(struct TA_HT_TRENDMODE_STATE_CIRCBUF )); if ( _state.value .value .circBuf == NULL) return RetCode.AllocErr ; struct TA_HT_TRENDMODE_STATE_CIRCBUF * buf = (struct TA_HT_TRENDMODE_STATE_CIRCBUF *) _state.value .value .circBuf; buf->idx = 0; buf->size = circbuf_size; buf->circbuf = calloc(circbuf_size, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} struct TA_HT_TRENDMODE_STATE_CIRCBUF * str_circbuf = _state.value .value .circBuf; str_circbuf->idx = circbuf_idx; if (str_circbuf->size > 0) { io_circbuf_res = fread(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      return 0;
+   }
    public RetCode htTrendMode( int startIdx,
       int endIdx,
       float inReal[],
@@ -22143,6 +27917,58 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int imiStateSave( struct TA_imi_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_IMI_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .upsum,sizeof( _state.value .upsum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .downsum,sizeof( _state.value .downsum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int imiStateLoad( struct TA_imi_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct imi ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_IMI_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_IMI_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .upsum,sizeof( _state.value .value .upsum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .downsum,sizeof( _state.value .value .downsum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode imi( int startIdx,
       int endIdx,
       float inOpen[],
@@ -22374,6 +28200,66 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int kamaStateSave( struct TA_kama_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_KAMA_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .sumROC1,sizeof( _state.value .sumROC1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .yestReal,sizeof( _state.value .yestReal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevKAMA,sizeof( _state.value .prevKAMA),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .trailingValue,sizeof( _state.value .trailingValue),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int kamaStateLoad( struct TA_kama_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct kama ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_KAMA_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_KAMA_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .sumROC1,sizeof( _state.value .value .sumROC1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .yestReal,sizeof( _state.value .value .yestReal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevKAMA,sizeof( _state.value .value .prevKAMA),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .trailingValue,sizeof( _state.value .value .trailingValue),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode kama( int startIdx,
       int endIdx,
       float inReal[],
@@ -22595,6 +28481,70 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int linearRegStateSave( struct TA_linearReg_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_LINEARREG_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .SumX,sizeof( _state.value .SumX),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .SumXY,sizeof( _state.value .SumXY),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .SumY,sizeof( _state.value .SumY),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .SumXSqr,sizeof( _state.value .SumXSqr),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .Divisor,sizeof( _state.value .Divisor),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int linearRegStateLoad( struct TA_linearReg_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct linearReg ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_LINEARREG_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_LINEARREG_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .SumX,sizeof( _state.value .value .SumX),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .SumXY,sizeof( _state.value .value .SumXY),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .SumY,sizeof( _state.value .value .SumY),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .SumXSqr,sizeof( _state.value .value .SumXSqr),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .Divisor,sizeof( _state.value .value .Divisor),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode linearReg( int startIdx,
       int endIdx,
       float inReal[],
@@ -22776,6 +28726,70 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int linearRegAngleStateSave( struct TA_linearRegAngle_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_LINEARREG_ANGLE_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .SumX,sizeof( _state.value .SumX),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .SumXY,sizeof( _state.value .SumXY),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .SumY,sizeof( _state.value .SumY),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .SumXSqr,sizeof( _state.value .SumXSqr),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .Divisor,sizeof( _state.value .Divisor),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int linearRegAngleStateLoad( struct TA_linearRegAngle_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct linearRegAngle ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_LINEARREG_ANGLE_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_LINEARREG_ANGLE_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .SumX,sizeof( _state.value .value .SumX),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .SumXY,sizeof( _state.value .value .SumXY),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .SumY,sizeof( _state.value .value .SumY),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .SumXSqr,sizeof( _state.value .value .SumXSqr),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .Divisor,sizeof( _state.value .value .Divisor),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode linearRegAngle( int startIdx,
       int endIdx,
       float inReal[],
@@ -22956,6 +28970,70 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int linearRegInterceptStateSave( struct TA_linearRegIntercept_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_LINEARREG_INTERCEPT_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .SumX,sizeof( _state.value .SumX),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .SumXY,sizeof( _state.value .SumXY),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .SumY,sizeof( _state.value .SumY),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .SumXSqr,sizeof( _state.value .SumXSqr),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .Divisor,sizeof( _state.value .Divisor),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int linearRegInterceptStateLoad( struct TA_linearRegIntercept_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct linearRegIntercept ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_LINEARREG_INTERCEPT_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_LINEARREG_INTERCEPT_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .SumX,sizeof( _state.value .value .SumX),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .SumXY,sizeof( _state.value .value .SumXY),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .SumY,sizeof( _state.value .value .SumY),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .SumXSqr,sizeof( _state.value .value .SumXSqr),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .Divisor,sizeof( _state.value .value .Divisor),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode linearRegIntercept( int startIdx,
       int endIdx,
       float inReal[],
@@ -23133,6 +29211,70 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int linearRegSlopeStateSave( struct TA_linearRegSlope_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_LINEARREG_SLOPE_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .SumX,sizeof( _state.value .SumX),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .SumXY,sizeof( _state.value .SumXY),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .SumY,sizeof( _state.value .SumY),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .SumXSqr,sizeof( _state.value .SumXSqr),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .Divisor,sizeof( _state.value .Divisor),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int linearRegSlopeStateLoad( struct TA_linearRegSlope_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct linearRegSlope ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_LINEARREG_SLOPE_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_LINEARREG_SLOPE_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .SumX,sizeof( _state.value .value .SumX),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .SumXY,sizeof( _state.value .value .SumXY),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .SumY,sizeof( _state.value .value .SumY),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .SumXSqr,sizeof( _state.value .value .SumXSqr),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .Divisor,sizeof( _state.value .value .Divisor),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode linearRegSlope( int startIdx,
       int endIdx,
       float inReal[],
@@ -23246,6 +29388,46 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int lnStateSave( struct TA_ln_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_LN_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int lnStateLoad( struct TA_ln_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct ln ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_LN_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_LN_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
    public RetCode ln( int startIdx,
       int endIdx,
       float inReal[],
@@ -23328,6 +29510,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int log10StateSave( struct TA_log10_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_LOG10_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int log10StateLoad( struct TA_log10_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct log10 ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_LOG10_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_LOG10_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode log10( int startIdx,
       int endIdx,
@@ -23624,6 +29846,124 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int movingAverageStateSave( struct TA_movingAverage_State* _state,
+      FILE* _file )
+   {
+      RetCode retValue;
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_MA_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInMAType,sizeof( _state.value .optInMAType),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      {
+         switch( _state.value .optInMAType )
+         {
+            case Sma :
+               retValue = TA_SMA_StateSave ( (struct sma *) _state.value .ta_state, _file);
+            break;
+            case Ema :
+               retValue = TA_EMA_StateSave ( (struct ema *) _state.value .ta_state, _file);
+            break;
+            case Wma :
+               retValue = TA_WMA_StateSave ( (struct wma *) _state.value .ta_state, _file);
+            break;
+            case Dema :
+               retValue = TA_DEMA_StateSave ( (struct dema *) _state.value .ta_state, _file);
+            break;
+            case Tema :
+               retValue = TA_TEMA_StateSave ( (struct tema *) _state.value .ta_state, _file);
+            break;
+            case Trima :
+               retValue = TA_TRIMA_StateSave ( (struct trima *) _state.value .ta_state, _file);
+            break;
+            case Kama :
+               retValue = TA_KAMA_StateSave ( (struct kama *) _state.value .ta_state, _file);
+            break;
+            case Mama :
+               retValue = TA_MAMA_StateSave ( (struct mama *) _state.value .ta_state, _file);
+            break;
+            case T3 :
+               retValue = TA_T3_StateSave ( (struct t3 *) _state.value .ta_state, _file);
+            break;
+            default:
+               retValue = RetCode.BadParam ;
+         }
+      }
+      return retValue;
+   }
+   public int movingAverageStateLoad( struct TA_movingAverage_State** _state,
+      FILE* _file )
+   {
+      RetCode retValue;
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct movingAverage ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_MA_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_MA_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInMAType,sizeof( _state.value .value .optInMAType),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      {
+         switch( _state.value .value .optInMAType )
+         {
+            case Sma :
+               retValue = TA_SMA_StateLoad ( (struct sma **) & _state.value .value .ta_state, _file);
+            break;
+            case Ema :
+               retValue = TA_EMA_StateLoad ( (struct ema **) & _state.value .value .ta_state, _file);
+            break;
+            case Wma :
+               retValue = TA_WMA_StateLoad ( (struct wma **) & _state.value .value .ta_state, _file);
+            break;
+            case Dema :
+               retValue = TA_DEMA_StateLoad ( (struct dema **) & _state.value .value .ta_state, _file);
+            break;
+            case Tema :
+               retValue = TA_TEMA_StateLoad ( (struct tema **) & _state.value .value .ta_state, _file);
+            break;
+            case Trima :
+               retValue = TA_TRIMA_StateLoad ( (struct trima **) & _state.value .value .ta_state, _file);
+            break;
+            case Kama :
+               retValue = TA_KAMA_StateLoad ( (struct kama **) & _state.value .value .ta_state, _file);
+            break;
+            case Mama :
+               retValue = TA_MAMA_StateLoad ( (struct mama **) & _state.value .value .ta_state, _file);
+            break;
+            case T3 :
+               retValue = TA_T3_StateLoad ( (struct t3 **) & _state.value .value .ta_state, _file);
+            break;
+            default:
+               retValue = RetCode.BadParam ;
+         }
+      }
+      return retValue;
    }
    public RetCode movingAverage( int startIdx,
       int endIdx,
@@ -24018,6 +30358,76 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int macdStateSave( struct TA_macd_State* _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_MACD_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInFastPeriod,sizeof( _state.value .optInFastPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInSlowPeriod,sizeof( _state.value .optInSlowPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInSignalPeriod,sizeof( _state.value .optInSignalPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .fastEMADelay,sizeof( _state.value .fastEMADelay),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_EMA_StateSave ( (struct ema *) _state.value .slowEMAState, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_EMA_StateSave ( (struct ema *) _state.value .fastEMAState, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_EMA_StateSave ( (struct ema *) _state.value .signalEMAState, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
+   public int macdStateLoad( struct TA_macd_State** _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct macd ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_MACD_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_MACD_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInFastPeriod,sizeof( _state.value .value .optInFastPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInSlowPeriod,sizeof( _state.value .value .optInSlowPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInSignalPeriod,sizeof( _state.value .value .optInSignalPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .fastEMADelay,sizeof( _state.value .value .fastEMADelay),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_EMA_StateLoad ( (struct ema **) & _state.value .value .slowEMAState, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_EMA_StateLoad ( (struct ema **) & _state.value .value .fastEMAState, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_EMA_StateLoad ( (struct ema **) & _state.value .value .signalEMAState, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
    public RetCode macd( int startIdx,
       int endIdx,
       float inReal[],
@@ -24397,6 +30807,88 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int macdExtStateSave( struct TA_macdExt_State* _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_MACDEXT_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInFastPeriod,sizeof( _state.value .optInFastPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInFastMAType,sizeof( _state.value .optInFastMAType),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInSlowPeriod,sizeof( _state.value .optInSlowPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInSlowMAType,sizeof( _state.value .optInSlowMAType),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInSignalPeriod,sizeof( _state.value .optInSignalPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInSignalMAType,sizeof( _state.value .optInSignalMAType),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .fastMADelay,sizeof( _state.value .fastMADelay),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_MA_StateSave ( (struct movingAverage *) _state.value .slowMAState, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_MA_StateSave ( (struct movingAverage *) _state.value .fastMAState, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_MA_StateSave ( (struct movingAverage *) _state.value .signalMAState, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
+   public int macdExtStateLoad( struct TA_macdExt_State** _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct macdExt ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_MACDEXT_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_MACDEXT_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInFastPeriod,sizeof( _state.value .value .optInFastPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInFastMAType,sizeof( _state.value .value .optInFastMAType),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInSlowPeriod,sizeof( _state.value .value .optInSlowPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInSlowMAType,sizeof( _state.value .value .optInSlowMAType),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInSignalPeriod,sizeof( _state.value .value .optInSignalPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInSignalMAType,sizeof( _state.value .value .optInSignalMAType),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .fastMADelay,sizeof( _state.value .value .fastMADelay),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_MA_StateLoad ( (struct movingAverage **) & _state.value .value .slowMAState, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_MA_StateLoad ( (struct movingAverage **) & _state.value .value .fastMAState, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_MA_StateLoad ( (struct movingAverage **) & _state.value .value .signalMAState, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
    public RetCode macdExt( int startIdx,
       int endIdx,
       float inReal[],
@@ -24567,6 +31059,50 @@ public class Core {
    public int macdFixStateFree( struct TA_macdFix_State** _state )
    {
       return macd ( (struct macd **) _state );
+   }
+   public int macdFixStateSave( struct TA_macdFix_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_MACDFIX_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInSignalPeriod,sizeof( _state.value .optInSignalPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int macdFixStateLoad( struct TA_macdFix_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct macdFix ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_MACDFIX_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_MACDFIX_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInSignalPeriod,sizeof( _state.value .value .optInSignalPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode macdFix( int startIdx,
       int endIdx,
@@ -24949,6 +31485,138 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int mamaStateSave( struct TA_mama_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_MAMA_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInFastLimit,sizeof( _state.value .optInFastLimit),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInSlowLimit,sizeof( _state.value .optInSlowLimit),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .hilbertIdx,sizeof( _state.value .hilbertIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodWMASub,sizeof( _state.value .periodWMASub),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodWMASum,sizeof( _state.value .periodWMASum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .period,sizeof( _state.value .period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForOddPrev2,sizeof( _state.value .I1ForOddPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForEvenPrev2,sizeof( _state.value .I1ForEvenPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForOddPrev3,sizeof( _state.value .I1ForOddPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .I1ForEvenPrev3,sizeof( _state.value .I1ForEvenPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevI2,sizeof( _state.value .prevI2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevQ2,sizeof( _state.value .prevQ2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevPhase,sizeof( _state.value .prevPhase),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mama,sizeof( _state.value .mama),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .fama,sizeof( _state.value .fama),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .Im,sizeof( _state.value .Im),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .Re,sizeof( _state.value .Re),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .trailingWMAValue,sizeof( _state.value .trailingWMAValue),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .rad2Deg,sizeof( _state.value .rad2Deg),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .a,sizeof( _state.value .a),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .b,sizeof( _state.value .b),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      { if ( _state.value .detrender == NULL) return RetCode.BadParam ; if (fwrite( _state.value .detrender,sizeof(struct TA_MAMA_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .Q1 == NULL) return RetCode.BadParam ; if (fwrite( _state.value .Q1,sizeof(struct TA_MAMA_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .jI == NULL) return RetCode.BadParam ; if (fwrite( _state.value .jI,sizeof(struct TA_MAMA_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .jQ == NULL) return RetCode.BadParam ; if (fwrite( _state.value .jQ,sizeof(struct TA_MAMA_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int mamaStateLoad( struct TA_mama_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct mama ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_MAMA_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_MAMA_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInFastLimit,sizeof( _state.value .value .optInFastLimit),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInSlowLimit,sizeof( _state.value .value .optInSlowLimit),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .hilbertIdx,sizeof( _state.value .value .hilbertIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodWMASub,sizeof( _state.value .value .periodWMASub),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodWMASum,sizeof( _state.value .value .periodWMASum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .period,sizeof( _state.value .value .period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForOddPrev2,sizeof( _state.value .value .I1ForOddPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForEvenPrev2,sizeof( _state.value .value .I1ForEvenPrev2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForOddPrev3,sizeof( _state.value .value .I1ForOddPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .I1ForEvenPrev3,sizeof( _state.value .value .I1ForEvenPrev3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevI2,sizeof( _state.value .value .prevI2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevQ2,sizeof( _state.value .value .prevQ2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevPhase,sizeof( _state.value .value .prevPhase),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mama,sizeof( _state.value .value .mama),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .fama,sizeof( _state.value .value .fama),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .Im,sizeof( _state.value .value .Im),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .Re,sizeof( _state.value .value .Re),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .trailingWMAValue,sizeof( _state.value .value .trailingWMAValue),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .rad2Deg,sizeof( _state.value .value .rad2Deg),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .a,sizeof( _state.value .value .a),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .b,sizeof( _state.value .value .b),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      { if ( _state.value .value .detrender != NULL) return RetCode.BadParam ; { _state.value .value .detrender = calloc(1, sizeof(struct TA_MAMA_HILBERT_STRUCT )); if ( _state.value .value .detrender == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .detrender,sizeof(struct TA_MAMA_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .value .Q1 != NULL) return RetCode.BadParam ; { _state.value .value .Q1 = calloc(1, sizeof(struct TA_MAMA_HILBERT_STRUCT )); if ( _state.value .value .Q1 == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .Q1,sizeof(struct TA_MAMA_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .value .jI != NULL) return RetCode.BadParam ; { _state.value .value .jI = calloc(1, sizeof(struct TA_MAMA_HILBERT_STRUCT )); if ( _state.value .value .jI == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .jI,sizeof(struct TA_MAMA_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      { if ( _state.value .value .jQ != NULL) return RetCode.BadParam ; { _state.value .value .jQ = calloc(1, sizeof(struct TA_MAMA_HILBERT_STRUCT )); if ( _state.value .value .jQ == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .jQ,sizeof(struct TA_MAMA_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
+      return 0;
+   }
    public RetCode mama( int startIdx,
       int endIdx,
       float inReal[],
@@ -25269,6 +31937,62 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int movingAverageVariablePeriodStateSave( struct TA_movingAverageVariablePeriod_State* _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_MAVP_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInMinPeriod,sizeof( _state.value .optInMinPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInMaxPeriod,sizeof( _state.value .optInMaxPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInMAType,sizeof( _state.value .optInMAType),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_MA_StateSave ( (struct movingAverage *) _state.value .MAState, _file );
+      return retCode;
+   }
+   public int movingAverageVariablePeriodStateLoad( struct TA_movingAverageVariablePeriod_State** _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct movingAverageVariablePeriod ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_MAVP_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_MAVP_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInMinPeriod,sizeof( _state.value .value .optInMinPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInMaxPeriod,sizeof( _state.value .value .optInMaxPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInMAType,sizeof( _state.value .value .optInMAType),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_MA_StateLoad ( (struct movingAverage **) & _state.value .value .MAState, _file );
+      return retCode;
+   }
    public RetCode movingAverageVariablePeriod( int startIdx,
       int endIdx,
       float inReal[],
@@ -25472,6 +32196,54 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int maxStateSave( struct TA_max_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_MAX_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .max,sizeof( _state.value .max),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int maxStateLoad( struct TA_max_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct max ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_MAX_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_MAX_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .max,sizeof( _state.value .value .max),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode max( int startIdx,
       int endIdx,
       float inReal[],
@@ -25660,6 +32432,62 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int maxIndexStateSave( struct TA_maxIndex_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_MAXINDEX_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .max,sizeof( _state.value .max),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .maxIdx,sizeof( _state.value .maxIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .currentIdx,sizeof( _state.value .currentIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int maxIndexStateLoad( struct TA_maxIndex_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct maxIndex ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_MAXINDEX_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_MAXINDEX_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .max,sizeof( _state.value .value .max),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .maxIdx,sizeof( _state.value .value .maxIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .currentIdx,sizeof( _state.value .value .currentIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode maxIndex( int startIdx,
       int endIdx,
       float inReal[],
@@ -25788,6 +32616,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int medPriceStateSave( struct TA_medPrice_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_MEDPRICE_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int medPriceStateLoad( struct TA_medPrice_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct medPrice ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_MEDPRICE_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_MEDPRICE_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode medPrice( int startIdx,
       int endIdx,
@@ -26044,6 +32912,64 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int mfiStateSave( struct TA_mfi_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_MFI_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevValue,sizeof( _state.value .prevValue),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .posSumMF,sizeof( _state.value .posSumMF),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .negSumMF,sizeof( _state.value .negSumMF),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      { int io_circbuf_res; struct TA_MFI_STATE_CIRCBUF * str_circbuf = _state.value .mflow; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      return 0;
+   }
+   public int mfiStateLoad( struct TA_mfi_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct mfi ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_MFI_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_MFI_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevValue,sizeof( _state.value .value .prevValue),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .posSumMF,sizeof( _state.value .value .posSumMF),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .negSumMF,sizeof( _state.value .value .negSumMF),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      { int io_circbuf_res; int circbuf_idx; int circbuf_size; if ( _state.value .value .mflow != NULL) return RetCode.BadParam ; io_circbuf_res = fread(&circbuf_idx,sizeof(circbuf_idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fread(&circbuf_size,sizeof(circbuf_size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; { _state.value .value .mflow = calloc(1, sizeof(struct TA_MFI_STATE_CIRCBUF )); if ( _state.value .value .mflow == NULL) return RetCode.AllocErr ; struct TA_MFI_STATE_CIRCBUF * buf = (struct TA_MFI_STATE_CIRCBUF *) _state.value .value .mflow; buf->idx = 0; buf->size = circbuf_size; buf->circbuf = calloc(circbuf_size, sizeof(MoneyFlow)); if (!buf->circbuf) return RetCode.AllocErr ;} struct TA_MFI_STATE_CIRCBUF * str_circbuf = _state.value .value .mflow; str_circbuf->idx = circbuf_idx; if (str_circbuf->size > 0) { io_circbuf_res = fread(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      return 0;
+   }
    public RetCode mfi( int startIdx,
       int endIdx,
       float inHigh[],
@@ -26286,6 +33212,58 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int midPointStateSave( struct TA_midPoint_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_MIDPOINT_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .highest,sizeof( _state.value .highest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .lowest,sizeof( _state.value .lowest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int midPointStateLoad( struct TA_midPoint_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct midPoint ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_MIDPOINT_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_MIDPOINT_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .highest,sizeof( _state.value .value .highest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .lowest,sizeof( _state.value .value .lowest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode midPoint( int startIdx,
       int endIdx,
       float inReal[],
@@ -26441,6 +33419,58 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int midPriceStateSave( struct TA_midPrice_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_MIDPRICE_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .highest,sizeof( _state.value .highest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .lowest,sizeof( _state.value .lowest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int midPriceStateLoad( struct TA_midPrice_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct midPrice ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_MIDPRICE_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_MIDPRICE_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .highest,sizeof( _state.value .value .highest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .lowest,sizeof( _state.value .value .lowest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode midPrice( int startIdx,
       int endIdx,
@@ -26607,6 +33637,54 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int minStateSave( struct TA_min_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_MIN_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .min,sizeof( _state.value .min),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int minStateLoad( struct TA_min_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct min ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_MIN_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_MIN_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .min,sizeof( _state.value .value .min),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode min( int startIdx,
       int endIdx,
@@ -26795,6 +33873,62 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int minIndexStateSave( struct TA_minIndex_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_MININDEX_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .min,sizeof( _state.value .min),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .minIdx,sizeof( _state.value .minIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .currentIdx,sizeof( _state.value .currentIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int minIndexStateLoad( struct TA_minIndex_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct minIndex ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_MININDEX_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_MININDEX_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .min,sizeof( _state.value .value .min),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .minIdx,sizeof( _state.value .value .minIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .currentIdx,sizeof( _state.value .value .currentIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode minIndex( int startIdx,
       int endIdx,
@@ -27006,6 +34140,58 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int minMaxStateSave( struct TA_minMax_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_MINMAX_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .min,sizeof( _state.value .min),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .max,sizeof( _state.value .max),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int minMaxStateLoad( struct TA_minMax_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct minMax ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_MINMAX_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_MINMAX_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .min,sizeof( _state.value .value .min),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .max,sizeof( _state.value .value .max),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode minMax( int startIdx,
       int endIdx,
@@ -27251,6 +34437,70 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int minMaxIndexStateSave( struct TA_minMaxIndex_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_MINMAXINDEX_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .min,sizeof( _state.value .min),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .max,sizeof( _state.value .max),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .minIdx,sizeof( _state.value .minIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .maxIdx,sizeof( _state.value .maxIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .currentIdx,sizeof( _state.value .currentIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int minMaxIndexStateLoad( struct TA_minMaxIndex_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct minMaxIndex ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_MINMAXINDEX_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_MINMAXINDEX_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .min,sizeof( _state.value .value .min),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .max,sizeof( _state.value .value .max),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .minIdx,sizeof( _state.value .value .minIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .maxIdx,sizeof( _state.value .value .maxIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .currentIdx,sizeof( _state.value .value .currentIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode minMaxIndex( int startIdx,
       int endIdx,
@@ -27592,6 +34842,70 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int minusDIStateSave( struct TA_minusDI_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_MINUS_DI_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevHigh,sizeof( _state.value .prevHigh),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevLow,sizeof( _state.value .prevLow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevClose,sizeof( _state.value .prevClose),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevTR,sizeof( _state.value .prevTR),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevMinusDM,sizeof( _state.value .prevMinusDM),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int minusDIStateLoad( struct TA_minusDI_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct minusDI ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_MINUS_DI_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_MINUS_DI_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevHigh,sizeof( _state.value .value .prevHigh),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevLow,sizeof( _state.value .value .prevLow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevClose,sizeof( _state.value .value .prevClose),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevTR,sizeof( _state.value .value .prevTR),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevMinusDM,sizeof( _state.value .value .prevMinusDM),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode minusDI( int startIdx,
       int endIdx,
@@ -27951,6 +35265,62 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int minusDMStateSave( struct TA_minusDM_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_MINUS_DM_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevHigh,sizeof( _state.value .prevHigh),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevLow,sizeof( _state.value .prevLow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevMinusDM,sizeof( _state.value .prevMinusDM),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int minusDMStateLoad( struct TA_minusDM_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct minusDM ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_MINUS_DM_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_MINUS_DM_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevHigh,sizeof( _state.value .value .prevHigh),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevLow,sizeof( _state.value .value .prevLow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevMinusDM,sizeof( _state.value .value .prevMinusDM),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode minusDM( int startIdx,
       int endIdx,
       float inHigh[],
@@ -28162,6 +35532,50 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int momStateSave( struct TA_mom_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_MOM_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int momStateLoad( struct TA_mom_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct mom ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_MOM_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_MOM_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode mom( int startIdx,
       int endIdx,
       float inReal[],
@@ -28260,6 +35674,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int multStateSave( struct TA_mult_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_MULT_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int multStateLoad( struct TA_mult_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct mult ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_MULT_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_MULT_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode mult( int startIdx,
       int endIdx,
@@ -28467,6 +35921,68 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int natrStateSave( struct TA_natr_State* _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_NATR_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevATR,sizeof( _state.value .prevATR),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .firstATR,sizeof( _state.value .firstATR),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_TRANGE_StateSave ( (struct trueRange *) _state.value .StateTRANGE, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_SMA_StateSave ( (struct sma *) _state.value .StateSMA, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
+   public int natrStateLoad( struct TA_natr_State** _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct natr ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_NATR_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_NATR_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevATR,sizeof( _state.value .value .prevATR),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .firstATR,sizeof( _state.value .value .firstATR),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_TRANGE_StateLoad ( (struct trueRange **) & _state.value .value .StateTRANGE, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_SMA_StateLoad ( (struct sma **) & _state.value .value .StateSMA, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
    public RetCode natr( int startIdx,
       int endIdx,
       float inHigh[],
@@ -28642,6 +36158,54 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int obvStateSave( struct TA_obv_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_OBV_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .prevOBV,sizeof( _state.value .prevOBV),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevReal,sizeof( _state.value .prevReal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int obvStateLoad( struct TA_obv_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct obv ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_OBV_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_OBV_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .prevOBV,sizeof( _state.value .value .prevOBV),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevReal,sizeof( _state.value .value .prevReal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode obv( int startIdx,
       int endIdx,
@@ -28926,6 +36490,70 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int plusDIStateSave( struct TA_plusDI_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_PLUS_DI_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevHigh,sizeof( _state.value .prevHigh),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevLow,sizeof( _state.value .prevLow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevClose,sizeof( _state.value .prevClose),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevTR,sizeof( _state.value .prevTR),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevPlusDM,sizeof( _state.value .prevPlusDM),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int plusDIStateLoad( struct TA_plusDI_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct plusDI ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_PLUS_DI_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_PLUS_DI_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevHigh,sizeof( _state.value .value .prevHigh),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevLow,sizeof( _state.value .value .prevLow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevClose,sizeof( _state.value .value .prevClose),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevTR,sizeof( _state.value .value .prevTR),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevPlusDM,sizeof( _state.value .value .prevPlusDM),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode plusDI( int startIdx,
       int endIdx,
@@ -29285,6 +36913,62 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int plusDMStateSave( struct TA_plusDM_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_PLUS_DM_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevHigh,sizeof( _state.value .prevHigh),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevLow,sizeof( _state.value .prevLow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevPlusDM,sizeof( _state.value .prevPlusDM),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int plusDMStateLoad( struct TA_plusDM_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct plusDM ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_PLUS_DM_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_PLUS_DM_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevHigh,sizeof( _state.value .value .prevHigh),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevLow,sizeof( _state.value .value .prevLow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevPlusDM,sizeof( _state.value .value .prevPlusDM),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode plusDM( int startIdx,
       int endIdx,
       float inHigh[],
@@ -29475,6 +37159,58 @@ public class Core {
    {
       return apo ((struct apo **)_state);
    }
+   public int ppoStateSave( struct TA_ppo_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_PPO_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInFastPeriod,sizeof( _state.value .optInFastPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInSlowPeriod,sizeof( _state.value .optInSlowPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInMAType,sizeof( _state.value .optInMAType),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int ppoStateLoad( struct TA_ppo_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct ppo ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_PPO_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_PPO_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInFastPeriod,sizeof( _state.value .value .optInFastPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInSlowPeriod,sizeof( _state.value .value .optInSlowPeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInMAType,sizeof( _state.value .value .optInMAType),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode ppo( int startIdx,
       int endIdx,
       float inReal[],
@@ -29605,6 +37341,50 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int rocStateSave( struct TA_roc_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_ROC_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int rocStateLoad( struct TA_roc_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct roc ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_ROC_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_ROC_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode roc( int startIdx,
       int endIdx,
@@ -29744,6 +37524,50 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int rocPStateSave( struct TA_rocP_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_ROCP_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int rocPStateLoad( struct TA_rocP_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct rocP ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_ROCP_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_ROCP_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode rocP( int startIdx,
       int endIdx,
       float inReal[],
@@ -29882,6 +37706,50 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int rocRStateSave( struct TA_rocR_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_ROCR_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int rocRStateLoad( struct TA_rocR_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct rocR ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_ROCR_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_ROCR_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode rocR( int startIdx,
       int endIdx,
       float inReal[],
@@ -30019,6 +37887,50 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int rocR100StateSave( struct TA_rocR100_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_ROCR100_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int rocR100StateLoad( struct TA_rocR100_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct rocR100 ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_ROCR100_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_ROCR100_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode rocR100( int startIdx,
       int endIdx,
@@ -30286,6 +38198,66 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int rsiStateSave( struct TA_rsi_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_RSI_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .MetastockMode,sizeof( _state.value .MetastockMode),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevGain,sizeof( _state.value .prevGain),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevLoss,sizeof( _state.value .prevLoss),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevValue,sizeof( _state.value .prevValue),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int rsiStateLoad( struct TA_rsi_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct rsi ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_RSI_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_RSI_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .MetastockMode,sizeof( _state.value .value .MetastockMode),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevGain,sizeof( _state.value .value .prevGain),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevLoss,sizeof( _state.value .value .prevLoss),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevValue,sizeof( _state.value .value .prevValue),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode rsi( int startIdx,
       int endIdx,
@@ -30739,6 +38711,92 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int sarStateSave( struct TA_sar_State* _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_SAR_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInAcceleration,sizeof( _state.value .optInAcceleration),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInMaximum,sizeof( _state.value .optInMaximum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .newHigh,sizeof( _state.value .newHigh),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .newLow,sizeof( _state.value .newLow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevHigh,sizeof( _state.value .prevHigh),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevLow,sizeof( _state.value .prevLow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .isLong,sizeof( _state.value .isLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .sar,sizeof( _state.value .sar),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ep,sizeof( _state.value .ep),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .af,sizeof( _state.value .af),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_MINUS_DM_StateSave ( (struct minusDM *) _state.value .stateMINUS_DM, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
+   public int sarStateLoad( struct TA_sar_State** _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct sar ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_SAR_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_SAR_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInAcceleration,sizeof( _state.value .value .optInAcceleration),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInMaximum,sizeof( _state.value .value .optInMaximum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .newHigh,sizeof( _state.value .value .newHigh),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .newLow,sizeof( _state.value .value .newLow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevHigh,sizeof( _state.value .value .prevHigh),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevLow,sizeof( _state.value .value .prevLow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .isLong,sizeof( _state.value .value .isLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .sar,sizeof( _state.value .value .sar),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ep,sizeof( _state.value .value .ep),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .af,sizeof( _state.value .value .af),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_MINUS_DM_StateLoad ( (struct minusDM **) & _state.value .value .stateMINUS_DM, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
    }
    public RetCode sar( int startIdx,
       int endIdx,
@@ -31373,6 +39431,120 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int sarExtStateSave( struct TA_sarExt_State* _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_SAREXT_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInStartValue,sizeof( _state.value .optInStartValue),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInOffsetOnReverse,sizeof( _state.value .optInOffsetOnReverse),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInAccelerationInitLong,sizeof( _state.value .optInAccelerationInitLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInAccelerationLong,sizeof( _state.value .optInAccelerationLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInAccelerationMaxLong,sizeof( _state.value .optInAccelerationMaxLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInAccelerationInitShort,sizeof( _state.value .optInAccelerationInitShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInAccelerationShort,sizeof( _state.value .optInAccelerationShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInAccelerationMaxShort,sizeof( _state.value .optInAccelerationMaxShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .newHigh,sizeof( _state.value .newHigh),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .newLow,sizeof( _state.value .newLow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevHigh,sizeof( _state.value .prevHigh),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevLow,sizeof( _state.value .prevLow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .isLong,sizeof( _state.value .isLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .sar,sizeof( _state.value .sar),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ep,sizeof( _state.value .ep),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .afLong,sizeof( _state.value .afLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .afShort,sizeof( _state.value .afShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_MINUS_DM_StateSave ( (struct minusDM *) _state.value .stateMINUS_DM, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
+   public int sarExtStateLoad( struct TA_sarExt_State** _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct sarExt ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_SAREXT_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_SAREXT_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInStartValue,sizeof( _state.value .value .optInStartValue),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInOffsetOnReverse,sizeof( _state.value .value .optInOffsetOnReverse),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInAccelerationInitLong,sizeof( _state.value .value .optInAccelerationInitLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInAccelerationLong,sizeof( _state.value .value .optInAccelerationLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInAccelerationMaxLong,sizeof( _state.value .value .optInAccelerationMaxLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInAccelerationInitShort,sizeof( _state.value .value .optInAccelerationInitShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInAccelerationShort,sizeof( _state.value .value .optInAccelerationShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInAccelerationMaxShort,sizeof( _state.value .value .optInAccelerationMaxShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .newHigh,sizeof( _state.value .value .newHigh),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .newLow,sizeof( _state.value .value .newLow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevHigh,sizeof( _state.value .value .prevHigh),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevLow,sizeof( _state.value .value .prevLow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .isLong,sizeof( _state.value .value .isLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .sar,sizeof( _state.value .value .sar),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ep,sizeof( _state.value .value .ep),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .afLong,sizeof( _state.value .value .afLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .afShort,sizeof( _state.value .value .afShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_MINUS_DM_StateLoad ( (struct minusDM **) & _state.value .value .stateMINUS_DM, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
    public RetCode sarExt( int startIdx,
       int endIdx,
       float inHigh[],
@@ -31653,6 +39825,46 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int sinStateSave( struct TA_sin_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_SIN_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int sinStateLoad( struct TA_sin_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct sin ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_SIN_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_SIN_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
    public RetCode sin( int startIdx,
       int endIdx,
       float inReal[],
@@ -31735,6 +39947,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int sinhStateSave( struct TA_sinh_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_SINH_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int sinhStateLoad( struct TA_sinh_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct sinh ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_SINH_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_SINH_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode sinh( int startIdx,
       int endIdx,
@@ -31875,6 +40127,54 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int smaStateSave( struct TA_sma_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_SMA_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodTotal,sizeof( _state.value .periodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int smaStateLoad( struct TA_sma_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct sma ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_SMA_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_SMA_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodTotal,sizeof( _state.value .value .periodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode sma( int startIdx,
       int endIdx,
       float inReal[],
@@ -31995,6 +40295,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int sqrtStateSave( struct TA_sqrt_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_SQRT_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int sqrtStateLoad( struct TA_sqrt_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct sqrt ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_SQRT_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_SQRT_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode sqrt( int startIdx,
       int endIdx,
@@ -32183,6 +40523,60 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int stdDevStateSave( struct TA_stdDev_State* _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_STDDEV_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInNbDev,sizeof( _state.value .optInNbDev),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_VAR_StateSave ( (struct variance *) _state.value .var_state, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
+   public int stdDevStateLoad( struct TA_stdDev_State** _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct stdDev ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_STDDEV_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_STDDEV_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInNbDev,sizeof( _state.value .value .optInNbDev),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_VAR_StateLoad ( (struct variance **) & _state.value .value .var_state, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
    }
    public RetCode stdDev( int startIdx,
       int endIdx,
@@ -32580,6 +40974,92 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int stochStateSave( struct TA_stoch_State* _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_STOCH_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInFastK_Period,sizeof( _state.value .optInFastK_Period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInSlowK_Period,sizeof( _state.value .optInSlowK_Period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInSlowK_MAType,sizeof( _state.value .optInSlowK_MAType),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInSlowD_Period,sizeof( _state.value .optInSlowD_Period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInSlowD_MAType,sizeof( _state.value .optInSlowD_MAType),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .lowest,sizeof( _state.value .lowest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .highest,sizeof( _state.value .highest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .lowest_exp,sizeof( _state.value .lowest_exp),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .highest_exp,sizeof( _state.value .highest_exp),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_MA_StateSave ( (struct movingAverage *) _state.value .stateMA1, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_MA_StateSave ( (struct movingAverage *) _state.value .stateMA2, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
+   public int stochStateLoad( struct TA_stoch_State** _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct stoch ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_STOCH_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_STOCH_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInFastK_Period,sizeof( _state.value .value .optInFastK_Period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInSlowK_Period,sizeof( _state.value .value .optInSlowK_Period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInSlowK_MAType,sizeof( _state.value .value .optInSlowK_MAType),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInSlowD_Period,sizeof( _state.value .value .optInSlowD_Period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInSlowD_MAType,sizeof( _state.value .value .optInSlowD_MAType),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .lowest,sizeof( _state.value .value .lowest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .highest,sizeof( _state.value .value .highest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .lowest_exp,sizeof( _state.value .value .lowest_exp),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .highest_exp,sizeof( _state.value .value .highest_exp),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_MA_StateLoad ( (struct movingAverage **) & _state.value .value .stateMA1, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_MA_StateLoad ( (struct movingAverage **) & _state.value .value .stateMA2, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
    }
    public RetCode stoch( int startIdx,
       int endIdx,
@@ -32985,6 +41465,22 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return RetCode.Success ;
    }
+   public int stochFStateSave( struct TA_stochF_State* _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      retCode = TA_MA_StateSave ( (struct movingAverage *) _state.value .stateMA1, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
+   public int stochFStateLoad( struct TA_stochF_State** _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      retCode = TA_MA_StateLoad ( (struct movingAverage **) & _state.value .value .stateMA1, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
    public RetCode stochF( int startIdx,
       int endIdx,
       float inHigh[],
@@ -33264,6 +41760,72 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int stochRsiStateSave( struct TA_stochRsi_State* _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_STOCHRSI_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInFastK_Period,sizeof( _state.value .optInFastK_Period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInFastD_Period,sizeof( _state.value .optInFastD_Period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInFastD_MAType,sizeof( _state.value .optInFastD_MAType),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_RSI_StateSave ( (struct rsi *) _state.value .stateRSI, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_STOCHF_StateSave ( (struct stochF *) _state.value .stateSTOCHF, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
+   public int stochRsiStateLoad( struct TA_stochRsi_State** _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct stochRsi ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_STOCHRSI_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_STOCHRSI_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInFastK_Period,sizeof( _state.value .value .optInFastK_Period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInFastD_Period,sizeof( _state.value .value .optInFastD_Period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInFastD_MAType,sizeof( _state.value .value .optInFastD_MAType),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_RSI_StateLoad ( (struct rsi **) & _state.value .value .stateRSI, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_STOCHF_StateLoad ( (struct stochF **) & _state.value .value .stateSTOCHF, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
    public RetCode stochRsi( int startIdx,
       int endIdx,
       float inReal[],
@@ -33410,6 +41972,46 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int subStateSave( struct TA_sub_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_SUB_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int subStateLoad( struct TA_sub_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct sub ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_SUB_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_SUB_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
    public RetCode sub( int startIdx,
       int endIdx,
       float inReal0[],
@@ -33539,6 +42141,54 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int sumStateSave( struct TA_sum_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_SUM_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .tempSum,sizeof( _state.value .tempSum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int sumStateLoad( struct TA_sum_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct sum ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_SUM_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_SUM_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .tempSum,sizeof( _state.value .value .tempSum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode sum( int startIdx,
       int endIdx,
@@ -33871,6 +42521,110 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int t3StateSave( struct TA_t3_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_T3_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInVFactor,sizeof( _state.value .optInVFactor),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .k,sizeof( _state.value .k),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .one_minus_k,sizeof( _state.value .one_minus_k),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .e1,sizeof( _state.value .e1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .e2,sizeof( _state.value .e2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .e3,sizeof( _state.value .e3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .e4,sizeof( _state.value .e4),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .e5,sizeof( _state.value .e5),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .e6,sizeof( _state.value .e6),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .c1,sizeof( _state.value .c1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .c2,sizeof( _state.value .c2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .c3,sizeof( _state.value .c3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .c4,sizeof( _state.value .c4),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .tempReal,sizeof( _state.value .tempReal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .firstOutput,sizeof( _state.value .firstOutput),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int t3StateLoad( struct TA_t3_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct t3 ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_T3_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_T3_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInVFactor,sizeof( _state.value .value .optInVFactor),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .k,sizeof( _state.value .value .k),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .one_minus_k,sizeof( _state.value .value .one_minus_k),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .e1,sizeof( _state.value .value .e1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .e2,sizeof( _state.value .value .e2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .e3,sizeof( _state.value .value .e3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .e4,sizeof( _state.value .value .e4),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .e5,sizeof( _state.value .value .e5),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .e6,sizeof( _state.value .value .e6),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .c1,sizeof( _state.value .value .c1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .c2,sizeof( _state.value .value .c2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .c3,sizeof( _state.value .value .c3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .c4,sizeof( _state.value .value .c4),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .tempReal,sizeof( _state.value .value .tempReal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .firstOutput,sizeof( _state.value .value .firstOutput),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode t3( int startIdx,
       int endIdx,
       float inReal[],
@@ -34051,6 +42805,46 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int tanStateSave( struct TA_tan_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_TAN_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int tanStateLoad( struct TA_tan_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct tan ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_TAN_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_TAN_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
    public RetCode tan( int startIdx,
       int endIdx,
       float inReal[],
@@ -34133,6 +42927,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int tanhStateSave( struct TA_tanh_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_TANH_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int tanhStateLoad( struct TA_tanh_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct tanh ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_TANH_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_TANH_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode tanh( int startIdx,
       int endIdx,
@@ -34307,6 +43141,64 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return res;
+   }
+   public int temaStateSave( struct TA_tema_State* _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_TEMA_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_EMA_StateSave ( (struct ema *) _state.value .state_EMA, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_EMA_StateSave ( (struct ema *) _state.value .state_EMA2, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_EMA_StateSave ( (struct ema *) _state.value .state_EMA3, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
+   public int temaStateLoad( struct TA_tema_State** _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct tema ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_TEMA_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_TEMA_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_EMA_StateLoad ( (struct ema **) & _state.value .value .state_EMA, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_EMA_StateLoad ( (struct ema **) & _state.value .value .state_EMA2, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_EMA_StateLoad ( (struct ema **) & _state.value .value .state_EMA3, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
    }
    public RetCode tema( int startIdx,
       int endIdx,
@@ -34483,6 +43375,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int trueRangeStateSave( struct TA_trueRange_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_TRANGE_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int trueRangeStateLoad( struct TA_trueRange_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct trueRange ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_TRANGE_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_TRANGE_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode trueRange( int startIdx,
       int endIdx,
@@ -34755,6 +43687,70 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int trimaStateSave( struct TA_trima_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_TRIMA_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .numerator,sizeof( _state.value .numerator),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .numeratorSub,sizeof( _state.value .numeratorSub),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .numeratorAdd,sizeof( _state.value .numeratorAdd),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .factor,sizeof( _state.value .factor),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .middleIdx,sizeof( _state.value .middleIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int trimaStateLoad( struct TA_trima_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct trima ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_TRIMA_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_TRIMA_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .numerator,sizeof( _state.value .value .numerator),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .numeratorSub,sizeof( _state.value .value .numeratorSub),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .numeratorAdd,sizeof( _state.value .value .numeratorAdd),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .factor,sizeof( _state.value .value .factor),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .middleIdx,sizeof( _state.value .value .middleIdx),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode trima( int startIdx,
       int endIdx,
@@ -35040,6 +44036,68 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int trixStateSave( struct TA_trix_State* _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_TRIX_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_EMA_StateSave ( (struct ema *) _state.value .stateEMA1, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_EMA_StateSave ( (struct ema *) _state.value .stateEMA2, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_EMA_StateSave ( (struct ema *) _state.value .stateEMA3, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_ROC_StateSave ( (struct roc *) _state.value .stateROC, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
+   public int trixStateLoad( struct TA_trix_State** _state,
+      FILE* _file )
+   {
+      TA_RetCode retCode;
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct trix ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_TRIX_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_TRIX_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      retCode = TA_EMA_StateLoad ( (struct ema **) & _state.value .value .stateEMA1, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_EMA_StateLoad ( (struct ema **) & _state.value .value .stateEMA2, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_EMA_StateLoad ( (struct ema **) & _state.value .value .stateEMA3, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      retCode = TA_ROC_StateLoad ( (struct roc **) & _state.value .value .stateROC, _file );
+      if (retCode != RetCode.Success ) return retCode;
+      return 0;
+   }
    public RetCode trix( int startIdx,
       int endIdx,
       float inReal[],
@@ -35254,6 +44312,70 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int tsfStateSave( struct TA_tsf_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_TSF_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .SumX,sizeof( _state.value .SumX),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .SumXY,sizeof( _state.value .SumXY),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .SumY,sizeof( _state.value .SumY),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .SumXSqr,sizeof( _state.value .SumXSqr),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .Divisor,sizeof( _state.value .Divisor),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int tsfStateLoad( struct TA_tsf_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct tsf ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_TSF_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_TSF_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .SumX,sizeof( _state.value .value .SumX),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .SumXY,sizeof( _state.value .value .SumXY),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .SumY,sizeof( _state.value .value .SumY),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .SumXSqr,sizeof( _state.value .value .SumXSqr),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .Divisor,sizeof( _state.value .value .Divisor),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode tsf( int startIdx,
       int endIdx,
       float inReal[],
@@ -35377,6 +44499,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int typPriceStateSave( struct TA_typPrice_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_TYPPRICE_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int typPriceStateLoad( struct TA_typPrice_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct typPrice ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_TYPPRICE_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_TYPPRICE_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode typPrice( int startIdx,
       int endIdx,
@@ -35653,6 +44815,98 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int ultOscStateSave( struct TA_ultOsc_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_ULTOSC_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod1,sizeof( _state.value .optInTimePeriod1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInTimePeriod2,sizeof( _state.value .optInTimePeriod2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInTimePeriod3,sizeof( _state.value .optInTimePeriod3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .a1Total,sizeof( _state.value .a1Total),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .a2Total,sizeof( _state.value .a2Total),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .a3Total,sizeof( _state.value .a3Total),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .b1Total,sizeof( _state.value .b1Total),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .b2Total,sizeof( _state.value .b2Total),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .b3Total,sizeof( _state.value .b3Total),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevClose,sizeof( _state.value .prevClose),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gap2,sizeof( _state.value .gap2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gap1,sizeof( _state.value .gap1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      { int io_circbuf_res; struct TA_ULTOSC_STATE_CIRCBUF * str_circbuf = _state.value .periodA; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      { int io_circbuf_res; struct TA_ULTOSC_STATE_CIRCBUF * str_circbuf = _state.value .periodB; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      return 0;
+   }
+   public int ultOscStateLoad( struct TA_ultOsc_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct ultOsc ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_ULTOSC_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_ULTOSC_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod1,sizeof( _state.value .value .optInTimePeriod1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInTimePeriod2,sizeof( _state.value .value .optInTimePeriod2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInTimePeriod3,sizeof( _state.value .value .optInTimePeriod3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .a1Total,sizeof( _state.value .value .a1Total),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .a2Total,sizeof( _state.value .value .a2Total),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .a3Total,sizeof( _state.value .value .a3Total),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .b1Total,sizeof( _state.value .value .b1Total),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .b2Total,sizeof( _state.value .value .b2Total),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .b3Total,sizeof( _state.value .value .b3Total),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevClose,sizeof( _state.value .value .prevClose),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gap2,sizeof( _state.value .value .gap2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gap1,sizeof( _state.value .value .gap1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      { int io_circbuf_res; int circbuf_idx; int circbuf_size; if ( _state.value .value .periodA != NULL) return RetCode.BadParam ; io_circbuf_res = fread(&circbuf_idx,sizeof(circbuf_idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fread(&circbuf_size,sizeof(circbuf_size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; { _state.value .value .periodA = calloc(1, sizeof(struct TA_ULTOSC_STATE_CIRCBUF )); if ( _state.value .value .periodA == NULL) return RetCode.AllocErr ; struct TA_ULTOSC_STATE_CIRCBUF * buf = (struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .value .periodA; buf->idx = 0; buf->size = circbuf_size; buf->circbuf = calloc(circbuf_size, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} struct TA_ULTOSC_STATE_CIRCBUF * str_circbuf = _state.value .value .periodA; str_circbuf->idx = circbuf_idx; if (str_circbuf->size > 0) { io_circbuf_res = fread(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      { int io_circbuf_res; int circbuf_idx; int circbuf_size; if ( _state.value .value .periodB != NULL) return RetCode.BadParam ; io_circbuf_res = fread(&circbuf_idx,sizeof(circbuf_idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fread(&circbuf_size,sizeof(circbuf_size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; { _state.value .value .periodB = calloc(1, sizeof(struct TA_ULTOSC_STATE_CIRCBUF )); if ( _state.value .value .periodB == NULL) return RetCode.AllocErr ; struct TA_ULTOSC_STATE_CIRCBUF * buf = (struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .value .periodB; buf->idx = 0; buf->size = circbuf_size; buf->circbuf = calloc(circbuf_size, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} struct TA_ULTOSC_STATE_CIRCBUF * str_circbuf = _state.value .value .periodB; str_circbuf->idx = circbuf_idx; if (str_circbuf->size > 0) { io_circbuf_res = fread(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      return 0;
+   }
    public RetCode ultOsc( int startIdx,
       int endIdx,
       float inHigh[],
@@ -35918,6 +45172,62 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int varianceStateSave( struct TA_variance_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_VAR_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInNbDev,sizeof( _state.value .optInNbDev),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodTotal1,sizeof( _state.value .periodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodTotal2,sizeof( _state.value .periodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int varianceStateLoad( struct TA_variance_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct variance ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_VAR_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_VAR_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInNbDev,sizeof( _state.value .value .optInNbDev),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodTotal1,sizeof( _state.value .value .periodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodTotal2,sizeof( _state.value .value .periodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode variance( int startIdx,
       int endIdx,
       float inReal[],
@@ -36063,6 +45373,46 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int wclPriceStateSave( struct TA_wclPrice_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_WCLPRICE_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      return 0;
+   }
+   public int wclPriceStateLoad( struct TA_wclPrice_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct wclPrice ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_WCLPRICE_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_WCLPRICE_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      return 0;
    }
    public RetCode wclPrice( int startIdx,
       int endIdx,
@@ -36296,6 +45646,66 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
+   public int willRStateSave( struct TA_willR_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_WILLR_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .lowest,sizeof( _state.value .lowest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .highest,sizeof( _state.value .highest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .lowest_exp,sizeof( _state.value .lowest_exp),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .highest_exp,sizeof( _state.value .highest_exp),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int willRStateLoad( struct TA_willR_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct willR ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_WILLR_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_WILLR_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .lowest,sizeof( _state.value .value .lowest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .highest,sizeof( _state.value .value .highest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .lowest_exp,sizeof( _state.value .value .lowest_exp),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .highest_exp,sizeof( _state.value .value .highest_exp),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
    public RetCode willR( int startIdx,
       int endIdx,
       float inHigh[],
@@ -36521,6 +45931,62 @@ public class Core {
          if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
+   }
+   public int wmaStateSave( struct TA_wma_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_WMA_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodSum,sizeof( _state.value .periodSum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodSub,sizeof( _state.value .periodSub),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .divider,sizeof( _state.value .divider),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public int wmaStateLoad( struct TA_wma_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct wma ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_WMA_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_WMA_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodSum,sizeof( _state.value .value .periodSum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodSub,sizeof( _state.value .value .periodSub),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .divider,sizeof( _state.value .value .divider),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
    }
    public RetCode wma( int startIdx,
       int endIdx,

@@ -479,7 +479,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                         (TA_MAType)test->optInMethod_2,
                         &outBegIdx,
                         &outNbElement,
-                        gBuffer[0].out0 );
+                        gBuffer[0].out0,
+                        _tmp_state_file);
    }
    else
    {
@@ -491,7 +492,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                         (TA_MAType)test->optInMethod_2,
                         &outBegIdx,
                         &outNbElement,
-                        gBuffer[0].out0 );
+                        gBuffer[0].out0,
+                        _tmp_state_file);
    }
 
 

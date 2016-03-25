@@ -658,6 +658,157 @@ DEFINE_CIRCBUF_STRUCT(ULTOSC, double)
 
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
+/* Generated */ #if defined( _MANAGED )
+/* Generated */ int Core::UltOscStateSave( struct TA_UltOsc_State* _state,
+/* Generated */                          FILE* _file )
+/* Generated */ 
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public int ultOscStateSave( struct TA_ultOsc_State* _state,
+/* Generated */                           FILE* _file )
+/* Generated */ 
+/* Generated */ #else
+/* Generated */ TA_LIB_API int TA_ULTOSC_StateSave( struct TA_ULTOSC_State* _state,
+/* Generated */                                              FILE* _file )
+/* Generated */ 
+/* Generated */ #endif
+/**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
+
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 12 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */ 
+/* Generated */     int io_res; int state_is_null; state_is_null = (_state == NULL);
+/* Generated */    io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    if (state_is_null) return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+/* Generated */    io_res = fwrite(&STATE.mem_index,sizeof(STATE.mem_index),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.mem_size,sizeof(STATE.mem_size),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    int memory_allocated;
+/* Generated */    memory_allocated = STATE.memory != NULL;
+/* Generated */    io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    if (memory_allocated && STATE.mem_size > 0) { io_res = fwrite(STATE.memory,sizeof(struct TA_ULTOSC_Data),STATE.mem_size,_file);
+/* Generated */    if (io_res < (int) STATE.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); }
+/* Generated */    io_res = fwrite(&STATE.optInTimePeriod1,sizeof(STATE.optInTimePeriod1),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.optInTimePeriod2,sizeof(STATE.optInTimePeriod2),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.optInTimePeriod3,sizeof(STATE.optInTimePeriod3),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    // Warning: STATE.periodA must be saved manually!
+/* Generated */    // Warning: STATE.periodB must be saved manually!
+/* Generated */    io_res = fwrite(&STATE.a1Total,sizeof(STATE.a1Total),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.a2Total,sizeof(STATE.a2Total),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.a3Total,sizeof(STATE.a3Total),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.b1Total,sizeof(STATE.b1Total),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.b2Total,sizeof(STATE.b2Total),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.b3Total,sizeof(STATE.b3Total),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.prevClose,sizeof(STATE.prevClose),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.gap2,sizeof(STATE.gap2),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.gap1,sizeof(STATE.gap1),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */ 
+/* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/**** END GENCODE SECTION 12 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state save code here. */   
+            CIRCBUF_STRUCT_SAVE(ULTOSC, periodA)
+            CIRCBUF_STRUCT_SAVE(ULTOSC, periodB)
+   return 0;
+}
+
+/**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #if defined( _MANAGED )
+/* Generated */ int Core::UltOscStateLoad( struct TA_UltOsc_State** _state,
+/* Generated */                          FILE* _file )
+/* Generated */ 
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public int ultOscStateLoad( struct TA_ultOsc_State** _state,
+/* Generated */                           FILE* _file )
+/* Generated */ 
+/* Generated */ #else
+/* Generated */ TA_LIB_API int TA_ULTOSC_StateLoad( struct TA_ULTOSC_State** _state,
+/* Generated */                                              FILE* _file )
+/* Generated */ 
+/* Generated */ #endif
+/**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 14 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
+/* Generated */ 
+/* Generated */    int io_res; int state_is_null;
+/* Generated */    io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    if (state_is_null) return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+/* Generated */    if (STATE != NULL) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    STATE = TA_Calloc(1, sizeof(struct TA_ULTOSC_State));
+/* Generated */    io_res = fread(&STATE_P.mem_index,sizeof(STATE_P.mem_index),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.mem_size,sizeof(STATE_P.mem_size),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    int memory_allocated;
+/* Generated */    io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    if (STATE_P.mem_size > 0 && memory_allocated) { STATE_P.memory = TA_Calloc(STATE_P.mem_size, sizeof(struct TA_ULTOSC_Data));
+/* Generated */    io_res = fread(STATE_P.memory,sizeof(struct TA_ULTOSC_Data),STATE_P.mem_size,_file);
+/* Generated */    if (io_res < (int) STATE_P.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); } 
+/* Generated */    io_res = fread(&STATE_P.optInTimePeriod1,sizeof(STATE_P.optInTimePeriod1),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.optInTimePeriod2,sizeof(STATE_P.optInTimePeriod2),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.optInTimePeriod3,sizeof(STATE_P.optInTimePeriod3),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    // Warning: STATE_P.periodA must be loaded manually!
+/* Generated */    // Warning: STATE_P.periodB must be loaded manually!
+/* Generated */    io_res = fread(&STATE_P.a1Total,sizeof(STATE_P.a1Total),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.a2Total,sizeof(STATE_P.a2Total),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.a3Total,sizeof(STATE_P.a3Total),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.b1Total,sizeof(STATE_P.b1Total),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.b2Total,sizeof(STATE_P.b2Total),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.b3Total,sizeof(STATE_P.b3Total),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.prevClose,sizeof(STATE_P.prevClose),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.gap2,sizeof(STATE_P.gap2),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.gap1,sizeof(STATE_P.gap1),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */ 
+/* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
+/* Generated */ 
+/**** END GENCODE SECTION 14 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state load code here. */   
+            CIRCBUF_STRUCT_LOAD(ULTOSC, periodA, double)
+            CIRCBUF_STRUCT_LOAD(ULTOSC, periodB, double)
+   return 0;
+}
+
+/**** START GENCODE SECTION 15 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
 /* Generated */ #define  USE_SINGLE_PRECISION_INPUT
 /* Generated */ #undef  TA_LIB_PRO
 /* Generated */ #if !defined( _MANAGED ) && !defined( _JAVA )
@@ -859,5 +1010,5 @@ DEFINE_CIRCBUF_STRUCT(ULTOSC, double)
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ }}} // Close namespace TicTacTec.TA.Lib
 /* Generated */ #endif
-/**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
+/**** END GENCODE SECTION 15 - DO NOT DELETE THIS LINE ****/
 

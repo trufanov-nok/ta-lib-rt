@@ -349,7 +349,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                                  gBuffer[0].in,
                                  &outBegIdx,
                                  &outNbElement,
-                                 gBuffer[0].out0 );
+                                 gBuffer[0].out0,
+                                 _tmp_state_file);
        break;
 
     case TA_HT_DCPHASE_TEST:
@@ -358,7 +359,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                                 gBuffer[0].in,
                                 &outBegIdx,
                                 &outNbElement,
-                                gBuffer[0].out0 );
+                                gBuffer[0].out0,
+                                _tmp_state_file);
        break;
     case TA_HT_TRENDLINE_TEST:
        retCode = TA_HT_TRENDLINE_StateTest( test->startIdx,
@@ -366,7 +368,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                                   gBuffer[0].in,
                                   &outBegIdx,
                                   &outNbElement,
-                                  gBuffer[0].out0 );
+                                  gBuffer[0].out0,
+                                _tmp_state_file);
        break;
     case TA_HT_TRENDMODE_TEST:
 #define PRE_SENTINEL  ((TA_Integer)0xABABFEDC)
@@ -384,7 +387,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                                   gBuffer[0].in,
                                   &outBegIdx,
                                   &outNbElement,
-                                  &intBuffer[1] );
+                                  &intBuffer[1],
+                                _tmp_state_file);
 #define FREE_INT_BUFFER( destBuffer, varNbElement ) \
 { \
    if( intBuffer[0] != PRE_SENTINEL ) \
@@ -410,7 +414,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                          gBuffer[0].in,
                          &outBegIdx,
                          &outNbElement,
-                         gBuffer[0].out0 );
+                         gBuffer[0].out0,
+                         _tmp_state_file);
         break;
     default:
        retCode = TA_INTERNAL_ERROR(133);

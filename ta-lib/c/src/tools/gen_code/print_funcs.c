@@ -189,14 +189,36 @@ TA_RetCode printStateTestFunc(FILE* out, const TA_FuncInfo *funcInfo)
     print(out, " #ifdef TEST_WHOLE_DATA_%s\n", funcInfo->name);
     print(out, "   i = 0;\n");
     print(out, " #endif\n");
+    print(out, " int first_iteration;\n");
+    print(out, " first_iteration = 1;\n");
     print(out, " while (i <= endIdx)\n");
     print(out, "   {\n");
+
+    // to test save/loade state
+    print(out, "    if (_file != NULL && !first_iteration ) {\n");
+    print(out, "     first_iteration = 0;\n");
+    print(out, "     if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);\n");
+    print(out, "     res = TA_%s_StateFree(&state);\n", funcInfo->name);
+    print(out, "     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;\n");
+    print(out, "     state = NULL;\n");
+    print(out, "     res = TA_%s_StateLoad(&state, _file);\n", funcInfo->name);
+    print(out, "     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;\n");
+    print(out, "    }\n");
 
     listInputParameters(inputArgs, funcInfo, ", ", "[i]");
     listOutputParameters(outputArgs, funcInfo, " ", "_local;", NULL, 1);
     print(out, "    %s\n", outputArgs);
     listOutputParameters(outputArgs, funcInfo, ", ", "_local", "&", 0);
     print(out, "    res = TA_%s_State(state, %s, %s);\n", funcInfo->name, inputArgs, outputArgs);
+
+    // to test save/loade state
+    print(out, "    if (_file != NULL) {\n");
+    print(out, "        if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);\n");
+    print(out, "        int io_res;\n");
+    print(out, "        io_res = TA_%s_StateSave(state, _file);\n", funcInfo->name);
+    print(out, "        if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;\n");
+    print(out, "    }\n");
+
     print(out, "    if (i++ < startIdx) continue;\n");
     print(out, "    if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {\n");
     print(out, "      if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;\n");

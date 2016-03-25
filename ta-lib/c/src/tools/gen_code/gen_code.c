@@ -1434,6 +1434,15 @@ void doForEachFunctionPhase2( const TA_FuncInfo *funcInfo,
    printFunc( gOutFunc_H->file, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_stateFreeSignature );
    printFunc( gOutFunc_SWG->file, NULL, funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_stateFreeSignature );
 
+   /* Generate the corresponding state save function prototype. */
+   printFunc( gOutFunc_H->file, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_stateSaveSignature );
+   printFunc( gOutFunc_SWG->file, NULL, funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_stateSaveSignature );
+
+   /* Generate the corresponding state load function prototype. */
+   printFunc( gOutFunc_H->file, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_stateLoadSignature );
+   printFunc( gOutFunc_SWG->file, NULL, funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_stateLoadSignature );
+
+
    genPrefix = 1;
    printStateTestFunc( gOutFunc_H->file, funcInfo);
    genPrefix = 0;
@@ -1449,6 +1458,10 @@ void doForEachFunctionPhase2( const TA_FuncInfo *funcInfo,
    printFrameHeader( gOutFrame_H->file, funcInfo, pfs_stateFuncSignature );
    fprintf( gOutFrame_H->file, ";\n" );
    printFrameHeader( gOutFrame_H->file, funcInfo, pfs_stateFreeSignature );
+   fprintf( gOutFrame_H->file, ";\n" );
+   printFrameHeader( gOutFrame_H->file, funcInfo, pfs_stateSaveSignature );
+   fprintf( gOutFrame_H->file, ";\n" );
+   printFrameHeader( gOutFrame_H->file, funcInfo, pfs_stateLoadSignature );
    fprintf( gOutFrame_H->file, ";\n\n" );
    printCallFrame( gOutFrame_C->file, funcInfo );
 
@@ -1729,8 +1742,10 @@ void printFunc( FILE *out,
    SETTING_DECL(stateFuncSignature);
    SETTING_DECL(stateFreeSignature);
    SETTING_DECL(stateTestSignature);
+   SETTING_DECL(stateLoadSignature);
+   SETTING_DECL(stateSaveSignature);
 
-   #define ANY_SIGNATURE_PARAM (lookbackSignature || stateInitSignature || stateFuncSignature || stateFreeSignature)
+   #define ANY_SIGNATURE_PARAM (lookbackSignature || stateInitSignature || stateFuncSignature || stateFreeSignature || stateLoadSignature || stateSaveSignature)
 
 
    // init text constants begin
@@ -1908,6 +1923,12 @@ void printFunc( FILE *out,
       if( stateFreeSignature )
         { PRINT_SIGNATURE("StateFree"); }
       else
+      if( stateLoadSignature )
+        { PRINT_SIGNATURE("StateLoad"); }
+      else
+      if( stateSaveSignature )
+        { PRINT_SIGNATURE("StateSave"); }
+      else
       {
          if( arrayToSubArrayCnvt )
 		 {			 
@@ -1990,6 +2011,16 @@ void printFunc( FILE *out,
       {
          print( out, "%sTA_%s_StateFree(", prefix == NULL? "" : prefix, funcName );
          indent += 12;
+      } else
+      if( stateSaveSignature )
+      {
+         print( out, "%sTA_%s_StateSave(", prefix == NULL? "" : prefix, funcName );
+         indent += 12;
+      } else
+      if( stateLoadSignature )
+      {
+         print( out, "%sTA_%s_StateLoad(", prefix == NULL? "" : prefix, funcName );
+         indent += 12;
       }
       else
       {  
@@ -2021,25 +2052,47 @@ void printFunc( FILE *out,
    }
 
 
-   if (stateInitSignature || stateFuncSignature || stateFreeSignature)
+   if (stateInitSignature || stateFuncSignature || stateFreeSignature || stateSaveSignature || stateLoadSignature)
    {
-       unsigned int last_arg = stateFreeSignature || (!stateFuncSignature && funcInfo->nbOptInput == 0);
+       unsigned int last_arg = stateFreeSignature || (!(stateFuncSignature || stateSaveSignature || stateLoadSignature) && funcInfo->nbOptInput == 0);
 
        if (frame)
-           fprintf( out, " %s(struct TA_%s_State**) &params->_state%s\n", stateFuncSignature?"*":"", funcName, last_arg?"":"," );
+           fprintf( out, " %s(struct TA_%s_State**) &params->_state%s\n", (stateFuncSignature||stateSaveSignature)?"*":"", funcName, last_arg?"":"," );
        else
        if (!validationCode) {
        fprintf( out, "struct TA_%s_State*", funcName );
-       if (!stateFuncSignature) fprintf( out, "*");
+       if (!stateFuncSignature && !stateSaveSignature) fprintf( out, "*");
        fprintf( out, " _state");
        if (!last_arg)
            fprintf( out, ",\n"); // hope that will be more params later
        } else {
 
-           printIndent( out, indent );
-           fprintf( out, "if (_state == NULL)\n");
-           printIndent( out, indent+6 );
-           fprintf( out, "return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);\n");
+           if (!stateSaveSignature && !stateLoadSignature )
+           {
+               printIndent( out, indent );
+               fprintf( out, "if (_state == NULL)\n");
+               printIndent( out, indent+6 );
+               fprintf( out, "return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);\n");
+           } else
+           if (stateSaveSignature) {
+               printIndent( out, indent );
+               fprintf( out, " int io_res; int state_is_null; state_is_null = (_state == NULL);\n");
+               printIndent( out, indent );
+               fprintf( out, "io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);\n");
+               printIndent( out, indent );
+               fprintf( out, "if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);\n");
+               printIndent( out, indent );
+               fprintf( out, "if (state_is_null) return ENUM_VALUE(RetCode,TA_SUCCESS,Success);\n");
+           } else {
+               printIndent( out, indent );
+               fprintf( out, "int io_res; int state_is_null;\n");
+               printIndent( out, indent );
+               fprintf( out, "io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);\n");
+               printIndent( out, indent );
+               fprintf( out, "if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);\n");
+               printIndent( out, indent );
+               fprintf( out, "if (state_is_null) return ENUM_VALUE(RetCode,TA_SUCCESS,Success);\n");
+           }
 
 //           if (stateInitSignature)
 //           is moved close to optIn
@@ -2050,7 +2103,144 @@ void printFunc( FILE *out,
            fprintf( out, "if (MEM_P != NULL) TA_Free(MEM_P);\n");
            printIndent( out, indent+6 );
            fprintf( out, "TA_Free(STATE); STATE = NULL;}\n");
-       }
+       } else
+           if (stateSaveSignature)
+           {
+
+               printIndent( out, indent );
+               fprintf( out, "io_res = fwrite(&STATE.mem_index,sizeof(STATE.mem_index),1,_file);\n");
+               printIndent( out, indent );
+               fprintf( out, "if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);\n");
+               printIndent( out, indent );
+               fprintf( out, "io_res = fwrite(&STATE.mem_size,sizeof(STATE.mem_size),1,_file);\n");
+               printIndent( out, indent );
+               fprintf( out, "if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);\n");
+               printIndent( out, indent );
+               fprintf( out, "int memory_allocated;\n");
+               printIndent( out, indent );
+               fprintf( out, "memory_allocated = STATE.memory != NULL;\n");
+               printIndent( out, indent );
+               fprintf( out, "io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);\n");
+               printIndent( out, indent );
+               fprintf( out, "if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);\n");
+               printIndent( out, indent );
+               fprintf( out, "if (memory_allocated && STATE.mem_size > 0) { io_res = fwrite(STATE.memory,sizeof(struct TA_%s_Data),STATE.mem_size,_file);\n", funcName);
+               printIndent( out, indent );
+               fprintf( out, "if (io_res < (int) STATE.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); }\n");
+
+                   for( i=0; i < funcInfo->nbOptInput; i++ )
+                   {
+                      retCode = TA_GetOptInputParameterInfo( funcInfo->handle,
+                                                          i, &optInputParamInfo );
+
+                      if( retCode != TA_SUCCESS )
+                      {
+                         printf( "[%s] invalid 'input' information (%d,%d)\n", funcName, i, paramNb );
+                         return;
+                      }
+
+                      printIndent( out, indent );
+                      fprintf( out, "io_res = fwrite(&STATE.%s,sizeof(STATE.%s),1,_file);\n", optInputParamInfo->paramName, optInputParamInfo->paramName);
+                      printIndent( out, indent );
+                      fprintf( out, "if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);\n");
+
+                   }
+
+               for( i=0; i < funcInfo->nbStructParams; i++ )
+               {
+                  retCode = TA_GetStructParameterInfo( funcInfo->handle,
+                                                      i, &inputParamInfo );
+
+                  if( retCode != TA_SUCCESS )
+                  {
+                     printf( "[%s] invalid 'opt input' information (%d,%d)\n", funcName, i, paramNb );
+                     return;
+                  }
+
+                  if ( inputParamInfo->type != TA_Input_Pointer)
+                  {
+                      printIndent( out, indent );
+                      fprintf( out, "io_res = fwrite(&STATE.%s,sizeof(STATE.%s),1,_file);\n", inputParamInfo->paramName, inputParamInfo->paramName);
+                      printIndent( out, indent );
+                      fprintf( out, "if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);\n");
+
+                  } else {
+                      printIndent( out, indent );
+                      fprintf( out, "// Warning: STATE.%s must be saved manually!\n", inputParamInfo->paramName);
+                  }
+               }
+
+           } else
+               if (stateLoadSignature)
+               {
+                   printIndent( out, indent );
+                   fprintf( out, "if (STATE != NULL) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);\n");
+                   printIndent( out, indent );
+                   fprintf( out, "STATE = TA_Calloc(1, sizeof(struct TA_%s_State));\n", funcName);
+                   printIndent( out, indent );
+                   fprintf( out, "io_res = fread(&STATE_P.mem_index,sizeof(STATE_P.mem_index),1,_file);\n");
+                   printIndent( out, indent );
+                   fprintf( out, "if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);\n");
+                   printIndent( out, indent );
+                   fprintf( out, "io_res = fread(&STATE_P.mem_size,sizeof(STATE_P.mem_size),1,_file);\n");
+                   printIndent( out, indent );
+                   fprintf( out, "if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);\n");
+                   printIndent( out, indent );
+                   fprintf( out, "int memory_allocated;\n");
+                   printIndent( out, indent );
+                   fprintf( out, "io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);\n");
+                   printIndent( out, indent );
+                   fprintf( out, "if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);\n");
+                   printIndent( out, indent );
+                   fprintf( out, "if (STATE_P.mem_size > 0 && memory_allocated) { STATE_P.memory = TA_Calloc(STATE_P.mem_size, sizeof(struct TA_%s_Data));\n", funcName);
+                   printIndent( out, indent );
+                   fprintf( out, "io_res = fread(STATE_P.memory,sizeof(struct TA_%s_Data),STATE_P.mem_size,_file);\n", funcName);
+                   printIndent( out, indent );
+                   fprintf( out, "if (io_res < (int) STATE_P.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); } \n");
+
+                   for( i=0; i < funcInfo->nbOptInput; i++ )
+                   {
+                      retCode = TA_GetOptInputParameterInfo( funcInfo->handle,
+                                                          i, &optInputParamInfo );
+
+                      if( retCode != TA_SUCCESS )
+                      {
+                         printf( "[%s] invalid 'opt input' information (%d,%d)\n", funcName, i, paramNb );
+                         return;
+                      }
+
+                      printIndent( out, indent );
+                      fprintf( out, "io_res = fread(&STATE_P.%s,sizeof(STATE_P.%s),1,_file);\n", optInputParamInfo->paramName, optInputParamInfo->paramName);
+                      printIndent( out, indent );
+                      fprintf( out, "if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);\n");
+
+                   }
+
+                   for( i=0; i < funcInfo->nbStructParams; i++ )
+                   {
+                      retCode = TA_GetStructParameterInfo( funcInfo->handle,
+                                                          i, &inputParamInfo );
+
+                      if( retCode != TA_SUCCESS )
+                      {
+                         printf( "[%s] invalid 'input' information (%d,%d)\n", funcName, i, paramNb );
+                         return;
+                      }
+
+                      if ( inputParamInfo->type != TA_Input_Pointer)
+                      {
+                          printIndent( out, indent );
+                          fprintf( out, "io_res = fread(&STATE_P.%s,sizeof(STATE_P.%s),1,_file);\n", inputParamInfo->paramName, inputParamInfo->paramName);
+                          printIndent( out, indent );
+                          fprintf( out, "if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);\n");
+
+                      } else {
+                          printIndent( out, indent );
+                          fprintf( out, "// Warning: STATE_P.%s must be loaded manually!\n", inputParamInfo->paramName);
+                      }
+                   }
+
+               }
 
        }
    }
@@ -2061,7 +2251,7 @@ void printFunc( FILE *out,
    char nbInputArgsBuffer[500];
 
 
-   if( !lookbackSignature && !lookbackValidationCode && !stateInitSignature && !stateFreeSignature )
+   if( !lookbackSignature && !lookbackValidationCode && !stateInitSignature && !stateFreeSignature && !stateSaveSignature && !stateLoadSignature)
    {
       if( validationCode )
       {
@@ -2443,7 +2633,7 @@ void printFunc( FILE *out,
        print( out, "struct TA_%s_Data* memory;\n", funcName);
    }
 
-   /* Go through all the additional State arams. */
+   /* Go through all the additional State params. */
    if( stateStruct )
    {
       for( i=0; i < funcInfo->nbStructParams; i++ )
@@ -2492,7 +2682,7 @@ void printFunc( FILE *out,
    nbOptInputArgsBuffer[0] = '\0';
    int nbOptInputArgsBufferLen = 0;
 
-   if (!stateFreeSignature && !stateFuncSignature)
+   if (!stateFreeSignature && !stateFuncSignature && !stateSaveSignature && !stateLoadSignature)
    for( i=0; i < funcInfo->nbOptInput; i++ )
    {
       excludeFromManaged = 0;
@@ -2710,12 +2900,21 @@ void printFunc( FILE *out,
    }
 
    if (!validationCode)
+   {
    if( ((lookbackSignature || stateInitSignature) && (funcInfo->nbOptInput == 0)) || stateFreeSignature)
    {
       if( frame || outputForJava || stateInitSignature || stateFreeSignature)
          fprintf( out, " )%s\n", semiColonNeeded? ";":"" );
       else      
          fprintf( out, "void )%s\n", semiColonNeeded? ";":"" );
+   } else if (stateSaveSignature || stateLoadSignature)
+   {
+       printIndent( out, indent );
+       if( frame  )
+           fprintf( out, " _file )%s\n", semiColonNeeded? ";":"" );
+       else
+          fprintf( out, "FILE* _file )%s\n", semiColonNeeded? ";":"" );
+   }
    }
 
    if (stateStruct)
@@ -2726,7 +2925,7 @@ void printFunc( FILE *out,
    }
 
    /* Go through all the output */
-   if( lookbackSignature || stateInitSignature || stateFreeSignature || stateStruct )
+   if( lookbackSignature || stateInitSignature || stateFreeSignature || stateStruct || stateSaveSignature || stateLoadSignature )
    {
       if( !frame )
          print( out, "\n" );
@@ -2847,7 +3046,7 @@ void printFunc( FILE *out,
             else
             {
                fprintf( out, "%s )%s\n",
-                      frame? " */":"",
+                      frame? " */": stateTestSignature?",\nFILE* _file":"",
                       semiColonNeeded? ";":"" );
             }
          }
@@ -2901,6 +3100,20 @@ void printCallFrame( FILE *out, const TA_FuncInfo *funcInfo )
       print( out, "   (void)params;\n" );
    printFunc( out, "   return ", funcInfo, pfs_frame | pfs_semiColonNeeded | pfs_stateFreeSignature);
    print( out, "}\n" );
+
+   printFrameHeader( out, funcInfo, pfs_stateSaveSignature );
+   print( out, "{\n" );
+   if( funcInfo->nbOptInput == 0 )
+      print( out, "   (void)params;\n" );
+   printFunc( out, "   return ", funcInfo, pfs_frame | pfs_semiColonNeeded | pfs_stateSaveSignature);
+   print( out, "}\n" );
+
+   printFrameHeader( out, funcInfo, pfs_stateLoadSignature );
+   print( out, "{\n" );
+   if( funcInfo->nbOptInput == 0 )
+      print( out, "   (void)params;\n" );
+   printFunc( out, "   return ", funcInfo, pfs_frame | pfs_semiColonNeeded | pfs_stateLoadSignature);
+   print( out, "}\n" );
    
    genPrefix = 0;
 }
@@ -2926,6 +3139,16 @@ void printFrameHeader( FILE *out, const TA_FuncInfo *funcInfo, unsigned int sett
    if( settings & pfs_stateFreeSignature )
    {
       print( out, "unsigned int TA_%s_FramePPSF( const TA_ParamHolderPriv *params )\n", funcInfo->name );
+   }
+   else
+   if( settings & pfs_stateSaveSignature )
+   {
+      print( out, "unsigned int TA_%s_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )\n", funcInfo->name );
+   }
+   else
+   if( settings & pfs_stateLoadSignature )
+   {
+      print( out, "unsigned int TA_%s_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )\n", funcInfo->name );
    }
    else
    {
@@ -3729,7 +3952,84 @@ void writeFuncFile( const TA_FuncInfo *funcInfo )
    print( out, "\n" );
    //section 10 end
 
-   // section 11?
+
+   genPrefix = 0;
+   skipToGenCode( funcInfo->name, gOutFunc_C->file, gOutFunc_C->templateFile );
+
+   // section 11 begin
+   genPrefix = 1;
+   print( out, "\n" );
+   print( out, "#if defined( _MANAGED )\n" );
+   printFunc( out, NULL, funcInfo, pfs_prototype | pfs_stateSaveSignature | pfs_managedCPPCode );
+   print( out, "#elif defined( _JAVA )\n" );
+   /* Handle special case to avoid duplicate definition of min,max */
+   if( strcmp( funcInfo->camelCaseName, "Min" ) == 0 ) {
+      print( out, "#undef min\n" );
+   } else if( strcmp( funcInfo->camelCaseName, "Max" ) == 0 ) {
+      print( out, "#undef max\n" );
+   }
+   printFunc( out, NULL, funcInfo, pfs_prototype | pfs_stateSaveSignature | pfs_outputForJava );
+   print( out, "#else\n" );
+   printFunc( out, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_stateSaveSignature );
+   print( out, "#endif\n" );
+   //section 11 end
+
+   genPrefix = 0;
+   skipToGenCode( funcInfo->name, gOutFunc_C->file, gOutFunc_C->templateFile );
+
+   //section 12 begin
+   genPrefix = 1;
+   print( out, "\n" );
+   print( out, "#ifndef TA_FUNC_NO_RANGE_CHECK\n" );
+   print( out, "\n" );
+   /* Generate the code for checking the parameters.
+    * Also generates the code for setting up the
+    * default values.
+    */
+   printFunc( out, NULL, funcInfo, pfs_stateSaveSignature | pfs_validationCode );
+   print( out, "#endif /* TA_FUNC_NO_RANGE_CHECK */\n" );
+   print( out, "\n" );
+   //section 12 end
+
+   genPrefix = 0;
+   skipToGenCode( funcInfo->name, gOutFunc_C->file, gOutFunc_C->templateFile );
+
+   // section 13 begin
+   genPrefix = 1;
+   print( out, "\n" );
+   print( out, "#if defined( _MANAGED )\n" );
+   printFunc( out, NULL, funcInfo, pfs_prototype | pfs_stateLoadSignature | pfs_managedCPPCode );
+   print( out, "#elif defined( _JAVA )\n" );
+   /* Handle special case to avoid duplicate definition of min,max */
+   if( strcmp( funcInfo->camelCaseName, "Min" ) == 0 ) {
+      print( out, "#undef min\n" );
+   } else if( strcmp( funcInfo->camelCaseName, "Max" ) == 0 ) {
+      print( out, "#undef max\n" );
+   }
+   printFunc( out, NULL, funcInfo, pfs_prototype | pfs_stateLoadSignature | pfs_outputForJava );
+   print( out, "#else\n" );
+   printFunc( out, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_stateLoadSignature );
+   print( out, "#endif\n" );
+   //section 13 end
+
+   genPrefix = 0;
+   skipToGenCode( funcInfo->name, gOutFunc_C->file, gOutFunc_C->templateFile );
+
+   //section 14 begin
+   genPrefix = 1;
+   print( out, "\n" );
+   print( out, "#ifndef TA_FUNC_NO_RANGE_CHECK\n" );
+   print( out, "\n" );
+   /* Generate the code for checking the parameters.
+    * Also generates the code for setting up the
+    * default values.
+    */
+   printFunc( out, NULL, funcInfo, pfs_stateLoadSignature | pfs_validationCode );
+   print( out, "#endif /* TA_FUNC_NO_RANGE_CHECK */\n" );
+   print( out, "\n" );
+   //section 14 end
+
+   // section 15?
    /* Put a marker who is going to be used in the second pass */
 //   fprintf( out, "%%%%%%GENCODE%%%%%%\n" );
 }
