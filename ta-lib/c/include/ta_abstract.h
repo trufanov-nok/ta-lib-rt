@@ -566,13 +566,18 @@ const char *TA_FunctionDescriptionXML( void );
 TA_RetCode TA_InitNewState( const TA_ParamHolder *params );
 TA_RetCode TA_CallFuncState( const TA_ParamHolder *params );
 TA_RetCode TA_FreeState( const TA_ParamHolder *params );
+TA_RetCode TA_SaveState( const TA_ParamHolder *params, FILE *_file );
+TA_RetCode TA_LoadState(const TA_ParamHolder *params, FILE *_file);
 
 
 typedef unsigned int (*TA_StateFunc)( const void *params );
+typedef unsigned int (*TA_StateIOFunc)( const void *params, FILE *_file );
 
 TA_RetCode TA_GetInitNewStateFuncPtr(const TA_FuncInfo *params, TA_StateFunc* func );
 TA_RetCode TA_GetCallFuncStateFuncPtr( const TA_FuncInfo *params, TA_StateFunc* func );
 TA_RetCode TA_GetFreeStateFuncPtr(const TA_FuncInfo *params, TA_StateFunc *func );
+TA_RetCode TA_GetSaveStateFuncPtr(const TA_FuncInfo *params, TA_StateIOFunc *func );
+TA_RetCode TA_GetLoadStateFuncPtr(const TA_FuncInfo *params, TA_StateIOFunc *func );
 
 
 TA_RetCode TA_GetParamStatePtr(TA_ParamHolder *param,

@@ -128,4 +128,6 @@ typedef unsigned int (*TA_FrameLookback)( const TA_ParamHolderPriv *params );
 
 typedef unsigned int (*TA_FrameStateFunc)( const TA_ParamHolderPriv *params );
 
+typedef unsigned int (*TA_FrameStateIOFunc)( const TA_ParamHolderPriv *params, FILE *_file );
+
 #endif

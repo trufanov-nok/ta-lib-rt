@@ -1334,6 +1334,26 @@ TA_RetCode TA_FreeState( const TA_ParamHolder *param )
    return (*stateFreeFunction)( paramHolderPriv ); //paramHolderPriv._state != NULL check is performed in function
 }
 
+TA_RetCode TA_SaveState( const TA_ParamHolder *param, FILE *_file )
+{
+   TA_FrameStateIOFunc stateSaveFunction;
+
+   GET_PRIVATE_FUNC(param, state_save, stateSaveFunction);
+
+   /* Perform the function call. */
+   return (*stateSaveFunction)( paramHolderPriv, _file ); //paramHolderPriv._state != NULL check is performed in function
+}
+
+TA_RetCode TA_LoadState( const TA_ParamHolder *param, FILE *_file )
+{
+   TA_FrameStateIOFunc stateLoadFunction;
+
+   GET_PRIVATE_FUNC(param, state_load, stateLoadFunction);
+
+   /* Perform the function call. */
+   return (*stateLoadFunction)( paramHolderPriv, _file ); //paramHolderPriv._state != NULL check is performed in function
+}
+
 
 TA_RetCode TA_GetInitNewStateFuncPtr( const TA_FuncInfo *param, TA_StateFunc* func  )
 {
@@ -1372,7 +1392,29 @@ TA_RetCode TA_GetFreeStateFuncPtr( const TA_FuncInfo *param, TA_StateFunc* func 
     return TA_SUCCESS;
 }
 
+TA_RetCode TA_GetSaveStateFuncPtr(const TA_FuncInfo *param, TA_StateIOFunc *func  )
+{
+    if (func == NULL)
+        return TA_BAD_PARAM;
 
+    TA_FrameStateIOFunc f;
+    GET_PRIVATE_FUNC_BY_FUN_INFO(param, state_save, f);
+    *func = (TA_StateIOFunc) f;
+
+    return TA_SUCCESS;
+}
+
+TA_RetCode TA_GetLoadStateFuncPtr( const TA_FuncInfo *param, TA_StateIOFunc* func  )
+{
+    if (func == NULL)
+        return TA_BAD_PARAM;
+
+    TA_FrameStateIOFunc f;
+    GET_PRIVATE_FUNC_BY_FUN_INFO(param, state_load, f);
+    *func = (TA_StateIOFunc) f;
+
+    return TA_SUCCESS;
+}
 
 /**** Local functions definitions.     ****/
 static TA_RetCode getGroupId( const char *groupString, unsigned int *groupId )
