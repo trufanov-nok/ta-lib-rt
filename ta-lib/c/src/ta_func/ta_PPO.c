@@ -433,7 +433,7 @@ return FUNCTION_CALL_STATE_INIT(INT_PO)((struct TA_APO_State**)_state, optInFast
 
 {
    /* insert local variable here */
-
+return FUNCTION_CALL_STATE_SAVE(APO)((struct TA_APO_State**)_state, _file);
 /**** START GENCODE SECTION 12 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -485,7 +485,7 @@ return FUNCTION_CALL_STATE_INIT(INT_PO)((struct TA_APO_State**)_state, optInFast
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+return FUNCTION_CALL_STATE_LOAD(APO)((struct TA_APO_State**)_state, _file);
 /**** START GENCODE SECTION 14 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
