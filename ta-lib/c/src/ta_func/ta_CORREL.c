@@ -405,11 +405,10 @@
        STATE.sumY2 += sign*inY*inY; \
    }
 
+   ADDDATA(inReal0, inReal1, 1)
 
    if (NEED_MORE_DATA)
    {
-      ADDDATA(inReal0, inReal1, 1)
-
              PUSH_TO_MEM(inReal0,inReal0);
              PUSH_TO_MEM(inReal1,inReal1);
       return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);

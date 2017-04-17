@@ -702,15 +702,15 @@ static ErrorNumber do_test_state( const TA_History *history,
       break;
 
    case TA_CORREL_TEST:
-//      retCode = TA_CORREL_StateTest( test->startIdx,
-//                           test->endIdx,
-//                           gBuffer[0].in,
-//                           gBuffer[1].in,
-//                           test->optInTimePeriod,
-//                           &outBegIdx,
-//                           &outNbElement,
-//                           gBuffer[0].out0,
-//                          _tmp_state_file);
+      retCode = TA_CORREL_StateTest( test->startIdx,
+                           test->endIdx,
+                           gBuffer[0].in,
+                           gBuffer[1].in,
+                           test->optInTimePeriod,
+                           &outBegIdx,
+                           &outNbElement,
+                           gBuffer[0].out0,
+                          _tmp_state_file);
       break;
 
    case TA_BETA_TEST:
