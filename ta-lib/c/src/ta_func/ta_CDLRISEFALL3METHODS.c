@@ -359,7 +359,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_CDLRISEFALL3METHODS_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+int i1, i2, i3, i4;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -393,6 +394,87 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+        if (FIRST_LAUNCH)
+           {
+                 STATE.BodyPeriodTotal0 = 0.;
+                 STATE.BodyPeriodTotal1 = 0.;
+                 STATE.BodyPeriodTotal2 = 0.;
+                 STATE.BodyPeriodTotal3 = 0.;
+                 STATE.BodyPeriodTotal4 = 0.;
+
+                 STATE.periodBodyShort = TA_CANDLEAVGPERIOD(BodyShort);
+                 STATE.gapBodyShort = MEM_SIZE - STATE.periodBodyShort;
+                 STATE.periodBodyLong = TA_CANDLEAVGPERIOD(BodyLong);
+                 STATE.gapBodyLong = MEM_SIZE - STATE.periodBodyLong;
+
+           }
+
+        i1 = GET_LOCAL_IDX(-1);
+        i2 = GET_LOCAL_IDX(-2);
+        i3 = GET_LOCAL_IDX(-3);
+        i4 = GET_LOCAL_IDX(-4);
+
+        if (!(NEED_MORE_DATA))
+        {
+
+            if( // 1st long, then 3 small, 5th long
+                    TA_REALBODY_STATE_IDX(i4) > TA_CANDLEAVERAGE_STATE_IDX( BodyLong, STATE.BodyPeriodTotal4, i4 ) &&
+                    TA_REALBODY_STATE_IDX(i3) < TA_CANDLEAVERAGE_STATE_IDX( BodyShort, STATE.BodyPeriodTotal3, i3 ) &&
+                    TA_REALBODY_STATE_IDX(i2) < TA_CANDLEAVERAGE_STATE_IDX( BodyShort, STATE.BodyPeriodTotal2, i2 ) &&
+                    TA_REALBODY_STATE_IDX(i1) < TA_CANDLEAVERAGE_STATE_IDX( BodyShort, STATE.BodyPeriodTotal1, i1 ) &&
+                    TA_REALBODY_STATE_CUR()   > TA_CANDLEAVERAGE_STATE_CUR( BodyLong, STATE.BodyPeriodTotal0 ) &&
+                    // white, 3 black, white  ||  black, 3 white, black
+                    TA_CANDLECOLOR_STATE_IDX(i4) == -TA_CANDLECOLOR_STATE_IDX(i3) &&
+                    TA_CANDLECOLOR_STATE_IDX(i3) ==  TA_CANDLECOLOR_STATE_IDX(i2) &&
+                    TA_CANDLECOLOR_STATE_IDX(i2) ==  TA_CANDLECOLOR_STATE_IDX(i1) &&
+                    TA_CANDLECOLOR_STATE_IDX(i1) == -TA_CANDLECOLOR_STATE_CUR() &&
+                    // 2nd to 4th hold within 1st: a part of the real body must be within 1st range
+                    min(MEM_IDX_NS(inOpen,i3), MEM_IDX_NS(inClose,i3)) < MEM_IDX_NS(inHigh,i4) && max(MEM_IDX_NS(inOpen,i3), MEM_IDX_NS(inClose,i3)) > MEM_IDX_NS(inLow,i4) &&
+                    min(MEM_IDX_NS(inOpen,i2), MEM_IDX_NS(inClose,i2)) < MEM_IDX_NS(inHigh,i4) && max(MEM_IDX_NS(inOpen,i2), MEM_IDX_NS(inClose,i2)) > MEM_IDX_NS(inLow,i4) &&
+                    min(MEM_IDX_NS(inOpen,i1), MEM_IDX_NS(inClose,i1)) < MEM_IDX_NS(inHigh,i4) && max(MEM_IDX_NS(inOpen,i1), MEM_IDX_NS(inClose,i1)) > MEM_IDX_NS(inLow,i4) &&
+                    // 2nd to 4th are falling (rising)
+                    MEM_IDX_NS(inClose,i2) * TA_CANDLECOLOR_STATE_IDX(i4) < MEM_IDX_NS(inClose,i3) * TA_CANDLECOLOR_STATE_IDX(i4) &&
+                    MEM_IDX_NS(inClose,i1) * TA_CANDLECOLOR_STATE_IDX(i4) < MEM_IDX_NS(inClose,i2) * TA_CANDLECOLOR_STATE_IDX(i4) &&
+                    // 5th opens above (below) the prior close
+                    inOpen * TA_CANDLECOLOR_STATE_IDX(i4) > MEM_IDX_NS(inClose,i1) * TA_CANDLECOLOR_STATE_IDX(i4) &&
+                    // 5th closes above (below) the 1st close
+                    inClose * TA_CANDLECOLOR_STATE_IDX(i4) > MEM_IDX_NS(inClose,i4) * TA_CANDLECOLOR_STATE_IDX(i4)
+                    )
+                VALUE_HANDLE_DEREF(outInteger) = 100 * TA_CANDLECOLOR_STATE_IDX(i4);
+            else
+                VALUE_HANDLE_DEREF(outInteger) = 0;
+
+        }
+
+
+        if ((int)STATE.mem_index-1 >= STATE.periodBodyShort)
+        {
+            STATE.BodyPeriodTotal1 += TA_CANDLERANGE_STATE_IDX(  BodyShort, i1 );
+            STATE.BodyPeriodTotal2 += TA_CANDLERANGE_STATE_IDX(  BodyShort, i2 );
+            STATE.BodyPeriodTotal3 += TA_CANDLERANGE_STATE_IDX(  BodyShort, i3 );
+        }
+
+        if ((int)STATE.mem_index-1 >= STATE.periodBodyLong)
+        {
+            STATE.BodyPeriodTotal4 += TA_CANDLERANGE_STATE_IDX(  BodyLong, i4 );
+            STATE.BodyPeriodTotal0 += TA_CANDLERANGE_STATE_CUR(  BodyLong );
+        }
+
+        if (!(NEED_MORE_DATA))
+        {
+            STATE.BodyPeriodTotal1 -= TA_CANDLERANGE_STATE( BodyShort, -STATE.periodBodyShort-1 );
+            STATE.BodyPeriodTotal2 -= TA_CANDLERANGE_STATE( BodyShort, -STATE.periodBodyShort-2 );
+            STATE.BodyPeriodTotal3 -= TA_CANDLERANGE_STATE( BodyShort, -STATE.periodBodyShort-3 );
+
+            STATE.BodyPeriodTotal4 -= TA_CANDLERANGE_STATE( BodyLong, -STATE.periodBodyLong-4 );
+            STATE.BodyPeriodTotal0 -= TA_CANDLERANGE_STATE( BodyLong, -STATE.periodBodyLong );
+        }
+
+        PUSH_TO_MEM(inOpen,inOpen);
+        PUSH_TO_MEM(inHigh,inHigh);
+        PUSH_TO_MEM(inLow,inLow);
+        PUSH_TO_MEM(inClose,inClose);
+        if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
@@ -469,6 +551,24 @@
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */    if (memory_allocated && STATE.mem_size > 0) { io_res = fwrite(STATE.memory,sizeof(struct TA_CDLRISEFALL3METHODS_Data),STATE.mem_size,_file);
 /* Generated */    if (io_res < (int) STATE.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); }
+/* Generated */    io_res = fwrite(&STATE.BodyPeriodTotal0,sizeof(STATE.BodyPeriodTotal0),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.BodyPeriodTotal1,sizeof(STATE.BodyPeriodTotal1),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.BodyPeriodTotal2,sizeof(STATE.BodyPeriodTotal2),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.BodyPeriodTotal3,sizeof(STATE.BodyPeriodTotal3),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.BodyPeriodTotal4,sizeof(STATE.BodyPeriodTotal4),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.periodBodyShort,sizeof(STATE.periodBodyShort),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.gapBodyShort,sizeof(STATE.gapBodyShort),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.periodBodyLong,sizeof(STATE.periodBodyLong),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.gapBodyLong,sizeof(STATE.gapBodyLong),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -517,6 +617,24 @@
 /* Generated */    if (STATE_P.mem_size > 0 && memory_allocated) { STATE_P.memory = TA_Calloc(STATE_P.mem_size, sizeof(struct TA_CDLRISEFALL3METHODS_Data));
 /* Generated */    io_res = fread(STATE_P.memory,sizeof(struct TA_CDLRISEFALL3METHODS_Data),STATE_P.mem_size,_file);
 /* Generated */    if (io_res < (int) STATE_P.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); } 
+/* Generated */    io_res = fread(&STATE_P.BodyPeriodTotal0,sizeof(STATE_P.BodyPeriodTotal0),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.BodyPeriodTotal1,sizeof(STATE_P.BodyPeriodTotal1),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.BodyPeriodTotal2,sizeof(STATE_P.BodyPeriodTotal2),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.BodyPeriodTotal3,sizeof(STATE_P.BodyPeriodTotal3),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.BodyPeriodTotal4,sizeof(STATE_P.BodyPeriodTotal4),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.periodBodyShort,sizeof(STATE_P.periodBodyShort),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.gapBodyShort,sizeof(STATE_P.gapBodyShort),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.periodBodyLong,sizeof(STATE_P.periodBodyLong),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.gapBodyLong,sizeof(STATE_P.gapBodyLong),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

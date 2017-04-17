@@ -318,7 +318,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_CDLMATCHINGLOW_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+int i1;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -352,6 +353,46 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+        if (FIRST_LAUNCH)
+           {
+                 STATE.EqualPeriodTotal = 0.;
+
+                 STATE.periodEqual = TA_CANDLEAVGPERIOD(Equal);
+                 STATE.gapEqual = MEM_SIZE - STATE.periodEqual;
+           }
+
+        i1 = GET_LOCAL_IDX(-1);
+
+        if (!(NEED_MORE_DATA))
+        {
+
+            if( TA_CANDLECOLOR_STATE_IDX(i1) == -1 &&                                                        // first black
+                TA_CANDLECOLOR_STATE_CUR() == -1 &&                                                          // second black
+                inClose <= MEM_IDX_NS(inClose,i1) + TA_CANDLEAVERAGE_STATE_IDX( Equal, STATE.EqualPeriodTotal, i1 ) && // 1st and 2nd same close
+                inClose >= MEM_IDX_NS(inClose,i1) - TA_CANDLEAVERAGE_STATE_IDX( Equal, STATE.EqualPeriodTotal, i1 )
+              )
+                VALUE_HANDLE_DEREF(outInteger) = 100;
+            else
+                VALUE_HANDLE_DEREF(outInteger) = 0;
+
+        }
+
+
+        if ((int)STATE.mem_index-1 >= STATE.gapEqual)
+        {
+          STATE.EqualPeriodTotal += TA_CANDLERANGE_STATE_IDX(  Equal, i1 );
+        }
+
+        if (!(NEED_MORE_DATA))
+        {
+         STATE.EqualPeriodTotal -= TA_CANDLERANGE_STATE( Equal, -STATE.periodEqual -1 );
+        }
+
+        PUSH_TO_MEM(inOpen,inOpen);
+        PUSH_TO_MEM(inHigh,inHigh);
+        PUSH_TO_MEM(inLow,inLow);
+        PUSH_TO_MEM(inClose,inClose);
+        if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
@@ -428,6 +469,12 @@
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */    if (memory_allocated && STATE.mem_size > 0) { io_res = fwrite(STATE.memory,sizeof(struct TA_CDLMATCHINGLOW_Data),STATE.mem_size,_file);
 /* Generated */    if (io_res < (int) STATE.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); }
+/* Generated */    io_res = fwrite(&STATE.EqualPeriodTotal,sizeof(STATE.EqualPeriodTotal),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.periodEqual,sizeof(STATE.periodEqual),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.gapEqual,sizeof(STATE.gapEqual),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -476,6 +523,12 @@
 /* Generated */    if (STATE_P.mem_size > 0 && memory_allocated) { STATE_P.memory = TA_Calloc(STATE_P.mem_size, sizeof(struct TA_CDLMATCHINGLOW_Data));
 /* Generated */    io_res = fread(STATE_P.memory,sizeof(struct TA_CDLMATCHINGLOW_Data),STATE_P.mem_size,_file);
 /* Generated */    if (io_res < (int) STATE_P.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); } 
+/* Generated */    io_res = fread(&STATE_P.EqualPeriodTotal,sizeof(STATE_P.EqualPeriodTotal),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.periodEqual,sizeof(STATE_P.periodEqual),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.gapEqual,sizeof(STATE_P.gapEqual),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

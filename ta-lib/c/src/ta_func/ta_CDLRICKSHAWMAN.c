@@ -351,7 +351,7 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_CDLRICKSHAWMAN_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -385,6 +385,69 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+                if (FIRST_LAUNCH)
+                   {
+                         STATE.BodyDojiPeriodTotal = 0.;
+                         STATE.ShadowLongPeriodTotal = 0.;
+                         STATE.NearPeriodTotal = 0.;
+
+                         STATE.periodBodyDoji = TA_CANDLEAVGPERIOD(BodyDoji);
+                         STATE.periodShadowLong = TA_CANDLEAVGPERIOD(ShadowLong);
+                         STATE.periodNear = TA_CANDLEAVGPERIOD(Near);
+
+                         STATE.gapBodyDoji = MEM_SIZE - STATE.periodBodyDoji;
+                         STATE.gapShadowLong = MEM_SIZE - STATE.periodShadowLong;
+                         STATE.gapNear = MEM_SIZE - STATE.periodNear;
+                   }
+
+                if (!(NEED_MORE_DATA))
+                {
+
+                    if( TA_REALBODY_STATE_CUR() <= TA_CANDLEAVERAGE_STATE_CUR( BodyDoji, STATE.BodyDojiPeriodTotal ) &&            // doji
+                        TA_LOWERSHADOW_STATE_CUR() > TA_CANDLEAVERAGE_STATE_CUR( ShadowLong, STATE.ShadowLongPeriodTotal ) &&      // long shadow
+                        TA_UPPERSHADOW_STATE_CUR() > TA_CANDLEAVERAGE_STATE_CUR( ShadowLong, STATE.ShadowLongPeriodTotal ) &&      // long shadow
+                        (                                                                                       // body near midpoint
+                            min( inOpen, inClose )
+                                <= inLow + TA_HIGHLOWRANGE_STATE_CUR() / 2 + TA_CANDLEAVERAGE_STATE_CUR( Near, STATE.NearPeriodTotal )
+                            &&
+                            max( inOpen, inClose )
+                                >= inLow + TA_HIGHLOWRANGE_STATE_CUR() / 2 - TA_CANDLEAVERAGE_STATE_CUR( Near, STATE.NearPeriodTotal )
+                        )
+                      )
+                        VALUE_HANDLE_DEREF(outInteger) = 100;
+                    else
+                        VALUE_HANDLE_DEREF(outInteger) = 0;
+
+                }
+
+
+                if ((int)STATE.mem_index-1 >= STATE.gapBodyDoji)
+                {
+                  STATE.BodyDojiPeriodTotal += TA_CANDLERANGE_STATE_CUR(  BodyDoji );
+                }
+
+                if ((int)STATE.mem_index-1 >= STATE.gapShadowLong)
+                {
+                  STATE.ShadowLongPeriodTotal += TA_CANDLERANGE_STATE_CUR( ShadowLong );
+                }
+
+                if ((int)STATE.mem_index-1 >= STATE.gapNear)
+                {
+                  STATE.NearPeriodTotal += TA_CANDLERANGE_STATE_CUR( Near );
+                }
+
+                if (!(NEED_MORE_DATA))
+                {
+                 STATE.BodyDojiPeriodTotal -= TA_CANDLERANGE_STATE( BodyDoji, -STATE.periodBodyDoji );
+                 STATE.ShadowLongPeriodTotal -= TA_CANDLERANGE_STATE( ShadowLong, -STATE.periodShadowLong );
+                 STATE.NearPeriodTotal -= TA_CANDLERANGE_STATE( Near, -STATE.periodNear );
+                }
+
+                PUSH_TO_MEM(inOpen,inOpen);
+                PUSH_TO_MEM(inHigh,inHigh);
+                PUSH_TO_MEM(inLow,inLow);
+                PUSH_TO_MEM(inClose,inClose);
+                if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
@@ -461,6 +524,24 @@
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */    if (memory_allocated && STATE.mem_size > 0) { io_res = fwrite(STATE.memory,sizeof(struct TA_CDLRICKSHAWMAN_Data),STATE.mem_size,_file);
 /* Generated */    if (io_res < (int) STATE.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); }
+/* Generated */    io_res = fwrite(&STATE.BodyDojiPeriodTotal,sizeof(STATE.BodyDojiPeriodTotal),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.ShadowLongPeriodTotal,sizeof(STATE.ShadowLongPeriodTotal),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.NearPeriodTotal,sizeof(STATE.NearPeriodTotal),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.periodBodyDoji,sizeof(STATE.periodBodyDoji),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.periodShadowLong,sizeof(STATE.periodShadowLong),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.periodNear,sizeof(STATE.periodNear),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.gapBodyDoji,sizeof(STATE.gapBodyDoji),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.gapShadowLong,sizeof(STATE.gapShadowLong),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.gapNear,sizeof(STATE.gapNear),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -509,6 +590,24 @@
 /* Generated */    if (STATE_P.mem_size > 0 && memory_allocated) { STATE_P.memory = TA_Calloc(STATE_P.mem_size, sizeof(struct TA_CDLRICKSHAWMAN_Data));
 /* Generated */    io_res = fread(STATE_P.memory,sizeof(struct TA_CDLRICKSHAWMAN_Data),STATE_P.mem_size,_file);
 /* Generated */    if (io_res < (int) STATE_P.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); } 
+/* Generated */    io_res = fread(&STATE_P.BodyDojiPeriodTotal,sizeof(STATE_P.BodyDojiPeriodTotal),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.ShadowLongPeriodTotal,sizeof(STATE_P.ShadowLongPeriodTotal),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.NearPeriodTotal,sizeof(STATE_P.NearPeriodTotal),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.periodBodyDoji,sizeof(STATE_P.periodBodyDoji),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.periodShadowLong,sizeof(STATE_P.periodShadowLong),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.periodNear,sizeof(STATE_P.periodNear),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.gapBodyDoji,sizeof(STATE_P.gapBodyDoji),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.gapShadowLong,sizeof(STATE_P.gapShadowLong),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.gapNear,sizeof(STATE_P.gapNear),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

@@ -6738,6 +6738,15 @@ struct TA_CDLINVERTEDHAMMER_State {
                                   size_t mem_size;
                                   size_t mem_index;
                                   struct TA_CDLINVERTEDHAMMER_Data* memory;
+                                  double       BodyPeriodTotal;
+                                  double       ShadowVeryShortPeriodTotal;
+                                  double       ShadowLongPeriodTotal;
+                                  int          periodShadowVeryShort;
+                                  int          gapShadowVeryShort;
+                                  int          periodBody;
+                                  int          gapBody;
+                                  int          periodShadowLong;
+                                  int          gapShadowLong;
                                   };
 
 
@@ -6859,6 +6868,14 @@ struct TA_CDLKICKING_State {
                            size_t mem_size;
                            size_t mem_index;
                            struct TA_CDLKICKING_Data* memory;
+                           double       BodyPeriodTotal0;
+                           double       ShadowVeryShortPeriodTotal0;
+                           double       BodyPeriodTotal1;
+                           double       ShadowVeryShortPeriodTotal1;
+                           int          periodShadowVeryShort;
+                           int          gapShadowVeryShort;
+                           int          periodBody;
+                           int          gapBody;
                            };
 
 
@@ -6980,6 +6997,14 @@ struct TA_CDLKICKINGBYLENGTH_State {
                                    size_t mem_size;
                                    size_t mem_index;
                                    struct TA_CDLKICKINGBYLENGTH_Data* memory;
+                                   double       BodyPeriodTotal0;
+                                   double       ShadowVeryShortPeriodTotal0;
+                                   double       BodyPeriodTotal1;
+                                   double       ShadowVeryShortPeriodTotal1;
+                                   int          periodShadowVeryShort;
+                                   int          gapShadowVeryShort;
+                                   int          periodBody;
+                                   int          gapBody;
                                    };
 
 
@@ -7101,6 +7126,9 @@ struct TA_CDLLADDERBOTTOM_State {
                                 size_t mem_size;
                                 size_t mem_index;
                                 struct TA_CDLLADDERBOTTOM_Data* memory;
+                                double       ShadowVeryShortPeriodTotal;
+                                int          periodShadowVeryShort;
+                                int          gapShadowVeryShort;
                                 };
 
 
@@ -7349,6 +7377,12 @@ struct TA_CDLLONGLINE_State {
                             size_t mem_size;
                             size_t mem_index;
                             struct TA_CDLLONGLINE_Data* memory;
+                            double       ShadowPeriodTotal;
+                            int          periodShadow;
+                            int          gapShadow;
+                            double       BodyPeriodTotal;
+                            int          periodBody;
+                            int          gapBody;
                             };
 
 
@@ -7597,6 +7631,9 @@ struct TA_CDLMATCHINGLOW_State {
                                size_t mem_size;
                                size_t mem_index;
                                struct TA_CDLMATCHINGLOW_Data* memory;
+                               double       EqualPeriodTotal;
+                               int          periodEqual;
+                               int          gapEqual;
                                };
 
 
@@ -7726,6 +7763,14 @@ struct TA_CDLMATHOLD_State {
                            size_t mem_size;
                            size_t mem_index;
                            struct TA_CDLMATHOLD_Data* memory;
+                           double       BodyPeriodTotal1;
+                           double       BodyPeriodTotal2;
+                           double       BodyPeriodTotal3;
+                           double       BodyPeriodTotal4;
+                           int          periodBodyShort;
+                           int          gapBodyShort;
+                           int          periodBodyLong;
+                           int          gapBodyLong;
                            double        optInPenetration; /* From 0 to TA_REAL_MAX */
                            };
 
@@ -8130,6 +8175,12 @@ struct TA_CDLONNECK_State {
                           size_t mem_size;
                           size_t mem_index;
                           struct TA_CDLONNECK_Data* memory;
+                          double       EqualPeriodTotal;
+                          int          periodEqual;
+                          int          gapEqual;
+                          double       BodyLongPeriodTotal;
+                          int          periodBodyLong;
+                          int          gapBodyLong;
                           };
 
 
@@ -8251,6 +8302,10 @@ struct TA_CDLPIERCING_State {
                             size_t mem_size;
                             size_t mem_index;
                             struct TA_CDLPIERCING_Data* memory;
+                            double       BodyLongPeriodTotal0;
+                            double       BodyLongPeriodTotal1;
+                            int          periodBodyLong;
+                            int          gapBodyLong;
                             };
 
 
@@ -8372,6 +8427,15 @@ struct TA_CDLRICKSHAWMAN_State {
                                size_t mem_size;
                                size_t mem_index;
                                struct TA_CDLRICKSHAWMAN_Data* memory;
+                               double       BodyDojiPeriodTotal;
+                               double       ShadowLongPeriodTotal;
+                               double       NearPeriodTotal;
+                               int          periodBodyDoji;
+                               int          periodShadowLong;
+                               int          periodNear;
+                               int          gapBodyDoji;
+                               int          gapShadowLong;
+                               int          gapNear;
                                };
 
 
@@ -8493,6 +8557,15 @@ struct TA_CDLRISEFALL3METHODS_State {
                                     size_t mem_size;
                                     size_t mem_index;
                                     struct TA_CDLRISEFALL3METHODS_Data* memory;
+                                    double       BodyPeriodTotal0;
+                                    double       BodyPeriodTotal1;
+                                    double       BodyPeriodTotal2;
+                                    double       BodyPeriodTotal3;
+                                    double       BodyPeriodTotal4;
+                                    int          periodBodyShort;
+                                    int          gapBodyShort;
+                                    int          periodBodyLong;
+                                    int          gapBodyLong;
                                     };
 
 
@@ -8614,6 +8687,15 @@ struct TA_CDLSEPARATINGLINES_State {
                                    size_t mem_size;
                                    size_t mem_index;
                                    struct TA_CDLSEPARATINGLINES_Data* memory;
+                                   double       ShadowVeryShortPeriodTotal;
+                                   double       BodyLongPeriodTotal;
+                                   double       EqualPeriodTotal;
+                                   int          gapShadowVeryShort;
+                                   int          periodShadowVeryShort;
+                                   int          gapBodyLong;
+                                   int          periodBodyLong;
+                                   int          gapEqual;
+                                   int          periodEqual;
                                    };
 
 
@@ -8735,6 +8817,15 @@ struct TA_CDLSHOOTINGSTAR_State {
                                 size_t mem_size;
                                 size_t mem_index;
                                 struct TA_CDLSHOOTINGSTAR_Data* memory;
+                                double       BodyPeriodTotal;
+                                double       ShadowLongPeriodTotal;
+                                double       ShadowVeryShortPeriodTotal;
+                                int          periodBody;
+                                int          periodShadowLong;
+                                int          periodShadowVeryShort;
+                                int          gapBody;
+                                int          gapShadowLong;
+                                int          gapShadowVeryShort;
                                 };
 
 
@@ -8856,6 +8947,12 @@ struct TA_CDLSHORTLINE_State {
                              size_t mem_size;
                              size_t mem_index;
                              struct TA_CDLSHORTLINE_Data* memory;
+                             double       ShadowPeriodTotal;
+                             int          periodShadow;
+                             int          gapShadow;
+                             double       BodyPeriodTotal;
+                             int          periodBody;
+                             int          gapBody;
                              };
 
 
@@ -8977,6 +9074,9 @@ struct TA_CDLSPINNINGTOP_State {
                                size_t mem_size;
                                size_t mem_index;
                                struct TA_CDLSPINNINGTOP_Data* memory;
+                               double       BodyPeriodTotal;
+                               int          periodBody;
+                               int          gapBody;
                                };
 
 

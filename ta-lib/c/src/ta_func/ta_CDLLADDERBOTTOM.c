@@ -327,7 +327,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_CDLLADDERBOTTOM_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+int i1, i2, i3, i4;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -361,6 +362,53 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+        if (FIRST_LAUNCH)
+           {
+                 STATE.ShadowVeryShortPeriodTotal = 0.;
+                 STATE.periodShadowVeryShort = TA_CANDLEAVGPERIOD(ShadowVeryShort);
+                 STATE.gapShadowVeryShort = MEM_SIZE - STATE.periodShadowVeryShort;
+           }
+
+        i1 = GET_LOCAL_IDX(-1);
+        i2 = GET_LOCAL_IDX(-2);
+        i3 = GET_LOCAL_IDX(-3);
+        i4 = GET_LOCAL_IDX(-4);
+
+        if (!(NEED_MORE_DATA))
+        {
+
+            if(
+                TA_CANDLECOLOR_STATE_IDX(i4) == -1 && TA_CANDLECOLOR_STATE_IDX(i3) == -1 && TA_CANDLECOLOR_STATE_IDX(i2) == -1 &&  // 3 black candlesticks
+                MEM_IDX_NS(inOpen,i4) > MEM_IDX_NS(inOpen,i3) && MEM_IDX_NS(inOpen,i3) > MEM_IDX_NS(inOpen,i2) &&           // with consecutively lower opens
+                MEM_IDX_NS(inClose,i4) > MEM_IDX_NS(inClose,i3) && MEM_IDX_NS(inClose,i3) > MEM_IDX_NS(inClose,i2) &&       // and closes
+                TA_CANDLECOLOR_STATE_IDX(i1) == -1 &&                                        // 4th: black with an upper shadow
+                TA_UPPERSHADOW_STATE_IDX(i1) > TA_CANDLEAVERAGE_STATE_IDX( ShadowVeryShort, STATE.ShadowVeryShortPeriodTotal, i1 ) &&
+                TA_CANDLECOLOR_STATE_CUR() == 1 &&                                           // 5th: white
+                inOpen > MEM_IDX_NS(inOpen,i1) &&                                          // that opens above prior candle's body
+                inClose > MEM_IDX_NS(inHigh,i1)                                            // and closes above prior candle's high
+              )
+                VALUE_HANDLE_DEREF(outInteger) = 100;
+            else
+                VALUE_HANDLE_DEREF(outInteger) = 0;
+
+        }
+
+
+        if ((int)STATE.mem_index-1 >= STATE.gapShadowVeryShort)
+        {
+            STATE.ShadowVeryShortPeriodTotal += TA_CANDLERANGE_STATE_IDX(  ShadowVeryShort, i1 );
+        }
+
+        if (!(NEED_MORE_DATA))
+        {
+            STATE.ShadowVeryShortPeriodTotal -= TA_CANDLERANGE_STATE( ShadowVeryShort, -STATE.periodShadowVeryShort-1 );
+        }
+
+        PUSH_TO_MEM(inOpen,inOpen);
+        PUSH_TO_MEM(inHigh,inHigh);
+        PUSH_TO_MEM(inLow,inLow);
+        PUSH_TO_MEM(inClose,inClose);
+        if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
@@ -437,6 +485,12 @@
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */    if (memory_allocated && STATE.mem_size > 0) { io_res = fwrite(STATE.memory,sizeof(struct TA_CDLLADDERBOTTOM_Data),STATE.mem_size,_file);
 /* Generated */    if (io_res < (int) STATE.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); }
+/* Generated */    io_res = fwrite(&STATE.ShadowVeryShortPeriodTotal,sizeof(STATE.ShadowVeryShortPeriodTotal),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.periodShadowVeryShort,sizeof(STATE.periodShadowVeryShort),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.gapShadowVeryShort,sizeof(STATE.gapShadowVeryShort),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -485,6 +539,12 @@
 /* Generated */    if (STATE_P.mem_size > 0 && memory_allocated) { STATE_P.memory = TA_Calloc(STATE_P.mem_size, sizeof(struct TA_CDLLADDERBOTTOM_Data));
 /* Generated */    io_res = fread(STATE_P.memory,sizeof(struct TA_CDLLADDERBOTTOM_Data),STATE_P.mem_size,_file);
 /* Generated */    if (io_res < (int) STATE_P.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); } 
+/* Generated */    io_res = fread(&STATE_P.ShadowVeryShortPeriodTotal,sizeof(STATE_P.ShadowVeryShortPeriodTotal),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.periodShadowVeryShort,sizeof(STATE_P.periodShadowVeryShort),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.gapShadowVeryShort,sizeof(STATE_P.gapShadowVeryShort),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

@@ -12167,7 +12167,7 @@ public class Core {
          if( ( Math.abs ( inClose - inOpen ) ) < ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) != 0.0? _state.value .BodyPeriodTotal / (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
             ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) > ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].avgPeriod) != 0.0? _state.value .ShadowLongPeriodTotal / (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
             ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) < ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) != 0.0? _state.value .ShadowVeryShortPeriodTotal / (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
-            (((inClose) < (inOpen)) ? (inClose) : (inOpen)) <= ( _state.value .memory+i1).value .inLow + ( i1!=0?( ( (this.candleSettings[CandleSettingType.Near.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.Near.ordinal()].avgPeriod) != 0.0? _state.value .NearPeriodTotal / (this.candleSettings[CandleSettingType.Near.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+i1)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+i1)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+i1)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+i1)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+i1)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+i1)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+i1)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+i1)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+i1)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+i1)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+i1)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+i1)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+i1)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+i1)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) ):( ( (this.candleSettings[CandleSettingType.Near.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.Near.ordinal()].avgPeriod) != 0.0? _state.value .NearPeriodTotal / (this.candleSettings[CandleSettingType.Near.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) ) )
+            (((inClose) < (inOpen)) ? (inClose) : (inOpen)) <= ( _state.value .memory+i1).value .inLow + ( (this.candleSettings[CandleSettingType.Near.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.Near.ordinal()].avgPeriod) != 0.0? _state.value .NearPeriodTotal / (this.candleSettings[CandleSettingType.Near.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) )
             )
             outInteger.value = 100;
          else
@@ -15183,16 +15183,58 @@ public class Core {
       double inClose,
       int *outInteger )
    {
+      int i1;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         ( _state.value .memory+_cur_idx).value .inClose = inClose ;
-         return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .BodyPeriodTotal = 0.;
+         _state.value .ShadowLongPeriodTotal = 0.;
+         _state.value .ShadowVeryShortPeriodTotal = 0.;
+         _state.value .periodBody = (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) ;
+         _state.value .periodShadowVeryShort = (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) ;
+         _state.value .periodShadowLong = (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].avgPeriod) ;
+         _state.value .gapShadowLong = _state.value .mem_size - _state.value .periodShadowLong;
+         _state.value .gapShadowVeryShort = _state.value .mem_size - _state.value .periodShadowVeryShort;
+         _state.value .gapBody = _state.value .mem_size - _state.value .periodBody;
+      }
+      i1 = (( _state.value .mem_index-1+-1)% _state.value .mem_size ) ;
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         if( ( Math.abs ( inClose - inOpen ) ) < ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) != 0.0? _state.value .BodyPeriodTotal / (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) > ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].avgPeriod) != 0.0? _state.value .ShadowLongPeriodTotal / (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) < ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) != 0.0? _state.value .ShadowVeryShortPeriodTotal / (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( (((inOpen) > (inClose)) ? (inOpen) : (inClose)) < ((( ( _state.value .memory+i1).value .inOpen ) < ( ( _state.value .memory+i1).value .inClose )) ? ( ( _state.value .memory+i1).value .inOpen ) : ( ( _state.value .memory+i1).value .inClose )) )
+            )
+            outInteger.value = 100;
+         else
+            outInteger.value = 0;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .gapShadowVeryShort)
+      {
+         _state.value .ShadowVeryShortPeriodTotal += ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .gapShadowLong)
+      {
+         _state.value .ShadowLongPeriodTotal += ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .gapBody)
+      {
+         _state.value .BodyPeriodTotal += ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ;
+      }
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         _state.value .ShadowVeryShortPeriodTotal -= ( - _state.value .periodShadowVeryShort!=0?( ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+         _state.value .ShadowLongPeriodTotal -= ( - _state.value .periodShadowLong!=0?( ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+         _state.value .BodyPeriodTotal -= ( - _state.value .periodBody!=0?( ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+      }
+      ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
+      ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
+      ( _state.value .memory+_cur_idx).value .inLow = inLow ;
+      ( _state.value .memory+_cur_idx).value .inClose = inClose ;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
    public int cdlInvertedHammerStateFree( struct TA_cdlInvertedHammer_State** _state )
@@ -15221,6 +15263,24 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLINVERTEDHAMMER_Data), _state.value .mem_size,_file);
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .BodyPeriodTotal,sizeof( _state.value .BodyPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal,sizeof( _state.value .ShadowVeryShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowLongPeriodTotal,sizeof( _state.value .ShadowLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowVeryShort,sizeof( _state.value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadowVeryShort,sizeof( _state.value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBody,sizeof( _state.value .periodBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBody,sizeof( _state.value .gapBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowLong,sizeof( _state.value .periodShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadowLong,sizeof( _state.value .gapShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public int cdlInvertedHammerStateLoad( struct TA_cdlInvertedHammer_State** _state,
@@ -15242,6 +15302,24 @@ public class Core {
       if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLINVERTEDHAMMER_Data));
          io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLINVERTEDHAMMER_Data), _state.value .value .mem_size,_file);
          if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .BodyPeriodTotal,sizeof( _state.value .value .BodyPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal,sizeof( _state.value .value .ShadowVeryShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowLongPeriodTotal,sizeof( _state.value .value .ShadowLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowVeryShort,sizeof( _state.value .value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadowVeryShort,sizeof( _state.value .value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBody,sizeof( _state.value .value .periodBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBody,sizeof( _state.value .value .gapBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowLong,sizeof( _state.value .value .periodShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadowLong,sizeof( _state.value .value .gapShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public RetCode cdlInvertedHammer( int startIdx,
@@ -15419,16 +15497,64 @@ public class Core {
       double inClose,
       int *outInteger )
    {
+      int i1;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         ( _state.value .memory+_cur_idx).value .inClose = inClose ;
-         return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .BodyPeriodTotal0 = 0.;
+         _state.value .ShadowVeryShortPeriodTotal0 = 0.;
+         _state.value .BodyPeriodTotal1 = 0.;
+         _state.value .ShadowVeryShortPeriodTotal1 = 0.;
+         _state.value .periodBody = (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) ;
+         _state.value .periodShadowVeryShort = (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) ;
+         _state.value .gapShadowVeryShort = _state.value .mem_size - _state.value .periodShadowVeryShort;
+         _state.value .gapBody = _state.value .mem_size - _state.value .periodBody;
+      }
+      i1 = (( _state.value .mem_index-1+-1)% _state.value .mem_size ) ;
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         if( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? 1 : -1 ) == - ( inClose >= inOpen ? 1 : -1 ) &&
+            ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) > ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) != 0.0? _state.value .BodyPeriodTotal1 / (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) < ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) != 0.0? _state.value .ShadowVeryShortPeriodTotal1 / (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) < ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) != 0.0? _state.value .ShadowVeryShortPeriodTotal1 / (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( Math.abs ( inClose - inOpen ) ) > ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) != 0.0? _state.value .BodyPeriodTotal0 / (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) < ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) != 0.0? _state.value .ShadowVeryShortPeriodTotal0 / (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) < ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) != 0.0? _state.value .ShadowVeryShortPeriodTotal0 / (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            (
+            ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? 1 : -1 ) == -1 && ( inLow > ( _state.value .memory+i1).value .inHigh ) )
+            ||
+            ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? 1 : -1 ) == 1 && ( inHigh < ( _state.value .memory+i1).value .inLow ) )
+            )
+            )
+            outInteger.value = ( inClose >= inOpen ? 1 : -1 ) * 100;
+         else
+            outInteger.value = 0;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .gapShadowVeryShort)
+      {
+         _state.value .ShadowVeryShortPeriodTotal0 += ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ;
+         _state.value .ShadowVeryShortPeriodTotal1 += ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .gapBody)
+      {
+         _state.value .BodyPeriodTotal0 += ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ;
+         _state.value .BodyPeriodTotal1 += ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ;
+      }
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         _state.value .ShadowVeryShortPeriodTotal0 -= ( - _state.value .periodShadowVeryShort!=0?( ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+         _state.value .BodyPeriodTotal0 -= ( - _state.value .periodBody!=0?( ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+         _state.value .ShadowVeryShortPeriodTotal1 -= ( - _state.value .periodShadowVeryShort - 1!=0?( ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+         _state.value .BodyPeriodTotal1 -= ( - _state.value .periodBody - 1!=0?( ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+      }
+      ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
+      ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
+      ( _state.value .memory+_cur_idx).value .inLow = inLow ;
+      ( _state.value .memory+_cur_idx).value .inClose = inClose ;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
    public int cdlKickingStateFree( struct TA_cdlKicking_State** _state )
@@ -15457,6 +15583,22 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLKICKING_Data), _state.value .mem_size,_file);
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .BodyPeriodTotal0,sizeof( _state.value .BodyPeriodTotal0),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal0,sizeof( _state.value .ShadowVeryShortPeriodTotal0),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyPeriodTotal1,sizeof( _state.value .BodyPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal1,sizeof( _state.value .ShadowVeryShortPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowVeryShort,sizeof( _state.value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadowVeryShort,sizeof( _state.value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBody,sizeof( _state.value .periodBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBody,sizeof( _state.value .gapBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public int cdlKickingStateLoad( struct TA_cdlKicking_State** _state,
@@ -15478,6 +15620,22 @@ public class Core {
       if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLKICKING_Data));
          io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLKICKING_Data), _state.value .value .mem_size,_file);
          if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .BodyPeriodTotal0,sizeof( _state.value .value .BodyPeriodTotal0),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal0,sizeof( _state.value .value .ShadowVeryShortPeriodTotal0),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyPeriodTotal1,sizeof( _state.value .value .BodyPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal1,sizeof( _state.value .value .ShadowVeryShortPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowVeryShort,sizeof( _state.value .value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadowVeryShort,sizeof( _state.value .value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBody,sizeof( _state.value .value .periodBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBody,sizeof( _state.value .value .gapBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public RetCode cdlKicking( int startIdx,
@@ -15662,16 +15820,69 @@ public class Core {
       double inClose,
       int *outInteger )
    {
+      int i1;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         ( _state.value .memory+_cur_idx).value .inClose = inClose ;
-         return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .BodyPeriodTotal0 = 0.;
+         _state.value .ShadowVeryShortPeriodTotal0 = 0.;
+         _state.value .BodyPeriodTotal1 = 0.;
+         _state.value .ShadowVeryShortPeriodTotal1 = 0.;
+         _state.value .periodBody = (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) ;
+         _state.value .periodShadowVeryShort = (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) ;
+         _state.value .gapShadowVeryShort = _state.value .mem_size - _state.value .periodShadowVeryShort;
+         _state.value .gapBody = _state.value .mem_size - _state.value .periodBody;
+      }
+      i1 = (( _state.value .mem_index-1+-1)% _state.value .mem_size ) ;
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         if( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? 1 : -1 ) == - ( inClose >= inOpen ? 1 : -1 ) &&
+            ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) > ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) != 0.0? _state.value .BodyPeriodTotal1 / (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) < ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) != 0.0? _state.value .ShadowVeryShortPeriodTotal1 / (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) < ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) != 0.0? _state.value .ShadowVeryShortPeriodTotal1 / (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( Math.abs ( inClose - inOpen ) ) > ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) != 0.0? _state.value .BodyPeriodTotal0 / (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) < ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) != 0.0? _state.value .ShadowVeryShortPeriodTotal0 / (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) < ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) != 0.0? _state.value .ShadowVeryShortPeriodTotal0 / (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            (
+            ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? 1 : -1 ) == -1 && ( inLow > ( _state.value .memory+i1).value .inHigh ) )
+            ||
+            ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? 1 : -1 ) == 1 && ( inHigh < ( _state.value .memory+i1).value .inLow ) )
+            )
+            )
+         {
+            if ( ( Math.abs ( inClose - inOpen ) ) > ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) )
+               outInteger.value = ( inClose >= inOpen ? 1 : -1 ) * 100;
+            else
+               outInteger.value = ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? 1 : -1 ) * 100;
+         }
+         else
+            outInteger.value = 0;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .gapShadowVeryShort)
+      {
+         _state.value .ShadowVeryShortPeriodTotal0 += ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ;
+         _state.value .ShadowVeryShortPeriodTotal1 += ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .gapBody)
+      {
+         _state.value .BodyPeriodTotal0 += ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ;
+         _state.value .BodyPeriodTotal1 += ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ;
+      }
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         _state.value .ShadowVeryShortPeriodTotal0 -= ( - _state.value .periodShadowVeryShort!=0?( ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+         _state.value .BodyPeriodTotal0 -= ( - _state.value .periodBody!=0?( ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+         _state.value .ShadowVeryShortPeriodTotal1 -= ( - _state.value .periodShadowVeryShort - 1!=0?( ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort - 1)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+         _state.value .BodyPeriodTotal1 -= ( - _state.value .periodBody - 1!=0?( ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody - 1)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+      }
+      ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
+      ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
+      ( _state.value .memory+_cur_idx).value .inLow = inLow ;
+      ( _state.value .memory+_cur_idx).value .inClose = inClose ;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
    public int cdlKickingByLengthStateFree( struct TA_cdlKickingByLength_State** _state )
@@ -15700,6 +15911,22 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLKICKINGBYLENGTH_Data), _state.value .mem_size,_file);
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .BodyPeriodTotal0,sizeof( _state.value .BodyPeriodTotal0),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal0,sizeof( _state.value .ShadowVeryShortPeriodTotal0),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyPeriodTotal1,sizeof( _state.value .BodyPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal1,sizeof( _state.value .ShadowVeryShortPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowVeryShort,sizeof( _state.value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadowVeryShort,sizeof( _state.value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBody,sizeof( _state.value .periodBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBody,sizeof( _state.value .gapBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public int cdlKickingByLengthStateLoad( struct TA_cdlKickingByLength_State** _state,
@@ -15721,6 +15948,22 @@ public class Core {
       if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLKICKINGBYLENGTH_Data));
          io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLKICKINGBYLENGTH_Data), _state.value .value .mem_size,_file);
          if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .BodyPeriodTotal0,sizeof( _state.value .value .BodyPeriodTotal0),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal0,sizeof( _state.value .value .ShadowVeryShortPeriodTotal0),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyPeriodTotal1,sizeof( _state.value .value .BodyPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal1,sizeof( _state.value .value .ShadowVeryShortPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowVeryShort,sizeof( _state.value .value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadowVeryShort,sizeof( _state.value .value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBody,sizeof( _state.value .value .periodBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBody,sizeof( _state.value .value .gapBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public RetCode cdlKickingByLength( int startIdx,
@@ -15884,16 +16127,50 @@ public class Core {
       double inClose,
       int *outInteger )
    {
+      int i1, i2, i3, i4;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         ( _state.value .memory+_cur_idx).value .inClose = inClose ;
-         return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .ShadowVeryShortPeriodTotal = 0.;
+         _state.value .periodShadowVeryShort = (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) ;
+         _state.value .gapShadowVeryShort = _state.value .mem_size - _state.value .periodShadowVeryShort;
+      }
+      i1 = (( _state.value .mem_index-1+-1)% _state.value .mem_size ) ;
+      i2 = (( _state.value .mem_index-1+-2)% _state.value .mem_size ) ;
+      i3 = (( _state.value .mem_index-1+-3)% _state.value .mem_size ) ;
+      i4 = (( _state.value .mem_index-1+-4)% _state.value .mem_size ) ;
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         if(
+            ( ( _state.value .memory+i4).value .inClose >= ( _state.value .memory+i4).value .inOpen ? 1 : -1 ) == -1 && ( ( _state.value .memory+i3).value .inClose >= ( _state.value .memory+i3).value .inOpen ? 1 : -1 ) == -1 && ( ( _state.value .memory+i2).value .inClose >= ( _state.value .memory+i2).value .inOpen ? 1 : -1 ) == -1 &&
+            ( _state.value .memory+i4).value .inOpen > ( _state.value .memory+i3).value .inOpen && ( _state.value .memory+i3).value .inOpen > ( _state.value .memory+i2).value .inOpen &&
+            ( _state.value .memory+i4).value .inClose > ( _state.value .memory+i3).value .inClose && ( _state.value .memory+i3).value .inClose > ( _state.value .memory+i2).value .inClose &&
+            ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? 1 : -1 ) == -1 &&
+            ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) > ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) != 0.0? _state.value .ShadowVeryShortPeriodTotal / (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( inClose >= inOpen ? 1 : -1 ) == 1 &&
+            inOpen > ( _state.value .memory+i1).value .inOpen &&
+            inClose > ( _state.value .memory+i1).value .inHigh
+            )
+            outInteger.value = 100;
+         else
+            outInteger.value = 0;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .gapShadowVeryShort)
+      {
+         _state.value .ShadowVeryShortPeriodTotal += ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ;
+      }
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         _state.value .ShadowVeryShortPeriodTotal -= ( - _state.value .periodShadowVeryShort-1!=0?( ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort-1)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort-1)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort-1)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort-1)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort-1)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort-1)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort-1)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort-1)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort-1)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort-1)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort-1)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort-1)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort-1)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort-1)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+      }
+      ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
+      ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
+      ( _state.value .memory+_cur_idx).value .inLow = inLow ;
+      ( _state.value .memory+_cur_idx).value .inClose = inClose ;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
    public int cdlLadderBottomStateFree( struct TA_cdlLadderBottom_State** _state )
@@ -15922,6 +16199,12 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLLADDERBOTTOM_Data), _state.value .mem_size,_file);
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal,sizeof( _state.value .ShadowVeryShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowVeryShort,sizeof( _state.value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadowVeryShort,sizeof( _state.value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public int cdlLadderBottomStateLoad( struct TA_cdlLadderBottom_State** _state,
@@ -15943,6 +16226,12 @@ public class Core {
       if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLLADDERBOTTOM_Data));
          io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLLADDERBOTTOM_Data), _state.value .value .mem_size,_file);
          if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal,sizeof( _state.value .value .ShadowVeryShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowVeryShort,sizeof( _state.value .value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadowVeryShort,sizeof( _state.value .value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public RetCode cdlLadderBottom( int startIdx,
@@ -16355,12 +16644,42 @@ public class Core {
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         ( _state.value .memory+_cur_idx).value .inClose = inClose ;
-         return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .BodyPeriodTotal = 0.;
+         _state.value .ShadowPeriodTotal = 0.;
+         _state.value .periodBody = (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) ;
+         _state.value .periodShadow = (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].avgPeriod) ;
+         _state.value .gapShadow = _state.value .mem_size - _state.value .periodShadow;
+         _state.value .gapBody = _state.value .mem_size - _state.value .periodBody;
+      }
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         if( ( Math.abs ( inClose - inOpen ) ) > ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) != 0.0? _state.value .BodyPeriodTotal / (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) < ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].avgPeriod) != 0.0? _state.value .ShadowPeriodTotal / (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) < ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].avgPeriod) != 0.0? _state.value .ShadowPeriodTotal / (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) )
+            outInteger.value = ( inClose >= inOpen ? 1 : -1 ) * 100;
+         else
+            outInteger.value = 0;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .gapShadow)
+      {
+         _state.value .ShadowPeriodTotal += ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .gapBody)
+      {
+         _state.value .BodyPeriodTotal += ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ;
+      }
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         _state.value .ShadowPeriodTotal -= ( - _state.value .periodShadow!=0?( ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+         _state.value .BodyPeriodTotal -= ( - _state.value .periodBody!=0?( ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+      }
+      ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
+      ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
+      ( _state.value .memory+_cur_idx).value .inLow = inLow ;
+      ( _state.value .memory+_cur_idx).value .inClose = inClose ;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
    public int cdlLongLineStateFree( struct TA_cdlLongLine_State** _state )
@@ -16389,6 +16708,18 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLLONGLINE_Data), _state.value .mem_size,_file);
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .ShadowPeriodTotal,sizeof( _state.value .ShadowPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadow,sizeof( _state.value .periodShadow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadow,sizeof( _state.value .gapShadow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyPeriodTotal,sizeof( _state.value .BodyPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBody,sizeof( _state.value .periodBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBody,sizeof( _state.value .gapBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public int cdlLongLineStateLoad( struct TA_cdlLongLine_State** _state,
@@ -16410,6 +16741,18 @@ public class Core {
       if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLLONGLINE_Data));
          io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLLONGLINE_Data), _state.value .value .mem_size,_file);
          if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .ShadowPeriodTotal,sizeof( _state.value .value .ShadowPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadow,sizeof( _state.value .value .periodShadow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadow,sizeof( _state.value .value .gapShadow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyPeriodTotal,sizeof( _state.value .value .BodyPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBody,sizeof( _state.value .value .periodBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBody,sizeof( _state.value .value .gapBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public RetCode cdlLongLine( int startIdx,
@@ -16808,16 +17151,42 @@ public class Core {
       double inClose,
       int *outInteger )
    {
+      int i1;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         ( _state.value .memory+_cur_idx).value .inClose = inClose ;
-         return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .EqualPeriodTotal = 0.;
+         _state.value .periodEqual = (this.candleSettings[CandleSettingType.Equal.ordinal()].avgPeriod) ;
+         _state.value .gapEqual = _state.value .mem_size - _state.value .periodEqual;
+      }
+      i1 = (( _state.value .mem_index-1+-1)% _state.value .mem_size ) ;
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         if( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? 1 : -1 ) == -1 &&
+            ( inClose >= inOpen ? 1 : -1 ) == -1 &&
+            inClose <= ( _state.value .memory+i1).value .inClose + ( (this.candleSettings[CandleSettingType.Equal.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.Equal.ordinal()].avgPeriod) != 0.0? _state.value .EqualPeriodTotal / (this.candleSettings[CandleSettingType.Equal.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            inClose >= ( _state.value .memory+i1).value .inClose - ( (this.candleSettings[CandleSettingType.Equal.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.Equal.ordinal()].avgPeriod) != 0.0? _state.value .EqualPeriodTotal / (this.candleSettings[CandleSettingType.Equal.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) )
+            )
+            outInteger.value = 100;
+         else
+            outInteger.value = 0;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .gapEqual)
+      {
+         _state.value .EqualPeriodTotal += ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ;
+      }
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         _state.value .EqualPeriodTotal -= ( - _state.value .periodEqual -1!=0?( ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+      }
+      ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
+      ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
+      ( _state.value .memory+_cur_idx).value .inLow = inLow ;
+      ( _state.value .memory+_cur_idx).value .inClose = inClose ;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
    public int cdlMatchingLowStateFree( struct TA_cdlMatchingLow_State** _state )
@@ -16846,6 +17215,12 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLMATCHINGLOW_Data), _state.value .mem_size,_file);
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .EqualPeriodTotal,sizeof( _state.value .EqualPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodEqual,sizeof( _state.value .periodEqual),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapEqual,sizeof( _state.value .gapEqual),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public int cdlMatchingLowStateLoad( struct TA_cdlMatchingLow_State** _state,
@@ -16867,6 +17242,12 @@ public class Core {
       if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLMATCHINGLOW_Data));
          io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLMATCHINGLOW_Data), _state.value .value .mem_size,_file);
          if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .EqualPeriodTotal,sizeof( _state.value .value .EqualPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodEqual,sizeof( _state.value .value .periodEqual),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapEqual,sizeof( _state.value .value .gapEqual),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public RetCode cdlMatchingLow( int startIdx,
@@ -17042,16 +17423,72 @@ public class Core {
       double inClose,
       int *outInteger )
    {
+      int i1, i2, i3, i4;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         ( _state.value .memory+_cur_idx).value .inClose = inClose ;
-         return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .BodyPeriodTotal1 = 0.;
+         _state.value .BodyPeriodTotal2 = 0.;
+         _state.value .BodyPeriodTotal3 = 0.;
+         _state.value .BodyPeriodTotal4 = 0.;
+         _state.value .periodBodyShort = (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) ;
+         _state.value .gapBodyShort = _state.value .mem_size - _state.value .periodBodyShort;
+         _state.value .periodBodyLong = (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) ;
+         _state.value .gapBodyLong = _state.value .mem_size - _state.value .periodBodyLong;
+      }
+      i1 = (( _state.value .mem_index-1+-1)% _state.value .mem_size ) ;
+      i2 = (( _state.value .mem_index-1+-2)% _state.value .mem_size ) ;
+      i3 = (( _state.value .mem_index-1+-3)% _state.value .mem_size ) ;
+      i4 = (( _state.value .mem_index-1+-4)% _state.value .mem_size ) ;
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         if(
+            ( Math.abs ( ( _state.value .memory+i4).value .inClose - ( _state.value .memory+i4).value .inOpen ) ) > ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) != 0.0? _state.value .BodyPeriodTotal4 / (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i4).value .inClose - ( _state.value .memory+i4).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i4).value .inHigh - ( _state.value .memory+i4).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i4).value .inHigh - ( ( _state.value .memory+i4).value .inClose >= ( _state.value .memory+i4).value .inOpen ? ( _state.value .memory+i4).value .inClose : ( _state.value .memory+i4).value .inOpen ) ) + ( ( ( _state.value .memory+i4).value .inClose >= ( _state.value .memory+i4).value .inOpen ? ( _state.value .memory+i4).value .inOpen : ( _state.value .memory+i4).value .inClose ) - ( _state.value .memory+i4).value .inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( Math.abs ( ( _state.value .memory+i3).value .inClose - ( _state.value .memory+i3).value .inOpen ) ) < ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) != 0.0? _state.value .BodyPeriodTotal3 / (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i3).value .inClose - ( _state.value .memory+i3).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i3).value .inHigh - ( _state.value .memory+i3).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i3).value .inHigh - ( ( _state.value .memory+i3).value .inClose >= ( _state.value .memory+i3).value .inOpen ? ( _state.value .memory+i3).value .inClose : ( _state.value .memory+i3).value .inOpen ) ) + ( ( ( _state.value .memory+i3).value .inClose >= ( _state.value .memory+i3).value .inOpen ? ( _state.value .memory+i3).value .inOpen : ( _state.value .memory+i3).value .inClose ) - ( _state.value .memory+i3).value .inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( Math.abs ( ( _state.value .memory+i2).value .inClose - ( _state.value .memory+i2).value .inOpen ) ) < ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) != 0.0? _state.value .BodyPeriodTotal2 / (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i2).value .inClose - ( _state.value .memory+i2).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i2).value .inHigh - ( _state.value .memory+i2).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i2).value .inHigh - ( ( _state.value .memory+i2).value .inClose >= ( _state.value .memory+i2).value .inOpen ? ( _state.value .memory+i2).value .inClose : ( _state.value .memory+i2).value .inOpen ) ) + ( ( ( _state.value .memory+i2).value .inClose >= ( _state.value .memory+i2).value .inOpen ? ( _state.value .memory+i2).value .inOpen : ( _state.value .memory+i2).value .inClose ) - ( _state.value .memory+i2).value .inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) < ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) != 0.0? _state.value .BodyPeriodTotal1 / (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( ( _state.value .memory+i4).value .inClose >= ( _state.value .memory+i4).value .inOpen ? 1 : -1 ) == 1 &&
+            ( ( _state.value .memory+i3).value .inClose >= ( _state.value .memory+i3).value .inOpen ? 1 : -1 ) == -1 &&
+            ( inClose >= inOpen ? 1 : -1 ) == 1 &&
+            ( ((( ( _state.value .memory+i3).value .inOpen ) < ( ( _state.value .memory+i3).value .inClose )) ? ( ( _state.value .memory+i3).value .inOpen ) : ( ( _state.value .memory+i3).value .inClose )) > ((( ( _state.value .memory+i4).value .inOpen ) > ( ( _state.value .memory+i4).value .inClose )) ? ( ( _state.value .memory+i4).value .inOpen ) : ( ( _state.value .memory+i4).value .inClose )) ) &&
+            ((( ( _state.value .memory+i2).value .inOpen ) < ( ( _state.value .memory+i2).value .inClose )) ? ( ( _state.value .memory+i2).value .inOpen ) : ( ( _state.value .memory+i2).value .inClose )) < ( _state.value .memory+i4).value .inClose &&
+            ((( ( _state.value .memory+i1).value .inOpen ) < ( ( _state.value .memory+i1).value .inClose )) ? ( ( _state.value .memory+i1).value .inOpen ) : ( ( _state.value .memory+i1).value .inClose )) < ( _state.value .memory+i4).value .inClose &&
+            ((( ( _state.value .memory+i2).value .inOpen ) < ( ( _state.value .memory+i2).value .inClose )) ? ( ( _state.value .memory+i2).value .inOpen ) : ( ( _state.value .memory+i2).value .inClose )) > ( _state.value .memory+i4).value .inClose - ( Math.abs ( ( _state.value .memory+i4).value .inClose - ( _state.value .memory+i4).value .inOpen ) ) * _state.value .optInPenetration &&
+            ((( ( _state.value .memory+i1).value .inOpen ) < ( ( _state.value .memory+i1).value .inClose )) ? ( ( _state.value .memory+i1).value .inOpen ) : ( ( _state.value .memory+i1).value .inClose )) > ( _state.value .memory+i4).value .inClose - ( Math.abs ( ( _state.value .memory+i4).value .inClose - ( _state.value .memory+i4).value .inOpen ) ) * _state.value .optInPenetration &&
+            ((( ( _state.value .memory+i2).value .inClose ) > ( ( _state.value .memory+i2).value .inOpen )) ? ( ( _state.value .memory+i2).value .inClose ) : ( ( _state.value .memory+i2).value .inOpen )) < ( _state.value .memory+i3).value .inOpen &&
+            ((( ( _state.value .memory+i1).value .inClose ) > ( ( _state.value .memory+i1).value .inOpen )) ? ( ( _state.value .memory+i1).value .inClose ) : ( ( _state.value .memory+i1).value .inOpen )) < ((( ( _state.value .memory+i2).value .inClose ) > ( ( _state.value .memory+i2).value .inOpen )) ? ( ( _state.value .memory+i2).value .inClose ) : ( ( _state.value .memory+i2).value .inOpen )) &&
+            inOpen > ( _state.value .memory+i1).value .inClose &&
+            inClose > ((( ((( ( _state.value .memory+i3).value .inHigh ) > ( ( _state.value .memory+i2).value .inHigh )) ? ( ( _state.value .memory+i3).value .inHigh ) : ( ( _state.value .memory+i2).value .inHigh )) ) > ( ( _state.value .memory+i1).value .inHigh )) ? ( ((( ( _state.value .memory+i3).value .inHigh ) > ( ( _state.value .memory+i2).value .inHigh )) ? ( ( _state.value .memory+i3).value .inHigh ) : ( ( _state.value .memory+i2).value .inHigh )) ) : ( ( _state.value .memory+i1).value .inHigh ))
+            )
+            outInteger.value = 100;
+         else
+            outInteger.value = 0;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .periodBodyShort)
+      {
+         _state.value .BodyPeriodTotal1 += ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ;
+         _state.value .BodyPeriodTotal2 += ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i2).value .inClose - ( _state.value .memory+i2).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i2).value .inHigh - ( _state.value .memory+i2).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i2).value .inHigh - ( ( _state.value .memory+i2).value .inClose >= ( _state.value .memory+i2).value .inOpen ? ( _state.value .memory+i2).value .inClose : ( _state.value .memory+i2).value .inOpen ) ) + ( ( ( _state.value .memory+i2).value .inClose >= ( _state.value .memory+i2).value .inOpen ? ( _state.value .memory+i2).value .inOpen : ( _state.value .memory+i2).value .inClose ) - ( _state.value .memory+i2).value .inLow ) : 0 ) ) ) ;
+         _state.value .BodyPeriodTotal3 += ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i3).value .inClose - ( _state.value .memory+i3).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i3).value .inHigh - ( _state.value .memory+i3).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i3).value .inHigh - ( ( _state.value .memory+i3).value .inClose >= ( _state.value .memory+i3).value .inOpen ? ( _state.value .memory+i3).value .inClose : ( _state.value .memory+i3).value .inOpen ) ) + ( ( ( _state.value .memory+i3).value .inClose >= ( _state.value .memory+i3).value .inOpen ? ( _state.value .memory+i3).value .inOpen : ( _state.value .memory+i3).value .inClose ) - ( _state.value .memory+i3).value .inLow ) : 0 ) ) ) ;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .periodBodyLong)
+      {
+         _state.value .BodyPeriodTotal4 += ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i4).value .inClose - ( _state.value .memory+i4).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i4).value .inHigh - ( _state.value .memory+i4).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i4).value .inHigh - ( ( _state.value .memory+i4).value .inClose >= ( _state.value .memory+i4).value .inOpen ? ( _state.value .memory+i4).value .inClose : ( _state.value .memory+i4).value .inOpen ) ) + ( ( ( _state.value .memory+i4).value .inClose >= ( _state.value .memory+i4).value .inOpen ? ( _state.value .memory+i4).value .inOpen : ( _state.value .memory+i4).value .inClose ) - ( _state.value .memory+i4).value .inLow ) : 0 ) ) ) ;
+      }
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         _state.value .BodyPeriodTotal1 -= ( - _state.value .periodBodyShort-1!=0?( ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+         _state.value .BodyPeriodTotal2 -= ( - _state.value .periodBodyShort-2!=0?( ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+         _state.value .BodyPeriodTotal3 -= ( - _state.value .periodBodyShort-3!=0?( ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+         _state.value .BodyPeriodTotal4 -= ( - _state.value .periodBodyLong-4!=0?( ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+      }
+      ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
+      ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
+      ( _state.value .memory+_cur_idx).value .inLow = inLow ;
+      ( _state.value .memory+_cur_idx).value .inClose = inClose ;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
    public int cdlMatHoldStateFree( struct TA_cdlMatHold_State** _state )
@@ -17082,6 +17519,22 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       io_res = fwrite(& _state.value .optInPenetration,sizeof( _state.value .optInPenetration),1,_file);
       if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyPeriodTotal1,sizeof( _state.value .BodyPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyPeriodTotal2,sizeof( _state.value .BodyPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyPeriodTotal3,sizeof( _state.value .BodyPeriodTotal3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyPeriodTotal4,sizeof( _state.value .BodyPeriodTotal4),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyShort,sizeof( _state.value .periodBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyShort,sizeof( _state.value .gapBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyLong,sizeof( _state.value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyLong,sizeof( _state.value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public int cdlMatHoldStateLoad( struct TA_cdlMatHold_State** _state,
@@ -17104,6 +17557,22 @@ public class Core {
          io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLMATHOLD_Data), _state.value .value .mem_size,_file);
          if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
       io_res = fread(& _state.value .value .optInPenetration,sizeof( _state.value .value .optInPenetration),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyPeriodTotal1,sizeof( _state.value .value .BodyPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyPeriodTotal2,sizeof( _state.value .value .BodyPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyPeriodTotal3,sizeof( _state.value .value .BodyPeriodTotal3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyPeriodTotal4,sizeof( _state.value .value .BodyPeriodTotal4),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyShort,sizeof( _state.value .value .periodBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyShort,sizeof( _state.value .value .gapBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyLong,sizeof( _state.value .value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyLong,sizeof( _state.value .value .gapBodyLong),1,_file);
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
@@ -17935,16 +18404,51 @@ public class Core {
       double inClose,
       int *outInteger )
    {
+      int i1;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         ( _state.value .memory+_cur_idx).value .inClose = inClose ;
-         return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .EqualPeriodTotal = 0.;
+         _state.value .BodyLongPeriodTotal = 0.;
+         _state.value .periodBodyLong = (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) ;
+         _state.value .periodEqual = (this.candleSettings[CandleSettingType.Equal.ordinal()].avgPeriod) ;
+         _state.value .gapEqual = _state.value .mem_size - _state.value .periodEqual;
+         _state.value .gapBodyLong = _state.value .mem_size - _state.value .periodBodyLong;
+      }
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         if( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? 1 : -1 ) == -1 &&
+            ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) > ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) != 0.0? _state.value .BodyLongPeriodTotal / (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( inClose >= inOpen ? 1 : -1 ) == 1 &&
+            inOpen < ( _state.value .memory+i1).value .inLow &&
+            inClose <= ( _state.value .memory+i1).value .inLow + ( (this.candleSettings[CandleSettingType.Equal.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.Equal.ordinal()].avgPeriod) != 0.0? _state.value .EqualPeriodTotal / (this.candleSettings[CandleSettingType.Equal.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            inClose >= ( _state.value .memory+i1).value .inLow - ( (this.candleSettings[CandleSettingType.Equal.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.Equal.ordinal()].avgPeriod) != 0.0? _state.value .EqualPeriodTotal / (this.candleSettings[CandleSettingType.Equal.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) )
+            )
+            outInteger.value = -100;
+         else
+            outInteger.value = 0;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .gapEqual)
+      {
+         _state.value .EqualPeriodTotal += ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .gapBodyLong)
+      {
+         _state.value .BodyLongPeriodTotal += ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ;
+      }
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         _state.value .EqualPeriodTotal -= ( - _state.value .periodEqual -1!=0?( ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+         _state.value .BodyLongPeriodTotal -= ( - _state.value .periodBodyLong -1!=0?( ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+      }
+      ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
+      ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
+      ( _state.value .memory+_cur_idx).value .inLow = inLow ;
+      ( _state.value .memory+_cur_idx).value .inClose = inClose ;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
    public int cdlOnNeckStateFree( struct TA_cdlOnNeck_State** _state )
@@ -17973,6 +18477,18 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLONNECK_Data), _state.value .mem_size,_file);
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .EqualPeriodTotal,sizeof( _state.value .EqualPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodEqual,sizeof( _state.value .periodEqual),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapEqual,sizeof( _state.value .gapEqual),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyLongPeriodTotal,sizeof( _state.value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyLong,sizeof( _state.value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyLong,sizeof( _state.value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public int cdlOnNeckStateLoad( struct TA_cdlOnNeck_State** _state,
@@ -17994,6 +18510,18 @@ public class Core {
       if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLONNECK_Data));
          io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLONNECK_Data), _state.value .value .mem_size,_file);
          if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .EqualPeriodTotal,sizeof( _state.value .value .EqualPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodEqual,sizeof( _state.value .value .periodEqual),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapEqual,sizeof( _state.value .value .gapEqual),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyLongPeriodTotal,sizeof( _state.value .value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyLong,sizeof( _state.value .value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyLong,sizeof( _state.value .value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public RetCode cdlOnNeck( int startIdx,
@@ -18144,16 +18672,48 @@ public class Core {
       double inClose,
       int *outInteger )
    {
+      int i1;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         ( _state.value .memory+_cur_idx).value .inClose = inClose ;
-         return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .BodyLongPeriodTotal0 = 0.;
+         _state.value .BodyLongPeriodTotal1 = 0.;
+         _state.value .periodBodyLong = (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) ;
+         _state.value .gapBodyLong = _state.value .mem_size - _state.value .periodBodyLong;
+      }
+      i1 = (( _state.value .mem_index-1+-1)% _state.value .mem_size ) ;
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         if( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? 1 : -1 ) == -1 &&
+            ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) > ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) != 0.0? _state.value .BodyLongPeriodTotal1 / (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( inClose >= inOpen ? 1 : -1 ) == 1 &&
+            ( Math.abs ( inClose - inOpen ) ) > ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) != 0.0? _state.value .BodyLongPeriodTotal0 / (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            inOpen < ( _state.value .memory+i1).value .inLow &&
+            inClose < ( _state.value .memory+i1).value .inOpen &&
+            inClose > ( _state.value .memory+i1).value .inClose + ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) * 0.5
+            )
+            outInteger.value = 100;
+         else
+            outInteger.value = 0;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .gapBodyLong)
+      {
+         _state.value .BodyLongPeriodTotal0 += ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ;
+         _state.value .BodyLongPeriodTotal1 += ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ;
+      }
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         _state.value .BodyLongPeriodTotal0 -= ( - _state.value .periodBodyLong!=0?( ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+         _state.value .BodyLongPeriodTotal1 -= ( - _state.value .periodBodyLong -1!=0?( ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong -1)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+      }
+      ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
+      ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
+      ( _state.value .memory+_cur_idx).value .inLow = inLow ;
+      ( _state.value .memory+_cur_idx).value .inClose = inClose ;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
    public int cdlPiercingStateFree( struct TA_cdlPiercing_State** _state )
@@ -18182,6 +18742,14 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLPIERCING_Data), _state.value .mem_size,_file);
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .BodyLongPeriodTotal0,sizeof( _state.value .BodyLongPeriodTotal0),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyLongPeriodTotal1,sizeof( _state.value .BodyLongPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyLong,sizeof( _state.value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyLong,sizeof( _state.value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public int cdlPiercingStateLoad( struct TA_cdlPiercing_State** _state,
@@ -18203,6 +18771,14 @@ public class Core {
       if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLPIERCING_Data));
          io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLPIERCING_Data), _state.value .value .mem_size,_file);
          if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .BodyLongPeriodTotal0,sizeof( _state.value .value .BodyLongPeriodTotal0),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyLongPeriodTotal1,sizeof( _state.value .value .BodyLongPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyLong,sizeof( _state.value .value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyLong,sizeof( _state.value .value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public RetCode cdlPiercing( int startIdx,
@@ -18368,12 +18944,58 @@ public class Core {
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         ( _state.value .memory+_cur_idx).value .inClose = inClose ;
-         return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .BodyDojiPeriodTotal = 0.;
+         _state.value .ShadowLongPeriodTotal = 0.;
+         _state.value .NearPeriodTotal = 0.;
+         _state.value .periodBodyDoji = (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].avgPeriod) ;
+         _state.value .periodShadowLong = (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].avgPeriod) ;
+         _state.value .periodNear = (this.candleSettings[CandleSettingType.Near.ordinal()].avgPeriod) ;
+         _state.value .gapBodyDoji = _state.value .mem_size - _state.value .periodBodyDoji;
+         _state.value .gapShadowLong = _state.value .mem_size - _state.value .periodShadowLong;
+         _state.value .gapNear = _state.value .mem_size - _state.value .periodNear;
+      }
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         if( ( Math.abs ( inClose - inOpen ) ) <= ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].avgPeriod) != 0.0? _state.value .BodyDojiPeriodTotal / (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) > ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].avgPeriod) != 0.0? _state.value .ShadowLongPeriodTotal / (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) > ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].avgPeriod) != 0.0? _state.value .ShadowLongPeriodTotal / (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            (
+            (((inOpen) < (inClose)) ? (inOpen) : (inClose))
+            <= inLow + ( inHigh - inLow ) / 2 + ( (this.candleSettings[CandleSettingType.Near.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.Near.ordinal()].avgPeriod) != 0.0? _state.value .NearPeriodTotal / (this.candleSettings[CandleSettingType.Near.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) )
+            &&
+            (((inOpen) > (inClose)) ? (inOpen) : (inClose))
+            >= inLow + ( inHigh - inLow ) / 2 - ( (this.candleSettings[CandleSettingType.Near.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.Near.ordinal()].avgPeriod) != 0.0? _state.value .NearPeriodTotal / (this.candleSettings[CandleSettingType.Near.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) )
+            )
+            )
+            outInteger.value = 100;
+         else
+            outInteger.value = 0;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .gapBodyDoji)
+      {
+         _state.value .BodyDojiPeriodTotal += ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .gapShadowLong)
+      {
+         _state.value .ShadowLongPeriodTotal += ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .gapNear)
+      {
+         _state.value .NearPeriodTotal += ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ;
+      }
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         _state.value .BodyDojiPeriodTotal -= ( - _state.value .periodBodyDoji!=0?( ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyDoji)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyDoji)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyDoji)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyDoji)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyDoji)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyDoji)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyDoji)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyDoji)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyDoji)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyDoji)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyDoji)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyDoji)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyDoji)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyDoji)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyDoji.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+         _state.value .ShadowLongPeriodTotal -= ( - _state.value .periodShadowLong!=0?( ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+         _state.value .NearPeriodTotal -= ( - _state.value .periodNear!=0?( ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodNear)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodNear)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodNear)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodNear)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodNear)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodNear)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodNear)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodNear)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodNear)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodNear)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodNear)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodNear)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodNear)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodNear)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.Near.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+      }
+      ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
+      ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
+      ( _state.value .memory+_cur_idx).value .inLow = inLow ;
+      ( _state.value .memory+_cur_idx).value .inClose = inClose ;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
    public int cdlRickshawManStateFree( struct TA_cdlRickshawMan_State** _state )
@@ -18402,6 +19024,24 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLRICKSHAWMAN_Data), _state.value .mem_size,_file);
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .BodyDojiPeriodTotal,sizeof( _state.value .BodyDojiPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowLongPeriodTotal,sizeof( _state.value .ShadowLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .NearPeriodTotal,sizeof( _state.value .NearPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyDoji,sizeof( _state.value .periodBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowLong,sizeof( _state.value .periodShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodNear,sizeof( _state.value .periodNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyDoji,sizeof( _state.value .gapBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadowLong,sizeof( _state.value .gapShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapNear,sizeof( _state.value .gapNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public int cdlRickshawManStateLoad( struct TA_cdlRickshawMan_State** _state,
@@ -18423,6 +19063,24 @@ public class Core {
       if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLRICKSHAWMAN_Data));
          io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLRICKSHAWMAN_Data), _state.value .value .mem_size,_file);
          if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .BodyDojiPeriodTotal,sizeof( _state.value .value .BodyDojiPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowLongPeriodTotal,sizeof( _state.value .value .ShadowLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .NearPeriodTotal,sizeof( _state.value .value .NearPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyDoji,sizeof( _state.value .value .periodBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowLong,sizeof( _state.value .value .periodShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodNear,sizeof( _state.value .value .periodNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyDoji,sizeof( _state.value .value .gapBodyDoji),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadowLong,sizeof( _state.value .value .gapShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapNear,sizeof( _state.value .value .gapNear),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public RetCode cdlRickshawMan( int startIdx,
@@ -18608,16 +19266,75 @@ public class Core {
       double inClose,
       int *outInteger )
    {
+      int i1, i2, i3, i4;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         ( _state.value .memory+_cur_idx).value .inClose = inClose ;
-         return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .BodyPeriodTotal0 = 0.;
+         _state.value .BodyPeriodTotal1 = 0.;
+         _state.value .BodyPeriodTotal2 = 0.;
+         _state.value .BodyPeriodTotal3 = 0.;
+         _state.value .BodyPeriodTotal4 = 0.;
+         _state.value .periodBodyShort = (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) ;
+         _state.value .gapBodyShort = _state.value .mem_size - _state.value .periodBodyShort;
+         _state.value .periodBodyLong = (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) ;
+         _state.value .gapBodyLong = _state.value .mem_size - _state.value .periodBodyLong;
+      }
+      i1 = (( _state.value .mem_index-1+-1)% _state.value .mem_size ) ;
+      i2 = (( _state.value .mem_index-1+-2)% _state.value .mem_size ) ;
+      i3 = (( _state.value .mem_index-1+-3)% _state.value .mem_size ) ;
+      i4 = (( _state.value .mem_index-1+-4)% _state.value .mem_size ) ;
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         if(
+            ( Math.abs ( ( _state.value .memory+i4).value .inClose - ( _state.value .memory+i4).value .inOpen ) ) > ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) != 0.0? _state.value .BodyPeriodTotal4 / (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i4).value .inClose - ( _state.value .memory+i4).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i4).value .inHigh - ( _state.value .memory+i4).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i4).value .inHigh - ( ( _state.value .memory+i4).value .inClose >= ( _state.value .memory+i4).value .inOpen ? ( _state.value .memory+i4).value .inClose : ( _state.value .memory+i4).value .inOpen ) ) + ( ( ( _state.value .memory+i4).value .inClose >= ( _state.value .memory+i4).value .inOpen ? ( _state.value .memory+i4).value .inOpen : ( _state.value .memory+i4).value .inClose ) - ( _state.value .memory+i4).value .inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( Math.abs ( ( _state.value .memory+i3).value .inClose - ( _state.value .memory+i3).value .inOpen ) ) < ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) != 0.0? _state.value .BodyPeriodTotal3 / (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i3).value .inClose - ( _state.value .memory+i3).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i3).value .inHigh - ( _state.value .memory+i3).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i3).value .inHigh - ( ( _state.value .memory+i3).value .inClose >= ( _state.value .memory+i3).value .inOpen ? ( _state.value .memory+i3).value .inClose : ( _state.value .memory+i3).value .inOpen ) ) + ( ( ( _state.value .memory+i3).value .inClose >= ( _state.value .memory+i3).value .inOpen ? ( _state.value .memory+i3).value .inOpen : ( _state.value .memory+i3).value .inClose ) - ( _state.value .memory+i3).value .inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( Math.abs ( ( _state.value .memory+i2).value .inClose - ( _state.value .memory+i2).value .inOpen ) ) < ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) != 0.0? _state.value .BodyPeriodTotal2 / (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i2).value .inClose - ( _state.value .memory+i2).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i2).value .inHigh - ( _state.value .memory+i2).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i2).value .inHigh - ( ( _state.value .memory+i2).value .inClose >= ( _state.value .memory+i2).value .inOpen ? ( _state.value .memory+i2).value .inClose : ( _state.value .memory+i2).value .inOpen ) ) + ( ( ( _state.value .memory+i2).value .inClose >= ( _state.value .memory+i2).value .inOpen ? ( _state.value .memory+i2).value .inOpen : ( _state.value .memory+i2).value .inClose ) - ( _state.value .memory+i2).value .inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) < ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) != 0.0? _state.value .BodyPeriodTotal1 / (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( Math.abs ( inClose - inOpen ) ) > ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) != 0.0? _state.value .BodyPeriodTotal0 / (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( ( _state.value .memory+i4).value .inClose >= ( _state.value .memory+i4).value .inOpen ? 1 : -1 ) == - ( ( _state.value .memory+i3).value .inClose >= ( _state.value .memory+i3).value .inOpen ? 1 : -1 ) &&
+            ( ( _state.value .memory+i3).value .inClose >= ( _state.value .memory+i3).value .inOpen ? 1 : -1 ) == ( ( _state.value .memory+i2).value .inClose >= ( _state.value .memory+i2).value .inOpen ? 1 : -1 ) &&
+            ( ( _state.value .memory+i2).value .inClose >= ( _state.value .memory+i2).value .inOpen ? 1 : -1 ) == ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? 1 : -1 ) &&
+            ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? 1 : -1 ) == - ( inClose >= inOpen ? 1 : -1 ) &&
+            ((( ( _state.value .memory+i3).value .inOpen ) < ( ( _state.value .memory+i3).value .inClose )) ? ( ( _state.value .memory+i3).value .inOpen ) : ( ( _state.value .memory+i3).value .inClose )) < ( _state.value .memory+i4).value .inHigh && ((( ( _state.value .memory+i3).value .inOpen ) > ( ( _state.value .memory+i3).value .inClose )) ? ( ( _state.value .memory+i3).value .inOpen ) : ( ( _state.value .memory+i3).value .inClose )) > ( _state.value .memory+i4).value .inLow &&
+            ((( ( _state.value .memory+i2).value .inOpen ) < ( ( _state.value .memory+i2).value .inClose )) ? ( ( _state.value .memory+i2).value .inOpen ) : ( ( _state.value .memory+i2).value .inClose )) < ( _state.value .memory+i4).value .inHigh && ((( ( _state.value .memory+i2).value .inOpen ) > ( ( _state.value .memory+i2).value .inClose )) ? ( ( _state.value .memory+i2).value .inOpen ) : ( ( _state.value .memory+i2).value .inClose )) > ( _state.value .memory+i4).value .inLow &&
+            ((( ( _state.value .memory+i1).value .inOpen ) < ( ( _state.value .memory+i1).value .inClose )) ? ( ( _state.value .memory+i1).value .inOpen ) : ( ( _state.value .memory+i1).value .inClose )) < ( _state.value .memory+i4).value .inHigh && ((( ( _state.value .memory+i1).value .inOpen ) > ( ( _state.value .memory+i1).value .inClose )) ? ( ( _state.value .memory+i1).value .inOpen ) : ( ( _state.value .memory+i1).value .inClose )) > ( _state.value .memory+i4).value .inLow &&
+            ( _state.value .memory+i2).value .inClose * ( ( _state.value .memory+i4).value .inClose >= ( _state.value .memory+i4).value .inOpen ? 1 : -1 ) < ( _state.value .memory+i3).value .inClose * ( ( _state.value .memory+i4).value .inClose >= ( _state.value .memory+i4).value .inOpen ? 1 : -1 ) &&
+            ( _state.value .memory+i1).value .inClose * ( ( _state.value .memory+i4).value .inClose >= ( _state.value .memory+i4).value .inOpen ? 1 : -1 ) < ( _state.value .memory+i2).value .inClose * ( ( _state.value .memory+i4).value .inClose >= ( _state.value .memory+i4).value .inOpen ? 1 : -1 ) &&
+            inOpen * ( ( _state.value .memory+i4).value .inClose >= ( _state.value .memory+i4).value .inOpen ? 1 : -1 ) > ( _state.value .memory+i1).value .inClose * ( ( _state.value .memory+i4).value .inClose >= ( _state.value .memory+i4).value .inOpen ? 1 : -1 ) &&
+            inClose * ( ( _state.value .memory+i4).value .inClose >= ( _state.value .memory+i4).value .inOpen ? 1 : -1 ) > ( _state.value .memory+i4).value .inClose * ( ( _state.value .memory+i4).value .inClose >= ( _state.value .memory+i4).value .inOpen ? 1 : -1 )
+            )
+            outInteger.value = 100 * ( ( _state.value .memory+i4).value .inClose >= ( _state.value .memory+i4).value .inOpen ? 1 : -1 ) ;
+         else
+            outInteger.value = 0;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .periodBodyShort)
+      {
+         _state.value .BodyPeriodTotal1 += ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ;
+         _state.value .BodyPeriodTotal2 += ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i2).value .inClose - ( _state.value .memory+i2).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i2).value .inHigh - ( _state.value .memory+i2).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i2).value .inHigh - ( ( _state.value .memory+i2).value .inClose >= ( _state.value .memory+i2).value .inOpen ? ( _state.value .memory+i2).value .inClose : ( _state.value .memory+i2).value .inOpen ) ) + ( ( ( _state.value .memory+i2).value .inClose >= ( _state.value .memory+i2).value .inOpen ? ( _state.value .memory+i2).value .inOpen : ( _state.value .memory+i2).value .inClose ) - ( _state.value .memory+i2).value .inLow ) : 0 ) ) ) ;
+         _state.value .BodyPeriodTotal3 += ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i3).value .inClose - ( _state.value .memory+i3).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i3).value .inHigh - ( _state.value .memory+i3).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i3).value .inHigh - ( ( _state.value .memory+i3).value .inClose >= ( _state.value .memory+i3).value .inOpen ? ( _state.value .memory+i3).value .inClose : ( _state.value .memory+i3).value .inOpen ) ) + ( ( ( _state.value .memory+i3).value .inClose >= ( _state.value .memory+i3).value .inOpen ? ( _state.value .memory+i3).value .inOpen : ( _state.value .memory+i3).value .inClose ) - ( _state.value .memory+i3).value .inLow ) : 0 ) ) ) ;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .periodBodyLong)
+      {
+         _state.value .BodyPeriodTotal4 += ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i4).value .inClose - ( _state.value .memory+i4).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i4).value .inHigh - ( _state.value .memory+i4).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i4).value .inHigh - ( ( _state.value .memory+i4).value .inClose >= ( _state.value .memory+i4).value .inOpen ? ( _state.value .memory+i4).value .inClose : ( _state.value .memory+i4).value .inOpen ) ) + ( ( ( _state.value .memory+i4).value .inClose >= ( _state.value .memory+i4).value .inOpen ? ( _state.value .memory+i4).value .inOpen : ( _state.value .memory+i4).value .inClose ) - ( _state.value .memory+i4).value .inLow ) : 0 ) ) ) ;
+         _state.value .BodyPeriodTotal0 += ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ;
+      }
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         _state.value .BodyPeriodTotal1 -= ( - _state.value .periodBodyShort-1!=0?( ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-1)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+         _state.value .BodyPeriodTotal2 -= ( - _state.value .periodBodyShort-2!=0?( ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-2)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+         _state.value .BodyPeriodTotal3 -= ( - _state.value .periodBodyShort-3!=0?( ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyShort-3)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+         _state.value .BodyPeriodTotal4 -= ( - _state.value .periodBodyLong-4!=0?( ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong-4)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+         _state.value .BodyPeriodTotal0 -= ( - _state.value .periodBodyLong!=0?( ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+      }
+      ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
+      ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
+      ( _state.value .memory+_cur_idx).value .inLow = inLow ;
+      ( _state.value .memory+_cur_idx).value .inClose = inClose ;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
    public int cdlRiseFall3MethodsStateFree( struct TA_cdlRiseFall3Methods_State** _state )
@@ -18646,6 +19363,24 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLRISEFALL3METHODS_Data), _state.value .mem_size,_file);
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .BodyPeriodTotal0,sizeof( _state.value .BodyPeriodTotal0),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyPeriodTotal1,sizeof( _state.value .BodyPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyPeriodTotal2,sizeof( _state.value .BodyPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyPeriodTotal3,sizeof( _state.value .BodyPeriodTotal3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyPeriodTotal4,sizeof( _state.value .BodyPeriodTotal4),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyShort,sizeof( _state.value .periodBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyShort,sizeof( _state.value .gapBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyLong,sizeof( _state.value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyLong,sizeof( _state.value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public int cdlRiseFall3MethodsStateLoad( struct TA_cdlRiseFall3Methods_State** _state,
@@ -18667,6 +19402,24 @@ public class Core {
       if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLRISEFALL3METHODS_Data));
          io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLRISEFALL3METHODS_Data), _state.value .value .mem_size,_file);
          if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .BodyPeriodTotal0,sizeof( _state.value .value .BodyPeriodTotal0),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyPeriodTotal1,sizeof( _state.value .value .BodyPeriodTotal1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyPeriodTotal2,sizeof( _state.value .value .BodyPeriodTotal2),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyPeriodTotal3,sizeof( _state.value .value .BodyPeriodTotal3),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyPeriodTotal4,sizeof( _state.value .value .BodyPeriodTotal4),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyShort,sizeof( _state.value .value .periodBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyShort,sizeof( _state.value .value .gapBodyShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyLong,sizeof( _state.value .value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyLong,sizeof( _state.value .value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public RetCode cdlRiseFall3Methods( int startIdx,
@@ -18858,16 +19611,70 @@ public class Core {
       double inClose,
       int *outInteger )
    {
+      int i1;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .ShadowVeryShortPeriodTotal = 0.;
+         _state.value .BodyLongPeriodTotal = 0.;
+         _state.value .EqualPeriodTotal = 0.;
+         _state.value .periodShadowVeryShort = (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) ;
+         _state.value .periodBodyLong = (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) ;
+         _state.value .periodEqual = (this.candleSettings[CandleSettingType.Equal.ordinal()].avgPeriod) ;
+         _state.value .gapShadowVeryShort = _state.value .mem_size - _state.value .periodShadowVeryShort;
+         _state.value .gapBodyLong = _state.value .mem_size - _state.value .periodBodyLong;
+         _state.value .gapEqual = _state.value .mem_size - _state.value .periodEqual;
+      }
+      i1 = (( _state.value .mem_index-1+-1)% _state.value .mem_size ) ;
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         if( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? 1 : -1 ) == - ( inClose >= inOpen ? 1 : -1 ) &&
+            inOpen <= ( _state.value .memory+i1).value .inOpen + ( (this.candleSettings[CandleSettingType.Equal.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.Equal.ordinal()].avgPeriod) != 0.0? _state.value .EqualPeriodTotal / (this.candleSettings[CandleSettingType.Equal.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            inOpen >= ( _state.value .memory+i1).value .inOpen - ( (this.candleSettings[CandleSettingType.Equal.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.Equal.ordinal()].avgPeriod) != 0.0? _state.value .EqualPeriodTotal / (this.candleSettings[CandleSettingType.Equal.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( Math.abs ( inClose - inOpen ) ) > ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) != 0.0? _state.value .BodyLongPeriodTotal / (this.candleSettings[CandleSettingType.BodyLong.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            (
+            ( ( inClose >= inOpen ? 1 : -1 ) == 1 &&
+            ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) < ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) != 0.0? _state.value .ShadowVeryShortPeriodTotal / (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) )
+            )
+            ||
+            ( ( inClose >= inOpen ? 1 : -1 ) == -1 &&
+            ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) < ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) != 0.0? _state.value .ShadowVeryShortPeriodTotal / (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) )
+            )
+            )
+            )
+            outInteger.value = ( inClose >= inOpen ? 1 : -1 ) * 100;
+         else
+            outInteger.value = 0;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .gapShadowVeryShort)
+      {
+         _state.value .ShadowVeryShortPeriodTotal += ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .gapBodyLong)
+      {
+         _state.value .BodyLongPeriodTotal += ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .gapEqual)
+      {
+         _state.value .EqualPeriodTotal += ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+i1).value .inClose - ( _state.value .memory+i1).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+i1).value .inHigh - ( _state.value .memory+i1).value .inLow ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+i1).value .inHigh - ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inClose : ( _state.value .memory+i1).value .inOpen ) ) + ( ( ( _state.value .memory+i1).value .inClose >= ( _state.value .memory+i1).value .inOpen ? ( _state.value .memory+i1).value .inOpen : ( _state.value .memory+i1).value .inClose ) - ( _state.value .memory+i1).value .inLow ) : 0 ) ) ) ;
+      }
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         _state.value .ShadowVeryShortPeriodTotal -= ( - _state.value .periodShadowVeryShort!=0?( ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+         _state.value .BodyLongPeriodTotal -= ( - _state.value .periodBodyLong!=0?( ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBodyLong)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+         _state.value .EqualPeriodTotal -= ( - _state.value .periodEqual -1!=0?( ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodEqual -1)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.Equal.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+      }
+      if ( _state.value .mem_size > 0)
+      {
          ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
          ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
          ( _state.value .memory+_cur_idx).value .inLow = inLow ;
          ( _state.value .memory+_cur_idx).value .inClose = inClose ;
-         return RetCode.NeedMoreData ; }
+      }
+      if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
    public int cdlSeperatingLinesStateFree( struct TA_cdlSeperatingLines_State** _state )
@@ -18896,6 +19703,24 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLSEPARATINGLINES_Data), _state.value .mem_size,_file);
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal,sizeof( _state.value .ShadowVeryShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyLongPeriodTotal,sizeof( _state.value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .EqualPeriodTotal,sizeof( _state.value .EqualPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadowVeryShort,sizeof( _state.value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowVeryShort,sizeof( _state.value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBodyLong,sizeof( _state.value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBodyLong,sizeof( _state.value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapEqual,sizeof( _state.value .gapEqual),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodEqual,sizeof( _state.value .periodEqual),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public int cdlSeperatingLinesStateLoad( struct TA_cdlSeperatingLines_State** _state,
@@ -18917,6 +19742,24 @@ public class Core {
       if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLSEPARATINGLINES_Data));
          io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLSEPARATINGLINES_Data), _state.value .value .mem_size,_file);
          if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal,sizeof( _state.value .value .ShadowVeryShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyLongPeriodTotal,sizeof( _state.value .value .BodyLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .EqualPeriodTotal,sizeof( _state.value .value .EqualPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadowVeryShort,sizeof( _state.value .value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowVeryShort,sizeof( _state.value .value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBodyLong,sizeof( _state.value .value .gapBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBodyLong,sizeof( _state.value .value .periodBodyLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapEqual,sizeof( _state.value .value .gapEqual),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodEqual,sizeof( _state.value .value .periodEqual),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public RetCode cdlSeperatingLines( int startIdx,
@@ -19096,16 +19939,57 @@ public class Core {
       double inClose,
       int *outInteger )
    {
+      int i1;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         ( _state.value .memory+_cur_idx).value .inClose = inClose ;
-         return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .BodyPeriodTotal = 0.;
+         _state.value .ShadowLongPeriodTotal = 0.;
+         _state.value .ShadowVeryShortPeriodTotal = 0.;
+         _state.value .periodBody = (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) ;
+         _state.value .periodShadowLong = (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].avgPeriod) ;
+         _state.value .periodShadowVeryShort = (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) ;
+         _state.value .gapBody = _state.value .mem_size - _state.value .periodBody;
+         _state.value .gapShadowLong = _state.value .mem_size - _state.value .periodShadowLong;
+         _state.value .gapShadowVeryShort = _state.value .mem_size - _state.value .periodShadowVeryShort;
+      }
+      i1 = (( _state.value .mem_index-1+-1)% _state.value .mem_size ) ;
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         if( ( Math.abs ( inClose - inOpen ) ) < ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) != 0.0? _state.value .BodyPeriodTotal / (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) > ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].avgPeriod) != 0.0? _state.value .ShadowLongPeriodTotal / (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) < ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) != 0.0? _state.value .ShadowVeryShortPeriodTotal / (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( (((inOpen) < (inClose)) ? (inOpen) : (inClose)) > ((( ( _state.value .memory+i1).value .inOpen ) > ( ( _state.value .memory+i1).value .inClose )) ? ( ( _state.value .memory+i1).value .inOpen ) : ( ( _state.value .memory+i1).value .inClose )) ) )
+            outInteger.value = -100;
+         else
+            outInteger.value = 0;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .gapBody)
+      {
+         _state.value .BodyPeriodTotal += ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .gapShadowLong)
+      {
+         _state.value .ShadowLongPeriodTotal += ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .gapShadowVeryShort)
+      {
+         _state.value .ShadowVeryShortPeriodTotal += ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ;
+      }
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         _state.value .ShadowLongPeriodTotal -= ( - _state.value .periodShadowLong!=0?( ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowLong)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowLong.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+         _state.value .ShadowVeryShortPeriodTotal -= ( - _state.value .periodShadowVeryShort!=0?( ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadowVeryShort)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowVeryShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+         _state.value .BodyPeriodTotal -= ( - _state.value .periodBody!=0?( ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+      }
+      ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
+      ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
+      ( _state.value .memory+_cur_idx).value .inLow = inLow ;
+      ( _state.value .memory+_cur_idx).value .inClose = inClose ;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
    public int cdlShootingStarStateFree( struct TA_cdlShootingStar_State** _state )
@@ -19134,6 +20018,24 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLSHOOTINGSTAR_Data), _state.value .mem_size,_file);
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .BodyPeriodTotal,sizeof( _state.value .BodyPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowLongPeriodTotal,sizeof( _state.value .ShadowLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .ShadowVeryShortPeriodTotal,sizeof( _state.value .ShadowVeryShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBody,sizeof( _state.value .periodBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowLong,sizeof( _state.value .periodShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadowVeryShort,sizeof( _state.value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBody,sizeof( _state.value .gapBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadowLong,sizeof( _state.value .gapShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadowVeryShort,sizeof( _state.value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public int cdlShootingStarStateLoad( struct TA_cdlShootingStar_State** _state,
@@ -19155,6 +20057,24 @@ public class Core {
       if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLSHOOTINGSTAR_Data));
          io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLSHOOTINGSTAR_Data), _state.value .value .mem_size,_file);
          if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .BodyPeriodTotal,sizeof( _state.value .value .BodyPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowLongPeriodTotal,sizeof( _state.value .value .ShadowLongPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .ShadowVeryShortPeriodTotal,sizeof( _state.value .value .ShadowVeryShortPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBody,sizeof( _state.value .value .periodBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowLong,sizeof( _state.value .value .periodShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadowVeryShort,sizeof( _state.value .value .periodShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBody,sizeof( _state.value .value .gapBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadowLong,sizeof( _state.value .value .gapShadowLong),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadowVeryShort,sizeof( _state.value .value .gapShadowVeryShort),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public RetCode cdlShootingStar( int startIdx,
@@ -19315,12 +20235,42 @@ public class Core {
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
-         ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
-         ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
-         ( _state.value .memory+_cur_idx).value .inLow = inLow ;
-         ( _state.value .memory+_cur_idx).value .inClose = inClose ;
-         return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .BodyPeriodTotal = 0.;
+         _state.value .ShadowPeriodTotal = 0.;
+         _state.value .periodBody = (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) ;
+         _state.value .periodShadow = (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].avgPeriod) ;
+         _state.value .gapShadow = _state.value .mem_size - _state.value .periodShadow;
+         _state.value .gapBody = _state.value .mem_size - _state.value .periodBody;
+      }
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         if( ( Math.abs ( inClose - inOpen ) ) < ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) != 0.0? _state.value .BodyPeriodTotal / (this.candleSettings[CandleSettingType.BodyShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) < ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].avgPeriod) != 0.0? _state.value .ShadowPeriodTotal / (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) &&
+            ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) < ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].factor) * ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].avgPeriod) != 0.0? _state.value .ShadowPeriodTotal / (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].avgPeriod) : ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) / ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.Shadows ? 2.0 : 1.0 ) ) )
+            outInteger.value = ( inClose >= inOpen ? 1 : -1 ) * 100;
+         else
+            outInteger.value = 0;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .gapShadow)
+      {
+         _state.value .ShadowPeriodTotal += ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ;
+      }
+      if ((int) _state.value .mem_index-1 >= _state.value .gapBody)
+      {
+         _state.value .BodyPeriodTotal += ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ;
+      }
+      if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+      {
+         _state.value .ShadowPeriodTotal -= ( - _state.value .periodShadow!=0?( ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodShadow)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.ShadowShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+         _state.value .BodyPeriodTotal -= ( - _state.value .periodBody!=0?( ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inHigh - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inHigh - ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen ) ) + ( ( ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose >= ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen ? ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inOpen : ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inClose ) - ( _state.value .memory+(( _state.value .mem_index-1+- _state.value .periodBody)% _state.value .mem_size ) ).value .inLow ) : 0 ) ) ) ):( ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.RealBody ? ( Math.abs ( inClose - inOpen ) ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.HighLow ? ( inHigh - inLow ) : ( (this.candleSettings[CandleSettingType.BodyShort.ordinal()].rangeType) == RangeType.Shadows ? ( inHigh - ( inClose >= inOpen ? inClose : inOpen ) ) + ( ( inClose >= inOpen ? inOpen : inClose ) - inLow ) : 0 ) ) ) ) ) ;
+      }
+      ( _state.value .memory+_cur_idx).value .inOpen = inOpen ;
+      ( _state.value .memory+_cur_idx).value .inHigh = inHigh ;
+      ( _state.value .memory+_cur_idx).value .inLow = inLow ;
+      ( _state.value .memory+_cur_idx).value .inClose = inClose ;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
    public int cdlShortLineStateFree( struct TA_cdlShortLine_State** _state )
@@ -19349,6 +20299,18 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLSHORTLINE_Data), _state.value .mem_size,_file);
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .ShadowPeriodTotal,sizeof( _state.value .ShadowPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodShadow,sizeof( _state.value .periodShadow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapShadow,sizeof( _state.value .gapShadow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .BodyPeriodTotal,sizeof( _state.value .BodyPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBody,sizeof( _state.value .periodBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBody,sizeof( _state.value .gapBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public int cdlShortLineStateLoad( struct TA_cdlShortLine_State** _state,
@@ -19370,6 +20332,18 @@ public class Core {
       if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLSHORTLINE_Data));
          io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLSHORTLINE_Data), _state.value .value .mem_size,_file);
          if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .ShadowPeriodTotal,sizeof( _state.value .value .ShadowPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodShadow,sizeof( _state.value .value .periodShadow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapShadow,sizeof( _state.value .value .gapShadow),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .BodyPeriodTotal,sizeof( _state.value .value .BodyPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBody,sizeof( _state.value .value .periodBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBody,sizeof( _state.value .value .gapBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public RetCode cdlShortLine( int startIdx,
@@ -19543,6 +20517,12 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_CDLSPINNINGTOP_Data), _state.value .mem_size,_file);
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .BodyPeriodTotal,sizeof( _state.value .BodyPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .periodBody,sizeof( _state.value .periodBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .gapBody,sizeof( _state.value .gapBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public int cdlSpinningTopStateLoad( struct TA_cdlSpinningTop_State** _state,
@@ -19564,6 +20544,12 @@ public class Core {
       if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_CDLSPINNINGTOP_Data));
          io_res = fread( _state.value .value .memory,sizeof(struct TA_CDLSPINNINGTOP_Data), _state.value .value .mem_size,_file);
          if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .BodyPeriodTotal,sizeof( _state.value .value .BodyPeriodTotal),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .periodBody,sizeof( _state.value .value .periodBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .gapBody,sizeof( _state.value .value .gapBody),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public RetCode cdlSpinningTop( int startIdx,
@@ -22259,9 +23245,9 @@ public class Core {
          _state.value .sumX2 = 0.0;
          _state.value .sumY2 = 0.0;
       }
+      { _state.value .sumX += 1*inReal0; _state.value .sumX2 += 1*inReal0*inReal0; _state.value .sumXY += 1*inReal0*inReal1; _state.value .sumY += 1*inReal1; _state.value .sumY2 += 1*inReal1*inReal1; }
       if ( _state.value .mem_size > _state.value .mem_index - 1 )
       {
-         { _state.value .sumX += 1*inReal0; _state.value .sumX2 += 1*inReal0*inReal0; _state.value .sumXY += 1*inReal0*inReal1; _state.value .sumY += 1*inReal1; _state.value .sumY2 += 1*inReal1*inReal1; }
          ( _state.value .memory+_cur_idx).value .inReal0 = inReal0 ;
          ( _state.value .memory+_cur_idx).value .inReal1 = inReal1 ;
          return RetCode.NeedMoreData ;
@@ -37162,6 +38148,7 @@ public class Core {
    public int ppoStateSave( struct TA_ppo_State* _state,
       FILE* _file )
    {
+      return TA_APO_StateSave ((struct apo **)_state, _file);
       int io_res; int state_is_null; state_is_null = (_state == NULL);
       io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
       if (io_res < 1) return RetCode.IOFailed ;
@@ -37187,6 +38174,7 @@ public class Core {
    public int ppoStateLoad( struct TA_ppo_State** _state,
       FILE* _file )
    {
+      return TA_APO_StateLoad ((struct apo **)_state, _file);
       int io_res; int state_is_null;
       io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
       if (io_res < 1) return RetCode.IOFailed ;
