@@ -317,7 +317,7 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+int i1,i2;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -351,6 +351,33 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+                i1 = GET_LOCAL_IDX(-1);
+                i2 = GET_LOCAL_IDX(-2);
+
+                   if( TA_CANDLECOLOR_STATE_IDX(i2) == TA_CANDLECOLOR_STATE_IDX(i1) &&                   // 1st and 2nd of same color
+                        TA_CANDLECOLOR_STATE_IDX(i1) == -TA_CANDLECOLOR_STATE_CUR() &&                    // 3rd opposite color
+                        inOpen < max(MEM_IDX_NS(inClose, i1), MEM_IDX_NS(inOpen, i1)) &&                   // 3rd opens within 2nd rb
+                        inOpen > min(MEM_IDX_NS(inClose, i1), MEM_IDX_NS(inOpen, i1)) &&
+                        inClose < max(MEM_IDX_NS(inClose, i2), MEM_IDX_NS(inOpen, i2)) &&                  // 3rd closes within 1st rb
+                        inClose > min(MEM_IDX_NS(inClose, i2), MEM_IDX_NS(inOpen, i2)) &&
+                        ( (
+                            TA_CANDLECOLOR_STATE_IDX(i2) == 1 &&                                 // when 1st is white
+                            TA_REALBODYGAPUP_STATE_IDX(i1,i2)                                   // upside gap
+                          ) ||
+                          (
+                            TA_CANDLECOLOR_STATE_IDX(i2) == -1 &&                                // when 1st is black
+                            TA_REALBODYGAPDOWN_STATE_IDX(i1,i2)                                 // downside gap
+                          )
+                        )
+                    )
+                        VALUE_HANDLE_DEREF(outInteger) = TA_CANDLECOLOR_STATE_IDX(i2) * 100;
+                    else
+                        VALUE_HANDLE_DEREF(outInteger) = 0;
+
+                   PUSH_TO_MEM(inOpen,inOpen);
+                   PUSH_TO_MEM(inHigh,inHigh);
+                   PUSH_TO_MEM(inLow,inLow);
+                   PUSH_TO_MEM(inClose,inClose);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }

@@ -305,7 +305,6 @@
 
    /* insert state init code here. */
 
-
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
@@ -336,7 +335,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+#define TA_CDLTASUKIGAP_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+int i1, i2;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -370,6 +370,64 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+        if (FIRST_LAUNCH)
+           {
+                 STATE.NearPeriodTotal = 0.;
+                 STATE.periodNear = TA_CANDLEAVGPERIOD(Near);
+                 STATE.gapNear = MEM_SIZE - STATE.periodNear;
+           }
+
+        i1 = GET_LOCAL_IDX(-1);
+        i2 = GET_LOCAL_IDX(-2);
+
+        if (!(NEED_MORE_DATA))
+        {
+
+            if(
+                (
+                    TA_REALBODYGAPUP_STATE_IDX(i1,i2) &&                                // upside gap
+                    TA_CANDLECOLOR_STATE_IDX(i1) == 1 &&                                 // 1st: white
+                    TA_CANDLECOLOR_STATE_CUR() == -1 &&                                  // 2nd: black
+                    inOpen < MEM_IDX_NS(inClose, i1) && inOpen > MEM_IDX_NS(inOpen, i1) &&      //      that opens within the white rb
+                    inClose < MEM_IDX_NS(inOpen, i1) &&                                 //      and closes under the white rb
+                    inClose > max(MEM_IDX_NS(inClose, i2), MEM_IDX_NS(inOpen, i2)) &&              //      inside the gap
+                                                                                // size of 2 rb near the same
+                    std_fabs(TA_REALBODY_STATE_IDX(i1) - TA_REALBODY_STATE_CUR()) < TA_CANDLEAVERAGE_STATE_IDX( Near, STATE.NearPeriodTotal, i1 )
+                ) ||
+                (
+                    TA_REALBODYGAPDOWN_STATE_IDX(i1,i2) &&                              // downside gap
+                    TA_CANDLECOLOR_STATE_IDX(i1) == -1 &&                                // 1st: black
+                    TA_CANDLECOLOR_STATE_CUR() == 1 &&                                   // 2nd: white
+                    inOpen < MEM_IDX_NS(inOpen, i1) && inOpen > MEM_IDX_NS(inClose, i1) &&      //      that opens within the black rb
+                    inClose > MEM_IDX_NS(inOpen, i1) &&                                 //      and closes above the black rb
+                    inClose < min(MEM_IDX_NS(inClose, i2), MEM_IDX_NS(inOpen, i2)) &&              //      inside the gap
+                                                                                // size of 2 rb near the same
+                    std_fabs(TA_REALBODY_STATE_IDX(i1) - TA_REALBODY_STATE_CUR()) < TA_CANDLEAVERAGE_STATE_IDX( Near, STATE.NearPeriodTotal, i1 )
+                )
+            )
+                VALUE_HANDLE_DEREF(outInteger) = TA_CANDLECOLOR_STATE_IDX(i1) *  100;
+            else
+                VALUE_HANDLE_DEREF(outInteger) = 0;
+
+        }
+
+
+        if ((int)STATE.mem_index-1 >= STATE.gapNear)
+        {
+          STATE.NearPeriodTotal += TA_CANDLERANGE_STATE_IDX(  Near, i1 );
+        }
+
+        if (!(NEED_MORE_DATA))
+        {
+         STATE.NearPeriodTotal -= TA_CANDLERANGE_STATE( Near, -STATE.periodNear-1 );
+        }
+
+        PUSH_TO_MEM(inOpen,inOpen);
+        PUSH_TO_MEM(inHigh,inHigh);
+        PUSH_TO_MEM(inLow,inLow);
+        PUSH_TO_MEM(inClose,inClose);
+        if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
@@ -446,6 +504,12 @@
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */    if (memory_allocated && STATE.mem_size > 0) { io_res = fwrite(STATE.memory,sizeof(struct TA_CDLTASUKIGAP_Data),STATE.mem_size,_file);
 /* Generated */    if (io_res < (int) STATE.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); }
+/* Generated */    io_res = fwrite(&STATE.NearPeriodTotal,sizeof(STATE.NearPeriodTotal),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.periodNear,sizeof(STATE.periodNear),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.gapNear,sizeof(STATE.gapNear),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -494,6 +558,12 @@
 /* Generated */    if (STATE_P.mem_size > 0 && memory_allocated) { STATE_P.memory = TA_Calloc(STATE_P.mem_size, sizeof(struct TA_CDLTASUKIGAP_Data));
 /* Generated */    io_res = fread(STATE_P.memory,sizeof(struct TA_CDLTASUKIGAP_Data),STATE_P.mem_size,_file);
 /* Generated */    if (io_res < (int) STATE_P.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); } 
+/* Generated */    io_res = fread(&STATE_P.NearPeriodTotal,sizeof(STATE_P.NearPeriodTotal),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.periodNear,sizeof(STATE_P.periodNear),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.gapNear,sizeof(STATE_P.gapNear),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
