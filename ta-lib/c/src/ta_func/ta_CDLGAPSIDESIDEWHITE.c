@@ -387,31 +387,31 @@ int i1,i2;
         {
             if(
                     ( // upside or downside gap between the 1st candle and both the next 2 candles
-                      ( TA_REALBODYGAPUP_STATE(i1,i2) && TA_REALBODYGAPUP_STATE_CUR1(i2) )
+                      ( TA_REALBODYGAPUP_STATE_IDX(i1,i2) && TA_REALBODYGAPUP_STATE_CUR1(i2) )
                       ||
-                      ( TA_REALBODYGAPDOWN_STATE(i1,i2) && TA_REALBODYGAPDOWN_STATE_CUR1(i2) )
+                      ( TA_REALBODYGAPDOWN_STATE_IDX(i1,i2) && TA_REALBODYGAPDOWN_STATE_CUR1(i2) )
                       ) &&
-                    TA_CANDLECOLOR_STATE(i1) == 1 &&                                                                 // 2nd: white
+                    TA_CANDLECOLOR_STATE_IDX(i1) == 1 &&                                                                 // 2nd: white
                     TA_CANDLECOLOR_STATE_CUR() == 1 &&                                                                   // 3rd: white
-                    TA_REALBODY_STATE_CUR() >= TA_REALBODY_STATE(i1) - TA_CANDLEAVERAGE_STATE( Near, STATE.NearPeriodTotal, i1 ) &&   // same size 2 and 3
-                    TA_REALBODY_STATE_CUR() <= TA_REALBODY_STATE(i1) + TA_CANDLEAVERAGE_STATE( Near, STATE.NearPeriodTotal, i1 ) &&
-                    inOpen >= MEM_IDX_NS(inOpen,i1) - TA_CANDLEAVERAGE_STATE( Equal, STATE.EqualPeriodTotal, i1 ) &&           // same open 2 and 3
-                    inOpen <= MEM_IDX_NS(inOpen,i1) + TA_CANDLEAVERAGE_STATE( Equal, STATE.EqualPeriodTotal, i1 )
+                    TA_REALBODY_STATE_CUR() >= TA_REALBODY_STATE_IDX(i1) - TA_CANDLEAVERAGE_STATE_IDX( Near, STATE.NearPeriodTotal, i1 ) &&   // same size 2 and 3
+                    TA_REALBODY_STATE_CUR() <= TA_REALBODY_STATE_IDX(i1) + TA_CANDLEAVERAGE_STATE_IDX( Near, STATE.NearPeriodTotal, i1 ) &&
+                    inOpen >= MEM_IDX_NS(inOpen,i1) - TA_CANDLEAVERAGE_STATE_IDX( Equal, STATE.EqualPeriodTotal, i1 ) &&           // same open 2 and 3
+                    inOpen <= MEM_IDX_NS(inOpen,i1) + TA_CANDLEAVERAGE_STATE_IDX( Equal, STATE.EqualPeriodTotal, i1 )
                     )
-                VALUE_HANDLE_DEREF(outInteger) = ( TA_REALBODYGAPUP_STATE(i1,i2) ? 100 : -100 );
+                VALUE_HANDLE_DEREF(outInteger) = ( TA_REALBODYGAPUP_STATE_IDX(i1,i2) ? 100 : -100 );
             else
                 VALUE_HANDLE_DEREF(outInteger) = 0;
         }
 
 
-        if ((int)STATE.mem_index-1 >= 1)
+        if ((int)STATE.mem_index-1 >= MEM_SIZE - STATE.periodNear)
         {
-            STATE.NearPeriodTotal += TA_CANDLERANGE_STATE( Near, i1 );
+            STATE.NearPeriodTotal += TA_CANDLERANGE_STATE_IDX( Near, i1 );
         }
 
-        if ((int)STATE.mem_index-1 >= 1)
+        if ((int)STATE.mem_index-1 >= MEM_SIZE - STATE.periodEqual)
         {
-            STATE.EqualPeriodTotal += TA_CANDLERANGE_STATE( Equal, i1 );
+            STATE.EqualPeriodTotal += TA_CANDLERANGE_STATE_IDX( Equal, i1 );
         }
 
         if (!(NEED_MORE_DATA))

@@ -412,7 +412,7 @@ int i1;
             if( TA_REALBODY_STATE_CUR() < TA_CANDLEAVERAGE_STATE_CUR( BodyShort, STATE.BodyPeriodTotal ) &&                        // small rb
                 TA_LOWERSHADOW_STATE_CUR() > TA_CANDLEAVERAGE_STATE_CUR( ShadowLong, STATE.ShadowLongPeriodTotal ) &&              // long lower shadow
                 TA_UPPERSHADOW_STATE_CUR() < TA_CANDLEAVERAGE_STATE_CUR( ShadowVeryShort, STATE.ShadowVeryShortPeriodTotal ) &&    // very short upper shadow
-                min( inClose, inOpen ) >= MEM_IDX_NS(inHigh,i1) - TA_CANDLEAVERAGE_STATE( Near, STATE.NearPeriodTotal, i1 )  // rb near the prior candle's lows
+                min( inClose, inOpen ) >= MEM_IDX_NS(inHigh,i1) - TA_CANDLEAVERAGE_STATE_IDX( Near, STATE.NearPeriodTotal, i1 )  // rb near the prior candle's lows
               )
                 VALUE_HANDLE_DEREF(outInteger) = -100;
             else
