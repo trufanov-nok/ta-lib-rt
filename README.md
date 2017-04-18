@@ -16,4 +16,4 @@ There is also support of dynamic indicator functions resolution via `TA_FuncInfo
 
 Please refer to wiki and examples for details.
 
-**Current version is alpha and only C++ API is testted**
+**Current version is alpha and only C++ API is tested**
