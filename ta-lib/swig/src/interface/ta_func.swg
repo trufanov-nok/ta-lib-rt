@@ -7399,6 +7399,52 @@ int TA_NATR_StateLoad( struct TA_NATR_State** _state,
 
 
 /*
+ * TA_NVI - Negative Volume Index
+ * 
+ * Input  = Close, Volume
+ * Output = double
+ * 
+ */
+TA_RetCode TA_NVI( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inClose */,
+                   const double *IN_ARRAY /* inVolume */,
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outReal */ );
+
+int TA_NVI_Lookback( void );
+
+
+struct TA_NVI_Data {
+                   double       inClose;
+                   double       inVolume;
+                   };
+struct TA_NVI_State {
+                    size_t mem_size;
+                    size_t mem_index;
+                    struct TA_NVI_Data* memory;
+                    };
+
+
+int TA_NVI_StateInit( struct TA_NVI_State** _state );
+
+
+int TA_NVI_State( struct TA_NVI_State* _state,
+                const double inClose,
+                const double inVolume,
+                double        *outReal );
+
+int TA_NVI_StateFree( struct TA_NVI_State** _state );
+
+int TA_NVI_StateSave( struct TA_NVI_State* _state,
+                    FILE* _file );
+
+int TA_NVI_StateLoad( struct TA_NVI_State** _state,
+                    FILE* _file );
+
+
+/*
  * TA_OBV - On Balance Volume
  * 
  * Input  = Close, Volume
@@ -7626,6 +7672,52 @@ int TA_PPO_StateSave( struct TA_PPO_State* _state,
                     FILE* _file );
 
 int TA_PPO_StateLoad( struct TA_PPO_State** _state,
+                    FILE* _file );
+
+
+/*
+ * TA_PVI - Positive Volume Index
+ * 
+ * Input  = Close, Volume
+ * Output = double
+ * 
+ */
+TA_RetCode TA_PVI( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inClose */,
+                   const double *IN_ARRAY /* inVolume */,
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outReal */ );
+
+int TA_PVI_Lookback( void );
+
+
+struct TA_PVI_Data {
+                   double       inClose;
+                   double       inVolume;
+                   };
+struct TA_PVI_State {
+                    size_t mem_size;
+                    size_t mem_index;
+                    struct TA_PVI_Data* memory;
+                    };
+
+
+int TA_PVI_StateInit( struct TA_PVI_State** _state );
+
+
+int TA_PVI_State( struct TA_PVI_State* _state,
+                const double inClose,
+                const double inVolume,
+                double        *outReal );
+
+int TA_PVI_StateFree( struct TA_PVI_State** _state );
+
+int TA_PVI_StateSave( struct TA_PVI_State* _state,
+                    FILE* _file );
+
+int TA_PVI_StateLoad( struct TA_PVI_State** _state,
                     FILE* _file );
 
 

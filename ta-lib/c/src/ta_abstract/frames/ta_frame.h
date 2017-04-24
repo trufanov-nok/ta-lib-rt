@@ -2445,6 +2445,25 @@
 /* Generated */ unsigned int TA_NATR_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
 ;
 
+/* Generated */ TA_RetCode TA_NVI_FramePP( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
+/* Generated */ unsigned int TA_NVI_FramePPLB( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_NVI_FramePPSI( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_NVI_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_NVI_FramePPSF( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_NVI_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+;
+/* Generated */ unsigned int TA_NVI_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+;
+
 /* Generated */ TA_RetCode TA_OBV_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -2519,6 +2538,25 @@
 /* Generated */ unsigned int TA_PPO_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
 ;
 /* Generated */ unsigned int TA_PPO_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+;
+
+/* Generated */ TA_RetCode TA_PVI_FramePP( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
+/* Generated */ unsigned int TA_PVI_FramePPLB( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_PVI_FramePPSI( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_PVI_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_PVI_FramePPSF( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_PVI_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+;
+/* Generated */ unsigned int TA_PVI_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
 ;
 
 /* Generated */ TA_RetCode TA_ROC_FramePP( const TA_ParamHolderPriv *params,

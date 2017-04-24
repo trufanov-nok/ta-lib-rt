@@ -668,6 +668,11 @@
 #define TA_NATR_StateInit natr
 #define TA_NATR_State natr
 #define TA_NATR_StateFree natr
+#define TA_NVI_Lookback nviLookback
+#define TA_NVI nvi
+#define TA_NVI_StateInit nvi
+#define TA_NVI_State nvi
+#define TA_NVI_StateFree nvi
 #define TA_OBV_Lookback obvLookback
 #define TA_OBV obv
 #define TA_OBV_StateInit obv
@@ -688,6 +693,11 @@
 #define TA_PPO_StateInit ppo
 #define TA_PPO_State ppo
 #define TA_PPO_StateFree ppo
+#define TA_PVI_Lookback pviLookback
+#define TA_PVI pvi
+#define TA_PVI_StateInit pvi
+#define TA_PVI_State pvi
+#define TA_PVI_StateFree pvi
 #define TA_ROC_Lookback rocLookback
 #define TA_ROC roc
 #define TA_ROC_StateInit roc

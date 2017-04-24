@@ -153,10 +153,12 @@ SOURCES += \
     ../../../../../src/ta_func/ta_MOM.c \
     ../../../../../src/ta_func/ta_MULT.c \
     ../../../../../src/ta_func/ta_NATR.c \
+    ../../../../../src/ta_func/ta_NVI.c \
     ../../../../../src/ta_func/ta_OBV.c \
     ../../../../../src/ta_func/ta_PLUS_DI.c \
     ../../../../../src/ta_func/ta_PLUS_DM.c \
     ../../../../../src/ta_func/ta_PPO.c \
+    ../../../../../src/ta_func/ta_PVI.c \
     ../../../../../src/ta_func/ta_ROC.c \
     ../../../../../src/ta_func/ta_ROCP.c \
     ../../../../../src/ta_func/ta_ROCR.c \
