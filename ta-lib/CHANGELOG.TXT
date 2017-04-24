@@ -1,23 +1,17 @@
-Version 0.5 (Summer 2008)
+Version 0.7.0 (Spring 2017)
 
 New Features
 ============
-- New TA_ACCBANDS
-- VS2005 makefile for SWIG Python interface.
-- MacOS makefile for SWIG Perl interface.
-- Visual Studio 2008 support
-- General fix to floating point processing for support 
-  of calculation with very small values (<0.00000001).
+- Project is forked to "TA-Lib RT" (real time).
+- Additional API for incremental calculation of indicators without reprocessing whole data
+- QtCreator project files tree is added to `\c\ide\qt` So now sources could be built from QtCreator IDE.
 
 Fixes
 =====
-#1870200 : Fix to Excel for #N/A rules.
-Fix Linux RPM to make sure 64-bits lib installed in right dir.
-Removed -lcurl and -lpthread from Python SWIG Makefile
+#93 Link error: Missing test files: imi and avgdev (https://sourceforge.net/p/ta-lib/bugs/93/)
 
 Thanks to all contributors.
 
 See HISTORY.TXT for summary of previous versions.
 
 Info: http://ta-lib.org
-
