@@ -97,7 +97,7 @@
 /**** END GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
 
    /* insert lookback code here. */
-   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+   return 1;
 }
 
 /**** START GENCODE SECTION 3 - DO NOT DELETE THIS LINE ****/
@@ -145,7 +145,8 @@
 /**** END GENCODE SECTION 3 - DO NOT DELETE THIS LINE ****/
 {
 	/* insert local variable here */
-
+double prev_nvi;
+int outIdx;
 /**** START GENCODE SECTION 4 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -172,10 +173,27 @@
 /**** END GENCODE SECTION 4 - DO NOT DELETE THIS LINE ****/
 
    /* Insert TA function code here. */
+   VALUE_HANDLE_DEREF_TO_ZERO(outBegIdx);
+   VALUE_HANDLE_DEREF_TO_ZERO(outNBElement);
 
-   /* Default return values */
-   *outBegIdx    = 0;
-   *outNBElement = 0;
+   if( startIdx < 1 )
+      startIdx = 1;
+
+   outIdx = 0;
+   prev_nvi = 100.;
+
+   VALUE_HANDLE_DEREF(outBegIdx) = startIdx;
+
+   while( startIdx <= endIdx )
+   {
+      if (inVolume[startIdx] < inVolume[startIdx-1])
+          prev_nvi *= inClose[startIdx] / inClose[startIdx-1];
+
+      outReal[outIdx++] = prev_nvi;
+      startIdx++;
+   }
+
+   VALUE_HANDLE_DEREF(outNBElement) = outIdx;
 
    return TA_SUCCESS;
 }
@@ -275,6 +293,18 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+   if (FIRST_LAUNCH)
+      {
+       STATE.prevNVI = 100.;
+      }
+
+   if (inVolume < POP_FROM_MEM(inVolume))
+      STATE.prevNVI *= inClose / POP_FROM_MEM(inClose);
+
+   VALUE_HANDLE_DEREF(outReal) = STATE.prevNVI;
+
+   PUSH_TO_MEM(inClose,inClose);
+   PUSH_TO_MEM(inVolume,inVolume);
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
@@ -351,6 +381,8 @@
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */    if (memory_allocated && STATE.mem_size > 0) { io_res = fwrite(STATE.memory,sizeof(struct TA_NVI_Data),STATE.mem_size,_file);
 /* Generated */    if (io_res < (int) STATE.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); }
+/* Generated */    io_res = fwrite(&STATE.prevNVI,sizeof(STATE.prevNVI),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -399,6 +431,8 @@
 /* Generated */    if (STATE_P.mem_size > 0 && memory_allocated) { STATE_P.memory = TA_Calloc(STATE_P.mem_size, sizeof(struct TA_NVI_Data));
 /* Generated */    io_res = fread(STATE_P.memory,sizeof(struct TA_NVI_Data),STATE_P.mem_size,_file);
 /* Generated */    if (io_res < (int) STATE_P.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); } 
+/* Generated */    io_res = fread(&STATE_P.prevNVI,sizeof(STATE_P.prevNVI),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -452,6 +486,8 @@
 /* Generated */                      double        outReal[] )
 /* Generated */ #endif
 /* Generated */ {
+/* Generated */ double prev_nvi;
+/* Generated */ int outIdx;
 /* Generated */  #ifndef TA_FUNC_NO_RANGE_CHECK
 /* Generated */     if( startIdx < 0 )
 /* Generated */        return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
@@ -466,8 +502,21 @@
 /* Generated */        return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */     #endif 
 /* Generated */  #endif 
-/* Generated */    *outBegIdx    = 0;
-/* Generated */    *outNBElement = 0;
+/* Generated */    VALUE_HANDLE_DEREF_TO_ZERO(outBegIdx);
+/* Generated */    VALUE_HANDLE_DEREF_TO_ZERO(outNBElement);
+/* Generated */    if( startIdx < 1 )
+/* Generated */       startIdx = 1;
+/* Generated */    outIdx = 0;
+/* Generated */    prev_nvi = 100.;
+/* Generated */    VALUE_HANDLE_DEREF(outBegIdx) = startIdx;
+/* Generated */    while( startIdx <= endIdx )
+/* Generated */    {
+/* Generated */       if (inVolume[startIdx] < inVolume[startIdx-1])
+/* Generated */           prev_nvi += prev_nvi * inClose[startIdx] / inClose[startIdx-1];
+/* Generated */       outReal[outIdx++] = prev_nvi;
+/* Generated */       startIdx++;
+/* Generated */    }
+/* Generated */    VALUE_HANDLE_DEREF(outNBElement) = outIdx;
 /* Generated */    return TA_SUCCESS;
 /* Generated */ }
 /* Generated */ 

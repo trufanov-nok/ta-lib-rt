@@ -98,7 +98,7 @@
 /**** END GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
 
    /* insert lookback code here. */
-   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+   return 1;
 }
 
 /**** START GENCODE SECTION 3 - DO NOT DELETE THIS LINE ****/
@@ -146,7 +146,8 @@
 /**** END GENCODE SECTION 3 - DO NOT DELETE THIS LINE ****/
 {
 	/* insert local variable here */
-
+ double prev_pvi;
+ int outIdx;
 /**** START GENCODE SECTION 4 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -174,9 +175,28 @@
 
    /* Insert TA function code here. */
 
-   /* Default return values */
-   *outBegIdx    = 0;
-   *outNBElement = 0;
+       VALUE_HANDLE_DEREF_TO_ZERO(outBegIdx);
+       VALUE_HANDLE_DEREF_TO_ZERO(outNBElement);
+
+       if( startIdx < 1 )
+          startIdx = 1;
+
+       outIdx = 0;
+       prev_pvi = 100.;
+
+       VALUE_HANDLE_DEREF(outBegIdx) = startIdx;
+
+       while( startIdx <= endIdx )
+       {
+          if (inVolume[startIdx] > inVolume[startIdx-1])
+              prev_pvi *= inClose[startIdx] / inClose[startIdx-1];
+
+          outReal[outIdx++] = prev_pvi;
+          startIdx++;
+       }
+
+       VALUE_HANDLE_DEREF(outNBElement) = outIdx;
+
 
    return TA_SUCCESS;
 }
@@ -276,7 +296,18 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
+       if (FIRST_LAUNCH)
+          {
+           STATE.prevPVI = 100.;
+          }
 
+       if (inVolume > POP_FROM_MEM(inVolume))
+          STATE.prevPVI *= inClose / POP_FROM_MEM(inClose);
+
+       VALUE_HANDLE_DEREF(outReal) = STATE.prevPVI;
+
+       PUSH_TO_MEM(inClose,inClose);
+       PUSH_TO_MEM(inVolume,inVolume);
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
@@ -352,6 +383,8 @@
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */    if (memory_allocated && STATE.mem_size > 0) { io_res = fwrite(STATE.memory,sizeof(struct TA_PVI_Data),STATE.mem_size,_file);
 /* Generated */    if (io_res < (int) STATE.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); }
+/* Generated */    io_res = fwrite(&STATE.prevPVI,sizeof(STATE.prevPVI),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -400,6 +433,8 @@
 /* Generated */    if (STATE_P.mem_size > 0 && memory_allocated) { STATE_P.memory = TA_Calloc(STATE_P.mem_size, sizeof(struct TA_PVI_Data));
 /* Generated */    io_res = fread(STATE_P.memory,sizeof(struct TA_PVI_Data),STATE_P.mem_size,_file);
 /* Generated */    if (io_res < (int) STATE_P.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); } 
+/* Generated */    io_res = fread(&STATE_P.prevPVI,sizeof(STATE_P.prevPVI),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 

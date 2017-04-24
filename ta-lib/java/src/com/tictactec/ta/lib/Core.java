@@ -37638,7 +37638,7 @@ public class Core {
    /* Generated */
    public int nviLookback( )
    {
-      return RetCode.Success ;
+      return 1;
    }
    public RetCode nvi( int startIdx,
       int endIdx,
@@ -37648,12 +37648,27 @@ public class Core {
       MInteger outNBElement,
       double outReal[] )
    {
+      double prev_nvi;
+      int outIdx;
       if( startIdx < 0 )
          return RetCode.OutOfRangeStartIndex ;
       if( (endIdx < 0) || (endIdx < startIdx))
          return RetCode.OutOfRangeEndIndex ;
-      *outBegIdx = 0;
-      *outNBElement = 0;
+      outBegIdx.value = 0 ;
+      outNBElement.value = 0 ;
+      if( startIdx < 1 )
+         startIdx = 1;
+      outIdx = 0;
+      prev_nvi = 100.;
+      outBegIdx.value = startIdx;
+      while( startIdx <= endIdx )
+      {
+         if (inVolume[startIdx] < inVolume[startIdx-1])
+            prev_nvi += prev_nvi * inClose[startIdx] / inClose[startIdx-1];
+         outReal[outIdx++] = prev_nvi;
+         startIdx++;
+      }
+      outNBElement.value = outIdx;
       return TA_SUCCESS;
    }
    public int nviStateInit( struct TA_nvi_State** _state )
@@ -37682,6 +37697,15 @@ public class Core {
          ( _state.value .memory+_cur_idx).value .inClose = inClose ;
          ( _state.value .memory+_cur_idx).value .inVolume = inVolume ;
          return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .prevNVI = 100.;
+      }
+      if (inVolume < _state.value .inVolume)
+         _state.value .prevNVI += _state.value .prevNVI * inClose / _state.value .inClose;
+      outReal.value = _state.value .prevNVI;
+      ( _state.value .memory+_cur_idx).value .inClose = inClose ;
+      ( _state.value .memory+_cur_idx).value .inVolume = inVolume ;
       return RetCode.Success ;
    }
    public int nviStateFree( struct TA_nvi_State** _state )
@@ -37710,6 +37734,8 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_NVI_Data), _state.value .mem_size,_file);
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .prevNVI,sizeof( _state.value .prevNVI),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public int nviStateLoad( struct TA_nvi_State** _state,
@@ -37731,6 +37757,8 @@ public class Core {
       if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_NVI_Data));
          io_res = fread( _state.value .value .memory,sizeof(struct TA_NVI_Data), _state.value .value .mem_size,_file);
          if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .prevNVI,sizeof( _state.value .value .prevNVI),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public RetCode nvi( int startIdx,
@@ -37741,12 +37769,27 @@ public class Core {
       MInteger outNBElement,
       double outReal[] )
    {
+      double prev_nvi;
+      int outIdx;
       if( startIdx < 0 )
          return RetCode.OutOfRangeStartIndex ;
       if( (endIdx < 0) || (endIdx < startIdx))
          return RetCode.OutOfRangeEndIndex ;
-      *outBegIdx = 0;
-      *outNBElement = 0;
+      outBegIdx.value = 0 ;
+      outNBElement.value = 0 ;
+      if( startIdx < 1 )
+         startIdx = 1;
+      outIdx = 0;
+      prev_nvi = 100.;
+      outBegIdx.value = startIdx;
+      while( startIdx <= endIdx )
+      {
+         if (inVolume[startIdx] < inVolume[startIdx-1])
+            prev_nvi += prev_nvi * inClose[startIdx] / inClose[startIdx-1];
+         outReal[outIdx++] = prev_nvi;
+         startIdx++;
+      }
+      outNBElement.value = outIdx;
       return TA_SUCCESS;
    }
    /* Generated */
@@ -38999,6 +39042,8 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_PVI_Data), _state.value .mem_size,_file);
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .prevPVI,sizeof( _state.value .prevPVI),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public int pviStateLoad( struct TA_pvi_State** _state,
@@ -39020,6 +39065,8 @@ public class Core {
       if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_PVI_Data));
          io_res = fread( _state.value .value .memory,sizeof(struct TA_PVI_Data), _state.value .value .mem_size,_file);
          if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .prevPVI,sizeof( _state.value .value .prevPVI),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public RetCode pvi( int startIdx,

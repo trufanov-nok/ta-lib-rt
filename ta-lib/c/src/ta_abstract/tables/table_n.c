@@ -108,7 +108,12 @@ static const TA_OptInputParameterInfo *TA_NVI_OptInputs[] =
   NULL
 };
 
-static const TA_InputParameterInfo *TA_NVI_StructParams[] = { NULL }; 
+const TA_InputParameterInfo TA_NVI_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "prevNVI", 0 };
+static const TA_InputParameterInfo *TA_NVI_StructParams[] = {
+    &TA_NVI_DEF_UI_STRUCT_PARAM_1,
+
+    NULL };
 
 DEF_FUNCTION( NVI,                         /* name */
               TA_GroupId_VolumeIndicators,   /* groupId */

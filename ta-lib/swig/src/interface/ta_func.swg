@@ -7424,6 +7424,7 @@ struct TA_NVI_State {
                     size_t mem_size;
                     size_t mem_index;
                     struct TA_NVI_Data* memory;
+                    double       prevNVI;
                     };
 
 
@@ -7701,6 +7702,7 @@ struct TA_PVI_State {
                     size_t mem_size;
                     size_t mem_index;
                     struct TA_PVI_Data* memory;
+                    double       prevPVI;
                     };
 
 
