@@ -499,16 +499,16 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::PlusDIStateInit( struct TA_PlusDI_State** _state,
-/* Generated */                          int           optInTimePeriod )  /* From 1 to 100000 */
+/* Generated */ Core::RetCode Core::PlusDIStateInit( struct TA_PlusDI_State** _state,
+/* Generated */                                    int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int plusDIStateInit( struct TA_plusDI_State** _state,
-/* Generated */                           int           optInTimePeriod )  /* From 1 to 100000 */
+/* Generated */ public RetCode plusDIStateInit( struct TA_plusDI_State** _state,
+/* Generated */                               int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_PLUS_DI_StateInit( struct TA_PLUS_DI_State** _state,
-/* Generated */                                               int           optInTimePeriod )  /* From 1 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_PLUS_DI_StateInit( struct TA_PLUS_DI_State** _state,
+/* Generated */                                                      int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -551,23 +551,23 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::PlusDIState( struct TA_PlusDI_State* _state,
-/* Generated */                      cli::array<double>^ inHigh,
-/* Generated */                      cli::array<double>^ inLow,
-/* Generated */                      cli::array<double>^ inClose,
-/* Generated */                      cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::PlusDIState( struct TA_PlusDI_State* _state,
+/* Generated */                                cli::array<double>^ inHigh,
+/* Generated */                                cli::array<double>^ inLow,
+/* Generated */                                cli::array<double>^ inClose,
+/* Generated */                                cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int plusDIState( struct TA_plusDI_State* _state,
-/* Generated */                       double       inHigh,
-/* Generated */                       double       inLow,
-/* Generated */                       double       inClose,
-/* Generated */                       double        *outReal )
+/* Generated */ public RetCode plusDIState( struct TA_plusDI_State* _state,
+/* Generated */                           double       inHigh,
+/* Generated */                           double       inLow,
+/* Generated */                           double       inClose,
+/* Generated */                           double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_PLUS_DI_State( struct TA_PLUS_DI_State* _state,
-/* Generated */                                           const double inHigh,
-/* Generated */                                           const double inLow,
-/* Generated */                                           const double inClose,
-/* Generated */                                           double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_PLUS_DI_State( struct TA_PLUS_DI_State* _state,
+/* Generated */                                                  const double inHigh,
+/* Generated */                                                  const double inLow,
+/* Generated */                                                  const double inClose,
+/* Generated */                                                  double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -689,13 +689,13 @@ double tempReal, tempReal2, diffP, diffM;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::PlusDIStateFree( struct TA_PlusDI_State** _state )
+/* Generated */ Core::RetCode Core::PlusDIStateFree( struct TA_PlusDI_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int plusDIStateFree( struct TA_plusDI_State** _state )
+/* Generated */ public RetCode plusDIStateFree( struct TA_plusDI_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_PLUS_DI_StateFree( struct TA_PLUS_DI_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_PLUS_DI_StateFree( struct TA_PLUS_DI_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -723,16 +723,16 @@ double tempReal, tempReal2, diffP, diffM;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::PlusDIStateSave( struct TA_PlusDI_State* _state,
-/* Generated */                          FILE* _file )
+/* Generated */ Core::RetCode Core::PlusDIStateSave( struct TA_PlusDI_State* _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int plusDIStateSave( struct TA_plusDI_State* _state,
-/* Generated */                           FILE* _file )
+/* Generated */ public RetCode plusDIStateSave( struct TA_plusDI_State* _state,
+/* Generated */                               FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_PLUS_DI_StateSave( struct TA_PLUS_DI_State* _state,
-/* Generated */                                               FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_PLUS_DI_StateSave( struct TA_PLUS_DI_State* _state,
+/* Generated */                                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -782,16 +782,16 @@ double tempReal, tempReal2, diffP, diffM;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::PlusDIStateLoad( struct TA_PlusDI_State** _state,
-/* Generated */                          FILE* _file )
+/* Generated */ Core::RetCode Core::PlusDIStateLoad( struct TA_PlusDI_State** _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int plusDIStateLoad( struct TA_plusDI_State** _state,
-/* Generated */                           FILE* _file )
+/* Generated */ public RetCode plusDIStateLoad( struct TA_plusDI_State** _state,
+/* Generated */                               FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_PLUS_DI_StateLoad( struct TA_PLUS_DI_State** _state,
-/* Generated */                                               FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_PLUS_DI_StateLoad( struct TA_PLUS_DI_State** _state,
+/* Generated */                                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

@@ -477,13 +477,13 @@ DEFINE_HILBERT_VARIABLES_STRUCT(HT_SINE)
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtSineStateInit( struct TA_HtSine_State** _state )
+/* Generated */ Core::RetCode Core::HtSineStateInit( struct TA_HtSine_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htSineStateInit( struct TA_htSine_State** _state )
+/* Generated */ public RetCode htSineStateInit( struct TA_htSine_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_SINE_StateInit( struct TA_HT_SINE_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_SINE_StateInit( struct TA_HT_SINE_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -526,20 +526,20 @@ DEFINE_HILBERT_VARIABLES_STRUCT(HT_SINE)
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtSineState( struct TA_HtSine_State* _state,
-/* Generated */                      cli::array<double>^ inReal,
-/* Generated */                      cli::array<double>^  *outSine,
-/* Generated */                      cli::array<double>^  *outLeadSine )
+/* Generated */ Core::RetCode Core::HtSineState( struct TA_HtSine_State* _state,
+/* Generated */                                cli::array<double>^ inReal,
+/* Generated */                                cli::array<double>^  *outSine,
+/* Generated */                                cli::array<double>^  *outLeadSine )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htSineState( struct TA_htSine_State* _state,
-/* Generated */                       double       inReal,
-/* Generated */                       double        *outSine,
-/* Generated */                       double        *outLeadSine )
+/* Generated */ public RetCode htSineState( struct TA_htSine_State* _state,
+/* Generated */                           double       inReal,
+/* Generated */                           double        *outSine,
+/* Generated */                           double        *outLeadSine )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_SINE_State( struct TA_HT_SINE_State* _state,
-/* Generated */                                           const double inReal,
-/* Generated */                                           double        *outSine,
-/* Generated */                                           double        *outLeadSine )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_SINE_State( struct TA_HT_SINE_State* _state,
+/* Generated */                                                  const double inReal,
+/* Generated */                                                  double        *outSine,
+/* Generated */                                                  double        *outLeadSine )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -760,13 +760,13 @@ else {
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtSineStateFree( struct TA_HtSine_State** _state )
+/* Generated */ Core::RetCode Core::HtSineStateFree( struct TA_HtSine_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htSineStateFree( struct TA_htSine_State** _state )
+/* Generated */ public RetCode htSineStateFree( struct TA_htSine_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_SINE_StateFree( struct TA_HT_SINE_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_SINE_StateFree( struct TA_HT_SINE_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -800,16 +800,16 @@ else {
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtSineStateSave( struct TA_HtSine_State* _state,
-/* Generated */                          FILE* _file )
+/* Generated */ Core::RetCode Core::HtSineStateSave( struct TA_HtSine_State* _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htSineStateSave( struct TA_htSine_State* _state,
-/* Generated */                           FILE* _file )
+/* Generated */ public RetCode htSineStateSave( struct TA_htSine_State* _state,
+/* Generated */                               FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_SINE_StateSave( struct TA_HT_SINE_State* _state,
-/* Generated */                                               FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_SINE_StateSave( struct TA_HT_SINE_State* _state,
+/* Generated */                                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -897,16 +897,16 @@ else {
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtSineStateLoad( struct TA_HtSine_State** _state,
-/* Generated */                          FILE* _file )
+/* Generated */ Core::RetCode Core::HtSineStateLoad( struct TA_HtSine_State** _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htSineStateLoad( struct TA_htSine_State** _state,
-/* Generated */                           FILE* _file )
+/* Generated */ public RetCode htSineStateLoad( struct TA_htSine_State** _state,
+/* Generated */                               FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_SINE_StateLoad( struct TA_HT_SINE_State** _state,
-/* Generated */                                               FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_SINE_StateLoad( struct TA_HT_SINE_State** _state,
+/* Generated */                                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

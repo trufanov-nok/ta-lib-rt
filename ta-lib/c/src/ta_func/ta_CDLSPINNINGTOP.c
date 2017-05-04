@@ -247,13 +247,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlSpinningTopStateInit( struct TA_CdlSpinningTop_State** _state )
+/* Generated */ Core::RetCode Core::CdlSpinningTopStateInit( struct TA_CdlSpinningTop_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlSpinningTopStateInit( struct TA_cdlSpinningTop_State** _state )
+/* Generated */ public RetCode cdlSpinningTopStateInit( struct TA_cdlSpinningTop_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLSPINNINGTOP_StateInit( struct TA_CDLSPINNINGTOP_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLSPINNINGTOP_StateInit( struct TA_CDLSPINNINGTOP_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -289,26 +289,26 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlSpinningTopState( struct TA_CdlSpinningTop_State* _state,
-/* Generated */                              cli::array<double>^ inOpen,
-/* Generated */                              cli::array<double>^ inHigh,
-/* Generated */                              cli::array<double>^ inLow,
-/* Generated */                              cli::array<double>^ inClose,
-/* Generated */                              cli::array<int>^  *outInteger )
+/* Generated */ Core::RetCode Core::CdlSpinningTopState( struct TA_CdlSpinningTop_State* _state,
+/* Generated */                                        cli::array<double>^ inOpen,
+/* Generated */                                        cli::array<double>^ inHigh,
+/* Generated */                                        cli::array<double>^ inLow,
+/* Generated */                                        cli::array<double>^ inClose,
+/* Generated */                                        cli::array<int>^  *outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlSpinningTopState( struct TA_cdlSpinningTop_State* _state,
-/* Generated */                               double       inOpen,
-/* Generated */                               double       inHigh,
-/* Generated */                               double       inLow,
-/* Generated */                               double       inClose,
-/* Generated */                               int           *outInteger )
+/* Generated */ public RetCode cdlSpinningTopState( struct TA_cdlSpinningTop_State* _state,
+/* Generated */                                   double       inOpen,
+/* Generated */                                   double       inHigh,
+/* Generated */                                   double       inLow,
+/* Generated */                                   double       inClose,
+/* Generated */                                   int           *outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLSPINNINGTOP_State( struct TA_CDLSPINNINGTOP_State* _state,
-/* Generated */                                                  const double inOpen,
-/* Generated */                                                  const double inHigh,
-/* Generated */                                                  const double inLow,
-/* Generated */                                                  const double inClose,
-/* Generated */                                                  int           *outInteger )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLSPINNINGTOP_State( struct TA_CDLSPINNINGTOP_State* _state,
+/* Generated */                                                         const double inOpen,
+/* Generated */                                                         const double inHigh,
+/* Generated */                                                         const double inLow,
+/* Generated */                                                         const double inClose,
+/* Generated */                                                         int           *outInteger )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -390,13 +390,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlSpinningTopStateFree( struct TA_CdlSpinningTop_State** _state )
+/* Generated */ Core::RetCode Core::CdlSpinningTopStateFree( struct TA_CdlSpinningTop_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlSpinningTopStateFree( struct TA_cdlSpinningTop_State** _state )
+/* Generated */ public RetCode cdlSpinningTopStateFree( struct TA_cdlSpinningTop_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLSPINNINGTOP_StateFree( struct TA_CDLSPINNINGTOP_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLSPINNINGTOP_StateFree( struct TA_CDLSPINNINGTOP_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -424,16 +424,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlSpinningTopStateSave( struct TA_CdlSpinningTop_State* _state,
-/* Generated */                                  FILE* _file )
+/* Generated */ Core::RetCode Core::CdlSpinningTopStateSave( struct TA_CdlSpinningTop_State* _state,
+/* Generated */                                            FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlSpinningTopStateSave( struct TA_cdlSpinningTop_State* _state,
-/* Generated */                                   FILE* _file )
+/* Generated */ public RetCode cdlSpinningTopStateSave( struct TA_cdlSpinningTop_State* _state,
+/* Generated */                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLSPINNINGTOP_StateSave( struct TA_CDLSPINNINGTOP_State* _state,
-/* Generated */                                                      FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLSPINNINGTOP_StateSave( struct TA_CDLSPINNINGTOP_State* _state,
+/* Generated */                                                             FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -477,16 +477,16 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlSpinningTopStateLoad( struct TA_CdlSpinningTop_State** _state,
-/* Generated */                                  FILE* _file )
+/* Generated */ Core::RetCode Core::CdlSpinningTopStateLoad( struct TA_CdlSpinningTop_State** _state,
+/* Generated */                                            FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlSpinningTopStateLoad( struct TA_cdlSpinningTop_State** _state,
-/* Generated */                                   FILE* _file )
+/* Generated */ public RetCode cdlSpinningTopStateLoad( struct TA_cdlSpinningTop_State** _state,
+/* Generated */                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLSPINNINGTOP_StateLoad( struct TA_CDLSPINNINGTOP_State** _state,
-/* Generated */                                                      FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLSPINNINGTOP_StateLoad( struct TA_CDLSPINNINGTOP_State** _state,
+/* Generated */                                                             FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

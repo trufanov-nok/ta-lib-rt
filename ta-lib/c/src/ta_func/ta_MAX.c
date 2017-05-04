@@ -268,17 +268,17 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MaxStateInit( struct TA_Max_State** _state,
-/* Generated */                       int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ Core::RetCode Core::MaxStateInit( struct TA_Max_State** _state,
+/* Generated */                                 int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ #undef max
-/* Generated */ public int maxStateInit( struct TA_max_State** _state,
-/* Generated */                        int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ public RetCode maxStateInit( struct TA_max_State** _state,
+/* Generated */                            int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MAX_StateInit( struct TA_MAX_State** _state,
-/* Generated */                                           int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_MAX_StateInit( struct TA_MAX_State** _state,
+/* Generated */                                                  int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -321,18 +321,18 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MaxState( struct TA_Max_State* _state,
-/* Generated */                   cli::array<double>^ inReal,
-/* Generated */                   cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::MaxState( struct TA_Max_State* _state,
+/* Generated */                             cli::array<double>^ inReal,
+/* Generated */                             cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ #undef max
-/* Generated */ public int maxState( struct TA_max_State* _state,
-/* Generated */                    double       inReal,
-/* Generated */                    double        *outReal )
+/* Generated */ public RetCode maxState( struct TA_max_State* _state,
+/* Generated */                        double       inReal,
+/* Generated */                        double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MAX_State( struct TA_MAX_State* _state,
-/* Generated */                                       const double inReal,
-/* Generated */                                       double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_MAX_State( struct TA_MAX_State* _state,
+/* Generated */                                              const double inReal,
+/* Generated */                                              double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -380,14 +380,14 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MaxStateFree( struct TA_Max_State** _state )
+/* Generated */ Core::RetCode Core::MaxStateFree( struct TA_Max_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ #undef max
-/* Generated */ public int maxStateFree( struct TA_max_State** _state )
+/* Generated */ public RetCode maxStateFree( struct TA_max_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MAX_StateFree( struct TA_MAX_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_MAX_StateFree( struct TA_MAX_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -415,17 +415,17 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MaxStateSave( struct TA_Max_State* _state,
-/* Generated */                       FILE* _file )
+/* Generated */ Core::RetCode Core::MaxStateSave( struct TA_Max_State* _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ #undef max
-/* Generated */ public int maxStateSave( struct TA_max_State* _state,
-/* Generated */                        FILE* _file )
+/* Generated */ public RetCode maxStateSave( struct TA_max_State* _state,
+/* Generated */                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MAX_StateSave( struct TA_MAX_State* _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MAX_StateSave( struct TA_MAX_State* _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -467,17 +467,17 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MaxStateLoad( struct TA_Max_State** _state,
-/* Generated */                       FILE* _file )
+/* Generated */ Core::RetCode Core::MaxStateLoad( struct TA_Max_State** _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ #undef max
-/* Generated */ public int maxStateLoad( struct TA_max_State** _state,
-/* Generated */                        FILE* _file )
+/* Generated */ public RetCode maxStateLoad( struct TA_max_State** _state,
+/* Generated */                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MAX_StateLoad( struct TA_MAX_State** _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MAX_StateLoad( struct TA_MAX_State** _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

@@ -331,16 +331,16 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::BetaStateInit( struct TA_Beta_State** _state,
-/* Generated */                        int           optInTimePeriod )  /* From 1 to 100000 */
+/* Generated */ Core::RetCode Core::BetaStateInit( struct TA_Beta_State** _state,
+/* Generated */                                  int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int betaStateInit( struct TA_beta_State** _state,
-/* Generated */                         int           optInTimePeriod )  /* From 1 to 100000 */
+/* Generated */ public RetCode betaStateInit( struct TA_beta_State** _state,
+/* Generated */                             int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_BETA_StateInit( struct TA_BETA_State** _state,
-/* Generated */                                            int           optInTimePeriod )  /* From 1 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_BETA_StateInit( struct TA_BETA_State** _state,
+/* Generated */                                                   int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -386,20 +386,20 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::BetaState( struct TA_Beta_State* _state,
-/* Generated */                    cli::array<double>^ inReal0,
-/* Generated */                    cli::array<double>^ inReal1,
-/* Generated */                    cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::BetaState( struct TA_Beta_State* _state,
+/* Generated */                              cli::array<double>^ inReal0,
+/* Generated */                              cli::array<double>^ inReal1,
+/* Generated */                              cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int betaState( struct TA_beta_State* _state,
-/* Generated */                     double       inReal0,
-/* Generated */                     double       inReal1,
-/* Generated */                     double        *outReal )
+/* Generated */ public RetCode betaState( struct TA_beta_State* _state,
+/* Generated */                         double       inReal0,
+/* Generated */                         double       inReal1,
+/* Generated */                         double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_BETA_State( struct TA_BETA_State* _state,
-/* Generated */                                        const double inReal0,
-/* Generated */                                        const double inReal1,
-/* Generated */                                        double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_BETA_State( struct TA_BETA_State* _state,
+/* Generated */                                               const double inReal0,
+/* Generated */                                               const double inReal1,
+/* Generated */                                               double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -512,13 +512,13 @@ double x,y,temp;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::BetaStateFree( struct TA_Beta_State** _state )
+/* Generated */ Core::RetCode Core::BetaStateFree( struct TA_Beta_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int betaStateFree( struct TA_beta_State** _state )
+/* Generated */ public RetCode betaStateFree( struct TA_beta_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_BETA_StateFree( struct TA_BETA_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_BETA_StateFree( struct TA_BETA_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -546,16 +546,16 @@ double x,y,temp;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::BetaStateSave( struct TA_Beta_State* _state,
-/* Generated */                        FILE* _file )
+/* Generated */ Core::RetCode Core::BetaStateSave( struct TA_Beta_State* _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int betaStateSave( struct TA_beta_State* _state,
-/* Generated */                         FILE* _file )
+/* Generated */ public RetCode betaStateSave( struct TA_beta_State* _state,
+/* Generated */                             FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_BETA_StateSave( struct TA_BETA_State* _state,
-/* Generated */                                            FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_BETA_StateSave( struct TA_BETA_State* _state,
+/* Generated */                                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -613,16 +613,16 @@ double x,y,temp;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::BetaStateLoad( struct TA_Beta_State** _state,
-/* Generated */                        FILE* _file )
+/* Generated */ Core::RetCode Core::BetaStateLoad( struct TA_Beta_State** _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int betaStateLoad( struct TA_beta_State** _state,
-/* Generated */                         FILE* _file )
+/* Generated */ public RetCode betaStateLoad( struct TA_beta_State** _state,
+/* Generated */                             FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_BETA_StateLoad( struct TA_BETA_State** _state,
-/* Generated */                                            FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_BETA_StateLoad( struct TA_BETA_State** _state,
+/* Generated */                                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

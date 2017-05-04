@@ -260,16 +260,16 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::LinearRegAngleStateInit( struct TA_LinearRegAngle_State** _state,
-/* Generated */                                  int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ Core::RetCode Core::LinearRegAngleStateInit( struct TA_LinearRegAngle_State** _state,
+/* Generated */                                            int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int linearRegAngleStateInit( struct TA_linearRegAngle_State** _state,
-/* Generated */                                   int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ public RetCode linearRegAngleStateInit( struct TA_linearRegAngle_State** _state,
+/* Generated */                                       int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_LINEARREG_ANGLE_StateInit( struct TA_LINEARREG_ANGLE_State** _state,
-/* Generated */                                                       int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_LINEARREG_ANGLE_StateInit( struct TA_LINEARREG_ANGLE_State** _state,
+/* Generated */                                                              int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -312,17 +312,17 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::LinearRegAngleState( struct TA_LinearRegAngle_State* _state,
-/* Generated */                              cli::array<double>^ inReal,
-/* Generated */                              cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::LinearRegAngleState( struct TA_LinearRegAngle_State* _state,
+/* Generated */                                        cli::array<double>^ inReal,
+/* Generated */                                        cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int linearRegAngleState( struct TA_linearRegAngle_State* _state,
-/* Generated */                               double       inReal,
-/* Generated */                               double        *outReal )
+/* Generated */ public RetCode linearRegAngleState( struct TA_linearRegAngle_State* _state,
+/* Generated */                                   double       inReal,
+/* Generated */                                   double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_LINEARREG_ANGLE_State( struct TA_LINEARREG_ANGLE_State* _state,
-/* Generated */                                                   const double inReal,
-/* Generated */                                                   double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_LINEARREG_ANGLE_State( struct TA_LINEARREG_ANGLE_State* _state,
+/* Generated */                                                          const double inReal,
+/* Generated */                                                          double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -392,13 +392,13 @@ double m, tempReal;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::LinearRegAngleStateFree( struct TA_LinearRegAngle_State** _state )
+/* Generated */ Core::RetCode Core::LinearRegAngleStateFree( struct TA_LinearRegAngle_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int linearRegAngleStateFree( struct TA_linearRegAngle_State** _state )
+/* Generated */ public RetCode linearRegAngleStateFree( struct TA_linearRegAngle_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_LINEARREG_ANGLE_StateFree( struct TA_LINEARREG_ANGLE_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_LINEARREG_ANGLE_StateFree( struct TA_LINEARREG_ANGLE_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -426,16 +426,16 @@ double m, tempReal;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::LinearRegAngleStateSave( struct TA_LinearRegAngle_State* _state,
-/* Generated */                                  FILE* _file )
+/* Generated */ Core::RetCode Core::LinearRegAngleStateSave( struct TA_LinearRegAngle_State* _state,
+/* Generated */                                            FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int linearRegAngleStateSave( struct TA_linearRegAngle_State* _state,
-/* Generated */                                   FILE* _file )
+/* Generated */ public RetCode linearRegAngleStateSave( struct TA_linearRegAngle_State* _state,
+/* Generated */                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_LINEARREG_ANGLE_StateSave( struct TA_LINEARREG_ANGLE_State* _state,
-/* Generated */                                                       FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_LINEARREG_ANGLE_StateSave( struct TA_LINEARREG_ANGLE_State* _state,
+/* Generated */                                                              FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -485,16 +485,16 @@ double m, tempReal;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::LinearRegAngleStateLoad( struct TA_LinearRegAngle_State** _state,
-/* Generated */                                  FILE* _file )
+/* Generated */ Core::RetCode Core::LinearRegAngleStateLoad( struct TA_LinearRegAngle_State** _state,
+/* Generated */                                            FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int linearRegAngleStateLoad( struct TA_linearRegAngle_State** _state,
-/* Generated */                                   FILE* _file )
+/* Generated */ public RetCode linearRegAngleStateLoad( struct TA_linearRegAngle_State** _state,
+/* Generated */                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_LINEARREG_ANGLE_StateLoad( struct TA_LINEARREG_ANGLE_State** _state,
-/* Generated */                                                       FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_LINEARREG_ANGLE_StateLoad( struct TA_LINEARREG_ANGLE_State** _state,
+/* Generated */                                                              FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

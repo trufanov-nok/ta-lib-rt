@@ -280,13 +280,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlSeperatingLinesStateInit( struct TA_CdlSeperatingLines_State** _state )
+/* Generated */ Core::RetCode Core::CdlSeperatingLinesStateInit( struct TA_CdlSeperatingLines_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlSeperatingLinesStateInit( struct TA_cdlSeperatingLines_State** _state )
+/* Generated */ public RetCode cdlSeperatingLinesStateInit( struct TA_cdlSeperatingLines_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLSEPARATINGLINES_StateInit( struct TA_CDLSEPARATINGLINES_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLSEPARATINGLINES_StateInit( struct TA_CDLSEPARATINGLINES_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -322,26 +322,26 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlSeperatingLinesState( struct TA_CdlSeperatingLines_State* _state,
-/* Generated */                                  cli::array<double>^ inOpen,
-/* Generated */                                  cli::array<double>^ inHigh,
-/* Generated */                                  cli::array<double>^ inLow,
-/* Generated */                                  cli::array<double>^ inClose,
-/* Generated */                                  cli::array<int>^  *outInteger )
+/* Generated */ Core::RetCode Core::CdlSeperatingLinesState( struct TA_CdlSeperatingLines_State* _state,
+/* Generated */                                            cli::array<double>^ inOpen,
+/* Generated */                                            cli::array<double>^ inHigh,
+/* Generated */                                            cli::array<double>^ inLow,
+/* Generated */                                            cli::array<double>^ inClose,
+/* Generated */                                            cli::array<int>^  *outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlSeperatingLinesState( struct TA_cdlSeperatingLines_State* _state,
-/* Generated */                                   double       inOpen,
-/* Generated */                                   double       inHigh,
-/* Generated */                                   double       inLow,
-/* Generated */                                   double       inClose,
-/* Generated */                                   int           *outInteger )
+/* Generated */ public RetCode cdlSeperatingLinesState( struct TA_cdlSeperatingLines_State* _state,
+/* Generated */                                       double       inOpen,
+/* Generated */                                       double       inHigh,
+/* Generated */                                       double       inLow,
+/* Generated */                                       double       inClose,
+/* Generated */                                       int           *outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLSEPARATINGLINES_State( struct TA_CDLSEPARATINGLINES_State* _state,
-/* Generated */                                                      const double inOpen,
-/* Generated */                                                      const double inHigh,
-/* Generated */                                                      const double inLow,
-/* Generated */                                                      const double inClose,
-/* Generated */                                                      int           *outInteger )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLSEPARATINGLINES_State( struct TA_CDLSEPARATINGLINES_State* _state,
+/* Generated */                                                             const double inOpen,
+/* Generated */                                                             const double inHigh,
+/* Generated */                                                             const double inLow,
+/* Generated */                                                             const double inClose,
+/* Generated */                                                             int           *outInteger )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -459,13 +459,13 @@ int i1;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlSeperatingLinesStateFree( struct TA_CdlSeperatingLines_State** _state )
+/* Generated */ Core::RetCode Core::CdlSeperatingLinesStateFree( struct TA_CdlSeperatingLines_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlSeperatingLinesStateFree( struct TA_cdlSeperatingLines_State** _state )
+/* Generated */ public RetCode cdlSeperatingLinesStateFree( struct TA_cdlSeperatingLines_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLSEPARATINGLINES_StateFree( struct TA_CDLSEPARATINGLINES_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLSEPARATINGLINES_StateFree( struct TA_CDLSEPARATINGLINES_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -493,16 +493,16 @@ int i1;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlSeperatingLinesStateSave( struct TA_CdlSeperatingLines_State* _state,
-/* Generated */                                      FILE* _file )
+/* Generated */ Core::RetCode Core::CdlSeperatingLinesStateSave( struct TA_CdlSeperatingLines_State* _state,
+/* Generated */                                                FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlSeperatingLinesStateSave( struct TA_cdlSeperatingLines_State* _state,
-/* Generated */                                       FILE* _file )
+/* Generated */ public RetCode cdlSeperatingLinesStateSave( struct TA_cdlSeperatingLines_State* _state,
+/* Generated */                                           FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLSEPARATINGLINES_StateSave( struct TA_CDLSEPARATINGLINES_State* _state,
-/* Generated */                                                          FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLSEPARATINGLINES_StateSave( struct TA_CDLSEPARATINGLINES_State* _state,
+/* Generated */                                                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -558,16 +558,16 @@ int i1;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlSeperatingLinesStateLoad( struct TA_CdlSeperatingLines_State** _state,
-/* Generated */                                      FILE* _file )
+/* Generated */ Core::RetCode Core::CdlSeperatingLinesStateLoad( struct TA_CdlSeperatingLines_State** _state,
+/* Generated */                                                FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlSeperatingLinesStateLoad( struct TA_cdlSeperatingLines_State** _state,
-/* Generated */                                       FILE* _file )
+/* Generated */ public RetCode cdlSeperatingLinesStateLoad( struct TA_cdlSeperatingLines_State** _state,
+/* Generated */                                           FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLSEPARATINGLINES_StateLoad( struct TA_CDLSEPARATINGLINES_State** _state,
-/* Generated */                                                          FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLSEPARATINGLINES_StateLoad( struct TA_CDLSEPARATINGLINES_State** _state,
+/* Generated */                                                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

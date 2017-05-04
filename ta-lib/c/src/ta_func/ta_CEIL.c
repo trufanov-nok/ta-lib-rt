@@ -187,13 +187,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CeilStateInit( struct TA_Ceil_State** _state )
+/* Generated */ Core::RetCode Core::CeilStateInit( struct TA_Ceil_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int ceilStateInit( struct TA_ceil_State** _state )
+/* Generated */ public RetCode ceilStateInit( struct TA_ceil_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CEIL_StateInit( struct TA_CEIL_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CEIL_StateInit( struct TA_CEIL_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -229,17 +229,17 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CeilState( struct TA_Ceil_State* _state,
-/* Generated */                    cli::array<double>^ inReal,
-/* Generated */                    cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::CeilState( struct TA_Ceil_State* _state,
+/* Generated */                              cli::array<double>^ inReal,
+/* Generated */                              cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int ceilState( struct TA_ceil_State* _state,
-/* Generated */                     double       inReal,
-/* Generated */                     double        *outReal )
+/* Generated */ public RetCode ceilState( struct TA_ceil_State* _state,
+/* Generated */                         double       inReal,
+/* Generated */                         double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CEIL_State( struct TA_CEIL_State* _state,
-/* Generated */                                        const double inReal,
-/* Generated */                                        double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_CEIL_State( struct TA_CEIL_State* _state,
+/* Generated */                                               const double inReal,
+/* Generated */                                               double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -278,13 +278,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CeilStateFree( struct TA_Ceil_State** _state )
+/* Generated */ Core::RetCode Core::CeilStateFree( struct TA_Ceil_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int ceilStateFree( struct TA_ceil_State** _state )
+/* Generated */ public RetCode ceilStateFree( struct TA_ceil_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CEIL_StateFree( struct TA_CEIL_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CEIL_StateFree( struct TA_CEIL_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -312,16 +312,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CeilStateSave( struct TA_Ceil_State* _state,
-/* Generated */                        FILE* _file )
+/* Generated */ Core::RetCode Core::CeilStateSave( struct TA_Ceil_State* _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int ceilStateSave( struct TA_ceil_State* _state,
-/* Generated */                         FILE* _file )
+/* Generated */ public RetCode ceilStateSave( struct TA_ceil_State* _state,
+/* Generated */                             FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CEIL_StateSave( struct TA_CEIL_State* _state,
-/* Generated */                                            FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CEIL_StateSave( struct TA_CEIL_State* _state,
+/* Generated */                                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -359,16 +359,16 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CeilStateLoad( struct TA_Ceil_State** _state,
-/* Generated */                        FILE* _file )
+/* Generated */ Core::RetCode Core::CeilStateLoad( struct TA_Ceil_State** _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int ceilStateLoad( struct TA_ceil_State** _state,
-/* Generated */                         FILE* _file )
+/* Generated */ public RetCode ceilStateLoad( struct TA_ceil_State** _state,
+/* Generated */                             FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CEIL_StateLoad( struct TA_CEIL_State** _state,
-/* Generated */                                            FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CEIL_StateLoad( struct TA_CEIL_State** _state,
+/* Generated */                                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

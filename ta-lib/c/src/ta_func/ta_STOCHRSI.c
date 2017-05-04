@@ -362,23 +362,23 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::StochRsiStateInit( struct TA_StochRsi_State** _state,
-/* Generated */                            int           optInTimePeriod, /* From 2 to 100000 */
-/* Generated */                            int           optInFastK_Period, /* From 1 to 100000 */
-/* Generated */                            int           optInFastD_Period, /* From 1 to 100000 */
-/* Generated */                            MAType        optInFastD_MAType ) /* Generated */ 
+/* Generated */ Core::RetCode Core::StochRsiStateInit( struct TA_StochRsi_State** _state,
+/* Generated */                                      int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                      int           optInFastK_Period, /* From 1 to 100000 */
+/* Generated */                                      int           optInFastD_Period, /* From 1 to 100000 */
+/* Generated */                                      MAType        optInFastD_MAType ) /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int stochRsiStateInit( struct TA_stochRsi_State** _state,
-/* Generated */                             int           optInTimePeriod, /* From 2 to 100000 */
-/* Generated */                             int           optInFastK_Period, /* From 1 to 100000 */
-/* Generated */                             int           optInFastD_Period, /* From 1 to 100000 */
-/* Generated */                             MAType        optInFastD_MAType ) /* Generated */ 
+/* Generated */ public RetCode stochRsiStateInit( struct TA_stochRsi_State** _state,
+/* Generated */                                 int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                 int           optInFastK_Period, /* From 1 to 100000 */
+/* Generated */                                 int           optInFastD_Period, /* From 1 to 100000 */
+/* Generated */                                 MAType        optInFastD_MAType ) /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_STOCHRSI_StateInit( struct TA_STOCHRSI_State** _state,
-/* Generated */                                                int           optInTimePeriod, /* From 2 to 100000 */
-/* Generated */                                                int           optInFastK_Period, /* From 1 to 100000 */
-/* Generated */                                                int           optInFastD_Period, /* From 1 to 100000 */
-/* Generated */                                                TA_MAType     optInFastD_MAType ) /* Generated */ 
+/* Generated */ TA_LIB_API TA_RetCode TA_STOCHRSI_StateInit( struct TA_STOCHRSI_State** _state,
+/* Generated */                                                       int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                                       int           optInFastK_Period, /* From 1 to 100000 */
+/* Generated */                                                       int           optInFastD_Period, /* From 1 to 100000 */
+/* Generated */                                                       TA_MAType     optInFastD_MAType ) /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 
@@ -447,20 +447,20 @@ TA_RetCode retCode;
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::StochRsiState( struct TA_StochRsi_State* _state,
-/* Generated */                        cli::array<double>^ inReal,
-/* Generated */                        cli::array<double>^  *outFastK,
-/* Generated */                        cli::array<double>^  *outFastD )
+/* Generated */ Core::RetCode Core::StochRsiState( struct TA_StochRsi_State* _state,
+/* Generated */                                  cli::array<double>^ inReal,
+/* Generated */                                  cli::array<double>^  *outFastK,
+/* Generated */                                  cli::array<double>^  *outFastD )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int stochRsiState( struct TA_stochRsi_State* _state,
-/* Generated */                         double       inReal,
-/* Generated */                         double        *outFastK,
-/* Generated */                         double        *outFastD )
+/* Generated */ public RetCode stochRsiState( struct TA_stochRsi_State* _state,
+/* Generated */                             double       inReal,
+/* Generated */                             double        *outFastK,
+/* Generated */                             double        *outFastD )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_STOCHRSI_State( struct TA_STOCHRSI_State* _state,
-/* Generated */                                            const double inReal,
-/* Generated */                                            double        *outFastK,
-/* Generated */                                            double        *outFastD )
+/* Generated */ TA_LIB_API TA_RetCode TA_STOCHRSI_State( struct TA_STOCHRSI_State* _state,
+/* Generated */                                                   const double inReal,
+/* Generated */                                                   double        *outFastK,
+/* Generated */                                                   double        *outFastD )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -508,13 +508,13 @@ TA_RetCode retCode;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::StochRsiStateFree( struct TA_StochRsi_State** _state )
+/* Generated */ Core::RetCode Core::StochRsiStateFree( struct TA_StochRsi_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int stochRsiStateFree( struct TA_stochRsi_State** _state )
+/* Generated */ public RetCode stochRsiStateFree( struct TA_stochRsi_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_STOCHRSI_StateFree( struct TA_STOCHRSI_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_STOCHRSI_StateFree( struct TA_STOCHRSI_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -547,16 +547,16 @@ TA_RetCode retCode;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::StochRsiStateSave( struct TA_StochRsi_State* _state,
-/* Generated */                            FILE* _file )
+/* Generated */ Core::RetCode Core::StochRsiStateSave( struct TA_StochRsi_State* _state,
+/* Generated */                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int stochRsiStateSave( struct TA_stochRsi_State* _state,
-/* Generated */                             FILE* _file )
+/* Generated */ public RetCode stochRsiStateSave( struct TA_stochRsi_State* _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_STOCHRSI_StateSave( struct TA_STOCHRSI_State* _state,
-/* Generated */                                                FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_STOCHRSI_StateSave( struct TA_STOCHRSI_State* _state,
+/* Generated */                                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -608,16 +608,16 @@ TA_RetCode retCode;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::StochRsiStateLoad( struct TA_StochRsi_State** _state,
-/* Generated */                            FILE* _file )
+/* Generated */ Core::RetCode Core::StochRsiStateLoad( struct TA_StochRsi_State** _state,
+/* Generated */                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int stochRsiStateLoad( struct TA_stochRsi_State** _state,
-/* Generated */                             FILE* _file )
+/* Generated */ public RetCode stochRsiStateLoad( struct TA_stochRsi_State** _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_STOCHRSI_StateLoad( struct TA_STOCHRSI_State** _state,
-/* Generated */                                                FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_STOCHRSI_StateLoad( struct TA_STOCHRSI_State** _state,
+/* Generated */                                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

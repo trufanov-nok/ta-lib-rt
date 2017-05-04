@@ -398,22 +398,22 @@ DEFINE_CIRCBUF_STRUCT(ULTOSC, double)
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::UltOscStateInit( struct TA_UltOsc_State** _state,
-/* Generated */                          int           optInTimePeriod1, /* From 1 to 100000 */
-/* Generated */                          int           optInTimePeriod2, /* From 1 to 100000 */
-/* Generated */                          int           optInTimePeriod3 )  /* From 1 to 100000 */
+/* Generated */ Core::RetCode Core::UltOscStateInit( struct TA_UltOsc_State** _state,
+/* Generated */                                    int           optInTimePeriod1, /* From 1 to 100000 */
+/* Generated */                                    int           optInTimePeriod2, /* From 1 to 100000 */
+/* Generated */                                    int           optInTimePeriod3 )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int ultOscStateInit( struct TA_ultOsc_State** _state,
-/* Generated */                           int           optInTimePeriod1, /* From 1 to 100000 */
-/* Generated */                           int           optInTimePeriod2, /* From 1 to 100000 */
-/* Generated */                           int           optInTimePeriod3 )  /* From 1 to 100000 */
+/* Generated */ public RetCode ultOscStateInit( struct TA_ultOsc_State** _state,
+/* Generated */                               int           optInTimePeriod1, /* From 1 to 100000 */
+/* Generated */                               int           optInTimePeriod2, /* From 1 to 100000 */
+/* Generated */                               int           optInTimePeriod3 )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ULTOSC_StateInit( struct TA_ULTOSC_State** _state,
-/* Generated */                                              int           optInTimePeriod1, /* From 1 to 100000 */
-/* Generated */                                              int           optInTimePeriod2, /* From 1 to 100000 */
-/* Generated */                                              int           optInTimePeriod3 )  /* From 1 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_ULTOSC_StateInit( struct TA_ULTOSC_State** _state,
+/* Generated */                                                     int           optInTimePeriod1, /* From 1 to 100000 */
+/* Generated */                                                     int           optInTimePeriod2, /* From 1 to 100000 */
+/* Generated */                                                     int           optInTimePeriod3 )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -489,23 +489,23 @@ DEFINE_CIRCBUF_STRUCT(ULTOSC, double)
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::UltOscState( struct TA_UltOsc_State* _state,
-/* Generated */                      cli::array<double>^ inHigh,
-/* Generated */                      cli::array<double>^ inLow,
-/* Generated */                      cli::array<double>^ inClose,
-/* Generated */                      cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::UltOscState( struct TA_UltOsc_State* _state,
+/* Generated */                                cli::array<double>^ inHigh,
+/* Generated */                                cli::array<double>^ inLow,
+/* Generated */                                cli::array<double>^ inClose,
+/* Generated */                                cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int ultOscState( struct TA_ultOsc_State* _state,
-/* Generated */                       double       inHigh,
-/* Generated */                       double       inLow,
-/* Generated */                       double       inClose,
-/* Generated */                       double        *outReal )
+/* Generated */ public RetCode ultOscState( struct TA_ultOsc_State* _state,
+/* Generated */                           double       inHigh,
+/* Generated */                           double       inLow,
+/* Generated */                           double       inClose,
+/* Generated */                           double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ULTOSC_State( struct TA_ULTOSC_State* _state,
-/* Generated */                                          const double inHigh,
-/* Generated */                                          const double inLow,
-/* Generated */                                          const double inClose,
-/* Generated */                                          double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_ULTOSC_State( struct TA_ULTOSC_State* _state,
+/* Generated */                                                 const double inHigh,
+/* Generated */                                                 const double inLow,
+/* Generated */                                                 const double inClose,
+/* Generated */                                                 double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -624,13 +624,13 @@ DEFINE_CIRCBUF_STRUCT(ULTOSC, double)
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::UltOscStateFree( struct TA_UltOsc_State** _state )
+/* Generated */ Core::RetCode Core::UltOscStateFree( struct TA_UltOsc_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int ultOscStateFree( struct TA_ultOsc_State** _state )
+/* Generated */ public RetCode ultOscStateFree( struct TA_ultOsc_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ULTOSC_StateFree( struct TA_ULTOSC_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_ULTOSC_StateFree( struct TA_ULTOSC_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -659,16 +659,16 @@ DEFINE_CIRCBUF_STRUCT(ULTOSC, double)
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::UltOscStateSave( struct TA_UltOsc_State* _state,
-/* Generated */                          FILE* _file )
+/* Generated */ Core::RetCode Core::UltOscStateSave( struct TA_UltOsc_State* _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int ultOscStateSave( struct TA_ultOsc_State* _state,
-/* Generated */                           FILE* _file )
+/* Generated */ public RetCode ultOscStateSave( struct TA_ultOsc_State* _state,
+/* Generated */                               FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ULTOSC_StateSave( struct TA_ULTOSC_State* _state,
-/* Generated */                                              FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_ULTOSC_StateSave( struct TA_ULTOSC_State* _state,
+/* Generated */                                                     FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -734,16 +734,16 @@ DEFINE_CIRCBUF_STRUCT(ULTOSC, double)
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::UltOscStateLoad( struct TA_UltOsc_State** _state,
-/* Generated */                          FILE* _file )
+/* Generated */ Core::RetCode Core::UltOscStateLoad( struct TA_UltOsc_State** _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int ultOscStateLoad( struct TA_ultOsc_State** _state,
-/* Generated */                           FILE* _file )
+/* Generated */ public RetCode ultOscStateLoad( struct TA_ultOsc_State** _state,
+/* Generated */                               FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ULTOSC_StateLoad( struct TA_ULTOSC_State** _state,
-/* Generated */                                              FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_ULTOSC_StateLoad( struct TA_ULTOSC_State** _state,
+/* Generated */                                                     FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

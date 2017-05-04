@@ -290,16 +290,16 @@ TA_RetCode TA_PREFIX(INT_SMA)( int    startIdx,
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::SmaStateInit( struct TA_Sma_State** _state,
-/* Generated */                       int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ Core::RetCode Core::SmaStateInit( struct TA_Sma_State** _state,
+/* Generated */                                 int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int smaStateInit( struct TA_sma_State** _state,
-/* Generated */                        int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ public RetCode smaStateInit( struct TA_sma_State** _state,
+/* Generated */                            int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_SMA_StateInit( struct TA_SMA_State** _state,
-/* Generated */                                           int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_SMA_StateInit( struct TA_SMA_State** _state,
+/* Generated */                                                  int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -342,17 +342,17 @@ TA_RetCode TA_PREFIX(INT_SMA)( int    startIdx,
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::SmaState( struct TA_Sma_State* _state,
-/* Generated */                   cli::array<double>^ inReal,
-/* Generated */                   cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::SmaState( struct TA_Sma_State* _state,
+/* Generated */                             cli::array<double>^ inReal,
+/* Generated */                             cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int smaState( struct TA_sma_State* _state,
-/* Generated */                    double       inReal,
-/* Generated */                    double        *outReal )
+/* Generated */ public RetCode smaState( struct TA_sma_State* _state,
+/* Generated */                        double       inReal,
+/* Generated */                        double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_SMA_State( struct TA_SMA_State* _state,
-/* Generated */                                       const double inReal,
-/* Generated */                                       double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_SMA_State( struct TA_SMA_State* _state,
+/* Generated */                                              const double inReal,
+/* Generated */                                              double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -409,13 +409,13 @@ TA_RetCode TA_PREFIX(INT_SMA)( int    startIdx,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::SmaStateFree( struct TA_Sma_State** _state )
+/* Generated */ Core::RetCode Core::SmaStateFree( struct TA_Sma_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int smaStateFree( struct TA_sma_State** _state )
+/* Generated */ public RetCode smaStateFree( struct TA_sma_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_SMA_StateFree( struct TA_SMA_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_SMA_StateFree( struct TA_SMA_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -443,16 +443,16 @@ TA_RetCode TA_PREFIX(INT_SMA)( int    startIdx,
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::SmaStateSave( struct TA_Sma_State* _state,
-/* Generated */                       FILE* _file )
+/* Generated */ Core::RetCode Core::SmaStateSave( struct TA_Sma_State* _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int smaStateSave( struct TA_sma_State* _state,
-/* Generated */                        FILE* _file )
+/* Generated */ public RetCode smaStateSave( struct TA_sma_State* _state,
+/* Generated */                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_SMA_StateSave( struct TA_SMA_State* _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_SMA_StateSave( struct TA_SMA_State* _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -494,16 +494,16 @@ TA_RetCode TA_PREFIX(INT_SMA)( int    startIdx,
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::SmaStateLoad( struct TA_Sma_State** _state,
-/* Generated */                       FILE* _file )
+/* Generated */ Core::RetCode Core::SmaStateLoad( struct TA_Sma_State** _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int smaStateLoad( struct TA_sma_State** _state,
-/* Generated */                        FILE* _file )
+/* Generated */ public RetCode smaStateLoad( struct TA_sma_State** _state,
+/* Generated */                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_SMA_StateLoad( struct TA_SMA_State** _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_SMA_StateLoad( struct TA_SMA_State** _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

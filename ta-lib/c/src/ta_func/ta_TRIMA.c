@@ -486,16 +486,16 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TrimaStateInit( struct TA_Trima_State** _state,
-/* Generated */                         int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ Core::RetCode Core::TrimaStateInit( struct TA_Trima_State** _state,
+/* Generated */                                   int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int trimaStateInit( struct TA_trima_State** _state,
-/* Generated */                          int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ public RetCode trimaStateInit( struct TA_trima_State** _state,
+/* Generated */                              int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TRIMA_StateInit( struct TA_TRIMA_State** _state,
-/* Generated */                                             int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_TRIMA_StateInit( struct TA_TRIMA_State** _state,
+/* Generated */                                                    int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -538,17 +538,17 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TrimaState( struct TA_Trima_State* _state,
-/* Generated */                     cli::array<double>^ inReal,
-/* Generated */                     cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::TrimaState( struct TA_Trima_State* _state,
+/* Generated */                               cli::array<double>^ inReal,
+/* Generated */                               cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int trimaState( struct TA_trima_State* _state,
-/* Generated */                      double       inReal,
-/* Generated */                      double        *outReal )
+/* Generated */ public RetCode trimaState( struct TA_trima_State* _state,
+/* Generated */                          double       inReal,
+/* Generated */                          double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TRIMA_State( struct TA_TRIMA_State* _state,
-/* Generated */                                         const double inReal,
-/* Generated */                                         double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_TRIMA_State( struct TA_TRIMA_State* _state,
+/* Generated */                                                const double inReal,
+/* Generated */                                                double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -667,13 +667,13 @@ double tempReal;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TrimaStateFree( struct TA_Trima_State** _state )
+/* Generated */ Core::RetCode Core::TrimaStateFree( struct TA_Trima_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int trimaStateFree( struct TA_trima_State** _state )
+/* Generated */ public RetCode trimaStateFree( struct TA_trima_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TRIMA_StateFree( struct TA_TRIMA_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_TRIMA_StateFree( struct TA_TRIMA_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -701,16 +701,16 @@ double tempReal;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TrimaStateSave( struct TA_Trima_State* _state,
-/* Generated */                         FILE* _file )
+/* Generated */ Core::RetCode Core::TrimaStateSave( struct TA_Trima_State* _state,
+/* Generated */                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int trimaStateSave( struct TA_trima_State* _state,
-/* Generated */                          FILE* _file )
+/* Generated */ public RetCode trimaStateSave( struct TA_trima_State* _state,
+/* Generated */                              FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TRIMA_StateSave( struct TA_TRIMA_State* _state,
-/* Generated */                                             FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_TRIMA_StateSave( struct TA_TRIMA_State* _state,
+/* Generated */                                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -760,16 +760,16 @@ double tempReal;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TrimaStateLoad( struct TA_Trima_State** _state,
-/* Generated */                         FILE* _file )
+/* Generated */ Core::RetCode Core::TrimaStateLoad( struct TA_Trima_State** _state,
+/* Generated */                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int trimaStateLoad( struct TA_trima_State** _state,
-/* Generated */                          FILE* _file )
+/* Generated */ public RetCode trimaStateLoad( struct TA_trima_State** _state,
+/* Generated */                              FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TRIMA_StateLoad( struct TA_TRIMA_State** _state,
-/* Generated */                                             FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_TRIMA_StateLoad( struct TA_TRIMA_State** _state,
+/* Generated */                                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

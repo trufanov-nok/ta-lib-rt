@@ -224,16 +224,16 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MacdFixStateInit( struct TA_MacdFix_State** _state,
-/* Generated */                           int           optInSignalPeriod )  /* From 1 to 100000 */
+/* Generated */ Core::RetCode Core::MacdFixStateInit( struct TA_MacdFix_State** _state,
+/* Generated */                                     int           optInSignalPeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int macdFixStateInit( struct TA_macdFix_State** _state,
-/* Generated */                            int           optInSignalPeriod )  /* From 1 to 100000 */
+/* Generated */ public RetCode macdFixStateInit( struct TA_macdFix_State** _state,
+/* Generated */                                int           optInSignalPeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MACDFIX_StateInit( struct TA_MACDFIX_State** _state,
-/* Generated */                                               int           optInSignalPeriod )  /* From 1 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_MACDFIX_StateInit( struct TA_MACDFIX_State** _state,
+/* Generated */                                                      int           optInSignalPeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -281,23 +281,23 @@ return FUNCTION_CALL_STATE_INIT(INT_MACD)((struct TA_MACD_State**) _state,
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MacdFixState( struct TA_MacdFix_State* _state,
-/* Generated */                       cli::array<double>^ inReal,
-/* Generated */                       cli::array<double>^  *outMACD,
-/* Generated */                       cli::array<double>^  *outMACDSignal,
-/* Generated */                       cli::array<double>^  *outMACDHist )
+/* Generated */ Core::RetCode Core::MacdFixState( struct TA_MacdFix_State* _state,
+/* Generated */                                 cli::array<double>^ inReal,
+/* Generated */                                 cli::array<double>^  *outMACD,
+/* Generated */                                 cli::array<double>^  *outMACDSignal,
+/* Generated */                                 cli::array<double>^  *outMACDHist )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int macdFixState( struct TA_macdFix_State* _state,
-/* Generated */                        double       inReal,
-/* Generated */                        double        *outMACD,
-/* Generated */                        double        *outMACDSignal,
-/* Generated */                        double        *outMACDHist )
+/* Generated */ public RetCode macdFixState( struct TA_macdFix_State* _state,
+/* Generated */                            double       inReal,
+/* Generated */                            double        *outMACD,
+/* Generated */                            double        *outMACDSignal,
+/* Generated */                            double        *outMACDHist )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MACDFIX_State( struct TA_MACDFIX_State* _state,
-/* Generated */                                           const double inReal,
-/* Generated */                                           double        *outMACD,
-/* Generated */                                           double        *outMACDSignal,
-/* Generated */                                           double        *outMACDHist )
+/* Generated */ TA_LIB_API TA_RetCode TA_MACDFIX_State( struct TA_MACDFIX_State* _state,
+/* Generated */                                                  const double inReal,
+/* Generated */                                                  double        *outMACD,
+/* Generated */                                                  double        *outMACDSignal,
+/* Generated */                                                  double        *outMACDHist )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -344,13 +344,13 @@ return FUNCTION_CALL_STATE_INIT(INT_MACD)((struct TA_MACD_State**) _state,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MacdFixStateFree( struct TA_MacdFix_State** _state )
+/* Generated */ Core::RetCode Core::MacdFixStateFree( struct TA_MacdFix_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int macdFixStateFree( struct TA_macdFix_State** _state )
+/* Generated */ public RetCode macdFixStateFree( struct TA_macdFix_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MACDFIX_StateFree( struct TA_MACDFIX_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_MACDFIX_StateFree( struct TA_MACDFIX_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -380,16 +380,16 @@ return FUNCTION_CALL_STATE_INIT(INT_MACD)((struct TA_MACD_State**) _state,
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MacdFixStateSave( struct TA_MacdFix_State* _state,
-/* Generated */                           FILE* _file )
+/* Generated */ Core::RetCode Core::MacdFixStateSave( struct TA_MacdFix_State* _state,
+/* Generated */                                     FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int macdFixStateSave( struct TA_macdFix_State* _state,
-/* Generated */                            FILE* _file )
+/* Generated */ public RetCode macdFixStateSave( struct TA_macdFix_State* _state,
+/* Generated */                                FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MACDFIX_StateSave( struct TA_MACDFIX_State* _state,
-/* Generated */                                               FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MACDFIX_StateSave( struct TA_MACDFIX_State* _state,
+/* Generated */                                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -429,16 +429,16 @@ return FUNCTION_CALL_STATE_INIT(INT_MACD)((struct TA_MACD_State**) _state,
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MacdFixStateLoad( struct TA_MacdFix_State** _state,
-/* Generated */                           FILE* _file )
+/* Generated */ Core::RetCode Core::MacdFixStateLoad( struct TA_MacdFix_State** _state,
+/* Generated */                                     FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int macdFixStateLoad( struct TA_macdFix_State** _state,
-/* Generated */                            FILE* _file )
+/* Generated */ public RetCode macdFixStateLoad( struct TA_macdFix_State** _state,
+/* Generated */                                FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MACDFIX_StateLoad( struct TA_MACDFIX_State** _state,
-/* Generated */                                               FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MACDFIX_StateLoad( struct TA_MACDFIX_State** _state,
+/* Generated */                                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

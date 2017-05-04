@@ -346,16 +346,16 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TemaStateInit( struct TA_Tema_State** _state,
-/* Generated */                        int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ Core::RetCode Core::TemaStateInit( struct TA_Tema_State** _state,
+/* Generated */                                  int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int temaStateInit( struct TA_tema_State** _state,
-/* Generated */                         int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ public RetCode temaStateInit( struct TA_tema_State** _state,
+/* Generated */                             int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TEMA_StateInit( struct TA_TEMA_State** _state,
-/* Generated */                                            int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_TEMA_StateInit( struct TA_TEMA_State** _state,
+/* Generated */                                                   int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -410,17 +410,17 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TemaState( struct TA_Tema_State* _state,
-/* Generated */                    cli::array<double>^ inReal,
-/* Generated */                    cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::TemaState( struct TA_Tema_State* _state,
+/* Generated */                              cli::array<double>^ inReal,
+/* Generated */                              cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int temaState( struct TA_tema_State* _state,
-/* Generated */                     double       inReal,
-/* Generated */                     double        *outReal )
+/* Generated */ public RetCode temaState( struct TA_tema_State* _state,
+/* Generated */                         double       inReal,
+/* Generated */                         double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TEMA_State( struct TA_TEMA_State* _state,
-/* Generated */                                        const double inReal,
-/* Generated */                                        double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_TEMA_State( struct TA_TEMA_State* _state,
+/* Generated */                                               const double inReal,
+/* Generated */                                               double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -475,13 +475,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TemaStateFree( struct TA_Tema_State** _state )
+/* Generated */ Core::RetCode Core::TemaStateFree( struct TA_Tema_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int temaStateFree( struct TA_tema_State** _state )
+/* Generated */ public RetCode temaStateFree( struct TA_tema_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TEMA_StateFree( struct TA_TEMA_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_TEMA_StateFree( struct TA_TEMA_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -519,16 +519,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TemaStateSave( struct TA_Tema_State* _state,
-/* Generated */                        FILE* _file )
+/* Generated */ Core::RetCode Core::TemaStateSave( struct TA_Tema_State* _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int temaStateSave( struct TA_tema_State* _state,
-/* Generated */                         FILE* _file )
+/* Generated */ public RetCode temaStateSave( struct TA_tema_State* _state,
+/* Generated */                             FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TEMA_StateSave( struct TA_TEMA_State* _state,
-/* Generated */                                            FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_TEMA_StateSave( struct TA_TEMA_State* _state,
+/* Generated */                                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -577,16 +577,16 @@ TA_RetCode retCode;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TemaStateLoad( struct TA_Tema_State** _state,
-/* Generated */                        FILE* _file )
+/* Generated */ Core::RetCode Core::TemaStateLoad( struct TA_Tema_State** _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int temaStateLoad( struct TA_tema_State** _state,
-/* Generated */                         FILE* _file )
+/* Generated */ public RetCode temaStateLoad( struct TA_tema_State** _state,
+/* Generated */                             FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TEMA_StateLoad( struct TA_TEMA_State** _state,
-/* Generated */                                            FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_TEMA_StateLoad( struct TA_TEMA_State** _state,
+/* Generated */                                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

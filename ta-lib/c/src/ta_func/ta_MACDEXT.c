@@ -467,23 +467,23 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MacdExtStateInit( struct TA_MacdExt_State** _state,
-/* Generated */                           int           optInFastPeriod, /* From 2 to 100000 */
-/* Generated */                           MAType        optInFastMAType,/* Generated */                           int           optInSlowPeriod, /* From 2 to 100000 */
-/* Generated */                           MAType        optInSlowMAType,/* Generated */                           int           optInSignalPeriod, /* From 1 to 100000 */
-/* Generated */                           MAType        optInSignalMAType ) /* Generated */ 
+/* Generated */ Core::RetCode Core::MacdExtStateInit( struct TA_MacdExt_State** _state,
+/* Generated */                                     int           optInFastPeriod, /* From 2 to 100000 */
+/* Generated */                                     MAType        optInFastMAType,/* Generated */                                     int           optInSlowPeriod, /* From 2 to 100000 */
+/* Generated */                                     MAType        optInSlowMAType,/* Generated */                                     int           optInSignalPeriod, /* From 1 to 100000 */
+/* Generated */                                     MAType        optInSignalMAType ) /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int macdExtStateInit( struct TA_macdExt_State** _state,
-/* Generated */                            int           optInFastPeriod, /* From 2 to 100000 */
-/* Generated */                            MAType        optInFastMAType,/* Generated */                            int           optInSlowPeriod, /* From 2 to 100000 */
-/* Generated */                            MAType        optInSlowMAType,/* Generated */                            int           optInSignalPeriod, /* From 1 to 100000 */
-/* Generated */                            MAType        optInSignalMAType ) /* Generated */ 
+/* Generated */ public RetCode macdExtStateInit( struct TA_macdExt_State** _state,
+/* Generated */                                int           optInFastPeriod, /* From 2 to 100000 */
+/* Generated */                                MAType        optInFastMAType,/* Generated */                                int           optInSlowPeriod, /* From 2 to 100000 */
+/* Generated */                                MAType        optInSlowMAType,/* Generated */                                int           optInSignalPeriod, /* From 1 to 100000 */
+/* Generated */                                MAType        optInSignalMAType ) /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MACDEXT_StateInit( struct TA_MACDEXT_State** _state,
-/* Generated */                                               int           optInFastPeriod, /* From 2 to 100000 */
-/* Generated */                                               TA_MAType     optInFastMAType,/* Generated */                                               int           optInSlowPeriod, /* From 2 to 100000 */
-/* Generated */                                               TA_MAType     optInSlowMAType,/* Generated */                                               int           optInSignalPeriod, /* From 1 to 100000 */
-/* Generated */                                               TA_MAType     optInSignalMAType ) /* Generated */ 
+/* Generated */ TA_LIB_API TA_RetCode TA_MACDEXT_StateInit( struct TA_MACDEXT_State** _state,
+/* Generated */                                                      int           optInFastPeriod, /* From 2 to 100000 */
+/* Generated */                                                      TA_MAType     optInFastMAType,/* Generated */                                                      int           optInSlowPeriod, /* From 2 to 100000 */
+/* Generated */                                                      TA_MAType     optInSlowMAType,/* Generated */                                                      int           optInSignalPeriod, /* From 1 to 100000 */
+/* Generated */                                                      TA_MAType     optInSignalMAType ) /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 
@@ -580,23 +580,23 @@ ENUM_DECLARATION(RetCode) retCode;
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MacdExtState( struct TA_MacdExt_State* _state,
-/* Generated */                       cli::array<double>^ inReal,
-/* Generated */                       cli::array<double>^  *outMACD,
-/* Generated */                       cli::array<double>^  *outMACDSignal,
-/* Generated */                       cli::array<double>^  *outMACDHist )
+/* Generated */ Core::RetCode Core::MacdExtState( struct TA_MacdExt_State* _state,
+/* Generated */                                 cli::array<double>^ inReal,
+/* Generated */                                 cli::array<double>^  *outMACD,
+/* Generated */                                 cli::array<double>^  *outMACDSignal,
+/* Generated */                                 cli::array<double>^  *outMACDHist )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int macdExtState( struct TA_macdExt_State* _state,
-/* Generated */                        double       inReal,
-/* Generated */                        double        *outMACD,
-/* Generated */                        double        *outMACDSignal,
-/* Generated */                        double        *outMACDHist )
+/* Generated */ public RetCode macdExtState( struct TA_macdExt_State* _state,
+/* Generated */                            double       inReal,
+/* Generated */                            double        *outMACD,
+/* Generated */                            double        *outMACDSignal,
+/* Generated */                            double        *outMACDHist )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MACDEXT_State( struct TA_MACDEXT_State* _state,
-/* Generated */                                           const double inReal,
-/* Generated */                                           double        *outMACD,
-/* Generated */                                           double        *outMACDSignal,
-/* Generated */                                           double        *outMACDHist )
+/* Generated */ TA_LIB_API TA_RetCode TA_MACDEXT_State( struct TA_MACDEXT_State* _state,
+/* Generated */                                                  const double inReal,
+/* Generated */                                                  double        *outMACD,
+/* Generated */                                                  double        *outMACDSignal,
+/* Generated */                                                  double        *outMACDHist )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -684,13 +684,13 @@ double slowMA, fastMA;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MacdExtStateFree( struct TA_MacdExt_State** _state )
+/* Generated */ Core::RetCode Core::MacdExtStateFree( struct TA_MacdExt_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int macdExtStateFree( struct TA_macdExt_State** _state )
+/* Generated */ public RetCode macdExtStateFree( struct TA_macdExt_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MACDEXT_StateFree( struct TA_MACDEXT_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_MACDEXT_StateFree( struct TA_MACDEXT_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -725,16 +725,16 @@ double slowMA, fastMA;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MacdExtStateSave( struct TA_MacdExt_State* _state,
-/* Generated */                           FILE* _file )
+/* Generated */ Core::RetCode Core::MacdExtStateSave( struct TA_MacdExt_State* _state,
+/* Generated */                                     FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int macdExtStateSave( struct TA_macdExt_State* _state,
-/* Generated */                            FILE* _file )
+/* Generated */ public RetCode macdExtStateSave( struct TA_macdExt_State* _state,
+/* Generated */                                FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MACDEXT_StateSave( struct TA_MACDEXT_State* _state,
-/* Generated */                                               FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MACDEXT_StateSave( struct TA_MACDEXT_State* _state,
+/* Generated */                                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -795,16 +795,16 @@ TA_RetCode retCode;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MacdExtStateLoad( struct TA_MacdExt_State** _state,
-/* Generated */                           FILE* _file )
+/* Generated */ Core::RetCode Core::MacdExtStateLoad( struct TA_MacdExt_State** _state,
+/* Generated */                                     FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int macdExtStateLoad( struct TA_macdExt_State** _state,
-/* Generated */                            FILE* _file )
+/* Generated */ public RetCode macdExtStateLoad( struct TA_macdExt_State** _state,
+/* Generated */                                FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MACDEXT_StateLoad( struct TA_MACDEXT_State** _state,
-/* Generated */                                               FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MACDEXT_StateLoad( struct TA_MACDEXT_State** _state,
+/* Generated */                                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

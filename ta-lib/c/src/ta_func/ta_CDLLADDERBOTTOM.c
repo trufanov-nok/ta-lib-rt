@@ -261,13 +261,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlLadderBottomStateInit( struct TA_CdlLadderBottom_State** _state )
+/* Generated */ Core::RetCode Core::CdlLadderBottomStateInit( struct TA_CdlLadderBottom_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlLadderBottomStateInit( struct TA_cdlLadderBottom_State** _state )
+/* Generated */ public RetCode cdlLadderBottomStateInit( struct TA_cdlLadderBottom_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLLADDERBOTTOM_StateInit( struct TA_CDLLADDERBOTTOM_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLLADDERBOTTOM_StateInit( struct TA_CDLLADDERBOTTOM_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -303,26 +303,26 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlLadderBottomState( struct TA_CdlLadderBottom_State* _state,
-/* Generated */                               cli::array<double>^ inOpen,
-/* Generated */                               cli::array<double>^ inHigh,
-/* Generated */                               cli::array<double>^ inLow,
-/* Generated */                               cli::array<double>^ inClose,
-/* Generated */                               cli::array<int>^  *outInteger )
+/* Generated */ Core::RetCode Core::CdlLadderBottomState( struct TA_CdlLadderBottom_State* _state,
+/* Generated */                                         cli::array<double>^ inOpen,
+/* Generated */                                         cli::array<double>^ inHigh,
+/* Generated */                                         cli::array<double>^ inLow,
+/* Generated */                                         cli::array<double>^ inClose,
+/* Generated */                                         cli::array<int>^  *outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlLadderBottomState( struct TA_cdlLadderBottom_State* _state,
-/* Generated */                                double       inOpen,
-/* Generated */                                double       inHigh,
-/* Generated */                                double       inLow,
-/* Generated */                                double       inClose,
-/* Generated */                                int           *outInteger )
+/* Generated */ public RetCode cdlLadderBottomState( struct TA_cdlLadderBottom_State* _state,
+/* Generated */                                    double       inOpen,
+/* Generated */                                    double       inHigh,
+/* Generated */                                    double       inLow,
+/* Generated */                                    double       inClose,
+/* Generated */                                    int           *outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLLADDERBOTTOM_State( struct TA_CDLLADDERBOTTOM_State* _state,
-/* Generated */                                                   const double inOpen,
-/* Generated */                                                   const double inHigh,
-/* Generated */                                                   const double inLow,
-/* Generated */                                                   const double inClose,
-/* Generated */                                                   int           *outInteger )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLLADDERBOTTOM_State( struct TA_CDLLADDERBOTTOM_State* _state,
+/* Generated */                                                          const double inOpen,
+/* Generated */                                                          const double inHigh,
+/* Generated */                                                          const double inLow,
+/* Generated */                                                          const double inClose,
+/* Generated */                                                          int           *outInteger )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -416,13 +416,13 @@ int i1, i2, i3, i4;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlLadderBottomStateFree( struct TA_CdlLadderBottom_State** _state )
+/* Generated */ Core::RetCode Core::CdlLadderBottomStateFree( struct TA_CdlLadderBottom_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlLadderBottomStateFree( struct TA_cdlLadderBottom_State** _state )
+/* Generated */ public RetCode cdlLadderBottomStateFree( struct TA_cdlLadderBottom_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLLADDERBOTTOM_StateFree( struct TA_CDLLADDERBOTTOM_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLLADDERBOTTOM_StateFree( struct TA_CDLLADDERBOTTOM_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -450,16 +450,16 @@ int i1, i2, i3, i4;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlLadderBottomStateSave( struct TA_CdlLadderBottom_State* _state,
-/* Generated */                                   FILE* _file )
+/* Generated */ Core::RetCode Core::CdlLadderBottomStateSave( struct TA_CdlLadderBottom_State* _state,
+/* Generated */                                             FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlLadderBottomStateSave( struct TA_cdlLadderBottom_State* _state,
-/* Generated */                                    FILE* _file )
+/* Generated */ public RetCode cdlLadderBottomStateSave( struct TA_cdlLadderBottom_State* _state,
+/* Generated */                                        FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLLADDERBOTTOM_StateSave( struct TA_CDLLADDERBOTTOM_State* _state,
-/* Generated */                                                       FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLLADDERBOTTOM_StateSave( struct TA_CDLLADDERBOTTOM_State* _state,
+/* Generated */                                                              FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -503,16 +503,16 @@ int i1, i2, i3, i4;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlLadderBottomStateLoad( struct TA_CdlLadderBottom_State** _state,
-/* Generated */                                   FILE* _file )
+/* Generated */ Core::RetCode Core::CdlLadderBottomStateLoad( struct TA_CdlLadderBottom_State** _state,
+/* Generated */                                             FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlLadderBottomStateLoad( struct TA_cdlLadderBottom_State** _state,
-/* Generated */                                    FILE* _file )
+/* Generated */ public RetCode cdlLadderBottomStateLoad( struct TA_cdlLadderBottom_State** _state,
+/* Generated */                                        FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLLADDERBOTTOM_StateLoad( struct TA_CDLLADDERBOTTOM_State** _state,
-/* Generated */                                                       FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLLADDERBOTTOM_StateLoad( struct TA_CDLLADDERBOTTOM_State** _state,
+/* Generated */                                                              FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

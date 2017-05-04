@@ -1884,26 +1884,29 @@ void printFunc( FILE *out,
    if( prototype )
    {
 
-       #define PRINT_SIGNATURE(funcSuffix) \
+       #define PRINT_SIGNATURE(funcSuffix, returnInt) \
        { \
            if( managedCPPCode ) \
            {        \
-              sprintf( gTempBuf, "%s%sint %s%s%s( ", \
+              sprintf( gTempBuf, "%s%s%s %s%s%s( ", \
                        prefix? prefix:"", \
                        managedCPPDeclaration? "         static ":"", \
+                       returnInt? "int":"Core::RetCode", \
                        managedCPPDeclaration? "":"Core::", \
                        funcName, funcSuffix ); \
            } \
            else if( outputForJava ) \
            {          \
-              sprintf( gTempBuf, "%spublic int %s%s( ", \
+              sprintf( gTempBuf, "%spublic %s %s%s( ", \
                        prefix? prefix:"", \
+                       returnInt? "int":"RetCode", \
                        funcName, funcSuffix ); \
            } \
            else \
            { \
-              sprintf( gTempBuf, "%sint TA_%s_%s( ", \
+              sprintf( gTempBuf, "%s%s TA_%s_%s( ", \
                        prefix? prefix:"", \
+                       returnInt? "int":"TA_RetCode", \
                        funcName, funcSuffix ); \
            } \
            print( out, gTempBuf ); \
@@ -1912,22 +1915,22 @@ void printFunc( FILE *out,
 
 
       if( lookbackSignature )      
-        { PRINT_SIGNATURE("Lookback"); }
+        { PRINT_SIGNATURE("Lookback", 1); }
       else
       if( stateInitSignature )
-        { PRINT_SIGNATURE("StateInit"); }
+        { PRINT_SIGNATURE("StateInit", 0); }
       else
       if( stateFuncSignature )
-        { PRINT_SIGNATURE("State"); }
+        { PRINT_SIGNATURE("State", 0); }
       else
       if( stateFreeSignature )
-        { PRINT_SIGNATURE("StateFree"); }
+        { PRINT_SIGNATURE("StateFree", 0); }
       else
       if( stateLoadSignature )
-        { PRINT_SIGNATURE("StateLoad"); }
+        { PRINT_SIGNATURE("StateLoad", 0); }
       else
       if( stateSaveSignature )
-        { PRINT_SIGNATURE("StateSave"); }
+        { PRINT_SIGNATURE("StateSave", 0); }
       else
       {
          if( arrayToSubArrayCnvt )

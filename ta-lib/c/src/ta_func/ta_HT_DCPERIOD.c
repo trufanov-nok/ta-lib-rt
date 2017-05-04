@@ -385,13 +385,13 @@ DEFINE_HILBERT_VARIABLES_STRUCT(HT_DCPERIOD)
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtDcPeriodStateInit( struct TA_HtDcPeriod_State** _state )
+/* Generated */ Core::RetCode Core::HtDcPeriodStateInit( struct TA_HtDcPeriod_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htDcPeriodStateInit( struct TA_htDcPeriod_State** _state )
+/* Generated */ public RetCode htDcPeriodStateInit( struct TA_htDcPeriod_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_DCPERIOD_StateInit( struct TA_HT_DCPERIOD_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_DCPERIOD_StateInit( struct TA_HT_DCPERIOD_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -430,17 +430,17 @@ DEFINE_HILBERT_VARIABLES_STRUCT(HT_DCPERIOD)
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtDcPeriodState( struct TA_HtDcPeriod_State* _state,
-/* Generated */                          cli::array<double>^ inReal,
-/* Generated */                          cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::HtDcPeriodState( struct TA_HtDcPeriod_State* _state,
+/* Generated */                                    cli::array<double>^ inReal,
+/* Generated */                                    cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htDcPeriodState( struct TA_htDcPeriod_State* _state,
-/* Generated */                           double       inReal,
-/* Generated */                           double        *outReal )
+/* Generated */ public RetCode htDcPeriodState( struct TA_htDcPeriod_State* _state,
+/* Generated */                               double       inReal,
+/* Generated */                               double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_DCPERIOD_State( struct TA_HT_DCPERIOD_State* _state,
-/* Generated */                                               const double inReal,
-/* Generated */                                               double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_DCPERIOD_State( struct TA_HT_DCPERIOD_State* _state,
+/* Generated */                                                      const double inReal,
+/* Generated */                                                      double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -602,13 +602,13 @@ DEFINE_HILBERT_VARIABLES_STRUCT(HT_DCPERIOD)
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtDcPeriodStateFree( struct TA_HtDcPeriod_State** _state )
+/* Generated */ Core::RetCode Core::HtDcPeriodStateFree( struct TA_HtDcPeriod_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htDcPeriodStateFree( struct TA_htDcPeriod_State** _state )
+/* Generated */ public RetCode htDcPeriodStateFree( struct TA_htDcPeriod_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_DCPERIOD_StateFree( struct TA_HT_DCPERIOD_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_DCPERIOD_StateFree( struct TA_HT_DCPERIOD_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -641,16 +641,16 @@ DEFINE_HILBERT_VARIABLES_STRUCT(HT_DCPERIOD)
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtDcPeriodStateSave( struct TA_HtDcPeriod_State* _state,
-/* Generated */                              FILE* _file )
+/* Generated */ Core::RetCode Core::HtDcPeriodStateSave( struct TA_HtDcPeriod_State* _state,
+/* Generated */                                        FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htDcPeriodStateSave( struct TA_htDcPeriod_State* _state,
-/* Generated */                               FILE* _file )
+/* Generated */ public RetCode htDcPeriodStateSave( struct TA_htDcPeriod_State* _state,
+/* Generated */                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_DCPERIOD_StateSave( struct TA_HT_DCPERIOD_State* _state,
-/* Generated */                                                   FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_DCPERIOD_StateSave( struct TA_HT_DCPERIOD_State* _state,
+/* Generated */                                                          FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -730,16 +730,16 @@ DEFINE_HILBERT_VARIABLES_STRUCT(HT_DCPERIOD)
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtDcPeriodStateLoad( struct TA_HtDcPeriod_State** _state,
-/* Generated */                              FILE* _file )
+/* Generated */ Core::RetCode Core::HtDcPeriodStateLoad( struct TA_HtDcPeriod_State** _state,
+/* Generated */                                        FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htDcPeriodStateLoad( struct TA_htDcPeriod_State** _state,
-/* Generated */                               FILE* _file )
+/* Generated */ public RetCode htDcPeriodStateLoad( struct TA_htDcPeriod_State** _state,
+/* Generated */                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_DCPERIOD_StateLoad( struct TA_HT_DCPERIOD_State** _state,
-/* Generated */                                                   FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_DCPERIOD_StateLoad( struct TA_HT_DCPERIOD_State** _state,
+/* Generated */                                                          FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

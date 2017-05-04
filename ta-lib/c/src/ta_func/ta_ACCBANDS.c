@@ -338,16 +338,16 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AccbandsStateInit( struct TA_Accbands_State** _state,
-/* Generated */                            int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ Core::RetCode Core::AccbandsStateInit( struct TA_Accbands_State** _state,
+/* Generated */                                      int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int accbandsStateInit( struct TA_accbands_State** _state,
-/* Generated */                             int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ public RetCode accbandsStateInit( struct TA_accbands_State** _state,
+/* Generated */                                 int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ACCBANDS_StateInit( struct TA_ACCBANDS_State** _state,
-/* Generated */                                                int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_ACCBANDS_StateInit( struct TA_ACCBANDS_State** _state,
+/* Generated */                                                       int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -396,29 +396,29 @@ TA_RetCode retCode;
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AccbandsState( struct TA_Accbands_State* _state,
-/* Generated */                        cli::array<double>^ inHigh,
-/* Generated */                        cli::array<double>^ inLow,
-/* Generated */                        cli::array<double>^ inClose,
-/* Generated */                        cli::array<double>^  *outRealUpperBand,
-/* Generated */                        cli::array<double>^  *outRealMiddleBand,
-/* Generated */                        cli::array<double>^  *outRealLowerBand )
+/* Generated */ Core::RetCode Core::AccbandsState( struct TA_Accbands_State* _state,
+/* Generated */                                  cli::array<double>^ inHigh,
+/* Generated */                                  cli::array<double>^ inLow,
+/* Generated */                                  cli::array<double>^ inClose,
+/* Generated */                                  cli::array<double>^  *outRealUpperBand,
+/* Generated */                                  cli::array<double>^  *outRealMiddleBand,
+/* Generated */                                  cli::array<double>^  *outRealLowerBand )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int accbandsState( struct TA_accbands_State* _state,
-/* Generated */                         double       inHigh,
-/* Generated */                         double       inLow,
-/* Generated */                         double       inClose,
-/* Generated */                         double        *outRealUpperBand,
-/* Generated */                         double        *outRealMiddleBand,
-/* Generated */                         double        *outRealLowerBand )
+/* Generated */ public RetCode accbandsState( struct TA_accbands_State* _state,
+/* Generated */                             double       inHigh,
+/* Generated */                             double       inLow,
+/* Generated */                             double       inClose,
+/* Generated */                             double        *outRealUpperBand,
+/* Generated */                             double        *outRealMiddleBand,
+/* Generated */                             double        *outRealLowerBand )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ACCBANDS_State( struct TA_ACCBANDS_State* _state,
-/* Generated */                                            const double inHigh,
-/* Generated */                                            const double inLow,
-/* Generated */                                            const double inClose,
-/* Generated */                                            double        *outRealUpperBand,
-/* Generated */                                            double        *outRealMiddleBand,
-/* Generated */                                            double        *outRealLowerBand )
+/* Generated */ TA_LIB_API TA_RetCode TA_ACCBANDS_State( struct TA_ACCBANDS_State* _state,
+/* Generated */                                                   const double inHigh,
+/* Generated */                                                   const double inLow,
+/* Generated */                                                   const double inClose,
+/* Generated */                                                   double        *outRealUpperBand,
+/* Generated */                                                   double        *outRealMiddleBand,
+/* Generated */                                                   double        *outRealLowerBand )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -487,13 +487,13 @@ double tempReal,tempReal1,tempReal2;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AccbandsStateFree( struct TA_Accbands_State** _state )
+/* Generated */ Core::RetCode Core::AccbandsStateFree( struct TA_Accbands_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int accbandsStateFree( struct TA_accbands_State** _state )
+/* Generated */ public RetCode accbandsStateFree( struct TA_accbands_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ACCBANDS_StateFree( struct TA_ACCBANDS_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_ACCBANDS_StateFree( struct TA_ACCBANDS_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -528,16 +528,16 @@ double tempReal,tempReal1,tempReal2;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AccbandsStateSave( struct TA_Accbands_State* _state,
-/* Generated */                            FILE* _file )
+/* Generated */ Core::RetCode Core::AccbandsStateSave( struct TA_Accbands_State* _state,
+/* Generated */                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int accbandsStateSave( struct TA_accbands_State* _state,
-/* Generated */                             FILE* _file )
+/* Generated */ public RetCode accbandsStateSave( struct TA_accbands_State* _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ACCBANDS_StateSave( struct TA_ACCBANDS_State* _state,
-/* Generated */                                                FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_ACCBANDS_StateSave( struct TA_ACCBANDS_State* _state,
+/* Generated */                                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -584,16 +584,16 @@ double tempReal,tempReal1,tempReal2;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AccbandsStateLoad( struct TA_Accbands_State** _state,
-/* Generated */                            FILE* _file )
+/* Generated */ Core::RetCode Core::AccbandsStateLoad( struct TA_Accbands_State** _state,
+/* Generated */                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int accbandsStateLoad( struct TA_accbands_State** _state,
-/* Generated */                             FILE* _file )
+/* Generated */ public RetCode accbandsStateLoad( struct TA_accbands_State** _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ACCBANDS_StateLoad( struct TA_ACCBANDS_State** _state,
-/* Generated */                                                FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_ACCBANDS_StateLoad( struct TA_ACCBANDS_State** _state,
+/* Generated */                                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

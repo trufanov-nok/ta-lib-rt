@@ -263,16 +263,16 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MinIndexStateInit( struct TA_MinIndex_State** _state,
-/* Generated */                            int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ Core::RetCode Core::MinIndexStateInit( struct TA_MinIndex_State** _state,
+/* Generated */                                      int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int minIndexStateInit( struct TA_minIndex_State** _state,
-/* Generated */                             int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ public RetCode minIndexStateInit( struct TA_minIndex_State** _state,
+/* Generated */                                 int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MININDEX_StateInit( struct TA_MININDEX_State** _state,
-/* Generated */                                                int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_MININDEX_StateInit( struct TA_MININDEX_State** _state,
+/* Generated */                                                       int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -315,17 +315,17 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MinIndexState( struct TA_MinIndex_State* _state,
-/* Generated */                        cli::array<double>^ inReal,
-/* Generated */                        cli::array<int>^  *outInteger )
+/* Generated */ Core::RetCode Core::MinIndexState( struct TA_MinIndex_State* _state,
+/* Generated */                                  cli::array<double>^ inReal,
+/* Generated */                                  cli::array<int>^  *outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int minIndexState( struct TA_minIndex_State* _state,
-/* Generated */                         double       inReal,
-/* Generated */                         int           *outInteger )
+/* Generated */ public RetCode minIndexState( struct TA_minIndex_State* _state,
+/* Generated */                             double       inReal,
+/* Generated */                             int           *outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MININDEX_State( struct TA_MININDEX_State* _state,
-/* Generated */                                            const double inReal,
-/* Generated */                                            int           *outInteger )
+/* Generated */ TA_LIB_API TA_RetCode TA_MININDEX_State( struct TA_MININDEX_State* _state,
+/* Generated */                                                   const double inReal,
+/* Generated */                                                   int           *outInteger )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -383,13 +383,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MinIndexStateFree( struct TA_MinIndex_State** _state )
+/* Generated */ Core::RetCode Core::MinIndexStateFree( struct TA_MinIndex_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int minIndexStateFree( struct TA_minIndex_State** _state )
+/* Generated */ public RetCode minIndexStateFree( struct TA_minIndex_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MININDEX_StateFree( struct TA_MININDEX_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_MININDEX_StateFree( struct TA_MININDEX_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -417,16 +417,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MinIndexStateSave( struct TA_MinIndex_State* _state,
-/* Generated */                            FILE* _file )
+/* Generated */ Core::RetCode Core::MinIndexStateSave( struct TA_MinIndex_State* _state,
+/* Generated */                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int minIndexStateSave( struct TA_minIndex_State* _state,
-/* Generated */                             FILE* _file )
+/* Generated */ public RetCode minIndexStateSave( struct TA_minIndex_State* _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MININDEX_StateSave( struct TA_MININDEX_State* _state,
-/* Generated */                                                FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MININDEX_StateSave( struct TA_MININDEX_State* _state,
+/* Generated */                                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -472,16 +472,16 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MinIndexStateLoad( struct TA_MinIndex_State** _state,
-/* Generated */                            FILE* _file )
+/* Generated */ Core::RetCode Core::MinIndexStateLoad( struct TA_MinIndex_State** _state,
+/* Generated */                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int minIndexStateLoad( struct TA_minIndex_State** _state,
-/* Generated */                             FILE* _file )
+/* Generated */ public RetCode minIndexStateLoad( struct TA_minIndex_State** _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MININDEX_StateLoad( struct TA_MININDEX_State** _state,
-/* Generated */                                                FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MININDEX_StateLoad( struct TA_MININDEX_State** _state,
+/* Generated */                                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

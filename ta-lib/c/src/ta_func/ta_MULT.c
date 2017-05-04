@@ -192,13 +192,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MultStateInit( struct TA_Mult_State** _state )
+/* Generated */ Core::RetCode Core::MultStateInit( struct TA_Mult_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int multStateInit( struct TA_mult_State** _state )
+/* Generated */ public RetCode multStateInit( struct TA_mult_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MULT_StateInit( struct TA_MULT_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_MULT_StateInit( struct TA_MULT_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -234,20 +234,20 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MultState( struct TA_Mult_State* _state,
-/* Generated */                    cli::array<double>^ inReal0,
-/* Generated */                    cli::array<double>^ inReal1,
-/* Generated */                    cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::MultState( struct TA_Mult_State* _state,
+/* Generated */                              cli::array<double>^ inReal0,
+/* Generated */                              cli::array<double>^ inReal1,
+/* Generated */                              cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int multState( struct TA_mult_State* _state,
-/* Generated */                     double       inReal0,
-/* Generated */                     double       inReal1,
-/* Generated */                     double        *outReal )
+/* Generated */ public RetCode multState( struct TA_mult_State* _state,
+/* Generated */                         double       inReal0,
+/* Generated */                         double       inReal1,
+/* Generated */                         double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MULT_State( struct TA_MULT_State* _state,
-/* Generated */                                        const double inReal0,
-/* Generated */                                        const double inReal1,
-/* Generated */                                        double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_MULT_State( struct TA_MULT_State* _state,
+/* Generated */                                               const double inReal0,
+/* Generated */                                               const double inReal1,
+/* Generated */                                               double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -287,13 +287,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MultStateFree( struct TA_Mult_State** _state )
+/* Generated */ Core::RetCode Core::MultStateFree( struct TA_Mult_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int multStateFree( struct TA_mult_State** _state )
+/* Generated */ public RetCode multStateFree( struct TA_mult_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MULT_StateFree( struct TA_MULT_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_MULT_StateFree( struct TA_MULT_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -321,16 +321,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MultStateSave( struct TA_Mult_State* _state,
-/* Generated */                        FILE* _file )
+/* Generated */ Core::RetCode Core::MultStateSave( struct TA_Mult_State* _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int multStateSave( struct TA_mult_State* _state,
-/* Generated */                         FILE* _file )
+/* Generated */ public RetCode multStateSave( struct TA_mult_State* _state,
+/* Generated */                             FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MULT_StateSave( struct TA_MULT_State* _state,
-/* Generated */                                            FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MULT_StateSave( struct TA_MULT_State* _state,
+/* Generated */                                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -368,16 +368,16 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MultStateLoad( struct TA_Mult_State** _state,
-/* Generated */                        FILE* _file )
+/* Generated */ Core::RetCode Core::MultStateLoad( struct TA_Mult_State** _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int multStateLoad( struct TA_mult_State** _state,
-/* Generated */                         FILE* _file )
+/* Generated */ public RetCode multStateLoad( struct TA_mult_State** _state,
+/* Generated */                             FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MULT_StateLoad( struct TA_MULT_State** _state,
-/* Generated */                                            FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MULT_StateLoad( struct TA_MULT_State** _state,
+/* Generated */                                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

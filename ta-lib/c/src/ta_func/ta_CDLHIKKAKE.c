@@ -277,13 +277,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlHikkakeStateInit( struct TA_CdlHikkake_State** _state )
+/* Generated */ Core::RetCode Core::CdlHikkakeStateInit( struct TA_CdlHikkake_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlHikkakeStateInit( struct TA_cdlHikkake_State** _state )
+/* Generated */ public RetCode cdlHikkakeStateInit( struct TA_cdlHikkake_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLHIKKAKE_StateInit( struct TA_CDLHIKKAKE_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLHIKKAKE_StateInit( struct TA_CDLHIKKAKE_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -320,26 +320,26 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlHikkakeState( struct TA_CdlHikkake_State* _state,
-/* Generated */                          cli::array<double>^ inOpen,
-/* Generated */                          cli::array<double>^ inHigh,
-/* Generated */                          cli::array<double>^ inLow,
-/* Generated */                          cli::array<double>^ inClose,
-/* Generated */                          cli::array<int>^  *outInteger )
+/* Generated */ Core::RetCode Core::CdlHikkakeState( struct TA_CdlHikkake_State* _state,
+/* Generated */                                    cli::array<double>^ inOpen,
+/* Generated */                                    cli::array<double>^ inHigh,
+/* Generated */                                    cli::array<double>^ inLow,
+/* Generated */                                    cli::array<double>^ inClose,
+/* Generated */                                    cli::array<int>^  *outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlHikkakeState( struct TA_cdlHikkake_State* _state,
-/* Generated */                           double       inOpen,
-/* Generated */                           double       inHigh,
-/* Generated */                           double       inLow,
-/* Generated */                           double       inClose,
-/* Generated */                           int           *outInteger )
+/* Generated */ public RetCode cdlHikkakeState( struct TA_cdlHikkake_State* _state,
+/* Generated */                               double       inOpen,
+/* Generated */                               double       inHigh,
+/* Generated */                               double       inLow,
+/* Generated */                               double       inClose,
+/* Generated */                               int           *outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLHIKKAKE_State( struct TA_CDLHIKKAKE_State* _state,
-/* Generated */                                              const double inOpen,
-/* Generated */                                              const double inHigh,
-/* Generated */                                              const double inLow,
-/* Generated */                                              const double inClose,
-/* Generated */                                              int           *outInteger )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLHIKKAKE_State( struct TA_CDLHIKKAKE_State* _state,
+/* Generated */                                                     const double inOpen,
+/* Generated */                                                     const double inHigh,
+/* Generated */                                                     const double inLow,
+/* Generated */                                                     const double inClose,
+/* Generated */                                                     int           *outInteger )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -433,13 +433,13 @@ int i1,i2;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlHikkakeStateFree( struct TA_CdlHikkake_State** _state )
+/* Generated */ Core::RetCode Core::CdlHikkakeStateFree( struct TA_CdlHikkake_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlHikkakeStateFree( struct TA_cdlHikkake_State** _state )
+/* Generated */ public RetCode cdlHikkakeStateFree( struct TA_cdlHikkake_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLHIKKAKE_StateFree( struct TA_CDLHIKKAKE_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLHIKKAKE_StateFree( struct TA_CDLHIKKAKE_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -467,16 +467,16 @@ int i1,i2;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlHikkakeStateSave( struct TA_CdlHikkake_State* _state,
-/* Generated */                              FILE* _file )
+/* Generated */ Core::RetCode Core::CdlHikkakeStateSave( struct TA_CdlHikkake_State* _state,
+/* Generated */                                        FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlHikkakeStateSave( struct TA_cdlHikkake_State* _state,
-/* Generated */                               FILE* _file )
+/* Generated */ public RetCode cdlHikkakeStateSave( struct TA_cdlHikkake_State* _state,
+/* Generated */                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLHIKKAKE_StateSave( struct TA_CDLHIKKAKE_State* _state,
-/* Generated */                                                  FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLHIKKAKE_StateSave( struct TA_CDLHIKKAKE_State* _state,
+/* Generated */                                                         FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -522,16 +522,16 @@ int i1,i2;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlHikkakeStateLoad( struct TA_CdlHikkake_State** _state,
-/* Generated */                              FILE* _file )
+/* Generated */ Core::RetCode Core::CdlHikkakeStateLoad( struct TA_CdlHikkake_State** _state,
+/* Generated */                                        FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlHikkakeStateLoad( struct TA_cdlHikkake_State** _state,
-/* Generated */                               FILE* _file )
+/* Generated */ public RetCode cdlHikkakeStateLoad( struct TA_cdlHikkake_State** _state,
+/* Generated */                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLHIKKAKE_StateLoad( struct TA_CDLHIKKAKE_State** _state,
-/* Generated */                                                  FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLHIKKAKE_StateLoad( struct TA_CDLHIKKAKE_State** _state,
+/* Generated */                                                         FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

@@ -187,13 +187,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::FloorStateInit( struct TA_Floor_State** _state )
+/* Generated */ Core::RetCode Core::FloorStateInit( struct TA_Floor_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int floorStateInit( struct TA_floor_State** _state )
+/* Generated */ public RetCode floorStateInit( struct TA_floor_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_FLOOR_StateInit( struct TA_FLOOR_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_FLOOR_StateInit( struct TA_FLOOR_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -229,17 +229,17 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::FloorState( struct TA_Floor_State* _state,
-/* Generated */                     cli::array<double>^ inReal,
-/* Generated */                     cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::FloorState( struct TA_Floor_State* _state,
+/* Generated */                               cli::array<double>^ inReal,
+/* Generated */                               cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int floorState( struct TA_floor_State* _state,
-/* Generated */                      double       inReal,
-/* Generated */                      double        *outReal )
+/* Generated */ public RetCode floorState( struct TA_floor_State* _state,
+/* Generated */                          double       inReal,
+/* Generated */                          double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_FLOOR_State( struct TA_FLOOR_State* _state,
-/* Generated */                                         const double inReal,
-/* Generated */                                         double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_FLOOR_State( struct TA_FLOOR_State* _state,
+/* Generated */                                                const double inReal,
+/* Generated */                                                double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -278,13 +278,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::FloorStateFree( struct TA_Floor_State** _state )
+/* Generated */ Core::RetCode Core::FloorStateFree( struct TA_Floor_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int floorStateFree( struct TA_floor_State** _state )
+/* Generated */ public RetCode floorStateFree( struct TA_floor_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_FLOOR_StateFree( struct TA_FLOOR_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_FLOOR_StateFree( struct TA_FLOOR_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -312,16 +312,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::FloorStateSave( struct TA_Floor_State* _state,
-/* Generated */                         FILE* _file )
+/* Generated */ Core::RetCode Core::FloorStateSave( struct TA_Floor_State* _state,
+/* Generated */                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int floorStateSave( struct TA_floor_State* _state,
-/* Generated */                          FILE* _file )
+/* Generated */ public RetCode floorStateSave( struct TA_floor_State* _state,
+/* Generated */                              FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_FLOOR_StateSave( struct TA_FLOOR_State* _state,
-/* Generated */                                             FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_FLOOR_StateSave( struct TA_FLOOR_State* _state,
+/* Generated */                                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -359,16 +359,16 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::FloorStateLoad( struct TA_Floor_State** _state,
-/* Generated */                         FILE* _file )
+/* Generated */ Core::RetCode Core::FloorStateLoad( struct TA_Floor_State** _state,
+/* Generated */                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int floorStateLoad( struct TA_floor_State** _state,
-/* Generated */                          FILE* _file )
+/* Generated */ public RetCode floorStateLoad( struct TA_floor_State** _state,
+/* Generated */                              FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_FLOOR_StateLoad( struct TA_FLOOR_State** _state,
-/* Generated */                                             FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_FLOOR_StateLoad( struct TA_FLOOR_State** _state,
+/* Generated */                                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

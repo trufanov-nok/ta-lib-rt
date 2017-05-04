@@ -270,13 +270,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlUpsideGap2CrowsStateInit( struct TA_CdlUpsideGap2Crows_State** _state )
+/* Generated */ Core::RetCode Core::CdlUpsideGap2CrowsStateInit( struct TA_CdlUpsideGap2Crows_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlUpsideGap2CrowsStateInit( struct TA_cdlUpsideGap2Crows_State** _state )
+/* Generated */ public RetCode cdlUpsideGap2CrowsStateInit( struct TA_cdlUpsideGap2Crows_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLUPSIDEGAP2CROWS_StateInit( struct TA_CDLUPSIDEGAP2CROWS_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLUPSIDEGAP2CROWS_StateInit( struct TA_CDLUPSIDEGAP2CROWS_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -312,26 +312,26 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlUpsideGap2CrowsState( struct TA_CdlUpsideGap2Crows_State* _state,
-/* Generated */                                  cli::array<double>^ inOpen,
-/* Generated */                                  cli::array<double>^ inHigh,
-/* Generated */                                  cli::array<double>^ inLow,
-/* Generated */                                  cli::array<double>^ inClose,
-/* Generated */                                  cli::array<int>^  *outInteger )
+/* Generated */ Core::RetCode Core::CdlUpsideGap2CrowsState( struct TA_CdlUpsideGap2Crows_State* _state,
+/* Generated */                                            cli::array<double>^ inOpen,
+/* Generated */                                            cli::array<double>^ inHigh,
+/* Generated */                                            cli::array<double>^ inLow,
+/* Generated */                                            cli::array<double>^ inClose,
+/* Generated */                                            cli::array<int>^  *outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlUpsideGap2CrowsState( struct TA_cdlUpsideGap2Crows_State* _state,
-/* Generated */                                   double       inOpen,
-/* Generated */                                   double       inHigh,
-/* Generated */                                   double       inLow,
-/* Generated */                                   double       inClose,
-/* Generated */                                   int           *outInteger )
+/* Generated */ public RetCode cdlUpsideGap2CrowsState( struct TA_cdlUpsideGap2Crows_State* _state,
+/* Generated */                                       double       inOpen,
+/* Generated */                                       double       inHigh,
+/* Generated */                                       double       inLow,
+/* Generated */                                       double       inClose,
+/* Generated */                                       int           *outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLUPSIDEGAP2CROWS_State( struct TA_CDLUPSIDEGAP2CROWS_State* _state,
-/* Generated */                                                      const double inOpen,
-/* Generated */                                                      const double inHigh,
-/* Generated */                                                      const double inLow,
-/* Generated */                                                      const double inClose,
-/* Generated */                                                      int           *outInteger )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLUPSIDEGAP2CROWS_State( struct TA_CDLUPSIDEGAP2CROWS_State* _state,
+/* Generated */                                                             const double inOpen,
+/* Generated */                                                             const double inHigh,
+/* Generated */                                                             const double inLow,
+/* Generated */                                                             const double inClose,
+/* Generated */                                                             int           *outInteger )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -433,13 +433,13 @@ int i1,i2;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlUpsideGap2CrowsStateFree( struct TA_CdlUpsideGap2Crows_State** _state )
+/* Generated */ Core::RetCode Core::CdlUpsideGap2CrowsStateFree( struct TA_CdlUpsideGap2Crows_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlUpsideGap2CrowsStateFree( struct TA_cdlUpsideGap2Crows_State** _state )
+/* Generated */ public RetCode cdlUpsideGap2CrowsStateFree( struct TA_cdlUpsideGap2Crows_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLUPSIDEGAP2CROWS_StateFree( struct TA_CDLUPSIDEGAP2CROWS_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLUPSIDEGAP2CROWS_StateFree( struct TA_CDLUPSIDEGAP2CROWS_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -467,16 +467,16 @@ int i1,i2;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlUpsideGap2CrowsStateSave( struct TA_CdlUpsideGap2Crows_State* _state,
-/* Generated */                                      FILE* _file )
+/* Generated */ Core::RetCode Core::CdlUpsideGap2CrowsStateSave( struct TA_CdlUpsideGap2Crows_State* _state,
+/* Generated */                                                FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlUpsideGap2CrowsStateSave( struct TA_cdlUpsideGap2Crows_State* _state,
-/* Generated */                                       FILE* _file )
+/* Generated */ public RetCode cdlUpsideGap2CrowsStateSave( struct TA_cdlUpsideGap2Crows_State* _state,
+/* Generated */                                           FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLUPSIDEGAP2CROWS_StateSave( struct TA_CDLUPSIDEGAP2CROWS_State* _state,
-/* Generated */                                                          FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLUPSIDEGAP2CROWS_StateSave( struct TA_CDLUPSIDEGAP2CROWS_State* _state,
+/* Generated */                                                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -526,16 +526,16 @@ int i1,i2;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlUpsideGap2CrowsStateLoad( struct TA_CdlUpsideGap2Crows_State** _state,
-/* Generated */                                      FILE* _file )
+/* Generated */ Core::RetCode Core::CdlUpsideGap2CrowsStateLoad( struct TA_CdlUpsideGap2Crows_State** _state,
+/* Generated */                                                FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlUpsideGap2CrowsStateLoad( struct TA_cdlUpsideGap2Crows_State** _state,
-/* Generated */                                       FILE* _file )
+/* Generated */ public RetCode cdlUpsideGap2CrowsStateLoad( struct TA_cdlUpsideGap2Crows_State** _state,
+/* Generated */                                           FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLUPSIDEGAP2CROWS_StateLoad( struct TA_CDLUPSIDEGAP2CROWS_State** _state,
-/* Generated */                                                          FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLUPSIDEGAP2CROWS_StateLoad( struct TA_CDLUPSIDEGAP2CROWS_State** _state,
+/* Generated */                                                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

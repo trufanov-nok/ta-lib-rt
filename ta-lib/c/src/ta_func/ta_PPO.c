@@ -258,20 +258,20 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::PpoStateInit( struct TA_Ppo_State** _state,
-/* Generated */                       int           optInFastPeriod, /* From 2 to 100000 */
-/* Generated */                       int           optInSlowPeriod, /* From 2 to 100000 */
-/* Generated */                       MAType        optInMAType ) /* Generated */ 
+/* Generated */ Core::RetCode Core::PpoStateInit( struct TA_Ppo_State** _state,
+/* Generated */                                 int           optInFastPeriod, /* From 2 to 100000 */
+/* Generated */                                 int           optInSlowPeriod, /* From 2 to 100000 */
+/* Generated */                                 MAType        optInMAType ) /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int ppoStateInit( struct TA_ppo_State** _state,
-/* Generated */                        int           optInFastPeriod, /* From 2 to 100000 */
-/* Generated */                        int           optInSlowPeriod, /* From 2 to 100000 */
-/* Generated */                        MAType        optInMAType ) /* Generated */ 
+/* Generated */ public RetCode ppoStateInit( struct TA_ppo_State** _state,
+/* Generated */                            int           optInFastPeriod, /* From 2 to 100000 */
+/* Generated */                            int           optInSlowPeriod, /* From 2 to 100000 */
+/* Generated */                            MAType        optInMAType ) /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_PPO_StateInit( struct TA_PPO_State** _state,
-/* Generated */                                           int           optInFastPeriod, /* From 2 to 100000 */
-/* Generated */                                           int           optInSlowPeriod, /* From 2 to 100000 */
-/* Generated */                                           TA_MAType     optInMAType ) /* Generated */ 
+/* Generated */ TA_LIB_API TA_RetCode TA_PPO_StateInit( struct TA_PPO_State** _state,
+/* Generated */                                                  int           optInFastPeriod, /* From 2 to 100000 */
+/* Generated */                                                  int           optInSlowPeriod, /* From 2 to 100000 */
+/* Generated */                                                  TA_MAType     optInMAType ) /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 
@@ -330,17 +330,17 @@ return FUNCTION_CALL_STATE_INIT(INT_PO)((struct TA_APO_State**)_state, optInFast
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::PpoState( struct TA_Ppo_State* _state,
-/* Generated */                   cli::array<double>^ inReal,
-/* Generated */                   cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::PpoState( struct TA_Ppo_State* _state,
+/* Generated */                             cli::array<double>^ inReal,
+/* Generated */                             cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int ppoState( struct TA_ppo_State* _state,
-/* Generated */                    double       inReal,
-/* Generated */                    double        *outReal )
+/* Generated */ public RetCode ppoState( struct TA_ppo_State* _state,
+/* Generated */                        double       inReal,
+/* Generated */                        double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_PPO_State( struct TA_PPO_State* _state,
-/* Generated */                                       const double inReal,
-/* Generated */                                       double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_PPO_State( struct TA_PPO_State* _state,
+/* Generated */                                              const double inReal,
+/* Generated */                                              double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -381,13 +381,13 @@ return FUNCTION_CALL_STATE_INIT(INT_PO)((struct TA_APO_State**)_state, optInFast
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::PpoStateFree( struct TA_Ppo_State** _state )
+/* Generated */ Core::RetCode Core::PpoStateFree( struct TA_Ppo_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int ppoStateFree( struct TA_ppo_State** _state )
+/* Generated */ public RetCode ppoStateFree( struct TA_ppo_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_PPO_StateFree( struct TA_PPO_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_PPO_StateFree( struct TA_PPO_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -417,16 +417,16 @@ return FUNCTION_CALL_STATE_INIT(INT_PO)((struct TA_APO_State**)_state, optInFast
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::PpoStateSave( struct TA_Ppo_State* _state,
-/* Generated */                       FILE* _file )
+/* Generated */ Core::RetCode Core::PpoStateSave( struct TA_Ppo_State* _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int ppoStateSave( struct TA_ppo_State* _state,
-/* Generated */                        FILE* _file )
+/* Generated */ public RetCode ppoStateSave( struct TA_ppo_State* _state,
+/* Generated */                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_PPO_StateSave( struct TA_PPO_State* _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_PPO_StateSave( struct TA_PPO_State* _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -470,16 +470,16 @@ return FUNCTION_CALL_STATE_SAVE(APO)((struct TA_APO_State**)_state, _file);
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::PpoStateLoad( struct TA_Ppo_State** _state,
-/* Generated */                       FILE* _file )
+/* Generated */ Core::RetCode Core::PpoStateLoad( struct TA_Ppo_State** _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int ppoStateLoad( struct TA_ppo_State** _state,
-/* Generated */                        FILE* _file )
+/* Generated */ public RetCode ppoStateLoad( struct TA_ppo_State** _state,
+/* Generated */                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_PPO_StateLoad( struct TA_PPO_State** _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_PPO_StateLoad( struct TA_PPO_State** _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

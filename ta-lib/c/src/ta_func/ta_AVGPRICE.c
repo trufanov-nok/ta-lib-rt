@@ -205,13 +205,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AvgPriceStateInit( struct TA_AvgPrice_State** _state )
+/* Generated */ Core::RetCode Core::AvgPriceStateInit( struct TA_AvgPrice_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int avgPriceStateInit( struct TA_avgPrice_State** _state )
+/* Generated */ public RetCode avgPriceStateInit( struct TA_avgPrice_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_AVGPRICE_StateInit( struct TA_AVGPRICE_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_AVGPRICE_StateInit( struct TA_AVGPRICE_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -247,26 +247,26 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AvgPriceState( struct TA_AvgPrice_State* _state,
-/* Generated */                        cli::array<double>^ inOpen,
-/* Generated */                        cli::array<double>^ inHigh,
-/* Generated */                        cli::array<double>^ inLow,
-/* Generated */                        cli::array<double>^ inClose,
-/* Generated */                        cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::AvgPriceState( struct TA_AvgPrice_State* _state,
+/* Generated */                                  cli::array<double>^ inOpen,
+/* Generated */                                  cli::array<double>^ inHigh,
+/* Generated */                                  cli::array<double>^ inLow,
+/* Generated */                                  cli::array<double>^ inClose,
+/* Generated */                                  cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int avgPriceState( struct TA_avgPrice_State* _state,
-/* Generated */                         double       inOpen,
-/* Generated */                         double       inHigh,
-/* Generated */                         double       inLow,
-/* Generated */                         double       inClose,
-/* Generated */                         double        *outReal )
+/* Generated */ public RetCode avgPriceState( struct TA_avgPrice_State* _state,
+/* Generated */                             double       inOpen,
+/* Generated */                             double       inHigh,
+/* Generated */                             double       inLow,
+/* Generated */                             double       inClose,
+/* Generated */                             double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_AVGPRICE_State( struct TA_AVGPRICE_State* _state,
-/* Generated */                                            const double inOpen,
-/* Generated */                                            const double inHigh,
-/* Generated */                                            const double inLow,
-/* Generated */                                            const double inClose,
-/* Generated */                                            double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_AVGPRICE_State( struct TA_AVGPRICE_State* _state,
+/* Generated */                                                   const double inOpen,
+/* Generated */                                                   const double inHigh,
+/* Generated */                                                   const double inLow,
+/* Generated */                                                   const double inClose,
+/* Generated */                                                   double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -312,13 +312,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AvgPriceStateFree( struct TA_AvgPrice_State** _state )
+/* Generated */ Core::RetCode Core::AvgPriceStateFree( struct TA_AvgPrice_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int avgPriceStateFree( struct TA_avgPrice_State** _state )
+/* Generated */ public RetCode avgPriceStateFree( struct TA_avgPrice_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_AVGPRICE_StateFree( struct TA_AVGPRICE_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_AVGPRICE_StateFree( struct TA_AVGPRICE_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -346,16 +346,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AvgPriceStateSave( struct TA_AvgPrice_State* _state,
-/* Generated */                            FILE* _file )
+/* Generated */ Core::RetCode Core::AvgPriceStateSave( struct TA_AvgPrice_State* _state,
+/* Generated */                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int avgPriceStateSave( struct TA_avgPrice_State* _state,
-/* Generated */                             FILE* _file )
+/* Generated */ public RetCode avgPriceStateSave( struct TA_avgPrice_State* _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_AVGPRICE_StateSave( struct TA_AVGPRICE_State* _state,
-/* Generated */                                                FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_AVGPRICE_StateSave( struct TA_AVGPRICE_State* _state,
+/* Generated */                                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -393,16 +393,16 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AvgPriceStateLoad( struct TA_AvgPrice_State** _state,
-/* Generated */                            FILE* _file )
+/* Generated */ Core::RetCode Core::AvgPriceStateLoad( struct TA_AvgPrice_State** _state,
+/* Generated */                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int avgPriceStateLoad( struct TA_avgPrice_State** _state,
-/* Generated */                             FILE* _file )
+/* Generated */ public RetCode avgPriceStateLoad( struct TA_avgPrice_State** _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_AVGPRICE_StateLoad( struct TA_AVGPRICE_State** _state,
-/* Generated */                                                FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_AVGPRICE_StateLoad( struct TA_AVGPRICE_State** _state,
+/* Generated */                                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

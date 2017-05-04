@@ -423,16 +423,16 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::RsiStateInit( struct TA_Rsi_State** _state,
-/* Generated */                       int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ Core::RetCode Core::RsiStateInit( struct TA_Rsi_State** _state,
+/* Generated */                                 int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int rsiStateInit( struct TA_rsi_State** _state,
-/* Generated */                        int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ public RetCode rsiStateInit( struct TA_rsi_State** _state,
+/* Generated */                            int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_RSI_StateInit( struct TA_RSI_State** _state,
-/* Generated */                                           int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_RSI_StateInit( struct TA_RSI_State** _state,
+/* Generated */                                                  int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -479,17 +479,17 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::RsiState( struct TA_Rsi_State* _state,
-/* Generated */                   cli::array<double>^ inReal,
-/* Generated */                   cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::RsiState( struct TA_Rsi_State* _state,
+/* Generated */                             cli::array<double>^ inReal,
+/* Generated */                             cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int rsiState( struct TA_rsi_State* _state,
-/* Generated */                    double       inReal,
-/* Generated */                    double        *outReal )
+/* Generated */ public RetCode rsiState( struct TA_rsi_State* _state,
+/* Generated */                        double       inReal,
+/* Generated */                        double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_RSI_State( struct TA_RSI_State* _state,
-/* Generated */                                       const double inReal,
-/* Generated */                                       double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_RSI_State( struct TA_RSI_State* _state,
+/* Generated */                                              const double inReal,
+/* Generated */                                              double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -574,13 +574,13 @@ double tempValue1, tempValue2;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::RsiStateFree( struct TA_Rsi_State** _state )
+/* Generated */ Core::RetCode Core::RsiStateFree( struct TA_Rsi_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int rsiStateFree( struct TA_rsi_State** _state )
+/* Generated */ public RetCode rsiStateFree( struct TA_rsi_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_RSI_StateFree( struct TA_RSI_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_RSI_StateFree( struct TA_RSI_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -608,16 +608,16 @@ double tempValue1, tempValue2;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::RsiStateSave( struct TA_Rsi_State* _state,
-/* Generated */                       FILE* _file )
+/* Generated */ Core::RetCode Core::RsiStateSave( struct TA_Rsi_State* _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int rsiStateSave( struct TA_rsi_State* _state,
-/* Generated */                        FILE* _file )
+/* Generated */ public RetCode rsiStateSave( struct TA_rsi_State* _state,
+/* Generated */                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_RSI_StateSave( struct TA_RSI_State* _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_RSI_StateSave( struct TA_RSI_State* _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -665,16 +665,16 @@ double tempValue1, tempValue2;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::RsiStateLoad( struct TA_Rsi_State** _state,
-/* Generated */                       FILE* _file )
+/* Generated */ Core::RetCode Core::RsiStateLoad( struct TA_Rsi_State** _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int rsiStateLoad( struct TA_rsi_State** _state,
-/* Generated */                        FILE* _file )
+/* Generated */ public RetCode rsiStateLoad( struct TA_rsi_State** _state,
+/* Generated */                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_RSI_StateLoad( struct TA_RSI_State** _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_RSI_StateLoad( struct TA_RSI_State** _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

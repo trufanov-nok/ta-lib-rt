@@ -262,16 +262,16 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MidPriceStateInit( struct TA_MidPrice_State** _state,
-/* Generated */                            int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ Core::RetCode Core::MidPriceStateInit( struct TA_MidPrice_State** _state,
+/* Generated */                                      int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int midPriceStateInit( struct TA_midPrice_State** _state,
-/* Generated */                             int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ public RetCode midPriceStateInit( struct TA_midPrice_State** _state,
+/* Generated */                                 int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MIDPRICE_StateInit( struct TA_MIDPRICE_State** _state,
-/* Generated */                                                int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_MIDPRICE_StateInit( struct TA_MIDPRICE_State** _state,
+/* Generated */                                                       int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -314,20 +314,20 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MidPriceState( struct TA_MidPrice_State* _state,
-/* Generated */                        cli::array<double>^ inHigh,
-/* Generated */                        cli::array<double>^ inLow,
-/* Generated */                        cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::MidPriceState( struct TA_MidPrice_State* _state,
+/* Generated */                                  cli::array<double>^ inHigh,
+/* Generated */                                  cli::array<double>^ inLow,
+/* Generated */                                  cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int midPriceState( struct TA_midPrice_State* _state,
-/* Generated */                         double       inHigh,
-/* Generated */                         double       inLow,
-/* Generated */                         double        *outReal )
+/* Generated */ public RetCode midPriceState( struct TA_midPrice_State* _state,
+/* Generated */                             double       inHigh,
+/* Generated */                             double       inLow,
+/* Generated */                             double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MIDPRICE_State( struct TA_MIDPRICE_State* _state,
-/* Generated */                                            const double inHigh,
-/* Generated */                                            const double inLow,
-/* Generated */                                            double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_MIDPRICE_State( struct TA_MIDPRICE_State* _state,
+/* Generated */                                                   const double inHigh,
+/* Generated */                                                   const double inLow,
+/* Generated */                                                   double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -384,13 +384,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MidPriceStateFree( struct TA_MidPrice_State** _state )
+/* Generated */ Core::RetCode Core::MidPriceStateFree( struct TA_MidPrice_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int midPriceStateFree( struct TA_midPrice_State** _state )
+/* Generated */ public RetCode midPriceStateFree( struct TA_midPrice_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MIDPRICE_StateFree( struct TA_MIDPRICE_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_MIDPRICE_StateFree( struct TA_MIDPRICE_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -418,16 +418,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MidPriceStateSave( struct TA_MidPrice_State* _state,
-/* Generated */                            FILE* _file )
+/* Generated */ Core::RetCode Core::MidPriceStateSave( struct TA_MidPrice_State* _state,
+/* Generated */                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int midPriceStateSave( struct TA_midPrice_State* _state,
-/* Generated */                             FILE* _file )
+/* Generated */ public RetCode midPriceStateSave( struct TA_midPrice_State* _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MIDPRICE_StateSave( struct TA_MIDPRICE_State* _state,
-/* Generated */                                                FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MIDPRICE_StateSave( struct TA_MIDPRICE_State* _state,
+/* Generated */                                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -471,16 +471,16 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MidPriceStateLoad( struct TA_MidPrice_State** _state,
-/* Generated */                            FILE* _file )
+/* Generated */ Core::RetCode Core::MidPriceStateLoad( struct TA_MidPrice_State** _state,
+/* Generated */                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int midPriceStateLoad( struct TA_midPrice_State** _state,
-/* Generated */                             FILE* _file )
+/* Generated */ public RetCode midPriceStateLoad( struct TA_midPrice_State** _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MIDPRICE_StateLoad( struct TA_MIDPRICE_State** _state,
-/* Generated */                                                FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MIDPRICE_StateLoad( struct TA_MIDPRICE_State** _state,
+/* Generated */                                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

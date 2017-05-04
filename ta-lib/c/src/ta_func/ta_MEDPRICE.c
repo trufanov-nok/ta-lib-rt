@@ -200,13 +200,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MedPriceStateInit( struct TA_MedPrice_State** _state )
+/* Generated */ Core::RetCode Core::MedPriceStateInit( struct TA_MedPrice_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int medPriceStateInit( struct TA_medPrice_State** _state )
+/* Generated */ public RetCode medPriceStateInit( struct TA_medPrice_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MEDPRICE_StateInit( struct TA_MEDPRICE_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_MEDPRICE_StateInit( struct TA_MEDPRICE_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -241,20 +241,20 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MedPriceState( struct TA_MedPrice_State* _state,
-/* Generated */                        cli::array<double>^ inHigh,
-/* Generated */                        cli::array<double>^ inLow,
-/* Generated */                        cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::MedPriceState( struct TA_MedPrice_State* _state,
+/* Generated */                                  cli::array<double>^ inHigh,
+/* Generated */                                  cli::array<double>^ inLow,
+/* Generated */                                  cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int medPriceState( struct TA_medPrice_State* _state,
-/* Generated */                         double       inHigh,
-/* Generated */                         double       inLow,
-/* Generated */                         double        *outReal )
+/* Generated */ public RetCode medPriceState( struct TA_medPrice_State* _state,
+/* Generated */                             double       inHigh,
+/* Generated */                             double       inLow,
+/* Generated */                             double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MEDPRICE_State( struct TA_MEDPRICE_State* _state,
-/* Generated */                                            const double inHigh,
-/* Generated */                                            const double inLow,
-/* Generated */                                            double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_MEDPRICE_State( struct TA_MEDPRICE_State* _state,
+/* Generated */                                                   const double inHigh,
+/* Generated */                                                   const double inLow,
+/* Generated */                                                   double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -298,13 +298,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MedPriceStateFree( struct TA_MedPrice_State** _state )
+/* Generated */ Core::RetCode Core::MedPriceStateFree( struct TA_MedPrice_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int medPriceStateFree( struct TA_medPrice_State** _state )
+/* Generated */ public RetCode medPriceStateFree( struct TA_medPrice_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MEDPRICE_StateFree( struct TA_MEDPRICE_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_MEDPRICE_StateFree( struct TA_MEDPRICE_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -332,16 +332,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MedPriceStateSave( struct TA_MedPrice_State* _state,
-/* Generated */                            FILE* _file )
+/* Generated */ Core::RetCode Core::MedPriceStateSave( struct TA_MedPrice_State* _state,
+/* Generated */                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int medPriceStateSave( struct TA_medPrice_State* _state,
-/* Generated */                             FILE* _file )
+/* Generated */ public RetCode medPriceStateSave( struct TA_medPrice_State* _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MEDPRICE_StateSave( struct TA_MEDPRICE_State* _state,
-/* Generated */                                                FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MEDPRICE_StateSave( struct TA_MEDPRICE_State* _state,
+/* Generated */                                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -379,16 +379,16 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MedPriceStateLoad( struct TA_MedPrice_State** _state,
-/* Generated */                            FILE* _file )
+/* Generated */ Core::RetCode Core::MedPriceStateLoad( struct TA_MedPrice_State** _state,
+/* Generated */                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int medPriceStateLoad( struct TA_medPrice_State** _state,
-/* Generated */                             FILE* _file )
+/* Generated */ public RetCode medPriceStateLoad( struct TA_medPrice_State** _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MEDPRICE_StateLoad( struct TA_MEDPRICE_State** _state,
-/* Generated */                                                FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MEDPRICE_StateLoad( struct TA_MEDPRICE_State** _state,
+/* Generated */                                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

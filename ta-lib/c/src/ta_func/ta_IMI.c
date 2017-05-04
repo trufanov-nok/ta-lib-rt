@@ -238,16 +238,16 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::ImiStateInit( struct TA_Imi_State** _state,
-/* Generated */                       int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ Core::RetCode Core::ImiStateInit( struct TA_Imi_State** _state,
+/* Generated */                                 int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int imiStateInit( struct TA_imi_State** _state,
-/* Generated */                        int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ public RetCode imiStateInit( struct TA_imi_State** _state,
+/* Generated */                            int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_IMI_StateInit( struct TA_IMI_State** _state,
-/* Generated */                                           int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_IMI_StateInit( struct TA_IMI_State** _state,
+/* Generated */                                                  int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -290,20 +290,20 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::ImiState( struct TA_Imi_State* _state,
-/* Generated */                   cli::array<double>^ inOpen,
-/* Generated */                   cli::array<double>^ inClose,
-/* Generated */                   cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::ImiState( struct TA_Imi_State* _state,
+/* Generated */                             cli::array<double>^ inOpen,
+/* Generated */                             cli::array<double>^ inClose,
+/* Generated */                             cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int imiState( struct TA_imi_State* _state,
-/* Generated */                    double       inOpen,
-/* Generated */                    double       inClose,
-/* Generated */                    double        *outReal )
+/* Generated */ public RetCode imiState( struct TA_imi_State* _state,
+/* Generated */                        double       inOpen,
+/* Generated */                        double       inClose,
+/* Generated */                        double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_IMI_State( struct TA_IMI_State* _state,
-/* Generated */                                       const double inOpen,
-/* Generated */                                       const double inClose,
-/* Generated */                                       double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_IMI_State( struct TA_IMI_State* _state,
+/* Generated */                                              const double inOpen,
+/* Generated */                                              const double inClose,
+/* Generated */                                              double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -384,13 +384,13 @@ double tempClose, tempOpen;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::ImiStateFree( struct TA_Imi_State** _state )
+/* Generated */ Core::RetCode Core::ImiStateFree( struct TA_Imi_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int imiStateFree( struct TA_imi_State** _state )
+/* Generated */ public RetCode imiStateFree( struct TA_imi_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_IMI_StateFree( struct TA_IMI_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_IMI_StateFree( struct TA_IMI_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -418,16 +418,16 @@ double tempClose, tempOpen;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::ImiStateSave( struct TA_Imi_State* _state,
-/* Generated */                       FILE* _file )
+/* Generated */ Core::RetCode Core::ImiStateSave( struct TA_Imi_State* _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int imiStateSave( struct TA_imi_State* _state,
-/* Generated */                        FILE* _file )
+/* Generated */ public RetCode imiStateSave( struct TA_imi_State* _state,
+/* Generated */                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_IMI_StateSave( struct TA_IMI_State* _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_IMI_StateSave( struct TA_IMI_State* _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -471,16 +471,16 @@ double tempClose, tempOpen;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::ImiStateLoad( struct TA_Imi_State** _state,
-/* Generated */                       FILE* _file )
+/* Generated */ Core::RetCode Core::ImiStateLoad( struct TA_Imi_State** _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int imiStateLoad( struct TA_imi_State** _state,
-/* Generated */                        FILE* _file )
+/* Generated */ public RetCode imiStateLoad( struct TA_imi_State** _state,
+/* Generated */                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_IMI_StateLoad( struct TA_IMI_State** _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_IMI_StateLoad( struct TA_IMI_State** _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

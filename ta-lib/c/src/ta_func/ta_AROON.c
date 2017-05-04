@@ -311,16 +311,16 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AroonStateInit( struct TA_Aroon_State** _state,
-/* Generated */                         int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ Core::RetCode Core::AroonStateInit( struct TA_Aroon_State** _state,
+/* Generated */                                   int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int aroonStateInit( struct TA_aroon_State** _state,
-/* Generated */                          int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ public RetCode aroonStateInit( struct TA_aroon_State** _state,
+/* Generated */                              int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_AROON_StateInit( struct TA_AROON_State** _state,
-/* Generated */                                             int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_AROON_StateInit( struct TA_AROON_State** _state,
+/* Generated */                                                    int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -363,23 +363,23 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AroonState( struct TA_Aroon_State* _state,
-/* Generated */                     cli::array<double>^ inHigh,
-/* Generated */                     cli::array<double>^ inLow,
-/* Generated */                     cli::array<double>^  *outAroonDown,
-/* Generated */                     cli::array<double>^  *outAroonUp )
+/* Generated */ Core::RetCode Core::AroonState( struct TA_Aroon_State* _state,
+/* Generated */                               cli::array<double>^ inHigh,
+/* Generated */                               cli::array<double>^ inLow,
+/* Generated */                               cli::array<double>^  *outAroonDown,
+/* Generated */                               cli::array<double>^  *outAroonUp )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int aroonState( struct TA_aroon_State* _state,
-/* Generated */                      double       inHigh,
-/* Generated */                      double       inLow,
-/* Generated */                      double        *outAroonDown,
-/* Generated */                      double        *outAroonUp )
+/* Generated */ public RetCode aroonState( struct TA_aroon_State* _state,
+/* Generated */                          double       inHigh,
+/* Generated */                          double       inLow,
+/* Generated */                          double        *outAroonDown,
+/* Generated */                          double        *outAroonUp )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_AROON_State( struct TA_AROON_State* _state,
-/* Generated */                                         const double inHigh,
-/* Generated */                                         const double inLow,
-/* Generated */                                         double        *outAroonDown,
-/* Generated */                                         double        *outAroonUp )
+/* Generated */ TA_LIB_API TA_RetCode TA_AROON_State( struct TA_AROON_State* _state,
+/* Generated */                                                const double inHigh,
+/* Generated */                                                const double inLow,
+/* Generated */                                                double        *outAroonDown,
+/* Generated */                                                double        *outAroonUp )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -492,13 +492,13 @@ double temp;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AroonStateFree( struct TA_Aroon_State** _state )
+/* Generated */ Core::RetCode Core::AroonStateFree( struct TA_Aroon_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int aroonStateFree( struct TA_aroon_State** _state )
+/* Generated */ public RetCode aroonStateFree( struct TA_aroon_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_AROON_StateFree( struct TA_AROON_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_AROON_StateFree( struct TA_AROON_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -526,16 +526,16 @@ double temp;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AroonStateSave( struct TA_Aroon_State* _state,
-/* Generated */                         FILE* _file )
+/* Generated */ Core::RetCode Core::AroonStateSave( struct TA_Aroon_State* _state,
+/* Generated */                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int aroonStateSave( struct TA_aroon_State* _state,
-/* Generated */                          FILE* _file )
+/* Generated */ public RetCode aroonStateSave( struct TA_aroon_State* _state,
+/* Generated */                              FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_AROON_StateSave( struct TA_AROON_State* _state,
-/* Generated */                                             FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_AROON_StateSave( struct TA_AROON_State* _state,
+/* Generated */                                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -585,16 +585,16 @@ double temp;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AroonStateLoad( struct TA_Aroon_State** _state,
-/* Generated */                         FILE* _file )
+/* Generated */ Core::RetCode Core::AroonStateLoad( struct TA_Aroon_State** _state,
+/* Generated */                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int aroonStateLoad( struct TA_aroon_State** _state,
-/* Generated */                          FILE* _file )
+/* Generated */ public RetCode aroonStateLoad( struct TA_aroon_State** _state,
+/* Generated */                              FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_AROON_StateLoad( struct TA_AROON_State** _state,
-/* Generated */                                             FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_AROON_StateLoad( struct TA_AROON_State** _state,
+/* Generated */                                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

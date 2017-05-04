@@ -259,16 +259,16 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::LinearRegStateInit( struct TA_LinearReg_State** _state,
-/* Generated */                             int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ Core::RetCode Core::LinearRegStateInit( struct TA_LinearReg_State** _state,
+/* Generated */                                       int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int linearRegStateInit( struct TA_linearReg_State** _state,
-/* Generated */                              int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ public RetCode linearRegStateInit( struct TA_linearReg_State** _state,
+/* Generated */                                  int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_LINEARREG_StateInit( struct TA_LINEARREG_State** _state,
-/* Generated */                                                 int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_LINEARREG_StateInit( struct TA_LINEARREG_State** _state,
+/* Generated */                                                        int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -311,17 +311,17 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::LinearRegState( struct TA_LinearReg_State* _state,
-/* Generated */                         cli::array<double>^ inReal,
-/* Generated */                         cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::LinearRegState( struct TA_LinearReg_State* _state,
+/* Generated */                                   cli::array<double>^ inReal,
+/* Generated */                                   cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int linearRegState( struct TA_linearReg_State* _state,
-/* Generated */                          double       inReal,
-/* Generated */                          double        *outReal )
+/* Generated */ public RetCode linearRegState( struct TA_linearReg_State* _state,
+/* Generated */                              double       inReal,
+/* Generated */                              double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_LINEARREG_State( struct TA_LINEARREG_State* _state,
-/* Generated */                                             const double inReal,
-/* Generated */                                             double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_LINEARREG_State( struct TA_LINEARREG_State* _state,
+/* Generated */                                                    const double inReal,
+/* Generated */                                                    double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -392,13 +392,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::LinearRegStateFree( struct TA_LinearReg_State** _state )
+/* Generated */ Core::RetCode Core::LinearRegStateFree( struct TA_LinearReg_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int linearRegStateFree( struct TA_linearReg_State** _state )
+/* Generated */ public RetCode linearRegStateFree( struct TA_linearReg_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_LINEARREG_StateFree( struct TA_LINEARREG_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_LINEARREG_StateFree( struct TA_LINEARREG_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -426,16 +426,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::LinearRegStateSave( struct TA_LinearReg_State* _state,
-/* Generated */                             FILE* _file )
+/* Generated */ Core::RetCode Core::LinearRegStateSave( struct TA_LinearReg_State* _state,
+/* Generated */                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int linearRegStateSave( struct TA_linearReg_State* _state,
-/* Generated */                              FILE* _file )
+/* Generated */ public RetCode linearRegStateSave( struct TA_linearReg_State* _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_LINEARREG_StateSave( struct TA_LINEARREG_State* _state,
-/* Generated */                                                 FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_LINEARREG_StateSave( struct TA_LINEARREG_State* _state,
+/* Generated */                                                        FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -485,16 +485,16 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::LinearRegStateLoad( struct TA_LinearReg_State** _state,
-/* Generated */                             FILE* _file )
+/* Generated */ Core::RetCode Core::LinearRegStateLoad( struct TA_LinearReg_State** _state,
+/* Generated */                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int linearRegStateLoad( struct TA_linearReg_State** _state,
-/* Generated */                              FILE* _file )
+/* Generated */ public RetCode linearRegStateLoad( struct TA_linearReg_State** _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_LINEARREG_StateLoad( struct TA_LINEARREG_State** _state,
-/* Generated */                                                 FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_LINEARREG_StateLoad( struct TA_LINEARREG_State** _state,
+/* Generated */                                                        FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

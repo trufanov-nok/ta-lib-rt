@@ -497,20 +497,20 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::StochFStateInit( struct TA_StochF_State** _state,
-/* Generated */                          int           optInFastK_Period, /* From 1 to 100000 */
-/* Generated */                          int           optInFastD_Period, /* From 1 to 100000 */
-/* Generated */                          MAType        optInFastD_MAType ) /* Generated */ 
+/* Generated */ Core::RetCode Core::StochFStateInit( struct TA_StochF_State** _state,
+/* Generated */                                    int           optInFastK_Period, /* From 1 to 100000 */
+/* Generated */                                    int           optInFastD_Period, /* From 1 to 100000 */
+/* Generated */                                    MAType        optInFastD_MAType ) /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int stochFStateInit( struct TA_stochF_State** _state,
-/* Generated */                           int           optInFastK_Period, /* From 1 to 100000 */
-/* Generated */                           int           optInFastD_Period, /* From 1 to 100000 */
-/* Generated */                           MAType        optInFastD_MAType ) /* Generated */ 
+/* Generated */ public RetCode stochFStateInit( struct TA_stochF_State** _state,
+/* Generated */                               int           optInFastK_Period, /* From 1 to 100000 */
+/* Generated */                               int           optInFastD_Period, /* From 1 to 100000 */
+/* Generated */                               MAType        optInFastD_MAType ) /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_STOCHF_StateInit( struct TA_STOCHF_State** _state,
-/* Generated */                                              int           optInFastK_Period, /* From 1 to 100000 */
-/* Generated */                                              int           optInFastD_Period, /* From 1 to 100000 */
-/* Generated */                                              TA_MAType     optInFastD_MAType ) /* Generated */ 
+/* Generated */ TA_LIB_API TA_RetCode TA_STOCHF_StateInit( struct TA_STOCHF_State** _state,
+/* Generated */                                                     int           optInFastK_Period, /* From 1 to 100000 */
+/* Generated */                                                     int           optInFastD_Period, /* From 1 to 100000 */
+/* Generated */                                                     TA_MAType     optInFastD_MAType ) /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 
@@ -575,26 +575,26 @@ TA_RetCode retCode;
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::StochFState( struct TA_StochF_State* _state,
-/* Generated */                      cli::array<double>^ inHigh,
-/* Generated */                      cli::array<double>^ inLow,
-/* Generated */                      cli::array<double>^ inClose,
-/* Generated */                      cli::array<double>^  *outFastK,
-/* Generated */                      cli::array<double>^  *outFastD )
+/* Generated */ Core::RetCode Core::StochFState( struct TA_StochF_State* _state,
+/* Generated */                                cli::array<double>^ inHigh,
+/* Generated */                                cli::array<double>^ inLow,
+/* Generated */                                cli::array<double>^ inClose,
+/* Generated */                                cli::array<double>^  *outFastK,
+/* Generated */                                cli::array<double>^  *outFastD )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int stochFState( struct TA_stochF_State* _state,
-/* Generated */                       double       inHigh,
-/* Generated */                       double       inLow,
-/* Generated */                       double       inClose,
-/* Generated */                       double        *outFastK,
-/* Generated */                       double        *outFastD )
+/* Generated */ public RetCode stochFState( struct TA_stochF_State* _state,
+/* Generated */                           double       inHigh,
+/* Generated */                           double       inLow,
+/* Generated */                           double       inClose,
+/* Generated */                           double        *outFastK,
+/* Generated */                           double        *outFastD )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_STOCHF_State( struct TA_STOCHF_State* _state,
-/* Generated */                                          const double inHigh,
-/* Generated */                                          const double inLow,
-/* Generated */                                          const double inClose,
-/* Generated */                                          double        *outFastK,
-/* Generated */                                          double        *outFastD )
+/* Generated */ TA_LIB_API TA_RetCode TA_STOCHF_State( struct TA_STOCHF_State* _state,
+/* Generated */                                                 const double inHigh,
+/* Generated */                                                 const double inLow,
+/* Generated */                                                 const double inClose,
+/* Generated */                                                 double        *outFastK,
+/* Generated */                                                 double        *outFastD )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -721,13 +721,13 @@ TA_RetCode retCode;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::StochFStateFree( struct TA_StochF_State** _state )
+/* Generated */ Core::RetCode Core::StochFStateFree( struct TA_StochF_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int stochFStateFree( struct TA_stochF_State** _state )
+/* Generated */ public RetCode stochFStateFree( struct TA_stochF_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_STOCHF_StateFree( struct TA_STOCHF_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_STOCHF_StateFree( struct TA_STOCHF_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -758,16 +758,16 @@ TA_RetCode retCode;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::StochFStateSave( struct TA_StochF_State* _state,
-/* Generated */                          FILE* _file )
+/* Generated */ Core::RetCode Core::StochFStateSave( struct TA_StochF_State* _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int stochFStateSave( struct TA_stochF_State* _state,
-/* Generated */                           FILE* _file )
+/* Generated */ public RetCode stochFStateSave( struct TA_stochF_State* _state,
+/* Generated */                               FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_STOCHF_StateSave( struct TA_STOCHF_State* _state,
-/* Generated */                                              FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_STOCHF_StateSave( struct TA_STOCHF_State* _state,
+/* Generated */                                                     FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -822,16 +822,16 @@ TA_RetCode retCode;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::StochFStateLoad( struct TA_StochF_State** _state,
-/* Generated */                          FILE* _file )
+/* Generated */ Core::RetCode Core::StochFStateLoad( struct TA_StochF_State** _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int stochFStateLoad( struct TA_stochF_State** _state,
-/* Generated */                           FILE* _file )
+/* Generated */ public RetCode stochFStateLoad( struct TA_stochF_State** _state,
+/* Generated */                               FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_STOCHF_StateLoad( struct TA_STOCHF_State** _state,
-/* Generated */                                              FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_STOCHF_StateLoad( struct TA_STOCHF_State** _state,
+/* Generated */                                                     FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

@@ -503,19 +503,19 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::SarStateInit( struct TA_Sar_State** _state,
-/* Generated */                       double        optInAcceleration, /* From 0 to TA_REAL_MAX */
-/* Generated */                       double        optInMaximum )  /* From 0 to TA_REAL_MAX */
+/* Generated */ Core::RetCode Core::SarStateInit( struct TA_Sar_State** _state,
+/* Generated */                                 double        optInAcceleration, /* From 0 to TA_REAL_MAX */
+/* Generated */                                 double        optInMaximum )  /* From 0 to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int sarStateInit( struct TA_sar_State** _state,
-/* Generated */                        double        optInAcceleration, /* From 0 to TA_REAL_MAX */
-/* Generated */                        double        optInMaximum )  /* From 0 to TA_REAL_MAX */
+/* Generated */ public RetCode sarStateInit( struct TA_sar_State** _state,
+/* Generated */                            double        optInAcceleration, /* From 0 to TA_REAL_MAX */
+/* Generated */                            double        optInMaximum )  /* From 0 to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_SAR_StateInit( struct TA_SAR_State** _state,
-/* Generated */                                           double        optInAcceleration, /* From 0 to TA_REAL_MAX */
-/* Generated */                                           double        optInMaximum )  /* From 0 to TA_REAL_MAX */
+/* Generated */ TA_LIB_API TA_RetCode TA_SAR_StateInit( struct TA_SAR_State** _state,
+/* Generated */                                                  double        optInAcceleration, /* From 0 to TA_REAL_MAX */
+/* Generated */                                                  double        optInMaximum )  /* From 0 to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -567,20 +567,20 @@ TA_RetCode retCode;
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::SarState( struct TA_Sar_State* _state,
-/* Generated */                   cli::array<double>^ inHigh,
-/* Generated */                   cli::array<double>^ inLow,
-/* Generated */                   cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::SarState( struct TA_Sar_State* _state,
+/* Generated */                             cli::array<double>^ inHigh,
+/* Generated */                             cli::array<double>^ inLow,
+/* Generated */                             cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int sarState( struct TA_sar_State* _state,
-/* Generated */                    double       inHigh,
-/* Generated */                    double       inLow,
-/* Generated */                    double        *outReal )
+/* Generated */ public RetCode sarState( struct TA_sar_State* _state,
+/* Generated */                        double       inHigh,
+/* Generated */                        double       inLow,
+/* Generated */                        double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_SAR_State( struct TA_SAR_State* _state,
-/* Generated */                                       const double inHigh,
-/* Generated */                                       const double inLow,
-/* Generated */                                       double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_SAR_State( struct TA_SAR_State* _state,
+/* Generated */                                              const double inHigh,
+/* Generated */                                              const double inLow,
+/* Generated */                                              double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -795,13 +795,13 @@ double ep_temp;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::SarStateFree( struct TA_Sar_State** _state )
+/* Generated */ Core::RetCode Core::SarStateFree( struct TA_Sar_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int sarStateFree( struct TA_sar_State** _state )
+/* Generated */ public RetCode sarStateFree( struct TA_sar_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_SAR_StateFree( struct TA_SAR_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_SAR_StateFree( struct TA_SAR_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -832,16 +832,16 @@ if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::SarStateSave( struct TA_Sar_State* _state,
-/* Generated */                       FILE* _file )
+/* Generated */ Core::RetCode Core::SarStateSave( struct TA_Sar_State* _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int sarStateSave( struct TA_sar_State* _state,
-/* Generated */                        FILE* _file )
+/* Generated */ public RetCode sarStateSave( struct TA_sar_State* _state,
+/* Generated */                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_SAR_StateSave( struct TA_SAR_State* _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_SAR_StateSave( struct TA_SAR_State* _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -902,16 +902,16 @@ TA_RetCode retCode;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::SarStateLoad( struct TA_Sar_State** _state,
-/* Generated */                       FILE* _file )
+/* Generated */ Core::RetCode Core::SarStateLoad( struct TA_Sar_State** _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int sarStateLoad( struct TA_sar_State** _state,
-/* Generated */                        FILE* _file )
+/* Generated */ public RetCode sarStateLoad( struct TA_sar_State** _state,
+/* Generated */                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_SAR_StateLoad( struct TA_SAR_State** _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_SAR_StateLoad( struct TA_SAR_State** _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

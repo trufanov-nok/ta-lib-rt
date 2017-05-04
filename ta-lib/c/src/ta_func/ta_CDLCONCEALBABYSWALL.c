@@ -282,13 +282,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlConcealBabysWallStateInit( struct TA_CdlConcealBabysWall_State** _state )
+/* Generated */ Core::RetCode Core::CdlConcealBabysWallStateInit( struct TA_CdlConcealBabysWall_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlConcealBabysWallStateInit( struct TA_cdlConcealBabysWall_State** _state )
+/* Generated */ public RetCode cdlConcealBabysWallStateInit( struct TA_cdlConcealBabysWall_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLCONCEALBABYSWALL_StateInit( struct TA_CDLCONCEALBABYSWALL_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLCONCEALBABYSWALL_StateInit( struct TA_CDLCONCEALBABYSWALL_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -324,26 +324,26 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlConcealBabysWallState( struct TA_CdlConcealBabysWall_State* _state,
-/* Generated */                                   cli::array<double>^ inOpen,
-/* Generated */                                   cli::array<double>^ inHigh,
-/* Generated */                                   cli::array<double>^ inLow,
-/* Generated */                                   cli::array<double>^ inClose,
-/* Generated */                                   cli::array<int>^  *outInteger )
+/* Generated */ Core::RetCode Core::CdlConcealBabysWallState( struct TA_CdlConcealBabysWall_State* _state,
+/* Generated */                                             cli::array<double>^ inOpen,
+/* Generated */                                             cli::array<double>^ inHigh,
+/* Generated */                                             cli::array<double>^ inLow,
+/* Generated */                                             cli::array<double>^ inClose,
+/* Generated */                                             cli::array<int>^  *outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlConcealBabysWallState( struct TA_cdlConcealBabysWall_State* _state,
-/* Generated */                                    double       inOpen,
-/* Generated */                                    double       inHigh,
-/* Generated */                                    double       inLow,
-/* Generated */                                    double       inClose,
-/* Generated */                                    int           *outInteger )
+/* Generated */ public RetCode cdlConcealBabysWallState( struct TA_cdlConcealBabysWall_State* _state,
+/* Generated */                                        double       inOpen,
+/* Generated */                                        double       inHigh,
+/* Generated */                                        double       inLow,
+/* Generated */                                        double       inClose,
+/* Generated */                                        int           *outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLCONCEALBABYSWALL_State( struct TA_CDLCONCEALBABYSWALL_State* _state,
-/* Generated */                                                       const double inOpen,
-/* Generated */                                                       const double inHigh,
-/* Generated */                                                       const double inLow,
-/* Generated */                                                       const double inClose,
-/* Generated */                                                       int           *outInteger )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLCONCEALBABYSWALL_State( struct TA_CDLCONCEALBABYSWALL_State* _state,
+/* Generated */                                                              const double inOpen,
+/* Generated */                                                              const double inHigh,
+/* Generated */                                                              const double inLow,
+/* Generated */                                                              const double inClose,
+/* Generated */                                                              int           *outInteger )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -448,13 +448,13 @@ unsigned int i1,i2,i3;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlConcealBabysWallStateFree( struct TA_CdlConcealBabysWall_State** _state )
+/* Generated */ Core::RetCode Core::CdlConcealBabysWallStateFree( struct TA_CdlConcealBabysWall_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlConcealBabysWallStateFree( struct TA_cdlConcealBabysWall_State** _state )
+/* Generated */ public RetCode cdlConcealBabysWallStateFree( struct TA_cdlConcealBabysWall_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLCONCEALBABYSWALL_StateFree( struct TA_CDLCONCEALBABYSWALL_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLCONCEALBABYSWALL_StateFree( struct TA_CDLCONCEALBABYSWALL_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -482,16 +482,16 @@ unsigned int i1,i2,i3;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlConcealBabysWallStateSave( struct TA_CdlConcealBabysWall_State* _state,
-/* Generated */                                       FILE* _file )
+/* Generated */ Core::RetCode Core::CdlConcealBabysWallStateSave( struct TA_CdlConcealBabysWall_State* _state,
+/* Generated */                                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlConcealBabysWallStateSave( struct TA_cdlConcealBabysWall_State* _state,
-/* Generated */                                        FILE* _file )
+/* Generated */ public RetCode cdlConcealBabysWallStateSave( struct TA_cdlConcealBabysWall_State* _state,
+/* Generated */                                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLCONCEALBABYSWALL_StateSave( struct TA_CDLCONCEALBABYSWALL_State* _state,
-/* Generated */                                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLCONCEALBABYSWALL_StateSave( struct TA_CDLCONCEALBABYSWALL_State* _state,
+/* Generated */                                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -537,16 +537,16 @@ unsigned int i1,i2,i3;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlConcealBabysWallStateLoad( struct TA_CdlConcealBabysWall_State** _state,
-/* Generated */                                       FILE* _file )
+/* Generated */ Core::RetCode Core::CdlConcealBabysWallStateLoad( struct TA_CdlConcealBabysWall_State** _state,
+/* Generated */                                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlConcealBabysWallStateLoad( struct TA_cdlConcealBabysWall_State** _state,
-/* Generated */                                        FILE* _file )
+/* Generated */ public RetCode cdlConcealBabysWallStateLoad( struct TA_cdlConcealBabysWall_State** _state,
+/* Generated */                                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLCONCEALBABYSWALL_StateLoad( struct TA_CDLCONCEALBABYSWALL_State** _state,
-/* Generated */                                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLCONCEALBABYSWALL_StateLoad( struct TA_CDLCONCEALBABYSWALL_State** _state,
+/* Generated */                                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

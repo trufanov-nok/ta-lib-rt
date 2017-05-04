@@ -389,16 +389,16 @@ DEFINE_CIRCBUF_STRUCT(MFI, MoneyFlow)
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MfiStateInit( struct TA_Mfi_State** _state,
-/* Generated */                       int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ Core::RetCode Core::MfiStateInit( struct TA_Mfi_State** _state,
+/* Generated */                                 int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int mfiStateInit( struct TA_mfi_State** _state,
-/* Generated */                        int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ public RetCode mfiStateInit( struct TA_mfi_State** _state,
+/* Generated */                            int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MFI_StateInit( struct TA_MFI_State** _state,
-/* Generated */                                           int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_MFI_StateInit( struct TA_MFI_State** _state,
+/* Generated */                                                  int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -442,26 +442,26 @@ DEFINE_CIRCBUF_STRUCT(MFI, MoneyFlow)
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MfiState( struct TA_Mfi_State* _state,
-/* Generated */                   cli::array<double>^ inHigh,
-/* Generated */                   cli::array<double>^ inLow,
-/* Generated */                   cli::array<double>^ inClose,
-/* Generated */                   cli::array<double>^ inVolume,
-/* Generated */                   cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::MfiState( struct TA_Mfi_State* _state,
+/* Generated */                             cli::array<double>^ inHigh,
+/* Generated */                             cli::array<double>^ inLow,
+/* Generated */                             cli::array<double>^ inClose,
+/* Generated */                             cli::array<double>^ inVolume,
+/* Generated */                             cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int mfiState( struct TA_mfi_State* _state,
-/* Generated */                    double       inHigh,
-/* Generated */                    double       inLow,
-/* Generated */                    double       inClose,
-/* Generated */                    double       inVolume,
-/* Generated */                    double        *outReal )
+/* Generated */ public RetCode mfiState( struct TA_mfi_State* _state,
+/* Generated */                        double       inHigh,
+/* Generated */                        double       inLow,
+/* Generated */                        double       inClose,
+/* Generated */                        double       inVolume,
+/* Generated */                        double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MFI_State( struct TA_MFI_State* _state,
-/* Generated */                                       const double inHigh,
-/* Generated */                                       const double inLow,
-/* Generated */                                       const double inClose,
-/* Generated */                                       const double inVolume,
-/* Generated */                                       double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_MFI_State( struct TA_MFI_State* _state,
+/* Generated */                                              const double inHigh,
+/* Generated */                                              const double inLow,
+/* Generated */                                              const double inClose,
+/* Generated */                                              const double inVolume,
+/* Generated */                                              double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -557,13 +557,13 @@ DEFINE_CIRCBUF_STRUCT(MFI, MoneyFlow)
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MfiStateFree( struct TA_Mfi_State** _state )
+/* Generated */ Core::RetCode Core::MfiStateFree( struct TA_Mfi_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int mfiStateFree( struct TA_mfi_State** _state )
+/* Generated */ public RetCode mfiStateFree( struct TA_mfi_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MFI_StateFree( struct TA_MFI_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_MFI_StateFree( struct TA_MFI_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -591,16 +591,16 @@ DEFINE_CIRCBUF_STRUCT(MFI, MoneyFlow)
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MfiStateSave( struct TA_Mfi_State* _state,
-/* Generated */                       FILE* _file )
+/* Generated */ Core::RetCode Core::MfiStateSave( struct TA_Mfi_State* _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int mfiStateSave( struct TA_mfi_State* _state,
-/* Generated */                        FILE* _file )
+/* Generated */ public RetCode mfiStateSave( struct TA_mfi_State* _state,
+/* Generated */                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MFI_StateSave( struct TA_MFI_State* _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MFI_StateSave( struct TA_MFI_State* _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -648,16 +648,16 @@ DEFINE_CIRCBUF_STRUCT(MFI, MoneyFlow)
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MfiStateLoad( struct TA_Mfi_State** _state,
-/* Generated */                       FILE* _file )
+/* Generated */ Core::RetCode Core::MfiStateLoad( struct TA_Mfi_State** _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int mfiStateLoad( struct TA_mfi_State** _state,
-/* Generated */                        FILE* _file )
+/* Generated */ public RetCode mfiStateLoad( struct TA_mfi_State** _state,
+/* Generated */                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MFI_StateLoad( struct TA_MFI_State** _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MFI_StateLoad( struct TA_MFI_State** _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

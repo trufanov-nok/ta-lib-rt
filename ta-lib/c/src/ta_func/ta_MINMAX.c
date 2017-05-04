@@ -295,16 +295,16 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MinMaxStateInit( struct TA_MinMax_State** _state,
-/* Generated */                          int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ Core::RetCode Core::MinMaxStateInit( struct TA_MinMax_State** _state,
+/* Generated */                                    int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int minMaxStateInit( struct TA_minMax_State** _state,
-/* Generated */                           int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ public RetCode minMaxStateInit( struct TA_minMax_State** _state,
+/* Generated */                               int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MINMAX_StateInit( struct TA_MINMAX_State** _state,
-/* Generated */                                              int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_MINMAX_StateInit( struct TA_MINMAX_State** _state,
+/* Generated */                                                     int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -347,20 +347,20 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MinMaxState( struct TA_MinMax_State* _state,
-/* Generated */                      cli::array<double>^ inReal,
-/* Generated */                      cli::array<double>^  *outMin,
-/* Generated */                      cli::array<double>^  *outMax )
+/* Generated */ Core::RetCode Core::MinMaxState( struct TA_MinMax_State* _state,
+/* Generated */                                cli::array<double>^ inReal,
+/* Generated */                                cli::array<double>^  *outMin,
+/* Generated */                                cli::array<double>^  *outMax )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int minMaxState( struct TA_minMax_State* _state,
-/* Generated */                       double       inReal,
-/* Generated */                       double        *outMin,
-/* Generated */                       double        *outMax )
+/* Generated */ public RetCode minMaxState( struct TA_minMax_State* _state,
+/* Generated */                           double       inReal,
+/* Generated */                           double        *outMin,
+/* Generated */                           double        *outMax )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MINMAX_State( struct TA_MINMAX_State* _state,
-/* Generated */                                          const double inReal,
-/* Generated */                                          double        *outMin,
-/* Generated */                                          double        *outMax )
+/* Generated */ TA_LIB_API TA_RetCode TA_MINMAX_State( struct TA_MINMAX_State* _state,
+/* Generated */                                                 const double inReal,
+/* Generated */                                                 double        *outMin,
+/* Generated */                                                 double        *outMax )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -417,13 +417,13 @@ return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MinMaxStateFree( struct TA_MinMax_State** _state )
+/* Generated */ Core::RetCode Core::MinMaxStateFree( struct TA_MinMax_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int minMaxStateFree( struct TA_minMax_State** _state )
+/* Generated */ public RetCode minMaxStateFree( struct TA_minMax_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MINMAX_StateFree( struct TA_MINMAX_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_MINMAX_StateFree( struct TA_MINMAX_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -451,16 +451,16 @@ return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MinMaxStateSave( struct TA_MinMax_State* _state,
-/* Generated */                          FILE* _file )
+/* Generated */ Core::RetCode Core::MinMaxStateSave( struct TA_MinMax_State* _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int minMaxStateSave( struct TA_minMax_State* _state,
-/* Generated */                           FILE* _file )
+/* Generated */ public RetCode minMaxStateSave( struct TA_minMax_State* _state,
+/* Generated */                               FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MINMAX_StateSave( struct TA_MINMAX_State* _state,
-/* Generated */                                              FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MINMAX_StateSave( struct TA_MINMAX_State* _state,
+/* Generated */                                                     FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -504,16 +504,16 @@ return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MinMaxStateLoad( struct TA_MinMax_State** _state,
-/* Generated */                          FILE* _file )
+/* Generated */ Core::RetCode Core::MinMaxStateLoad( struct TA_MinMax_State** _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int minMaxStateLoad( struct TA_minMax_State** _state,
-/* Generated */                           FILE* _file )
+/* Generated */ public RetCode minMaxStateLoad( struct TA_minMax_State** _state,
+/* Generated */                               FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MINMAX_StateLoad( struct TA_MINMAX_State** _state,
-/* Generated */                                              FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MINMAX_StateLoad( struct TA_MINMAX_State** _state,
+/* Generated */                                                     FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

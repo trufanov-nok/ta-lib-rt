@@ -186,13 +186,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TanStateInit( struct TA_Tan_State** _state )
+/* Generated */ Core::RetCode Core::TanStateInit( struct TA_Tan_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int tanStateInit( struct TA_tan_State** _state )
+/* Generated */ public RetCode tanStateInit( struct TA_tan_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TAN_StateInit( struct TA_TAN_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_TAN_StateInit( struct TA_TAN_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -228,17 +228,17 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TanState( struct TA_Tan_State* _state,
-/* Generated */                   cli::array<double>^ inReal,
-/* Generated */                   cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::TanState( struct TA_Tan_State* _state,
+/* Generated */                             cli::array<double>^ inReal,
+/* Generated */                             cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int tanState( struct TA_tan_State* _state,
-/* Generated */                    double       inReal,
-/* Generated */                    double        *outReal )
+/* Generated */ public RetCode tanState( struct TA_tan_State* _state,
+/* Generated */                        double       inReal,
+/* Generated */                        double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TAN_State( struct TA_TAN_State* _state,
-/* Generated */                                       const double inReal,
-/* Generated */                                       double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_TAN_State( struct TA_TAN_State* _state,
+/* Generated */                                              const double inReal,
+/* Generated */                                              double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -277,13 +277,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TanStateFree( struct TA_Tan_State** _state )
+/* Generated */ Core::RetCode Core::TanStateFree( struct TA_Tan_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int tanStateFree( struct TA_tan_State** _state )
+/* Generated */ public RetCode tanStateFree( struct TA_tan_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TAN_StateFree( struct TA_TAN_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_TAN_StateFree( struct TA_TAN_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -311,16 +311,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TanStateSave( struct TA_Tan_State* _state,
-/* Generated */                       FILE* _file )
+/* Generated */ Core::RetCode Core::TanStateSave( struct TA_Tan_State* _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int tanStateSave( struct TA_tan_State* _state,
-/* Generated */                        FILE* _file )
+/* Generated */ public RetCode tanStateSave( struct TA_tan_State* _state,
+/* Generated */                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TAN_StateSave( struct TA_TAN_State* _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_TAN_StateSave( struct TA_TAN_State* _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -358,16 +358,16 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TanStateLoad( struct TA_Tan_State** _state,
-/* Generated */                       FILE* _file )
+/* Generated */ Core::RetCode Core::TanStateLoad( struct TA_Tan_State** _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int tanStateLoad( struct TA_tan_State** _state,
-/* Generated */                        FILE* _file )
+/* Generated */ public RetCode tanStateLoad( struct TA_tan_State** _state,
+/* Generated */                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TAN_StateLoad( struct TA_TAN_State** _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_TAN_StateLoad( struct TA_TAN_State** _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

@@ -276,13 +276,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlHaramiCrossStateInit( struct TA_CdlHaramiCross_State** _state )
+/* Generated */ Core::RetCode Core::CdlHaramiCrossStateInit( struct TA_CdlHaramiCross_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlHaramiCrossStateInit( struct TA_cdlHaramiCross_State** _state )
+/* Generated */ public RetCode cdlHaramiCrossStateInit( struct TA_cdlHaramiCross_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLHARAMICROSS_StateInit( struct TA_CDLHARAMICROSS_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLHARAMICROSS_StateInit( struct TA_CDLHARAMICROSS_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -318,26 +318,26 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlHaramiCrossState( struct TA_CdlHaramiCross_State* _state,
-/* Generated */                              cli::array<double>^ inOpen,
-/* Generated */                              cli::array<double>^ inHigh,
-/* Generated */                              cli::array<double>^ inLow,
-/* Generated */                              cli::array<double>^ inClose,
-/* Generated */                              cli::array<int>^  *outInteger )
+/* Generated */ Core::RetCode Core::CdlHaramiCrossState( struct TA_CdlHaramiCross_State* _state,
+/* Generated */                                        cli::array<double>^ inOpen,
+/* Generated */                                        cli::array<double>^ inHigh,
+/* Generated */                                        cli::array<double>^ inLow,
+/* Generated */                                        cli::array<double>^ inClose,
+/* Generated */                                        cli::array<int>^  *outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlHaramiCrossState( struct TA_cdlHaramiCross_State* _state,
-/* Generated */                               double       inOpen,
-/* Generated */                               double       inHigh,
-/* Generated */                               double       inLow,
-/* Generated */                               double       inClose,
-/* Generated */                               int           *outInteger )
+/* Generated */ public RetCode cdlHaramiCrossState( struct TA_cdlHaramiCross_State* _state,
+/* Generated */                                   double       inOpen,
+/* Generated */                                   double       inHigh,
+/* Generated */                                   double       inLow,
+/* Generated */                                   double       inClose,
+/* Generated */                                   int           *outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLHARAMICROSS_State( struct TA_CDLHARAMICROSS_State* _state,
-/* Generated */                                                  const double inOpen,
-/* Generated */                                                  const double inHigh,
-/* Generated */                                                  const double inLow,
-/* Generated */                                                  const double inClose,
-/* Generated */                                                  int           *outInteger )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLHARAMICROSS_State( struct TA_CDLHARAMICROSS_State* _state,
+/* Generated */                                                         const double inOpen,
+/* Generated */                                                         const double inHigh,
+/* Generated */                                                         const double inLow,
+/* Generated */                                                         const double inClose,
+/* Generated */                                                         int           *outInteger )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -445,13 +445,13 @@ int i1;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlHaramiCrossStateFree( struct TA_CdlHaramiCross_State** _state )
+/* Generated */ Core::RetCode Core::CdlHaramiCrossStateFree( struct TA_CdlHaramiCross_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlHaramiCrossStateFree( struct TA_cdlHaramiCross_State** _state )
+/* Generated */ public RetCode cdlHaramiCrossStateFree( struct TA_cdlHaramiCross_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLHARAMICROSS_StateFree( struct TA_CDLHARAMICROSS_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLHARAMICROSS_StateFree( struct TA_CDLHARAMICROSS_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -479,16 +479,16 @@ int i1;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlHaramiCrossStateSave( struct TA_CdlHaramiCross_State* _state,
-/* Generated */                                  FILE* _file )
+/* Generated */ Core::RetCode Core::CdlHaramiCrossStateSave( struct TA_CdlHaramiCross_State* _state,
+/* Generated */                                            FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlHaramiCrossStateSave( struct TA_cdlHaramiCross_State* _state,
-/* Generated */                                   FILE* _file )
+/* Generated */ public RetCode cdlHaramiCrossStateSave( struct TA_cdlHaramiCross_State* _state,
+/* Generated */                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLHARAMICROSS_StateSave( struct TA_CDLHARAMICROSS_State* _state,
-/* Generated */                                                      FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLHARAMICROSS_StateSave( struct TA_CDLHARAMICROSS_State* _state,
+/* Generated */                                                             FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -538,16 +538,16 @@ int i1;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlHaramiCrossStateLoad( struct TA_CdlHaramiCross_State** _state,
-/* Generated */                                  FILE* _file )
+/* Generated */ Core::RetCode Core::CdlHaramiCrossStateLoad( struct TA_CdlHaramiCross_State** _state,
+/* Generated */                                            FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlHaramiCrossStateLoad( struct TA_cdlHaramiCross_State** _state,
-/* Generated */                                   FILE* _file )
+/* Generated */ public RetCode cdlHaramiCrossStateLoad( struct TA_cdlHaramiCross_State** _state,
+/* Generated */                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLHARAMICROSS_StateLoad( struct TA_CDLHARAMICROSS_State** _state,
-/* Generated */                                                      FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLHARAMICROSS_StateLoad( struct TA_CDLHARAMICROSS_State** _state,
+/* Generated */                                                             FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

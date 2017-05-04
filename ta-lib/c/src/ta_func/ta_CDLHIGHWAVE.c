@@ -255,13 +255,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlHignWaveStateInit( struct TA_CdlHignWave_State** _state )
+/* Generated */ Core::RetCode Core::CdlHignWaveStateInit( struct TA_CdlHignWave_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlHignWaveStateInit( struct TA_cdlHignWave_State** _state )
+/* Generated */ public RetCode cdlHignWaveStateInit( struct TA_cdlHignWave_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLHIGHWAVE_StateInit( struct TA_CDLHIGHWAVE_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLHIGHWAVE_StateInit( struct TA_CDLHIGHWAVE_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -297,26 +297,26 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlHignWaveState( struct TA_CdlHignWave_State* _state,
-/* Generated */                           cli::array<double>^ inOpen,
-/* Generated */                           cli::array<double>^ inHigh,
-/* Generated */                           cli::array<double>^ inLow,
-/* Generated */                           cli::array<double>^ inClose,
-/* Generated */                           cli::array<int>^  *outInteger )
+/* Generated */ Core::RetCode Core::CdlHignWaveState( struct TA_CdlHignWave_State* _state,
+/* Generated */                                     cli::array<double>^ inOpen,
+/* Generated */                                     cli::array<double>^ inHigh,
+/* Generated */                                     cli::array<double>^ inLow,
+/* Generated */                                     cli::array<double>^ inClose,
+/* Generated */                                     cli::array<int>^  *outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlHignWaveState( struct TA_cdlHignWave_State* _state,
-/* Generated */                            double       inOpen,
-/* Generated */                            double       inHigh,
-/* Generated */                            double       inLow,
-/* Generated */                            double       inClose,
-/* Generated */                            int           *outInteger )
+/* Generated */ public RetCode cdlHignWaveState( struct TA_cdlHignWave_State* _state,
+/* Generated */                                double       inOpen,
+/* Generated */                                double       inHigh,
+/* Generated */                                double       inLow,
+/* Generated */                                double       inClose,
+/* Generated */                                int           *outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLHIGHWAVE_State( struct TA_CDLHIGHWAVE_State* _state,
-/* Generated */                                               const double inOpen,
-/* Generated */                                               const double inHigh,
-/* Generated */                                               const double inLow,
-/* Generated */                                               const double inClose,
-/* Generated */                                               int           *outInteger )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLHIGHWAVE_State( struct TA_CDLHIGHWAVE_State* _state,
+/* Generated */                                                      const double inOpen,
+/* Generated */                                                      const double inHigh,
+/* Generated */                                                      const double inLow,
+/* Generated */                                                      const double inClose,
+/* Generated */                                                      int           *outInteger )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -401,13 +401,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlHignWaveStateFree( struct TA_CdlHignWave_State** _state )
+/* Generated */ Core::RetCode Core::CdlHignWaveStateFree( struct TA_CdlHignWave_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlHignWaveStateFree( struct TA_cdlHignWave_State** _state )
+/* Generated */ public RetCode cdlHignWaveStateFree( struct TA_cdlHignWave_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLHIGHWAVE_StateFree( struct TA_CDLHIGHWAVE_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLHIGHWAVE_StateFree( struct TA_CDLHIGHWAVE_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -435,16 +435,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlHignWaveStateSave( struct TA_CdlHignWave_State* _state,
-/* Generated */                               FILE* _file )
+/* Generated */ Core::RetCode Core::CdlHignWaveStateSave( struct TA_CdlHignWave_State* _state,
+/* Generated */                                         FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlHignWaveStateSave( struct TA_cdlHignWave_State* _state,
-/* Generated */                                FILE* _file )
+/* Generated */ public RetCode cdlHignWaveStateSave( struct TA_cdlHignWave_State* _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLHIGHWAVE_StateSave( struct TA_CDLHIGHWAVE_State* _state,
-/* Generated */                                                   FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLHIGHWAVE_StateSave( struct TA_CDLHIGHWAVE_State* _state,
+/* Generated */                                                          FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -490,16 +490,16 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlHignWaveStateLoad( struct TA_CdlHignWave_State** _state,
-/* Generated */                               FILE* _file )
+/* Generated */ Core::RetCode Core::CdlHignWaveStateLoad( struct TA_CdlHignWave_State** _state,
+/* Generated */                                         FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlHignWaveStateLoad( struct TA_cdlHignWave_State** _state,
-/* Generated */                                FILE* _file )
+/* Generated */ public RetCode cdlHignWaveStateLoad( struct TA_cdlHignWave_State** _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLHIGHWAVE_StateLoad( struct TA_CDLHIGHWAVE_State** _state,
-/* Generated */                                                   FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLHIGHWAVE_StateLoad( struct TA_CDLHIGHWAVE_State** _state,
+/* Generated */                                                          FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

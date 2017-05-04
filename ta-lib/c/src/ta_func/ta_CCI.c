@@ -307,16 +307,16 @@ DEFINE_CIRCBUF_STRUCT(CCI, double)
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CciStateInit( struct TA_Cci_State** _state,
-/* Generated */                       int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ Core::RetCode Core::CciStateInit( struct TA_Cci_State** _state,
+/* Generated */                                 int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cciStateInit( struct TA_cci_State** _state,
-/* Generated */                        int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ public RetCode cciStateInit( struct TA_cci_State** _state,
+/* Generated */                            int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CCI_StateInit( struct TA_CCI_State** _state,
-/* Generated */                                           int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_CCI_StateInit( struct TA_CCI_State** _state,
+/* Generated */                                                  int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -360,23 +360,23 @@ DEFINE_CIRCBUF_STRUCT(CCI, double)
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CciState( struct TA_Cci_State* _state,
-/* Generated */                   cli::array<double>^ inHigh,
-/* Generated */                   cli::array<double>^ inLow,
-/* Generated */                   cli::array<double>^ inClose,
-/* Generated */                   cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::CciState( struct TA_Cci_State* _state,
+/* Generated */                             cli::array<double>^ inHigh,
+/* Generated */                             cli::array<double>^ inLow,
+/* Generated */                             cli::array<double>^ inClose,
+/* Generated */                             cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cciState( struct TA_cci_State* _state,
-/* Generated */                    double       inHigh,
-/* Generated */                    double       inLow,
-/* Generated */                    double       inClose,
-/* Generated */                    double        *outReal )
+/* Generated */ public RetCode cciState( struct TA_cci_State* _state,
+/* Generated */                        double       inHigh,
+/* Generated */                        double       inLow,
+/* Generated */                        double       inClose,
+/* Generated */                        double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CCI_State( struct TA_CCI_State* _state,
-/* Generated */                                       const double inHigh,
-/* Generated */                                       const double inLow,
-/* Generated */                                       const double inClose,
-/* Generated */                                       double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_CCI_State( struct TA_CCI_State* _state,
+/* Generated */                                              const double inHigh,
+/* Generated */                                              const double inLow,
+/* Generated */                                              const double inClose,
+/* Generated */                                              double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -454,13 +454,13 @@ double lastValue, sum, avg;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CciStateFree( struct TA_Cci_State** _state )
+/* Generated */ Core::RetCode Core::CciStateFree( struct TA_Cci_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cciStateFree( struct TA_cci_State** _state )
+/* Generated */ public RetCode cciStateFree( struct TA_cci_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CCI_StateFree( struct TA_CCI_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CCI_StateFree( struct TA_CCI_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -488,16 +488,16 @@ double lastValue, sum, avg;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CciStateSave( struct TA_Cci_State* _state,
-/* Generated */                       FILE* _file )
+/* Generated */ Core::RetCode Core::CciStateSave( struct TA_Cci_State* _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cciStateSave( struct TA_cci_State* _state,
-/* Generated */                        FILE* _file )
+/* Generated */ public RetCode cciStateSave( struct TA_cci_State* _state,
+/* Generated */                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CCI_StateSave( struct TA_CCI_State* _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CCI_StateSave( struct TA_CCI_State* _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -542,16 +542,16 @@ double lastValue, sum, avg;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CciStateLoad( struct TA_Cci_State** _state,
-/* Generated */                       FILE* _file )
+/* Generated */ Core::RetCode Core::CciStateLoad( struct TA_Cci_State** _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cciStateLoad( struct TA_cci_State** _state,
-/* Generated */                        FILE* _file )
+/* Generated */ public RetCode cciStateLoad( struct TA_cci_State** _state,
+/* Generated */                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CCI_StateLoad( struct TA_CCI_State** _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CCI_StateLoad( struct TA_CCI_State** _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

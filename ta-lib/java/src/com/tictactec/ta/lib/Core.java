@@ -285,7 +285,7 @@ public class Core {
       outNBElement.value = outputSize;
       return RetCode.Success ;
    }
-   public int accbandsStateInit( struct TA_accbands_State** _state,
+   public RetCode accbandsStateInit( struct TA_accbands_State** _state,
       int optInTimePeriod )
    {
       TA_RetCode retCode;
@@ -308,7 +308,7 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return RetCode.Success ;
    }
-   public int accbandsState( struct TA_accbands_State* _state,
+   public RetCode accbandsState( struct TA_accbands_State* _state,
       double inHigh,
       double inLow,
       double inClose,
@@ -339,7 +339,7 @@ public class Core {
       retCode3 = sma ( (struct sma *) _state.value .stateSMA3, tempReal2, outRealLowerBand );
       return retCode1 | retCode2 | retCode3;
    }
-   public int accbandsStateFree( struct TA_accbands_State** _state )
+   public RetCode accbandsStateFree( struct TA_accbands_State** _state )
    {
       TA_RetCode retCode;
       retCode = sma ( (struct sma **) & _state.value .value .stateSMA1 );
@@ -355,7 +355,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int accbandsStateSave( struct TA_accbands_State* _state,
+   public RetCode accbandsStateSave( struct TA_accbands_State* _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -383,7 +383,7 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return 0;
    }
-   public int accbandsStateLoad( struct TA_accbands_State** _state,
+   public RetCode accbandsStateLoad( struct TA_accbands_State** _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -527,7 +527,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int acosStateInit( struct TA_acos_State** _state )
+   public RetCode acosStateInit( struct TA_acos_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -540,7 +540,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int acosState( struct TA_acos_State* _state,
+   public RetCode acosState( struct TA_acos_State* _state,
       double inReal,
       double *outReal )
    {
@@ -554,7 +554,7 @@ public class Core {
       outReal.value = Math.acos (inReal);
       return RetCode.Success ;
    }
-   public int acosStateFree( struct TA_acos_State** _state )
+   public RetCode acosStateFree( struct TA_acos_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -563,7 +563,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int acosStateSave( struct TA_acos_State* _state,
+   public RetCode acosStateSave( struct TA_acos_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -582,7 +582,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int acosStateLoad( struct TA_acos_State** _state,
+   public RetCode acosStateLoad( struct TA_acos_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -666,7 +666,7 @@ public class Core {
       }
       return RetCode.Success ;
    }
-   public int adStateInit( struct TA_ad_State** _state )
+   public RetCode adStateInit( struct TA_ad_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -679,7 +679,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int adState( struct TA_ad_State* _state,
+   public RetCode adState( struct TA_ad_State* _state,
       double inHigh,
       double inLow,
       double inClose,
@@ -707,7 +707,7 @@ public class Core {
       outReal.value = _state.value .ad;
       return RetCode.Success ;
    }
-   public int adStateFree( struct TA_ad_State** _state )
+   public RetCode adStateFree( struct TA_ad_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -716,7 +716,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int adStateSave( struct TA_ad_State* _state,
+   public RetCode adStateSave( struct TA_ad_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -737,7 +737,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int adStateLoad( struct TA_ad_State** _state,
+   public RetCode adStateLoad( struct TA_ad_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -824,7 +824,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int addStateInit( struct TA_add_State** _state )
+   public RetCode addStateInit( struct TA_add_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -837,7 +837,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int addState( struct TA_add_State* _state,
+   public RetCode addState( struct TA_add_State* _state,
       double inReal0,
       double inReal1,
       double *outReal )
@@ -853,7 +853,7 @@ public class Core {
       outReal.value = inReal0 + inReal1;
       return RetCode.Success ;
    }
-   public int addStateFree( struct TA_add_State** _state )
+   public RetCode addStateFree( struct TA_add_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -862,7 +862,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int addStateSave( struct TA_add_State* _state,
+   public RetCode addStateSave( struct TA_add_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -881,7 +881,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int addStateLoad( struct TA_add_State** _state,
+   public RetCode addStateLoad( struct TA_add_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -1013,7 +1013,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int adOscStateInit( struct TA_adOsc_State** _state,
+   public RetCode adOscStateInit( struct TA_adOsc_State** _state,
       int optInFastPeriod,
       int optInSlowPeriod )
    {
@@ -1035,7 +1035,7 @@ public class Core {
       _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int adOscState( struct TA_adOsc_State* _state,
+   public RetCode adOscState( struct TA_adOsc_State* _state,
       double inHigh,
       double inLow,
       double inClose,
@@ -1066,7 +1066,7 @@ public class Core {
       outReal.value = _state.value .fastEMA - _state.value .slowEMA;
       return RetCode.Success ;
    }
-   public int adOscStateFree( struct TA_adOsc_State** _state )
+   public RetCode adOscStateFree( struct TA_adOsc_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -1075,7 +1075,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int adOscStateSave( struct TA_adOsc_State* _state,
+   public RetCode adOscStateSave( struct TA_adOsc_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -1112,7 +1112,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int adOscStateLoad( struct TA_adOsc_State** _state,
+   public RetCode adOscStateLoad( struct TA_adOsc_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -1403,7 +1403,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int adxStateInit( struct TA_adx_State** _state,
+   public RetCode adxStateInit( struct TA_adx_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -1419,7 +1419,7 @@ public class Core {
       _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int adxState( struct TA_adx_State* _state,
+   public RetCode adxState( struct TA_adx_State* _state,
       double inHigh,
       double inLow,
       double inClose,
@@ -1491,7 +1491,7 @@ public class Core {
       outReal.value = _state.value .prevADX;
       return RetCode.Success ;
    }
-   public int adxStateFree( struct TA_adx_State** _state )
+   public RetCode adxStateFree( struct TA_adx_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -1500,7 +1500,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int adxStateSave( struct TA_adx_State* _state,
+   public RetCode adxStateSave( struct TA_adx_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -1537,7 +1537,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int adxStateLoad( struct TA_adx_State** _state,
+   public RetCode adxStateLoad( struct TA_adx_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -1809,7 +1809,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int adxrStateInit( struct TA_adxr_State** _state,
+   public RetCode adxrStateInit( struct TA_adxr_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -1830,7 +1830,7 @@ public class Core {
       _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_ADXR_Data));
       return adx ((struct adx **)& _state.value .value .ADXState, _state.value .value .optInTimePeriod);
    }
-   public int adxrState( struct TA_adxr_State* _state,
+   public RetCode adxrState( struct TA_adxr_State* _state,
       double inHigh,
       double inLow,
       double inClose,
@@ -1861,7 +1861,7 @@ public class Core {
       }
       return RetCode.Success ;
    }
-   public int adxrStateFree( struct TA_adxr_State** _state )
+   public RetCode adxrStateFree( struct TA_adxr_State** _state )
    {
       RetCode retCode;
       retCode = adx ((struct adx **)& _state.value .value .ADXState);
@@ -1873,7 +1873,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int adxrStateSave( struct TA_adxr_State* _state,
+   public RetCode adxrStateSave( struct TA_adxr_State* _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -1897,7 +1897,7 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return 0;
    }
-   public int adxrStateLoad( struct TA_adxr_State** _state,
+   public RetCode adxrStateLoad( struct TA_adxr_State** _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -2092,7 +2092,7 @@ public class Core {
       }
       return retCode;
    }
-   public int apoStateInit( struct TA_apo_State** _state,
+   public RetCode apoStateInit( struct TA_apo_State** _state,
       int optInFastPeriod,
       int optInSlowPeriod,
       MAType optInMAType )
@@ -2136,7 +2136,7 @@ public class Core {
          return retCode;
       return movingAverage ((struct movingAverage **)& _state.value .value .slowMAState, _state.value .value .optInSlowPeriod, _state.value .value .optInMAType);
    }
-   public int apoState( struct TA_apo_State* _state,
+   public RetCode apoState( struct TA_apo_State* _state,
       double inReal,
       double *outReal )
    {
@@ -2161,7 +2161,7 @@ public class Core {
          outReal.value = fastMA - slowMA;
       return RetCode.Success ;
    }
-   public int apoStateFree( struct TA_apo_State** _state )
+   public RetCode apoStateFree( struct TA_apo_State** _state )
    {
       int res = movingAverage ((struct movingAverage **)& _state.value .value .fastMAState);
       if (res != RetCode.Success ) return res;
@@ -2174,7 +2174,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int apoStateSave( struct TA_apo_State* _state,
+   public RetCode apoStateSave( struct TA_apo_State* _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -2206,7 +2206,7 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return 0;
    }
-   public int apoStateLoad( struct TA_apo_State** _state,
+   public RetCode apoStateLoad( struct TA_apo_State** _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -2446,7 +2446,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int aroonStateInit( struct TA_aroon_State** _state,
+   public RetCode aroonStateInit( struct TA_aroon_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -2465,7 +2465,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int aroonState( struct TA_aroon_State* _state,
+   public RetCode aroonState( struct TA_aroon_State* _state,
       double inHigh,
       double inLow,
       double *outAroonDown,
@@ -2538,7 +2538,7 @@ public class Core {
       outAroonDown.value = _state.value .factor* _state.value .lowest_exp;
       return RetCode.Success ;
    }
-   public int aroonStateFree( struct TA_aroon_State** _state )
+   public RetCode aroonStateFree( struct TA_aroon_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -2547,7 +2547,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int aroonStateSave( struct TA_aroon_State* _state,
+   public RetCode aroonStateSave( struct TA_aroon_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -2578,7 +2578,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int aroonStateLoad( struct TA_aroon_State** _state,
+   public RetCode aroonStateLoad( struct TA_aroon_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -2801,7 +2801,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int aroonOscStateInit( struct TA_aroonOsc_State** _state,
+   public RetCode aroonOscStateInit( struct TA_aroonOsc_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -2820,7 +2820,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int aroonOscState( struct TA_aroonOsc_State* _state,
+   public RetCode aroonOscState( struct TA_aroonOsc_State* _state,
       double inHigh,
       double inLow,
       double *outReal )
@@ -2891,7 +2891,7 @@ public class Core {
       outReal.value = _state.value .factor*( _state.value .highest_exp - _state.value .lowest_exp);
       return RetCode.Success ;
    }
-   public int aroonOscStateFree( struct TA_aroonOsc_State** _state )
+   public RetCode aroonOscStateFree( struct TA_aroonOsc_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -2900,7 +2900,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int aroonOscStateSave( struct TA_aroonOsc_State* _state,
+   public RetCode aroonOscStateSave( struct TA_aroonOsc_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -2931,7 +2931,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int aroonOscStateLoad( struct TA_aroonOsc_State** _state,
+   public RetCode aroonOscStateLoad( struct TA_aroonOsc_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -3080,7 +3080,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int asinStateInit( struct TA_asin_State** _state )
+   public RetCode asinStateInit( struct TA_asin_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -3093,7 +3093,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int asinState( struct TA_asin_State* _state,
+   public RetCode asinState( struct TA_asin_State* _state,
       double inReal,
       double *outReal )
    {
@@ -3107,7 +3107,7 @@ public class Core {
       outReal.value = Math.asin (inReal);
       return RetCode.Success ;
    }
-   public int asinStateFree( struct TA_asin_State** _state )
+   public RetCode asinStateFree( struct TA_asin_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -3116,7 +3116,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int asinStateSave( struct TA_asin_State* _state,
+   public RetCode asinStateSave( struct TA_asin_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -3135,7 +3135,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int asinStateLoad( struct TA_asin_State** _state,
+   public RetCode asinStateLoad( struct TA_asin_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -3203,7 +3203,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int atanStateInit( struct TA_atan_State** _state )
+   public RetCode atanStateInit( struct TA_atan_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -3216,7 +3216,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int atanState( struct TA_atan_State* _state,
+   public RetCode atanState( struct TA_atan_State* _state,
       double inReal,
       double *outReal )
    {
@@ -3230,7 +3230,7 @@ public class Core {
       outReal.value = Math.atan (inReal);
       return RetCode.Success ;
    }
-   public int atanStateFree( struct TA_atan_State** _state )
+   public RetCode atanStateFree( struct TA_atan_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -3239,7 +3239,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int atanStateSave( struct TA_atan_State* _state,
+   public RetCode atanStateSave( struct TA_atan_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -3258,7 +3258,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int atanStateLoad( struct TA_atan_State** _state,
+   public RetCode atanStateLoad( struct TA_atan_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -3390,7 +3390,7 @@ public class Core {
       outNBElement.value = outIdx;
       return retCode;
    }
-   public int atrStateInit( struct TA_atr_State** _state,
+   public RetCode atrStateInit( struct TA_atr_State** _state,
       int optInTimePeriod )
    {
       TA_RetCode retCode;
@@ -3416,7 +3416,7 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return sma ( (struct sma **) & _state.value .value .StateSMA, optInTimePeriod );
    }
-   public int atrState( struct TA_atr_State* _state,
+   public RetCode atrState( struct TA_atr_State* _state,
       double inHigh,
       double inLow,
       double inClose,
@@ -3454,7 +3454,7 @@ public class Core {
       outReal.value = _state.value .prevATR;
       return RetCode.Success ;
    }
-   public int atrStateFree( struct TA_atr_State** _state )
+   public RetCode atrStateFree( struct TA_atr_State** _state )
    {
       if( _state.value .value .optInTimePeriod <= 1 )
       {
@@ -3472,7 +3472,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int atrStateSave( struct TA_atr_State* _state,
+   public RetCode atrStateSave( struct TA_atr_State* _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -3502,7 +3502,7 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return 0;
    }
-   public int atrStateLoad( struct TA_atr_State** _state,
+   public RetCode atrStateLoad( struct TA_atr_State** _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -3647,7 +3647,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int avgPriceStateInit( struct TA_avgPrice_State** _state )
+   public RetCode avgPriceStateInit( struct TA_avgPrice_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -3660,7 +3660,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int avgPriceState( struct TA_avgPrice_State* _state,
+   public RetCode avgPriceState( struct TA_avgPrice_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -3680,7 +3680,7 @@ public class Core {
       outReal.value = ( inHigh + inLow + inClose + inOpen) / 4;
       return RetCode.Success ;
    }
-   public int avgPriceStateFree( struct TA_avgPrice_State** _state )
+   public RetCode avgPriceStateFree( struct TA_avgPrice_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -3689,7 +3689,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int avgPriceStateSave( struct TA_avgPrice_State* _state,
+   public RetCode avgPriceStateSave( struct TA_avgPrice_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -3708,7 +3708,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int avgPriceStateLoad( struct TA_avgPrice_State** _state,
+   public RetCode avgPriceStateLoad( struct TA_avgPrice_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -3812,7 +3812,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int avgDevStateInit( struct TA_avgDev_State** _state,
+   public RetCode avgDevStateInit( struct TA_avgDev_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -3831,7 +3831,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int avgDevState( struct TA_avgDev_State* _state,
+   public RetCode avgDevState( struct TA_avgDev_State* _state,
       double inReal,
       double *outReal )
    {
@@ -3859,7 +3859,7 @@ public class Core {
       outReal.value = temp / _state.value .optInTimePeriod;
       return RetCode.Success ;
    }
-   public int avgDevStateFree( struct TA_avgDev_State** _state )
+   public RetCode avgDevStateFree( struct TA_avgDev_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -3868,7 +3868,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int avgDevStateSave( struct TA_avgDev_State* _state,
+   public RetCode avgDevStateSave( struct TA_avgDev_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -3891,7 +3891,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int avgDevStateLoad( struct TA_avgDev_State** _state,
+   public RetCode avgDevStateLoad( struct TA_avgDev_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -4122,7 +4122,7 @@ public class Core {
       }
       return RetCode.Success ;
    }
-   public int bbandsStateInit( struct TA_bbands_State** _state,
+   public RetCode bbandsStateInit( struct TA_bbands_State** _state,
       int optInTimePeriod,
       double optInNbDevUp,
       double optInNbDevDn,
@@ -4157,7 +4157,7 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return RetCode.Success ;
    }
-   public int bbandsState( struct TA_bbands_State* _state,
+   public RetCode bbandsState( struct TA_bbands_State* _state,
       double inReal,
       double *outRealUpperBand,
       double *outRealMiddleBand,
@@ -4203,7 +4203,7 @@ public class Core {
       }
       return RetCode.Success ;
    }
-   public int bbandsStateFree( struct TA_bbands_State** _state )
+   public RetCode bbandsStateFree( struct TA_bbands_State** _state )
    {
       TA_RetCode retCode;
       retCode = movingAverage ( (struct movingAverage **) & _state.value .value .stateMA );
@@ -4217,7 +4217,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int bbandsStateSave( struct TA_bbands_State* _state,
+   public RetCode bbandsStateSave( struct TA_bbands_State* _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -4249,7 +4249,7 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return 0;
    }
-   public int bbandsStateLoad( struct TA_bbands_State** _state,
+   public RetCode bbandsStateLoad( struct TA_bbands_State** _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -4516,7 +4516,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int betaStateInit( struct TA_beta_State** _state,
+   public RetCode betaStateInit( struct TA_beta_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -4536,7 +4536,7 @@ public class Core {
          _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_BETA_Data));
       return RetCode.Success ;
    }
-   public int betaState( struct TA_beta_State* _state,
+   public RetCode betaState( struct TA_beta_State* _state,
       double inReal0,
       double inReal1,
       double *outReal )
@@ -4604,7 +4604,7 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inReal1 = inReal1 ;
       return RetCode.Success ;
    }
-   public int betaStateFree( struct TA_beta_State** _state )
+   public RetCode betaStateFree( struct TA_beta_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -4613,7 +4613,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int betaStateSave( struct TA_beta_State* _state,
+   public RetCode betaStateSave( struct TA_beta_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -4652,7 +4652,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int betaStateLoad( struct TA_beta_State** _state,
+   public RetCode betaStateLoad( struct TA_beta_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -4836,7 +4836,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int bopStateInit( struct TA_bop_State** _state )
+   public RetCode bopStateInit( struct TA_bop_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -4849,7 +4849,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int bopState( struct TA_bop_State* _state,
+   public RetCode bopState( struct TA_bop_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -4874,7 +4874,7 @@ public class Core {
          outReal.value = (inClose - inOpen)/tempReal;
       return RetCode.Success ;
    }
-   public int bopStateFree( struct TA_bop_State** _state )
+   public RetCode bopStateFree( struct TA_bop_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -4883,7 +4883,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int bopStateSave( struct TA_bop_State* _state,
+   public RetCode bopStateSave( struct TA_bop_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -4902,7 +4902,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int bopStateLoad( struct TA_bop_State** _state,
+   public RetCode bopStateLoad( struct TA_bop_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -5029,7 +5029,7 @@ public class Core {
       return RetCode.Success ;
    }
    struct TA_CCI_STATE_CIRCBUF { int idx; double* circbuf; int size; };
-   public int cciStateInit( struct TA_cci_State** _state,
+   public RetCode cciStateInit( struct TA_cci_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -5047,7 +5047,7 @@ public class Core {
       _state.value .value .theAverage = 0.;
       return RetCode.Success ;
    }
-   public int cciState( struct TA_cci_State* _state,
+   public RetCode cciState( struct TA_cci_State* _state,
       double inHigh,
       double inLow,
       double inClose,
@@ -5084,7 +5084,7 @@ public class Core {
       { struct TA_CCI_STATE_CIRCBUF * buf = (struct TA_CCI_STATE_CIRCBUF *) _state.value .circBuf; if(buf->idx < buf->size-1) buf->idx++; else buf->idx = 0;} ;
       return RetCode.Success ;
    }
-   public int cciStateFree( struct TA_cci_State** _state )
+   public RetCode cciStateFree( struct TA_cci_State** _state )
    {
       { struct TA_CCI_STATE_CIRCBUF * buf = (struct TA_CCI_STATE_CIRCBUF *) _state.value .value .circBuf; if (buf != NULL) { if (buf->circbuf != NULL) free(buf->circbuf); free (buf); _state.value .value .circBuf = NULL; } } ;
       if (_state == NULL)
@@ -5094,7 +5094,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cciStateSave( struct TA_cci_State* _state,
+   public RetCode cciStateSave( struct TA_cci_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -5118,7 +5118,7 @@ public class Core {
       { int io_circbuf_res; struct TA_CCI_STATE_CIRCBUF * str_circbuf = _state.value .circBuf; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
       return 0;
    }
-   public int cciStateLoad( struct TA_cci_State** _state,
+   public RetCode cciStateLoad( struct TA_cci_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -5271,7 +5271,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdl2CrowsStateInit( struct TA_cdl2Crows_State** _state )
+   public RetCode cdl2CrowsStateInit( struct TA_cdl2Crows_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -5284,7 +5284,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdl2CrowsState( struct TA_cdl2Crows_State* _state,
+   public RetCode cdl2CrowsState( struct TA_cdl2Crows_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -5324,7 +5324,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdl2CrowsStateFree( struct TA_cdl2Crows_State** _state )
+   public RetCode cdl2CrowsStateFree( struct TA_cdl2Crows_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -5333,7 +5333,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdl2CrowsStateSave( struct TA_cdl2Crows_State* _state,
+   public RetCode cdl2CrowsStateSave( struct TA_cdl2Crows_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -5354,7 +5354,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdl2CrowsStateLoad( struct TA_cdl2Crows_State** _state,
+   public RetCode cdl2CrowsStateLoad( struct TA_cdl2Crows_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -5503,7 +5503,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdl3BlackCrowsStateInit( struct TA_cdl3BlackCrows_State** _state )
+   public RetCode cdl3BlackCrowsStateInit( struct TA_cdl3BlackCrows_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -5516,7 +5516,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdl3BlackCrowsState( struct TA_cdl3BlackCrows_State* _state,
+   public RetCode cdl3BlackCrowsState( struct TA_cdl3BlackCrows_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -5573,7 +5573,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdl3BlackCrowsStateFree( struct TA_cdl3BlackCrows_State** _state )
+   public RetCode cdl3BlackCrowsStateFree( struct TA_cdl3BlackCrows_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -5582,7 +5582,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdl3BlackCrowsStateSave( struct TA_cdl3BlackCrows_State* _state,
+   public RetCode cdl3BlackCrowsStateSave( struct TA_cdl3BlackCrows_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -5609,7 +5609,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdl3BlackCrowsStateLoad( struct TA_cdl3BlackCrows_State** _state,
+   public RetCode cdl3BlackCrowsStateLoad( struct TA_cdl3BlackCrows_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -5774,7 +5774,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdl3InsideStateInit( struct TA_cdl3Inside_State** _state )
+   public RetCode cdl3InsideStateInit( struct TA_cdl3Inside_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -5787,7 +5787,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdl3InsideState( struct TA_cdl3Inside_State* _state,
+   public RetCode cdl3InsideState( struct TA_cdl3Inside_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -5843,7 +5843,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdl3InsideStateFree( struct TA_cdl3Inside_State** _state )
+   public RetCode cdl3InsideStateFree( struct TA_cdl3Inside_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -5852,7 +5852,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdl3InsideStateSave( struct TA_cdl3Inside_State* _state,
+   public RetCode cdl3InsideStateSave( struct TA_cdl3Inside_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -5879,7 +5879,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdl3InsideStateLoad( struct TA_cdl3Inside_State** _state,
+   public RetCode cdl3InsideStateLoad( struct TA_cdl3Inside_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -6051,7 +6051,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdl3LineStrikeStateInit( struct TA_cdl3LineStrike_State** _state )
+   public RetCode cdl3LineStrikeStateInit( struct TA_cdl3LineStrike_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -6064,7 +6064,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdl3LineStrikeState( struct TA_cdl3LineStrike_State* _state,
+   public RetCode cdl3LineStrikeState( struct TA_cdl3LineStrike_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -6130,7 +6130,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdl3LineStrikeStateFree( struct TA_cdl3LineStrike_State** _state )
+   public RetCode cdl3LineStrikeStateFree( struct TA_cdl3LineStrike_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -6139,7 +6139,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdl3LineStrikeStateSave( struct TA_cdl3LineStrike_State* _state,
+   public RetCode cdl3LineStrikeStateSave( struct TA_cdl3LineStrike_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -6164,7 +6164,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdl3LineStrikeStateLoad( struct TA_cdl3LineStrike_State** _state,
+   public RetCode cdl3LineStrikeStateLoad( struct TA_cdl3LineStrike_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -6318,7 +6318,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdl3OutsideStateInit( struct TA_cdl3Outside_State** _state )
+   public RetCode cdl3OutsideStateInit( struct TA_cdl3Outside_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -6329,7 +6329,7 @@ public class Core {
       _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_CDL3OUTSIDE_Data));
       return RetCode.Success ;
    }
-   public int cdl3OutsideState( struct TA_cdl3Outside_State* _state,
+   public RetCode cdl3OutsideState( struct TA_cdl3Outside_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -6368,7 +6368,7 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       return RetCode.Success ;
    }
-   public int cdl3OutsideStateFree( struct TA_cdl3Outside_State** _state )
+   public RetCode cdl3OutsideStateFree( struct TA_cdl3Outside_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -6377,7 +6377,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdl3OutsideStateSave( struct TA_cdl3Outside_State* _state,
+   public RetCode cdl3OutsideStateSave( struct TA_cdl3Outside_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -6396,7 +6396,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int cdl3OutsideStateLoad( struct TA_cdl3Outside_State** _state,
+   public RetCode cdl3OutsideStateLoad( struct TA_cdl3Outside_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -6570,7 +6570,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdl3StarsInSouthStateInit( struct TA_cdl3StarsInSouth_State** _state )
+   public RetCode cdl3StarsInSouthStateInit( struct TA_cdl3StarsInSouth_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -6583,7 +6583,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdl3StarsInSouthState( struct TA_cdl3StarsInSouth_State* _state,
+   public RetCode cdl3StarsInSouthState( struct TA_cdl3StarsInSouth_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -6666,7 +6666,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdl3StarsInSouthStateFree( struct TA_cdl3StarsInSouth_State** _state )
+   public RetCode cdl3StarsInSouthStateFree( struct TA_cdl3StarsInSouth_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -6675,7 +6675,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdl3StarsInSouthStateSave( struct TA_cdl3StarsInSouth_State* _state,
+   public RetCode cdl3StarsInSouthStateSave( struct TA_cdl3StarsInSouth_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -6720,7 +6720,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdl3StarsInSouthStateLoad( struct TA_cdl3StarsInSouth_State** _state,
+   public RetCode cdl3StarsInSouthStateLoad( struct TA_cdl3StarsInSouth_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -6979,7 +6979,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdl3WhiteSoldiersStateInit( struct TA_cdl3WhiteSoldiers_State** _state )
+   public RetCode cdl3WhiteSoldiersStateInit( struct TA_cdl3WhiteSoldiers_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -6992,7 +6992,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdl3WhiteSoldiersState( struct TA_cdl3WhiteSoldiers_State* _state,
+   public RetCode cdl3WhiteSoldiersState( struct TA_cdl3WhiteSoldiers_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -7084,7 +7084,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdl3WhiteSoldiersStateFree( struct TA_cdl3WhiteSoldiers_State** _state )
+   public RetCode cdl3WhiteSoldiersStateFree( struct TA_cdl3WhiteSoldiers_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -7093,7 +7093,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdl3WhiteSoldiersStateSave( struct TA_cdl3WhiteSoldiers_State* _state,
+   public RetCode cdl3WhiteSoldiersStateSave( struct TA_cdl3WhiteSoldiers_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -7144,7 +7144,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdl3WhiteSoldiersStateLoad( struct TA_cdl3WhiteSoldiers_State** _state,
+   public RetCode cdl3WhiteSoldiersStateLoad( struct TA_cdl3WhiteSoldiers_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -7408,7 +7408,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlAbandonedBabyStateInit( struct TA_cdlAbandonedBaby_State** _state,
+   public RetCode cdlAbandonedBabyStateInit( struct TA_cdlAbandonedBaby_State** _state,
       double optInPenetration )
    {
       if (_state == NULL)
@@ -7427,7 +7427,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlAbandonedBabyState( struct TA_cdlAbandonedBaby_State* _state,
+   public RetCode cdlAbandonedBabyState( struct TA_cdlAbandonedBaby_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -7505,7 +7505,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlAbandonedBabyStateFree( struct TA_cdlAbandonedBaby_State** _state )
+   public RetCode cdlAbandonedBabyStateFree( struct TA_cdlAbandonedBaby_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -7514,7 +7514,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlAbandonedBabyStateSave( struct TA_cdlAbandonedBaby_State* _state,
+   public RetCode cdlAbandonedBabyStateSave( struct TA_cdlAbandonedBaby_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -7553,7 +7553,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlAbandonedBabyStateLoad( struct TA_cdlAbandonedBaby_State** _state,
+   public RetCode cdlAbandonedBabyStateLoad( struct TA_cdlAbandonedBaby_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -7833,7 +7833,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlAdvanceBlockStateInit( struct TA_cdlAdvanceBlock_State** _state )
+   public RetCode cdlAdvanceBlockStateInit( struct TA_cdlAdvanceBlock_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -7846,7 +7846,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlAdvanceBlockState( struct TA_cdlAdvanceBlock_State* _state,
+   public RetCode cdlAdvanceBlockState( struct TA_cdlAdvanceBlock_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -7966,7 +7966,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlAdvanceBlockStateFree( struct TA_cdlAdvanceBlock_State** _state )
+   public RetCode cdlAdvanceBlockStateFree( struct TA_cdlAdvanceBlock_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -7975,7 +7975,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlAdvanceBlockStateSave( struct TA_cdlAdvanceBlock_State* _state,
+   public RetCode cdlAdvanceBlockStateSave( struct TA_cdlAdvanceBlock_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -8034,7 +8034,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlAdvanceBlockStateLoad( struct TA_cdlAdvanceBlock_State** _state,
+   public RetCode cdlAdvanceBlockStateLoad( struct TA_cdlAdvanceBlock_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -8307,7 +8307,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlBeltHoldStateInit( struct TA_cdlBeltHold_State** _state )
+   public RetCode cdlBeltHoldStateInit( struct TA_cdlBeltHold_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -8320,7 +8320,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlBeltHoldState( struct TA_cdlBeltHold_State* _state,
+   public RetCode cdlBeltHoldState( struct TA_cdlBeltHold_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -8380,7 +8380,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlBeltHoldStateFree( struct TA_cdlBeltHold_State** _state )
+   public RetCode cdlBeltHoldStateFree( struct TA_cdlBeltHold_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -8389,7 +8389,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlBeltHoldStateSave( struct TA_cdlBeltHold_State* _state,
+   public RetCode cdlBeltHoldStateSave( struct TA_cdlBeltHold_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -8420,7 +8420,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlBeltHoldStateLoad( struct TA_cdlBeltHold_State** _state,
+   public RetCode cdlBeltHoldStateLoad( struct TA_cdlBeltHold_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -8593,7 +8593,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlBreakawayStateInit( struct TA_cdlBreakaway_State** _state )
+   public RetCode cdlBreakawayStateInit( struct TA_cdlBreakaway_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -8606,7 +8606,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlBreakawayState( struct TA_cdlBreakaway_State* _state,
+   public RetCode cdlBreakawayState( struct TA_cdlBreakaway_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -8667,7 +8667,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlBreakawayStateFree( struct TA_cdlBreakaway_State** _state )
+   public RetCode cdlBreakawayStateFree( struct TA_cdlBreakaway_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -8676,7 +8676,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlBreakawayStateSave( struct TA_cdlBreakaway_State* _state,
+   public RetCode cdlBreakawayStateSave( struct TA_cdlBreakaway_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -8697,7 +8697,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlBreakawayStateLoad( struct TA_cdlBreakaway_State** _state,
+   public RetCode cdlBreakawayStateLoad( struct TA_cdlBreakaway_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -8860,7 +8860,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlClosingMarubozuStateInit( struct TA_cdlClosingMarubozu_State** _state )
+   public RetCode cdlClosingMarubozuStateInit( struct TA_cdlClosingMarubozu_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -8873,7 +8873,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlClosingMarubozuState( struct TA_cdlClosingMarubozu_State* _state,
+   public RetCode cdlClosingMarubozuState( struct TA_cdlClosingMarubozu_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -8933,7 +8933,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlClosingMarubozuStateFree( struct TA_cdlClosingMarubozu_State** _state )
+   public RetCode cdlClosingMarubozuStateFree( struct TA_cdlClosingMarubozu_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -8942,7 +8942,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlClosingMarubozuStateSave( struct TA_cdlClosingMarubozu_State* _state,
+   public RetCode cdlClosingMarubozuStateSave( struct TA_cdlClosingMarubozu_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -8973,7 +8973,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlClosingMarubozuStateLoad( struct TA_cdlClosingMarubozu_State** _state,
+   public RetCode cdlClosingMarubozuStateLoad( struct TA_cdlClosingMarubozu_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -9144,7 +9144,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlConcealBabysWallStateInit( struct TA_cdlConcealBabysWall_State** _state )
+   public RetCode cdlConcealBabysWallStateInit( struct TA_cdlConcealBabysWall_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -9157,7 +9157,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlConcealBabysWallState( struct TA_cdlConcealBabysWall_State* _state,
+   public RetCode cdlConcealBabysWallState( struct TA_cdlConcealBabysWall_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -9217,7 +9217,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlConcealBabysWallStateFree( struct TA_cdlConcealBabysWall_State** _state )
+   public RetCode cdlConcealBabysWallStateFree( struct TA_cdlConcealBabysWall_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -9226,7 +9226,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlConcealBabysWallStateSave( struct TA_cdlConcealBabysWall_State* _state,
+   public RetCode cdlConcealBabysWallStateSave( struct TA_cdlConcealBabysWall_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -9253,7 +9253,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlConcealBabysWallStateLoad( struct TA_cdlConcealBabysWall_State** _state,
+   public RetCode cdlConcealBabysWallStateLoad( struct TA_cdlConcealBabysWall_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -9421,7 +9421,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlCounterAttackStateInit( struct TA_cdlCounterAttack_State** _state )
+   public RetCode cdlCounterAttackStateInit( struct TA_cdlCounterAttack_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -9434,7 +9434,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlCounterAttackState( struct TA_cdlCounterAttack_State* _state,
+   public RetCode cdlCounterAttackState( struct TA_cdlCounterAttack_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -9491,7 +9491,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlCounterAttackStateFree( struct TA_cdlCounterAttack_State** _state )
+   public RetCode cdlCounterAttackStateFree( struct TA_cdlCounterAttack_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -9500,7 +9500,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlCounterAttackStateSave( struct TA_cdlCounterAttack_State* _state,
+   public RetCode cdlCounterAttackStateSave( struct TA_cdlCounterAttack_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -9533,7 +9533,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlCounterAttackStateLoad( struct TA_cdlCounterAttack_State** _state,
+   public RetCode cdlCounterAttackStateLoad( struct TA_cdlCounterAttack_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -9703,7 +9703,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlDarkCloudCoverStateInit( struct TA_cdlDarkCloudCover_State** _state,
+   public RetCode cdlDarkCloudCoverStateInit( struct TA_cdlDarkCloudCover_State** _state,
       double optInPenetration )
    {
       if (_state == NULL)
@@ -9722,7 +9722,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlDarkCloudCoverState( struct TA_cdlDarkCloudCover_State* _state,
+   public RetCode cdlDarkCloudCoverState( struct TA_cdlDarkCloudCover_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -9768,7 +9768,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlDarkCloudCoverStateFree( struct TA_cdlDarkCloudCover_State** _state )
+   public RetCode cdlDarkCloudCoverStateFree( struct TA_cdlDarkCloudCover_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -9777,7 +9777,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlDarkCloudCoverStateSave( struct TA_cdlDarkCloudCover_State* _state,
+   public RetCode cdlDarkCloudCoverStateSave( struct TA_cdlDarkCloudCover_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -9802,7 +9802,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlDarkCloudCoverStateLoad( struct TA_cdlDarkCloudCover_State** _state,
+   public RetCode cdlDarkCloudCoverStateLoad( struct TA_cdlDarkCloudCover_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -9940,7 +9940,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlDojiStateInit( struct TA_cdlDoji_State** _state )
+   public RetCode cdlDojiStateInit( struct TA_cdlDoji_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -9953,7 +9953,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlDojiState( struct TA_cdlDoji_State* _state,
+   public RetCode cdlDojiState( struct TA_cdlDoji_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -9990,7 +9990,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlDojiStateFree( struct TA_cdlDoji_State** _state )
+   public RetCode cdlDojiStateFree( struct TA_cdlDoji_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -9999,7 +9999,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlDojiStateSave( struct TA_cdlDoji_State* _state,
+   public RetCode cdlDojiStateSave( struct TA_cdlDoji_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -10020,7 +10020,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlDojiStateLoad( struct TA_cdlDoji_State** _state,
+   public RetCode cdlDojiStateLoad( struct TA_cdlDoji_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -10156,7 +10156,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlDojiStarStateInit( struct TA_cdlDojiStar_State** _state )
+   public RetCode cdlDojiStarStateInit( struct TA_cdlDojiStar_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -10169,7 +10169,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlDojiStarState( struct TA_cdlDojiStar_State* _state,
+   public RetCode cdlDojiStarState( struct TA_cdlDojiStar_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -10220,7 +10220,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlDojiStarStateFree( struct TA_cdlDojiStar_State** _state )
+   public RetCode cdlDojiStarStateFree( struct TA_cdlDojiStar_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -10229,7 +10229,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlDojiStarStateSave( struct TA_cdlDojiStar_State* _state,
+   public RetCode cdlDojiStarStateSave( struct TA_cdlDojiStar_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -10260,7 +10260,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlDojiStarStateLoad( struct TA_cdlDojiStar_State** _state,
+   public RetCode cdlDojiStarStateLoad( struct TA_cdlDojiStar_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -10419,7 +10419,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlDragonflyDojiStateInit( struct TA_cdlDragonflyDoji_State** _state )
+   public RetCode cdlDragonflyDojiStateInit( struct TA_cdlDragonflyDoji_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -10432,7 +10432,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlDragonflyDojiState( struct TA_cdlDragonflyDoji_State* _state,
+   public RetCode cdlDragonflyDojiState( struct TA_cdlDragonflyDoji_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -10485,7 +10485,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlDragonflyDojiStateFree( struct TA_cdlDragonflyDoji_State** _state )
+   public RetCode cdlDragonflyDojiStateFree( struct TA_cdlDragonflyDoji_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -10494,7 +10494,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlDragonflyDojiStateSave( struct TA_cdlDragonflyDoji_State* _state,
+   public RetCode cdlDragonflyDojiStateSave( struct TA_cdlDragonflyDoji_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -10525,7 +10525,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlDragonflyDojiStateLoad( struct TA_cdlDragonflyDoji_State** _state,
+   public RetCode cdlDragonflyDojiStateLoad( struct TA_cdlDragonflyDoji_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -10675,7 +10675,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlEngulfingStateInit( struct TA_cdlEngulfing_State** _state )
+   public RetCode cdlEngulfingStateInit( struct TA_cdlEngulfing_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -10688,7 +10688,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlEngulfingState( struct TA_cdlEngulfing_State* _state,
+   public RetCode cdlEngulfingState( struct TA_cdlEngulfing_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -10731,7 +10731,7 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       return RetCode.Success ;
    }
-   public int cdlEngulfingStateFree( struct TA_cdlEngulfing_State** _state )
+   public RetCode cdlEngulfingStateFree( struct TA_cdlEngulfing_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -10740,7 +10740,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlEngulfingStateSave( struct TA_cdlEngulfing_State* _state,
+   public RetCode cdlEngulfingStateSave( struct TA_cdlEngulfing_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -10759,7 +10759,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int cdlEngulfingStateLoad( struct TA_cdlEngulfing_State** _state,
+   public RetCode cdlEngulfingStateLoad( struct TA_cdlEngulfing_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -10920,7 +10920,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlEveningDojiStarStateInit( struct TA_cdlEveningDojiStar_State** _state,
+   public RetCode cdlEveningDojiStarStateInit( struct TA_cdlEveningDojiStar_State** _state,
       double optInPenetration )
    {
       if (_state == NULL)
@@ -10939,7 +10939,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlEveningDojiStarState( struct TA_cdlEveningDojiStar_State* _state,
+   public RetCode cdlEveningDojiStarState( struct TA_cdlEveningDojiStar_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -11004,7 +11004,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlEveningDojiStarStateFree( struct TA_cdlEveningDojiStar_State** _state )
+   public RetCode cdlEveningDojiStarStateFree( struct TA_cdlEveningDojiStar_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -11013,7 +11013,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlEveningDojiStarStateSave( struct TA_cdlEveningDojiStar_State* _state,
+   public RetCode cdlEveningDojiStarStateSave( struct TA_cdlEveningDojiStar_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -11052,7 +11052,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlEveningDojiStarStateLoad( struct TA_cdlEveningDojiStar_State** _state,
+   public RetCode cdlEveningDojiStarStateLoad( struct TA_cdlEveningDojiStar_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -11252,7 +11252,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlEveningStarStateInit( struct TA_cdlEveningStar_State** _state,
+   public RetCode cdlEveningStarStateInit( struct TA_cdlEveningStar_State** _state,
       double optInPenetration )
    {
       if (_state == NULL)
@@ -11271,7 +11271,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlEveningStarState( struct TA_cdlEveningStar_State* _state,
+   public RetCode cdlEveningStarState( struct TA_cdlEveningStar_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -11331,7 +11331,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlEveningStarStateFree( struct TA_cdlEveningStar_State** _state )
+   public RetCode cdlEveningStarStateFree( struct TA_cdlEveningStar_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -11340,7 +11340,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlEveningStarStateSave( struct TA_cdlEveningStar_State* _state,
+   public RetCode cdlEveningStarStateSave( struct TA_cdlEveningStar_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -11375,7 +11375,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlEveningStarStateLoad( struct TA_cdlEveningStar_State** _state,
+   public RetCode cdlEveningStarStateLoad( struct TA_cdlEveningStar_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -11558,7 +11558,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlGapSideSideWhiteStateInit( struct TA_cdlGapSideSideWhite_State** _state )
+   public RetCode cdlGapSideSideWhiteStateInit( struct TA_cdlGapSideSideWhite_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -11571,7 +11571,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlGapSideSideWhiteState( struct TA_cdlGapSideSideWhite_State* _state,
+   public RetCode cdlGapSideSideWhiteState( struct TA_cdlGapSideSideWhite_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -11634,7 +11634,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlGapSideSideWhiteStateFree( struct TA_cdlGapSideSideWhite_State** _state )
+   public RetCode cdlGapSideSideWhiteStateFree( struct TA_cdlGapSideSideWhite_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -11643,7 +11643,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlGapSideSideWhiteStateSave( struct TA_cdlGapSideSideWhite_State* _state,
+   public RetCode cdlGapSideSideWhiteStateSave( struct TA_cdlGapSideSideWhite_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -11670,7 +11670,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlGapSideSideWhiteStateLoad( struct TA_cdlGapSideSideWhite_State** _state,
+   public RetCode cdlGapSideSideWhiteStateLoad( struct TA_cdlGapSideSideWhite_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -11833,7 +11833,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlGravestoneDojiStateInit( struct TA_cdlGravestoneDoji_State** _state )
+   public RetCode cdlGravestoneDojiStateInit( struct TA_cdlGravestoneDoji_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -11846,7 +11846,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlGravestoneDojiState( struct TA_cdlGravestoneDoji_State* _state,
+   public RetCode cdlGravestoneDojiState( struct TA_cdlGravestoneDoji_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -11899,7 +11899,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlGravestoneDojiStateFree( struct TA_cdlGravestoneDoji_State** _state )
+   public RetCode cdlGravestoneDojiStateFree( struct TA_cdlGravestoneDoji_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -11908,7 +11908,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlGravestoneDojiStateSave( struct TA_cdlGravestoneDoji_State* _state,
+   public RetCode cdlGravestoneDojiStateSave( struct TA_cdlGravestoneDoji_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -11939,7 +11939,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlGravestoneDojiStateLoad( struct TA_cdlGravestoneDoji_State** _state,
+   public RetCode cdlGravestoneDojiStateLoad( struct TA_cdlGravestoneDoji_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -12121,7 +12121,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlHammerStateInit( struct TA_cdlHammer_State** _state )
+   public RetCode cdlHammerStateInit( struct TA_cdlHammer_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -12134,7 +12134,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlHammerState( struct TA_cdlHammer_State* _state,
+   public RetCode cdlHammerState( struct TA_cdlHammer_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -12203,7 +12203,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlHammerStateFree( struct TA_cdlHammer_State** _state )
+   public RetCode cdlHammerStateFree( struct TA_cdlHammer_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -12212,7 +12212,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlHammerStateSave( struct TA_cdlHammer_State* _state,
+   public RetCode cdlHammerStateSave( struct TA_cdlHammer_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -12255,7 +12255,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlHammerStateLoad( struct TA_cdlHammer_State** _state,
+   public RetCode cdlHammerStateLoad( struct TA_cdlHammer_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -12472,7 +12472,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlHangingManStateInit( struct TA_cdlHangingMan_State** _state )
+   public RetCode cdlHangingManStateInit( struct TA_cdlHangingMan_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -12485,7 +12485,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlHangingManState( struct TA_cdlHangingMan_State* _state,
+   public RetCode cdlHangingManState( struct TA_cdlHangingMan_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -12554,7 +12554,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlHangingManStateFree( struct TA_cdlHangingMan_State** _state )
+   public RetCode cdlHangingManStateFree( struct TA_cdlHangingMan_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -12563,7 +12563,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlHangingManStateSave( struct TA_cdlHangingMan_State* _state,
+   public RetCode cdlHangingManStateSave( struct TA_cdlHangingMan_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -12606,7 +12606,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlHangingManStateLoad( struct TA_cdlHangingMan_State** _state,
+   public RetCode cdlHangingManStateLoad( struct TA_cdlHangingMan_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -12808,7 +12808,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlHaramiStateInit( struct TA_cdlHarami_State** _state )
+   public RetCode cdlHaramiStateInit( struct TA_cdlHarami_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -12821,7 +12821,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlHaramiState( struct TA_cdlHarami_State* _state,
+   public RetCode cdlHaramiState( struct TA_cdlHarami_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -12882,7 +12882,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlHaramiStateFree( struct TA_cdlHarami_State** _state )
+   public RetCode cdlHaramiStateFree( struct TA_cdlHarami_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -12891,7 +12891,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlHaramiStateSave( struct TA_cdlHarami_State* _state,
+   public RetCode cdlHaramiStateSave( struct TA_cdlHarami_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -12922,7 +12922,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlHaramiStateLoad( struct TA_cdlHarami_State** _state,
+   public RetCode cdlHaramiStateLoad( struct TA_cdlHarami_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -13097,7 +13097,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlHaramiCrossStateInit( struct TA_cdlHaramiCross_State** _state )
+   public RetCode cdlHaramiCrossStateInit( struct TA_cdlHaramiCross_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -13110,7 +13110,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlHaramiCrossState( struct TA_cdlHaramiCross_State* _state,
+   public RetCode cdlHaramiCrossState( struct TA_cdlHaramiCross_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -13171,7 +13171,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlHaramiCrossStateFree( struct TA_cdlHaramiCross_State** _state )
+   public RetCode cdlHaramiCrossStateFree( struct TA_cdlHaramiCross_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -13180,7 +13180,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlHaramiCrossStateSave( struct TA_cdlHaramiCross_State* _state,
+   public RetCode cdlHaramiCrossStateSave( struct TA_cdlHaramiCross_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -13211,7 +13211,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlHaramiCrossStateLoad( struct TA_cdlHaramiCross_State** _state,
+   public RetCode cdlHaramiCrossStateLoad( struct TA_cdlHaramiCross_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -13375,7 +13375,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlHignWaveStateInit( struct TA_cdlHignWave_State** _state )
+   public RetCode cdlHignWaveStateInit( struct TA_cdlHignWave_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -13388,7 +13388,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlHignWaveState( struct TA_cdlHignWave_State* _state,
+   public RetCode cdlHignWaveState( struct TA_cdlHignWave_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -13430,7 +13430,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlHignWaveStateFree( struct TA_cdlHignWave_State** _state )
+   public RetCode cdlHignWaveStateFree( struct TA_cdlHignWave_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -13439,7 +13439,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlHignWaveStateSave( struct TA_cdlHignWave_State* _state,
+   public RetCode cdlHignWaveStateSave( struct TA_cdlHignWave_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -13466,7 +13466,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlHignWaveStateLoad( struct TA_cdlHignWave_State** _state,
+   public RetCode cdlHignWaveStateLoad( struct TA_cdlHignWave_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -13634,7 +13634,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlHikkakeStateInit( struct TA_cdlHikkake_State** _state )
+   public RetCode cdlHikkakeStateInit( struct TA_cdlHikkake_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -13647,7 +13647,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlHikkakeState( struct TA_cdlHikkake_State* _state,
+   public RetCode cdlHikkakeState( struct TA_cdlHikkake_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -13702,7 +13702,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlHikkakeStateFree( struct TA_cdlHikkake_State** _state )
+   public RetCode cdlHikkakeStateFree( struct TA_cdlHikkake_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -13711,7 +13711,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlHikkakeStateSave( struct TA_cdlHikkake_State* _state,
+   public RetCode cdlHikkakeStateSave( struct TA_cdlHikkake_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -13738,7 +13738,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlHikkakeStateLoad( struct TA_cdlHikkake_State** _state,
+   public RetCode cdlHikkakeStateLoad( struct TA_cdlHikkake_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -13946,7 +13946,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlHikkakeModStateInit( struct TA_cdlHikkakeMod_State** _state )
+   public RetCode cdlHikkakeModStateInit( struct TA_cdlHikkakeMod_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -13959,7 +13959,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlHikkakeModState( struct TA_cdlHikkakeMod_State* _state,
+   public RetCode cdlHikkakeModState( struct TA_cdlHikkakeMod_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -14027,7 +14027,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlHikkakeModStateFree( struct TA_cdlHikkakeMod_State** _state )
+   public RetCode cdlHikkakeModStateFree( struct TA_cdlHikkakeMod_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -14036,7 +14036,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlHikkakeModStateSave( struct TA_cdlHikkakeMod_State* _state,
+   public RetCode cdlHikkakeModStateSave( struct TA_cdlHikkakeMod_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -14069,7 +14069,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlHikkakeModStateLoad( struct TA_cdlHikkakeMod_State** _state,
+   public RetCode cdlHikkakeModStateLoad( struct TA_cdlHikkakeMod_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -14270,7 +14270,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlHomingPigeonStateInit( struct TA_cdlHomingPigeon_State** _state )
+   public RetCode cdlHomingPigeonStateInit( struct TA_cdlHomingPigeon_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -14283,7 +14283,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlHomingPigeonState( struct TA_cdlHomingPigeon_State* _state,
+   public RetCode cdlHomingPigeonState( struct TA_cdlHomingPigeon_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -14338,7 +14338,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlHomingPigeonStateFree( struct TA_cdlHomingPigeon_State** _state )
+   public RetCode cdlHomingPigeonStateFree( struct TA_cdlHomingPigeon_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -14347,7 +14347,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlHomingPigeonStateSave( struct TA_cdlHomingPigeon_State* _state,
+   public RetCode cdlHomingPigeonStateSave( struct TA_cdlHomingPigeon_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -14378,7 +14378,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlHomingPigeonStateLoad( struct TA_cdlHomingPigeon_State** _state,
+   public RetCode cdlHomingPigeonStateLoad( struct TA_cdlHomingPigeon_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -14561,7 +14561,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlIdentical3CrowsStateInit( struct TA_cdlIdentical3Crows_State** _state )
+   public RetCode cdlIdentical3CrowsStateInit( struct TA_cdlIdentical3Crows_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -14574,7 +14574,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlIdentical3CrowsState( struct TA_cdlIdentical3Crows_State* _state,
+   public RetCode cdlIdentical3CrowsState( struct TA_cdlIdentical3Crows_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -14645,7 +14645,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlIdentical3CrowsStateFree( struct TA_cdlIdentical3Crows_State** _state )
+   public RetCode cdlIdentical3CrowsStateFree( struct TA_cdlIdentical3Crows_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -14654,7 +14654,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlIdentical3CrowsStateSave( struct TA_cdlIdentical3Crows_State* _state,
+   public RetCode cdlIdentical3CrowsStateSave( struct TA_cdlIdentical3Crows_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -14691,7 +14691,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlIdentical3CrowsStateLoad( struct TA_cdlIdentical3Crows_State** _state,
+   public RetCode cdlIdentical3CrowsStateLoad( struct TA_cdlIdentical3Crows_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -14881,7 +14881,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlInNeckStateInit( struct TA_cdlInNeck_State** _state )
+   public RetCode cdlInNeckStateInit( struct TA_cdlInNeck_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -14894,7 +14894,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlInNeckState( struct TA_cdlInNeck_State* _state,
+   public RetCode cdlInNeckState( struct TA_cdlInNeck_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -14949,7 +14949,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlInNeckStateFree( struct TA_cdlInNeck_State** _state )
+   public RetCode cdlInNeckStateFree( struct TA_cdlInNeck_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -14958,7 +14958,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlInNeckStateSave( struct TA_cdlInNeck_State* _state,
+   public RetCode cdlInNeckStateSave( struct TA_cdlInNeck_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -14989,7 +14989,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlInNeckStateLoad( struct TA_cdlInNeck_State** _state,
+   public RetCode cdlInNeckStateLoad( struct TA_cdlInNeck_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -15163,7 +15163,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlInvertedHammerStateInit( struct TA_cdlInvertedHammer_State** _state )
+   public RetCode cdlInvertedHammerStateInit( struct TA_cdlInvertedHammer_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -15176,7 +15176,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlInvertedHammerState( struct TA_cdlInvertedHammer_State* _state,
+   public RetCode cdlInvertedHammerState( struct TA_cdlInvertedHammer_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -15237,7 +15237,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlInvertedHammerStateFree( struct TA_cdlInvertedHammer_State** _state )
+   public RetCode cdlInvertedHammerStateFree( struct TA_cdlInvertedHammer_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -15246,7 +15246,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlInvertedHammerStateSave( struct TA_cdlInvertedHammer_State* _state,
+   public RetCode cdlInvertedHammerStateSave( struct TA_cdlInvertedHammer_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -15283,7 +15283,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlInvertedHammerStateLoad( struct TA_cdlInvertedHammer_State** _state,
+   public RetCode cdlInvertedHammerStateLoad( struct TA_cdlInvertedHammer_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -15477,7 +15477,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlKickingStateInit( struct TA_cdlKicking_State** _state )
+   public RetCode cdlKickingStateInit( struct TA_cdlKicking_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -15490,7 +15490,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlKickingState( struct TA_cdlKicking_State* _state,
+   public RetCode cdlKickingState( struct TA_cdlKicking_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -15557,7 +15557,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlKickingStateFree( struct TA_cdlKicking_State** _state )
+   public RetCode cdlKickingStateFree( struct TA_cdlKicking_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -15566,7 +15566,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlKickingStateSave( struct TA_cdlKicking_State* _state,
+   public RetCode cdlKickingStateSave( struct TA_cdlKicking_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -15601,7 +15601,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlKickingStateLoad( struct TA_cdlKicking_State** _state,
+   public RetCode cdlKickingStateLoad( struct TA_cdlKicking_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -15800,7 +15800,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlKickingByLengthStateInit( struct TA_cdlKickingByLength_State** _state )
+   public RetCode cdlKickingByLengthStateInit( struct TA_cdlKickingByLength_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -15813,7 +15813,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlKickingByLengthState( struct TA_cdlKickingByLength_State* _state,
+   public RetCode cdlKickingByLengthState( struct TA_cdlKickingByLength_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -15885,7 +15885,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlKickingByLengthStateFree( struct TA_cdlKickingByLength_State** _state )
+   public RetCode cdlKickingByLengthStateFree( struct TA_cdlKickingByLength_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -15894,7 +15894,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlKickingByLengthStateSave( struct TA_cdlKickingByLength_State* _state,
+   public RetCode cdlKickingByLengthStateSave( struct TA_cdlKickingByLength_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -15929,7 +15929,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlKickingByLengthStateLoad( struct TA_cdlKickingByLength_State** _state,
+   public RetCode cdlKickingByLengthStateLoad( struct TA_cdlKickingByLength_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -16107,7 +16107,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlLadderBottomStateInit( struct TA_cdlLadderBottom_State** _state )
+   public RetCode cdlLadderBottomStateInit( struct TA_cdlLadderBottom_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -16120,7 +16120,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlLadderBottomState( struct TA_cdlLadderBottom_State* _state,
+   public RetCode cdlLadderBottomState( struct TA_cdlLadderBottom_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -16173,7 +16173,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlLadderBottomStateFree( struct TA_cdlLadderBottom_State** _state )
+   public RetCode cdlLadderBottomStateFree( struct TA_cdlLadderBottom_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -16182,7 +16182,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlLadderBottomStateSave( struct TA_cdlLadderBottom_State* _state,
+   public RetCode cdlLadderBottomStateSave( struct TA_cdlLadderBottom_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -16207,7 +16207,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlLadderBottomStateLoad( struct TA_cdlLadderBottom_State** _state,
+   public RetCode cdlLadderBottomStateLoad( struct TA_cdlLadderBottom_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -16358,7 +16358,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlLongLeggedDojiStateInit( struct TA_cdlLongLeggedDoji_State** _state )
+   public RetCode cdlLongLeggedDojiStateInit( struct TA_cdlLongLeggedDoji_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -16371,7 +16371,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlLongLeggedDojiState( struct TA_cdlLongLeggedDoji_State* _state,
+   public RetCode cdlLongLeggedDojiState( struct TA_cdlLongLeggedDoji_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -16423,7 +16423,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlLongLeggedDojiStateFree( struct TA_cdlLongLeggedDoji_State** _state )
+   public RetCode cdlLongLeggedDojiStateFree( struct TA_cdlLongLeggedDoji_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -16432,7 +16432,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlLongLeggedDojiStateSave( struct TA_cdlLongLeggedDoji_State* _state,
+   public RetCode cdlLongLeggedDojiStateSave( struct TA_cdlLongLeggedDoji_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -16463,7 +16463,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlLongLeggedDojiStateLoad( struct TA_cdlLongLeggedDoji_State** _state,
+   public RetCode cdlLongLeggedDojiStateLoad( struct TA_cdlLongLeggedDoji_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -16620,7 +16620,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlLongLineStateInit( struct TA_cdlLongLine_State** _state )
+   public RetCode cdlLongLineStateInit( struct TA_cdlLongLine_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -16633,7 +16633,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlLongLineState( struct TA_cdlLongLine_State* _state,
+   public RetCode cdlLongLineState( struct TA_cdlLongLine_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -16682,7 +16682,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlLongLineStateFree( struct TA_cdlLongLine_State** _state )
+   public RetCode cdlLongLineStateFree( struct TA_cdlLongLine_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -16691,7 +16691,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlLongLineStateSave( struct TA_cdlLongLine_State* _state,
+   public RetCode cdlLongLineStateSave( struct TA_cdlLongLine_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -16722,7 +16722,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlLongLineStateLoad( struct TA_cdlLongLine_State** _state,
+   public RetCode cdlLongLineStateLoad( struct TA_cdlLongLine_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -16877,7 +16877,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlMarubozuStateInit( struct TA_cdlMarubozu_State** _state )
+   public RetCode cdlMarubozuStateInit( struct TA_cdlMarubozu_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -16890,7 +16890,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlMarubozuState( struct TA_cdlMarubozu_State* _state,
+   public RetCode cdlMarubozuState( struct TA_cdlMarubozu_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -16942,7 +16942,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlMarubozuStateFree( struct TA_cdlMarubozu_State** _state )
+   public RetCode cdlMarubozuStateFree( struct TA_cdlMarubozu_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -16951,7 +16951,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlMarubozuStateSave( struct TA_cdlMarubozu_State* _state,
+   public RetCode cdlMarubozuStateSave( struct TA_cdlMarubozu_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -16982,7 +16982,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlMarubozuStateLoad( struct TA_cdlMarubozu_State** _state,
+   public RetCode cdlMarubozuStateLoad( struct TA_cdlMarubozu_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -17131,7 +17131,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlMatchingLowStateInit( struct TA_cdlMatchingLow_State** _state )
+   public RetCode cdlMatchingLowStateInit( struct TA_cdlMatchingLow_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -17144,7 +17144,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlMatchingLowState( struct TA_cdlMatchingLow_State* _state,
+   public RetCode cdlMatchingLowState( struct TA_cdlMatchingLow_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -17189,7 +17189,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlMatchingLowStateFree( struct TA_cdlMatchingLow_State** _state )
+   public RetCode cdlMatchingLowStateFree( struct TA_cdlMatchingLow_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -17198,7 +17198,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlMatchingLowStateSave( struct TA_cdlMatchingLow_State* _state,
+   public RetCode cdlMatchingLowStateSave( struct TA_cdlMatchingLow_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -17223,7 +17223,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlMatchingLowStateLoad( struct TA_cdlMatchingLow_State** _state,
+   public RetCode cdlMatchingLowStateLoad( struct TA_cdlMatchingLow_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -17397,7 +17397,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlMatHoldStateInit( struct TA_cdlMatHold_State** _state,
+   public RetCode cdlMatHoldStateInit( struct TA_cdlMatHold_State** _state,
       double optInPenetration )
    {
       if (_state == NULL)
@@ -17416,7 +17416,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlMatHoldState( struct TA_cdlMatHold_State* _state,
+   public RetCode cdlMatHoldState( struct TA_cdlMatHold_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -17491,7 +17491,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlMatHoldStateFree( struct TA_cdlMatHold_State** _state )
+   public RetCode cdlMatHoldStateFree( struct TA_cdlMatHold_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -17500,7 +17500,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlMatHoldStateSave( struct TA_cdlMatHold_State* _state,
+   public RetCode cdlMatHoldStateSave( struct TA_cdlMatHold_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -17537,7 +17537,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlMatHoldStateLoad( struct TA_cdlMatHold_State** _state,
+   public RetCode cdlMatHoldStateLoad( struct TA_cdlMatHold_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -17750,7 +17750,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlMorningDojiStarStateInit( struct TA_cdlMorningDojiStar_State** _state,
+   public RetCode cdlMorningDojiStarStateInit( struct TA_cdlMorningDojiStar_State** _state,
       double optInPenetration )
    {
       if (_state == NULL)
@@ -17769,7 +17769,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlMorningDojiStarState( struct TA_cdlMorningDojiStar_State* _state,
+   public RetCode cdlMorningDojiStarState( struct TA_cdlMorningDojiStar_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -17834,7 +17834,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlMorningDojiStarStateFree( struct TA_cdlMorningDojiStar_State** _state )
+   public RetCode cdlMorningDojiStarStateFree( struct TA_cdlMorningDojiStar_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -17843,7 +17843,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlMorningDojiStarStateSave( struct TA_cdlMorningDojiStar_State* _state,
+   public RetCode cdlMorningDojiStarStateSave( struct TA_cdlMorningDojiStar_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -17882,7 +17882,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlMorningDojiStarStateLoad( struct TA_cdlMorningDojiStar_State** _state,
+   public RetCode cdlMorningDojiStarStateLoad( struct TA_cdlMorningDojiStar_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -18082,7 +18082,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlMorningStarStateInit( struct TA_cdlMorningStar_State** _state,
+   public RetCode cdlMorningStarStateInit( struct TA_cdlMorningStar_State** _state,
       double optInPenetration )
    {
       if (_state == NULL)
@@ -18101,7 +18101,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlMorningStarState( struct TA_cdlMorningStar_State* _state,
+   public RetCode cdlMorningStarState( struct TA_cdlMorningStar_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -18161,7 +18161,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlMorningStarStateFree( struct TA_cdlMorningStar_State** _state )
+   public RetCode cdlMorningStarStateFree( struct TA_cdlMorningStar_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -18170,7 +18170,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlMorningStarStateSave( struct TA_cdlMorningStar_State* _state,
+   public RetCode cdlMorningStarStateSave( struct TA_cdlMorningStar_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -18205,7 +18205,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlMorningStarStateLoad( struct TA_cdlMorningStar_State** _state,
+   public RetCode cdlMorningStarStateLoad( struct TA_cdlMorningStar_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -18384,7 +18384,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlOnNeckStateInit( struct TA_cdlOnNeck_State** _state )
+   public RetCode cdlOnNeckStateInit( struct TA_cdlOnNeck_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -18397,7 +18397,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlOnNeckState( struct TA_cdlOnNeck_State* _state,
+   public RetCode cdlOnNeckState( struct TA_cdlOnNeck_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -18451,7 +18451,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlOnNeckStateFree( struct TA_cdlOnNeck_State** _state )
+   public RetCode cdlOnNeckStateFree( struct TA_cdlOnNeck_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -18460,7 +18460,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlOnNeckStateSave( struct TA_cdlOnNeck_State* _state,
+   public RetCode cdlOnNeckStateSave( struct TA_cdlOnNeck_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -18491,7 +18491,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlOnNeckStateLoad( struct TA_cdlOnNeck_State** _state,
+   public RetCode cdlOnNeckStateLoad( struct TA_cdlOnNeck_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -18652,7 +18652,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlPiercingStateInit( struct TA_cdlPiercing_State** _state )
+   public RetCode cdlPiercingStateInit( struct TA_cdlPiercing_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -18665,7 +18665,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlPiercingState( struct TA_cdlPiercing_State* _state,
+   public RetCode cdlPiercingState( struct TA_cdlPiercing_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -18716,7 +18716,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlPiercingStateFree( struct TA_cdlPiercing_State** _state )
+   public RetCode cdlPiercingStateFree( struct TA_cdlPiercing_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -18725,7 +18725,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlPiercingStateSave( struct TA_cdlPiercing_State* _state,
+   public RetCode cdlPiercingStateSave( struct TA_cdlPiercing_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -18752,7 +18752,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlPiercingStateLoad( struct TA_cdlPiercing_State** _state,
+   public RetCode cdlPiercingStateLoad( struct TA_cdlPiercing_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -18920,7 +18920,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlRickshawManStateInit( struct TA_cdlRickshawMan_State** _state )
+   public RetCode cdlRickshawManStateInit( struct TA_cdlRickshawMan_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -18933,7 +18933,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlRickshawManState( struct TA_cdlRickshawMan_State* _state,
+   public RetCode cdlRickshawManState( struct TA_cdlRickshawMan_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -18998,7 +18998,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlRickshawManStateFree( struct TA_cdlRickshawMan_State** _state )
+   public RetCode cdlRickshawManStateFree( struct TA_cdlRickshawMan_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -19007,7 +19007,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlRickshawManStateSave( struct TA_cdlRickshawMan_State* _state,
+   public RetCode cdlRickshawManStateSave( struct TA_cdlRickshawMan_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -19044,7 +19044,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlRickshawManStateLoad( struct TA_cdlRickshawMan_State** _state,
+   public RetCode cdlRickshawManStateLoad( struct TA_cdlRickshawMan_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -19246,7 +19246,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlRiseFall3MethodsStateInit( struct TA_cdlRiseFall3Methods_State** _state )
+   public RetCode cdlRiseFall3MethodsStateInit( struct TA_cdlRiseFall3Methods_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -19259,7 +19259,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlRiseFall3MethodsState( struct TA_cdlRiseFall3Methods_State* _state,
+   public RetCode cdlRiseFall3MethodsState( struct TA_cdlRiseFall3Methods_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -19337,7 +19337,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlRiseFall3MethodsStateFree( struct TA_cdlRiseFall3Methods_State** _state )
+   public RetCode cdlRiseFall3MethodsStateFree( struct TA_cdlRiseFall3Methods_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -19346,7 +19346,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlRiseFall3MethodsStateSave( struct TA_cdlRiseFall3Methods_State* _state,
+   public RetCode cdlRiseFall3MethodsStateSave( struct TA_cdlRiseFall3Methods_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -19383,7 +19383,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlRiseFall3MethodsStateLoad( struct TA_cdlRiseFall3Methods_State** _state,
+   public RetCode cdlRiseFall3MethodsStateLoad( struct TA_cdlRiseFall3Methods_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -19591,7 +19591,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlSeperatingLinesStateInit( struct TA_cdlSeperatingLines_State** _state )
+   public RetCode cdlSeperatingLinesStateInit( struct TA_cdlSeperatingLines_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -19604,7 +19604,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlSeperatingLinesState( struct TA_cdlSeperatingLines_State* _state,
+   public RetCode cdlSeperatingLinesState( struct TA_cdlSeperatingLines_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -19677,7 +19677,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlSeperatingLinesStateFree( struct TA_cdlSeperatingLines_State** _state )
+   public RetCode cdlSeperatingLinesStateFree( struct TA_cdlSeperatingLines_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -19686,7 +19686,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlSeperatingLinesStateSave( struct TA_cdlSeperatingLines_State* _state,
+   public RetCode cdlSeperatingLinesStateSave( struct TA_cdlSeperatingLines_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -19723,7 +19723,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlSeperatingLinesStateLoad( struct TA_cdlSeperatingLines_State** _state,
+   public RetCode cdlSeperatingLinesStateLoad( struct TA_cdlSeperatingLines_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -19919,7 +19919,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlShootingStarStateInit( struct TA_cdlShootingStar_State** _state )
+   public RetCode cdlShootingStarStateInit( struct TA_cdlShootingStar_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -19932,7 +19932,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlShootingStarState( struct TA_cdlShootingStar_State* _state,
+   public RetCode cdlShootingStarState( struct TA_cdlShootingStar_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -19992,7 +19992,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlShootingStarStateFree( struct TA_cdlShootingStar_State** _state )
+   public RetCode cdlShootingStarStateFree( struct TA_cdlShootingStar_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -20001,7 +20001,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlShootingStarStateSave( struct TA_cdlShootingStar_State* _state,
+   public RetCode cdlShootingStarStateSave( struct TA_cdlShootingStar_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -20038,7 +20038,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlShootingStarStateLoad( struct TA_cdlShootingStar_State** _state,
+   public RetCode cdlShootingStarStateLoad( struct TA_cdlShootingStar_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -20211,7 +20211,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlShortLineStateInit( struct TA_cdlShortLine_State** _state )
+   public RetCode cdlShortLineStateInit( struct TA_cdlShortLine_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -20224,7 +20224,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlShortLineState( struct TA_cdlShortLine_State* _state,
+   public RetCode cdlShortLineState( struct TA_cdlShortLine_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -20273,7 +20273,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlShortLineStateFree( struct TA_cdlShortLine_State** _state )
+   public RetCode cdlShortLineStateFree( struct TA_cdlShortLine_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -20282,7 +20282,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlShortLineStateSave( struct TA_cdlShortLine_State* _state,
+   public RetCode cdlShortLineStateSave( struct TA_cdlShortLine_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -20313,7 +20313,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlShortLineStateLoad( struct TA_cdlShortLine_State** _state,
+   public RetCode cdlShortLineStateLoad( struct TA_cdlShortLine_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -20459,7 +20459,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlSpinningTopStateInit( struct TA_cdlSpinningTop_State** _state )
+   public RetCode cdlSpinningTopStateInit( struct TA_cdlSpinningTop_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -20472,7 +20472,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlSpinningTopState( struct TA_cdlSpinningTop_State* _state,
+   public RetCode cdlSpinningTopState( struct TA_cdlSpinningTop_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -20513,7 +20513,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlSpinningTopStateFree( struct TA_cdlSpinningTop_State** _state )
+   public RetCode cdlSpinningTopStateFree( struct TA_cdlSpinningTop_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -20522,7 +20522,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlSpinningTopStateSave( struct TA_cdlSpinningTop_State* _state,
+   public RetCode cdlSpinningTopStateSave( struct TA_cdlSpinningTop_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -20547,7 +20547,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlSpinningTopStateLoad( struct TA_cdlSpinningTop_State** _state,
+   public RetCode cdlSpinningTopStateLoad( struct TA_cdlSpinningTop_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -20730,7 +20730,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlStalledPatternStateInit( struct TA_cdlStalledPattern_State** _state )
+   public RetCode cdlStalledPatternStateInit( struct TA_cdlStalledPattern_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -20743,7 +20743,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlStalledPatternState( struct TA_cdlStalledPattern_State* _state,
+   public RetCode cdlStalledPatternState( struct TA_cdlStalledPattern_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -20827,7 +20827,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlStalledPatternStateFree( struct TA_cdlStalledPattern_State** _state )
+   public RetCode cdlStalledPatternStateFree( struct TA_cdlStalledPattern_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -20836,7 +20836,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlStalledPatternStateSave( struct TA_cdlStalledPattern_State* _state,
+   public RetCode cdlStalledPatternStateSave( struct TA_cdlStalledPattern_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -20883,7 +20883,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlStalledPatternStateLoad( struct TA_cdlStalledPattern_State** _state,
+   public RetCode cdlStalledPatternStateLoad( struct TA_cdlStalledPattern_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -21091,7 +21091,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlStickSandwhichStateInit( struct TA_cdlStickSandwhich_State** _state )
+   public RetCode cdlStickSandwhichStateInit( struct TA_cdlStickSandwhich_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -21104,7 +21104,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlStickSandwhichState( struct TA_cdlStickSandwhich_State* _state,
+   public RetCode cdlStickSandwhichState( struct TA_cdlStickSandwhich_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -21152,7 +21152,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlStickSandwhichStateFree( struct TA_cdlStickSandwhich_State** _state )
+   public RetCode cdlStickSandwhichStateFree( struct TA_cdlStickSandwhich_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -21161,7 +21161,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlStickSandwhichStateSave( struct TA_cdlStickSandwhich_State* _state,
+   public RetCode cdlStickSandwhichStateSave( struct TA_cdlStickSandwhich_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -21186,7 +21186,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlStickSandwhichStateLoad( struct TA_cdlStickSandwhich_State** _state,
+   public RetCode cdlStickSandwhichStateLoad( struct TA_cdlStickSandwhich_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -21342,7 +21342,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlTakuriStateInit( struct TA_cdlTakuri_State** _state )
+   public RetCode cdlTakuriStateInit( struct TA_cdlTakuri_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -21355,7 +21355,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlTakuriState( struct TA_cdlTakuri_State* _state,
+   public RetCode cdlTakuriState( struct TA_cdlTakuri_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -21416,7 +21416,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlTakuriStateFree( struct TA_cdlTakuri_State** _state )
+   public RetCode cdlTakuriStateFree( struct TA_cdlTakuri_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -21425,7 +21425,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlTakuriStateSave( struct TA_cdlTakuri_State* _state,
+   public RetCode cdlTakuriStateSave( struct TA_cdlTakuri_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -21462,7 +21462,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlTakuriStateLoad( struct TA_cdlTakuri_State** _state,
+   public RetCode cdlTakuriStateLoad( struct TA_cdlTakuri_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -21643,7 +21643,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlTasukiGapStateInit( struct TA_cdlTasukiGap_State** _state )
+   public RetCode cdlTasukiGapStateInit( struct TA_cdlTasukiGap_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -21656,7 +21656,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlTasukiGapState( struct TA_cdlTasukiGap_State* _state,
+   public RetCode cdlTasukiGapState( struct TA_cdlTasukiGap_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -21717,7 +21717,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlTasukiGapStateFree( struct TA_cdlTasukiGap_State** _state )
+   public RetCode cdlTasukiGapStateFree( struct TA_cdlTasukiGap_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -21726,7 +21726,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlTasukiGapStateSave( struct TA_cdlTasukiGap_State* _state,
+   public RetCode cdlTasukiGapStateSave( struct TA_cdlTasukiGap_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -21751,7 +21751,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlTasukiGapStateLoad( struct TA_cdlTasukiGap_State** _state,
+   public RetCode cdlTasukiGapStateLoad( struct TA_cdlTasukiGap_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -21915,7 +21915,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlThrustingStateInit( struct TA_cdlThrusting_State** _state )
+   public RetCode cdlThrustingStateInit( struct TA_cdlThrusting_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -21928,7 +21928,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlThrustingState( struct TA_cdlThrusting_State* _state,
+   public RetCode cdlThrustingState( struct TA_cdlThrusting_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -21983,7 +21983,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlThrustingStateFree( struct TA_cdlThrusting_State** _state )
+   public RetCode cdlThrustingStateFree( struct TA_cdlThrusting_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -21992,7 +21992,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlThrustingStateSave( struct TA_cdlThrusting_State* _state,
+   public RetCode cdlThrustingStateSave( struct TA_cdlThrusting_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -22023,7 +22023,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlThrustingStateLoad( struct TA_cdlThrusting_State** _state,
+   public RetCode cdlThrustingStateLoad( struct TA_cdlThrusting_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -22187,7 +22187,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlTristarStateInit( struct TA_cdlTristar_State** _state )
+   public RetCode cdlTristarStateInit( struct TA_cdlTristar_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -22200,7 +22200,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlTristarState( struct TA_cdlTristar_State* _state,
+   public RetCode cdlTristarState( struct TA_cdlTristar_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -22255,7 +22255,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlTristarStateFree( struct TA_cdlTristar_State** _state )
+   public RetCode cdlTristarStateFree( struct TA_cdlTristar_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -22264,7 +22264,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlTristarStateSave( struct TA_cdlTristar_State* _state,
+   public RetCode cdlTristarStateSave( struct TA_cdlTristar_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -22289,7 +22289,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlTristarStateLoad( struct TA_cdlTristar_State** _state,
+   public RetCode cdlTristarStateLoad( struct TA_cdlTristar_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -22448,7 +22448,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlUnique3RiverStateInit( struct TA_cdlUnique3River_State** _state )
+   public RetCode cdlUnique3RiverStateInit( struct TA_cdlUnique3River_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -22461,7 +22461,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlUnique3RiverState( struct TA_cdlUnique3River_State* _state,
+   public RetCode cdlUnique3RiverState( struct TA_cdlUnique3River_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -22519,7 +22519,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlUnique3RiverStateFree( struct TA_cdlUnique3River_State** _state )
+   public RetCode cdlUnique3RiverStateFree( struct TA_cdlUnique3River_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -22528,7 +22528,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlUnique3RiverStateSave( struct TA_cdlUnique3River_State* _state,
+   public RetCode cdlUnique3RiverStateSave( struct TA_cdlUnique3River_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -22559,7 +22559,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlUnique3RiverStateLoad( struct TA_cdlUnique3River_State** _state,
+   public RetCode cdlUnique3RiverStateLoad( struct TA_cdlUnique3River_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -22727,7 +22727,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlUpsideGap2CrowsStateInit( struct TA_cdlUpsideGap2Crows_State** _state )
+   public RetCode cdlUpsideGap2CrowsStateInit( struct TA_cdlUpsideGap2Crows_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -22740,7 +22740,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlUpsideGap2CrowsState( struct TA_cdlUpsideGap2Crows_State* _state,
+   public RetCode cdlUpsideGap2CrowsState( struct TA_cdlUpsideGap2Crows_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -22798,7 +22798,7 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int cdlUpsideGap2CrowsStateFree( struct TA_cdlUpsideGap2Crows_State** _state )
+   public RetCode cdlUpsideGap2CrowsStateFree( struct TA_cdlUpsideGap2Crows_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -22807,7 +22807,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlUpsideGap2CrowsStateSave( struct TA_cdlUpsideGap2Crows_State* _state,
+   public RetCode cdlUpsideGap2CrowsStateSave( struct TA_cdlUpsideGap2Crows_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -22838,7 +22838,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cdlUpsideGap2CrowsStateLoad( struct TA_cdlUpsideGap2Crows_State** _state,
+   public RetCode cdlUpsideGap2CrowsStateLoad( struct TA_cdlUpsideGap2Crows_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -22994,7 +22994,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cdlXSideGap3MethodsStateInit( struct TA_cdlXSideGap3Methods_State** _state )
+   public RetCode cdlXSideGap3MethodsStateInit( struct TA_cdlXSideGap3Methods_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -23007,7 +23007,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cdlXSideGap3MethodsState( struct TA_cdlXSideGap3Methods_State* _state,
+   public RetCode cdlXSideGap3MethodsState( struct TA_cdlXSideGap3Methods_State* _state,
       double inOpen,
       double inHigh,
       double inLow,
@@ -23052,7 +23052,7 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       return RetCode.Success ;
    }
-   public int cdlXSideGap3MethodsStateFree( struct TA_cdlXSideGap3Methods_State** _state )
+   public RetCode cdlXSideGap3MethodsStateFree( struct TA_cdlXSideGap3Methods_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -23061,7 +23061,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cdlXSideGap3MethodsStateSave( struct TA_cdlXSideGap3Methods_State* _state,
+   public RetCode cdlXSideGap3MethodsStateSave( struct TA_cdlXSideGap3Methods_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -23080,7 +23080,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int cdlXSideGap3MethodsStateLoad( struct TA_cdlXSideGap3Methods_State** _state,
+   public RetCode cdlXSideGap3MethodsStateLoad( struct TA_cdlXSideGap3Methods_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -23180,7 +23180,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int ceilStateInit( struct TA_ceil_State** _state )
+   public RetCode ceilStateInit( struct TA_ceil_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -23193,7 +23193,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int ceilState( struct TA_ceil_State* _state,
+   public RetCode ceilState( struct TA_ceil_State* _state,
       double inReal,
       double *outReal )
    {
@@ -23207,7 +23207,7 @@ public class Core {
       outReal.value = Math.ceil (inReal);
       return RetCode.Success ;
    }
-   public int ceilStateFree( struct TA_ceil_State** _state )
+   public RetCode ceilStateFree( struct TA_ceil_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -23216,7 +23216,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int ceilStateSave( struct TA_ceil_State* _state,
+   public RetCode ceilStateSave( struct TA_ceil_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -23235,7 +23235,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int ceilStateLoad( struct TA_ceil_State** _state,
+   public RetCode ceilStateLoad( struct TA_ceil_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -23426,7 +23426,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int cmoStateInit( struct TA_cmo_State** _state,
+   public RetCode cmoStateInit( struct TA_cmo_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -23447,7 +23447,7 @@ public class Core {
          _state.value .value .MetastockMode = 0;
       return RetCode.Success ;
    }
-   public int cmoState( struct TA_cmo_State* _state,
+   public RetCode cmoState( struct TA_cmo_State* _state,
       double inReal,
       double *outReal )
    {
@@ -23494,7 +23494,7 @@ public class Core {
          outReal.value = 0.0;
       return RetCode.Success ;
    }
-   public int cmoStateFree( struct TA_cmo_State** _state )
+   public RetCode cmoStateFree( struct TA_cmo_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -23503,7 +23503,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cmoStateSave( struct TA_cmo_State* _state,
+   public RetCode cmoStateSave( struct TA_cmo_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -23532,7 +23532,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int cmoStateLoad( struct TA_cmo_State** _state,
+   public RetCode cmoStateLoad( struct TA_cmo_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -23784,7 +23784,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int correlStateInit( struct TA_correl_State** _state,
+   public RetCode correlStateInit( struct TA_correl_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -23803,7 +23803,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int correlState( struct TA_correl_State* _state,
+   public RetCode correlState( struct TA_correl_State* _state,
       double inReal0,
       double inReal1,
       double *outReal )
@@ -23840,7 +23840,7 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inReal1 = inReal1 ;
       return RetCode.Success ;
    }
-   public int correlStateFree( struct TA_correl_State** _state )
+   public RetCode correlStateFree( struct TA_correl_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -23849,7 +23849,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int correlStateSave( struct TA_correl_State* _state,
+   public RetCode correlStateSave( struct TA_correl_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -23880,7 +23880,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int correlStateLoad( struct TA_correl_State** _state,
+   public RetCode correlStateLoad( struct TA_correl_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -24014,7 +24014,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int cosStateInit( struct TA_cos_State** _state )
+   public RetCode cosStateInit( struct TA_cos_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -24027,7 +24027,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int cosState( struct TA_cos_State* _state,
+   public RetCode cosState( struct TA_cos_State* _state,
       double inReal,
       double *outReal )
    {
@@ -24041,7 +24041,7 @@ public class Core {
       outReal.value = Math.cos (inReal);
       return RetCode.Success ;
    }
-   public int cosStateFree( struct TA_cos_State** _state )
+   public RetCode cosStateFree( struct TA_cos_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -24050,7 +24050,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int cosStateSave( struct TA_cos_State* _state,
+   public RetCode cosStateSave( struct TA_cos_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -24069,7 +24069,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int cosStateLoad( struct TA_cos_State** _state,
+   public RetCode cosStateLoad( struct TA_cos_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -24137,7 +24137,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int coshStateInit( struct TA_cosh_State** _state )
+   public RetCode coshStateInit( struct TA_cosh_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -24150,7 +24150,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int coshState( struct TA_cosh_State* _state,
+   public RetCode coshState( struct TA_cosh_State* _state,
       double inReal,
       double *outReal )
    {
@@ -24164,7 +24164,7 @@ public class Core {
       outReal.value = Math.cosh (inReal);
       return RetCode.Success ;
    }
-   public int coshStateFree( struct TA_cosh_State** _state )
+   public RetCode coshStateFree( struct TA_cosh_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -24173,7 +24173,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int coshStateSave( struct TA_cosh_State* _state,
+   public RetCode coshStateSave( struct TA_cosh_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -24192,7 +24192,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int coshStateLoad( struct TA_cosh_State** _state,
+   public RetCode coshStateLoad( struct TA_cosh_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -24312,7 +24312,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int demaStateInit( struct TA_dema_State** _state,
+   public RetCode demaStateInit( struct TA_dema_State** _state,
       int optInTimePeriod )
    {
       int res;
@@ -24334,7 +24334,7 @@ public class Core {
       }
       return res;
    }
-   public int demaState( struct TA_dema_State* _state,
+   public RetCode demaState( struct TA_dema_State* _state,
       double inReal,
       double *outReal )
    {
@@ -24353,7 +24353,7 @@ public class Core {
       outReal.value = (2.0*ema) - ema2;
       return RetCode.Success ;
    }
-   public int demaStateFree( struct TA_dema_State** _state )
+   public RetCode demaStateFree( struct TA_dema_State** _state )
    {
       int res = ema ((struct ema **)& _state.value .value .state_EMA);
       if (res == RetCode.Success )
@@ -24367,7 +24367,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return res;
    }
-   public int demaStateSave( struct TA_dema_State* _state,
+   public RetCode demaStateSave( struct TA_dema_State* _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -24393,7 +24393,7 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return 0;
    }
-   public int demaStateLoad( struct TA_dema_State** _state,
+   public RetCode demaStateLoad( struct TA_dema_State** _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -24512,7 +24512,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int divStateInit( struct TA_div_State** _state )
+   public RetCode divStateInit( struct TA_div_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -24525,7 +24525,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int divState( struct TA_div_State* _state,
+   public RetCode divState( struct TA_div_State* _state,
       double inReal0,
       double inReal1,
       double *outReal )
@@ -24541,7 +24541,7 @@ public class Core {
       outReal.value = inReal0 / inReal1;
       return RetCode.Success ;
    }
-   public int divStateFree( struct TA_div_State** _state )
+   public RetCode divStateFree( struct TA_div_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -24550,7 +24550,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int divStateSave( struct TA_div_State* _state,
+   public RetCode divStateSave( struct TA_div_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -24569,7 +24569,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int divStateLoad( struct TA_div_State** _state,
+   public RetCode divStateLoad( struct TA_div_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -24767,7 +24767,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int dxStateInit( struct TA_dx_State** _state,
+   public RetCode dxStateInit( struct TA_dx_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -24783,7 +24783,7 @@ public class Core {
       _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int dxState( struct TA_dx_State* _state,
+   public RetCode dxState( struct TA_dx_State* _state,
       double inHigh,
       double inLow,
       double inClose,
@@ -24844,7 +24844,7 @@ public class Core {
          outReal.value = _state.value .prevOutReal;
       return RetCode.Success ;
    }
-   public int dxStateFree( struct TA_dx_State** _state )
+   public RetCode dxStateFree( struct TA_dx_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -24853,7 +24853,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int dxStateSave( struct TA_dx_State* _state,
+   public RetCode dxStateSave( struct TA_dx_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -24888,7 +24888,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int dxStateLoad( struct TA_dx_State** _state,
+   public RetCode dxStateLoad( struct TA_dx_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -25145,7 +25145,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int emaStateInit( struct TA_ema_State** _state,
+   public RetCode emaStateInit( struct TA_ema_State** _state,
       int optInTimePeriod )
    {
       return TA_INT_EMA_StateInit(_state, optInTimePeriod, ((double)2.0 / ((double)(optInTimePeriod + 1))) );
@@ -25168,7 +25168,7 @@ public class Core {
       _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int emaState( struct TA_ema_State* _state,
+   public RetCode emaState( struct TA_ema_State* _state,
       double inReal,
       double *outReal )
    {
@@ -25211,7 +25211,7 @@ public class Core {
       outReal.value = _state.value .prevMA;
       return RetCode.Success ;
    }
-   public int emaStateFree( struct TA_ema_State** _state )
+   public RetCode emaStateFree( struct TA_ema_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -25220,7 +25220,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int emaStateSave( struct TA_ema_State* _state,
+   public RetCode emaStateSave( struct TA_ema_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -25249,7 +25249,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int emaStateLoad( struct TA_ema_State** _state,
+   public RetCode emaStateLoad( struct TA_ema_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -25374,7 +25374,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int expStateInit( struct TA_exp_State** _state )
+   public RetCode expStateInit( struct TA_exp_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -25387,7 +25387,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int expState( struct TA_exp_State* _state,
+   public RetCode expState( struct TA_exp_State* _state,
       double inReal,
       double *outReal )
    {
@@ -25401,7 +25401,7 @@ public class Core {
       outReal.value = Math.exp (inReal);
       return RetCode.Success ;
    }
-   public int expStateFree( struct TA_exp_State** _state )
+   public RetCode expStateFree( struct TA_exp_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -25410,7 +25410,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int expStateSave( struct TA_exp_State* _state,
+   public RetCode expStateSave( struct TA_exp_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -25429,7 +25429,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int expStateLoad( struct TA_exp_State** _state,
+   public RetCode expStateLoad( struct TA_exp_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -25497,7 +25497,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int floorStateInit( struct TA_floor_State** _state )
+   public RetCode floorStateInit( struct TA_floor_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -25510,7 +25510,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int floorState( struct TA_floor_State* _state,
+   public RetCode floorState( struct TA_floor_State* _state,
       double inReal,
       double *outReal )
    {
@@ -25524,7 +25524,7 @@ public class Core {
       outReal.value = Math.floor (inReal);
       return RetCode.Success ;
    }
-   public int floorStateFree( struct TA_floor_State** _state )
+   public RetCode floorStateFree( struct TA_floor_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -25533,7 +25533,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int floorStateSave( struct TA_floor_State* _state,
+   public RetCode floorStateSave( struct TA_floor_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -25552,7 +25552,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int floorStateLoad( struct TA_floor_State** _state,
+   public RetCode floorStateLoad( struct TA_floor_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -25729,7 +25729,7 @@ public class Core {
       return RetCode.Success ;
    }
    struct TA_HT_DCPERIOD_HILBERT_STRUCT { double []_Odd = new double[3] ; double []_Even = new double[3] ; double var; double prev_Odd; double prev_Even; double prev_input_Odd; double prev_input_Even; };
-   public int htDcPeriodStateInit( struct TA_htDcPeriod_State** _state )
+   public RetCode htDcPeriodStateInit( struct TA_htDcPeriod_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -25746,7 +25746,7 @@ public class Core {
       { _state.value .value .jQ = calloc(1, sizeof(struct TA_HT_DCPERIOD_HILBERT_STRUCT )); if ( _state.value .value .jQ == NULL) return RetCode.AllocErr ; } ;
       return RetCode.Success ;
    }
-   public int htDcPeriodState( struct TA_htDcPeriod_State* _state,
+   public RetCode htDcPeriodState( struct TA_htDcPeriod_State* _state,
       double inReal,
       double *outReal )
    {
@@ -25846,7 +25846,7 @@ public class Core {
          return RetCode.Success ;
       }
    }
-   public int htDcPeriodStateFree( struct TA_htDcPeriod_State** _state )
+   public RetCode htDcPeriodStateFree( struct TA_htDcPeriod_State** _state )
    {
       { if ( _state.value .value .detrender != NULL) { free ( _state.value .value .detrender); _state.value .value .detrender = NULL; } } ;
       { if ( _state.value .value .Q1 != NULL) { free ( _state.value .value .Q1); _state.value .value .Q1 = NULL; } } ;
@@ -25859,7 +25859,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int htDcPeriodStateSave( struct TA_htDcPeriod_State* _state,
+   public RetCode htDcPeriodStateSave( struct TA_htDcPeriod_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -25916,7 +25916,7 @@ public class Core {
       { if ( _state.value .jQ == NULL) return RetCode.BadParam ; if (fwrite( _state.value .jQ,sizeof(struct TA_HT_DCPERIOD_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
       return 0;
    }
-   public int htDcPeriodStateLoad( struct TA_htDcPeriod_State** _state,
+   public RetCode htDcPeriodStateLoad( struct TA_htDcPeriod_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -26284,7 +26284,7 @@ public class Core {
    }
    struct TA_HT_DCPHASE_STATE_CIRCBUF { int idx; double* circbuf; int size; };
    struct TA_HT_DCPHASE_HILBERT_STRUCT { double []_Odd = new double[3] ; double []_Even = new double[3] ; double var; double prev_Odd; double prev_Even; double prev_input_Odd; double prev_input_Even; };
-   public int htDcPhaseStateInit( struct TA_htDcPhase_State** _state )
+   public RetCode htDcPhaseStateInit( struct TA_htDcPhase_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -26302,7 +26302,7 @@ public class Core {
       { _state.value .value .jQ = calloc(1, sizeof(struct TA_HT_DCPHASE_HILBERT_STRUCT )); if ( _state.value .value .jQ == NULL) return RetCode.AllocErr ; } ;
       return RetCode.Success ;
    }
-   public int htDcPhaseState( struct TA_htDcPhase_State* _state,
+   public RetCode htDcPhaseState( struct TA_htDcPhase_State* _state,
       double inReal,
       double *outReal )
    {
@@ -26441,7 +26441,7 @@ public class Core {
          return RetCode.Success ;
       }
    }
-   public int htDcPhaseStateFree( struct TA_htDcPhase_State** _state )
+   public RetCode htDcPhaseStateFree( struct TA_htDcPhase_State** _state )
    {
       { if ( _state.value .value .detrender != NULL) { free ( _state.value .value .detrender); _state.value .value .detrender = NULL; } } ;
       { if ( _state.value .value .Q1 != NULL) { free ( _state.value .value .Q1); _state.value .value .Q1 = NULL; } } ;
@@ -26455,7 +26455,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int htDcPhaseStateSave( struct TA_htDcPhase_State* _state,
+   public RetCode htDcPhaseStateSave( struct TA_htDcPhase_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -26517,7 +26517,7 @@ public class Core {
       { int io_circbuf_res; struct TA_HT_DCPHASE_STATE_CIRCBUF * str_circbuf = _state.value .circBuf; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
       return 0;
    }
-   public int htDcPhaseStateLoad( struct TA_htDcPhase_State** _state,
+   public RetCode htDcPhaseStateLoad( struct TA_htDcPhase_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -26894,7 +26894,7 @@ public class Core {
       return RetCode.Success ;
    }
    struct TA_HT_PHASOR_HILBERT_STRUCT { double []_Odd = new double[3] ; double []_Even = new double[3] ; double var; double prev_Odd; double prev_Even; double prev_input_Odd; double prev_input_Even; };
-   public int htPhasorStateInit( struct TA_htPhasor_State** _state )
+   public RetCode htPhasorStateInit( struct TA_htPhasor_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -26911,7 +26911,7 @@ public class Core {
       { _state.value .value .jQ = calloc(1, sizeof(struct TA_HT_PHASOR_HILBERT_STRUCT )); if ( _state.value .value .jQ == NULL) return RetCode.AllocErr ; } ;
       return RetCode.Success ;
    }
-   public int htPhasorState( struct TA_htPhasor_State* _state,
+   public RetCode htPhasorState( struct TA_htPhasor_State* _state,
       double inReal,
       double *outInPhase,
       double *outQuadrature )
@@ -27019,7 +27019,7 @@ public class Core {
          return RetCode.Success ;
       }
    }
-   public int htPhasorStateFree( struct TA_htPhasor_State** _state )
+   public RetCode htPhasorStateFree( struct TA_htPhasor_State** _state )
    {
       { if ( _state.value .value .detrender != NULL) { free ( _state.value .value .detrender); _state.value .value .detrender = NULL; } } ;
       { if ( _state.value .value .Q1 != NULL) { free ( _state.value .value .Q1); _state.value .value .Q1 = NULL; } } ;
@@ -27032,7 +27032,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int htPhasorStateSave( struct TA_htPhasor_State* _state,
+   public RetCode htPhasorStateSave( struct TA_htPhasor_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -27087,7 +27087,7 @@ public class Core {
       { if ( _state.value .jQ == NULL) return RetCode.BadParam ; if (fwrite( _state.value .jQ,sizeof(struct TA_HT_PHASOR_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
       return 0;
    }
-   public int htPhasorStateLoad( struct TA_htPhasor_State** _state,
+   public RetCode htPhasorStateLoad( struct TA_htPhasor_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -27461,7 +27461,7 @@ public class Core {
    }
    struct TA_HT_SINE_STATE_CIRCBUF { int idx; double* circbuf; int size; };
    struct TA_HT_SINE_HILBERT_STRUCT { double []_Odd = new double[3] ; double []_Even = new double[3] ; double var; double prev_Odd; double prev_Even; double prev_input_Odd; double prev_input_Even; };
-   public int htSineStateInit( struct TA_htSine_State** _state )
+   public RetCode htSineStateInit( struct TA_htSine_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -27479,7 +27479,7 @@ public class Core {
       { _state.value .value .jQ = calloc(1, sizeof(struct TA_HT_SINE_HILBERT_STRUCT )); if ( _state.value .value .jQ == NULL) return RetCode.AllocErr ; } ;
       return RetCode.Success ;
    }
-   public int htSineState( struct TA_htSine_State* _state,
+   public RetCode htSineState( struct TA_htSine_State* _state,
       double inReal,
       double *outSine,
       double *outLeadSine )
@@ -27622,7 +27622,7 @@ public class Core {
       }
       return RetCode.Success ;
    }
-   public int htSineStateFree( struct TA_htSine_State** _state )
+   public RetCode htSineStateFree( struct TA_htSine_State** _state )
    {
       { if ( _state.value .value .detrender != NULL) { free ( _state.value .value .detrender); _state.value .value .detrender = NULL; } } ;
       { if ( _state.value .value .Q1 != NULL) { free ( _state.value .value .Q1); _state.value .value .Q1 = NULL; } } ;
@@ -27636,7 +27636,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int htSineStateSave( struct TA_htSine_State* _state,
+   public RetCode htSineStateSave( struct TA_htSine_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -27700,7 +27700,7 @@ public class Core {
       { int io_circbuf_res; struct TA_HT_SINE_STATE_CIRCBUF * str_circbuf = _state.value .circBuf; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
       return 0;
    }
-   public int htSineStateLoad( struct TA_htSine_State** _state,
+   public RetCode htSineStateLoad( struct TA_htSine_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -28102,7 +28102,7 @@ public class Core {
    }
    struct TA_HT_TRENDLINE_STATE_CIRCBUF { int idx; double* circbuf; int size; };
    struct TA_HT_TRENDLINE_HILBERT_STRUCT { double []_Odd = new double[3] ; double []_Even = new double[3] ; double var; double prev_Odd; double prev_Even; double prev_input_Odd; double prev_input_Even; };
-   public int htTrendlineStateInit( struct TA_htTrendline_State** _state )
+   public RetCode htTrendlineStateInit( struct TA_htTrendline_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -28120,7 +28120,7 @@ public class Core {
       { _state.value .value .jQ = calloc(1, sizeof(struct TA_HT_TRENDLINE_HILBERT_STRUCT )); if ( _state.value .value .jQ == NULL) return RetCode.AllocErr ; } ;
       return RetCode.Success ;
    }
-   public int htTrendlineState( struct TA_htTrendline_State* _state,
+   public RetCode htTrendlineState( struct TA_htTrendline_State* _state,
       double inReal,
       double *outReal )
    {
@@ -28241,7 +28241,7 @@ public class Core {
       }
       return RetCode.Success ;
    }
-   public int htTrendlineStateFree( struct TA_htTrendline_State** _state )
+   public RetCode htTrendlineStateFree( struct TA_htTrendline_State** _state )
    {
       { if ( _state.value .value .detrender != NULL) { free ( _state.value .value .detrender); _state.value .value .detrender = NULL; } } ;
       { if ( _state.value .value .Q1 != NULL) { free ( _state.value .value .Q1); _state.value .value .Q1 = NULL; } } ;
@@ -28255,7 +28255,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int htTrendlineStateSave( struct TA_htTrendline_State* _state,
+   public RetCode htTrendlineStateSave( struct TA_htTrendline_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -28319,7 +28319,7 @@ public class Core {
       { int io_circbuf_res; struct TA_HT_TRENDLINE_STATE_CIRCBUF * str_circbuf = _state.value .circBuf; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
       return 0;
    }
-   public int htTrendlineStateLoad( struct TA_htTrendline_State** _state,
+   public RetCode htTrendlineStateLoad( struct TA_htTrendline_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -28764,7 +28764,7 @@ public class Core {
    }
    struct TA_HT_TRENDMODE_STATE_CIRCBUF { int idx; double* circbuf; int size; };
    struct TA_HT_TRENDMODE_HILBERT_STRUCT { double []_Odd = new double[3] ; double []_Even = new double[3] ; double var; double prev_Odd; double prev_Even; double prev_input_Odd; double prev_input_Even; };
-   public int htTrendModeStateInit( struct TA_htTrendMode_State** _state )
+   public RetCode htTrendModeStateInit( struct TA_htTrendMode_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -28782,7 +28782,7 @@ public class Core {
       { _state.value .value .jQ = calloc(1, sizeof(struct TA_HT_TRENDMODE_HILBERT_STRUCT )); if ( _state.value .value .jQ == NULL) return RetCode.AllocErr ; } ;
       return RetCode.Success ;
    }
-   public int htTrendModeState( struct TA_htTrendMode_State* _state,
+   public RetCode htTrendModeState( struct TA_htTrendMode_State* _state,
       double inReal,
       int *outInteger )
    {
@@ -28967,7 +28967,7 @@ public class Core {
       }
       return RetCode.Success ;
    }
-   public int htTrendModeStateFree( struct TA_htTrendMode_State** _state )
+   public RetCode htTrendModeStateFree( struct TA_htTrendMode_State** _state )
    {
       { if ( _state.value .value .detrender != NULL) { free ( _state.value .value .detrender); _state.value .value .detrender = NULL; } } ;
       { if ( _state.value .value .Q1 != NULL) { free ( _state.value .value .Q1); _state.value .value .Q1 = NULL; } } ;
@@ -28981,7 +28981,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int htTrendModeStateSave( struct TA_htTrendMode_State* _state,
+   public RetCode htTrendModeStateSave( struct TA_htTrendMode_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -29059,7 +29059,7 @@ public class Core {
       { int io_circbuf_res; struct TA_HT_TRENDMODE_STATE_CIRCBUF * str_circbuf = _state.value .circBuf; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
       return 0;
    }
-   public int htTrendModeStateLoad( struct TA_htTrendMode_State** _state,
+   public RetCode htTrendModeStateLoad( struct TA_htTrendMode_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -29413,7 +29413,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int imiStateInit( struct TA_imi_State** _state,
+   public RetCode imiStateInit( struct TA_imi_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -29432,7 +29432,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int imiState( struct TA_imi_State* _state,
+   public RetCode imiState( struct TA_imi_State* _state,
       double inOpen,
       double inClose,
       double *outReal )
@@ -29470,7 +29470,7 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       return RetCode.Success ;
    }
-   public int imiStateFree( struct TA_imi_State** _state )
+   public RetCode imiStateFree( struct TA_imi_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -29479,7 +29479,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int imiStateSave( struct TA_imi_State* _state,
+   public RetCode imiStateSave( struct TA_imi_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -29504,7 +29504,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int imiStateLoad( struct TA_imi_State** _state,
+   public RetCode imiStateLoad( struct TA_imi_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -29681,7 +29681,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int kamaStateInit( struct TA_kama_State** _state,
+   public RetCode kamaStateInit( struct TA_kama_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -29700,7 +29700,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int kamaState( struct TA_kama_State* _state,
+   public RetCode kamaState( struct TA_kama_State* _state,
       double inReal,
       double *outReal )
    {
@@ -29753,7 +29753,7 @@ public class Core {
       outReal.value = _state.value .prevKAMA;
       return RetCode.Success ;
    }
-   public int kamaStateFree( struct TA_kama_State** _state )
+   public RetCode kamaStateFree( struct TA_kama_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -29762,7 +29762,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int kamaStateSave( struct TA_kama_State* _state,
+   public RetCode kamaStateSave( struct TA_kama_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -29791,7 +29791,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int kamaStateLoad( struct TA_kama_State** _state,
+   public RetCode kamaStateLoad( struct TA_kama_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -29980,7 +29980,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int linearRegStateInit( struct TA_linearReg_State** _state,
+   public RetCode linearRegStateInit( struct TA_linearReg_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -29999,7 +29999,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int linearRegState( struct TA_linearReg_State* _state,
+   public RetCode linearRegState( struct TA_linearReg_State* _state,
       double inReal,
       double *outReal )
    {
@@ -30034,7 +30034,7 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
    }
-   public int linearRegStateFree( struct TA_linearReg_State** _state )
+   public RetCode linearRegStateFree( struct TA_linearReg_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -30043,7 +30043,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int linearRegStateSave( struct TA_linearReg_State* _state,
+   public RetCode linearRegStateSave( struct TA_linearReg_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -30074,7 +30074,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int linearRegStateLoad( struct TA_linearReg_State** _state,
+   public RetCode linearRegStateLoad( struct TA_linearReg_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -30223,7 +30223,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int linearRegAngleStateInit( struct TA_linearRegAngle_State** _state,
+   public RetCode linearRegAngleStateInit( struct TA_linearRegAngle_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -30242,7 +30242,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int linearRegAngleState( struct TA_linearRegAngle_State* _state,
+   public RetCode linearRegAngleState( struct TA_linearRegAngle_State* _state,
       double inReal,
       double *outReal )
    {
@@ -30279,7 +30279,7 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
    }
-   public int linearRegAngleStateFree( struct TA_linearRegAngle_State** _state )
+   public RetCode linearRegAngleStateFree( struct TA_linearRegAngle_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -30288,7 +30288,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int linearRegAngleStateSave( struct TA_linearRegAngle_State* _state,
+   public RetCode linearRegAngleStateSave( struct TA_linearRegAngle_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -30319,7 +30319,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int linearRegAngleStateLoad( struct TA_linearRegAngle_State** _state,
+   public RetCode linearRegAngleStateLoad( struct TA_linearRegAngle_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -30467,7 +30467,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int linearRegInterceptStateInit( struct TA_linearRegIntercept_State** _state,
+   public RetCode linearRegInterceptStateInit( struct TA_linearRegIntercept_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -30486,7 +30486,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int linearRegInterceptState( struct TA_linearRegIntercept_State* _state,
+   public RetCode linearRegInterceptState( struct TA_linearRegIntercept_State* _state,
       double inReal,
       double *outReal )
    {
@@ -30523,7 +30523,7 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
    }
-   public int linearRegInterceptStateFree( struct TA_linearRegIntercept_State** _state )
+   public RetCode linearRegInterceptStateFree( struct TA_linearRegIntercept_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -30532,7 +30532,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int linearRegInterceptStateSave( struct TA_linearRegIntercept_State* _state,
+   public RetCode linearRegInterceptStateSave( struct TA_linearRegIntercept_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -30563,7 +30563,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int linearRegInterceptStateLoad( struct TA_linearRegIntercept_State** _state,
+   public RetCode linearRegInterceptStateLoad( struct TA_linearRegIntercept_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -30709,7 +30709,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int linearRegSlopeStateInit( struct TA_linearRegSlope_State** _state,
+   public RetCode linearRegSlopeStateInit( struct TA_linearRegSlope_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -30728,7 +30728,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int linearRegSlopeState( struct TA_linearRegSlope_State* _state,
+   public RetCode linearRegSlopeState( struct TA_linearRegSlope_State* _state,
       double inReal,
       double *outReal )
    {
@@ -30764,7 +30764,7 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
    }
-   public int linearRegSlopeStateFree( struct TA_linearRegSlope_State** _state )
+   public RetCode linearRegSlopeStateFree( struct TA_linearRegSlope_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -30773,7 +30773,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int linearRegSlopeStateSave( struct TA_linearRegSlope_State* _state,
+   public RetCode linearRegSlopeStateSave( struct TA_linearRegSlope_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -30804,7 +30804,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int linearRegSlopeStateLoad( struct TA_linearRegSlope_State** _state,
+   public RetCode linearRegSlopeStateLoad( struct TA_linearRegSlope_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -30914,7 +30914,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int lnStateInit( struct TA_ln_State** _state )
+   public RetCode lnStateInit( struct TA_ln_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -30927,7 +30927,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int lnState( struct TA_ln_State* _state,
+   public RetCode lnState( struct TA_ln_State* _state,
       double inReal,
       double *outReal )
    {
@@ -30941,7 +30941,7 @@ public class Core {
       outReal.value = Math.log (inReal);
       return RetCode.Success ;
    }
-   public int lnStateFree( struct TA_ln_State** _state )
+   public RetCode lnStateFree( struct TA_ln_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -30950,7 +30950,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int lnStateSave( struct TA_ln_State* _state,
+   public RetCode lnStateSave( struct TA_ln_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -30969,7 +30969,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int lnStateLoad( struct TA_ln_State** _state,
+   public RetCode lnStateLoad( struct TA_ln_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -31037,7 +31037,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int log10StateInit( struct TA_log10_State** _state )
+   public RetCode log10StateInit( struct TA_log10_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -31050,7 +31050,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int log10State( struct TA_log10_State* _state,
+   public RetCode log10State( struct TA_log10_State* _state,
       double inReal,
       double *outReal )
    {
@@ -31064,7 +31064,7 @@ public class Core {
       outReal.value = Math.log10 (inReal);
       return RetCode.Success ;
    }
-   public int log10StateFree( struct TA_log10_State** _state )
+   public RetCode log10StateFree( struct TA_log10_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -31073,7 +31073,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int log10StateSave( struct TA_log10_State* _state,
+   public RetCode log10StateSave( struct TA_log10_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -31092,7 +31092,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int log10StateLoad( struct TA_log10_State** _state,
+   public RetCode log10StateLoad( struct TA_log10_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -31255,7 +31255,7 @@ public class Core {
       }
       return retCode;
    }
-   public int movingAverageStateInit( struct TA_movingAverage_State** _state,
+   public RetCode movingAverageStateInit( struct TA_movingAverage_State** _state,
       int optInTimePeriod,
       MAType optInMAType )
    {
@@ -31311,7 +31311,7 @@ public class Core {
       }
       return retValue;
    }
-   public int movingAverageState( struct TA_movingAverage_State* _state,
+   public RetCode movingAverageState( struct TA_movingAverage_State* _state,
       double inReal,
       double *outReal )
    {
@@ -31362,7 +31362,7 @@ public class Core {
       }
       return retValue;
    }
-   public int movingAverageStateFree( struct TA_movingAverage_State** _state )
+   public RetCode movingAverageStateFree( struct TA_movingAverage_State** _state )
    {
       RetCode retValue;
       if( _state.value .value .optInTimePeriod != 1 )
@@ -31409,7 +31409,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int movingAverageStateSave( struct TA_movingAverage_State* _state,
+   public RetCode movingAverageStateSave( struct TA_movingAverage_State* _state,
       FILE* _file )
    {
       RetCode retValue;
@@ -31467,7 +31467,7 @@ public class Core {
       }
       return retValue;
    }
-   public int movingAverageStateLoad( struct TA_movingAverage_State** _state,
+   public RetCode movingAverageStateLoad( struct TA_movingAverage_State** _state,
       FILE* _file )
    {
       RetCode retValue;
@@ -31771,7 +31771,7 @@ public class Core {
       outNBElement.value = outNbElement2.value ;
       return RetCode.Success ;
    }
-   public int macdStateInit( struct TA_macd_State** _state,
+   public RetCode macdStateInit( struct TA_macd_State** _state,
       int optInFastPeriod,
       int optInSlowPeriod,
       int optInSignalPeriod )
@@ -31865,7 +31865,7 @@ public class Core {
       retCode = TA_INT_EMA_StateInit ((struct ema **)& _state.value .value .signalEMAState, _state.value .value .optInSignalPeriod, ((double)2.0 / ((double)( _state.value .value .optInSignalPeriod + 1))) );
       return retCode;
    }
-   public int macdState( struct TA_macd_State* _state,
+   public RetCode macdState( struct TA_macd_State* _state,
       double inReal,
       double *outMACD,
       double *outMACDSignal,
@@ -31904,7 +31904,7 @@ public class Core {
       outMACDHist.value = outMACD.value - outMACDSignal.value ;
       return (retCode1 | retCode2 | retCode3);
    }
-   public int macdStateFree( struct TA_macd_State** _state )
+   public RetCode macdStateFree( struct TA_macd_State** _state )
    {
       RetCode retCode;
       retCode = ema ((struct ema **)& _state.value .value .slowEMAState);
@@ -31920,7 +31920,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int macdStateSave( struct TA_macd_State* _state,
+   public RetCode macdStateSave( struct TA_macd_State* _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -31954,7 +31954,7 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return 0;
    }
-   public int macdStateLoad( struct TA_macd_State** _state,
+   public RetCode macdStateLoad( struct TA_macd_State** _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -32269,7 +32269,7 @@ public class Core {
       outNBElement.value = outNbElement2.value ;
       return RetCode.Success ;
    }
-   public int macdExtStateInit( struct TA_macdExt_State** _state,
+   public RetCode macdExtStateInit( struct TA_macdExt_State** _state,
       int optInFastPeriod,
       MAType optInFastMAType, int optInSlowPeriod,
       MAType optInSlowMAType, int optInSignalPeriod,
@@ -32314,7 +32314,7 @@ public class Core {
       retCode = movingAverage ((struct movingAverage **)& _state.value .value .signalMAState, _state.value .value .optInSignalPeriod, _state.value .value .optInSignalMAType);
       return retCode;
    }
-   public int macdExtState( struct TA_macdExt_State* _state,
+   public RetCode macdExtState( struct TA_macdExt_State* _state,
       double inReal,
       double *outMACD,
       double *outMACDSignal,
@@ -32353,7 +32353,7 @@ public class Core {
       outMACDHist.value = outMACD.value - outMACDSignal.value ;
       return (retCode1 | retCode2 | retCode3);
    }
-   public int macdExtStateFree( struct TA_macdExt_State** _state )
+   public RetCode macdExtStateFree( struct TA_macdExt_State** _state )
    {
       RetCode retCode;
       retCode = movingAverage ((struct movingAverage **)& _state.value .value .slowMAState);
@@ -32369,7 +32369,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int macdExtStateSave( struct TA_macdExt_State* _state,
+   public RetCode macdExtStateSave( struct TA_macdExt_State* _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -32409,7 +32409,7 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return 0;
    }
-   public int macdExtStateLoad( struct TA_macdExt_State** _state,
+   public RetCode macdExtStateLoad( struct TA_macdExt_State** _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -32602,7 +32602,7 @@ public class Core {
          outMACDSignal,
          outMACDHist );
    }
-   public int macdFixStateInit( struct TA_macdFix_State** _state,
+   public RetCode macdFixStateInit( struct TA_macdFix_State** _state,
       int optInSignalPeriod )
    {
       return TA_INT_MACD_StateInit ((struct macd **) _state,
@@ -32610,7 +32610,7 @@ public class Core {
          0,
          optInSignalPeriod);
    }
-   public int macdFixState( struct TA_macdFix_State* _state,
+   public RetCode macdFixState( struct TA_macdFix_State* _state,
       double inReal,
       double *outMACD,
       double *outMACDSignal,
@@ -32618,11 +32618,11 @@ public class Core {
    {
       return macd ( (struct macd *) _state, inReal, outMACD, outMACDSignal, outMACDHist );
    }
-   public int macdFixStateFree( struct TA_macdFix_State** _state )
+   public RetCode macdFixStateFree( struct TA_macdFix_State** _state )
    {
       return macd ( (struct macd **) _state );
    }
-   public int macdFixStateSave( struct TA_macdFix_State* _state,
+   public RetCode macdFixStateSave( struct TA_macdFix_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -32643,7 +32643,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int macdFixStateLoad( struct TA_macdFix_State** _state,
+   public RetCode macdFixStateLoad( struct TA_macdFix_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -32875,7 +32875,7 @@ public class Core {
       return RetCode.Success ;
    }
    struct TA_MAMA_HILBERT_STRUCT { double []_Odd = new double[3] ; double []_Even = new double[3] ; double var; double prev_Odd; double prev_Even; double prev_input_Odd; double prev_input_Even; };
-   public int mamaStateInit( struct TA_mama_State** _state,
+   public RetCode mamaStateInit( struct TA_mama_State** _state,
       double optInFastLimit,
       double optInSlowLimit )
    {
@@ -32904,7 +32904,7 @@ public class Core {
       { _state.value .value .jQ = calloc(1, sizeof(struct TA_MAMA_HILBERT_STRUCT )); if ( _state.value .value .jQ == NULL) return RetCode.AllocErr ; } ;
       return RetCode.Success ;
    }
-   public int mamaState( struct TA_mama_State* _state,
+   public RetCode mamaState( struct TA_mama_State* _state,
       double inReal,
       double *outMAMA,
       double *outFAMA )
@@ -33034,7 +33034,7 @@ public class Core {
       else
          return RetCode.Success ;
    }
-   public int mamaStateFree( struct TA_mama_State** _state )
+   public RetCode mamaStateFree( struct TA_mama_State** _state )
    {
       { if ( _state.value .value .detrender != NULL) { free ( _state.value .value .detrender); _state.value .value .detrender = NULL; } } ;
       { if ( _state.value .value .Q1 != NULL) { free ( _state.value .value .Q1); _state.value .value .Q1 = NULL; } } ;
@@ -33047,7 +33047,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int mamaStateSave( struct TA_mama_State* _state,
+   public RetCode mamaStateSave( struct TA_mama_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -33112,7 +33112,7 @@ public class Core {
       { if ( _state.value .jQ == NULL) return RetCode.BadParam ; if (fwrite( _state.value .jQ,sizeof(struct TA_MAMA_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
       return 0;
    }
-   public int mamaStateLoad( struct TA_mama_State** _state,
+   public RetCode mamaStateLoad( struct TA_mama_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -33448,7 +33448,7 @@ public class Core {
       outNBElement.value = outputSize;
       return RetCode.Success ;
    }
-   public int movingAverageVariablePeriodStateInit( struct TA_movingAverageVariablePeriod_State** _state,
+   public RetCode movingAverageVariablePeriodStateInit( struct TA_movingAverageVariablePeriod_State** _state,
       int optInMinPeriod,
       int optInMaxPeriod,
       MAType optInMAType )
@@ -33472,7 +33472,7 @@ public class Core {
       _state.value .value .memory = NULL;
       return movingAverage ((struct movingAverage **)& _state.value .value .MAState, _state.value .value .optInMaxPeriod, _state.value .value .optInMAType );
    }
-   public int movingAverageVariablePeriodState( struct TA_movingAverageVariablePeriod_State* _state,
+   public RetCode movingAverageVariablePeriodState( struct TA_movingAverageVariablePeriod_State* _state,
       double inReal,
       double inPeriods,
       double *outReal )
@@ -33489,7 +33489,7 @@ public class Core {
       ma_state->optInTimePeriod = period;
       return movingAverage ( ma_state, inReal, outReal );
    }
-   public int movingAverageVariablePeriodStateFree( struct TA_movingAverageVariablePeriod_State** _state )
+   public RetCode movingAverageVariablePeriodStateFree( struct TA_movingAverageVariablePeriod_State** _state )
    {
       movingAverage ((struct movingAverage **)& _state.value .value .MAState);
       if (_state == NULL)
@@ -33499,7 +33499,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int movingAverageVariablePeriodStateSave( struct TA_movingAverageVariablePeriod_State* _state,
+   public RetCode movingAverageVariablePeriodStateSave( struct TA_movingAverageVariablePeriod_State* _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -33526,7 +33526,7 @@ public class Core {
       retCode = TA_MA_StateSave ( (struct movingAverage *) _state.value .MAState, _file );
       return retCode;
    }
-   public int movingAverageVariablePeriodStateLoad( struct TA_movingAverageVariablePeriod_State** _state,
+   public RetCode movingAverageVariablePeriodStateLoad( struct TA_movingAverageVariablePeriod_State** _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -33716,7 +33716,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int maxStateInit( struct TA_max_State** _state,
+   public RetCode maxStateInit( struct TA_max_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -33732,7 +33732,7 @@ public class Core {
       _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int maxState( struct TA_max_State* _state,
+   public RetCode maxState( struct TA_max_State* _state,
       double inReal,
       double *outReal )
    {
@@ -33749,7 +33749,7 @@ public class Core {
       outReal.value = _state.value .max;
       return RetCode.Success ;
    }
-   public int maxStateFree( struct TA_max_State** _state )
+   public RetCode maxStateFree( struct TA_max_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -33758,7 +33758,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int maxStateSave( struct TA_max_State* _state,
+   public RetCode maxStateSave( struct TA_max_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -33781,7 +33781,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int maxStateLoad( struct TA_max_State** _state,
+   public RetCode maxStateLoad( struct TA_max_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -33943,7 +33943,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int maxIndexStateInit( struct TA_maxIndex_State** _state,
+   public RetCode maxIndexStateInit( struct TA_maxIndex_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -33959,7 +33959,7 @@ public class Core {
       _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int maxIndexState( struct TA_maxIndex_State* _state,
+   public RetCode maxIndexState( struct TA_maxIndex_State* _state,
       double inReal,
       int *outInteger )
    {
@@ -33985,7 +33985,7 @@ public class Core {
       outInteger.value = _state.value .maxIdx;
       return RetCode.Success ;
    }
-   public int maxIndexStateFree( struct TA_maxIndex_State** _state )
+   public RetCode maxIndexStateFree( struct TA_maxIndex_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -33994,7 +33994,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int maxIndexStateSave( struct TA_maxIndex_State* _state,
+   public RetCode maxIndexStateSave( struct TA_maxIndex_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -34021,7 +34021,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int maxIndexStateLoad( struct TA_maxIndex_State** _state,
+   public RetCode maxIndexStateLoad( struct TA_maxIndex_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -34141,7 +34141,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int medPriceStateInit( struct TA_medPrice_State** _state )
+   public RetCode medPriceStateInit( struct TA_medPrice_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -34154,7 +34154,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int medPriceState( struct TA_medPrice_State* _state,
+   public RetCode medPriceState( struct TA_medPrice_State* _state,
       double inHigh,
       double inLow,
       double *outReal )
@@ -34170,7 +34170,7 @@ public class Core {
       outReal.value = (inHigh+inLow)/2.0;
       return RetCode.Success ;
    }
-   public int medPriceStateFree( struct TA_medPrice_State** _state )
+   public RetCode medPriceStateFree( struct TA_medPrice_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -34179,7 +34179,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int medPriceStateSave( struct TA_medPrice_State* _state,
+   public RetCode medPriceStateSave( struct TA_medPrice_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -34198,7 +34198,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int medPriceStateLoad( struct TA_medPrice_State** _state,
+   public RetCode medPriceStateLoad( struct TA_medPrice_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -34389,7 +34389,7 @@ public class Core {
       return RetCode.Success ;
    }
    struct TA_MFI_STATE_CIRCBUF { int idx; MoneyFlow* circbuf; int size; };
-   public int mfiStateInit( struct TA_mfi_State** _state,
+   public RetCode mfiStateInit( struct TA_mfi_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -34409,7 +34409,7 @@ public class Core {
       { _state.value .value .mflow = calloc(1, sizeof(struct TA_MFI_STATE_CIRCBUF )); if ( _state.value .value .mflow == NULL) return RetCode.AllocErr ; struct TA_MFI_STATE_CIRCBUF * buf = (struct TA_MFI_STATE_CIRCBUF *) _state.value .value .mflow; buf->idx = 0; buf->size = _state.value .value .optInTimePeriod; buf->circbuf = calloc(_state.value .value .optInTimePeriod, sizeof(MoneyFlow)); if (!buf->circbuf) return RetCode.AllocErr ;} ;
       return RetCode.Success ;
    }
-   public int mfiState( struct TA_mfi_State* _state,
+   public RetCode mfiState( struct TA_mfi_State* _state,
       double inHigh,
       double inLow,
       double inClose,
@@ -34464,7 +34464,7 @@ public class Core {
          outReal.value = 100.0*( _state.value .posSumMF/tempValue1);
       return RetCode.Success ;
    }
-   public int mfiStateFree( struct TA_mfi_State** _state )
+   public RetCode mfiStateFree( struct TA_mfi_State** _state )
    {
       { struct TA_MFI_STATE_CIRCBUF * buf = (struct TA_MFI_STATE_CIRCBUF *) _state.value .value .mflow; if (buf != NULL) { if (buf->circbuf != NULL) free(buf->circbuf); free (buf); _state.value .value .mflow = NULL; } } ;
       if (_state == NULL)
@@ -34474,7 +34474,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int mfiStateSave( struct TA_mfi_State* _state,
+   public RetCode mfiStateSave( struct TA_mfi_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -34502,7 +34502,7 @@ public class Core {
       { int io_circbuf_res; struct TA_MFI_STATE_CIRCBUF * str_circbuf = _state.value .mflow; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
       return 0;
    }
-   public int mfiStateLoad( struct TA_mfi_State** _state,
+   public RetCode mfiStateLoad( struct TA_mfi_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -34727,7 +34727,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int midPointStateInit( struct TA_midPoint_State** _state,
+   public RetCode midPointStateInit( struct TA_midPoint_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -34743,7 +34743,7 @@ public class Core {
       _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int midPointState( struct TA_midPoint_State* _state,
+   public RetCode midPointState( struct TA_midPoint_State* _state,
       double inReal,
       double *outReal )
    {
@@ -34765,7 +34765,7 @@ public class Core {
       outReal.value = ( _state.value .highest+ _state.value .lowest)/2.0;
       return RetCode.Success ;
    }
-   public int midPointStateFree( struct TA_midPoint_State** _state )
+   public RetCode midPointStateFree( struct TA_midPoint_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -34774,7 +34774,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int midPointStateSave( struct TA_midPoint_State* _state,
+   public RetCode midPointStateSave( struct TA_midPoint_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -34799,7 +34799,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int midPointStateLoad( struct TA_midPoint_State** _state,
+   public RetCode midPointStateLoad( struct TA_midPoint_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -34934,7 +34934,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int midPriceStateInit( struct TA_midPrice_State** _state,
+   public RetCode midPriceStateInit( struct TA_midPrice_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -34950,7 +34950,7 @@ public class Core {
       _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int midPriceState( struct TA_midPrice_State* _state,
+   public RetCode midPriceState( struct TA_midPrice_State* _state,
       double inHigh,
       double inLow,
       double *outReal )
@@ -34973,7 +34973,7 @@ public class Core {
       outReal.value = ( _state.value .highest+ _state.value .lowest)/2.0;
       return RetCode.Success ;
    }
-   public int midPriceStateFree( struct TA_midPrice_State** _state )
+   public RetCode midPriceStateFree( struct TA_midPrice_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -34982,7 +34982,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int midPriceStateSave( struct TA_midPrice_State* _state,
+   public RetCode midPriceStateSave( struct TA_midPrice_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -35007,7 +35007,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int midPriceStateLoad( struct TA_midPrice_State** _state,
+   public RetCode midPriceStateLoad( struct TA_midPrice_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -35158,7 +35158,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int minStateInit( struct TA_min_State** _state,
+   public RetCode minStateInit( struct TA_min_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -35174,7 +35174,7 @@ public class Core {
       _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int minState( struct TA_min_State* _state,
+   public RetCode minState( struct TA_min_State* _state,
       double inReal,
       double *outReal )
    {
@@ -35191,7 +35191,7 @@ public class Core {
       outReal.value = _state.value .min;
       return RetCode.Success ;
    }
-   public int minStateFree( struct TA_min_State** _state )
+   public RetCode minStateFree( struct TA_min_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -35200,7 +35200,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int minStateSave( struct TA_min_State* _state,
+   public RetCode minStateSave( struct TA_min_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -35223,7 +35223,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int minStateLoad( struct TA_min_State** _state,
+   public RetCode minStateLoad( struct TA_min_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -35385,7 +35385,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int minIndexStateInit( struct TA_minIndex_State** _state,
+   public RetCode minIndexStateInit( struct TA_minIndex_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -35401,7 +35401,7 @@ public class Core {
       _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int minIndexState( struct TA_minIndex_State* _state,
+   public RetCode minIndexState( struct TA_minIndex_State* _state,
       double inReal,
       int *outInteger )
    {
@@ -35427,7 +35427,7 @@ public class Core {
       outInteger.value = _state.value .minIdx;
       return RetCode.Success ;
    }
-   public int minIndexStateFree( struct TA_minIndex_State** _state )
+   public RetCode minIndexStateFree( struct TA_minIndex_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -35436,7 +35436,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int minIndexStateSave( struct TA_minIndex_State* _state,
+   public RetCode minIndexStateSave( struct TA_minIndex_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -35463,7 +35463,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int minIndexStateLoad( struct TA_minIndex_State** _state,
+   public RetCode minIndexStateLoad( struct TA_minIndex_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -35654,7 +35654,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int minMaxStateInit( struct TA_minMax_State** _state,
+   public RetCode minMaxStateInit( struct TA_minMax_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -35670,7 +35670,7 @@ public class Core {
       _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int minMaxState( struct TA_minMax_State* _state,
+   public RetCode minMaxState( struct TA_minMax_State* _state,
       double inReal,
       double *outMin,
       double *outMax )
@@ -35694,7 +35694,7 @@ public class Core {
       outMax.value = _state.value .max;
       return RetCode.Success ;
    }
-   public int minMaxStateFree( struct TA_minMax_State** _state )
+   public RetCode minMaxStateFree( struct TA_minMax_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -35703,7 +35703,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int minMaxStateSave( struct TA_minMax_State* _state,
+   public RetCode minMaxStateSave( struct TA_minMax_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -35728,7 +35728,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int minMaxStateLoad( struct TA_minMax_State** _state,
+   public RetCode minMaxStateLoad( struct TA_minMax_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -35942,7 +35942,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int minMaxIndexStateInit( struct TA_minMaxIndex_State** _state,
+   public RetCode minMaxIndexStateInit( struct TA_minMaxIndex_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -35958,7 +35958,7 @@ public class Core {
       _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int minMaxIndexState( struct TA_minMaxIndex_State* _state,
+   public RetCode minMaxIndexState( struct TA_minMaxIndex_State* _state,
       double inReal,
       int *outMinIdx,
       int *outMaxIdx )
@@ -35991,7 +35991,7 @@ public class Core {
       outMinIdx.value = _state.value .minIdx;
       return RetCode.Success ;
    }
-   public int minMaxIndexStateFree( struct TA_minMaxIndex_State** _state )
+   public RetCode minMaxIndexStateFree( struct TA_minMaxIndex_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -36000,7 +36000,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int minMaxIndexStateSave( struct TA_minMaxIndex_State* _state,
+   public RetCode minMaxIndexStateSave( struct TA_minMaxIndex_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -36031,7 +36031,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int minMaxIndexStateLoad( struct TA_minMaxIndex_State** _state,
+   public RetCode minMaxIndexStateLoad( struct TA_minMaxIndex_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -36312,7 +36312,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int minusDIStateInit( struct TA_minusDI_State** _state,
+   public RetCode minusDIStateInit( struct TA_minusDI_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -36328,7 +36328,7 @@ public class Core {
       _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int minusDIState( struct TA_minusDI_State* _state,
+   public RetCode minusDIState( struct TA_minusDI_State* _state,
       double inHigh,
       double inLow,
       double inClose,
@@ -36396,7 +36396,7 @@ public class Core {
          outReal.value = 0.0;
       return RetCode.Success ;
    }
-   public int minusDIStateFree( struct TA_minusDI_State** _state )
+   public RetCode minusDIStateFree( struct TA_minusDI_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -36405,7 +36405,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int minusDIStateSave( struct TA_minusDI_State* _state,
+   public RetCode minusDIStateSave( struct TA_minusDI_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -36436,7 +36436,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int minusDIStateLoad( struct TA_minusDI_State** _state,
+   public RetCode minusDIStateLoad( struct TA_minusDI_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -36751,7 +36751,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int minusDMStateInit( struct TA_minusDM_State** _state,
+   public RetCode minusDMStateInit( struct TA_minusDM_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -36767,7 +36767,7 @@ public class Core {
       _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int minusDMState( struct TA_minusDM_State* _state,
+   public RetCode minusDMState( struct TA_minusDM_State* _state,
       double inHigh,
       double inLow,
       double *outReal )
@@ -36818,7 +36818,7 @@ public class Core {
       outReal.value = _state.value .prevMinusDM;
       return RetCode.Success ;
    }
-   public int minusDMStateFree( struct TA_minusDM_State** _state )
+   public RetCode minusDMStateFree( struct TA_minusDM_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -36827,7 +36827,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int minusDMStateSave( struct TA_minusDM_State* _state,
+   public RetCode minusDMStateSave( struct TA_minusDM_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -36854,7 +36854,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int minusDMStateLoad( struct TA_minusDM_State** _state,
+   public RetCode minusDMStateLoad( struct TA_minusDM_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -37049,7 +37049,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int momStateInit( struct TA_mom_State** _state,
+   public RetCode momStateInit( struct TA_mom_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -37068,7 +37068,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int momState( struct TA_mom_State* _state,
+   public RetCode momState( struct TA_mom_State* _state,
       double inReal,
       double *outReal )
    {
@@ -37085,7 +37085,7 @@ public class Core {
       outReal.value = inReal - temp;
       return RetCode.Success ;
    }
-   public int momStateFree( struct TA_mom_State** _state )
+   public RetCode momStateFree( struct TA_mom_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -37094,7 +37094,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int momStateSave( struct TA_mom_State* _state,
+   public RetCode momStateSave( struct TA_mom_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -37115,7 +37115,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int momStateLoad( struct TA_mom_State** _state,
+   public RetCode momStateLoad( struct TA_mom_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -37199,7 +37199,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int multStateInit( struct TA_mult_State** _state )
+   public RetCode multStateInit( struct TA_mult_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -37212,7 +37212,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int multState( struct TA_mult_State* _state,
+   public RetCode multState( struct TA_mult_State* _state,
       double inReal0,
       double inReal1,
       double *outReal )
@@ -37228,7 +37228,7 @@ public class Core {
       outReal.value = inReal0*inReal1;
       return RetCode.Success ;
    }
-   public int multStateFree( struct TA_mult_State** _state )
+   public RetCode multStateFree( struct TA_mult_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -37237,7 +37237,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int multStateSave( struct TA_mult_State* _state,
+   public RetCode multStateSave( struct TA_mult_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -37256,7 +37256,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int multStateLoad( struct TA_mult_State** _state,
+   public RetCode multStateLoad( struct TA_mult_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -37398,7 +37398,7 @@ public class Core {
       outNBElement.value = outIdx;
       return retCode;
    }
-   public int natrStateInit( struct TA_natr_State** _state,
+   public RetCode natrStateInit( struct TA_natr_State** _state,
       int optInTimePeriod )
    {
       TA_RetCode retCode;
@@ -37425,7 +37425,7 @@ public class Core {
       return sma ( (struct sma **) & _state.value .value .StateSMA, optInTimePeriod );
       return RetCode.Success ;
    }
-   public int natrState( struct TA_natr_State* _state,
+   public RetCode natrState( struct TA_natr_State* _state,
       double inHigh,
       double inLow,
       double inClose,
@@ -37465,7 +37465,7 @@ public class Core {
       else outReal.value = 0.;
       return RetCode.Success ;
    }
-   public int natrStateFree( struct TA_natr_State** _state )
+   public RetCode natrStateFree( struct TA_natr_State** _state )
    {
       if( _state.value .value .optInTimePeriod <= 1 )
       {
@@ -37483,7 +37483,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int natrStateSave( struct TA_natr_State* _state,
+   public RetCode natrStateSave( struct TA_natr_State* _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -37513,7 +37513,7 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return 0;
    }
-   public int natrStateLoad( struct TA_natr_State** _state,
+   public RetCode natrStateLoad( struct TA_natr_State** _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -37664,14 +37664,14 @@ public class Core {
       while( startIdx <= endIdx )
       {
          if (inVolume[startIdx] < inVolume[startIdx-1])
-            prev_nvi += prev_nvi * inClose[startIdx] / inClose[startIdx-1];
+            prev_nvi *= inClose[startIdx] / inClose[startIdx-1];
          outReal[outIdx++] = prev_nvi;
          startIdx++;
       }
       outNBElement.value = outIdx;
       return TA_SUCCESS;
    }
-   public int nviStateInit( struct TA_nvi_State** _state )
+   public RetCode nviStateInit( struct TA_nvi_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -37684,7 +37684,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int nviState( struct TA_nvi_State* _state,
+   public RetCode nviState( struct TA_nvi_State* _state,
       double inClose,
       double inVolume,
       double *outReal )
@@ -37701,14 +37701,14 @@ public class Core {
       {
          _state.value .prevNVI = 100.;
       }
-      if (inVolume < _state.value .inVolume)
-         _state.value .prevNVI += _state.value .prevNVI * inClose / _state.value .inClose;
+      if (inVolume < ( _state.value .memory+_cur_idx).value .inVolume )
+         _state.value .prevNVI *= inClose / ( _state.value .memory+_cur_idx).value .inClose ;
       outReal.value = _state.value .prevNVI;
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       ( _state.value .memory+_cur_idx).value .inVolume = inVolume ;
       return RetCode.Success ;
    }
-   public int nviStateFree( struct TA_nvi_State** _state )
+   public RetCode nviStateFree( struct TA_nvi_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -37717,7 +37717,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int nviStateSave( struct TA_nvi_State* _state,
+   public RetCode nviStateSave( struct TA_nvi_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -37738,7 +37738,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int nviStateLoad( struct TA_nvi_State** _state,
+   public RetCode nviStateLoad( struct TA_nvi_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -37785,7 +37785,7 @@ public class Core {
       while( startIdx <= endIdx )
       {
          if (inVolume[startIdx] < inVolume[startIdx-1])
-            prev_nvi += prev_nvi * inClose[startIdx] / inClose[startIdx-1];
+            prev_nvi *= inClose[startIdx] / inClose[startIdx-1];
          outReal[outIdx++] = prev_nvi;
          startIdx++;
       }
@@ -37829,7 +37829,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int obvStateInit( struct TA_obv_State** _state )
+   public RetCode obvStateInit( struct TA_obv_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -37842,7 +37842,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int obvState( struct TA_obv_State* _state,
+   public RetCode obvState( struct TA_obv_State* _state,
       double inClose,
       double inVolume,
       double *outReal )
@@ -37869,7 +37869,7 @@ public class Core {
       _state.value .prevReal = inClose;
       return RetCode.Success ;
    }
-   public int obvStateFree( struct TA_obv_State** _state )
+   public RetCode obvStateFree( struct TA_obv_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -37878,7 +37878,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int obvStateSave( struct TA_obv_State* _state,
+   public RetCode obvStateSave( struct TA_obv_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -37901,7 +37901,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int obvStateLoad( struct TA_obv_State** _state,
+   public RetCode obvStateLoad( struct TA_obv_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -38117,7 +38117,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int plusDIStateInit( struct TA_plusDI_State** _state,
+   public RetCode plusDIStateInit( struct TA_plusDI_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -38133,7 +38133,7 @@ public class Core {
       _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int plusDIState( struct TA_plusDI_State* _state,
+   public RetCode plusDIState( struct TA_plusDI_State* _state,
       double inHigh,
       double inLow,
       double inClose,
@@ -38201,7 +38201,7 @@ public class Core {
          outReal.value = 0.0;
       return RetCode.Success ;
    }
-   public int plusDIStateFree( struct TA_plusDI_State** _state )
+   public RetCode plusDIStateFree( struct TA_plusDI_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -38210,7 +38210,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int plusDIStateSave( struct TA_plusDI_State* _state,
+   public RetCode plusDIStateSave( struct TA_plusDI_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -38241,7 +38241,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int plusDIStateLoad( struct TA_plusDI_State** _state,
+   public RetCode plusDIStateLoad( struct TA_plusDI_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -38556,7 +38556,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int plusDMStateInit( struct TA_plusDM_State** _state,
+   public RetCode plusDMStateInit( struct TA_plusDM_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -38572,7 +38572,7 @@ public class Core {
       _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int plusDMState( struct TA_plusDM_State* _state,
+   public RetCode plusDMState( struct TA_plusDM_State* _state,
       double inHigh,
       double inLow,
       double *outReal )
@@ -38623,7 +38623,7 @@ public class Core {
       outReal.value = _state.value .prevPlusDM;
       return RetCode.Success ;
    }
-   public int plusDMStateFree( struct TA_plusDM_State** _state )
+   public RetCode plusDMStateFree( struct TA_plusDM_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -38632,7 +38632,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int plusDMStateSave( struct TA_plusDM_State* _state,
+   public RetCode plusDMStateSave( struct TA_plusDM_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -38659,7 +38659,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int plusDMStateLoad( struct TA_plusDM_State** _state,
+   public RetCode plusDMStateLoad( struct TA_plusDM_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -38861,24 +38861,24 @@ public class Core {
          1 );
       return retCode;
    }
-   public int ppoStateInit( struct TA_ppo_State** _state,
+   public RetCode ppoStateInit( struct TA_ppo_State** _state,
       int optInFastPeriod,
       int optInSlowPeriod,
       MAType optInMAType )
    {
       return TA_INT_PO_StateInit ((struct apo **)_state, optInFastPeriod, optInSlowPeriod, optInMAType, 1);
    }
-   public int ppoState( struct TA_ppo_State* _state,
+   public RetCode ppoState( struct TA_ppo_State* _state,
       double inReal,
       double *outReal )
    {
       return apo ((struct apo *)_state, inReal, outReal);
    }
-   public int ppoStateFree( struct TA_ppo_State** _state )
+   public RetCode ppoStateFree( struct TA_ppo_State** _state )
    {
       return apo ((struct apo **)_state);
    }
-   public int ppoStateSave( struct TA_ppo_State* _state,
+   public RetCode ppoStateSave( struct TA_ppo_State* _state,
       FILE* _file )
    {
       return TA_APO_StateSave ((struct apo **)_state, _file);
@@ -38904,7 +38904,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int ppoStateLoad( struct TA_ppo_State** _state,
+   public RetCode ppoStateLoad( struct TA_ppo_State** _state,
       FILE* _file )
    {
       return TA_APO_StateLoad ((struct apo **)_state, _file);
@@ -38970,7 +38970,7 @@ public class Core {
    /* Generated */
    public int pviLookback( )
    {
-      return RetCode.Success ;
+      return 1;
    }
    public RetCode pvi( int startIdx,
       int endIdx,
@@ -38980,15 +38980,30 @@ public class Core {
       MInteger outNBElement,
       double outReal[] )
    {
+      double prev_pvi;
+      int outIdx;
       if( startIdx < 0 )
          return RetCode.OutOfRangeStartIndex ;
       if( (endIdx < 0) || (endIdx < startIdx))
          return RetCode.OutOfRangeEndIndex ;
-      *outBegIdx = 0;
-      *outNBElement = 0;
+      outBegIdx.value = 0 ;
+      outNBElement.value = 0 ;
+      if( startIdx < 1 )
+         startIdx = 1;
+      outIdx = 0;
+      prev_pvi = 100.;
+      outBegIdx.value = startIdx;
+      while( startIdx <= endIdx )
+      {
+         if (inVolume[startIdx] > inVolume[startIdx-1])
+            prev_pvi *= inClose[startIdx] / inClose[startIdx-1];
+         outReal[outIdx++] = prev_pvi;
+         startIdx++;
+      }
+      outNBElement.value = outIdx;
       return TA_SUCCESS;
    }
-   public int pviStateInit( struct TA_pvi_State** _state )
+   public RetCode pviStateInit( struct TA_pvi_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -39001,7 +39016,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int pviState( struct TA_pvi_State* _state,
+   public RetCode pviState( struct TA_pvi_State* _state,
       double inClose,
       double inVolume,
       double *outReal )
@@ -39014,9 +39029,18 @@ public class Core {
          ( _state.value .memory+_cur_idx).value .inClose = inClose ;
          ( _state.value .memory+_cur_idx).value .inVolume = inVolume ;
          return RetCode.NeedMoreData ; }
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .prevPVI = 100.;
+      }
+      if (inVolume > ( _state.value .memory+_cur_idx).value .inVolume )
+         _state.value .prevPVI *= inClose / ( _state.value .memory+_cur_idx).value .inClose ;
+      outReal.value = _state.value .prevPVI;
+      ( _state.value .memory+_cur_idx).value .inClose = inClose ;
+      ( _state.value .memory+_cur_idx).value .inVolume = inVolume ;
       return RetCode.Success ;
    }
-   public int pviStateFree( struct TA_pvi_State** _state )
+   public RetCode pviStateFree( struct TA_pvi_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -39025,7 +39049,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int pviStateSave( struct TA_pvi_State* _state,
+   public RetCode pviStateSave( struct TA_pvi_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -39046,7 +39070,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int pviStateLoad( struct TA_pvi_State** _state,
+   public RetCode pviStateLoad( struct TA_pvi_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -39077,12 +39101,27 @@ public class Core {
       MInteger outNBElement,
       double outReal[] )
    {
+      double prev_pvi;
+      int outIdx;
       if( startIdx < 0 )
          return RetCode.OutOfRangeStartIndex ;
       if( (endIdx < 0) || (endIdx < startIdx))
          return RetCode.OutOfRangeEndIndex ;
-      *outBegIdx = 0;
-      *outNBElement = 0;
+      outBegIdx.value = 0 ;
+      outNBElement.value = 0 ;
+      if( startIdx < 1 )
+         startIdx = 1;
+      outIdx = 0;
+      prev_pvi = 100.;
+      outBegIdx.value = startIdx;
+      while( startIdx <= endIdx )
+      {
+         if (inVolume[startIdx] > inVolume[startIdx-1])
+            prev_pvi *= inClose[startIdx] / inClose[startIdx-1];
+         outReal[outIdx++] = prev_pvi;
+         startIdx++;
+      }
+      outNBElement.value = outIdx;
       return TA_SUCCESS;
    }
    /* Generated */
@@ -39136,7 +39175,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int rocStateInit( struct TA_roc_State** _state,
+   public RetCode rocStateInit( struct TA_roc_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -39155,7 +39194,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int rocState( struct TA_roc_State* _state,
+   public RetCode rocState( struct TA_roc_State* _state,
       double inReal,
       double *outReal )
    {
@@ -39172,7 +39211,7 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
    }
-   public int rocStateFree( struct TA_roc_State** _state )
+   public RetCode rocStateFree( struct TA_roc_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -39181,7 +39220,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int rocStateSave( struct TA_roc_State* _state,
+   public RetCode rocStateSave( struct TA_roc_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -39202,7 +39241,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int rocStateLoad( struct TA_roc_State** _state,
+   public RetCode rocStateLoad( struct TA_roc_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -39318,7 +39357,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int rocPStateInit( struct TA_rocP_State** _state,
+   public RetCode rocPStateInit( struct TA_rocP_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -39337,7 +39376,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int rocPState( struct TA_rocP_State* _state,
+   public RetCode rocPState( struct TA_rocP_State* _state,
       double inReal,
       double *outReal )
    {
@@ -39354,7 +39393,7 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
    }
-   public int rocPStateFree( struct TA_rocP_State** _state )
+   public RetCode rocPStateFree( struct TA_rocP_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -39363,7 +39402,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int rocPStateSave( struct TA_rocP_State* _state,
+   public RetCode rocPStateSave( struct TA_rocP_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -39384,7 +39423,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int rocPStateLoad( struct TA_rocP_State** _state,
+   public RetCode rocPStateLoad( struct TA_rocP_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -39500,7 +39539,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int rocRStateInit( struct TA_rocR_State** _state,
+   public RetCode rocRStateInit( struct TA_rocR_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -39519,7 +39558,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int rocRState( struct TA_rocR_State* _state,
+   public RetCode rocRState( struct TA_rocR_State* _state,
       double inReal,
       double *outReal )
    {
@@ -39536,7 +39575,7 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
    }
-   public int rocRStateFree( struct TA_rocR_State** _state )
+   public RetCode rocRStateFree( struct TA_rocR_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -39545,7 +39584,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int rocRStateSave( struct TA_rocR_State* _state,
+   public RetCode rocRStateSave( struct TA_rocR_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -39566,7 +39605,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int rocRStateLoad( struct TA_rocR_State** _state,
+   public RetCode rocRStateLoad( struct TA_rocR_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -39682,7 +39721,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int rocR100StateInit( struct TA_rocR100_State** _state,
+   public RetCode rocR100StateInit( struct TA_rocR100_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -39701,7 +39740,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int rocR100State( struct TA_rocR100_State* _state,
+   public RetCode rocR100State( struct TA_rocR100_State* _state,
       double inReal,
       double *outReal )
    {
@@ -39718,7 +39757,7 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
    }
-   public int rocR100StateFree( struct TA_rocR100_State** _state )
+   public RetCode rocR100StateFree( struct TA_rocR100_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -39727,7 +39766,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int rocR100StateSave( struct TA_rocR100_State* _state,
+   public RetCode rocR100StateSave( struct TA_rocR100_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -39748,7 +39787,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int rocR100StateLoad( struct TA_rocR100_State** _state,
+   public RetCode rocR100StateLoad( struct TA_rocR100_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -39961,7 +40000,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int rsiStateInit( struct TA_rsi_State** _state,
+   public RetCode rsiStateInit( struct TA_rsi_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -39982,7 +40021,7 @@ public class Core {
          _state.value .value .MetastockMode = 0;
       return RetCode.Success ;
    }
-   public int rsiState( struct TA_rsi_State* _state,
+   public RetCode rsiState( struct TA_rsi_State* _state,
       double inReal,
       double *outReal )
    {
@@ -40029,7 +40068,7 @@ public class Core {
          outReal.value = 0.0;
       return RetCode.Success ;
    }
-   public int rsiStateFree( struct TA_rsi_State** _state )
+   public RetCode rsiStateFree( struct TA_rsi_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -40038,7 +40077,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int rsiStateSave( struct TA_rsi_State* _state,
+   public RetCode rsiStateSave( struct TA_rsi_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -40067,7 +40106,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int rsiStateLoad( struct TA_rsi_State** _state,
+   public RetCode rsiStateLoad( struct TA_rsi_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -40401,7 +40440,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int sarStateInit( struct TA_sar_State** _state,
+   public RetCode sarStateInit( struct TA_sar_State** _state,
       double optInAcceleration,
       double optInMaximum )
    {
@@ -40427,7 +40466,7 @@ public class Core {
       retCode = minusDM ( (struct minusDM **) & _state.value .value .stateMINUS_DM, 1 );
       return retCode;
    }
-   public int sarState( struct TA_sar_State* _state,
+   public RetCode sarState( struct TA_sar_State* _state,
       double inHigh,
       double inLow,
       double *outReal )
@@ -40539,7 +40578,7 @@ public class Core {
       }
       return RetCode.Success ;
    }
-   public int sarStateFree( struct TA_sar_State** _state )
+   public RetCode sarStateFree( struct TA_sar_State** _state )
    {
       TA_RetCode retCode;
       retCode = minusDM ( (struct minusDM **) & _state.value .value .stateMINUS_DM );
@@ -40551,7 +40590,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int sarStateSave( struct TA_sar_State* _state,
+   public RetCode sarStateSave( struct TA_sar_State* _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -40593,7 +40632,7 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return 0;
    }
-   public int sarStateLoad( struct TA_sar_State** _state,
+   public RetCode sarStateLoad( struct TA_sar_State** _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -41052,7 +41091,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int sarExtStateInit( struct TA_sarExt_State** _state,
+   public RetCode sarExtStateInit( struct TA_sarExt_State** _state,
       double optInStartValue,
       double optInOffsetOnReverse,
       double optInAccelerationInitLong,
@@ -41124,7 +41163,7 @@ public class Core {
          _state.value .value .stateMINUS_DM = NULL;
       return RetCode.Success ;
    }
-   public int sarExtState( struct TA_sarExt_State* _state,
+   public RetCode sarExtState( struct TA_sarExt_State* _state,
       double inHigh,
       double inLow,
       double *outReal )
@@ -41255,7 +41294,7 @@ public class Core {
       }
       return RetCode.Success ;
    }
-   public int sarExtStateFree( struct TA_sarExt_State** _state )
+   public RetCode sarExtStateFree( struct TA_sarExt_State** _state )
    {
       if ( _state.value .value .optInStartValue == 0)
       {
@@ -41270,7 +41309,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int sarExtStateSave( struct TA_sarExt_State* _state,
+   public RetCode sarExtStateSave( struct TA_sarExt_State* _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -41326,7 +41365,7 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return 0;
    }
-   public int sarExtStateLoad( struct TA_sarExt_State** _state,
+   public RetCode sarExtStateLoad( struct TA_sarExt_State** _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -41628,7 +41667,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int sinStateInit( struct TA_sin_State** _state )
+   public RetCode sinStateInit( struct TA_sin_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -41641,7 +41680,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int sinState( struct TA_sin_State* _state,
+   public RetCode sinState( struct TA_sin_State* _state,
       double inReal,
       double *outReal )
    {
@@ -41655,7 +41694,7 @@ public class Core {
       outReal.value = Math.sin (inReal);
       return RetCode.Success ;
    }
-   public int sinStateFree( struct TA_sin_State** _state )
+   public RetCode sinStateFree( struct TA_sin_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -41664,7 +41703,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int sinStateSave( struct TA_sin_State* _state,
+   public RetCode sinStateSave( struct TA_sin_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -41683,7 +41722,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int sinStateLoad( struct TA_sin_State** _state,
+   public RetCode sinStateLoad( struct TA_sin_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -41751,7 +41790,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int sinhStateInit( struct TA_sinh_State** _state )
+   public RetCode sinhStateInit( struct TA_sinh_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -41764,7 +41803,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int sinhState( struct TA_sinh_State* _state,
+   public RetCode sinhState( struct TA_sinh_State* _state,
       double inReal,
       double *outReal )
    {
@@ -41778,7 +41817,7 @@ public class Core {
       outReal.value = Math.sinh (inReal);
       return RetCode.Success ;
    }
-   public int sinhStateFree( struct TA_sinh_State** _state )
+   public RetCode sinhStateFree( struct TA_sinh_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -41787,7 +41826,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int sinhStateSave( struct TA_sinh_State* _state,
+   public RetCode sinhStateSave( struct TA_sinh_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -41806,7 +41845,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int sinhStateLoad( struct TA_sinh_State** _state,
+   public RetCode sinhStateLoad( struct TA_sinh_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -41916,7 +41955,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int smaStateInit( struct TA_sma_State** _state,
+   public RetCode smaStateInit( struct TA_sma_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -41935,7 +41974,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int smaState( struct TA_sma_State* _state,
+   public RetCode smaState( struct TA_sma_State* _state,
       double inReal,
       double *outReal )
    {
@@ -41957,7 +41996,7 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
    }
-   public int smaStateFree( struct TA_sma_State** _state )
+   public RetCode smaStateFree( struct TA_sma_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -41966,7 +42005,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int smaStateSave( struct TA_sma_State* _state,
+   public RetCode smaStateSave( struct TA_sma_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -41989,7 +42028,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int smaStateLoad( struct TA_sma_State** _state,
+   public RetCode smaStateLoad( struct TA_sma_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -42099,7 +42138,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int sqrtStateInit( struct TA_sqrt_State** _state )
+   public RetCode sqrtStateInit( struct TA_sqrt_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -42112,7 +42151,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int sqrtState( struct TA_sqrt_State* _state,
+   public RetCode sqrtState( struct TA_sqrt_State* _state,
       double inReal,
       double *outReal )
    {
@@ -42126,7 +42165,7 @@ public class Core {
       outReal.value = Math.sqrt (inReal);
       return RetCode.Success ;
    }
-   public int sqrtStateFree( struct TA_sqrt_State** _state )
+   public RetCode sqrtStateFree( struct TA_sqrt_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -42135,7 +42174,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int sqrtStateSave( struct TA_sqrt_State* _state,
+   public RetCode sqrtStateSave( struct TA_sqrt_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -42154,7 +42193,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int sqrtStateLoad( struct TA_sqrt_State** _state,
+   public RetCode sqrtStateLoad( struct TA_sqrt_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -42300,7 +42339,7 @@ public class Core {
             output[outIdx] = (double)0.0;
       }
    }
-   public int stdDevStateInit( struct TA_stdDev_State** _state,
+   public RetCode stdDevStateInit( struct TA_stdDev_State** _state,
       int optInTimePeriod,
       double optInNbDev )
    {
@@ -42322,7 +42361,7 @@ public class Core {
       _state.value .value .memory = NULL;
       return variance ((struct variance **)& _state.value .value .var_state, optInTimePeriod, optInNbDev);
    }
-   public int stdDevState( struct TA_stdDev_State* _state,
+   public RetCode stdDevState( struct TA_stdDev_State* _state,
       double inReal,
       double *outReal )
    {
@@ -42353,7 +42392,7 @@ public class Core {
       }
       return RetCode.Success ;
    }
-   public int stdDevStateFree( struct TA_stdDev_State** _state )
+   public RetCode stdDevStateFree( struct TA_stdDev_State** _state )
    {
       variance ((struct variance **)& _state.value .value .var_state);
       if (_state == NULL)
@@ -42363,7 +42402,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int stdDevStateSave( struct TA_stdDev_State* _state,
+   public RetCode stdDevStateSave( struct TA_stdDev_State* _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -42389,7 +42428,7 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return 0;
    }
-   public int stdDevStateLoad( struct TA_stdDev_State** _state,
+   public RetCode stdDevStateLoad( struct TA_stdDev_State** _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -42678,7 +42717,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int stochStateInit( struct TA_stoch_State** _state,
+   public RetCode stochStateInit( struct TA_stoch_State** _state,
       int optInFastK_Period,
       int optInSlowK_Period,
       MAType optInSlowK_MAType, int optInSlowD_Period,
@@ -42718,7 +42757,7 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return RetCode.Success ;
    }
-   public int stochState( struct TA_stoch_State* _state,
+   public RetCode stochState( struct TA_stoch_State* _state,
       double inHigh,
       double inLow,
       double inClose,
@@ -42800,7 +42839,7 @@ public class Core {
       outSlowD.value = temp;
       return RetCode.Success ;
    }
-   public int stochStateFree( struct TA_stoch_State** _state )
+   public RetCode stochStateFree( struct TA_stoch_State** _state )
    {
       TA_RetCode retCode;
       retCode = movingAverage ( (struct movingAverage **) & _state.value .value .stateMA1 );
@@ -42814,7 +42853,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int stochStateSave( struct TA_stoch_State* _state,
+   public RetCode stochStateSave( struct TA_stoch_State* _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -42856,7 +42895,7 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return 0;
    }
-   public int stochStateLoad( struct TA_stoch_State** _state,
+   public RetCode stochStateLoad( struct TA_stoch_State** _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -43187,7 +43226,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int stochFStateInit( struct TA_stochF_State** _state,
+   public RetCode stochFStateInit( struct TA_stochF_State** _state,
       int optInFastK_Period,
       int optInFastD_Period,
       MAType optInFastD_MAType )
@@ -43218,7 +43257,7 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return RetCode.Success ;
    }
-   public int stochFState( struct TA_stochF_State* _state,
+   public RetCode stochFState( struct TA_stochF_State* _state,
       double inHigh,
       double inLow,
       double inClose,
@@ -43297,14 +43336,14 @@ public class Core {
       outFastD.value = temp;
       return RetCode.Success ;
    }
-   public int stochFStateFree( struct TA_stochF_State** _state )
+   public RetCode stochFStateFree( struct TA_stochF_State** _state )
    {
       TA_RetCode retCode;
       retCode = movingAverage ( (struct movingAverage **) & _state.value .value .stateMA1 );
       if (retCode != RetCode.Success ) return retCode;
       return RetCode.Success ;
    }
-   public int stochFStateSave( struct TA_stochF_State* _state,
+   public RetCode stochFStateSave( struct TA_stochF_State* _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -43312,7 +43351,7 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return 0;
    }
-   public int stochFStateLoad( struct TA_stochF_State** _state,
+   public RetCode stochFStateLoad( struct TA_stochF_State** _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -43533,7 +43572,7 @@ public class Core {
       }
       return RetCode.Success ;
    }
-   public int stochRsiStateInit( struct TA_stochRsi_State** _state,
+   public RetCode stochRsiStateInit( struct TA_stochRsi_State** _state,
       int optInTimePeriod,
       int optInFastK_Period,
       int optInFastD_Period,
@@ -43568,7 +43607,7 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return RetCode.Success ;
    }
-   public int stochRsiState( struct TA_stochRsi_State* _state,
+   public RetCode stochRsiState( struct TA_stochRsi_State* _state,
       double inReal,
       double *outFastK,
       double *outFastD )
@@ -43585,7 +43624,7 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return RetCode.Success ;
    }
-   public int stochRsiStateFree( struct TA_stochRsi_State** _state )
+   public RetCode stochRsiStateFree( struct TA_stochRsi_State** _state )
    {
       TA_RetCode retCode;
       retCode = rsi ( (struct rsi **) & _state.value .value .stateRSI );
@@ -43599,7 +43638,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int stochRsiStateSave( struct TA_stochRsi_State* _state,
+   public RetCode stochRsiStateSave( struct TA_stochRsi_State* _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -43631,7 +43670,7 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return 0;
    }
-   public int stochRsiStateLoad( struct TA_stochRsi_State** _state,
+   public RetCode stochRsiStateLoad( struct TA_stochRsi_State** _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -43773,7 +43812,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int subStateInit( struct TA_sub_State** _state )
+   public RetCode subStateInit( struct TA_sub_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -43786,7 +43825,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int subState( struct TA_sub_State* _state,
+   public RetCode subState( struct TA_sub_State* _state,
       double inReal0,
       double inReal1,
       double *outReal )
@@ -43802,7 +43841,7 @@ public class Core {
       outReal.value = inReal0-inReal1;
       return RetCode.Success ;
    }
-   public int subStateFree( struct TA_sub_State** _state )
+   public RetCode subStateFree( struct TA_sub_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -43811,7 +43850,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int subStateSave( struct TA_sub_State* _state,
+   public RetCode subStateSave( struct TA_sub_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -43830,7 +43869,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int subStateLoad( struct TA_sub_State** _state,
+   public RetCode subStateLoad( struct TA_sub_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -43929,7 +43968,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int sumStateInit( struct TA_sum_State** _state,
+   public RetCode sumStateInit( struct TA_sum_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -43948,7 +43987,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int sumState( struct TA_sum_State* _state,
+   public RetCode sumState( struct TA_sum_State* _state,
       double inReal,
       double *outReal )
    {
@@ -43972,7 +44011,7 @@ public class Core {
          return RetCode.Success ;
       }
    }
-   public int sumStateFree( struct TA_sum_State** _state )
+   public RetCode sumStateFree( struct TA_sum_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -43981,7 +44020,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int sumStateSave( struct TA_sum_State* _state,
+   public RetCode sumStateSave( struct TA_sum_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -44004,7 +44043,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int sumStateLoad( struct TA_sum_State** _state,
+   public RetCode sumStateLoad( struct TA_sum_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -44208,7 +44247,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int t3StateInit( struct TA_t3_State** _state,
+   public RetCode t3StateInit( struct TA_t3_State** _state,
       int optInTimePeriod,
       double optInVFactor )
    {
@@ -44230,7 +44269,7 @@ public class Core {
       _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int t3State( struct TA_t3_State* _state,
+   public RetCode t3State( struct TA_t3_State* _state,
       double inReal,
       double *outReal )
    {
@@ -44351,7 +44390,7 @@ public class Core {
       outReal.value = _state.value .c1* _state.value .e6+ _state.value .c2* _state.value .e5+ _state.value .c3* _state.value .e4+ _state.value .c4* _state.value .e3;
       return RetCode.Success ;
    }
-   public int t3StateFree( struct TA_t3_State** _state )
+   public RetCode t3StateFree( struct TA_t3_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -44360,7 +44399,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int t3StateSave( struct TA_t3_State* _state,
+   public RetCode t3StateSave( struct TA_t3_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -44411,7 +44450,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int t3StateLoad( struct TA_t3_State** _state,
+   public RetCode t3StateLoad( struct TA_t3_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -44608,7 +44647,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int tanStateInit( struct TA_tan_State** _state )
+   public RetCode tanStateInit( struct TA_tan_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -44621,7 +44660,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int tanState( struct TA_tan_State* _state,
+   public RetCode tanState( struct TA_tan_State* _state,
       double inReal,
       double *outReal )
    {
@@ -44635,7 +44674,7 @@ public class Core {
       outReal.value = Math.tan (inReal);
       return RetCode.Success ;
    }
-   public int tanStateFree( struct TA_tan_State** _state )
+   public RetCode tanStateFree( struct TA_tan_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -44644,7 +44683,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int tanStateSave( struct TA_tan_State* _state,
+   public RetCode tanStateSave( struct TA_tan_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -44663,7 +44702,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int tanStateLoad( struct TA_tan_State** _state,
+   public RetCode tanStateLoad( struct TA_tan_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -44731,7 +44770,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int tanhStateInit( struct TA_tanh_State** _state )
+   public RetCode tanhStateInit( struct TA_tanh_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -44744,7 +44783,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int tanhState( struct TA_tanh_State* _state,
+   public RetCode tanhState( struct TA_tanh_State* _state,
       double inReal,
       double *outReal )
    {
@@ -44758,7 +44797,7 @@ public class Core {
       outReal.value = Math.tanh (inReal);
       return RetCode.Success ;
    }
-   public int tanhStateFree( struct TA_tanh_State** _state )
+   public RetCode tanhStateFree( struct TA_tanh_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -44767,7 +44806,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int tanhStateSave( struct TA_tanh_State* _state,
+   public RetCode tanhStateSave( struct TA_tanh_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -44786,7 +44825,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int tanhStateLoad( struct TA_tanh_State** _state,
+   public RetCode tanhStateLoad( struct TA_tanh_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -44915,7 +44954,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int temaStateInit( struct TA_tema_State** _state,
+   public RetCode temaStateInit( struct TA_tema_State** _state,
       int optInTimePeriod )
    {
       int res;
@@ -44941,7 +44980,7 @@ public class Core {
       }
       return res;
    }
-   public int temaState( struct TA_tema_State* _state,
+   public RetCode temaState( struct TA_tema_State* _state,
       double inReal,
       double *outReal )
    {
@@ -44963,7 +45002,7 @@ public class Core {
       outReal.value = (3.0*ema) - (3.0*ema2) + ema3;
       return RetCode.Success ;
    }
-   public int temaStateFree( struct TA_tema_State** _state )
+   public RetCode temaStateFree( struct TA_tema_State** _state )
    {
       int res = ema ((struct ema **)& _state.value .value .state_EMA);
       if (res == RetCode.Success )
@@ -44981,7 +45020,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return res;
    }
-   public int temaStateSave( struct TA_tema_State* _state,
+   public RetCode temaStateSave( struct TA_tema_State* _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -45009,7 +45048,7 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return 0;
    }
-   public int temaStateLoad( struct TA_tema_State** _state,
+   public RetCode temaStateLoad( struct TA_tema_State** _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -45165,7 +45204,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int trueRangeStateInit( struct TA_trueRange_State** _state )
+   public RetCode trueRangeStateInit( struct TA_trueRange_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -45178,7 +45217,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int trueRangeState( struct TA_trueRange_State* _state,
+   public RetCode trueRangeState( struct TA_trueRange_State* _state,
       double inHigh,
       double inLow,
       double inClose,
@@ -45206,7 +45245,7 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       return RetCode.Success ;
    }
-   public int trueRangeStateFree( struct TA_trueRange_State** _state )
+   public RetCode trueRangeStateFree( struct TA_trueRange_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -45215,7 +45254,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int trueRangeStateSave( struct TA_trueRange_State* _state,
+   public RetCode trueRangeStateSave( struct TA_trueRange_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -45234,7 +45273,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int trueRangeStateLoad( struct TA_trueRange_State** _state,
+   public RetCode trueRangeStateLoad( struct TA_trueRange_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -45431,7 +45470,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int trimaStateInit( struct TA_trima_State** _state,
+   public RetCode trimaStateInit( struct TA_trima_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -45450,7 +45489,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int trimaState( struct TA_trima_State* _state,
+   public RetCode trimaState( struct TA_trima_State* _state,
       double inReal,
       double *outReal )
    {
@@ -45518,7 +45557,7 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
    }
-   public int trimaStateFree( struct TA_trima_State** _state )
+   public RetCode trimaStateFree( struct TA_trima_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -45527,7 +45566,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int trimaStateSave( struct TA_trima_State* _state,
+   public RetCode trimaStateSave( struct TA_trima_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -45558,7 +45597,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int trimaStateLoad( struct TA_trima_State** _state,
+   public RetCode trimaStateLoad( struct TA_trima_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -45809,7 +45848,7 @@ public class Core {
       }
       return RetCode.Success ;
    }
-   public int trixStateInit( struct TA_trix_State** _state,
+   public RetCode trixStateInit( struct TA_trix_State** _state,
       int optInTimePeriod )
    {
       TA_RetCode retCode;
@@ -45836,7 +45875,7 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return RetCode.Success ;
    }
-   public int trixState( struct TA_trix_State* _state,
+   public RetCode trixState( struct TA_trix_State* _state,
       double inReal,
       double *outReal )
    {
@@ -45857,7 +45896,7 @@ public class Core {
       outReal.value = tempReal;
       return RetCode.Success ;
    }
-   public int trixStateFree( struct TA_trix_State** _state )
+   public RetCode trixStateFree( struct TA_trix_State** _state )
    {
       TA_RetCode retCode;
       retCode = ema ( (struct ema **) & _state.value .value .stateEMA1 );
@@ -45875,7 +45914,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int trixStateSave( struct TA_trix_State* _state,
+   public RetCode trixStateSave( struct TA_trix_State* _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -45905,7 +45944,7 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return 0;
    }
-   public int trixStateLoad( struct TA_trix_State** _state,
+   public RetCode trixStateLoad( struct TA_trix_State** _state,
       FILE* _file )
    {
       TA_RetCode retCode;
@@ -46085,7 +46124,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int tsfStateInit( struct TA_tsf_State** _state,
+   public RetCode tsfStateInit( struct TA_tsf_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -46104,7 +46143,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int tsfState( struct TA_tsf_State* _state,
+   public RetCode tsfState( struct TA_tsf_State* _state,
       double inReal,
       double *outReal )
    {
@@ -46142,7 +46181,7 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
    }
-   public int tsfStateFree( struct TA_tsf_State** _state )
+   public RetCode tsfStateFree( struct TA_tsf_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -46151,7 +46190,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int tsfStateSave( struct TA_tsf_State* _state,
+   public RetCode tsfStateSave( struct TA_tsf_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -46182,7 +46221,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int tsfStateLoad( struct TA_tsf_State** _state,
+   public RetCode tsfStateLoad( struct TA_tsf_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -46299,7 +46338,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int typPriceStateInit( struct TA_typPrice_State** _state )
+   public RetCode typPriceStateInit( struct TA_typPrice_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -46312,7 +46351,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int typPriceState( struct TA_typPrice_State* _state,
+   public RetCode typPriceState( struct TA_typPrice_State* _state,
       double inHigh,
       double inLow,
       double inClose,
@@ -46330,7 +46369,7 @@ public class Core {
       outReal.value = ( inHigh + inLow + inClose ) / 3.0;
       return RetCode.Success ;
    }
-   public int typPriceStateFree( struct TA_typPrice_State** _state )
+   public RetCode typPriceStateFree( struct TA_typPrice_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -46339,7 +46378,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int typPriceStateSave( struct TA_typPrice_State* _state,
+   public RetCode typPriceStateSave( struct TA_typPrice_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -46358,7 +46397,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int typPriceStateLoad( struct TA_typPrice_State** _state,
+   public RetCode typPriceStateLoad( struct TA_typPrice_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -46535,7 +46574,7 @@ public class Core {
       return RetCode.Success ;
    }
    struct TA_ULTOSC_STATE_CIRCBUF { int idx; double* circbuf; int size; };
-   public int ultOscStateInit( struct TA_ultOsc_State** _state,
+   public RetCode ultOscStateInit( struct TA_ultOsc_State** _state,
       int optInTimePeriod1,
       int optInTimePeriod2,
       int optInTimePeriod3 )
@@ -46572,7 +46611,7 @@ public class Core {
       { _state.value .value .periodB = calloc(1, sizeof(struct TA_ULTOSC_STATE_CIRCBUF )); if ( _state.value .value .periodB == NULL) return RetCode.AllocErr ; struct TA_ULTOSC_STATE_CIRCBUF * buf = (struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .value .periodB; buf->idx = 0; buf->size = optInTimePeriod3+1; buf->circbuf = calloc(optInTimePeriod3+1, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} ;
       return RetCode.Success ;
    }
-   public int ultOscState( struct TA_ultOsc_State* _state,
+   public RetCode ultOscState( struct TA_ultOsc_State* _state,
       double inHigh,
       double inLow,
       double inClose,
@@ -46643,7 +46682,7 @@ public class Core {
          return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
-   public int ultOscStateFree( struct TA_ultOsc_State** _state )
+   public RetCode ultOscStateFree( struct TA_ultOsc_State** _state )
    {
       { struct TA_ULTOSC_STATE_CIRCBUF * buf = (struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .value .periodA; if (buf != NULL) { if (buf->circbuf != NULL) free(buf->circbuf); free (buf); _state.value .value .periodA = NULL; } } ;
       { struct TA_ULTOSC_STATE_CIRCBUF * buf = (struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .value .periodB; if (buf != NULL) { if (buf->circbuf != NULL) free(buf->circbuf); free (buf); _state.value .value .periodB = NULL; } } ;
@@ -46654,7 +46693,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int ultOscStateSave( struct TA_ultOsc_State* _state,
+   public RetCode ultOscStateSave( struct TA_ultOsc_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -46699,7 +46738,7 @@ public class Core {
       { int io_circbuf_res; struct TA_ULTOSC_STATE_CIRCBUF * str_circbuf = _state.value .periodB; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
       return 0;
    }
-   public int ultOscStateLoad( struct TA_ultOsc_State** _state,
+   public RetCode ultOscStateLoad( struct TA_ultOsc_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -46945,7 +46984,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int varianceStateInit( struct TA_variance_State** _state,
+   public RetCode varianceStateInit( struct TA_variance_State** _state,
       int optInTimePeriod,
       double optInNbDev )
    {
@@ -46970,7 +47009,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int varianceState( struct TA_variance_State* _state,
+   public RetCode varianceState( struct TA_variance_State* _state,
       double inReal,
       double *outReal )
    {
@@ -47002,7 +47041,7 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
    }
-   public int varianceStateFree( struct TA_variance_State** _state )
+   public RetCode varianceStateFree( struct TA_variance_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -47011,7 +47050,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int varianceStateSave( struct TA_variance_State* _state,
+   public RetCode varianceStateSave( struct TA_variance_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -47038,7 +47077,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int varianceStateLoad( struct TA_variance_State** _state,
+   public RetCode varianceStateLoad( struct TA_variance_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -47173,7 +47212,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int wclPriceStateInit( struct TA_wclPrice_State** _state )
+   public RetCode wclPriceStateInit( struct TA_wclPrice_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -47186,7 +47225,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int wclPriceState( struct TA_wclPrice_State* _state,
+   public RetCode wclPriceState( struct TA_wclPrice_State* _state,
       double inHigh,
       double inLow,
       double inClose,
@@ -47204,7 +47243,7 @@ public class Core {
       outReal.value = ( inHigh + inLow + (inClose*2.0) ) / 4.0;
       return RetCode.Success ;
    }
-   public int wclPriceStateFree( struct TA_wclPrice_State** _state )
+   public RetCode wclPriceStateFree( struct TA_wclPrice_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -47213,7 +47252,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int wclPriceStateSave( struct TA_wclPrice_State* _state,
+   public RetCode wclPriceStateSave( struct TA_wclPrice_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -47232,7 +47271,7 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       return 0;
    }
-   public int wclPriceStateLoad( struct TA_wclPrice_State** _state,
+   public RetCode wclPriceStateLoad( struct TA_wclPrice_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -47383,7 +47422,7 @@ public class Core {
       outNBElement.value = outIdx;
       return RetCode.Success ;
    }
-   public int willRStateInit( struct TA_willR_State** _state,
+   public RetCode willRStateInit( struct TA_willR_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -47402,7 +47441,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int willRState( struct TA_willR_State* _state,
+   public RetCode willRState( struct TA_willR_State* _state,
       double inHigh,
       double inLow,
       double inClose,
@@ -47476,7 +47515,7 @@ public class Core {
          outReal.value = 0.0;
       return RetCode.Success ;
    }
-   public int willRStateFree( struct TA_willR_State** _state )
+   public RetCode willRStateFree( struct TA_willR_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -47485,7 +47524,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int willRStateSave( struct TA_willR_State* _state,
+   public RetCode willRStateSave( struct TA_willR_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -47514,7 +47553,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int willRStateLoad( struct TA_willR_State** _state,
+   public RetCode willRStateLoad( struct TA_willR_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;
@@ -47713,7 +47752,7 @@ public class Core {
       outBegIdx.value = startIdx;
       return RetCode.Success ;
    }
-   public int wmaStateInit( struct TA_wma_State** _state,
+   public RetCode wmaStateInit( struct TA_wma_State** _state,
       int optInTimePeriod )
    {
       if (_state == NULL)
@@ -47732,7 +47771,7 @@ public class Core {
          _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
-   public int wmaState( struct TA_wma_State* _state,
+   public RetCode wmaState( struct TA_wma_State* _state,
       double inReal,
       double *outReal )
    {
@@ -47762,7 +47801,7 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
    }
-   public int wmaStateFree( struct TA_wma_State** _state )
+   public RetCode wmaStateFree( struct TA_wma_State** _state )
    {
       if (_state == NULL)
          return RetCode.BadParam ;
@@ -47771,7 +47810,7 @@ public class Core {
          TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
-   public int wmaStateSave( struct TA_wma_State* _state,
+   public RetCode wmaStateSave( struct TA_wma_State* _state,
       FILE* _file )
    {
       int io_res; int state_is_null; state_is_null = (_state == NULL);
@@ -47798,7 +47837,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
-   public int wmaStateLoad( struct TA_wma_State** _state,
+   public RetCode wmaStateLoad( struct TA_wma_State** _state,
       FILE* _file )
    {
       int io_res; int state_is_null;

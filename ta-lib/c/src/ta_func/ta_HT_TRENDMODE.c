@@ -538,13 +538,13 @@ DEFINE_HILBERT_VARIABLES_STRUCT(HT_TRENDMODE)
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtTrendModeStateInit( struct TA_HtTrendMode_State** _state )
+/* Generated */ Core::RetCode Core::HtTrendModeStateInit( struct TA_HtTrendMode_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htTrendModeStateInit( struct TA_htTrendMode_State** _state )
+/* Generated */ public RetCode htTrendModeStateInit( struct TA_htTrendMode_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_TRENDMODE_StateInit( struct TA_HT_TRENDMODE_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_TRENDMODE_StateInit( struct TA_HT_TRENDMODE_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -586,17 +586,17 @@ DEFINE_HILBERT_VARIABLES_STRUCT(HT_TRENDMODE)
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtTrendModeState( struct TA_HtTrendMode_State* _state,
-/* Generated */                           cli::array<double>^ inReal,
-/* Generated */                           cli::array<int>^  *outInteger )
+/* Generated */ Core::RetCode Core::HtTrendModeState( struct TA_HtTrendMode_State* _state,
+/* Generated */                                     cli::array<double>^ inReal,
+/* Generated */                                     cli::array<int>^  *outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htTrendModeState( struct TA_htTrendMode_State* _state,
-/* Generated */                            double       inReal,
-/* Generated */                            int           *outInteger )
+/* Generated */ public RetCode htTrendModeState( struct TA_htTrendMode_State* _state,
+/* Generated */                                double       inReal,
+/* Generated */                                int           *outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_TRENDMODE_State( struct TA_HT_TRENDMODE_State* _state,
-/* Generated */                                                const double inReal,
-/* Generated */                                                int           *outInteger )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_TRENDMODE_State( struct TA_HT_TRENDMODE_State* _state,
+/* Generated */                                                       const double inReal,
+/* Generated */                                                       int           *outInteger )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -872,13 +872,13 @@ double sine, leadSine;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtTrendModeStateFree( struct TA_HtTrendMode_State** _state )
+/* Generated */ Core::RetCode Core::HtTrendModeStateFree( struct TA_HtTrendMode_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htTrendModeStateFree( struct TA_htTrendMode_State** _state )
+/* Generated */ public RetCode htTrendModeStateFree( struct TA_htTrendMode_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_TRENDMODE_StateFree( struct TA_HT_TRENDMODE_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_TRENDMODE_StateFree( struct TA_HT_TRENDMODE_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -911,16 +911,16 @@ double sine, leadSine;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtTrendModeStateSave( struct TA_HtTrendMode_State* _state,
-/* Generated */                               FILE* _file )
+/* Generated */ Core::RetCode Core::HtTrendModeStateSave( struct TA_HtTrendMode_State* _state,
+/* Generated */                                         FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htTrendModeStateSave( struct TA_htTrendMode_State* _state,
-/* Generated */                                FILE* _file )
+/* Generated */ public RetCode htTrendModeStateSave( struct TA_htTrendMode_State* _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_TRENDMODE_StateSave( struct TA_HT_TRENDMODE_State* _state,
-/* Generated */                                                    FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_TRENDMODE_StateSave( struct TA_HT_TRENDMODE_State* _state,
+/* Generated */                                                           FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -1022,16 +1022,16 @@ double sine, leadSine;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtTrendModeStateLoad( struct TA_HtTrendMode_State** _state,
-/* Generated */                               FILE* _file )
+/* Generated */ Core::RetCode Core::HtTrendModeStateLoad( struct TA_HtTrendMode_State** _state,
+/* Generated */                                         FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htTrendModeStateLoad( struct TA_htTrendMode_State** _state,
-/* Generated */                                FILE* _file )
+/* Generated */ public RetCode htTrendModeStateLoad( struct TA_htTrendMode_State** _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_TRENDMODE_StateLoad( struct TA_HT_TRENDMODE_State** _state,
-/* Generated */                                                    FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_TRENDMODE_StateLoad( struct TA_HT_TRENDMODE_State** _state,
+/* Generated */                                                           FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

@@ -192,13 +192,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::DivStateInit( struct TA_Div_State** _state )
+/* Generated */ Core::RetCode Core::DivStateInit( struct TA_Div_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int divStateInit( struct TA_div_State** _state )
+/* Generated */ public RetCode divStateInit( struct TA_div_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_DIV_StateInit( struct TA_DIV_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_DIV_StateInit( struct TA_DIV_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -234,20 +234,20 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::DivState( struct TA_Div_State* _state,
-/* Generated */                   cli::array<double>^ inReal0,
-/* Generated */                   cli::array<double>^ inReal1,
-/* Generated */                   cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::DivState( struct TA_Div_State* _state,
+/* Generated */                             cli::array<double>^ inReal0,
+/* Generated */                             cli::array<double>^ inReal1,
+/* Generated */                             cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int divState( struct TA_div_State* _state,
-/* Generated */                    double       inReal0,
-/* Generated */                    double       inReal1,
-/* Generated */                    double        *outReal )
+/* Generated */ public RetCode divState( struct TA_div_State* _state,
+/* Generated */                        double       inReal0,
+/* Generated */                        double       inReal1,
+/* Generated */                        double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_DIV_State( struct TA_DIV_State* _state,
-/* Generated */                                       const double inReal0,
-/* Generated */                                       const double inReal1,
-/* Generated */                                       double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_DIV_State( struct TA_DIV_State* _state,
+/* Generated */                                              const double inReal0,
+/* Generated */                                              const double inReal1,
+/* Generated */                                              double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -287,13 +287,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::DivStateFree( struct TA_Div_State** _state )
+/* Generated */ Core::RetCode Core::DivStateFree( struct TA_Div_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int divStateFree( struct TA_div_State** _state )
+/* Generated */ public RetCode divStateFree( struct TA_div_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_DIV_StateFree( struct TA_DIV_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_DIV_StateFree( struct TA_DIV_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -321,16 +321,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::DivStateSave( struct TA_Div_State* _state,
-/* Generated */                       FILE* _file )
+/* Generated */ Core::RetCode Core::DivStateSave( struct TA_Div_State* _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int divStateSave( struct TA_div_State* _state,
-/* Generated */                        FILE* _file )
+/* Generated */ public RetCode divStateSave( struct TA_div_State* _state,
+/* Generated */                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_DIV_StateSave( struct TA_DIV_State* _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_DIV_StateSave( struct TA_DIV_State* _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -368,16 +368,16 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::DivStateLoad( struct TA_Div_State** _state,
-/* Generated */                       FILE* _file )
+/* Generated */ Core::RetCode Core::DivStateLoad( struct TA_Div_State** _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int divStateLoad( struct TA_div_State** _state,
-/* Generated */                        FILE* _file )
+/* Generated */ public RetCode divStateLoad( struct TA_div_State** _state,
+/* Generated */                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_DIV_StateLoad( struct TA_DIV_State** _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_DIV_StateLoad( struct TA_DIV_State** _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

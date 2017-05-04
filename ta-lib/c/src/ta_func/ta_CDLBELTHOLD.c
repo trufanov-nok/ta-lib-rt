@@ -263,13 +263,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlBeltHoldStateInit( struct TA_CdlBeltHold_State** _state )
+/* Generated */ Core::RetCode Core::CdlBeltHoldStateInit( struct TA_CdlBeltHold_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlBeltHoldStateInit( struct TA_cdlBeltHold_State** _state )
+/* Generated */ public RetCode cdlBeltHoldStateInit( struct TA_cdlBeltHold_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLBELTHOLD_StateInit( struct TA_CDLBELTHOLD_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLBELTHOLD_StateInit( struct TA_CDLBELTHOLD_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -305,26 +305,26 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlBeltHoldState( struct TA_CdlBeltHold_State* _state,
-/* Generated */                           cli::array<double>^ inOpen,
-/* Generated */                           cli::array<double>^ inHigh,
-/* Generated */                           cli::array<double>^ inLow,
-/* Generated */                           cli::array<double>^ inClose,
-/* Generated */                           cli::array<int>^  *outInteger )
+/* Generated */ Core::RetCode Core::CdlBeltHoldState( struct TA_CdlBeltHold_State* _state,
+/* Generated */                                     cli::array<double>^ inOpen,
+/* Generated */                                     cli::array<double>^ inHigh,
+/* Generated */                                     cli::array<double>^ inLow,
+/* Generated */                                     cli::array<double>^ inClose,
+/* Generated */                                     cli::array<int>^  *outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlBeltHoldState( struct TA_cdlBeltHold_State* _state,
-/* Generated */                            double       inOpen,
-/* Generated */                            double       inHigh,
-/* Generated */                            double       inLow,
-/* Generated */                            double       inClose,
-/* Generated */                            int           *outInteger )
+/* Generated */ public RetCode cdlBeltHoldState( struct TA_cdlBeltHold_State* _state,
+/* Generated */                                double       inOpen,
+/* Generated */                                double       inHigh,
+/* Generated */                                double       inLow,
+/* Generated */                                double       inClose,
+/* Generated */                                int           *outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLBELTHOLD_State( struct TA_CDLBELTHOLD_State* _state,
-/* Generated */                                               const double inOpen,
-/* Generated */                                               const double inHigh,
-/* Generated */                                               const double inLow,
-/* Generated */                                               const double inClose,
-/* Generated */                                               int           *outInteger )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLBELTHOLD_State( struct TA_CDLBELTHOLD_State* _state,
+/* Generated */                                                      const double inOpen,
+/* Generated */                                                      const double inHigh,
+/* Generated */                                                      const double inLow,
+/* Generated */                                                      const double inClose,
+/* Generated */                                                      int           *outInteger )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -429,13 +429,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlBeltHoldStateFree( struct TA_CdlBeltHold_State** _state )
+/* Generated */ Core::RetCode Core::CdlBeltHoldStateFree( struct TA_CdlBeltHold_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlBeltHoldStateFree( struct TA_cdlBeltHold_State** _state )
+/* Generated */ public RetCode cdlBeltHoldStateFree( struct TA_cdlBeltHold_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLBELTHOLD_StateFree( struct TA_CDLBELTHOLD_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLBELTHOLD_StateFree( struct TA_CDLBELTHOLD_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -463,16 +463,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlBeltHoldStateSave( struct TA_CdlBeltHold_State* _state,
-/* Generated */                               FILE* _file )
+/* Generated */ Core::RetCode Core::CdlBeltHoldStateSave( struct TA_CdlBeltHold_State* _state,
+/* Generated */                                         FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlBeltHoldStateSave( struct TA_cdlBeltHold_State* _state,
-/* Generated */                                FILE* _file )
+/* Generated */ public RetCode cdlBeltHoldStateSave( struct TA_cdlBeltHold_State* _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLBELTHOLD_StateSave( struct TA_CDLBELTHOLD_State* _state,
-/* Generated */                                                   FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLBELTHOLD_StateSave( struct TA_CDLBELTHOLD_State* _state,
+/* Generated */                                                          FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -522,16 +522,16 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlBeltHoldStateLoad( struct TA_CdlBeltHold_State** _state,
-/* Generated */                               FILE* _file )
+/* Generated */ Core::RetCode Core::CdlBeltHoldStateLoad( struct TA_CdlBeltHold_State** _state,
+/* Generated */                                         FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlBeltHoldStateLoad( struct TA_cdlBeltHold_State** _state,
-/* Generated */                                FILE* _file )
+/* Generated */ public RetCode cdlBeltHoldStateLoad( struct TA_cdlBeltHold_State** _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLBELTHOLD_StateLoad( struct TA_CDLBELTHOLD_State** _state,
-/* Generated */                                                   FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLBELTHOLD_StateLoad( struct TA_CDLBELTHOLD_State** _state,
+/* Generated */                                                          FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

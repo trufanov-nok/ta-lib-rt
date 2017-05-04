@@ -273,13 +273,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlCounterAttackStateInit( struct TA_CdlCounterAttack_State** _state )
+/* Generated */ Core::RetCode Core::CdlCounterAttackStateInit( struct TA_CdlCounterAttack_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlCounterAttackStateInit( struct TA_cdlCounterAttack_State** _state )
+/* Generated */ public RetCode cdlCounterAttackStateInit( struct TA_cdlCounterAttack_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLCOUNTERATTACK_StateInit( struct TA_CDLCOUNTERATTACK_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLCOUNTERATTACK_StateInit( struct TA_CDLCOUNTERATTACK_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -315,26 +315,26 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlCounterAttackState( struct TA_CdlCounterAttack_State* _state,
-/* Generated */                                cli::array<double>^ inOpen,
-/* Generated */                                cli::array<double>^ inHigh,
-/* Generated */                                cli::array<double>^ inLow,
-/* Generated */                                cli::array<double>^ inClose,
-/* Generated */                                cli::array<int>^  *outInteger )
+/* Generated */ Core::RetCode Core::CdlCounterAttackState( struct TA_CdlCounterAttack_State* _state,
+/* Generated */                                          cli::array<double>^ inOpen,
+/* Generated */                                          cli::array<double>^ inHigh,
+/* Generated */                                          cli::array<double>^ inLow,
+/* Generated */                                          cli::array<double>^ inClose,
+/* Generated */                                          cli::array<int>^  *outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlCounterAttackState( struct TA_cdlCounterAttack_State* _state,
-/* Generated */                                 double       inOpen,
-/* Generated */                                 double       inHigh,
-/* Generated */                                 double       inLow,
-/* Generated */                                 double       inClose,
-/* Generated */                                 int           *outInteger )
+/* Generated */ public RetCode cdlCounterAttackState( struct TA_cdlCounterAttack_State* _state,
+/* Generated */                                     double       inOpen,
+/* Generated */                                     double       inHigh,
+/* Generated */                                     double       inLow,
+/* Generated */                                     double       inClose,
+/* Generated */                                     int           *outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLCOUNTERATTACK_State( struct TA_CDLCOUNTERATTACK_State* _state,
-/* Generated */                                                    const double inOpen,
-/* Generated */                                                    const double inHigh,
-/* Generated */                                                    const double inLow,
-/* Generated */                                                    const double inClose,
-/* Generated */                                                    int           *outInteger )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLCOUNTERATTACK_State( struct TA_CDLCOUNTERATTACK_State* _state,
+/* Generated */                                                           const double inOpen,
+/* Generated */                                                           const double inHigh,
+/* Generated */                                                           const double inLow,
+/* Generated */                                                           const double inClose,
+/* Generated */                                                           int           *outInteger )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -432,13 +432,13 @@ unsigned int i1;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlCounterAttackStateFree( struct TA_CdlCounterAttack_State** _state )
+/* Generated */ Core::RetCode Core::CdlCounterAttackStateFree( struct TA_CdlCounterAttack_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlCounterAttackStateFree( struct TA_cdlCounterAttack_State** _state )
+/* Generated */ public RetCode cdlCounterAttackStateFree( struct TA_cdlCounterAttack_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLCOUNTERATTACK_StateFree( struct TA_CDLCOUNTERATTACK_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLCOUNTERATTACK_StateFree( struct TA_CDLCOUNTERATTACK_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -466,16 +466,16 @@ unsigned int i1;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlCounterAttackStateSave( struct TA_CdlCounterAttack_State* _state,
-/* Generated */                                    FILE* _file )
+/* Generated */ Core::RetCode Core::CdlCounterAttackStateSave( struct TA_CdlCounterAttack_State* _state,
+/* Generated */                                              FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlCounterAttackStateSave( struct TA_cdlCounterAttack_State* _state,
-/* Generated */                                     FILE* _file )
+/* Generated */ public RetCode cdlCounterAttackStateSave( struct TA_cdlCounterAttack_State* _state,
+/* Generated */                                         FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLCOUNTERATTACK_StateSave( struct TA_CDLCOUNTERATTACK_State* _state,
-/* Generated */                                                        FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLCOUNTERATTACK_StateSave( struct TA_CDLCOUNTERATTACK_State* _state,
+/* Generated */                                                               FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -527,16 +527,16 @@ unsigned int i1;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlCounterAttackStateLoad( struct TA_CdlCounterAttack_State** _state,
-/* Generated */                                    FILE* _file )
+/* Generated */ Core::RetCode Core::CdlCounterAttackStateLoad( struct TA_CdlCounterAttack_State** _state,
+/* Generated */                                              FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlCounterAttackStateLoad( struct TA_cdlCounterAttack_State** _state,
-/* Generated */                                     FILE* _file )
+/* Generated */ public RetCode cdlCounterAttackStateLoad( struct TA_cdlCounterAttack_State** _state,
+/* Generated */                                         FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLCOUNTERATTACK_StateLoad( struct TA_CDLCOUNTERATTACK_State** _state,
-/* Generated */                                                        FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLCOUNTERATTACK_StateLoad( struct TA_CDLCOUNTERATTACK_State** _state,
+/* Generated */                                                               FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

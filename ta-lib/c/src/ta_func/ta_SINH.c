@@ -187,13 +187,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::SinhStateInit( struct TA_Sinh_State** _state )
+/* Generated */ Core::RetCode Core::SinhStateInit( struct TA_Sinh_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int sinhStateInit( struct TA_sinh_State** _state )
+/* Generated */ public RetCode sinhStateInit( struct TA_sinh_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_SINH_StateInit( struct TA_SINH_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_SINH_StateInit( struct TA_SINH_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -229,17 +229,17 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::SinhState( struct TA_Sinh_State* _state,
-/* Generated */                    cli::array<double>^ inReal,
-/* Generated */                    cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::SinhState( struct TA_Sinh_State* _state,
+/* Generated */                              cli::array<double>^ inReal,
+/* Generated */                              cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int sinhState( struct TA_sinh_State* _state,
-/* Generated */                     double       inReal,
-/* Generated */                     double        *outReal )
+/* Generated */ public RetCode sinhState( struct TA_sinh_State* _state,
+/* Generated */                         double       inReal,
+/* Generated */                         double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_SINH_State( struct TA_SINH_State* _state,
-/* Generated */                                        const double inReal,
-/* Generated */                                        double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_SINH_State( struct TA_SINH_State* _state,
+/* Generated */                                               const double inReal,
+/* Generated */                                               double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -278,13 +278,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::SinhStateFree( struct TA_Sinh_State** _state )
+/* Generated */ Core::RetCode Core::SinhStateFree( struct TA_Sinh_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int sinhStateFree( struct TA_sinh_State** _state )
+/* Generated */ public RetCode sinhStateFree( struct TA_sinh_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_SINH_StateFree( struct TA_SINH_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_SINH_StateFree( struct TA_SINH_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -312,16 +312,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::SinhStateSave( struct TA_Sinh_State* _state,
-/* Generated */                        FILE* _file )
+/* Generated */ Core::RetCode Core::SinhStateSave( struct TA_Sinh_State* _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int sinhStateSave( struct TA_sinh_State* _state,
-/* Generated */                         FILE* _file )
+/* Generated */ public RetCode sinhStateSave( struct TA_sinh_State* _state,
+/* Generated */                             FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_SINH_StateSave( struct TA_SINH_State* _state,
-/* Generated */                                            FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_SINH_StateSave( struct TA_SINH_State* _state,
+/* Generated */                                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -359,16 +359,16 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::SinhStateLoad( struct TA_Sinh_State** _state,
-/* Generated */                        FILE* _file )
+/* Generated */ Core::RetCode Core::SinhStateLoad( struct TA_Sinh_State** _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int sinhStateLoad( struct TA_sinh_State** _state,
-/* Generated */                         FILE* _file )
+/* Generated */ public RetCode sinhStateLoad( struct TA_sinh_State** _state,
+/* Generated */                             FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_SINH_StateLoad( struct TA_SINH_State** _state,
-/* Generated */                                            FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_SINH_StateLoad( struct TA_SINH_State** _state,
+/* Generated */                                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

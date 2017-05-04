@@ -256,16 +256,16 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MidPointStateInit( struct TA_MidPoint_State** _state,
-/* Generated */                            int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ Core::RetCode Core::MidPointStateInit( struct TA_MidPoint_State** _state,
+/* Generated */                                      int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int midPointStateInit( struct TA_midPoint_State** _state,
-/* Generated */                             int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ public RetCode midPointStateInit( struct TA_midPoint_State** _state,
+/* Generated */                                 int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MIDPOINT_StateInit( struct TA_MIDPOINT_State** _state,
-/* Generated */                                                int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_MIDPOINT_StateInit( struct TA_MIDPOINT_State** _state,
+/* Generated */                                                       int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -308,17 +308,17 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MidPointState( struct TA_MidPoint_State* _state,
-/* Generated */                        cli::array<double>^ inReal,
-/* Generated */                        cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::MidPointState( struct TA_MidPoint_State* _state,
+/* Generated */                                  cli::array<double>^ inReal,
+/* Generated */                                  cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int midPointState( struct TA_midPoint_State* _state,
-/* Generated */                         double       inReal,
-/* Generated */                         double        *outReal )
+/* Generated */ public RetCode midPointState( struct TA_midPoint_State* _state,
+/* Generated */                             double       inReal,
+/* Generated */                             double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MIDPOINT_State( struct TA_MIDPOINT_State* _state,
-/* Generated */                                            const double inReal,
-/* Generated */                                            double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_MIDPOINT_State( struct TA_MIDPOINT_State* _state,
+/* Generated */                                                   const double inReal,
+/* Generated */                                                   double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -370,13 +370,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MidPointStateFree( struct TA_MidPoint_State** _state )
+/* Generated */ Core::RetCode Core::MidPointStateFree( struct TA_MidPoint_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int midPointStateFree( struct TA_midPoint_State** _state )
+/* Generated */ public RetCode midPointStateFree( struct TA_midPoint_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MIDPOINT_StateFree( struct TA_MIDPOINT_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_MIDPOINT_StateFree( struct TA_MIDPOINT_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -404,16 +404,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MidPointStateSave( struct TA_MidPoint_State* _state,
-/* Generated */                            FILE* _file )
+/* Generated */ Core::RetCode Core::MidPointStateSave( struct TA_MidPoint_State* _state,
+/* Generated */                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int midPointStateSave( struct TA_midPoint_State* _state,
-/* Generated */                             FILE* _file )
+/* Generated */ public RetCode midPointStateSave( struct TA_midPoint_State* _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MIDPOINT_StateSave( struct TA_MIDPOINT_State* _state,
-/* Generated */                                                FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MIDPOINT_StateSave( struct TA_MIDPOINT_State* _state,
+/* Generated */                                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -457,16 +457,16 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MidPointStateLoad( struct TA_MidPoint_State** _state,
-/* Generated */                            FILE* _file )
+/* Generated */ Core::RetCode Core::MidPointStateLoad( struct TA_MidPoint_State** _state,
+/* Generated */                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int midPointStateLoad( struct TA_midPoint_State** _state,
-/* Generated */                             FILE* _file )
+/* Generated */ public RetCode midPointStateLoad( struct TA_midPoint_State** _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MIDPOINT_StateLoad( struct TA_MIDPOINT_State** _state,
-/* Generated */                                                FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MIDPOINT_StateLoad( struct TA_MIDPOINT_State** _state,
+/* Generated */                                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

@@ -337,19 +337,19 @@ TA_RetCode TA_PREFIX(INT_VAR)( int    startIdx,
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::VarianceStateInit( struct TA_Variance_State** _state,
-/* Generated */                            int           optInTimePeriod, /* From 1 to 100000 */
-/* Generated */                            double        optInNbDev )  /* From TA_REAL_MIN to TA_REAL_MAX */
+/* Generated */ Core::RetCode Core::VarianceStateInit( struct TA_Variance_State** _state,
+/* Generated */                                      int           optInTimePeriod, /* From 1 to 100000 */
+/* Generated */                                      double        optInNbDev )  /* From TA_REAL_MIN to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int varianceStateInit( struct TA_variance_State** _state,
-/* Generated */                             int           optInTimePeriod, /* From 1 to 100000 */
-/* Generated */                             double        optInNbDev )  /* From TA_REAL_MIN to TA_REAL_MAX */
+/* Generated */ public RetCode varianceStateInit( struct TA_variance_State** _state,
+/* Generated */                                 int           optInTimePeriod, /* From 1 to 100000 */
+/* Generated */                                 double        optInNbDev )  /* From TA_REAL_MIN to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_VAR_StateInit( struct TA_VAR_State** _state,
-/* Generated */                                           int           optInTimePeriod, /* From 1 to 100000 */
-/* Generated */                                           double        optInNbDev )  /* From TA_REAL_MIN to TA_REAL_MAX */
+/* Generated */ TA_LIB_API TA_RetCode TA_VAR_StateInit( struct TA_VAR_State** _state,
+/* Generated */                                                  int           optInTimePeriod, /* From 1 to 100000 */
+/* Generated */                                                  double        optInNbDev )  /* From TA_REAL_MIN to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -398,17 +398,17 @@ TA_RetCode TA_PREFIX(INT_VAR)( int    startIdx,
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::VarianceState( struct TA_Variance_State* _state,
-/* Generated */                        cli::array<double>^ inReal,
-/* Generated */                        cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::VarianceState( struct TA_Variance_State* _state,
+/* Generated */                                  cli::array<double>^ inReal,
+/* Generated */                                  cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int varianceState( struct TA_variance_State* _state,
-/* Generated */                         double       inReal,
-/* Generated */                         double        *outReal )
+/* Generated */ public RetCode varianceState( struct TA_variance_State* _state,
+/* Generated */                             double       inReal,
+/* Generated */                             double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_VAR_State( struct TA_VAR_State* _state,
-/* Generated */                                       const double inReal,
-/* Generated */                                       double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_VAR_State( struct TA_VAR_State* _state,
+/* Generated */                                              const double inReal,
+/* Generated */                                              double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -476,13 +476,13 @@ TA_RetCode TA_PREFIX(INT_VAR)( int    startIdx,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::VarianceStateFree( struct TA_Variance_State** _state )
+/* Generated */ Core::RetCode Core::VarianceStateFree( struct TA_Variance_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int varianceStateFree( struct TA_variance_State** _state )
+/* Generated */ public RetCode varianceStateFree( struct TA_variance_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_VAR_StateFree( struct TA_VAR_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_VAR_StateFree( struct TA_VAR_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -510,16 +510,16 @@ TA_RetCode TA_PREFIX(INT_VAR)( int    startIdx,
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::VarianceStateSave( struct TA_Variance_State* _state,
-/* Generated */                            FILE* _file )
+/* Generated */ Core::RetCode Core::VarianceStateSave( struct TA_Variance_State* _state,
+/* Generated */                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int varianceStateSave( struct TA_variance_State* _state,
-/* Generated */                             FILE* _file )
+/* Generated */ public RetCode varianceStateSave( struct TA_variance_State* _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_VAR_StateSave( struct TA_VAR_State* _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_VAR_StateSave( struct TA_VAR_State* _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -565,16 +565,16 @@ TA_RetCode TA_PREFIX(INT_VAR)( int    startIdx,
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::VarianceStateLoad( struct TA_Variance_State** _state,
-/* Generated */                            FILE* _file )
+/* Generated */ Core::RetCode Core::VarianceStateLoad( struct TA_Variance_State** _state,
+/* Generated */                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int varianceStateLoad( struct TA_variance_State** _state,
-/* Generated */                             FILE* _file )
+/* Generated */ public RetCode varianceStateLoad( struct TA_variance_State** _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_VAR_StateLoad( struct TA_VAR_State** _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_VAR_StateLoad( struct TA_VAR_State** _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

@@ -268,17 +268,17 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MinStateInit( struct TA_Min_State** _state,
-/* Generated */                       int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ Core::RetCode Core::MinStateInit( struct TA_Min_State** _state,
+/* Generated */                                 int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ #undef min
-/* Generated */ public int minStateInit( struct TA_min_State** _state,
-/* Generated */                        int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ public RetCode minStateInit( struct TA_min_State** _state,
+/* Generated */                            int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MIN_StateInit( struct TA_MIN_State** _state,
-/* Generated */                                           int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_MIN_StateInit( struct TA_MIN_State** _state,
+/* Generated */                                                  int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -321,18 +321,18 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MinState( struct TA_Min_State* _state,
-/* Generated */                   cli::array<double>^ inReal,
-/* Generated */                   cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::MinState( struct TA_Min_State* _state,
+/* Generated */                             cli::array<double>^ inReal,
+/* Generated */                             cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ #undef min
-/* Generated */ public int minState( struct TA_min_State* _state,
-/* Generated */                    double       inReal,
-/* Generated */                    double        *outReal )
+/* Generated */ public RetCode minState( struct TA_min_State* _state,
+/* Generated */                        double       inReal,
+/* Generated */                        double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MIN_State( struct TA_MIN_State* _state,
-/* Generated */                                       const double inReal,
-/* Generated */                                       double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_MIN_State( struct TA_MIN_State* _state,
+/* Generated */                                              const double inReal,
+/* Generated */                                              double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -380,14 +380,14 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MinStateFree( struct TA_Min_State** _state )
+/* Generated */ Core::RetCode Core::MinStateFree( struct TA_Min_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ #undef min
-/* Generated */ public int minStateFree( struct TA_min_State** _state )
+/* Generated */ public RetCode minStateFree( struct TA_min_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MIN_StateFree( struct TA_MIN_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_MIN_StateFree( struct TA_MIN_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -415,17 +415,17 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MinStateSave( struct TA_Min_State* _state,
-/* Generated */                       FILE* _file )
+/* Generated */ Core::RetCode Core::MinStateSave( struct TA_Min_State* _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ #undef min
-/* Generated */ public int minStateSave( struct TA_min_State* _state,
-/* Generated */                        FILE* _file )
+/* Generated */ public RetCode minStateSave( struct TA_min_State* _state,
+/* Generated */                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MIN_StateSave( struct TA_MIN_State* _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MIN_StateSave( struct TA_MIN_State* _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -467,17 +467,17 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MinStateLoad( struct TA_Min_State** _state,
-/* Generated */                       FILE* _file )
+/* Generated */ Core::RetCode Core::MinStateLoad( struct TA_Min_State** _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ #undef min
-/* Generated */ public int minStateLoad( struct TA_min_State** _state,
-/* Generated */                        FILE* _file )
+/* Generated */ public RetCode minStateLoad( struct TA_min_State** _state,
+/* Generated */                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MIN_StateLoad( struct TA_MIN_State** _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MIN_StateLoad( struct TA_MIN_State** _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

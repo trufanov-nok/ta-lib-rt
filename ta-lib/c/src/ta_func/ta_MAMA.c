@@ -498,19 +498,19 @@ DEFINE_HILBERT_VARIABLES_STRUCT(MAMA)
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MamaStateInit( struct TA_Mama_State** _state,
-/* Generated */                        double        optInFastLimit, /* From 0.01 to 0.99 */
-/* Generated */                        double        optInSlowLimit )  /* From 0.01 to 0.99 */
+/* Generated */ Core::RetCode Core::MamaStateInit( struct TA_Mama_State** _state,
+/* Generated */                                  double        optInFastLimit, /* From 0.01 to 0.99 */
+/* Generated */                                  double        optInSlowLimit )  /* From 0.01 to 0.99 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int mamaStateInit( struct TA_mama_State** _state,
-/* Generated */                         double        optInFastLimit, /* From 0.01 to 0.99 */
-/* Generated */                         double        optInSlowLimit )  /* From 0.01 to 0.99 */
+/* Generated */ public RetCode mamaStateInit( struct TA_mama_State** _state,
+/* Generated */                             double        optInFastLimit, /* From 0.01 to 0.99 */
+/* Generated */                             double        optInSlowLimit )  /* From 0.01 to 0.99 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MAMA_StateInit( struct TA_MAMA_State** _state,
-/* Generated */                                            double        optInFastLimit, /* From 0.01 to 0.99 */
-/* Generated */                                            double        optInSlowLimit )  /* From 0.01 to 0.99 */
+/* Generated */ TA_LIB_API TA_RetCode TA_MAMA_StateInit( struct TA_MAMA_State** _state,
+/* Generated */                                                   double        optInFastLimit, /* From 0.01 to 0.99 */
+/* Generated */                                                   double        optInSlowLimit )  /* From 0.01 to 0.99 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -561,20 +561,20 @@ DEFINE_HILBERT_VARIABLES_STRUCT(MAMA)
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MamaState( struct TA_Mama_State* _state,
-/* Generated */                    cli::array<double>^ inReal,
-/* Generated */                    cli::array<double>^  *outMAMA,
-/* Generated */                    cli::array<double>^  *outFAMA )
+/* Generated */ Core::RetCode Core::MamaState( struct TA_Mama_State* _state,
+/* Generated */                              cli::array<double>^ inReal,
+/* Generated */                              cli::array<double>^  *outMAMA,
+/* Generated */                              cli::array<double>^  *outFAMA )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int mamaState( struct TA_mama_State* _state,
-/* Generated */                     double       inReal,
-/* Generated */                     double        *outMAMA,
-/* Generated */                     double        *outFAMA )
+/* Generated */ public RetCode mamaState( struct TA_mama_State* _state,
+/* Generated */                         double       inReal,
+/* Generated */                         double        *outMAMA,
+/* Generated */                         double        *outFAMA )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MAMA_State( struct TA_MAMA_State* _state,
-/* Generated */                                        const double inReal,
-/* Generated */                                        double        *outMAMA,
-/* Generated */                                        double        *outFAMA )
+/* Generated */ TA_LIB_API TA_RetCode TA_MAMA_State( struct TA_MAMA_State* _state,
+/* Generated */                                               const double inReal,
+/* Generated */                                               double        *outMAMA,
+/* Generated */                                               double        *outFAMA )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -784,13 +784,13 @@ DEFINE_HILBERT_VARIABLES_STRUCT(MAMA)
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MamaStateFree( struct TA_Mama_State** _state )
+/* Generated */ Core::RetCode Core::MamaStateFree( struct TA_Mama_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int mamaStateFree( struct TA_mama_State** _state )
+/* Generated */ public RetCode mamaStateFree( struct TA_mama_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MAMA_StateFree( struct TA_MAMA_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_MAMA_StateFree( struct TA_MAMA_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -821,16 +821,16 @@ DEFINE_HILBERT_VARIABLES_STRUCT(MAMA)
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MamaStateSave( struct TA_Mama_State* _state,
-/* Generated */                        FILE* _file )
+/* Generated */ Core::RetCode Core::MamaStateSave( struct TA_Mama_State* _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int mamaStateSave( struct TA_mama_State* _state,
-/* Generated */                         FILE* _file )
+/* Generated */ public RetCode mamaStateSave( struct TA_mama_State* _state,
+/* Generated */                             FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MAMA_StateSave( struct TA_MAMA_State* _state,
-/* Generated */                                            FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MAMA_StateSave( struct TA_MAMA_State* _state,
+/* Generated */                                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -918,16 +918,16 @@ DEFINE_HILBERT_VARIABLES_STRUCT(MAMA)
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MamaStateLoad( struct TA_Mama_State** _state,
-/* Generated */                        FILE* _file )
+/* Generated */ Core::RetCode Core::MamaStateLoad( struct TA_Mama_State** _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int mamaStateLoad( struct TA_mama_State** _state,
-/* Generated */                         FILE* _file )
+/* Generated */ public RetCode mamaStateLoad( struct TA_mama_State** _state,
+/* Generated */                             FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MAMA_StateLoad( struct TA_MAMA_State** _state,
-/* Generated */                                            FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MAMA_StateLoad( struct TA_MAMA_State** _state,
+/* Generated */                                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

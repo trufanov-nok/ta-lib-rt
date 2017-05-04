@@ -469,13 +469,13 @@ DEFINE_HILBERT_VARIABLES_STRUCT(HT_DCPHASE)
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtDcPhaseStateInit( struct TA_HtDcPhase_State** _state )
+/* Generated */ Core::RetCode Core::HtDcPhaseStateInit( struct TA_HtDcPhase_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htDcPhaseStateInit( struct TA_htDcPhase_State** _state )
+/* Generated */ public RetCode htDcPhaseStateInit( struct TA_htDcPhase_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_DCPHASE_StateInit( struct TA_HT_DCPHASE_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_DCPHASE_StateInit( struct TA_HT_DCPHASE_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -517,17 +517,17 @@ DEFINE_HILBERT_VARIABLES_STRUCT(HT_DCPHASE)
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtDcPhaseState( struct TA_HtDcPhase_State* _state,
-/* Generated */                         cli::array<double>^ inReal,
-/* Generated */                         cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::HtDcPhaseState( struct TA_HtDcPhase_State* _state,
+/* Generated */                                   cli::array<double>^ inReal,
+/* Generated */                                   cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htDcPhaseState( struct TA_htDcPhase_State* _state,
-/* Generated */                          double       inReal,
-/* Generated */                          double        *outReal )
+/* Generated */ public RetCode htDcPhaseState( struct TA_htDcPhase_State* _state,
+/* Generated */                              double       inReal,
+/* Generated */                              double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_DCPHASE_State( struct TA_HT_DCPHASE_State* _state,
-/* Generated */                                              const double inReal,
-/* Generated */                                              double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_DCPHASE_State( struct TA_HT_DCPHASE_State* _state,
+/* Generated */                                                     const double inReal,
+/* Generated */                                                     double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -742,13 +742,13 @@ DEFINE_HILBERT_VARIABLES_STRUCT(HT_DCPHASE)
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtDcPhaseStateFree( struct TA_HtDcPhase_State** _state )
+/* Generated */ Core::RetCode Core::HtDcPhaseStateFree( struct TA_HtDcPhase_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htDcPhaseStateFree( struct TA_htDcPhase_State** _state )
+/* Generated */ public RetCode htDcPhaseStateFree( struct TA_htDcPhase_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_DCPHASE_StateFree( struct TA_HT_DCPHASE_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_DCPHASE_StateFree( struct TA_HT_DCPHASE_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -782,16 +782,16 @@ DEFINE_HILBERT_VARIABLES_STRUCT(HT_DCPHASE)
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtDcPhaseStateSave( struct TA_HtDcPhase_State* _state,
-/* Generated */                             FILE* _file )
+/* Generated */ Core::RetCode Core::HtDcPhaseStateSave( struct TA_HtDcPhase_State* _state,
+/* Generated */                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htDcPhaseStateSave( struct TA_htDcPhase_State* _state,
-/* Generated */                              FILE* _file )
+/* Generated */ public RetCode htDcPhaseStateSave( struct TA_htDcPhase_State* _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_DCPHASE_StateSave( struct TA_HT_DCPHASE_State* _state,
-/* Generated */                                                  FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_DCPHASE_StateSave( struct TA_HT_DCPHASE_State* _state,
+/* Generated */                                                         FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -877,16 +877,16 @@ DEFINE_HILBERT_VARIABLES_STRUCT(HT_DCPHASE)
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtDcPhaseStateLoad( struct TA_HtDcPhase_State** _state,
-/* Generated */                             FILE* _file )
+/* Generated */ Core::RetCode Core::HtDcPhaseStateLoad( struct TA_HtDcPhase_State** _state,
+/* Generated */                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htDcPhaseStateLoad( struct TA_htDcPhase_State** _state,
-/* Generated */                              FILE* _file )
+/* Generated */ public RetCode htDcPhaseStateLoad( struct TA_htDcPhase_State** _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_DCPHASE_StateLoad( struct TA_HT_DCPHASE_State** _state,
-/* Generated */                                                  FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_DCPHASE_StateLoad( struct TA_HT_DCPHASE_State** _state,
+/* Generated */                                                         FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

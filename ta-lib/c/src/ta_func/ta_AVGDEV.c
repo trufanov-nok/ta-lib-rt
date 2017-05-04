@@ -232,16 +232,16 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AvgDevStateInit( struct TA_AvgDev_State** _state,
-/* Generated */                          int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ Core::RetCode Core::AvgDevStateInit( struct TA_AvgDev_State** _state,
+/* Generated */                                    int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int avgDevStateInit( struct TA_avgDev_State** _state,
-/* Generated */                           int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ public RetCode avgDevStateInit( struct TA_avgDev_State** _state,
+/* Generated */                               int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_AVGDEV_StateInit( struct TA_AVGDEV_State** _state,
-/* Generated */                                              int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_AVGDEV_StateInit( struct TA_AVGDEV_State** _state,
+/* Generated */                                                     int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -284,17 +284,17 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AvgDevState( struct TA_AvgDev_State* _state,
-/* Generated */                      cli::array<double>^ inReal,
-/* Generated */                      cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::AvgDevState( struct TA_AvgDev_State* _state,
+/* Generated */                                cli::array<double>^ inReal,
+/* Generated */                                cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int avgDevState( struct TA_avgDev_State* _state,
-/* Generated */                       double       inReal,
-/* Generated */                       double        *outReal )
+/* Generated */ public RetCode avgDevState( struct TA_avgDev_State* _state,
+/* Generated */                           double       inReal,
+/* Generated */                           double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_AVGDEV_State( struct TA_AVGDEV_State* _state,
-/* Generated */                                          const double inReal,
-/* Generated */                                          double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_AVGDEV_State( struct TA_AVGDEV_State* _state,
+/* Generated */                                                 const double inReal,
+/* Generated */                                                 double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -358,13 +358,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AvgDevStateFree( struct TA_AvgDev_State** _state )
+/* Generated */ Core::RetCode Core::AvgDevStateFree( struct TA_AvgDev_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int avgDevStateFree( struct TA_avgDev_State** _state )
+/* Generated */ public RetCode avgDevStateFree( struct TA_avgDev_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_AVGDEV_StateFree( struct TA_AVGDEV_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_AVGDEV_StateFree( struct TA_AVGDEV_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -392,16 +392,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AvgDevStateSave( struct TA_AvgDev_State* _state,
-/* Generated */                          FILE* _file )
+/* Generated */ Core::RetCode Core::AvgDevStateSave( struct TA_AvgDev_State* _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int avgDevStateSave( struct TA_avgDev_State* _state,
-/* Generated */                           FILE* _file )
+/* Generated */ public RetCode avgDevStateSave( struct TA_avgDev_State* _state,
+/* Generated */                               FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_AVGDEV_StateSave( struct TA_AVGDEV_State* _state,
-/* Generated */                                              FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_AVGDEV_StateSave( struct TA_AVGDEV_State* _state,
+/* Generated */                                                     FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -443,16 +443,16 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AvgDevStateLoad( struct TA_AvgDev_State** _state,
-/* Generated */                          FILE* _file )
+/* Generated */ Core::RetCode Core::AvgDevStateLoad( struct TA_AvgDev_State** _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int avgDevStateLoad( struct TA_avgDev_State** _state,
-/* Generated */                           FILE* _file )
+/* Generated */ public RetCode avgDevStateLoad( struct TA_avgDev_State** _state,
+/* Generated */                               FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_AVGDEV_StateLoad( struct TA_AVGDEV_State** _state,
-/* Generated */                                              FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_AVGDEV_StateLoad( struct TA_AVGDEV_State** _state,
+/* Generated */                                                     FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

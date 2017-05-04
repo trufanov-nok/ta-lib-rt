@@ -311,13 +311,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlStalledPatternStateInit( struct TA_CdlStalledPattern_State** _state )
+/* Generated */ Core::RetCode Core::CdlStalledPatternStateInit( struct TA_CdlStalledPattern_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlStalledPatternStateInit( struct TA_cdlStalledPattern_State** _state )
+/* Generated */ public RetCode cdlStalledPatternStateInit( struct TA_cdlStalledPattern_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLSTALLEDPATTERN_StateInit( struct TA_CDLSTALLEDPATTERN_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLSTALLEDPATTERN_StateInit( struct TA_CDLSTALLEDPATTERN_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -353,26 +353,26 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlStalledPatternState( struct TA_CdlStalledPattern_State* _state,
-/* Generated */                                 cli::array<double>^ inOpen,
-/* Generated */                                 cli::array<double>^ inHigh,
-/* Generated */                                 cli::array<double>^ inLow,
-/* Generated */                                 cli::array<double>^ inClose,
-/* Generated */                                 cli::array<int>^  *outInteger )
+/* Generated */ Core::RetCode Core::CdlStalledPatternState( struct TA_CdlStalledPattern_State* _state,
+/* Generated */                                           cli::array<double>^ inOpen,
+/* Generated */                                           cli::array<double>^ inHigh,
+/* Generated */                                           cli::array<double>^ inLow,
+/* Generated */                                           cli::array<double>^ inClose,
+/* Generated */                                           cli::array<int>^  *outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlStalledPatternState( struct TA_cdlStalledPattern_State* _state,
-/* Generated */                                  double       inOpen,
-/* Generated */                                  double       inHigh,
-/* Generated */                                  double       inLow,
-/* Generated */                                  double       inClose,
-/* Generated */                                  int           *outInteger )
+/* Generated */ public RetCode cdlStalledPatternState( struct TA_cdlStalledPattern_State* _state,
+/* Generated */                                      double       inOpen,
+/* Generated */                                      double       inHigh,
+/* Generated */                                      double       inLow,
+/* Generated */                                      double       inClose,
+/* Generated */                                      int           *outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLSTALLEDPATTERN_State( struct TA_CDLSTALLEDPATTERN_State* _state,
-/* Generated */                                                     const double inOpen,
-/* Generated */                                                     const double inHigh,
-/* Generated */                                                     const double inLow,
-/* Generated */                                                     const double inClose,
-/* Generated */                                                     int           *outInteger )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLSTALLEDPATTERN_State( struct TA_CDLSTALLEDPATTERN_State* _state,
+/* Generated */                                                            const double inOpen,
+/* Generated */                                                            const double inHigh,
+/* Generated */                                                            const double inLow,
+/* Generated */                                                            const double inClose,
+/* Generated */                                                            int           *outInteger )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -507,13 +507,13 @@ int i1, i2, i3;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlStalledPatternStateFree( struct TA_CdlStalledPattern_State** _state )
+/* Generated */ Core::RetCode Core::CdlStalledPatternStateFree( struct TA_CdlStalledPattern_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlStalledPatternStateFree( struct TA_cdlStalledPattern_State** _state )
+/* Generated */ public RetCode cdlStalledPatternStateFree( struct TA_cdlStalledPattern_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLSTALLEDPATTERN_StateFree( struct TA_CDLSTALLEDPATTERN_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLSTALLEDPATTERN_StateFree( struct TA_CDLSTALLEDPATTERN_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -541,16 +541,16 @@ int i1, i2, i3;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlStalledPatternStateSave( struct TA_CdlStalledPattern_State* _state,
-/* Generated */                                     FILE* _file )
+/* Generated */ Core::RetCode Core::CdlStalledPatternStateSave( struct TA_CdlStalledPattern_State* _state,
+/* Generated */                                               FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlStalledPatternStateSave( struct TA_cdlStalledPattern_State* _state,
-/* Generated */                                      FILE* _file )
+/* Generated */ public RetCode cdlStalledPatternStateSave( struct TA_cdlStalledPattern_State* _state,
+/* Generated */                                          FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLSTALLEDPATTERN_StateSave( struct TA_CDLSTALLEDPATTERN_State* _state,
-/* Generated */                                                         FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLSTALLEDPATTERN_StateSave( struct TA_CDLSTALLEDPATTERN_State* _state,
+/* Generated */                                                                FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -616,16 +616,16 @@ int i1, i2, i3;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlStalledPatternStateLoad( struct TA_CdlStalledPattern_State** _state,
-/* Generated */                                     FILE* _file )
+/* Generated */ Core::RetCode Core::CdlStalledPatternStateLoad( struct TA_CdlStalledPattern_State** _state,
+/* Generated */                                               FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlStalledPatternStateLoad( struct TA_cdlStalledPattern_State** _state,
-/* Generated */                                      FILE* _file )
+/* Generated */ public RetCode cdlStalledPatternStateLoad( struct TA_cdlStalledPattern_State** _state,
+/* Generated */                                          FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLSTALLEDPATTERN_StateLoad( struct TA_CDLSTALLEDPATTERN_State** _state,
-/* Generated */                                                         FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLSTALLEDPATTERN_StateLoad( struct TA_CDLSTALLEDPATTERN_State** _state,
+/* Generated */                                                                FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

@@ -295,16 +295,16 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MinMaxIndexStateInit( struct TA_MinMaxIndex_State** _state,
-/* Generated */                               int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ Core::RetCode Core::MinMaxIndexStateInit( struct TA_MinMaxIndex_State** _state,
+/* Generated */                                         int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int minMaxIndexStateInit( struct TA_minMaxIndex_State** _state,
-/* Generated */                                int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ public RetCode minMaxIndexStateInit( struct TA_minMaxIndex_State** _state,
+/* Generated */                                    int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MINMAXINDEX_StateInit( struct TA_MINMAXINDEX_State** _state,
-/* Generated */                                                   int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_MINMAXINDEX_StateInit( struct TA_MINMAXINDEX_State** _state,
+/* Generated */                                                          int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -347,20 +347,20 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MinMaxIndexState( struct TA_MinMaxIndex_State* _state,
-/* Generated */                           cli::array<double>^ inReal,
-/* Generated */                           cli::array<int>^  *outMinIdx,
-/* Generated */                           cli::array<int>^  *outMaxIdx )
+/* Generated */ Core::RetCode Core::MinMaxIndexState( struct TA_MinMaxIndex_State* _state,
+/* Generated */                                     cli::array<double>^ inReal,
+/* Generated */                                     cli::array<int>^  *outMinIdx,
+/* Generated */                                     cli::array<int>^  *outMaxIdx )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int minMaxIndexState( struct TA_minMaxIndex_State* _state,
-/* Generated */                            double       inReal,
-/* Generated */                            int           *outMinIdx,
-/* Generated */                            int           *outMaxIdx )
+/* Generated */ public RetCode minMaxIndexState( struct TA_minMaxIndex_State* _state,
+/* Generated */                                double       inReal,
+/* Generated */                                int           *outMinIdx,
+/* Generated */                                int           *outMaxIdx )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MINMAXINDEX_State( struct TA_MINMAXINDEX_State* _state,
-/* Generated */                                               const double inReal,
-/* Generated */                                               int           *outMinIdx,
-/* Generated */                                               int           *outMaxIdx )
+/* Generated */ TA_LIB_API TA_RetCode TA_MINMAXINDEX_State( struct TA_MINMAXINDEX_State* _state,
+/* Generated */                                                      const double inReal,
+/* Generated */                                                      int           *outMinIdx,
+/* Generated */                                                      int           *outMaxIdx )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -428,13 +428,13 @@ if (FIRST_LAUNCH)
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MinMaxIndexStateFree( struct TA_MinMaxIndex_State** _state )
+/* Generated */ Core::RetCode Core::MinMaxIndexStateFree( struct TA_MinMaxIndex_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int minMaxIndexStateFree( struct TA_minMaxIndex_State** _state )
+/* Generated */ public RetCode minMaxIndexStateFree( struct TA_minMaxIndex_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MINMAXINDEX_StateFree( struct TA_MINMAXINDEX_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_MINMAXINDEX_StateFree( struct TA_MINMAXINDEX_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -462,16 +462,16 @@ if (FIRST_LAUNCH)
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MinMaxIndexStateSave( struct TA_MinMaxIndex_State* _state,
-/* Generated */                               FILE* _file )
+/* Generated */ Core::RetCode Core::MinMaxIndexStateSave( struct TA_MinMaxIndex_State* _state,
+/* Generated */                                         FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int minMaxIndexStateSave( struct TA_minMaxIndex_State* _state,
-/* Generated */                                FILE* _file )
+/* Generated */ public RetCode minMaxIndexStateSave( struct TA_minMaxIndex_State* _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MINMAXINDEX_StateSave( struct TA_MINMAXINDEX_State* _state,
-/* Generated */                                                   FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MINMAXINDEX_StateSave( struct TA_MINMAXINDEX_State* _state,
+/* Generated */                                                          FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -521,16 +521,16 @@ if (FIRST_LAUNCH)
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MinMaxIndexStateLoad( struct TA_MinMaxIndex_State** _state,
-/* Generated */                               FILE* _file )
+/* Generated */ Core::RetCode Core::MinMaxIndexStateLoad( struct TA_MinMaxIndex_State** _state,
+/* Generated */                                         FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int minMaxIndexStateLoad( struct TA_minMaxIndex_State** _state,
-/* Generated */                                FILE* _file )
+/* Generated */ public RetCode minMaxIndexStateLoad( struct TA_minMaxIndex_State** _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MINMAXINDEX_StateLoad( struct TA_MINMAXINDEX_State** _state,
-/* Generated */                                                   FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MINMAXINDEX_StateLoad( struct TA_MINMAXINDEX_State** _state,
+/* Generated */                                                          FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

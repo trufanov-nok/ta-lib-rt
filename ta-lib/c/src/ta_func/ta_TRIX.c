@@ -312,16 +312,16 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TrixStateInit( struct TA_Trix_State** _state,
-/* Generated */                        int           optInTimePeriod )  /* From 1 to 100000 */
+/* Generated */ Core::RetCode Core::TrixStateInit( struct TA_Trix_State** _state,
+/* Generated */                                  int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int trixStateInit( struct TA_trix_State** _state,
-/* Generated */                         int           optInTimePeriod )  /* From 1 to 100000 */
+/* Generated */ public RetCode trixStateInit( struct TA_trix_State** _state,
+/* Generated */                             int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TRIX_StateInit( struct TA_TRIX_State** _state,
-/* Generated */                                            int           optInTimePeriod )  /* From 1 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_TRIX_StateInit( struct TA_TRIX_State** _state,
+/* Generated */                                                   int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -375,17 +375,17 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TrixState( struct TA_Trix_State* _state,
-/* Generated */                    cli::array<double>^ inReal,
-/* Generated */                    cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::TrixState( struct TA_Trix_State* _state,
+/* Generated */                              cli::array<double>^ inReal,
+/* Generated */                              cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int trixState( struct TA_trix_State* _state,
-/* Generated */                     double       inReal,
-/* Generated */                     double        *outReal )
+/* Generated */ public RetCode trixState( struct TA_trix_State* _state,
+/* Generated */                         double       inReal,
+/* Generated */                         double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TRIX_State( struct TA_TRIX_State* _state,
-/* Generated */                                        const double inReal,
-/* Generated */                                        double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_TRIX_State( struct TA_TRIX_State* _state,
+/* Generated */                                               const double inReal,
+/* Generated */                                               double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -435,13 +435,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TrixStateFree( struct TA_Trix_State** _state )
+/* Generated */ Core::RetCode Core::TrixStateFree( struct TA_Trix_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int trixStateFree( struct TA_trix_State** _state )
+/* Generated */ public RetCode trixStateFree( struct TA_trix_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TRIX_StateFree( struct TA_TRIX_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_TRIX_StateFree( struct TA_TRIX_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -477,16 +477,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TrixStateSave( struct TA_Trix_State* _state,
-/* Generated */                        FILE* _file )
+/* Generated */ Core::RetCode Core::TrixStateSave( struct TA_Trix_State* _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int trixStateSave( struct TA_trix_State* _state,
-/* Generated */                         FILE* _file )
+/* Generated */ public RetCode trixStateSave( struct TA_trix_State* _state,
+/* Generated */                             FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TRIX_StateSave( struct TA_TRIX_State* _state,
-/* Generated */                                            FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_TRIX_StateSave( struct TA_TRIX_State* _state,
+/* Generated */                                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -538,16 +538,16 @@ TA_RetCode retCode;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TrixStateLoad( struct TA_Trix_State** _state,
-/* Generated */                        FILE* _file )
+/* Generated */ Core::RetCode Core::TrixStateLoad( struct TA_Trix_State** _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int trixStateLoad( struct TA_trix_State** _state,
-/* Generated */                         FILE* _file )
+/* Generated */ public RetCode trixStateLoad( struct TA_trix_State** _state,
+/* Generated */                             FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TRIX_StateLoad( struct TA_TRIX_State** _state,
-/* Generated */                                            FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_TRIX_StateLoad( struct TA_TRIX_State** _state,
+/* Generated */                                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

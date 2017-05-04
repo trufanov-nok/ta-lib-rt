@@ -252,13 +252,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlMatchingLowStateInit( struct TA_CdlMatchingLow_State** _state )
+/* Generated */ Core::RetCode Core::CdlMatchingLowStateInit( struct TA_CdlMatchingLow_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlMatchingLowStateInit( struct TA_cdlMatchingLow_State** _state )
+/* Generated */ public RetCode cdlMatchingLowStateInit( struct TA_cdlMatchingLow_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLMATCHINGLOW_StateInit( struct TA_CDLMATCHINGLOW_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLMATCHINGLOW_StateInit( struct TA_CDLMATCHINGLOW_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -294,26 +294,26 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlMatchingLowState( struct TA_CdlMatchingLow_State* _state,
-/* Generated */                              cli::array<double>^ inOpen,
-/* Generated */                              cli::array<double>^ inHigh,
-/* Generated */                              cli::array<double>^ inLow,
-/* Generated */                              cli::array<double>^ inClose,
-/* Generated */                              cli::array<int>^  *outInteger )
+/* Generated */ Core::RetCode Core::CdlMatchingLowState( struct TA_CdlMatchingLow_State* _state,
+/* Generated */                                        cli::array<double>^ inOpen,
+/* Generated */                                        cli::array<double>^ inHigh,
+/* Generated */                                        cli::array<double>^ inLow,
+/* Generated */                                        cli::array<double>^ inClose,
+/* Generated */                                        cli::array<int>^  *outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlMatchingLowState( struct TA_cdlMatchingLow_State* _state,
-/* Generated */                               double       inOpen,
-/* Generated */                               double       inHigh,
-/* Generated */                               double       inLow,
-/* Generated */                               double       inClose,
-/* Generated */                               int           *outInteger )
+/* Generated */ public RetCode cdlMatchingLowState( struct TA_cdlMatchingLow_State* _state,
+/* Generated */                                   double       inOpen,
+/* Generated */                                   double       inHigh,
+/* Generated */                                   double       inLow,
+/* Generated */                                   double       inClose,
+/* Generated */                                   int           *outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLMATCHINGLOW_State( struct TA_CDLMATCHINGLOW_State* _state,
-/* Generated */                                                  const double inOpen,
-/* Generated */                                                  const double inHigh,
-/* Generated */                                                  const double inLow,
-/* Generated */                                                  const double inClose,
-/* Generated */                                                  int           *outInteger )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLMATCHINGLOW_State( struct TA_CDLMATCHINGLOW_State* _state,
+/* Generated */                                                         const double inOpen,
+/* Generated */                                                         const double inHigh,
+/* Generated */                                                         const double inLow,
+/* Generated */                                                         const double inClose,
+/* Generated */                                                         int           *outInteger )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -400,13 +400,13 @@ int i1;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlMatchingLowStateFree( struct TA_CdlMatchingLow_State** _state )
+/* Generated */ Core::RetCode Core::CdlMatchingLowStateFree( struct TA_CdlMatchingLow_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlMatchingLowStateFree( struct TA_cdlMatchingLow_State** _state )
+/* Generated */ public RetCode cdlMatchingLowStateFree( struct TA_cdlMatchingLow_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLMATCHINGLOW_StateFree( struct TA_CDLMATCHINGLOW_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLMATCHINGLOW_StateFree( struct TA_CDLMATCHINGLOW_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -434,16 +434,16 @@ int i1;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlMatchingLowStateSave( struct TA_CdlMatchingLow_State* _state,
-/* Generated */                                  FILE* _file )
+/* Generated */ Core::RetCode Core::CdlMatchingLowStateSave( struct TA_CdlMatchingLow_State* _state,
+/* Generated */                                            FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlMatchingLowStateSave( struct TA_cdlMatchingLow_State* _state,
-/* Generated */                                   FILE* _file )
+/* Generated */ public RetCode cdlMatchingLowStateSave( struct TA_cdlMatchingLow_State* _state,
+/* Generated */                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLMATCHINGLOW_StateSave( struct TA_CDLMATCHINGLOW_State* _state,
-/* Generated */                                                      FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLMATCHINGLOW_StateSave( struct TA_CDLMATCHINGLOW_State* _state,
+/* Generated */                                                             FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -487,16 +487,16 @@ int i1;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlMatchingLowStateLoad( struct TA_CdlMatchingLow_State** _state,
-/* Generated */                                  FILE* _file )
+/* Generated */ Core::RetCode Core::CdlMatchingLowStateLoad( struct TA_CdlMatchingLow_State** _state,
+/* Generated */                                            FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlMatchingLowStateLoad( struct TA_cdlMatchingLow_State** _state,
-/* Generated */                                   FILE* _file )
+/* Generated */ public RetCode cdlMatchingLowStateLoad( struct TA_cdlMatchingLow_State** _state,
+/* Generated */                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLMATCHINGLOW_StateLoad( struct TA_CDLMATCHINGLOW_State** _state,
-/* Generated */                                                      FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLMATCHINGLOW_StateLoad( struct TA_CDLMATCHINGLOW_State** _state,
+/* Generated */                                                             FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

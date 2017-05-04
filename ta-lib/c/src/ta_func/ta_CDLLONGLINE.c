@@ -259,13 +259,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlLongLineStateInit( struct TA_CdlLongLine_State** _state )
+/* Generated */ Core::RetCode Core::CdlLongLineStateInit( struct TA_CdlLongLine_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlLongLineStateInit( struct TA_cdlLongLine_State** _state )
+/* Generated */ public RetCode cdlLongLineStateInit( struct TA_cdlLongLine_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLLONGLINE_StateInit( struct TA_CDLLONGLINE_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLLONGLINE_StateInit( struct TA_CDLLONGLINE_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -301,26 +301,26 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlLongLineState( struct TA_CdlLongLine_State* _state,
-/* Generated */                           cli::array<double>^ inOpen,
-/* Generated */                           cli::array<double>^ inHigh,
-/* Generated */                           cli::array<double>^ inLow,
-/* Generated */                           cli::array<double>^ inClose,
-/* Generated */                           cli::array<int>^  *outInteger )
+/* Generated */ Core::RetCode Core::CdlLongLineState( struct TA_CdlLongLine_State* _state,
+/* Generated */                                     cli::array<double>^ inOpen,
+/* Generated */                                     cli::array<double>^ inHigh,
+/* Generated */                                     cli::array<double>^ inLow,
+/* Generated */                                     cli::array<double>^ inClose,
+/* Generated */                                     cli::array<int>^  *outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlLongLineState( struct TA_cdlLongLine_State* _state,
-/* Generated */                            double       inOpen,
-/* Generated */                            double       inHigh,
-/* Generated */                            double       inLow,
-/* Generated */                            double       inClose,
-/* Generated */                            int           *outInteger )
+/* Generated */ public RetCode cdlLongLineState( struct TA_cdlLongLine_State* _state,
+/* Generated */                                double       inOpen,
+/* Generated */                                double       inHigh,
+/* Generated */                                double       inLow,
+/* Generated */                                double       inClose,
+/* Generated */                                int           *outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLLONGLINE_State( struct TA_CDLLONGLINE_State* _state,
-/* Generated */                                               const double inOpen,
-/* Generated */                                               const double inHigh,
-/* Generated */                                               const double inLow,
-/* Generated */                                               const double inClose,
-/* Generated */                                               int           *outInteger )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLLONGLINE_State( struct TA_CDLLONGLINE_State* _state,
+/* Generated */                                                      const double inOpen,
+/* Generated */                                                      const double inHigh,
+/* Generated */                                                      const double inLow,
+/* Generated */                                                      const double inClose,
+/* Generated */                                                      int           *outInteger )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -413,13 +413,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlLongLineStateFree( struct TA_CdlLongLine_State** _state )
+/* Generated */ Core::RetCode Core::CdlLongLineStateFree( struct TA_CdlLongLine_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlLongLineStateFree( struct TA_cdlLongLine_State** _state )
+/* Generated */ public RetCode cdlLongLineStateFree( struct TA_cdlLongLine_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLLONGLINE_StateFree( struct TA_CDLLONGLINE_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLLONGLINE_StateFree( struct TA_CDLLONGLINE_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -447,16 +447,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlLongLineStateSave( struct TA_CdlLongLine_State* _state,
-/* Generated */                               FILE* _file )
+/* Generated */ Core::RetCode Core::CdlLongLineStateSave( struct TA_CdlLongLine_State* _state,
+/* Generated */                                         FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlLongLineStateSave( struct TA_cdlLongLine_State* _state,
-/* Generated */                                FILE* _file )
+/* Generated */ public RetCode cdlLongLineStateSave( struct TA_cdlLongLine_State* _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLLONGLINE_StateSave( struct TA_CDLLONGLINE_State* _state,
-/* Generated */                                                   FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLLONGLINE_StateSave( struct TA_CDLLONGLINE_State* _state,
+/* Generated */                                                          FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -506,16 +506,16 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlLongLineStateLoad( struct TA_CdlLongLine_State** _state,
-/* Generated */                               FILE* _file )
+/* Generated */ Core::RetCode Core::CdlLongLineStateLoad( struct TA_CdlLongLine_State** _state,
+/* Generated */                                         FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlLongLineStateLoad( struct TA_cdlLongLine_State** _state,
-/* Generated */                                FILE* _file )
+/* Generated */ public RetCode cdlLongLineStateLoad( struct TA_cdlLongLine_State** _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLLONGLINE_StateLoad( struct TA_CDLLONGLINE_State** _state,
-/* Generated */                                                   FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLLONGLINE_StateLoad( struct TA_CDLLONGLINE_State** _state,
+/* Generated */                                                          FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

@@ -272,16 +272,16 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AdxrStateInit( struct TA_Adxr_State** _state,
-/* Generated */                        int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ Core::RetCode Core::AdxrStateInit( struct TA_Adxr_State** _state,
+/* Generated */                                  int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int adxrStateInit( struct TA_adxr_State** _state,
-/* Generated */                         int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ public RetCode adxrStateInit( struct TA_adxr_State** _state,
+/* Generated */                             int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ADXR_StateInit( struct TA_ADXR_State** _state,
-/* Generated */                                            int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_ADXR_StateInit( struct TA_ADXR_State** _state,
+/* Generated */                                                   int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -330,23 +330,23 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AdxrState( struct TA_Adxr_State* _state,
-/* Generated */                    cli::array<double>^ inHigh,
-/* Generated */                    cli::array<double>^ inLow,
-/* Generated */                    cli::array<double>^ inClose,
-/* Generated */                    cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::AdxrState( struct TA_Adxr_State* _state,
+/* Generated */                              cli::array<double>^ inHigh,
+/* Generated */                              cli::array<double>^ inLow,
+/* Generated */                              cli::array<double>^ inClose,
+/* Generated */                              cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int adxrState( struct TA_adxr_State* _state,
-/* Generated */                     double       inHigh,
-/* Generated */                     double       inLow,
-/* Generated */                     double       inClose,
-/* Generated */                     double        *outReal )
+/* Generated */ public RetCode adxrState( struct TA_adxr_State* _state,
+/* Generated */                         double       inHigh,
+/* Generated */                         double       inLow,
+/* Generated */                         double       inClose,
+/* Generated */                         double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ADXR_State( struct TA_ADXR_State* _state,
-/* Generated */                                        const double inHigh,
-/* Generated */                                        const double inLow,
-/* Generated */                                        const double inClose,
-/* Generated */                                        double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_ADXR_State( struct TA_ADXR_State* _state,
+/* Generated */                                               const double inHigh,
+/* Generated */                                               const double inLow,
+/* Generated */                                               const double inClose,
+/* Generated */                                               double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -411,13 +411,13 @@ double tempReal;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AdxrStateFree( struct TA_Adxr_State** _state )
+/* Generated */ Core::RetCode Core::AdxrStateFree( struct TA_Adxr_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int adxrStateFree( struct TA_adxr_State** _state )
+/* Generated */ public RetCode adxrStateFree( struct TA_adxr_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ADXR_StateFree( struct TA_ADXR_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_ADXR_StateFree( struct TA_ADXR_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -448,16 +448,16 @@ if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AdxrStateSave( struct TA_Adxr_State* _state,
-/* Generated */                        FILE* _file )
+/* Generated */ Core::RetCode Core::AdxrStateSave( struct TA_Adxr_State* _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int adxrStateSave( struct TA_adxr_State* _state,
-/* Generated */                         FILE* _file )
+/* Generated */ public RetCode adxrStateSave( struct TA_adxr_State* _state,
+/* Generated */                             FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ADXR_StateSave( struct TA_ADXR_State* _state,
-/* Generated */                                            FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_ADXR_StateSave( struct TA_ADXR_State* _state,
+/* Generated */                                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -500,16 +500,16 @@ TA_RetCode retCode;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AdxrStateLoad( struct TA_Adxr_State** _state,
-/* Generated */                        FILE* _file )
+/* Generated */ Core::RetCode Core::AdxrStateLoad( struct TA_Adxr_State** _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int adxrStateLoad( struct TA_adxr_State** _state,
-/* Generated */                         FILE* _file )
+/* Generated */ public RetCode adxrStateLoad( struct TA_adxr_State** _state,
+/* Generated */                             FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ADXR_StateLoad( struct TA_ADXR_State** _state,
-/* Generated */                                            FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_ADXR_StateLoad( struct TA_ADXR_State** _state,
+/* Generated */                                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

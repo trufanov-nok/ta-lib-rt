@@ -265,16 +265,16 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::RocRStateInit( struct TA_RocR_State** _state,
-/* Generated */                        int           optInTimePeriod )  /* From 1 to 100000 */
+/* Generated */ Core::RetCode Core::RocRStateInit( struct TA_RocR_State** _state,
+/* Generated */                                  int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int rocRStateInit( struct TA_rocR_State** _state,
-/* Generated */                         int           optInTimePeriod )  /* From 1 to 100000 */
+/* Generated */ public RetCode rocRStateInit( struct TA_rocR_State** _state,
+/* Generated */                             int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ROCR_StateInit( struct TA_ROCR_State** _state,
-/* Generated */                                            int           optInTimePeriod )  /* From 1 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_ROCR_StateInit( struct TA_ROCR_State** _state,
+/* Generated */                                                   int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -317,17 +317,17 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::RocRState( struct TA_RocR_State* _state,
-/* Generated */                    cli::array<double>^ inReal,
-/* Generated */                    cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::RocRState( struct TA_RocR_State* _state,
+/* Generated */                              cli::array<double>^ inReal,
+/* Generated */                              cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int rocRState( struct TA_rocR_State* _state,
-/* Generated */                     double       inReal,
-/* Generated */                     double        *outReal )
+/* Generated */ public RetCode rocRState( struct TA_rocR_State* _state,
+/* Generated */                         double       inReal,
+/* Generated */                         double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ROCR_State( struct TA_ROCR_State* _state,
-/* Generated */                                        const double inReal,
-/* Generated */                                        double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_ROCR_State( struct TA_ROCR_State* _state,
+/* Generated */                                               const double inReal,
+/* Generated */                                               double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -368,13 +368,13 @@ double tempReal;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::RocRStateFree( struct TA_RocR_State** _state )
+/* Generated */ Core::RetCode Core::RocRStateFree( struct TA_RocR_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int rocRStateFree( struct TA_rocR_State** _state )
+/* Generated */ public RetCode rocRStateFree( struct TA_rocR_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ROCR_StateFree( struct TA_ROCR_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_ROCR_StateFree( struct TA_ROCR_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -402,16 +402,16 @@ double tempReal;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::RocRStateSave( struct TA_RocR_State* _state,
-/* Generated */                        FILE* _file )
+/* Generated */ Core::RetCode Core::RocRStateSave( struct TA_RocR_State* _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int rocRStateSave( struct TA_rocR_State* _state,
-/* Generated */                         FILE* _file )
+/* Generated */ public RetCode rocRStateSave( struct TA_rocR_State* _state,
+/* Generated */                             FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ROCR_StateSave( struct TA_ROCR_State* _state,
-/* Generated */                                            FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_ROCR_StateSave( struct TA_ROCR_State* _state,
+/* Generated */                                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -451,16 +451,16 @@ double tempReal;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::RocRStateLoad( struct TA_RocR_State** _state,
-/* Generated */                        FILE* _file )
+/* Generated */ Core::RetCode Core::RocRStateLoad( struct TA_RocR_State** _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int rocRStateLoad( struct TA_rocR_State** _state,
-/* Generated */                         FILE* _file )
+/* Generated */ public RetCode rocRStateLoad( struct TA_rocR_State** _state,
+/* Generated */                             FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ROCR_StateLoad( struct TA_ROCR_State** _state,
-/* Generated */                                            FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_ROCR_StateLoad( struct TA_ROCR_State** _state,
+/* Generated */                                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

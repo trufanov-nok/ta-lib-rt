@@ -187,13 +187,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::Log10StateInit( struct TA_Log10_State** _state )
+/* Generated */ Core::RetCode Core::Log10StateInit( struct TA_Log10_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int log10StateInit( struct TA_log10_State** _state )
+/* Generated */ public RetCode log10StateInit( struct TA_log10_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_LOG10_StateInit( struct TA_LOG10_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_LOG10_StateInit( struct TA_LOG10_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -229,17 +229,17 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::Log10State( struct TA_Log10_State* _state,
-/* Generated */                     cli::array<double>^ inReal,
-/* Generated */                     cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::Log10State( struct TA_Log10_State* _state,
+/* Generated */                               cli::array<double>^ inReal,
+/* Generated */                               cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int log10State( struct TA_log10_State* _state,
-/* Generated */                      double       inReal,
-/* Generated */                      double        *outReal )
+/* Generated */ public RetCode log10State( struct TA_log10_State* _state,
+/* Generated */                          double       inReal,
+/* Generated */                          double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_LOG10_State( struct TA_LOG10_State* _state,
-/* Generated */                                         const double inReal,
-/* Generated */                                         double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_LOG10_State( struct TA_LOG10_State* _state,
+/* Generated */                                                const double inReal,
+/* Generated */                                                double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -278,13 +278,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::Log10StateFree( struct TA_Log10_State** _state )
+/* Generated */ Core::RetCode Core::Log10StateFree( struct TA_Log10_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int log10StateFree( struct TA_log10_State** _state )
+/* Generated */ public RetCode log10StateFree( struct TA_log10_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_LOG10_StateFree( struct TA_LOG10_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_LOG10_StateFree( struct TA_LOG10_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -312,16 +312,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::Log10StateSave( struct TA_Log10_State* _state,
-/* Generated */                         FILE* _file )
+/* Generated */ Core::RetCode Core::Log10StateSave( struct TA_Log10_State* _state,
+/* Generated */                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int log10StateSave( struct TA_log10_State* _state,
-/* Generated */                          FILE* _file )
+/* Generated */ public RetCode log10StateSave( struct TA_log10_State* _state,
+/* Generated */                              FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_LOG10_StateSave( struct TA_LOG10_State* _state,
-/* Generated */                                             FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_LOG10_StateSave( struct TA_LOG10_State* _state,
+/* Generated */                                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -359,16 +359,16 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::Log10StateLoad( struct TA_Log10_State** _state,
-/* Generated */                         FILE* _file )
+/* Generated */ Core::RetCode Core::Log10StateLoad( struct TA_Log10_State** _state,
+/* Generated */                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int log10StateLoad( struct TA_log10_State** _state,
-/* Generated */                          FILE* _file )
+/* Generated */ public RetCode log10StateLoad( struct TA_log10_State** _state,
+/* Generated */                              FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_LOG10_StateLoad( struct TA_LOG10_State** _state,
-/* Generated */                                             FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_LOG10_StateLoad( struct TA_LOG10_State** _state,
+/* Generated */                                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

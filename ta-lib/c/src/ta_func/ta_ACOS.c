@@ -184,13 +184,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AcosStateInit( struct TA_Acos_State** _state )
+/* Generated */ Core::RetCode Core::AcosStateInit( struct TA_Acos_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int acosStateInit( struct TA_acos_State** _state )
+/* Generated */ public RetCode acosStateInit( struct TA_acos_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ACOS_StateInit( struct TA_ACOS_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_ACOS_StateInit( struct TA_ACOS_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -226,17 +226,17 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AcosState( struct TA_Acos_State* _state,
-/* Generated */                    cli::array<double>^ inReal,
-/* Generated */                    cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::AcosState( struct TA_Acos_State* _state,
+/* Generated */                              cli::array<double>^ inReal,
+/* Generated */                              cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int acosState( struct TA_acos_State* _state,
-/* Generated */                     double       inReal,
-/* Generated */                     double        *outReal )
+/* Generated */ public RetCode acosState( struct TA_acos_State* _state,
+/* Generated */                         double       inReal,
+/* Generated */                         double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ACOS_State( struct TA_ACOS_State* _state,
-/* Generated */                                        const double inReal,
-/* Generated */                                        double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_ACOS_State( struct TA_ACOS_State* _state,
+/* Generated */                                               const double inReal,
+/* Generated */                                               double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -275,13 +275,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AcosStateFree( struct TA_Acos_State** _state )
+/* Generated */ Core::RetCode Core::AcosStateFree( struct TA_Acos_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int acosStateFree( struct TA_acos_State** _state )
+/* Generated */ public RetCode acosStateFree( struct TA_acos_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ACOS_StateFree( struct TA_ACOS_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_ACOS_StateFree( struct TA_ACOS_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -309,16 +309,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AcosStateSave( struct TA_Acos_State* _state,
-/* Generated */                        FILE* _file )
+/* Generated */ Core::RetCode Core::AcosStateSave( struct TA_Acos_State* _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int acosStateSave( struct TA_acos_State* _state,
-/* Generated */                         FILE* _file )
+/* Generated */ public RetCode acosStateSave( struct TA_acos_State* _state,
+/* Generated */                             FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ACOS_StateSave( struct TA_ACOS_State* _state,
-/* Generated */                                            FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_ACOS_StateSave( struct TA_ACOS_State* _state,
+/* Generated */                                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -356,16 +356,16 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AcosStateLoad( struct TA_Acos_State** _state,
-/* Generated */                        FILE* _file )
+/* Generated */ Core::RetCode Core::AcosStateLoad( struct TA_Acos_State** _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int acosStateLoad( struct TA_acos_State** _state,
-/* Generated */                         FILE* _file )
+/* Generated */ public RetCode acosStateLoad( struct TA_acos_State** _state,
+/* Generated */                             FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ACOS_StateLoad( struct TA_ACOS_State** _state,
-/* Generated */                                            FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_ACOS_StateLoad( struct TA_ACOS_State** _state,
+/* Generated */                                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

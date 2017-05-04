@@ -530,22 +530,22 @@ TA_RetCode TA_PREFIX(INT_MACD)( int    startIdx,
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MacdStateInit( struct TA_Macd_State** _state,
-/* Generated */                        int           optInFastPeriod, /* From 2 to 100000 */
-/* Generated */                        int           optInSlowPeriod, /* From 2 to 100000 */
-/* Generated */                        int           optInSignalPeriod )  /* From 1 to 100000 */
+/* Generated */ Core::RetCode Core::MacdStateInit( struct TA_Macd_State** _state,
+/* Generated */                                  int           optInFastPeriod, /* From 2 to 100000 */
+/* Generated */                                  int           optInSlowPeriod, /* From 2 to 100000 */
+/* Generated */                                  int           optInSignalPeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int macdStateInit( struct TA_macd_State** _state,
-/* Generated */                         int           optInFastPeriod, /* From 2 to 100000 */
-/* Generated */                         int           optInSlowPeriod, /* From 2 to 100000 */
-/* Generated */                         int           optInSignalPeriod )  /* From 1 to 100000 */
+/* Generated */ public RetCode macdStateInit( struct TA_macd_State** _state,
+/* Generated */                             int           optInFastPeriod, /* From 2 to 100000 */
+/* Generated */                             int           optInSlowPeriod, /* From 2 to 100000 */
+/* Generated */                             int           optInSignalPeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MACD_StateInit( struct TA_MACD_State** _state,
-/* Generated */                                            int           optInFastPeriod, /* From 2 to 100000 */
-/* Generated */                                            int           optInSlowPeriod, /* From 2 to 100000 */
-/* Generated */                                            int           optInSignalPeriod )  /* From 1 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_MACD_StateInit( struct TA_MACD_State** _state,
+/* Generated */                                                   int           optInFastPeriod, /* From 2 to 100000 */
+/* Generated */                                                   int           optInSlowPeriod, /* From 2 to 100000 */
+/* Generated */                                                   int           optInSignalPeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -713,23 +713,23 @@ k2 = (double)0.15; /* Fix 12 */
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MacdState( struct TA_Macd_State* _state,
-/* Generated */                    cli::array<double>^ inReal,
-/* Generated */                    cli::array<double>^  *outMACD,
-/* Generated */                    cli::array<double>^  *outMACDSignal,
-/* Generated */                    cli::array<double>^  *outMACDHist )
+/* Generated */ Core::RetCode Core::MacdState( struct TA_Macd_State* _state,
+/* Generated */                              cli::array<double>^ inReal,
+/* Generated */                              cli::array<double>^  *outMACD,
+/* Generated */                              cli::array<double>^  *outMACDSignal,
+/* Generated */                              cli::array<double>^  *outMACDHist )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int macdState( struct TA_macd_State* _state,
-/* Generated */                     double       inReal,
-/* Generated */                     double        *outMACD,
-/* Generated */                     double        *outMACDSignal,
-/* Generated */                     double        *outMACDHist )
+/* Generated */ public RetCode macdState( struct TA_macd_State* _state,
+/* Generated */                         double       inReal,
+/* Generated */                         double        *outMACD,
+/* Generated */                         double        *outMACDSignal,
+/* Generated */                         double        *outMACDHist )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MACD_State( struct TA_MACD_State* _state,
-/* Generated */                                        const double inReal,
-/* Generated */                                        double        *outMACD,
-/* Generated */                                        double        *outMACDSignal,
-/* Generated */                                        double        *outMACDHist )
+/* Generated */ TA_LIB_API TA_RetCode TA_MACD_State( struct TA_MACD_State* _state,
+/* Generated */                                               const double inReal,
+/* Generated */                                               double        *outMACD,
+/* Generated */                                               double        *outMACDSignal,
+/* Generated */                                               double        *outMACDHist )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -820,13 +820,13 @@ k2 = (double)0.15; /* Fix 12 */
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MacdStateFree( struct TA_Macd_State** _state )
+/* Generated */ Core::RetCode Core::MacdStateFree( struct TA_Macd_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int macdStateFree( struct TA_macd_State** _state )
+/* Generated */ public RetCode macdStateFree( struct TA_macd_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MACD_StateFree( struct TA_MACD_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_MACD_StateFree( struct TA_MACD_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -861,16 +861,16 @@ k2 = (double)0.15; /* Fix 12 */
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MacdStateSave( struct TA_Macd_State* _state,
-/* Generated */                        FILE* _file )
+/* Generated */ Core::RetCode Core::MacdStateSave( struct TA_Macd_State* _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int macdStateSave( struct TA_macd_State* _state,
-/* Generated */                         FILE* _file )
+/* Generated */ public RetCode macdStateSave( struct TA_macd_State* _state,
+/* Generated */                             FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MACD_StateSave( struct TA_MACD_State* _state,
-/* Generated */                                            FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MACD_StateSave( struct TA_MACD_State* _state,
+/* Generated */                                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -925,16 +925,16 @@ TA_RetCode retCode;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MacdStateLoad( struct TA_Macd_State** _state,
-/* Generated */                        FILE* _file )
+/* Generated */ Core::RetCode Core::MacdStateLoad( struct TA_Macd_State** _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int macdStateLoad( struct TA_macd_State** _state,
-/* Generated */                         FILE* _file )
+/* Generated */ public RetCode macdStateLoad( struct TA_macd_State** _state,
+/* Generated */                             FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MACD_StateLoad( struct TA_MACD_State** _state,
-/* Generated */                                            FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MACD_StateLoad( struct TA_MACD_State** _state,
+/* Generated */                                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

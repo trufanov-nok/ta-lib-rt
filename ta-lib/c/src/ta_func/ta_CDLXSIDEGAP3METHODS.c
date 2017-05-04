@@ -251,13 +251,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlXSideGap3MethodsStateInit( struct TA_CdlXSideGap3Methods_State** _state )
+/* Generated */ Core::RetCode Core::CdlXSideGap3MethodsStateInit( struct TA_CdlXSideGap3Methods_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlXSideGap3MethodsStateInit( struct TA_cdlXSideGap3Methods_State** _state )
+/* Generated */ public RetCode cdlXSideGap3MethodsStateInit( struct TA_cdlXSideGap3Methods_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLXSIDEGAP3METHODS_StateInit( struct TA_CDLXSIDEGAP3METHODS_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLXSIDEGAP3METHODS_StateInit( struct TA_CDLXSIDEGAP3METHODS_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -293,26 +293,26 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlXSideGap3MethodsState( struct TA_CdlXSideGap3Methods_State* _state,
-/* Generated */                                   cli::array<double>^ inOpen,
-/* Generated */                                   cli::array<double>^ inHigh,
-/* Generated */                                   cli::array<double>^ inLow,
-/* Generated */                                   cli::array<double>^ inClose,
-/* Generated */                                   cli::array<int>^  *outInteger )
+/* Generated */ Core::RetCode Core::CdlXSideGap3MethodsState( struct TA_CdlXSideGap3Methods_State* _state,
+/* Generated */                                             cli::array<double>^ inOpen,
+/* Generated */                                             cli::array<double>^ inHigh,
+/* Generated */                                             cli::array<double>^ inLow,
+/* Generated */                                             cli::array<double>^ inClose,
+/* Generated */                                             cli::array<int>^  *outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlXSideGap3MethodsState( struct TA_cdlXSideGap3Methods_State* _state,
-/* Generated */                                    double       inOpen,
-/* Generated */                                    double       inHigh,
-/* Generated */                                    double       inLow,
-/* Generated */                                    double       inClose,
-/* Generated */                                    int           *outInteger )
+/* Generated */ public RetCode cdlXSideGap3MethodsState( struct TA_cdlXSideGap3Methods_State* _state,
+/* Generated */                                        double       inOpen,
+/* Generated */                                        double       inHigh,
+/* Generated */                                        double       inLow,
+/* Generated */                                        double       inClose,
+/* Generated */                                        int           *outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLXSIDEGAP3METHODS_State( struct TA_CDLXSIDEGAP3METHODS_State* _state,
-/* Generated */                                                       const double inOpen,
-/* Generated */                                                       const double inHigh,
-/* Generated */                                                       const double inLow,
-/* Generated */                                                       const double inClose,
-/* Generated */                                                       int           *outInteger )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLXSIDEGAP3METHODS_State( struct TA_CDLXSIDEGAP3METHODS_State* _state,
+/* Generated */                                                              const double inOpen,
+/* Generated */                                                              const double inHigh,
+/* Generated */                                                              const double inLow,
+/* Generated */                                                              const double inClose,
+/* Generated */                                                              int           *outInteger )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -385,13 +385,13 @@ int i1,i2;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlXSideGap3MethodsStateFree( struct TA_CdlXSideGap3Methods_State** _state )
+/* Generated */ Core::RetCode Core::CdlXSideGap3MethodsStateFree( struct TA_CdlXSideGap3Methods_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlXSideGap3MethodsStateFree( struct TA_cdlXSideGap3Methods_State** _state )
+/* Generated */ public RetCode cdlXSideGap3MethodsStateFree( struct TA_cdlXSideGap3Methods_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLXSIDEGAP3METHODS_StateFree( struct TA_CDLXSIDEGAP3METHODS_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLXSIDEGAP3METHODS_StateFree( struct TA_CDLXSIDEGAP3METHODS_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -419,16 +419,16 @@ int i1,i2;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlXSideGap3MethodsStateSave( struct TA_CdlXSideGap3Methods_State* _state,
-/* Generated */                                       FILE* _file )
+/* Generated */ Core::RetCode Core::CdlXSideGap3MethodsStateSave( struct TA_CdlXSideGap3Methods_State* _state,
+/* Generated */                                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlXSideGap3MethodsStateSave( struct TA_cdlXSideGap3Methods_State* _state,
-/* Generated */                                        FILE* _file )
+/* Generated */ public RetCode cdlXSideGap3MethodsStateSave( struct TA_cdlXSideGap3Methods_State* _state,
+/* Generated */                                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLXSIDEGAP3METHODS_StateSave( struct TA_CDLXSIDEGAP3METHODS_State* _state,
-/* Generated */                                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLXSIDEGAP3METHODS_StateSave( struct TA_CDLXSIDEGAP3METHODS_State* _state,
+/* Generated */                                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -466,16 +466,16 @@ int i1,i2;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlXSideGap3MethodsStateLoad( struct TA_CdlXSideGap3Methods_State** _state,
-/* Generated */                                       FILE* _file )
+/* Generated */ Core::RetCode Core::CdlXSideGap3MethodsStateLoad( struct TA_CdlXSideGap3Methods_State** _state,
+/* Generated */                                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlXSideGap3MethodsStateLoad( struct TA_cdlXSideGap3Methods_State** _state,
-/* Generated */                                        FILE* _file )
+/* Generated */ public RetCode cdlXSideGap3MethodsStateLoad( struct TA_cdlXSideGap3Methods_State** _state,
+/* Generated */                                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLXSIDEGAP3METHODS_StateLoad( struct TA_CDLXSIDEGAP3METHODS_State** _state,
-/* Generated */                                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLXSIDEGAP3METHODS_StateLoad( struct TA_CDLXSIDEGAP3METHODS_State** _state,
+/* Generated */                                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

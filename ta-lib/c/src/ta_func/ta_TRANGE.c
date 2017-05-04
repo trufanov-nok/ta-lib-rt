@@ -239,13 +239,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TrueRangeStateInit( struct TA_TrueRange_State** _state )
+/* Generated */ Core::RetCode Core::TrueRangeStateInit( struct TA_TrueRange_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int trueRangeStateInit( struct TA_trueRange_State** _state )
+/* Generated */ public RetCode trueRangeStateInit( struct TA_trueRange_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TRANGE_StateInit( struct TA_TRANGE_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_TRANGE_StateInit( struct TA_TRANGE_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -281,23 +281,23 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TrueRangeState( struct TA_TrueRange_State* _state,
-/* Generated */                         cli::array<double>^ inHigh,
-/* Generated */                         cli::array<double>^ inLow,
-/* Generated */                         cli::array<double>^ inClose,
-/* Generated */                         cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::TrueRangeState( struct TA_TrueRange_State* _state,
+/* Generated */                                   cli::array<double>^ inHigh,
+/* Generated */                                   cli::array<double>^ inLow,
+/* Generated */                                   cli::array<double>^ inClose,
+/* Generated */                                   cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int trueRangeState( struct TA_trueRange_State* _state,
-/* Generated */                          double       inHigh,
-/* Generated */                          double       inLow,
-/* Generated */                          double       inClose,
-/* Generated */                          double        *outReal )
+/* Generated */ public RetCode trueRangeState( struct TA_trueRange_State* _state,
+/* Generated */                              double       inHigh,
+/* Generated */                              double       inLow,
+/* Generated */                              double       inClose,
+/* Generated */                              double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TRANGE_State( struct TA_TRANGE_State* _state,
-/* Generated */                                          const double inHigh,
-/* Generated */                                          const double inLow,
-/* Generated */                                          const double inClose,
-/* Generated */                                          double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_TRANGE_State( struct TA_TRANGE_State* _state,
+/* Generated */                                                 const double inHigh,
+/* Generated */                                                 const double inLow,
+/* Generated */                                                 const double inClose,
+/* Generated */                                                 double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -358,13 +358,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TrueRangeStateFree( struct TA_TrueRange_State** _state )
+/* Generated */ Core::RetCode Core::TrueRangeStateFree( struct TA_TrueRange_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int trueRangeStateFree( struct TA_trueRange_State** _state )
+/* Generated */ public RetCode trueRangeStateFree( struct TA_trueRange_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TRANGE_StateFree( struct TA_TRANGE_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_TRANGE_StateFree( struct TA_TRANGE_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -392,16 +392,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TrueRangeStateSave( struct TA_TrueRange_State* _state,
-/* Generated */                             FILE* _file )
+/* Generated */ Core::RetCode Core::TrueRangeStateSave( struct TA_TrueRange_State* _state,
+/* Generated */                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int trueRangeStateSave( struct TA_trueRange_State* _state,
-/* Generated */                              FILE* _file )
+/* Generated */ public RetCode trueRangeStateSave( struct TA_trueRange_State* _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TRANGE_StateSave( struct TA_TRANGE_State* _state,
-/* Generated */                                              FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_TRANGE_StateSave( struct TA_TRANGE_State* _state,
+/* Generated */                                                     FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -439,16 +439,16 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::TrueRangeStateLoad( struct TA_TrueRange_State** _state,
-/* Generated */                             FILE* _file )
+/* Generated */ Core::RetCode Core::TrueRangeStateLoad( struct TA_TrueRange_State** _state,
+/* Generated */                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int trueRangeStateLoad( struct TA_trueRange_State** _state,
-/* Generated */                              FILE* _file )
+/* Generated */ public RetCode trueRangeStateLoad( struct TA_trueRange_State** _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_TRANGE_StateLoad( struct TA_TRANGE_State** _state,
-/* Generated */                                              FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_TRANGE_StateLoad( struct TA_TRANGE_State** _state,
+/* Generated */                                                     FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

@@ -341,17 +341,17 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MovingAverageStateInit( struct TA_MovingAverage_State** _state,
-/* Generated */                                 int           optInTimePeriod, /* From 1 to 100000 */
-/* Generated */                                 MAType        optInMAType ) /* Generated */ 
+/* Generated */ Core::RetCode Core::MovingAverageStateInit( struct TA_MovingAverage_State** _state,
+/* Generated */                                           int           optInTimePeriod, /* From 1 to 100000 */
+/* Generated */                                           MAType        optInMAType ) /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int movingAverageStateInit( struct TA_movingAverage_State** _state,
-/* Generated */                                  int           optInTimePeriod, /* From 1 to 100000 */
-/* Generated */                                  MAType        optInMAType ) /* Generated */ 
+/* Generated */ public RetCode movingAverageStateInit( struct TA_movingAverage_State** _state,
+/* Generated */                                      int           optInTimePeriod, /* From 1 to 100000 */
+/* Generated */                                      MAType        optInMAType ) /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MA_StateInit( struct TA_MA_State** _state,
-/* Generated */                                          int           optInTimePeriod, /* From 1 to 100000 */
-/* Generated */                                          TA_MAType     optInMAType ) /* Generated */ 
+/* Generated */ TA_LIB_API TA_RetCode TA_MA_StateInit( struct TA_MA_State** _state,
+/* Generated */                                                 int           optInTimePeriod, /* From 1 to 100000 */
+/* Generated */                                                 TA_MAType     optInMAType ) /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 
@@ -449,17 +449,17 @@ ENUM_DECLARATION(RetCode) retValue;
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MovingAverageState( struct TA_MovingAverage_State* _state,
-/* Generated */                             cli::array<double>^ inReal,
-/* Generated */                             cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::MovingAverageState( struct TA_MovingAverage_State* _state,
+/* Generated */                                       cli::array<double>^ inReal,
+/* Generated */                                       cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int movingAverageState( struct TA_movingAverage_State* _state,
-/* Generated */                              double       inReal,
-/* Generated */                              double        *outReal )
+/* Generated */ public RetCode movingAverageState( struct TA_movingAverage_State* _state,
+/* Generated */                                  double       inReal,
+/* Generated */                                  double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MA_State( struct TA_MA_State* _state,
-/* Generated */                                      const double inReal,
-/* Generated */                                      double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_MA_State( struct TA_MA_State* _state,
+/* Generated */                                             const double inReal,
+/* Generated */                                             double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -550,13 +550,13 @@ return retValue;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MovingAverageStateFree( struct TA_MovingAverage_State** _state )
+/* Generated */ Core::RetCode Core::MovingAverageStateFree( struct TA_MovingAverage_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int movingAverageStateFree( struct TA_movingAverage_State** _state )
+/* Generated */ public RetCode movingAverageStateFree( struct TA_movingAverage_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MA_StateFree( struct TA_MA_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_MA_StateFree( struct TA_MA_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -635,16 +635,16 @@ if (retValue != ENUM_VALUE(RetCode,TA_SUCCESS,Success))
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MovingAverageStateSave( struct TA_MovingAverage_State* _state,
-/* Generated */                                 FILE* _file )
+/* Generated */ Core::RetCode Core::MovingAverageStateSave( struct TA_MovingAverage_State* _state,
+/* Generated */                                           FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int movingAverageStateSave( struct TA_movingAverage_State* _state,
-/* Generated */                                  FILE* _file )
+/* Generated */ public RetCode movingAverageStateSave( struct TA_movingAverage_State* _state,
+/* Generated */                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MA_StateSave( struct TA_MA_State* _state,
-/* Generated */                                          FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MA_StateSave( struct TA_MA_State* _state,
+/* Generated */                                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -735,16 +735,16 @@ ENUM_DECLARATION(RetCode) retValue;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::MovingAverageStateLoad( struct TA_MovingAverage_State** _state,
-/* Generated */                                 FILE* _file )
+/* Generated */ Core::RetCode Core::MovingAverageStateLoad( struct TA_MovingAverage_State** _state,
+/* Generated */                                           FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int movingAverageStateLoad( struct TA_movingAverage_State** _state,
-/* Generated */                                  FILE* _file )
+/* Generated */ public RetCode movingAverageStateLoad( struct TA_movingAverage_State** _state,
+/* Generated */                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_MA_StateLoad( struct TA_MA_State** _state,
-/* Generated */                                          FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_MA_StateLoad( struct TA_MA_State** _state,
+/* Generated */                                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

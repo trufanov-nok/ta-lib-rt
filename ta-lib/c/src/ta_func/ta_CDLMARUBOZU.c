@@ -255,13 +255,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlMarubozuStateInit( struct TA_CdlMarubozu_State** _state )
+/* Generated */ Core::RetCode Core::CdlMarubozuStateInit( struct TA_CdlMarubozu_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlMarubozuStateInit( struct TA_cdlMarubozu_State** _state )
+/* Generated */ public RetCode cdlMarubozuStateInit( struct TA_cdlMarubozu_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLMARUBOZU_StateInit( struct TA_CDLMARUBOZU_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLMARUBOZU_StateInit( struct TA_CDLMARUBOZU_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -297,26 +297,26 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlMarubozuState( struct TA_CdlMarubozu_State* _state,
-/* Generated */                           cli::array<double>^ inOpen,
-/* Generated */                           cli::array<double>^ inHigh,
-/* Generated */                           cli::array<double>^ inLow,
-/* Generated */                           cli::array<double>^ inClose,
-/* Generated */                           cli::array<int>^  *outInteger )
+/* Generated */ Core::RetCode Core::CdlMarubozuState( struct TA_CdlMarubozu_State* _state,
+/* Generated */                                     cli::array<double>^ inOpen,
+/* Generated */                                     cli::array<double>^ inHigh,
+/* Generated */                                     cli::array<double>^ inLow,
+/* Generated */                                     cli::array<double>^ inClose,
+/* Generated */                                     cli::array<int>^  *outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlMarubozuState( struct TA_cdlMarubozu_State* _state,
-/* Generated */                            double       inOpen,
-/* Generated */                            double       inHigh,
-/* Generated */                            double       inLow,
-/* Generated */                            double       inClose,
-/* Generated */                            int           *outInteger )
+/* Generated */ public RetCode cdlMarubozuState( struct TA_cdlMarubozu_State* _state,
+/* Generated */                                double       inOpen,
+/* Generated */                                double       inHigh,
+/* Generated */                                double       inLow,
+/* Generated */                                double       inClose,
+/* Generated */                                int           *outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLMARUBOZU_State( struct TA_CDLMARUBOZU_State* _state,
-/* Generated */                                               const double inOpen,
-/* Generated */                                               const double inHigh,
-/* Generated */                                               const double inLow,
-/* Generated */                                               const double inClose,
-/* Generated */                                               int           *outInteger )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLMARUBOZU_State( struct TA_CDLMARUBOZU_State* _state,
+/* Generated */                                                      const double inOpen,
+/* Generated */                                                      const double inHigh,
+/* Generated */                                                      const double inLow,
+/* Generated */                                                      const double inClose,
+/* Generated */                                                      int           *outInteger )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -413,13 +413,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlMarubozuStateFree( struct TA_CdlMarubozu_State** _state )
+/* Generated */ Core::RetCode Core::CdlMarubozuStateFree( struct TA_CdlMarubozu_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlMarubozuStateFree( struct TA_cdlMarubozu_State** _state )
+/* Generated */ public RetCode cdlMarubozuStateFree( struct TA_cdlMarubozu_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLMARUBOZU_StateFree( struct TA_CDLMARUBOZU_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLMARUBOZU_StateFree( struct TA_CDLMARUBOZU_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -447,16 +447,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlMarubozuStateSave( struct TA_CdlMarubozu_State* _state,
-/* Generated */                               FILE* _file )
+/* Generated */ Core::RetCode Core::CdlMarubozuStateSave( struct TA_CdlMarubozu_State* _state,
+/* Generated */                                         FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlMarubozuStateSave( struct TA_cdlMarubozu_State* _state,
-/* Generated */                                FILE* _file )
+/* Generated */ public RetCode cdlMarubozuStateSave( struct TA_cdlMarubozu_State* _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLMARUBOZU_StateSave( struct TA_CDLMARUBOZU_State* _state,
-/* Generated */                                                   FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLMARUBOZU_StateSave( struct TA_CDLMARUBOZU_State* _state,
+/* Generated */                                                          FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -506,16 +506,16 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlMarubozuStateLoad( struct TA_CdlMarubozu_State** _state,
-/* Generated */                               FILE* _file )
+/* Generated */ Core::RetCode Core::CdlMarubozuStateLoad( struct TA_CdlMarubozu_State** _state,
+/* Generated */                                         FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlMarubozuStateLoad( struct TA_cdlMarubozu_State** _state,
-/* Generated */                                FILE* _file )
+/* Generated */ public RetCode cdlMarubozuStateLoad( struct TA_cdlMarubozu_State** _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLMARUBOZU_StateLoad( struct TA_CDLMARUBOZU_State** _state,
-/* Generated */                                                   FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLMARUBOZU_StateLoad( struct TA_CDLMARUBOZU_State** _state,
+/* Generated */                                                          FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

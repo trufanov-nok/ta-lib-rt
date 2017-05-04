@@ -450,13 +450,13 @@ DEFINE_HILBERT_VARIABLES_STRUCT(HT_TRENDLINE)
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtTrendlineStateInit( struct TA_HtTrendline_State** _state )
+/* Generated */ Core::RetCode Core::HtTrendlineStateInit( struct TA_HtTrendline_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htTrendlineStateInit( struct TA_htTrendline_State** _state )
+/* Generated */ public RetCode htTrendlineStateInit( struct TA_htTrendline_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_TRENDLINE_StateInit( struct TA_HT_TRENDLINE_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_TRENDLINE_StateInit( struct TA_HT_TRENDLINE_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -497,17 +497,17 @@ DEFINE_HILBERT_VARIABLES_STRUCT(HT_TRENDLINE)
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtTrendlineState( struct TA_HtTrendline_State* _state,
-/* Generated */                           cli::array<double>^ inReal,
-/* Generated */                           cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::HtTrendlineState( struct TA_HtTrendline_State* _state,
+/* Generated */                                     cli::array<double>^ inReal,
+/* Generated */                                     cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htTrendlineState( struct TA_htTrendline_State* _state,
-/* Generated */                            double       inReal,
-/* Generated */                            double        *outReal )
+/* Generated */ public RetCode htTrendlineState( struct TA_htTrendline_State* _state,
+/* Generated */                                double       inReal,
+/* Generated */                                double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_TRENDLINE_State( struct TA_HT_TRENDLINE_State* _state,
-/* Generated */                                                const double inReal,
-/* Generated */                                                double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_TRENDLINE_State( struct TA_HT_TRENDLINE_State* _state,
+/* Generated */                                                       const double inReal,
+/* Generated */                                                       double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -703,13 +703,13 @@ else {
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtTrendlineStateFree( struct TA_HtTrendline_State** _state )
+/* Generated */ Core::RetCode Core::HtTrendlineStateFree( struct TA_HtTrendline_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htTrendlineStateFree( struct TA_htTrendline_State** _state )
+/* Generated */ public RetCode htTrendlineStateFree( struct TA_htTrendline_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_TRENDLINE_StateFree( struct TA_HT_TRENDLINE_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_TRENDLINE_StateFree( struct TA_HT_TRENDLINE_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -742,16 +742,16 @@ else {
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtTrendlineStateSave( struct TA_HtTrendline_State* _state,
-/* Generated */                               FILE* _file )
+/* Generated */ Core::RetCode Core::HtTrendlineStateSave( struct TA_HtTrendline_State* _state,
+/* Generated */                                         FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htTrendlineStateSave( struct TA_htTrendline_State* _state,
-/* Generated */                                FILE* _file )
+/* Generated */ public RetCode htTrendlineStateSave( struct TA_htTrendline_State* _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_TRENDLINE_StateSave( struct TA_HT_TRENDLINE_State* _state,
-/* Generated */                                                    FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_TRENDLINE_StateSave( struct TA_HT_TRENDLINE_State* _state,
+/* Generated */                                                           FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -839,16 +839,16 @@ else {
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtTrendlineStateLoad( struct TA_HtTrendline_State** _state,
-/* Generated */                               FILE* _file )
+/* Generated */ Core::RetCode Core::HtTrendlineStateLoad( struct TA_HtTrendline_State** _state,
+/* Generated */                                         FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htTrendlineStateLoad( struct TA_htTrendline_State** _state,
-/* Generated */                                FILE* _file )
+/* Generated */ public RetCode htTrendlineStateLoad( struct TA_htTrendline_State** _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_TRENDLINE_StateLoad( struct TA_HT_TRENDLINE_State** _state,
-/* Generated */                                                    FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_TRENDLINE_StateLoad( struct TA_HT_TRENDLINE_State** _state,
+/* Generated */                                                           FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

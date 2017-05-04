@@ -285,16 +285,16 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CorrelStateInit( struct TA_Correl_State** _state,
-/* Generated */                          int           optInTimePeriod )  /* From 1 to 100000 */
+/* Generated */ Core::RetCode Core::CorrelStateInit( struct TA_Correl_State** _state,
+/* Generated */                                    int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int correlStateInit( struct TA_correl_State** _state,
-/* Generated */                           int           optInTimePeriod )  /* From 1 to 100000 */
+/* Generated */ public RetCode correlStateInit( struct TA_correl_State** _state,
+/* Generated */                               int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CORREL_StateInit( struct TA_CORREL_State** _state,
-/* Generated */                                              int           optInTimePeriod )  /* From 1 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_CORREL_StateInit( struct TA_CORREL_State** _state,
+/* Generated */                                                     int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -337,20 +337,20 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CorrelState( struct TA_Correl_State* _state,
-/* Generated */                      cli::array<double>^ inReal0,
-/* Generated */                      cli::array<double>^ inReal1,
-/* Generated */                      cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::CorrelState( struct TA_Correl_State* _state,
+/* Generated */                                cli::array<double>^ inReal0,
+/* Generated */                                cli::array<double>^ inReal1,
+/* Generated */                                cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int correlState( struct TA_correl_State* _state,
-/* Generated */                       double       inReal0,
-/* Generated */                       double       inReal1,
-/* Generated */                       double        *outReal )
+/* Generated */ public RetCode correlState( struct TA_correl_State* _state,
+/* Generated */                           double       inReal0,
+/* Generated */                           double       inReal1,
+/* Generated */                           double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CORREL_State( struct TA_CORREL_State* _state,
-/* Generated */                                          const double inReal0,
-/* Generated */                                          const double inReal1,
-/* Generated */                                          double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_CORREL_State( struct TA_CORREL_State* _state,
+/* Generated */                                                 const double inReal0,
+/* Generated */                                                 const double inReal1,
+/* Generated */                                                 double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -433,13 +433,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CorrelStateFree( struct TA_Correl_State** _state )
+/* Generated */ Core::RetCode Core::CorrelStateFree( struct TA_Correl_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int correlStateFree( struct TA_correl_State** _state )
+/* Generated */ public RetCode correlStateFree( struct TA_correl_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CORREL_StateFree( struct TA_CORREL_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CORREL_StateFree( struct TA_CORREL_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -467,16 +467,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CorrelStateSave( struct TA_Correl_State* _state,
-/* Generated */                          FILE* _file )
+/* Generated */ Core::RetCode Core::CorrelStateSave( struct TA_Correl_State* _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int correlStateSave( struct TA_correl_State* _state,
-/* Generated */                           FILE* _file )
+/* Generated */ public RetCode correlStateSave( struct TA_correl_State* _state,
+/* Generated */                               FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CORREL_StateSave( struct TA_CORREL_State* _state,
-/* Generated */                                              FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CORREL_StateSave( struct TA_CORREL_State* _state,
+/* Generated */                                                     FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -526,16 +526,16 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CorrelStateLoad( struct TA_Correl_State** _state,
-/* Generated */                          FILE* _file )
+/* Generated */ Core::RetCode Core::CorrelStateLoad( struct TA_Correl_State** _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int correlStateLoad( struct TA_correl_State** _state,
-/* Generated */                           FILE* _file )
+/* Generated */ public RetCode correlStateLoad( struct TA_correl_State** _state,
+/* Generated */                               FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CORREL_StateLoad( struct TA_CORREL_State** _state,
-/* Generated */                                              FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CORREL_StateLoad( struct TA_CORREL_State** _state,
+/* Generated */                                                     FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

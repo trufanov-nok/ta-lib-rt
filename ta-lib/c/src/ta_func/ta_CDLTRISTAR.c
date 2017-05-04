@@ -267,13 +267,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlTristarStateInit( struct TA_CdlTristar_State** _state )
+/* Generated */ Core::RetCode Core::CdlTristarStateInit( struct TA_CdlTristar_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlTristarStateInit( struct TA_cdlTristar_State** _state )
+/* Generated */ public RetCode cdlTristarStateInit( struct TA_cdlTristar_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLTRISTAR_StateInit( struct TA_CDLTRISTAR_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLTRISTAR_StateInit( struct TA_CDLTRISTAR_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -309,26 +309,26 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlTristarState( struct TA_CdlTristar_State* _state,
-/* Generated */                          cli::array<double>^ inOpen,
-/* Generated */                          cli::array<double>^ inHigh,
-/* Generated */                          cli::array<double>^ inLow,
-/* Generated */                          cli::array<double>^ inClose,
-/* Generated */                          cli::array<int>^  *outInteger )
+/* Generated */ Core::RetCode Core::CdlTristarState( struct TA_CdlTristar_State* _state,
+/* Generated */                                    cli::array<double>^ inOpen,
+/* Generated */                                    cli::array<double>^ inHigh,
+/* Generated */                                    cli::array<double>^ inLow,
+/* Generated */                                    cli::array<double>^ inClose,
+/* Generated */                                    cli::array<int>^  *outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlTristarState( struct TA_cdlTristar_State* _state,
-/* Generated */                           double       inOpen,
-/* Generated */                           double       inHigh,
-/* Generated */                           double       inLow,
-/* Generated */                           double       inClose,
-/* Generated */                           int           *outInteger )
+/* Generated */ public RetCode cdlTristarState( struct TA_cdlTristar_State* _state,
+/* Generated */                               double       inOpen,
+/* Generated */                               double       inHigh,
+/* Generated */                               double       inLow,
+/* Generated */                               double       inClose,
+/* Generated */                               int           *outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLTRISTAR_State( struct TA_CDLTRISTAR_State* _state,
-/* Generated */                                              const double inOpen,
-/* Generated */                                              const double inHigh,
-/* Generated */                                              const double inLow,
-/* Generated */                                              const double inClose,
-/* Generated */                                              int           *outInteger )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLTRISTAR_State( struct TA_CDLTRISTAR_State* _state,
+/* Generated */                                                     const double inOpen,
+/* Generated */                                                     const double inHigh,
+/* Generated */                                                     const double inLow,
+/* Generated */                                                     const double inClose,
+/* Generated */                                                     int           *outInteger )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -426,13 +426,13 @@ int i1, i2;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlTristarStateFree( struct TA_CdlTristar_State** _state )
+/* Generated */ Core::RetCode Core::CdlTristarStateFree( struct TA_CdlTristar_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlTristarStateFree( struct TA_cdlTristar_State** _state )
+/* Generated */ public RetCode cdlTristarStateFree( struct TA_cdlTristar_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLTRISTAR_StateFree( struct TA_CDLTRISTAR_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLTRISTAR_StateFree( struct TA_CDLTRISTAR_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -460,16 +460,16 @@ int i1, i2;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlTristarStateSave( struct TA_CdlTristar_State* _state,
-/* Generated */                              FILE* _file )
+/* Generated */ Core::RetCode Core::CdlTristarStateSave( struct TA_CdlTristar_State* _state,
+/* Generated */                                        FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlTristarStateSave( struct TA_cdlTristar_State* _state,
-/* Generated */                               FILE* _file )
+/* Generated */ public RetCode cdlTristarStateSave( struct TA_cdlTristar_State* _state,
+/* Generated */                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLTRISTAR_StateSave( struct TA_CDLTRISTAR_State* _state,
-/* Generated */                                                  FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLTRISTAR_StateSave( struct TA_CDLTRISTAR_State* _state,
+/* Generated */                                                         FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -513,16 +513,16 @@ int i1, i2;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlTristarStateLoad( struct TA_CdlTristar_State** _state,
-/* Generated */                              FILE* _file )
+/* Generated */ Core::RetCode Core::CdlTristarStateLoad( struct TA_CdlTristar_State** _state,
+/* Generated */                                        FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlTristarStateLoad( struct TA_cdlTristar_State** _state,
-/* Generated */                               FILE* _file )
+/* Generated */ public RetCode cdlTristarStateLoad( struct TA_cdlTristar_State** _state,
+/* Generated */                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLTRISTAR_StateLoad( struct TA_CDLTRISTAR_State** _state,
-/* Generated */                                                  FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLTRISTAR_StateLoad( struct TA_CDLTRISTAR_State** _state,
+/* Generated */                                                         FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

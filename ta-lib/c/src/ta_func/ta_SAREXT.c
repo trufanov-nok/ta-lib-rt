@@ -699,37 +699,37 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::SarExtStateInit( struct TA_SarExt_State** _state,
-/* Generated */                          double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
-/* Generated */                          double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
-/* Generated */                          double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
-/* Generated */                          double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
-/* Generated */                          double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
-/* Generated */                          double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
-/* Generated */                          double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
-/* Generated */                          double        optInAccelerationMaxShort )  /* From 0 to TA_REAL_MAX */
+/* Generated */ Core::RetCode Core::SarExtStateInit( struct TA_SarExt_State** _state,
+/* Generated */                                    double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
+/* Generated */                                    double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
+/* Generated */                                    double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                                    double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                                    double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                                    double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
+/* Generated */                                    double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
+/* Generated */                                    double        optInAccelerationMaxShort )  /* From 0 to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int sarExtStateInit( struct TA_sarExt_State** _state,
-/* Generated */                           double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
-/* Generated */                           double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
-/* Generated */                           double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
-/* Generated */                           double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
-/* Generated */                           double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
-/* Generated */                           double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
-/* Generated */                           double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
-/* Generated */                           double        optInAccelerationMaxShort )  /* From 0 to TA_REAL_MAX */
+/* Generated */ public RetCode sarExtStateInit( struct TA_sarExt_State** _state,
+/* Generated */                               double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
+/* Generated */                               double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
+/* Generated */                               double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                               double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                               double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                               double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
+/* Generated */                               double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
+/* Generated */                               double        optInAccelerationMaxShort )  /* From 0 to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_SAREXT_StateInit( struct TA_SAREXT_State** _state,
-/* Generated */                                              double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
-/* Generated */                                              double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
-/* Generated */                                              double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
-/* Generated */                                              double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
-/* Generated */                                              double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
-/* Generated */                                              double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
-/* Generated */                                              double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
-/* Generated */                                              double        optInAccelerationMaxShort )  /* From 0 to TA_REAL_MAX */
+/* Generated */ TA_LIB_API TA_RetCode TA_SAREXT_StateInit( struct TA_SAREXT_State** _state,
+/* Generated */                                                     double        optInStartValue, /* From TA_REAL_MIN to TA_REAL_MAX */
+/* Generated */                                                     double        optInOffsetOnReverse, /* From 0 to TA_REAL_MAX */
+/* Generated */                                                     double        optInAccelerationInitLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                                                     double        optInAccelerationLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                                                     double        optInAccelerationMaxLong, /* From 0 to TA_REAL_MAX */
+/* Generated */                                                     double        optInAccelerationInitShort, /* From 0 to TA_REAL_MAX */
+/* Generated */                                                     double        optInAccelerationShort, /* From 0 to TA_REAL_MAX */
+/* Generated */                                                     double        optInAccelerationMaxShort )  /* From 0 to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -833,20 +833,20 @@ if( optInAccelerationShort > optInAccelerationMaxShort )
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::SarExtState( struct TA_SarExt_State* _state,
-/* Generated */                      cli::array<double>^ inHigh,
-/* Generated */                      cli::array<double>^ inLow,
-/* Generated */                      cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::SarExtState( struct TA_SarExt_State* _state,
+/* Generated */                                cli::array<double>^ inHigh,
+/* Generated */                                cli::array<double>^ inLow,
+/* Generated */                                cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int sarExtState( struct TA_sarExt_State* _state,
-/* Generated */                       double       inHigh,
-/* Generated */                       double       inLow,
-/* Generated */                       double        *outReal )
+/* Generated */ public RetCode sarExtState( struct TA_sarExt_State* _state,
+/* Generated */                           double       inHigh,
+/* Generated */                           double       inLow,
+/* Generated */                           double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_SAREXT_State( struct TA_SAREXT_State* _state,
-/* Generated */                                          const double inHigh,
-/* Generated */                                          const double inLow,
-/* Generated */                                          double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_SAREXT_State( struct TA_SAREXT_State* _state,
+/* Generated */                                                 const double inHigh,
+/* Generated */                                                 const double inLow,
+/* Generated */                                                 double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -1084,13 +1084,13 @@ if( optInAccelerationShort > optInAccelerationMaxShort )
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::SarExtStateFree( struct TA_SarExt_State** _state )
+/* Generated */ Core::RetCode Core::SarExtStateFree( struct TA_SarExt_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int sarExtStateFree( struct TA_sarExt_State** _state )
+/* Generated */ public RetCode sarExtStateFree( struct TA_sarExt_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_SAREXT_StateFree( struct TA_SAREXT_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_SAREXT_StateFree( struct TA_SAREXT_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -1124,16 +1124,16 @@ if( optInAccelerationShort > optInAccelerationMaxShort )
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::SarExtStateSave( struct TA_SarExt_State* _state,
-/* Generated */                          FILE* _file )
+/* Generated */ Core::RetCode Core::SarExtStateSave( struct TA_SarExt_State* _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int sarExtStateSave( struct TA_sarExt_State* _state,
-/* Generated */                           FILE* _file )
+/* Generated */ public RetCode sarExtStateSave( struct TA_sarExt_State* _state,
+/* Generated */                               FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_SAREXT_StateSave( struct TA_SAREXT_State* _state,
-/* Generated */                                              FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_SAREXT_StateSave( struct TA_SAREXT_State* _state,
+/* Generated */                                                     FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -1208,16 +1208,16 @@ TA_RetCode retCode;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::SarExtStateLoad( struct TA_SarExt_State** _state,
-/* Generated */                          FILE* _file )
+/* Generated */ Core::RetCode Core::SarExtStateLoad( struct TA_SarExt_State** _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int sarExtStateLoad( struct TA_sarExt_State** _state,
-/* Generated */                           FILE* _file )
+/* Generated */ public RetCode sarExtStateLoad( struct TA_sarExt_State** _state,
+/* Generated */                               FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_SAREXT_StateLoad( struct TA_SAREXT_State** _state,
-/* Generated */                                              FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_SAREXT_StateLoad( struct TA_SAREXT_State** _state,
+/* Generated */                                                     FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

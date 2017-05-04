@@ -347,19 +347,19 @@ void TA_PREFIX(INT_stddev_using_precalc_ma)( const INPUT_TYPE *inReal,
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::StdDevStateInit( struct TA_StdDev_State** _state,
-/* Generated */                          int           optInTimePeriod, /* From 2 to 100000 */
-/* Generated */                          double        optInNbDev )  /* From TA_REAL_MIN to TA_REAL_MAX */
+/* Generated */ Core::RetCode Core::StdDevStateInit( struct TA_StdDev_State** _state,
+/* Generated */                                    int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                    double        optInNbDev )  /* From TA_REAL_MIN to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int stdDevStateInit( struct TA_stdDev_State** _state,
-/* Generated */                           int           optInTimePeriod, /* From 2 to 100000 */
-/* Generated */                           double        optInNbDev )  /* From TA_REAL_MIN to TA_REAL_MAX */
+/* Generated */ public RetCode stdDevStateInit( struct TA_stdDev_State** _state,
+/* Generated */                               int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                               double        optInNbDev )  /* From TA_REAL_MIN to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_STDDEV_StateInit( struct TA_STDDEV_State** _state,
-/* Generated */                                              int           optInTimePeriod, /* From 2 to 100000 */
-/* Generated */                                              double        optInNbDev )  /* From TA_REAL_MIN to TA_REAL_MAX */
+/* Generated */ TA_LIB_API TA_RetCode TA_STDDEV_StateInit( struct TA_STDDEV_State** _state,
+/* Generated */                                                     int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                                     double        optInNbDev )  /* From TA_REAL_MIN to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -410,17 +410,17 @@ void TA_PREFIX(INT_stddev_using_precalc_ma)( const INPUT_TYPE *inReal,
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::StdDevState( struct TA_StdDev_State* _state,
-/* Generated */                      cli::array<double>^ inReal,
-/* Generated */                      cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::StdDevState( struct TA_StdDev_State* _state,
+/* Generated */                                cli::array<double>^ inReal,
+/* Generated */                                cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int stdDevState( struct TA_stdDev_State* _state,
-/* Generated */                       double       inReal,
-/* Generated */                       double        *outReal )
+/* Generated */ public RetCode stdDevState( struct TA_stdDev_State* _state,
+/* Generated */                           double       inReal,
+/* Generated */                           double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_STDDEV_State( struct TA_STDDEV_State* _state,
-/* Generated */                                          const double inReal,
-/* Generated */                                          double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_STDDEV_State( struct TA_STDDEV_State* _state,
+/* Generated */                                                 const double inReal,
+/* Generated */                                                 double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -490,13 +490,13 @@ void TA_PREFIX(INT_stddev_using_precalc_ma)( const INPUT_TYPE *inReal,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::StdDevStateFree( struct TA_StdDev_State** _state )
+/* Generated */ Core::RetCode Core::StdDevStateFree( struct TA_StdDev_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int stdDevStateFree( struct TA_stdDev_State** _state )
+/* Generated */ public RetCode stdDevStateFree( struct TA_stdDev_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_STDDEV_StateFree( struct TA_STDDEV_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_STDDEV_StateFree( struct TA_STDDEV_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -524,16 +524,16 @@ void TA_PREFIX(INT_stddev_using_precalc_ma)( const INPUT_TYPE *inReal,
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::StdDevStateSave( struct TA_StdDev_State* _state,
-/* Generated */                          FILE* _file )
+/* Generated */ Core::RetCode Core::StdDevStateSave( struct TA_StdDev_State* _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int stdDevStateSave( struct TA_stdDev_State* _state,
-/* Generated */                           FILE* _file )
+/* Generated */ public RetCode stdDevStateSave( struct TA_stdDev_State* _state,
+/* Generated */                               FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_STDDEV_StateSave( struct TA_STDDEV_State* _state,
-/* Generated */                                              FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_STDDEV_StateSave( struct TA_STDDEV_State* _state,
+/* Generated */                                                     FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -578,16 +578,16 @@ TA_RetCode retCode;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::StdDevStateLoad( struct TA_StdDev_State** _state,
-/* Generated */                          FILE* _file )
+/* Generated */ Core::RetCode Core::StdDevStateLoad( struct TA_StdDev_State** _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int stdDevStateLoad( struct TA_stdDev_State** _state,
-/* Generated */                           FILE* _file )
+/* Generated */ public RetCode stdDevStateLoad( struct TA_stdDev_State** _state,
+/* Generated */                               FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_STDDEV_StateLoad( struct TA_STDDEV_State** _state,
-/* Generated */                                              FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_STDDEV_StateLoad( struct TA_STDDEV_State** _state,
+/* Generated */                                                     FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

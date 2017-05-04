@@ -276,13 +276,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlTakuriStateInit( struct TA_CdlTakuri_State** _state )
+/* Generated */ Core::RetCode Core::CdlTakuriStateInit( struct TA_CdlTakuri_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlTakuriStateInit( struct TA_cdlTakuri_State** _state )
+/* Generated */ public RetCode cdlTakuriStateInit( struct TA_cdlTakuri_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLTAKURI_StateInit( struct TA_CDLTAKURI_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLTAKURI_StateInit( struct TA_CDLTAKURI_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -318,26 +318,26 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlTakuriState( struct TA_CdlTakuri_State* _state,
-/* Generated */                         cli::array<double>^ inOpen,
-/* Generated */                         cli::array<double>^ inHigh,
-/* Generated */                         cli::array<double>^ inLow,
-/* Generated */                         cli::array<double>^ inClose,
-/* Generated */                         cli::array<int>^  *outInteger )
+/* Generated */ Core::RetCode Core::CdlTakuriState( struct TA_CdlTakuri_State* _state,
+/* Generated */                                   cli::array<double>^ inOpen,
+/* Generated */                                   cli::array<double>^ inHigh,
+/* Generated */                                   cli::array<double>^ inLow,
+/* Generated */                                   cli::array<double>^ inClose,
+/* Generated */                                   cli::array<int>^  *outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlTakuriState( struct TA_cdlTakuri_State* _state,
-/* Generated */                          double       inOpen,
-/* Generated */                          double       inHigh,
-/* Generated */                          double       inLow,
-/* Generated */                          double       inClose,
-/* Generated */                          int           *outInteger )
+/* Generated */ public RetCode cdlTakuriState( struct TA_cdlTakuri_State* _state,
+/* Generated */                              double       inOpen,
+/* Generated */                              double       inHigh,
+/* Generated */                              double       inLow,
+/* Generated */                              double       inClose,
+/* Generated */                              int           *outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLTAKURI_State( struct TA_CDLTAKURI_State* _state,
-/* Generated */                                             const double inOpen,
-/* Generated */                                             const double inHigh,
-/* Generated */                                             const double inLow,
-/* Generated */                                             const double inClose,
-/* Generated */                                             int           *outInteger )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLTAKURI_State( struct TA_CDLTAKURI_State* _state,
+/* Generated */                                                    const double inOpen,
+/* Generated */                                                    const double inHigh,
+/* Generated */                                                    const double inLow,
+/* Generated */                                                    const double inClose,
+/* Generated */                                                    int           *outInteger )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -440,13 +440,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlTakuriStateFree( struct TA_CdlTakuri_State** _state )
+/* Generated */ Core::RetCode Core::CdlTakuriStateFree( struct TA_CdlTakuri_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlTakuriStateFree( struct TA_cdlTakuri_State** _state )
+/* Generated */ public RetCode cdlTakuriStateFree( struct TA_cdlTakuri_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLTAKURI_StateFree( struct TA_CDLTAKURI_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLTAKURI_StateFree( struct TA_CDLTAKURI_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -474,16 +474,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlTakuriStateSave( struct TA_CdlTakuri_State* _state,
-/* Generated */                             FILE* _file )
+/* Generated */ Core::RetCode Core::CdlTakuriStateSave( struct TA_CdlTakuri_State* _state,
+/* Generated */                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlTakuriStateSave( struct TA_cdlTakuri_State* _state,
-/* Generated */                              FILE* _file )
+/* Generated */ public RetCode cdlTakuriStateSave( struct TA_cdlTakuri_State* _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLTAKURI_StateSave( struct TA_CDLTAKURI_State* _state,
-/* Generated */                                                 FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLTAKURI_StateSave( struct TA_CDLTAKURI_State* _state,
+/* Generated */                                                        FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -539,16 +539,16 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlTakuriStateLoad( struct TA_CdlTakuri_State** _state,
-/* Generated */                             FILE* _file )
+/* Generated */ Core::RetCode Core::CdlTakuriStateLoad( struct TA_CdlTakuri_State** _state,
+/* Generated */                                       FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlTakuriStateLoad( struct TA_cdlTakuri_State** _state,
-/* Generated */                              FILE* _file )
+/* Generated */ public RetCode cdlTakuriStateLoad( struct TA_cdlTakuri_State** _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLTAKURI_StateLoad( struct TA_CDLTAKURI_State** _state,
-/* Generated */                                                 FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLTAKURI_StateLoad( struct TA_CDLTAKURI_State** _state,
+/* Generated */                                                        FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

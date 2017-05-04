@@ -201,13 +201,13 @@ int outIdx;
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::NviStateInit( struct TA_Nvi_State** _state )
+/* Generated */ Core::RetCode Core::NviStateInit( struct TA_Nvi_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int nviStateInit( struct TA_nvi_State** _state )
+/* Generated */ public RetCode nviStateInit( struct TA_nvi_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_NVI_StateInit( struct TA_NVI_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_NVI_StateInit( struct TA_NVI_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -243,20 +243,20 @@ int outIdx;
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::NviState( struct TA_Nvi_State* _state,
-/* Generated */                   cli::array<double>^ inClose,
-/* Generated */                   cli::array<double>^ inVolume,
-/* Generated */                   cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::NviState( struct TA_Nvi_State* _state,
+/* Generated */                             cli::array<double>^ inClose,
+/* Generated */                             cli::array<double>^ inVolume,
+/* Generated */                             cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int nviState( struct TA_nvi_State* _state,
-/* Generated */                    double       inClose,
-/* Generated */                    double       inVolume,
-/* Generated */                    double        *outReal )
+/* Generated */ public RetCode nviState( struct TA_nvi_State* _state,
+/* Generated */                        double       inClose,
+/* Generated */                        double       inVolume,
+/* Generated */                        double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_NVI_State( struct TA_NVI_State* _state,
-/* Generated */                                       const double inClose,
-/* Generated */                                       const double inVolume,
-/* Generated */                                       double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_NVI_State( struct TA_NVI_State* _state,
+/* Generated */                                              const double inClose,
+/* Generated */                                              const double inVolume,
+/* Generated */                                              double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -312,13 +312,13 @@ int outIdx;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::NviStateFree( struct TA_Nvi_State** _state )
+/* Generated */ Core::RetCode Core::NviStateFree( struct TA_Nvi_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int nviStateFree( struct TA_nvi_State** _state )
+/* Generated */ public RetCode nviStateFree( struct TA_nvi_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_NVI_StateFree( struct TA_NVI_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_NVI_StateFree( struct TA_NVI_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -346,16 +346,16 @@ int outIdx;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::NviStateSave( struct TA_Nvi_State* _state,
-/* Generated */                       FILE* _file )
+/* Generated */ Core::RetCode Core::NviStateSave( struct TA_Nvi_State* _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int nviStateSave( struct TA_nvi_State* _state,
-/* Generated */                        FILE* _file )
+/* Generated */ public RetCode nviStateSave( struct TA_nvi_State* _state,
+/* Generated */                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_NVI_StateSave( struct TA_NVI_State* _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_NVI_StateSave( struct TA_NVI_State* _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -395,16 +395,16 @@ int outIdx;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::NviStateLoad( struct TA_Nvi_State** _state,
-/* Generated */                       FILE* _file )
+/* Generated */ Core::RetCode Core::NviStateLoad( struct TA_Nvi_State** _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int nviStateLoad( struct TA_nvi_State** _state,
-/* Generated */                        FILE* _file )
+/* Generated */ public RetCode nviStateLoad( struct TA_nvi_State** _state,
+/* Generated */                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_NVI_StateLoad( struct TA_NVI_State** _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_NVI_StateLoad( struct TA_NVI_State** _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
@@ -512,7 +512,7 @@ int outIdx;
 /* Generated */    while( startIdx <= endIdx )
 /* Generated */    {
 /* Generated */       if (inVolume[startIdx] < inVolume[startIdx-1])
-/* Generated */           prev_nvi += prev_nvi * inClose[startIdx] / inClose[startIdx-1];
+/* Generated */           prev_nvi *= inClose[startIdx] / inClose[startIdx-1];
 /* Generated */       outReal[outIdx++] = prev_nvi;
 /* Generated */       startIdx++;
 /* Generated */    }

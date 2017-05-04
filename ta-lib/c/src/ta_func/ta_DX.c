@@ -492,16 +492,16 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::DxStateInit( struct TA_Dx_State** _state,
-/* Generated */                      int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ Core::RetCode Core::DxStateInit( struct TA_Dx_State** _state,
+/* Generated */                                int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int dxStateInit( struct TA_dx_State** _state,
-/* Generated */                       int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ public RetCode dxStateInit( struct TA_dx_State** _state,
+/* Generated */                           int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_DX_StateInit( struct TA_DX_State** _state,
-/* Generated */                                          int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_DX_StateInit( struct TA_DX_State** _state,
+/* Generated */                                                 int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -544,23 +544,23 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::DxState( struct TA_Dx_State* _state,
-/* Generated */                  cli::array<double>^ inHigh,
-/* Generated */                  cli::array<double>^ inLow,
-/* Generated */                  cli::array<double>^ inClose,
-/* Generated */                  cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::DxState( struct TA_Dx_State* _state,
+/* Generated */                            cli::array<double>^ inHigh,
+/* Generated */                            cli::array<double>^ inLow,
+/* Generated */                            cli::array<double>^ inClose,
+/* Generated */                            cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int dxState( struct TA_dx_State* _state,
-/* Generated */                   double       inHigh,
-/* Generated */                   double       inLow,
-/* Generated */                   double       inClose,
-/* Generated */                   double        *outReal )
+/* Generated */ public RetCode dxState( struct TA_dx_State* _state,
+/* Generated */                       double       inHigh,
+/* Generated */                       double       inLow,
+/* Generated */                       double       inClose,
+/* Generated */                       double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_DX_State( struct TA_DX_State* _state,
-/* Generated */                                      const double inHigh,
-/* Generated */                                      const double inLow,
-/* Generated */                                      const double inClose,
-/* Generated */                                      double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_DX_State( struct TA_DX_State* _state,
+/* Generated */                                             const double inHigh,
+/* Generated */                                             const double inLow,
+/* Generated */                                             const double inClose,
+/* Generated */                                             double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -676,13 +676,13 @@ double minusDI, plusDI;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::DxStateFree( struct TA_Dx_State** _state )
+/* Generated */ Core::RetCode Core::DxStateFree( struct TA_Dx_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int dxStateFree( struct TA_dx_State** _state )
+/* Generated */ public RetCode dxStateFree( struct TA_dx_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_DX_StateFree( struct TA_DX_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_DX_StateFree( struct TA_DX_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -710,16 +710,16 @@ double minusDI, plusDI;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::DxStateSave( struct TA_Dx_State* _state,
-/* Generated */                      FILE* _file )
+/* Generated */ Core::RetCode Core::DxStateSave( struct TA_Dx_State* _state,
+/* Generated */                                FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int dxStateSave( struct TA_dx_State* _state,
-/* Generated */                       FILE* _file )
+/* Generated */ public RetCode dxStateSave( struct TA_dx_State* _state,
+/* Generated */                           FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_DX_StateSave( struct TA_DX_State* _state,
-/* Generated */                                          FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_DX_StateSave( struct TA_DX_State* _state,
+/* Generated */                                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -773,16 +773,16 @@ double minusDI, plusDI;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::DxStateLoad( struct TA_Dx_State** _state,
-/* Generated */                      FILE* _file )
+/* Generated */ Core::RetCode Core::DxStateLoad( struct TA_Dx_State** _state,
+/* Generated */                                FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int dxStateLoad( struct TA_dx_State** _state,
-/* Generated */                       FILE* _file )
+/* Generated */ public RetCode dxStateLoad( struct TA_dx_State** _state,
+/* Generated */                           FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_DX_StateLoad( struct TA_DX_State** _state,
-/* Generated */                                          FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_DX_StateLoad( struct TA_DX_State** _state,
+/* Generated */                                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

@@ -204,13 +204,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::PviStateInit( struct TA_Pvi_State** _state )
+/* Generated */ Core::RetCode Core::PviStateInit( struct TA_Pvi_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int pviStateInit( struct TA_pvi_State** _state )
+/* Generated */ public RetCode pviStateInit( struct TA_pvi_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_PVI_StateInit( struct TA_PVI_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_PVI_StateInit( struct TA_PVI_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -246,20 +246,20 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::PviState( struct TA_Pvi_State* _state,
-/* Generated */                   cli::array<double>^ inClose,
-/* Generated */                   cli::array<double>^ inVolume,
-/* Generated */                   cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::PviState( struct TA_Pvi_State* _state,
+/* Generated */                             cli::array<double>^ inClose,
+/* Generated */                             cli::array<double>^ inVolume,
+/* Generated */                             cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int pviState( struct TA_pvi_State* _state,
-/* Generated */                    double       inClose,
-/* Generated */                    double       inVolume,
-/* Generated */                    double        *outReal )
+/* Generated */ public RetCode pviState( struct TA_pvi_State* _state,
+/* Generated */                        double       inClose,
+/* Generated */                        double       inVolume,
+/* Generated */                        double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_PVI_State( struct TA_PVI_State* _state,
-/* Generated */                                       const double inClose,
-/* Generated */                                       const double inVolume,
-/* Generated */                                       double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_PVI_State( struct TA_PVI_State* _state,
+/* Generated */                                              const double inClose,
+/* Generated */                                              const double inVolume,
+/* Generated */                                              double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -314,13 +314,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::PviStateFree( struct TA_Pvi_State** _state )
+/* Generated */ Core::RetCode Core::PviStateFree( struct TA_Pvi_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int pviStateFree( struct TA_pvi_State** _state )
+/* Generated */ public RetCode pviStateFree( struct TA_pvi_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_PVI_StateFree( struct TA_PVI_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_PVI_StateFree( struct TA_PVI_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -348,16 +348,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::PviStateSave( struct TA_Pvi_State* _state,
-/* Generated */                       FILE* _file )
+/* Generated */ Core::RetCode Core::PviStateSave( struct TA_Pvi_State* _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int pviStateSave( struct TA_pvi_State* _state,
-/* Generated */                        FILE* _file )
+/* Generated */ public RetCode pviStateSave( struct TA_pvi_State* _state,
+/* Generated */                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_PVI_StateSave( struct TA_PVI_State* _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_PVI_StateSave( struct TA_PVI_State* _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -397,16 +397,16 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::PviStateLoad( struct TA_Pvi_State** _state,
-/* Generated */                       FILE* _file )
+/* Generated */ Core::RetCode Core::PviStateLoad( struct TA_Pvi_State** _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int pviStateLoad( struct TA_pvi_State** _state,
-/* Generated */                        FILE* _file )
+/* Generated */ public RetCode pviStateLoad( struct TA_pvi_State** _state,
+/* Generated */                            FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_PVI_StateLoad( struct TA_PVI_State** _state,
-/* Generated */                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_PVI_StateLoad( struct TA_PVI_State** _state,
+/* Generated */                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
@@ -488,6 +488,8 @@
 /* Generated */                      double        outReal[] )
 /* Generated */ #endif
 /* Generated */ {
+/* Generated */  double prev_pvi;
+/* Generated */  int outIdx;
 /* Generated */  #ifndef TA_FUNC_NO_RANGE_CHECK
 /* Generated */     if( startIdx < 0 )
 /* Generated */        return ENUM_VALUE(RetCode,TA_OUT_OF_RANGE_START_INDEX,OutOfRangeStartIndex);
@@ -502,8 +504,21 @@
 /* Generated */        return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */     #endif 
 /* Generated */  #endif 
-/* Generated */    *outBegIdx    = 0;
-/* Generated */    *outNBElement = 0;
+/* Generated */        VALUE_HANDLE_DEREF_TO_ZERO(outBegIdx);
+/* Generated */        VALUE_HANDLE_DEREF_TO_ZERO(outNBElement);
+/* Generated */        if( startIdx < 1 )
+/* Generated */           startIdx = 1;
+/* Generated */        outIdx = 0;
+/* Generated */        prev_pvi = 100.;
+/* Generated */        VALUE_HANDLE_DEREF(outBegIdx) = startIdx;
+/* Generated */        while( startIdx <= endIdx )
+/* Generated */        {
+/* Generated */           if (inVolume[startIdx] > inVolume[startIdx-1])
+/* Generated */               prev_pvi *= inClose[startIdx] / inClose[startIdx-1];
+/* Generated */           outReal[outIdx++] = prev_pvi;
+/* Generated */           startIdx++;
+/* Generated */        }
+/* Generated */        VALUE_HANDLE_DEREF(outNBElement) = outIdx;
 /* Generated */    return TA_SUCCESS;
 /* Generated */ }
 /* Generated */ 

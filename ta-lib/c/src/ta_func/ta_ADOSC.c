@@ -350,19 +350,19 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AdOscStateInit( struct TA_AdOsc_State** _state,
-/* Generated */                         int           optInFastPeriod, /* From 2 to 100000 */
-/* Generated */                         int           optInSlowPeriod )  /* From 2 to 100000 */
+/* Generated */ Core::RetCode Core::AdOscStateInit( struct TA_AdOsc_State** _state,
+/* Generated */                                   int           optInFastPeriod, /* From 2 to 100000 */
+/* Generated */                                   int           optInSlowPeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int adOscStateInit( struct TA_adOsc_State** _state,
-/* Generated */                          int           optInFastPeriod, /* From 2 to 100000 */
-/* Generated */                          int           optInSlowPeriod )  /* From 2 to 100000 */
+/* Generated */ public RetCode adOscStateInit( struct TA_adOsc_State** _state,
+/* Generated */                              int           optInFastPeriod, /* From 2 to 100000 */
+/* Generated */                              int           optInSlowPeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ADOSC_StateInit( struct TA_ADOSC_State** _state,
-/* Generated */                                             int           optInFastPeriod, /* From 2 to 100000 */
-/* Generated */                                             int           optInSlowPeriod )  /* From 2 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_ADOSC_StateInit( struct TA_ADOSC_State** _state,
+/* Generated */                                                    int           optInFastPeriod, /* From 2 to 100000 */
+/* Generated */                                                    int           optInSlowPeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -412,26 +412,26 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AdOscState( struct TA_AdOsc_State* _state,
-/* Generated */                     cli::array<double>^ inHigh,
-/* Generated */                     cli::array<double>^ inLow,
-/* Generated */                     cli::array<double>^ inClose,
-/* Generated */                     cli::array<double>^ inVolume,
-/* Generated */                     cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::AdOscState( struct TA_AdOsc_State* _state,
+/* Generated */                               cli::array<double>^ inHigh,
+/* Generated */                               cli::array<double>^ inLow,
+/* Generated */                               cli::array<double>^ inClose,
+/* Generated */                               cli::array<double>^ inVolume,
+/* Generated */                               cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int adOscState( struct TA_adOsc_State* _state,
-/* Generated */                      double       inHigh,
-/* Generated */                      double       inLow,
-/* Generated */                      double       inClose,
-/* Generated */                      double       inVolume,
-/* Generated */                      double        *outReal )
+/* Generated */ public RetCode adOscState( struct TA_adOsc_State* _state,
+/* Generated */                          double       inHigh,
+/* Generated */                          double       inLow,
+/* Generated */                          double       inClose,
+/* Generated */                          double       inVolume,
+/* Generated */                          double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ADOSC_State( struct TA_ADOSC_State* _state,
-/* Generated */                                         const double inHigh,
-/* Generated */                                         const double inLow,
-/* Generated */                                         const double inClose,
-/* Generated */                                         const double inVolume,
-/* Generated */                                         double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_ADOSC_State( struct TA_ADOSC_State* _state,
+/* Generated */                                                const double inHigh,
+/* Generated */                                                const double inLow,
+/* Generated */                                                const double inClose,
+/* Generated */                                                const double inVolume,
+/* Generated */                                                double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -512,13 +512,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AdOscStateFree( struct TA_AdOsc_State** _state )
+/* Generated */ Core::RetCode Core::AdOscStateFree( struct TA_AdOsc_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int adOscStateFree( struct TA_adOsc_State** _state )
+/* Generated */ public RetCode adOscStateFree( struct TA_adOsc_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ADOSC_StateFree( struct TA_ADOSC_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_ADOSC_StateFree( struct TA_ADOSC_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -545,16 +545,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AdOscStateSave( struct TA_AdOsc_State* _state,
-/* Generated */                         FILE* _file )
+/* Generated */ Core::RetCode Core::AdOscStateSave( struct TA_AdOsc_State* _state,
+/* Generated */                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int adOscStateSave( struct TA_adOsc_State* _state,
-/* Generated */                          FILE* _file )
+/* Generated */ public RetCode adOscStateSave( struct TA_adOsc_State* _state,
+/* Generated */                              FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ADOSC_StateSave( struct TA_ADOSC_State* _state,
-/* Generated */                                             FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_ADOSC_StateSave( struct TA_ADOSC_State* _state,
+/* Generated */                                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -610,16 +610,16 @@
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::AdOscStateLoad( struct TA_AdOsc_State** _state,
-/* Generated */                         FILE* _file )
+/* Generated */ Core::RetCode Core::AdOscStateLoad( struct TA_AdOsc_State** _state,
+/* Generated */                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int adOscStateLoad( struct TA_adOsc_State** _state,
-/* Generated */                          FILE* _file )
+/* Generated */ public RetCode adOscStateLoad( struct TA_adOsc_State** _state,
+/* Generated */                              FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_ADOSC_StateLoad( struct TA_ADOSC_State** _state,
-/* Generated */                                             FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_ADOSC_StateLoad( struct TA_ADOSC_State** _state,
+/* Generated */                                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

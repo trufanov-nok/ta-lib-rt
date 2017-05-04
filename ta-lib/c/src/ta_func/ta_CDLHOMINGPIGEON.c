@@ -270,13 +270,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlHomingPigeonStateInit( struct TA_CdlHomingPigeon_State** _state )
+/* Generated */ Core::RetCode Core::CdlHomingPigeonStateInit( struct TA_CdlHomingPigeon_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlHomingPigeonStateInit( struct TA_cdlHomingPigeon_State** _state )
+/* Generated */ public RetCode cdlHomingPigeonStateInit( struct TA_cdlHomingPigeon_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLHOMINGPIGEON_StateInit( struct TA_CDLHOMINGPIGEON_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLHOMINGPIGEON_StateInit( struct TA_CDLHOMINGPIGEON_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -312,26 +312,26 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlHomingPigeonState( struct TA_CdlHomingPigeon_State* _state,
-/* Generated */                               cli::array<double>^ inOpen,
-/* Generated */                               cli::array<double>^ inHigh,
-/* Generated */                               cli::array<double>^ inLow,
-/* Generated */                               cli::array<double>^ inClose,
-/* Generated */                               cli::array<int>^  *outInteger )
+/* Generated */ Core::RetCode Core::CdlHomingPigeonState( struct TA_CdlHomingPigeon_State* _state,
+/* Generated */                                         cli::array<double>^ inOpen,
+/* Generated */                                         cli::array<double>^ inHigh,
+/* Generated */                                         cli::array<double>^ inLow,
+/* Generated */                                         cli::array<double>^ inClose,
+/* Generated */                                         cli::array<int>^  *outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlHomingPigeonState( struct TA_cdlHomingPigeon_State* _state,
-/* Generated */                                double       inOpen,
-/* Generated */                                double       inHigh,
-/* Generated */                                double       inLow,
-/* Generated */                                double       inClose,
-/* Generated */                                int           *outInteger )
+/* Generated */ public RetCode cdlHomingPigeonState( struct TA_cdlHomingPigeon_State* _state,
+/* Generated */                                    double       inOpen,
+/* Generated */                                    double       inHigh,
+/* Generated */                                    double       inLow,
+/* Generated */                                    double       inClose,
+/* Generated */                                    int           *outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLHOMINGPIGEON_State( struct TA_CDLHOMINGPIGEON_State* _state,
-/* Generated */                                                   const double inOpen,
-/* Generated */                                                   const double inHigh,
-/* Generated */                                                   const double inLow,
-/* Generated */                                                   const double inClose,
-/* Generated */                                                   int           *outInteger )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLHOMINGPIGEON_State( struct TA_CDLHOMINGPIGEON_State* _state,
+/* Generated */                                                          const double inOpen,
+/* Generated */                                                          const double inHigh,
+/* Generated */                                                          const double inLow,
+/* Generated */                                                          const double inClose,
+/* Generated */                                                          int           *outInteger )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -429,13 +429,13 @@ int i1;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlHomingPigeonStateFree( struct TA_CdlHomingPigeon_State** _state )
+/* Generated */ Core::RetCode Core::CdlHomingPigeonStateFree( struct TA_CdlHomingPigeon_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlHomingPigeonStateFree( struct TA_cdlHomingPigeon_State** _state )
+/* Generated */ public RetCode cdlHomingPigeonStateFree( struct TA_cdlHomingPigeon_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLHOMINGPIGEON_StateFree( struct TA_CDLHOMINGPIGEON_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLHOMINGPIGEON_StateFree( struct TA_CDLHOMINGPIGEON_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -463,16 +463,16 @@ int i1;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlHomingPigeonStateSave( struct TA_CdlHomingPigeon_State* _state,
-/* Generated */                                   FILE* _file )
+/* Generated */ Core::RetCode Core::CdlHomingPigeonStateSave( struct TA_CdlHomingPigeon_State* _state,
+/* Generated */                                             FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlHomingPigeonStateSave( struct TA_cdlHomingPigeon_State* _state,
-/* Generated */                                    FILE* _file )
+/* Generated */ public RetCode cdlHomingPigeonStateSave( struct TA_cdlHomingPigeon_State* _state,
+/* Generated */                                        FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLHOMINGPIGEON_StateSave( struct TA_CDLHOMINGPIGEON_State* _state,
-/* Generated */                                                       FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLHOMINGPIGEON_StateSave( struct TA_CDLHOMINGPIGEON_State* _state,
+/* Generated */                                                              FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -522,16 +522,16 @@ int i1;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlHomingPigeonStateLoad( struct TA_CdlHomingPigeon_State** _state,
-/* Generated */                                   FILE* _file )
+/* Generated */ Core::RetCode Core::CdlHomingPigeonStateLoad( struct TA_CdlHomingPigeon_State** _state,
+/* Generated */                                             FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlHomingPigeonStateLoad( struct TA_cdlHomingPigeon_State** _state,
-/* Generated */                                    FILE* _file )
+/* Generated */ public RetCode cdlHomingPigeonStateLoad( struct TA_cdlHomingPigeon_State** _state,
+/* Generated */                                        FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLHOMINGPIGEON_StateLoad( struct TA_CDLHOMINGPIGEON_State** _state,
-/* Generated */                                                       FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLHOMINGPIGEON_StateLoad( struct TA_CDLHOMINGPIGEON_State** _state,
+/* Generated */                                                              FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

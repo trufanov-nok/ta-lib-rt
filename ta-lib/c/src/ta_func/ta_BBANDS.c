@@ -431,23 +431,23 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::BbandsStateInit( struct TA_Bbands_State** _state,
-/* Generated */                          int           optInTimePeriod, /* From 2 to 100000 */
-/* Generated */                          double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
-/* Generated */                          double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
-/* Generated */                          MAType        optInMAType ) /* Generated */ 
+/* Generated */ Core::RetCode Core::BbandsStateInit( struct TA_Bbands_State** _state,
+/* Generated */                                    int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                    double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
+/* Generated */                                    double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
+/* Generated */                                    MAType        optInMAType ) /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int bbandsStateInit( struct TA_bbands_State** _state,
-/* Generated */                           int           optInTimePeriod, /* From 2 to 100000 */
-/* Generated */                           double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
-/* Generated */                           double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
-/* Generated */                           MAType        optInMAType ) /* Generated */ 
+/* Generated */ public RetCode bbandsStateInit( struct TA_bbands_State** _state,
+/* Generated */                               int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                               double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
+/* Generated */                               double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
+/* Generated */                               MAType        optInMAType ) /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_BBANDS_StateInit( struct TA_BBANDS_State** _state,
-/* Generated */                                              int           optInTimePeriod, /* From 2 to 100000 */
-/* Generated */                                              double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
-/* Generated */                                              double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
-/* Generated */                                              TA_MAType     optInMAType ) /* Generated */ 
+/* Generated */ TA_LIB_API TA_RetCode TA_BBANDS_StateInit( struct TA_BBANDS_State** _state,
+/* Generated */                                                     int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                                     double        optInNbDevUp, /* From TA_REAL_MIN to TA_REAL_MAX */
+/* Generated */                                                     double        optInNbDevDn, /* From TA_REAL_MIN to TA_REAL_MAX */
+/* Generated */                                                     TA_MAType     optInMAType ) /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 
@@ -513,23 +513,23 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::BbandsState( struct TA_Bbands_State* _state,
-/* Generated */                      cli::array<double>^ inReal,
-/* Generated */                      cli::array<double>^  *outRealUpperBand,
-/* Generated */                      cli::array<double>^  *outRealMiddleBand,
-/* Generated */                      cli::array<double>^  *outRealLowerBand )
+/* Generated */ Core::RetCode Core::BbandsState( struct TA_Bbands_State* _state,
+/* Generated */                                cli::array<double>^ inReal,
+/* Generated */                                cli::array<double>^  *outRealUpperBand,
+/* Generated */                                cli::array<double>^  *outRealMiddleBand,
+/* Generated */                                cli::array<double>^  *outRealLowerBand )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int bbandsState( struct TA_bbands_State* _state,
-/* Generated */                       double       inReal,
-/* Generated */                       double        *outRealUpperBand,
-/* Generated */                       double        *outRealMiddleBand,
-/* Generated */                       double        *outRealLowerBand )
+/* Generated */ public RetCode bbandsState( struct TA_bbands_State* _state,
+/* Generated */                           double       inReal,
+/* Generated */                           double        *outRealUpperBand,
+/* Generated */                           double        *outRealMiddleBand,
+/* Generated */                           double        *outRealLowerBand )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_BBANDS_State( struct TA_BBANDS_State* _state,
-/* Generated */                                          const double inReal,
-/* Generated */                                          double        *outRealUpperBand,
-/* Generated */                                          double        *outRealMiddleBand,
-/* Generated */                                          double        *outRealLowerBand )
+/* Generated */ TA_LIB_API TA_RetCode TA_BBANDS_State( struct TA_BBANDS_State* _state,
+/* Generated */                                                 const double inReal,
+/* Generated */                                                 double        *outRealUpperBand,
+/* Generated */                                                 double        *outRealMiddleBand,
+/* Generated */                                                 double        *outRealLowerBand )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -616,13 +616,13 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::BbandsStateFree( struct TA_Bbands_State** _state )
+/* Generated */ Core::RetCode Core::BbandsStateFree( struct TA_Bbands_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int bbandsStateFree( struct TA_bbands_State** _state )
+/* Generated */ public RetCode bbandsStateFree( struct TA_bbands_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_BBANDS_StateFree( struct TA_BBANDS_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_BBANDS_StateFree( struct TA_BBANDS_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -654,16 +654,16 @@
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::BbandsStateSave( struct TA_Bbands_State* _state,
-/* Generated */                          FILE* _file )
+/* Generated */ Core::RetCode Core::BbandsStateSave( struct TA_Bbands_State* _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int bbandsStateSave( struct TA_bbands_State* _state,
-/* Generated */                           FILE* _file )
+/* Generated */ public RetCode bbandsStateSave( struct TA_bbands_State* _state,
+/* Generated */                               FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_BBANDS_StateSave( struct TA_BBANDS_State* _state,
-/* Generated */                                              FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_BBANDS_StateSave( struct TA_BBANDS_State* _state,
+/* Generated */                                                     FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -716,16 +716,16 @@ TA_RetCode retCode;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::BbandsStateLoad( struct TA_Bbands_State** _state,
-/* Generated */                          FILE* _file )
+/* Generated */ Core::RetCode Core::BbandsStateLoad( struct TA_Bbands_State** _state,
+/* Generated */                                    FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int bbandsStateLoad( struct TA_bbands_State** _state,
-/* Generated */                           FILE* _file )
+/* Generated */ public RetCode bbandsStateLoad( struct TA_bbands_State** _state,
+/* Generated */                               FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_BBANDS_StateLoad( struct TA_BBANDS_State** _state,
-/* Generated */                                              FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_BBANDS_StateLoad( struct TA_BBANDS_State** _state,
+/* Generated */                                                     FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

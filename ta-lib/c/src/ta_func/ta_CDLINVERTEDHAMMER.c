@@ -280,13 +280,13 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlInvertedHammerStateInit( struct TA_CdlInvertedHammer_State** _state )
+/* Generated */ Core::RetCode Core::CdlInvertedHammerStateInit( struct TA_CdlInvertedHammer_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlInvertedHammerStateInit( struct TA_cdlInvertedHammer_State** _state )
+/* Generated */ public RetCode cdlInvertedHammerStateInit( struct TA_cdlInvertedHammer_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLINVERTEDHAMMER_StateInit( struct TA_CDLINVERTEDHAMMER_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLINVERTEDHAMMER_StateInit( struct TA_CDLINVERTEDHAMMER_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -322,26 +322,26 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlInvertedHammerState( struct TA_CdlInvertedHammer_State* _state,
-/* Generated */                                 cli::array<double>^ inOpen,
-/* Generated */                                 cli::array<double>^ inHigh,
-/* Generated */                                 cli::array<double>^ inLow,
-/* Generated */                                 cli::array<double>^ inClose,
-/* Generated */                                 cli::array<int>^  *outInteger )
+/* Generated */ Core::RetCode Core::CdlInvertedHammerState( struct TA_CdlInvertedHammer_State* _state,
+/* Generated */                                           cli::array<double>^ inOpen,
+/* Generated */                                           cli::array<double>^ inHigh,
+/* Generated */                                           cli::array<double>^ inLow,
+/* Generated */                                           cli::array<double>^ inClose,
+/* Generated */                                           cli::array<int>^  *outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlInvertedHammerState( struct TA_cdlInvertedHammer_State* _state,
-/* Generated */                                  double       inOpen,
-/* Generated */                                  double       inHigh,
-/* Generated */                                  double       inLow,
-/* Generated */                                  double       inClose,
-/* Generated */                                  int           *outInteger )
+/* Generated */ public RetCode cdlInvertedHammerState( struct TA_cdlInvertedHammer_State* _state,
+/* Generated */                                      double       inOpen,
+/* Generated */                                      double       inHigh,
+/* Generated */                                      double       inLow,
+/* Generated */                                      double       inClose,
+/* Generated */                                      int           *outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLINVERTEDHAMMER_State( struct TA_CDLINVERTEDHAMMER_State* _state,
-/* Generated */                                                     const double inOpen,
-/* Generated */                                                     const double inHigh,
-/* Generated */                                                     const double inLow,
-/* Generated */                                                     const double inClose,
-/* Generated */                                                     int           *outInteger )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLINVERTEDHAMMER_State( struct TA_CDLINVERTEDHAMMER_State* _state,
+/* Generated */                                                            const double inOpen,
+/* Generated */                                                            const double inHigh,
+/* Generated */                                                            const double inLow,
+/* Generated */                                                            const double inClose,
+/* Generated */                                                            int           *outInteger )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -449,13 +449,13 @@ int i1;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlInvertedHammerStateFree( struct TA_CdlInvertedHammer_State** _state )
+/* Generated */ Core::RetCode Core::CdlInvertedHammerStateFree( struct TA_CdlInvertedHammer_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlInvertedHammerStateFree( struct TA_cdlInvertedHammer_State** _state )
+/* Generated */ public RetCode cdlInvertedHammerStateFree( struct TA_cdlInvertedHammer_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLINVERTEDHAMMER_StateFree( struct TA_CDLINVERTEDHAMMER_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLINVERTEDHAMMER_StateFree( struct TA_CDLINVERTEDHAMMER_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -483,16 +483,16 @@ int i1;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlInvertedHammerStateSave( struct TA_CdlInvertedHammer_State* _state,
-/* Generated */                                     FILE* _file )
+/* Generated */ Core::RetCode Core::CdlInvertedHammerStateSave( struct TA_CdlInvertedHammer_State* _state,
+/* Generated */                                               FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlInvertedHammerStateSave( struct TA_cdlInvertedHammer_State* _state,
-/* Generated */                                      FILE* _file )
+/* Generated */ public RetCode cdlInvertedHammerStateSave( struct TA_cdlInvertedHammer_State* _state,
+/* Generated */                                          FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLINVERTEDHAMMER_StateSave( struct TA_CDLINVERTEDHAMMER_State* _state,
-/* Generated */                                                         FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLINVERTEDHAMMER_StateSave( struct TA_CDLINVERTEDHAMMER_State* _state,
+/* Generated */                                                                FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -548,16 +548,16 @@ int i1;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlInvertedHammerStateLoad( struct TA_CdlInvertedHammer_State** _state,
-/* Generated */                                     FILE* _file )
+/* Generated */ Core::RetCode Core::CdlInvertedHammerStateLoad( struct TA_CdlInvertedHammer_State** _state,
+/* Generated */                                               FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlInvertedHammerStateLoad( struct TA_cdlInvertedHammer_State** _state,
-/* Generated */                                      FILE* _file )
+/* Generated */ public RetCode cdlInvertedHammerStateLoad( struct TA_cdlInvertedHammer_State** _state,
+/* Generated */                                          FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLINVERTEDHAMMER_StateLoad( struct TA_CDLINVERTEDHAMMER_State** _state,
-/* Generated */                                                         FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLINVERTEDHAMMER_StateLoad( struct TA_CDLINVERTEDHAMMER_State** _state,
+/* Generated */                                                                FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

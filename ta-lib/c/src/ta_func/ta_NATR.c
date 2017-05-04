@@ -347,16 +347,16 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::NatrStateInit( struct TA_Natr_State** _state,
-/* Generated */                        int           optInTimePeriod )  /* From 1 to 100000 */
+/* Generated */ Core::RetCode Core::NatrStateInit( struct TA_Natr_State** _state,
+/* Generated */                                  int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int natrStateInit( struct TA_natr_State** _state,
-/* Generated */                         int           optInTimePeriod )  /* From 1 to 100000 */
+/* Generated */ public RetCode natrStateInit( struct TA_natr_State** _state,
+/* Generated */                             int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_NATR_StateInit( struct TA_NATR_State** _state,
-/* Generated */                                            int           optInTimePeriod )  /* From 1 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_NATR_StateInit( struct TA_NATR_State** _state,
+/* Generated */                                                   int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -409,23 +409,23 @@ TA_RetCode retCode;
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::NatrState( struct TA_Natr_State* _state,
-/* Generated */                    cli::array<double>^ inHigh,
-/* Generated */                    cli::array<double>^ inLow,
-/* Generated */                    cli::array<double>^ inClose,
-/* Generated */                    cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::NatrState( struct TA_Natr_State* _state,
+/* Generated */                              cli::array<double>^ inHigh,
+/* Generated */                              cli::array<double>^ inLow,
+/* Generated */                              cli::array<double>^ inClose,
+/* Generated */                              cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int natrState( struct TA_natr_State* _state,
-/* Generated */                     double       inHigh,
-/* Generated */                     double       inLow,
-/* Generated */                     double       inClose,
-/* Generated */                     double        *outReal )
+/* Generated */ public RetCode natrState( struct TA_natr_State* _state,
+/* Generated */                         double       inHigh,
+/* Generated */                         double       inLow,
+/* Generated */                         double       inClose,
+/* Generated */                         double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_NATR_State( struct TA_NATR_State* _state,
-/* Generated */                                        const double inHigh,
-/* Generated */                                        const double inLow,
-/* Generated */                                        const double inClose,
-/* Generated */                                        double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_NATR_State( struct TA_NATR_State* _state,
+/* Generated */                                               const double inHigh,
+/* Generated */                                               const double inLow,
+/* Generated */                                               const double inClose,
+/* Generated */                                               double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -506,13 +506,13 @@ double tempReal, tempATR;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::NatrStateFree( struct TA_Natr_State** _state )
+/* Generated */ Core::RetCode Core::NatrStateFree( struct TA_Natr_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int natrStateFree( struct TA_natr_State** _state )
+/* Generated */ public RetCode natrStateFree( struct TA_natr_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_NATR_StateFree( struct TA_NATR_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_NATR_StateFree( struct TA_NATR_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -552,16 +552,16 @@ double tempReal, tempATR;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::NatrStateSave( struct TA_Natr_State* _state,
-/* Generated */                        FILE* _file )
+/* Generated */ Core::RetCode Core::NatrStateSave( struct TA_Natr_State* _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int natrStateSave( struct TA_natr_State* _state,
-/* Generated */                         FILE* _file )
+/* Generated */ public RetCode natrStateSave( struct TA_natr_State* _state,
+/* Generated */                             FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_NATR_StateSave( struct TA_NATR_State* _state,
-/* Generated */                                            FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_NATR_StateSave( struct TA_NATR_State* _state,
+/* Generated */                                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -611,16 +611,16 @@ TA_RetCode retCode;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::NatrStateLoad( struct TA_Natr_State** _state,
-/* Generated */                        FILE* _file )
+/* Generated */ Core::RetCode Core::NatrStateLoad( struct TA_Natr_State** _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int natrStateLoad( struct TA_natr_State** _state,
-/* Generated */                         FILE* _file )
+/* Generated */ public RetCode natrStateLoad( struct TA_natr_State** _state,
+/* Generated */                             FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_NATR_StateLoad( struct TA_NATR_State** _state,
-/* Generated */                                            FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_NATR_StateLoad( struct TA_NATR_State** _state,
+/* Generated */                                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

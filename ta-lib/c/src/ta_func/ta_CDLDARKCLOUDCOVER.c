@@ -281,16 +281,16 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlDarkCloudCoverStateInit( struct TA_CdlDarkCloudCover_State** _state,
-/* Generated */                                     double        optInPenetration )  /* From 0 to TA_REAL_MAX */
+/* Generated */ Core::RetCode Core::CdlDarkCloudCoverStateInit( struct TA_CdlDarkCloudCover_State** _state,
+/* Generated */                                               double        optInPenetration )  /* From 0 to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlDarkCloudCoverStateInit( struct TA_cdlDarkCloudCover_State** _state,
-/* Generated */                                      double        optInPenetration )  /* From 0 to TA_REAL_MAX */
+/* Generated */ public RetCode cdlDarkCloudCoverStateInit( struct TA_cdlDarkCloudCover_State** _state,
+/* Generated */                                          double        optInPenetration )  /* From 0 to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLDARKCLOUDCOVER_StateInit( struct TA_CDLDARKCLOUDCOVER_State** _state,
-/* Generated */                                                         double        optInPenetration )  /* From 0 to TA_REAL_MAX */
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLDARKCLOUDCOVER_StateInit( struct TA_CDLDARKCLOUDCOVER_State** _state,
+/* Generated */                                                                double        optInPenetration )  /* From 0 to TA_REAL_MAX */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -332,26 +332,26 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlDarkCloudCoverState( struct TA_CdlDarkCloudCover_State* _state,
-/* Generated */                                 cli::array<double>^ inOpen,
-/* Generated */                                 cli::array<double>^ inHigh,
-/* Generated */                                 cli::array<double>^ inLow,
-/* Generated */                                 cli::array<double>^ inClose,
-/* Generated */                                 cli::array<int>^  *outInteger )
+/* Generated */ Core::RetCode Core::CdlDarkCloudCoverState( struct TA_CdlDarkCloudCover_State* _state,
+/* Generated */                                           cli::array<double>^ inOpen,
+/* Generated */                                           cli::array<double>^ inHigh,
+/* Generated */                                           cli::array<double>^ inLow,
+/* Generated */                                           cli::array<double>^ inClose,
+/* Generated */                                           cli::array<int>^  *outInteger )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlDarkCloudCoverState( struct TA_cdlDarkCloudCover_State* _state,
-/* Generated */                                  double       inOpen,
-/* Generated */                                  double       inHigh,
-/* Generated */                                  double       inLow,
-/* Generated */                                  double       inClose,
-/* Generated */                                  int           *outInteger )
+/* Generated */ public RetCode cdlDarkCloudCoverState( struct TA_cdlDarkCloudCover_State* _state,
+/* Generated */                                      double       inOpen,
+/* Generated */                                      double       inHigh,
+/* Generated */                                      double       inLow,
+/* Generated */                                      double       inClose,
+/* Generated */                                      int           *outInteger )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLDARKCLOUDCOVER_State( struct TA_CDLDARKCLOUDCOVER_State* _state,
-/* Generated */                                                     const double inOpen,
-/* Generated */                                                     const double inHigh,
-/* Generated */                                                     const double inLow,
-/* Generated */                                                     const double inClose,
-/* Generated */                                                     int           *outInteger )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLDARKCLOUDCOVER_State( struct TA_CDLDARKCLOUDCOVER_State* _state,
+/* Generated */                                                            const double inOpen,
+/* Generated */                                                            const double inHigh,
+/* Generated */                                                            const double inLow,
+/* Generated */                                                            const double inClose,
+/* Generated */                                                            int           *outInteger )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -437,13 +437,13 @@ int i1;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlDarkCloudCoverStateFree( struct TA_CdlDarkCloudCover_State** _state )
+/* Generated */ Core::RetCode Core::CdlDarkCloudCoverStateFree( struct TA_CdlDarkCloudCover_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlDarkCloudCoverStateFree( struct TA_cdlDarkCloudCover_State** _state )
+/* Generated */ public RetCode cdlDarkCloudCoverStateFree( struct TA_cdlDarkCloudCover_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLDARKCLOUDCOVER_StateFree( struct TA_CDLDARKCLOUDCOVER_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLDARKCLOUDCOVER_StateFree( struct TA_CDLDARKCLOUDCOVER_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -471,16 +471,16 @@ int i1;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlDarkCloudCoverStateSave( struct TA_CdlDarkCloudCover_State* _state,
-/* Generated */                                     FILE* _file )
+/* Generated */ Core::RetCode Core::CdlDarkCloudCoverStateSave( struct TA_CdlDarkCloudCover_State* _state,
+/* Generated */                                               FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlDarkCloudCoverStateSave( struct TA_cdlDarkCloudCover_State* _state,
-/* Generated */                                      FILE* _file )
+/* Generated */ public RetCode cdlDarkCloudCoverStateSave( struct TA_cdlDarkCloudCover_State* _state,
+/* Generated */                                          FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLDARKCLOUDCOVER_StateSave( struct TA_CDLDARKCLOUDCOVER_State* _state,
-/* Generated */                                                         FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLDARKCLOUDCOVER_StateSave( struct TA_CDLDARKCLOUDCOVER_State* _state,
+/* Generated */                                                                FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -524,16 +524,16 @@ int i1;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::CdlDarkCloudCoverStateLoad( struct TA_CdlDarkCloudCover_State** _state,
-/* Generated */                                     FILE* _file )
+/* Generated */ Core::RetCode Core::CdlDarkCloudCoverStateLoad( struct TA_CdlDarkCloudCover_State** _state,
+/* Generated */                                               FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int cdlDarkCloudCoverStateLoad( struct TA_cdlDarkCloudCover_State** _state,
-/* Generated */                                      FILE* _file )
+/* Generated */ public RetCode cdlDarkCloudCoverStateLoad( struct TA_cdlDarkCloudCover_State** _state,
+/* Generated */                                          FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_CDLDARKCLOUDCOVER_StateLoad( struct TA_CDLDARKCLOUDCOVER_State** _state,
-/* Generated */                                                         FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_CDLDARKCLOUDCOVER_StateLoad( struct TA_CDLDARKCLOUDCOVER_State** _state,
+/* Generated */                                                                FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

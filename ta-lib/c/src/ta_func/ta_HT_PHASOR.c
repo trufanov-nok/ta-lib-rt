@@ -402,13 +402,13 @@ DEFINE_HILBERT_VARIABLES_STRUCT(HT_PHASOR)
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtPhasorStateInit( struct TA_HtPhasor_State** _state )
+/* Generated */ Core::RetCode Core::HtPhasorStateInit( struct TA_HtPhasor_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htPhasorStateInit( struct TA_htPhasor_State** _state )
+/* Generated */ public RetCode htPhasorStateInit( struct TA_htPhasor_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_PHASOR_StateInit( struct TA_HT_PHASOR_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_PHASOR_StateInit( struct TA_HT_PHASOR_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -447,20 +447,20 @@ DEFINE_HILBERT_VARIABLES_STRUCT(HT_PHASOR)
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtPhasorState( struct TA_HtPhasor_State* _state,
-/* Generated */                        cli::array<double>^ inReal,
-/* Generated */                        cli::array<double>^  *outInPhase,
-/* Generated */                        cli::array<double>^  *outQuadrature )
+/* Generated */ Core::RetCode Core::HtPhasorState( struct TA_HtPhasor_State* _state,
+/* Generated */                                  cli::array<double>^ inReal,
+/* Generated */                                  cli::array<double>^  *outInPhase,
+/* Generated */                                  cli::array<double>^  *outQuadrature )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htPhasorState( struct TA_htPhasor_State* _state,
-/* Generated */                         double       inReal,
-/* Generated */                         double        *outInPhase,
-/* Generated */                         double        *outQuadrature )
+/* Generated */ public RetCode htPhasorState( struct TA_htPhasor_State* _state,
+/* Generated */                             double       inReal,
+/* Generated */                             double        *outInPhase,
+/* Generated */                             double        *outQuadrature )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_PHASOR_State( struct TA_HT_PHASOR_State* _state,
-/* Generated */                                             const double inReal,
-/* Generated */                                             double        *outInPhase,
-/* Generated */                                             double        *outQuadrature )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_PHASOR_State( struct TA_HT_PHASOR_State* _state,
+/* Generated */                                                    const double inReal,
+/* Generated */                                                    double        *outInPhase,
+/* Generated */                                                    double        *outQuadrature )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -634,13 +634,13 @@ DEFINE_HILBERT_VARIABLES_STRUCT(HT_PHASOR)
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtPhasorStateFree( struct TA_HtPhasor_State** _state )
+/* Generated */ Core::RetCode Core::HtPhasorStateFree( struct TA_HtPhasor_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htPhasorStateFree( struct TA_htPhasor_State** _state )
+/* Generated */ public RetCode htPhasorStateFree( struct TA_htPhasor_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_PHASOR_StateFree( struct TA_HT_PHASOR_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_PHASOR_StateFree( struct TA_HT_PHASOR_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -673,16 +673,16 @@ DEFINE_HILBERT_VARIABLES_STRUCT(HT_PHASOR)
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtPhasorStateSave( struct TA_HtPhasor_State* _state,
-/* Generated */                            FILE* _file )
+/* Generated */ Core::RetCode Core::HtPhasorStateSave( struct TA_HtPhasor_State* _state,
+/* Generated */                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htPhasorStateSave( struct TA_htPhasor_State* _state,
-/* Generated */                             FILE* _file )
+/* Generated */ public RetCode htPhasorStateSave( struct TA_htPhasor_State* _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_PHASOR_StateSave( struct TA_HT_PHASOR_State* _state,
-/* Generated */                                                 FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_PHASOR_StateSave( struct TA_HT_PHASOR_State* _state,
+/* Generated */                                                        FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -760,16 +760,16 @@ DEFINE_HILBERT_VARIABLES_STRUCT(HT_PHASOR)
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::HtPhasorStateLoad( struct TA_HtPhasor_State** _state,
-/* Generated */                            FILE* _file )
+/* Generated */ Core::RetCode Core::HtPhasorStateLoad( struct TA_HtPhasor_State** _state,
+/* Generated */                                      FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int htPhasorStateLoad( struct TA_htPhasor_State** _state,
-/* Generated */                             FILE* _file )
+/* Generated */ public RetCode htPhasorStateLoad( struct TA_htPhasor_State** _state,
+/* Generated */                                 FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_HT_PHASOR_StateLoad( struct TA_HT_PHASOR_State** _state,
-/* Generated */                                                 FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_HT_PHASOR_StateLoad( struct TA_HT_PHASOR_State** _state,
+/* Generated */                                                        FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/

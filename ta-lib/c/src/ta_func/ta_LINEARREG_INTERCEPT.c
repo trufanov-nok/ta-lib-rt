@@ -258,16 +258,16 @@
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::LinearRegInterceptStateInit( struct TA_LinearRegIntercept_State** _state,
-/* Generated */                                      int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ Core::RetCode Core::LinearRegInterceptStateInit( struct TA_LinearRegIntercept_State** _state,
+/* Generated */                                                int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int linearRegInterceptStateInit( struct TA_linearRegIntercept_State** _state,
-/* Generated */                                       int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ public RetCode linearRegInterceptStateInit( struct TA_linearRegIntercept_State** _state,
+/* Generated */                                           int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_LINEARREG_INTERCEPT_StateInit( struct TA_LINEARREG_INTERCEPT_State** _state,
-/* Generated */                                                           int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_LINEARREG_INTERCEPT_StateInit( struct TA_LINEARREG_INTERCEPT_State** _state,
+/* Generated */                                                                  int           optInTimePeriod )  /* From 2 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -310,17 +310,17 @@
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::LinearRegInterceptState( struct TA_LinearRegIntercept_State* _state,
-/* Generated */                                  cli::array<double>^ inReal,
-/* Generated */                                  cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::LinearRegInterceptState( struct TA_LinearRegIntercept_State* _state,
+/* Generated */                                            cli::array<double>^ inReal,
+/* Generated */                                            cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int linearRegInterceptState( struct TA_linearRegIntercept_State* _state,
-/* Generated */                                   double       inReal,
-/* Generated */                                   double        *outReal )
+/* Generated */ public RetCode linearRegInterceptState( struct TA_linearRegIntercept_State* _state,
+/* Generated */                                       double       inReal,
+/* Generated */                                       double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_LINEARREG_INTERCEPT_State( struct TA_LINEARREG_INTERCEPT_State* _state,
-/* Generated */                                                       const double inReal,
-/* Generated */                                                       double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_LINEARREG_INTERCEPT_State( struct TA_LINEARREG_INTERCEPT_State* _state,
+/* Generated */                                                              const double inReal,
+/* Generated */                                                              double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
@@ -391,13 +391,13 @@ double m, tempReal;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::LinearRegInterceptStateFree( struct TA_LinearRegIntercept_State** _state )
+/* Generated */ Core::RetCode Core::LinearRegInterceptStateFree( struct TA_LinearRegIntercept_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int linearRegInterceptStateFree( struct TA_linearRegIntercept_State** _state )
+/* Generated */ public RetCode linearRegInterceptStateFree( struct TA_linearRegIntercept_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_LINEARREG_INTERCEPT_StateFree( struct TA_LINEARREG_INTERCEPT_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_LINEARREG_INTERCEPT_StateFree( struct TA_LINEARREG_INTERCEPT_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -425,16 +425,16 @@ double m, tempReal;
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::LinearRegInterceptStateSave( struct TA_LinearRegIntercept_State* _state,
-/* Generated */                                      FILE* _file )
+/* Generated */ Core::RetCode Core::LinearRegInterceptStateSave( struct TA_LinearRegIntercept_State* _state,
+/* Generated */                                                FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int linearRegInterceptStateSave( struct TA_linearRegIntercept_State* _state,
-/* Generated */                                       FILE* _file )
+/* Generated */ public RetCode linearRegInterceptStateSave( struct TA_linearRegIntercept_State* _state,
+/* Generated */                                           FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_LINEARREG_INTERCEPT_StateSave( struct TA_LINEARREG_INTERCEPT_State* _state,
-/* Generated */                                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_LINEARREG_INTERCEPT_StateSave( struct TA_LINEARREG_INTERCEPT_State* _state,
+/* Generated */                                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -484,16 +484,16 @@ double m, tempReal;
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::LinearRegInterceptStateLoad( struct TA_LinearRegIntercept_State** _state,
-/* Generated */                                      FILE* _file )
+/* Generated */ Core::RetCode Core::LinearRegInterceptStateLoad( struct TA_LinearRegIntercept_State** _state,
+/* Generated */                                                FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int linearRegInterceptStateLoad( struct TA_linearRegIntercept_State** _state,
-/* Generated */                                       FILE* _file )
+/* Generated */ public RetCode linearRegInterceptStateLoad( struct TA_linearRegIntercept_State** _state,
+/* Generated */                                           FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_LINEARREG_INTERCEPT_StateLoad( struct TA_LINEARREG_INTERCEPT_State** _state,
-/* Generated */                                                           FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_LINEARREG_INTERCEPT_StateLoad( struct TA_LINEARREG_INTERCEPT_State** _state,
+/* Generated */                                                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
