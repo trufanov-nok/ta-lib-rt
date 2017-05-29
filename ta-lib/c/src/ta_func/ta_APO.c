@@ -479,7 +479,7 @@ TA_RetCode TA_PREFIX(INT_PO)( int    startIdx,
                         MAType        optInMAType,
                         int doPercentageOutput)
  #else
- TA_LIB_API int TA_INT_PO_StateInit( struct TA_APO_State** _state,
+ TA_RetCode TA_INT_PO_StateInit( struct TA_APO_State** _state,
                                            int           optInFastPeriod, /* From 2 to 100000 */
                                            int           optInSlowPeriod, /* From 2 to 100000 */
                                            TA_MAType     optInMAType,

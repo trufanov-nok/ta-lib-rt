@@ -38881,7 +38881,7 @@ public class Core {
    public RetCode ppoStateSave( struct TA_ppo_State* _state,
       FILE* _file )
    {
-      return TA_APO_StateSave ((struct apo **)_state, _file);
+      return TA_APO_StateSave ((struct apo *)_state, _file);
       int io_res; int state_is_null; state_is_null = (_state == NULL);
       io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
       if (io_res < 1) return RetCode.IOFailed ;

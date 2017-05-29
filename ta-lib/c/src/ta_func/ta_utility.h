@@ -137,6 +137,12 @@ TA_RetCode TA_S_INT_PO( int           startIdx,
                         double       *outReal,
                         double       *tempBuffer,
                         int  doPercentageOutput );
+
+TA_RetCode TA_INT_PO_StateInit( struct TA_APO_State** _state,
+                                int           optInFastPeriod, /* From 2 to 100000 */
+                                int           optInSlowPeriod, /* From 2 to 100000 */
+                                TA_MAType     optInMAType,
+                                int doPercentageOutput);
 #endif
 
 /* Internal variance function. */
