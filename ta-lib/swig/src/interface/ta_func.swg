@@ -7724,6 +7724,53 @@ TA_RetCode TA_PVI_StateLoad( struct TA_PVI_State** _state,
 
 
 /*
+ * TA_PVT - Price Volume Trend
+ * 
+ * Input  = Close, Volume
+ * Output = double
+ * 
+ */
+TA_RetCode TA_PVT( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inClose */,
+                   const double *IN_ARRAY /* inVolume */,
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outReal */ );
+
+int TA_PVT_Lookback( void );
+
+
+struct TA_PVT_Data {
+                   double       inClose;
+                   double       inVolume;
+                   };
+struct TA_PVT_State {
+                    size_t mem_size;
+                    size_t mem_index;
+                    struct TA_PVT_Data* memory;
+                    double       prevPVT;
+                    };
+
+
+TA_RetCode TA_PVT_StateInit( struct TA_PVT_State** _state );
+
+
+TA_RetCode TA_PVT_State( struct TA_PVT_State* _state,
+                       const double inClose,
+                       const double inVolume,
+                       double        *outReal );
+
+TA_RetCode TA_PVT_StateFree( struct TA_PVT_State** _state );
+
+TA_RetCode TA_PVT_StateSave( struct TA_PVT_State* _state,
+                           FILE* _file );
+
+TA_RetCode TA_PVT_StateLoad( struct TA_PVT_State** _state,
+                           FILE* _file );
+
+
+/*
  * TA_ROC - Rate of change : ((price/prevPrice)-1)*100
  * 
  * Input  = double

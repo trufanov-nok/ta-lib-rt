@@ -159,6 +159,7 @@ SOURCES += \
     ../../../../../src/ta_func/ta_PLUS_DM.c \
     ../../../../../src/ta_func/ta_PPO.c \
     ../../../../../src/ta_func/ta_PVI.c \
+    ../../../../../src/ta_func/ta_PVT.c \
     ../../../../../src/ta_func/ta_ROC.c \
     ../../../../../src/ta_func/ta_ROCP.c \
     ../../../../../src/ta_func/ta_ROCR.c \

@@ -175,11 +175,15 @@
 
    /* Insert TA function code here. */
 
-       VALUE_HANDLE_DEREF_TO_ZERO(outBegIdx);
-       VALUE_HANDLE_DEREF_TO_ZERO(outNBElement);
-
        if( startIdx < 1 )
           startIdx = 1;
+
+       if( startIdx > endIdx )
+       {
+          VALUE_HANDLE_DEREF_TO_ZERO(outBegIdx);
+          VALUE_HANDLE_DEREF_TO_ZERO(outNBElement);
+          return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+       }
 
        outIdx = 0;
        prev_pvi = 100.;
@@ -239,7 +243,7 @@
 
    /* insert state init code here. */
 
-
+   STATE_P.prevPVI = 100.;
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
@@ -296,10 +300,6 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
-       if (FIRST_LAUNCH)
-          {
-           STATE.prevPVI = 100.;
-          }
 
        if (inVolume > POP_FROM_MEM(inVolume))
           STATE.prevPVI *= inClose / POP_FROM_MEM(inClose);
@@ -504,10 +504,14 @@
 /* Generated */        return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */     #endif 
 /* Generated */  #endif 
-/* Generated */        VALUE_HANDLE_DEREF_TO_ZERO(outBegIdx);
-/* Generated */        VALUE_HANDLE_DEREF_TO_ZERO(outNBElement);
 /* Generated */        if( startIdx < 1 )
 /* Generated */           startIdx = 1;
+/* Generated */        if( startIdx > endIdx )
+/* Generated */        {
+/* Generated */           VALUE_HANDLE_DEREF_TO_ZERO(outBegIdx);
+/* Generated */           VALUE_HANDLE_DEREF_TO_ZERO(outNBElement);
+/* Generated */           return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+/* Generated */        }
 /* Generated */        outIdx = 0;
 /* Generated */        prev_pvi = 100.;
 /* Generated */        VALUE_HANDLE_DEREF(outBegIdx) = startIdx;

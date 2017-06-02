@@ -5485,6 +5485,34 @@
 	</FinancialFunction>
 
 
+	<!-- PVT -->
+	<FinancialFunction>
+		<Abbreviation>PVT</Abbreviation>
+		<CamelCaseName>Pvt</CamelCaseName>
+		<ShortDescription>Price Volume Trend</ShortDescription>
+		<GroupId>Volume Indicators</GroupId>
+		<RequiredInputArguments>
+			<RequiredInputArgument>
+				<Type>Close</Type>
+				<Name>Close</Name>
+			</RequiredInputArgument>
+			<RequiredInputArgument>
+				<Type>Volume</Type>
+				<Name>Volume</Name>
+			</RequiredInputArgument>
+		</RequiredInputArguments>
+		<OutputArguments>
+			<OutputArgument>
+				<Type>Double Array</Type>
+				<Name>outReal</Name>
+				<Flags>
+					<Flag>Line</Flag>
+				</Flags>
+			</OutputArgument>
+		</OutputArguments>
+	</FinancialFunction>
+
+
 	<!-- ROC -->
 	<FinancialFunction>
 		<Abbreviation>ROC</Abbreviation>

@@ -6817,6 +6817,57 @@
 /* Generated */    return TA_PVI_StateLoad( (struct TA_PVI_State**) &params->_state,
 /* Generated */                      _file );
 /* Generated */ }
+/* Generated */ TA_RetCode TA_PVT_FramePP( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_PVT(/* Generated */             startIdx,
+/* Generated */             endIdx,
+/* Generated */             params->in[0].data.inPrice.close, /* inClose */
+/* Generated */             params->in[0].data.inPrice.volume, /* inVolume */
+/* Generated */             outBegIdx, 
+/* Generated */             outNBElement, 
+/* Generated */             params->out[0].data.outReal /*  outReal */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_PVT_FramePPLB( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_PVT_Lookback( );
+/* Generated */ }
+/* Generated */ unsigned int TA_PVT_FramePPSI( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_PVT_StateInit( (struct TA_PVT_State**) &params->_state
+ );
+/* Generated */ }
+/* Generated */ unsigned int TA_PVT_FramePPS( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_PVT_State( *(struct TA_PVT_State**) &params->_state,
+/* Generated */                     *params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                     *params->in[0].data.inPrice.volume, /* inVolume */
+/* Generated */                     params->out[0].data.outReal /*  *outReal */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_PVT_FramePPSF( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_PVT_StateFree( (struct TA_PVT_State**) &params->_state
+ );
+/* Generated */ }
+/* Generated */ unsigned int TA_PVT_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_PVT_StateSave( *(struct TA_PVT_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_PVT_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    (void)params;
+/* Generated */    return TA_PVT_StateLoad( (struct TA_PVT_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_ROC_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,

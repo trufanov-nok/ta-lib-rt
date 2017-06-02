@@ -7447,6 +7447,49 @@ public RetCode pvi(
 ); }
 
 
+public int pvtLookback(
+) {
+    return super.pvtLookback(
+); }
+
+@FuncInfo(
+        name  = "PVT",
+        group = "Volume Indicators",
+        flags = 0,
+        nbInput    = 1,
+        nbOptInput = 0,
+        nbOutput   = 1
+)
+public RetCode pvt(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inPriceCV",
+                flags     = 24,
+                type = InputParameterType.TA_Input_Price
+            )
+            double inClose [],
+            double inVolume [],
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.pvt (
+        startIdx,
+        endIdx,
+        inClose ,
+        inVolume ,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
 public int rocLookback(
         int optInTimePeriod) {
     return super.rocLookback(

@@ -37654,10 +37654,14 @@ public class Core {
          return RetCode.OutOfRangeStartIndex ;
       if( (endIdx < 0) || (endIdx < startIdx))
          return RetCode.OutOfRangeEndIndex ;
-      outBegIdx.value = 0 ;
-      outNBElement.value = 0 ;
       if( startIdx < 1 )
          startIdx = 1;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
       outIdx = 0;
       prev_nvi = 100.;
       outBegIdx.value = startIdx;
@@ -37775,10 +37779,14 @@ public class Core {
          return RetCode.OutOfRangeStartIndex ;
       if( (endIdx < 0) || (endIdx < startIdx))
          return RetCode.OutOfRangeEndIndex ;
-      outBegIdx.value = 0 ;
-      outNBElement.value = 0 ;
       if( startIdx < 1 )
          startIdx = 1;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
       outIdx = 0;
       prev_nvi = 100.;
       outBegIdx.value = startIdx;
@@ -38986,10 +38994,14 @@ public class Core {
          return RetCode.OutOfRangeStartIndex ;
       if( (endIdx < 0) || (endIdx < startIdx))
          return RetCode.OutOfRangeEndIndex ;
-      outBegIdx.value = 0 ;
-      outNBElement.value = 0 ;
       if( startIdx < 1 )
          startIdx = 1;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
       outIdx = 0;
       prev_pvi = 100.;
       outBegIdx.value = startIdx;
@@ -39107,10 +39119,14 @@ public class Core {
          return RetCode.OutOfRangeStartIndex ;
       if( (endIdx < 0) || (endIdx < startIdx))
          return RetCode.OutOfRangeEndIndex ;
-      outBegIdx.value = 0 ;
-      outNBElement.value = 0 ;
       if( startIdx < 1 )
          startIdx = 1;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
       outIdx = 0;
       prev_pvi = 100.;
       outBegIdx.value = startIdx;
@@ -39119,6 +39135,160 @@ public class Core {
          if (inVolume[startIdx] > inVolume[startIdx-1])
             prev_pvi *= inClose[startIdx] / inClose[startIdx-1];
          outReal[outIdx++] = prev_pvi;
+         startIdx++;
+      }
+      outNBElement.value = outIdx;
+      return TA_SUCCESS;
+   }
+   /* Generated */
+   public int pvtLookback( )
+   {
+      return 1;
+   }
+   public RetCode pvt( int startIdx,
+      int endIdx,
+      double inClose[],
+      double inVolume[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      double prev_pvt;
+      int outIdx;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      if( startIdx < 1 )
+         startIdx = 1;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      outIdx = 0;
+      prev_pvt = 0.;
+      outBegIdx.value = startIdx;
+      while( startIdx <= endIdx )
+      {
+         prev_pvt += inVolume[startIdx] * (inClose[startIdx] / inClose[startIdx-1] - 1.0);
+         outReal[outIdx++] = prev_pvt;
+         startIdx++;
+      }
+      outNBElement.value = outIdx;
+      return TA_SUCCESS;
+   }
+   public RetCode pvtStateInit( struct TA_pvt_State** _state )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct pvt ));
+      _state.value .value .mem_index = 0;
+      _state.value .value .mem_size = pvtLookback ();
+      if ( _state.value .value .mem_size > 0)
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_PVT_Data));
+      else
+         _state.value .value .memory = NULL;
+      return RetCode.Success ;
+   }
+   public RetCode pvtState( struct TA_pvt_State* _state,
+      double inClose,
+      double inVolume,
+      double *outReal )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      size_t _cur_idx = _state.value .mem_index++;
+      if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
+         ( _state.value .memory+_cur_idx).value .inClose = inClose ;
+         ( _state.value .memory+_cur_idx).value .inVolume = inVolume ;
+         return RetCode.NeedMoreData ; }
+      return RetCode.Success ;
+   }
+   public RetCode pvtStateFree( struct TA_pvt_State** _state )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
+      return RetCode.Success ;
+   }
+   public RetCode pvtStateSave( struct TA_pvt_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_PVT_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .prevPVT,sizeof( _state.value .prevPVT),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public RetCode pvtStateLoad( struct TA_pvt_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct pvt ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_PVT_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_PVT_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .prevPVT,sizeof( _state.value .value .prevPVT),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public RetCode pvt( int startIdx,
+      int endIdx,
+      float inClose[],
+      float inVolume[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      double prev_pvt;
+      int outIdx;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      if( startIdx < 1 )
+         startIdx = 1;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      outIdx = 0;
+      prev_pvt = 0.;
+      outBegIdx.value = startIdx;
+      while( startIdx <= endIdx )
+      {
+         prev_pvt += inVolume[startIdx] * (inClose[startIdx] / inClose[startIdx-1] - 1.0);
+         outReal[outIdx++] = prev_pvt;
          startIdx++;
       }
       outNBElement.value = outIdx;

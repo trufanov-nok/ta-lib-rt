@@ -135,6 +135,7 @@ libta_func_la_SOURCES = ta_utility.c \
 	ta_PLUS_DM.c /
 	ta_PPO.c /
 	ta_PVI.c /
+	ta_PVT.c /
 	ta_ROC.c /
 	ta_ROCP.c /
 	ta_ROCR.c /

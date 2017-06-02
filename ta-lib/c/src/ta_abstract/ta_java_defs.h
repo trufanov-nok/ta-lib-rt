@@ -698,6 +698,11 @@
 #define TA_PVI_StateInit pvi
 #define TA_PVI_State pvi
 #define TA_PVI_StateFree pvi
+#define TA_PVT_Lookback pvtLookback
+#define TA_PVT pvt
+#define TA_PVT_StateInit pvt
+#define TA_PVT_State pvt
+#define TA_PVT_StateFree pvt
 #define TA_ROC_Lookback rocLookback
 #define TA_ROC roc
 #define TA_ROC_StateInit roc

@@ -16699,6 +16699,118 @@ FILE* _file )
 /* Generated */ #endif
 
 /*
+ * TA_PVT - Price Volume Trend
+ * 
+ * Input  = Close, Volume
+ * Output = double
+ * 
+ */
+TA_LIB_API TA_RetCode TA_PVT( int    startIdx,
+                              int    endIdx,
+                                         const double inClose[],
+                                         const double inVolume[],
+                                         int          *outBegIdx,
+                                         int          *outNBElement,
+                                         double        outReal[] );
+
+TA_LIB_API TA_RetCode TA_S_PVT( int    startIdx,
+                                int    endIdx,
+                                           const float  inClose[],
+                                           const float  inVolume[],
+                                           int          *outBegIdx,
+                                           int          *outNBElement,
+                                           double        outReal[] );
+
+TA_LIB_API int TA_PVT_Lookback( void );
+
+
+struct TA_PVT_Data {
+                              double       inClose;
+                              double       inVolume;
+                              };
+struct TA_PVT_State {
+                    size_t mem_size;
+                    size_t mem_index;
+                    struct TA_PVT_Data* memory;
+                    double       prevPVT;
+                    };
+
+
+TA_LIB_API TA_RetCode TA_PVT_StateInit( struct TA_PVT_State** _state );
+
+
+TA_LIB_API TA_RetCode TA_PVT_State( struct TA_PVT_State* _state,
+                                             const double inClose,
+                                             const double inVolume,
+                                             double        *outReal );
+
+TA_LIB_API TA_RetCode TA_PVT_StateFree( struct TA_PVT_State** _state );
+
+TA_LIB_API TA_RetCode TA_PVT_StateSave( struct TA_PVT_State* _state,
+                                                 FILE* _file );
+
+TA_LIB_API TA_RetCode TA_PVT_StateLoad( struct TA_PVT_State** _state,
+                                                 FILE* _file );
+
+/* Generated */ #ifdef TEST_STATE_FUNCS
+/* Generated */ static TA_RetCode TA_PVT_StateTest( int    startIdx,
+/* Generated */                                     int    endIdx,
+/* Generated */                                     const double inClose[],
+/* Generated */                                     const double inVolume[],
+/* Generated */                                     int          *outBegIdx,
+/* Generated */                                     int          *outNBElement,
+/* Generated */                                     double        outReal[],
+FILE* _file )
+/* Generated */ {
+/* Generated */  TA_RetCode res = TA_PVT(startIdx, endIdx, inClose, inVolume, outBegIdx, outNBElement, outReal );
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
+/* Generated */  struct TA_PVT_State* state;
+/* Generated */  res = TA_PVT_StateInit(&state);
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */  int i, lookback;
+/* Generated */  lookback = TA_PVT_Lookback();
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i <= endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  #ifdef TEST_WHOLE_DATA_PVT
+/* Generated */    i = 0;
+/* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
+/* Generated */  while (i <= endIdx)
+/* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_PVT_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_PVT_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
+/* Generated */     double outReal_local;
+/* Generated */     res = TA_PVT_State(state, inClose[i], inVolume[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_PVT_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
+/* Generated */     if (i++ < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else break; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
+/* Generated */    }
+/* Generated */  }
+/* Generated */  TA_RetCode r = TA_PVT_StateFree(&state);
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
+/* Generated */ }
+/* Generated */ #endif
+
+/*
  * TA_ROC - Rate of change : ((price/prevPrice)-1)*100
  * 
  * Input  = double
