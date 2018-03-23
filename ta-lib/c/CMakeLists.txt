@@ -177,6 +177,7 @@ SET(ta-lib_CSOURCES
 	${ta-lib_SOURCE_DIR}/c/src/ta_func/ta_CDLTRISTAR.c
 	${ta-lib_SOURCE_DIR}/c/src/ta_func/ta_CDLHARAMI.c
 	${ta-lib_SOURCE_DIR}/c/src/ta_func/ta_PVI.c
+	${ta-lib_SOURCE_DIR}/c/src/ta_func/ta_PVT.c
 	${ta-lib_SOURCE_DIR}/c/src/ta_func/ta_ATAN.c
 	${ta-lib_SOURCE_DIR}/c/src/ta_func/ta_CDLHIGHWAVE.c
 	${ta-lib_SOURCE_DIR}/c/src/ta_func/ta_CDLSTALLEDPATTERN.c
