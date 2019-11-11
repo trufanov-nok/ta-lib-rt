@@ -1,4 +1,4 @@
-Package: ta-lib
+Package: ta-lib-rt
 Version: @VERSION@
 Section: dev-libs
 Priority: optional
@@ -13,4 +13,4 @@ Maintainer: Mario Fortier [mfortier@ta-lib.org]
 Conflicts: 
 Replaces: 
 Provides: 
-Description: TA-Lib provides common functions for the technical analysis of stock/future/commodity market data.
+Description: TA-Lib-RT provides common functions for the technical analysis of stock/future/commodity market data.
