@@ -603,10 +603,15 @@ TA_RetCode retCode;
         double temp;
         unsigned int j,i,p;
 #define TA_STOCHF_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+
+#ifndef TA_FUNC_NO_RANGE_CHECK
 #define TA_FUNC_NO_RANGE_CHECK //(!inHigh||!inLow||!inClose) may be true when passed from STOCHRSI
+// otherwise StateFree won't call TA_Free(STATE) and that leads to a memory leak
+#define TA_FUNC_NO_RANGE_CHECK_MUST_BE_UNDEFINED_BACK
    if (!_state || !outFastK || !outFastD) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
    size_t _cur_idx = STATE.mem_index++;
    if (MEM_SIZE > 0) _cur_idx %= MEM_SIZE;
+#endif
 
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
@@ -641,6 +646,11 @@ TA_RetCode retCode;
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
+
+#ifdef TA_FUNC_NO_RANGE_CHECK_MUST_BE_UNDEFINED_BACK
+#undef TA_FUNC_NO_RANGE_CHECK
+#endif
+
 
    /* insert state based TA dunc code here. */
                 if (FIRST_LAUNCH)
