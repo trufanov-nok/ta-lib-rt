@@ -3851,19 +3851,6 @@ int createTemplate( FileHandle *in, FileHandle *out )
       {
          skipSection = 1;
          fputs( gTempBuf, outFile );
-
-         // temporary measure to skip not existsing functions in existing file
-         if (sectionDone == 8) {
-             fputs( "%%%GENCODE%%%\n"
-                    "/**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/\n"
-                    "\n{\n  /* insert local variable here */\n\n"
-                    "/**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/\n"
-                    "%%%GENCODE%%%\n"
-                    "/**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/\n"
-                    "\n  /* insert batch state code here. */\n  return retValue;\n}\n\n"
-                    "/**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/\n", outFile );
-         }
-
          fputs( "%%%GENCODE%%%\n", outFile );
       }
 
