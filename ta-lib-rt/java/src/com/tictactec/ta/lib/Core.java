@@ -31399,6 +31399,8 @@ public class Core {
             default:
                retValue = RetCode.BadParam ;
          }
+      } else {
+         return RetCode.Success ;
       }
       if (retValue != RetCode.Success )
          return retValue;
@@ -37686,6 +37688,7 @@ public class Core {
          _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_NVI_Data));
       else
          _state.value .value .memory = NULL;
+      _state.value .value .prevNVI = 100.;
       return RetCode.Success ;
    }
    public RetCode nviState( struct TA_nvi_State* _state,
@@ -37701,10 +37704,6 @@ public class Core {
          ( _state.value .memory+_cur_idx).value .inClose = inClose ;
          ( _state.value .memory+_cur_idx).value .inVolume = inVolume ;
          return RetCode.NeedMoreData ; }
-      if ( ( _state.value .mem_index == 1) )
-      {
-         _state.value .prevNVI = 100.;
-      }
       if (inVolume < ( _state.value .memory+_cur_idx).value .inVolume )
          _state.value .prevNVI *= inClose / ( _state.value .memory+_cur_idx).value .inClose ;
       outReal.value = _state.value .prevNVI;
@@ -39026,6 +39025,7 @@ public class Core {
          _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_PVI_Data));
       else
          _state.value .value .memory = NULL;
+      _state.value .value .prevPVI = 100.;
       return RetCode.Success ;
    }
    public RetCode pviState( struct TA_pvi_State* _state,
@@ -39041,10 +39041,6 @@ public class Core {
          ( _state.value .memory+_cur_idx).value .inClose = inClose ;
          ( _state.value .memory+_cur_idx).value .inVolume = inVolume ;
          return RetCode.NeedMoreData ; }
-      if ( ( _state.value .mem_index == 1) )
-      {
-         _state.value .prevPVI = 100.;
-      }
       if (inVolume > ( _state.value .memory+_cur_idx).value .inVolume )
          _state.value .prevPVI *= inClose / ( _state.value .memory+_cur_idx).value .inClose ;
       outReal.value = _state.value .prevPVI;
@@ -39190,6 +39186,7 @@ public class Core {
          _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_PVT_Data));
       else
          _state.value .value .memory = NULL;
+      _state.value .value .prevPVT = 0.;
       return RetCode.Success ;
    }
    public RetCode pvtState( struct TA_pvt_State* _state,
@@ -39205,6 +39202,9 @@ public class Core {
          ( _state.value .memory+_cur_idx).value .inClose = inClose ;
          ( _state.value .memory+_cur_idx).value .inVolume = inVolume ;
          return RetCode.NeedMoreData ; }
+      _state.value .prevPVT += inVolume * (inClose / ( _state.value .memory+_cur_idx).value .inClose - 1.0);
+      outReal.value = _state.value .prevPVT;
+      ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       return RetCode.Success ;
    }
    public RetCode pvtStateFree( struct TA_pvt_State** _state )
@@ -43511,12 +43511,45 @@ public class Core {
       TA_RetCode retCode;
       retCode = movingAverage ( (struct movingAverage **) & _state.value .value .stateMA1 );
       if (retCode != RetCode.Success ) return retCode;
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
       return RetCode.Success ;
    }
    public RetCode stochFStateSave( struct TA_stochF_State* _state,
       FILE* _file )
    {
       TA_RetCode retCode;
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_STOCHF_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInFastK_Period,sizeof( _state.value .optInFastK_Period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInFastD_Period,sizeof( _state.value .optInFastD_Period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInFastD_MAType,sizeof( _state.value .optInFastD_MAType),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .lowest,sizeof( _state.value .lowest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .highest,sizeof( _state.value .highest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .lowest_exp,sizeof( _state.value .lowest_exp),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .highest_exp,sizeof( _state.value .highest_exp),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       retCode = TA_MA_StateSave ( (struct movingAverage *) _state.value .stateMA1, _file );
       if (retCode != RetCode.Success ) return retCode;
       return 0;
@@ -43525,6 +43558,36 @@ public class Core {
       FILE* _file )
    {
       TA_RetCode retCode;
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct stochF ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_STOCHF_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_STOCHF_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInFastK_Period,sizeof( _state.value .value .optInFastK_Period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInFastD_Period,sizeof( _state.value .value .optInFastD_Period),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInFastD_MAType,sizeof( _state.value .value .optInFastD_MAType),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .lowest,sizeof( _state.value .value .lowest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .highest,sizeof( _state.value .value .highest),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .lowest_exp,sizeof( _state.value .value .lowest_exp),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .highest_exp,sizeof( _state.value .value .highest_exp),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
       retCode = TA_MA_StateLoad ( (struct movingAverage **) & _state.value .value .stateMA1, _file );
       if (retCode != RetCode.Success ) return retCode;
       return 0;
@@ -43547,6 +43610,18 @@ public class Core {
       int outIdx, lowestIdx, highestIdx;
       int lookbackTotal, lookbackK, lookbackFastD;
       int trailingIdx, today, i;
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      if( (int)optInFastK_Period == ( Integer.MIN_VALUE ) )
+         optInFastK_Period = 5;
+      else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
+         return RetCode.BadParam ;
+      if( (int)optInFastD_Period == ( Integer.MIN_VALUE ) )
+         optInFastD_Period = 3;
+      else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
+         return RetCode.BadParam ;
       lookbackK = optInFastK_Period-1;
       lookbackFastD = movingAverageLookback ( optInFastD_Period, optInFastD_MAType );
       lookbackTotal = lookbackK + lookbackFastD;
