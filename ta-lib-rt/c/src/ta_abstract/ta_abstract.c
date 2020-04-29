@@ -1324,6 +1324,38 @@ TA_RetCode TA_CallFuncState( const TA_ParamHolder *param )
    return (*stateFunction)( paramHolderPriv );
 }
 
+
+TA_RetCode TA_CallFuncBatchState( const TA_ParamHolder *param,
+                                  TA_Integer            startIdx,
+                                  TA_Integer            endIdx,
+                                  TA_Integer           *outBegIdx,
+                                  TA_Integer           *outNbElement)
+{
+
+   TA_FrameBatchStateFunction batchStateFunction;
+
+   if( (outBegIdx == NULL) || (outNbElement == NULL) || (param == NULL)) {
+       return TA_BAD_PARAM;
+   }
+
+   GET_PRIVATE_FUNC(param, batch_state_func, batchStateFunction);
+
+    /* Check that all parameters are initialize (except the optInput). */
+   if( paramHolderPriv->inBitmap != 0 )
+   {
+      return TA_INPUT_NOT_ALL_INITIALIZE;
+   }
+
+   if( paramHolderPriv->outBitmap != 0 )
+   {
+      return TA_OUTPUT_NOT_ALL_INITIALIZE;
+   }
+
+   /* Perform the function call. */
+   return (*batchStateFunction)( paramHolderPriv, startIdx, endIdx,
+                                 outBegIdx, outNbElement );
+}
+
 TA_RetCode TA_FreeState( const TA_ParamHolder *param )
 {
    TA_FrameStateFunc stateFreeFunction;
@@ -1376,6 +1408,18 @@ TA_RetCode TA_GetCallFuncStateFuncPtr(const TA_FuncInfo *param, TA_StateFunc* fu
     TA_FrameStateFunc f;
     GET_PRIVATE_FUNC_BY_FUN_INFO(param, state_func, f);
     *func = (TA_StateFunc) f;
+
+    return TA_SUCCESS;
+}
+
+TA_RetCode TA_GetCallFuncBatchStateFuncPtr(const TA_FuncInfo *param, TA_BatchStateFunc* func  )
+{
+    if (func == NULL)
+        return TA_BAD_PARAM;
+
+    TA_BatchStateFunc f;
+    GET_PRIVATE_FUNC_BY_FUN_INFO(param, batch_state_func, f);
+    *func = (TA_BatchStateFunc) f;
 
     return TA_SUCCESS;
 }

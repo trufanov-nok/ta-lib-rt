@@ -172,6 +172,7 @@ typedef struct
    const TA_FrameLookback lookback;
    const TA_FrameStateFunc state_init;
    const TA_FrameStateFunc state_func;
+   const TA_FrameBatchStateFunction batch_state_func;
    const TA_FrameStateFunc state_free;
    const TA_FrameStateIOFunc state_save;
    const TA_FrameStateIOFunc state_load;
@@ -203,6 +204,7 @@ typedef struct
       TA_##name##_FramePPLB, \
       TA_##name##_FramePPSI, \
       TA_##name##_FramePPS, \
+      TA_##name##_FramePPBS, \
       TA_##name##_FramePPSF, \
       TA_##name##_FramePPSS, \
       TA_##name##_FramePPSL \
