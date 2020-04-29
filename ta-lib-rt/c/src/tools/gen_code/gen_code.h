@@ -253,7 +253,8 @@ enum printFuncSettings
     pfs_stateFreeSignature =     1 << 16,
     pfs_stateTestSignature =     1 << 17,
     pfs_stateSaveSignature =     1 << 18,
-    pfs_stateLoadSignature =     1 << 19
+    pfs_stateLoadSignature =     1 << 19,
+    pfs_stateBatchFuncSignature =1 << 20
 };
 
 

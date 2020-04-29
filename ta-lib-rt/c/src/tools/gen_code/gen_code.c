@@ -548,7 +548,7 @@ int genCode(int argc, char* argv[])
    #define FILE_CORE_JAVA_TMP ta_fs_path(3, "..", "temp", "CoreJava.tmp")
    #define FILE_CORE_JAVA_UNF ta_fs_path(3, "..", "temp", "CoreJavaUnformated.tmp")
    gOutCore_Java = fileOpen( FILE_CORE_JAVA, NULL, FILE_READ );
-   if( gOutCore_Java == NULL )   
+   if( gOutCore_Java == NULL )
    {
          printf( "\nCannot access [%s]\n", gToOpen );
          return -1;
@@ -1430,18 +1430,29 @@ void doForEachFunctionPhase2( const TA_FuncInfo *funcInfo,
    printFunc( gOutFunc_SWG->file, NULL, funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_stateFuncSignature );
    fprintf( gOutFunc_SWG->file, "\n" );
 
+   /* Generate the corresponding batch state function prototype. */
+   printFunc( gOutFunc_H->file, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_stateBatchFuncSignature );
+   fprintf( gOutFunc_H->file, "\n" );
+   printFunc( gOutFunc_SWG->file, NULL, funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_stateBatchFuncSignature );
+   fprintf( gOutFunc_SWG->file, "\n" );
+
    /* Generate the corresponding state free function prototype. */
    printFunc( gOutFunc_H->file, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_stateFreeSignature );
+   fprintf( gOutFunc_H->file, "\n" );
    printFunc( gOutFunc_SWG->file, NULL, funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_stateFreeSignature );
+   fprintf( gOutFunc_SWG->file, "\n" );
 
    /* Generate the corresponding state save function prototype. */
    printFunc( gOutFunc_H->file, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_stateSaveSignature );
+   fprintf( gOutFunc_H->file, "\n" );
    printFunc( gOutFunc_SWG->file, NULL, funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_stateSaveSignature );
+   fprintf( gOutFunc_SWG->file, "\n" );
 
    /* Generate the corresponding state load function prototype. */
    printFunc( gOutFunc_H->file, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_stateLoadSignature );
+   fprintf( gOutFunc_H->file, "\n" );
    printFunc( gOutFunc_SWG->file, NULL, funcInfo, pfs_prototype | pfs_semiColonNeeded | pfs_stateLoadSignature );
-
+   fprintf( gOutFunc_SWG->file, "\n" );
 
    genPrefix = 1;
    printStateTestFunc( gOutFunc_H->file, funcInfo);
@@ -1456,6 +1467,8 @@ void doForEachFunctionPhase2( const TA_FuncInfo *funcInfo,
    printFrameHeader( gOutFrame_H->file, funcInfo, pfs_stateInitSignature );
    fprintf( gOutFrame_H->file, ";\n" );
    printFrameHeader( gOutFrame_H->file, funcInfo, pfs_stateFuncSignature );
+   fprintf( gOutFrame_H->file, ";\n" );
+   printFrameHeader( gOutFrame_H->file, funcInfo, pfs_stateBatchFuncSignature );
    fprintf( gOutFrame_H->file, ";\n" );
    printFrameHeader( gOutFrame_H->file, funcInfo, pfs_stateFreeSignature );
    fprintf( gOutFrame_H->file, ";\n" );
@@ -1744,8 +1757,9 @@ void printFunc( FILE *out,
    SETTING_DECL(stateTestSignature);
    SETTING_DECL(stateLoadSignature);
    SETTING_DECL(stateSaveSignature);
+   SETTING_DECL(stateBatchFuncSignature);
 
-   #define ANY_SIGNATURE_PARAM (lookbackSignature || stateInitSignature || stateFuncSignature || stateFreeSignature || stateLoadSignature || stateSaveSignature)
+   #define ANY_SIGNATURE_PARAM (lookbackSignature || stateInitSignature || stateFuncSignature || stateFreeSignature || stateLoadSignature || stateSaveSignature || stateBatchFuncSignature )
 
 
    // init text constants begin
@@ -1923,6 +1937,9 @@ void printFunc( FILE *out,
       if( stateFuncSignature )
         { PRINT_SIGNATURE("State", 0); }
       else
+      if( stateBatchFuncSignature )
+        { PRINT_SIGNATURE("BatchState", 0); }
+      else
       if( stateFreeSignature )
         { PRINT_SIGNATURE("StateFree", 0); }
       else
@@ -2010,6 +2027,11 @@ void printFunc( FILE *out,
          print( out, "%sTA_%s_State(", prefix == NULL? "" : prefix, funcName );
          indent += 12;
       } else
+      if( stateBatchFuncSignature )
+      {
+         print( out, "%sTA_%s_BatchState(", prefix == NULL? "" : prefix, funcName );
+         indent += 12;
+      } else
       if( stateFreeSignature )
       {
          print( out, "%sTA_%s_StateFree(", prefix == NULL? "" : prefix, funcName );
@@ -2055,16 +2077,16 @@ void printFunc( FILE *out,
    }
 
 
-   if (stateInitSignature || stateFuncSignature || stateFreeSignature || stateSaveSignature || stateLoadSignature)
+   if (stateInitSignature || stateFuncSignature || stateFreeSignature || stateSaveSignature || stateLoadSignature || stateBatchFuncSignature)
    {
-       unsigned int last_arg = stateFreeSignature || (!(stateFuncSignature || stateSaveSignature || stateLoadSignature) && funcInfo->nbOptInput == 0);
+       unsigned int last_arg = stateFreeSignature || (!(stateFuncSignature || stateSaveSignature || stateLoadSignature || stateBatchFuncSignature) && funcInfo->nbOptInput == 0);
 
        if (frame)
-           fprintf( out, " %s(struct TA_%s_State**) &params->_state%s\n", (stateFuncSignature||stateSaveSignature)?"*":"", funcName, last_arg?"":"," );
+           fprintf( out, " %s(struct TA_%s_State**) &params->_state%s\n", (stateFuncSignature||stateSaveSignature||stateBatchFuncSignature)?"*":"", funcName, last_arg?"":"," );
        else
        if (!validationCode) {
        fprintf( out, "struct TA_%s_State*", funcName );
-       if (!stateFuncSignature && !stateSaveSignature) fprintf( out, "*");
+       if (!stateFuncSignature && !stateSaveSignature && !stateBatchFuncSignature) fprintf( out, "*");
        fprintf( out, " _state");
        if (!last_arg)
            fprintf( out, ",\n"); // hope that will be more params later
@@ -2138,7 +2160,7 @@ void printFunc( FILE *out,
 
                       if( retCode != TA_SUCCESS )
                       {
-                         printf( "[%s] invalid 'input' information (%d,%d)\n", funcName, i, paramNb );
+                         printf( "[%s] invalid 'input' information (%d)\n", funcName, i );
                          return;
                       }
 
@@ -2156,7 +2178,7 @@ void printFunc( FILE *out,
 
                   if( retCode != TA_SUCCESS )
                   {
-                     printf( "[%s] invalid 'opt input' information (%d,%d)\n", funcName, i, paramNb );
+                     printf( "[%s] invalid 'opt input' information (%d)\n", funcName, i );
                      return;
                   }
 
@@ -2208,7 +2230,7 @@ void printFunc( FILE *out,
 
                       if( retCode != TA_SUCCESS )
                       {
-                         printf( "[%s] invalid 'opt input' information (%d,%d)\n", funcName, i, paramNb );
+                         printf( "[%s] invalid 'opt input' information (%d)\n", funcName, i );
                          return;
                       }
 
@@ -2226,7 +2248,7 @@ void printFunc( FILE *out,
 
                       if( retCode != TA_SUCCESS )
                       {
-                         printf( "[%s] invalid 'input' information (%d,%d)\n", funcName, i, paramNb );
+                         printf( "[%s] invalid 'input' information (%d)\n", funcName, i );
                          return;
                       }
 
@@ -2244,7 +2266,13 @@ void printFunc( FILE *out,
                    }
 
                }
+       }
 
+       if (stateBatchFuncSignature && !validationCode) {
+           printIndent( out, indent );
+           fprintf( out, "%s%s,\n", frame?"":"int ", startIdxString );
+           printIndent( out, indent );
+           fprintf( out, "%s%s,\n", frame?"":"int ", endIdxString );
        }
    }
 
@@ -2685,7 +2713,7 @@ void printFunc( FILE *out,
    nbOptInputArgsBuffer[0] = '\0';
    int nbOptInputArgsBufferLen = 0;
 
-   if (!stateFreeSignature && !stateFuncSignature && !stateSaveSignature && !stateLoadSignature)
+   if (!stateFreeSignature && !stateFuncSignature && !stateSaveSignature && !stateLoadSignature && !stateBatchFuncSignature)
    for( i=0; i < funcInfo->nbOptInput; i++ )
    {
       excludeFromManaged = 0;
@@ -3063,6 +3091,110 @@ void printFunc( FILE *out,
          fprintf( out, "#endif /* !defined(_JAVA) */\n" );
       }
 
+      if (stateBatchFuncSignature && validationCode) {
+          printIndent( out, indent );
+          fprintf( out, "/* Make sure there is still something to evaluate. */\n");
+          printIndent( out, indent );
+          fprintf( out, "if( startIdx > endIdx )\n");
+          printIndent( out, indent );
+          fprintf( out, "{\n");
+          printIndent( out, indent );
+          fprintf( out, "   VALUE_HANDLE_DEREF_TO_ZERO(outBegIdx);\n");
+          printIndent( out, indent );
+          fprintf( out, "   VALUE_HANDLE_DEREF_TO_ZERO(outNBElement);\n");
+          printIndent( out, indent );
+          fprintf( out, "   return ENUM_VALUE(RetCode,TA_SUCCESS,Success);\n");
+          printIndent( out, indent );
+          fprintf( out, "}\n");
+          printIndent( out, indent );
+          fprintf( out, "\n");
+          printIndent( out, indent );
+          fprintf( out, "\n");
+          for( i = 0; i < funcInfo->nbOutput; i++ ) {
+             retCode = TA_GetOutputParameterInfo( funcInfo->handle, i, &outputParamInfo );
+             if( retCode != TA_SUCCESS ) {
+                printf( "[%s] invalid 'output' information (%d)\n", funcName, i );
+                return;
+             }
+             printIndent( out, indent );
+             fprintf( out, "%s %s%s;\n",
+                      outputParamInfo->type == TA_Output_Real ? "double" : "int",
+                      outputParamInfo->paramName, "Val");
+          }
+          printIndent( out, indent );
+          fprintf( out, "int retValue;\n");
+          printIndent( out, indent );
+          fprintf( out, "\n");
+          printIndent( out, indent );
+          fprintf( out, "int outIdx = 0;\n");
+          printIndent( out, indent );
+          fprintf( out, "VALUE_HANDLE_DEREF(outBegIdx)  = startIdx;\n");
+          printIndent( out, indent );
+          fprintf( out, "\n");
+          printIndent( out, indent );
+          fprintf( out, "for (int i = startIdx; i <= endIdx; ++i) {\n");
+          printIndent( out, indent );
+          fprintf( out, "   retValue = TA_%s_State( _state", funcName);
+          for( i = 0; i < funcInfo->nbInput; i++ ) {
+             retCode = TA_GetInputParameterInfo( funcInfo->handle, i, &inputParamInfo );
+             if( retCode != TA_SUCCESS ) {
+                printf( "[%s] invalid 'input' information (%d)\n", funcName, i );
+                return;
+             }
+
+             if (inputParamInfo->type == TA_Input_Price) {
+                 if( inputParamInfo->flags & TA_IN_PRICE_TIMESTAMP ) { fprintf( out, ", inTimestamp[i]"); }
+                 if( inputParamInfo->flags & TA_IN_PRICE_OPEN ) { fprintf( out, ", inOpen[i]"); }
+                 if( inputParamInfo->flags & TA_IN_PRICE_HIGH ) { fprintf( out, ", inHigh[i]"); }
+                 if( inputParamInfo->flags & TA_IN_PRICE_LOW ) { fprintf( out, ", inLow[i]"); }
+                 if( inputParamInfo->flags & TA_IN_PRICE_CLOSE ) { fprintf( out, ", inClose[i]"); }
+                 if( inputParamInfo->flags & TA_IN_PRICE_VOLUME ) { fprintf( out, ", inVolume[i]"); }
+                 if( inputParamInfo->flags & TA_IN_PRICE_OPENINTEREST ) { fprintf( out, ", inOpenInterest[i]"); }
+             } else {
+                 fprintf( out, ", %s[i]", inputParamInfo->paramName);
+             }
+          }
+          for( i = 0; i < funcInfo->nbOutput; i++ ) {
+             retCode = TA_GetOutputParameterInfo( funcInfo->handle, i, &outputParamInfo );
+             if( retCode != TA_SUCCESS ) {
+                printf( "[%s] invalid 'output' information (%d)\n", funcName, i );
+                return;
+             }
+             fprintf( out, ", &%s%s", outputParamInfo->paramName, "Val");
+          }
+          fprintf( out, " );\n");
+          printIndent( out, indent );
+          fprintf( out, "   if ( retValue == ENUM_VALUE(RetCode,TA_SUCCESS,Success) ) {\n");
+          for( i = 0; i < funcInfo->nbOutput; i++ ) {
+             retCode = TA_GetOutputParameterInfo( funcInfo->handle, i, &outputParamInfo );
+             if( retCode != TA_SUCCESS ) {
+                printf( "[%s] invalid 'output' information (%d)\n", funcName, i );
+                return;
+             }
+             printIndent( out, indent );
+             fprintf( out, "      %s[outIdx] = %s%s;\n", outputParamInfo->paramName, outputParamInfo->paramName, "Val");
+          }
+          printIndent( out, indent );
+          fprintf( out, "      outIdx++;\n");
+          printIndent( out, indent );
+          fprintf( out, "   } else if ( retValue == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) {\n");
+          printIndent( out, indent );
+          fprintf( out, "      continue;\n");
+          printIndent( out, indent );
+          fprintf( out, "   } else {\n");
+          printIndent( out, indent );
+          fprintf( out, "      break;\n");
+          printIndent( out, indent );
+          fprintf( out, "    }\n");
+          printIndent( out, indent );
+          fprintf( out, "}\n");
+          printIndent( out, indent );
+          fprintf( out, "\n");
+          printIndent( out, indent );
+          fprintf( out, "VALUE_HANDLE_DEREF(outNBElement) = outIdx;\n");
+      }
+
+
    }
 
 }
@@ -3117,6 +3249,13 @@ void printCallFrame( FILE *out, const TA_FuncInfo *funcInfo )
       print( out, "   (void)params;\n" );
    printFunc( out, "   return ", funcInfo, pfs_frame | pfs_semiColonNeeded | pfs_stateLoadSignature);
    print( out, "}\n" );
+
+   printFrameHeader( out, funcInfo, pfs_stateBatchFuncSignature );
+   print( out, "{\n" );
+   if( funcInfo->nbOptInput == 0 )
+      print( out, "   (void)params;\n" );
+   printFunc( out, "   return ", funcInfo, pfs_frame | pfs_semiColonNeeded | pfs_stateBatchFuncSignature);
+   print( out, "}\n" );
    
    genPrefix = 0;
 }
@@ -3137,6 +3276,15 @@ void printFrameHeader( FILE *out, const TA_FuncInfo *funcInfo, unsigned int sett
    if( settings & pfs_stateFuncSignature )
    {
       print( out, "unsigned int TA_%s_FramePPS( const TA_ParamHolderPriv *params )\n", funcInfo->name );
+   }
+   else
+   if( settings & pfs_stateBatchFuncSignature )
+   {
+      print( out, "unsigned int TA_%s_FramePPBS( const TA_ParamHolderPriv *params,\n", funcInfo->name );
+      print( out, "                          int            startIdx,\n" );
+      print( out, "                          int            endIdx,\n" );
+      print( out, "                          int           *outBegIdx,\n" );
+      print( out, "                          int           *outNBElement )\n" );
    }
    else
    if( settings & pfs_stateFreeSignature )
@@ -3703,6 +3851,19 @@ int createTemplate( FileHandle *in, FileHandle *out )
       {
          skipSection = 1;
          fputs( gTempBuf, outFile );
+
+         // temporary measure to skip not existsing functions in existing file
+         if (sectionDone == 8) {
+             fputs( "%%%GENCODE%%%\n"
+                    "/**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/\n"
+                    "\n{\n  /* insert local variable here */\n\n"
+                    "/**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/\n"
+                    "%%%GENCODE%%%\n"
+                    "/**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/\n"
+                    "\n  /* insert batch state code here. */\n  return retValue;\n}\n\n"
+                    "/**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/\n", outFile );
+         }
+
          fputs( "%%%GENCODE%%%\n", outFile );
       }
 
@@ -3924,6 +4085,44 @@ void writeFuncFile( const TA_FuncInfo *funcInfo )
    genPrefix = 1;
    print( out, "\n" );
    print( out, "#if defined( _MANAGED )\n" );
+   printFunc( out, NULL, funcInfo, pfs_prototype | pfs_stateBatchFuncSignature | pfs_managedCPPCode );
+   print( out, "#elif defined( _JAVA )\n" );
+   /* Handle special case to avoid duplicate definition of min,max */
+   if( strcmp( funcInfo->camelCaseName, "Min" ) == 0 ) {
+      print( out, "#undef min\n" );
+   } else if( strcmp( funcInfo->camelCaseName, "Max" ) == 0 ) {
+      print( out, "#undef max\n" );
+   }
+   printFunc( out, NULL, funcInfo, pfs_prototype | pfs_stateBatchFuncSignature | pfs_outputForJava );
+   print( out, "#else\n" );
+   printFunc( out, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_stateBatchFuncSignature );
+   print( out, "#endif\n" );
+   //section 9 end
+
+   genPrefix = 0;
+   skipToGenCode( funcInfo->name, gOutFunc_C->file, gOutFunc_C->templateFile );
+
+   //section 10 begin
+   genPrefix = 1;
+   print( out, "\n" );
+   print( out, "#ifndef TA_OVERWRITE_BATCH_STATE_CODE\n" );
+   print( out, "\n" );
+   /* Generate the code for checking the parameters.
+    * Also generates the code for setting up the
+    * default values.
+    */
+   printFunc( out, NULL, funcInfo, pfs_stateBatchFuncSignature | pfs_validationCode );
+   print( out, "#endif /* TA_OVERWRITE_BATCH_STATE_CODE */\n" );
+   print( out, "\n");
+   //section 10 end
+
+   genPrefix = 0;
+   skipToGenCode( funcInfo->name, gOutFunc_C->file, gOutFunc_C->templateFile );
+
+   // section 11 begin
+   genPrefix = 1;
+   print( out, "\n" );
+   print( out, "#if defined( _MANAGED )\n" );
    printFunc( out, NULL, funcInfo, pfs_prototype | pfs_stateFreeSignature | pfs_managedCPPCode );
    print( out, "#elif defined( _JAVA )\n" );
    /* Handle special case to avoid duplicate definition of min,max */
@@ -3935,45 +4134,6 @@ void writeFuncFile( const TA_FuncInfo *funcInfo )
    printFunc( out, NULL, funcInfo, pfs_prototype | pfs_stateFreeSignature | pfs_outputForJava );
    print( out, "#else\n" );
    printFunc( out, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_stateFreeSignature );
-   print( out, "#endif\n" );
-   //section 9 end
-
-   genPrefix = 0;
-   skipToGenCode( funcInfo->name, gOutFunc_C->file, gOutFunc_C->templateFile );
-
-   //section 10 begin
-   genPrefix = 1;
-   print( out, "\n" );
-   print( out, "#ifndef TA_FUNC_NO_RANGE_CHECK\n" );
-   print( out, "\n" );
-   /* Generate the code for checking the parameters.
-    * Also generates the code for setting up the
-    * default values.
-    */
-   printFunc( out, NULL, funcInfo, pfs_stateFreeSignature | pfs_validationCode );
-   print( out, "#endif /* TA_FUNC_NO_RANGE_CHECK */\n" );
-   print( out, "\n" );
-   //section 10 end
-
-
-   genPrefix = 0;
-   skipToGenCode( funcInfo->name, gOutFunc_C->file, gOutFunc_C->templateFile );
-
-   // section 11 begin
-   genPrefix = 1;
-   print( out, "\n" );
-   print( out, "#if defined( _MANAGED )\n" );
-   printFunc( out, NULL, funcInfo, pfs_prototype | pfs_stateSaveSignature | pfs_managedCPPCode );
-   print( out, "#elif defined( _JAVA )\n" );
-   /* Handle special case to avoid duplicate definition of min,max */
-   if( strcmp( funcInfo->camelCaseName, "Min" ) == 0 ) {
-      print( out, "#undef min\n" );
-   } else if( strcmp( funcInfo->camelCaseName, "Max" ) == 0 ) {
-      print( out, "#undef max\n" );
-   }
-   printFunc( out, NULL, funcInfo, pfs_prototype | pfs_stateSaveSignature | pfs_outputForJava );
-   print( out, "#else\n" );
-   printFunc( out, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_stateSaveSignature );
    print( out, "#endif\n" );
    //section 11 end
 
@@ -3989,10 +4149,11 @@ void writeFuncFile( const TA_FuncInfo *funcInfo )
     * Also generates the code for setting up the
     * default values.
     */
-   printFunc( out, NULL, funcInfo, pfs_stateSaveSignature | pfs_validationCode );
+   printFunc( out, NULL, funcInfo, pfs_stateFreeSignature | pfs_validationCode );
    print( out, "#endif /* TA_FUNC_NO_RANGE_CHECK */\n" );
    print( out, "\n" );
    //section 12 end
+
 
    genPrefix = 0;
    skipToGenCode( funcInfo->name, gOutFunc_C->file, gOutFunc_C->templateFile );
@@ -4001,7 +4162,7 @@ void writeFuncFile( const TA_FuncInfo *funcInfo )
    genPrefix = 1;
    print( out, "\n" );
    print( out, "#if defined( _MANAGED )\n" );
-   printFunc( out, NULL, funcInfo, pfs_prototype | pfs_stateLoadSignature | pfs_managedCPPCode );
+   printFunc( out, NULL, funcInfo, pfs_prototype | pfs_stateSaveSignature | pfs_managedCPPCode );
    print( out, "#elif defined( _JAVA )\n" );
    /* Handle special case to avoid duplicate definition of min,max */
    if( strcmp( funcInfo->camelCaseName, "Min" ) == 0 ) {
@@ -4009,9 +4170,9 @@ void writeFuncFile( const TA_FuncInfo *funcInfo )
    } else if( strcmp( funcInfo->camelCaseName, "Max" ) == 0 ) {
       print( out, "#undef max\n" );
    }
-   printFunc( out, NULL, funcInfo, pfs_prototype | pfs_stateLoadSignature | pfs_outputForJava );
+   printFunc( out, NULL, funcInfo, pfs_prototype | pfs_stateSaveSignature | pfs_outputForJava );
    print( out, "#else\n" );
-   printFunc( out, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_stateLoadSignature );
+   printFunc( out, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_stateSaveSignature );
    print( out, "#endif\n" );
    //section 13 end
 
@@ -4027,10 +4188,48 @@ void writeFuncFile( const TA_FuncInfo *funcInfo )
     * Also generates the code for setting up the
     * default values.
     */
-   printFunc( out, NULL, funcInfo, pfs_stateLoadSignature | pfs_validationCode );
+   printFunc( out, NULL, funcInfo, pfs_stateSaveSignature | pfs_validationCode );
    print( out, "#endif /* TA_FUNC_NO_RANGE_CHECK */\n" );
    print( out, "\n" );
    //section 14 end
+
+   genPrefix = 0;
+   skipToGenCode( funcInfo->name, gOutFunc_C->file, gOutFunc_C->templateFile );
+
+   // section 15 begin
+   genPrefix = 1;
+   print( out, "\n" );
+   print( out, "#if defined( _MANAGED )\n" );
+   printFunc( out, NULL, funcInfo, pfs_prototype | pfs_stateLoadSignature | pfs_managedCPPCode );
+   print( out, "#elif defined( _JAVA )\n" );
+   /* Handle special case to avoid duplicate definition of min,max */
+   if( strcmp( funcInfo->camelCaseName, "Min" ) == 0 ) {
+      print( out, "#undef min\n" );
+   } else if( strcmp( funcInfo->camelCaseName, "Max" ) == 0 ) {
+      print( out, "#undef max\n" );
+   }
+   printFunc( out, NULL, funcInfo, pfs_prototype | pfs_stateLoadSignature | pfs_outputForJava );
+   print( out, "#else\n" );
+   printFunc( out, "TA_LIB_API ", funcInfo, pfs_prototype | pfs_stateLoadSignature );
+   print( out, "#endif\n" );
+   //section 15 end
+
+   genPrefix = 0;
+   skipToGenCode( funcInfo->name, gOutFunc_C->file, gOutFunc_C->templateFile );
+
+   //section 16 begin
+   genPrefix = 1;
+   print( out, "\n" );
+   print( out, "#ifndef TA_FUNC_NO_RANGE_CHECK\n" );
+   print( out, "\n" );
+   /* Generate the code for checking the parameters.
+    * Also generates the code for setting up the
+    * default values.
+    */
+   printFunc( out, NULL, funcInfo, pfs_stateLoadSignature | pfs_validationCode );
+   print( out, "#endif /* TA_FUNC_NO_RANGE_CHECK */\n" );
+   print( out, "\n" );
+   //section 16 end
 
    // section 15?
    /* Put a marker who is going to be used in the second pass */

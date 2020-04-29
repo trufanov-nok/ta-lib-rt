@@ -119,8 +119,8 @@
 %%%GENCODE%%%
 /**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 
-   /* insert state free code here. */   
-   return 0;
+   /* insert batch state code here. */
+   return retValue;
 }
 
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -133,7 +133,7 @@
 %%%GENCODE%%%
 /**** END GENCODE SECTION 12 - DO NOT DELETE THIS LINE ****/
 
-   /* insert state save code here. */   
+   /* insert state free code here. */   
    return 0;
 }
 
@@ -147,11 +147,25 @@
 %%%GENCODE%%%
 /**** END GENCODE SECTION 14 - DO NOT DELETE THIS LINE ****/
 
-   /* insert state load code here. */   
+   /* insert state save code here. */   
    return 0;
 }
 
 /**** START GENCODE SECTION 15 - DO NOT DELETE THIS LINE ****/
 %%%GENCODE%%%
 /**** END GENCODE SECTION 15 - DO NOT DELETE THIS LINE ****/
+{
+   /* insert local variable here */
+
+/**** START GENCODE SECTION 16 - DO NOT DELETE THIS LINE ****/
+%%%GENCODE%%%
+/**** END GENCODE SECTION 16 - DO NOT DELETE THIS LINE ****/
+
+   /* insert state load code here. */   
+   return 0;
+}
+
+/**** START GENCODE SECTION 17 - DO NOT DELETE THIS LINE ****/
+%%%GENCODE%%%
+/**** END GENCODE SECTION 17 - DO NOT DELETE THIS LINE ****/
 
