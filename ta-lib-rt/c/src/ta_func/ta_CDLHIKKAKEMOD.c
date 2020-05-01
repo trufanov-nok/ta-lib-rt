@@ -553,13 +553,12 @@ int i1,i2,i3;
 /* Generated */    int outIdx = 0;
 /* Generated */    VALUE_HANDLE_DEREF(outBegIdx)  = startIdx;
 /* Generated */    
-/* Generated */    for (int i = startIdx; i <= endIdx; ++i) {
+/* Generated */    for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
 /* Generated */       retValue = TA_CDLHIKKAKEMOD_State( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
 /* Generated */       if ( retValue == ENUM_VALUE(RetCode,TA_SUCCESS,Success) ) {
 /* Generated */          outInteger[outIdx] = outIntegerVal;
-/* Generated */          outIdx++;
 /* Generated */       } else if ( retValue == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) {
-/* Generated */          continue;
+/* Generated */          outInteger[outIdx] = INT_MAX;
 /* Generated */       } else {
 /* Generated */          break;
 /* Generated */        }

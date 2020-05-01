@@ -761,13 +761,12 @@ else {
 /* Generated */    int outIdx = 0;
 /* Generated */    VALUE_HANDLE_DEREF(outBegIdx)  = startIdx;
 /* Generated */    
-/* Generated */    for (int i = startIdx; i <= endIdx; ++i) {
+/* Generated */    for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
 /* Generated */       retValue = TA_HT_TRENDLINE_State( _state, inReal[i], &outRealVal );
 /* Generated */       if ( retValue == ENUM_VALUE(RetCode,TA_SUCCESS,Success) ) {
 /* Generated */          outReal[outIdx] = outRealVal;
-/* Generated */          outIdx++;
 /* Generated */       } else if ( retValue == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) {
-/* Generated */          continue;
+/* Generated */          outReal[outIdx] = NAN;
 /* Generated */       } else {
 /* Generated */          break;
 /* Generated */        }

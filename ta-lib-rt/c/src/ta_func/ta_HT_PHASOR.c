@@ -699,14 +699,14 @@ DEFINE_HILBERT_VARIABLES_STRUCT(HT_PHASOR)
 /* Generated */    int outIdx = 0;
 /* Generated */    VALUE_HANDLE_DEREF(outBegIdx)  = startIdx;
 /* Generated */    
-/* Generated */    for (int i = startIdx; i <= endIdx; ++i) {
+/* Generated */    for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
 /* Generated */       retValue = TA_HT_PHASOR_State( _state, inReal[i], &outInPhaseVal, &outQuadratureVal );
 /* Generated */       if ( retValue == ENUM_VALUE(RetCode,TA_SUCCESS,Success) ) {
 /* Generated */          outInPhase[outIdx] = outInPhaseVal;
 /* Generated */          outQuadrature[outIdx] = outQuadratureVal;
-/* Generated */          outIdx++;
 /* Generated */       } else if ( retValue == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) {
-/* Generated */          continue;
+/* Generated */          outInPhase[outIdx] = NAN;
+/* Generated */          outQuadrature[outIdx] = NAN;
 /* Generated */       } else {
 /* Generated */          break;
 /* Generated */        }

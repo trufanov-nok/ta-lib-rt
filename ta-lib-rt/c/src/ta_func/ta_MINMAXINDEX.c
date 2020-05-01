@@ -493,14 +493,14 @@ if (FIRST_LAUNCH)
 /* Generated */    int outIdx = 0;
 /* Generated */    VALUE_HANDLE_DEREF(outBegIdx)  = startIdx;
 /* Generated */    
-/* Generated */    for (int i = startIdx; i <= endIdx; ++i) {
+/* Generated */    for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
 /* Generated */       retValue = TA_MINMAXINDEX_State( _state, inReal[i], &outMinIdxVal, &outMaxIdxVal );
 /* Generated */       if ( retValue == ENUM_VALUE(RetCode,TA_SUCCESS,Success) ) {
 /* Generated */          outMinIdx[outIdx] = outMinIdxVal;
 /* Generated */          outMaxIdx[outIdx] = outMaxIdxVal;
-/* Generated */          outIdx++;
 /* Generated */       } else if ( retValue == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) {
-/* Generated */          continue;
+/* Generated */          outMinIdx[outIdx] = INT_MAX;
+/* Generated */          outMaxIdx[outIdx] = INT_MAX;
 /* Generated */       } else {
 /* Generated */          break;
 /* Generated */        }

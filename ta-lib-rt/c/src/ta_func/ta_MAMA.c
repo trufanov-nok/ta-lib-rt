@@ -849,14 +849,14 @@ DEFINE_HILBERT_VARIABLES_STRUCT(MAMA)
 /* Generated */    int outIdx = 0;
 /* Generated */    VALUE_HANDLE_DEREF(outBegIdx)  = startIdx;
 /* Generated */    
-/* Generated */    for (int i = startIdx; i <= endIdx; ++i) {
+/* Generated */    for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
 /* Generated */       retValue = TA_MAMA_State( _state, inReal[i], &outMAMAVal, &outFAMAVal );
 /* Generated */       if ( retValue == ENUM_VALUE(RetCode,TA_SUCCESS,Success) ) {
 /* Generated */          outMAMA[outIdx] = outMAMAVal;
 /* Generated */          outFAMA[outIdx] = outFAMAVal;
-/* Generated */          outIdx++;
 /* Generated */       } else if ( retValue == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) {
-/* Generated */          continue;
+/* Generated */          outMAMA[outIdx] = NAN;
+/* Generated */          outFAMA[outIdx] = NAN;
 /* Generated */       } else {
 /* Generated */          break;
 /* Generated */        }

@@ -439,13 +439,12 @@ return FUNCTION_CALL_STATE_INIT(INT_PO)((struct TA_APO_State**)_state, optInFast
 /* Generated */    int outIdx = 0;
 /* Generated */    VALUE_HANDLE_DEREF(outBegIdx)  = startIdx;
 /* Generated */    
-/* Generated */    for (int i = startIdx; i <= endIdx; ++i) {
+/* Generated */    for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
 /* Generated */       retValue = TA_PPO_State( _state, inReal[i], &outRealVal );
 /* Generated */       if ( retValue == ENUM_VALUE(RetCode,TA_SUCCESS,Success) ) {
 /* Generated */          outReal[outIdx] = outRealVal;
-/* Generated */          outIdx++;
 /* Generated */       } else if ( retValue == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) {
-/* Generated */          continue;
+/* Generated */          outReal[outIdx] = NAN;
 /* Generated */       } else {
 /* Generated */          break;
 /* Generated */        }

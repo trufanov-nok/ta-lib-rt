@@ -892,15 +892,16 @@ k2 = (double)0.15; /* Fix 12 */
 /* Generated */    int outIdx = 0;
 /* Generated */    VALUE_HANDLE_DEREF(outBegIdx)  = startIdx;
 /* Generated */    
-/* Generated */    for (int i = startIdx; i <= endIdx; ++i) {
+/* Generated */    for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
 /* Generated */       retValue = TA_MACD_State( _state, inReal[i], &outMACDVal, &outMACDSignalVal, &outMACDHistVal );
 /* Generated */       if ( retValue == ENUM_VALUE(RetCode,TA_SUCCESS,Success) ) {
 /* Generated */          outMACD[outIdx] = outMACDVal;
 /* Generated */          outMACDSignal[outIdx] = outMACDSignalVal;
 /* Generated */          outMACDHist[outIdx] = outMACDHistVal;
-/* Generated */          outIdx++;
 /* Generated */       } else if ( retValue == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) {
-/* Generated */          continue;
+/* Generated */          outMACD[outIdx] = NAN;
+/* Generated */          outMACDSignal[outIdx] = NAN;
+/* Generated */          outMACDHist[outIdx] = NAN;
 /* Generated */       } else {
 /* Generated */          break;
 /* Generated */        }

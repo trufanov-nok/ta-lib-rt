@@ -365,15 +365,16 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = accbands ( _state, inHigh[i], inLow[i], inClose[i], &outRealUpperBandVal, &outRealMiddleBandVal, &outRealLowerBandVal );
          if ( retValue == RetCode.Success ) {
             outRealUpperBand[outIdx] = outRealUpperBandVal;
             outRealMiddleBand[outIdx] = outRealMiddleBandVal;
             outRealLowerBand[outIdx] = outRealLowerBandVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outRealUpperBand[outIdx] = NAN;
+            outRealMiddleBand[outIdx] = NAN;
+            outRealLowerBand[outIdx] = NAN;
          } else {
             break;
          }
@@ -616,13 +617,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = acos ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -806,13 +806,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = ad ( _state, inHigh[i], inLow[i], inClose[i], inVolume[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -987,13 +986,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = add ( _state, inReal0[i], inReal1[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -1237,13 +1235,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = adOsc ( _state, inHigh[i], inLow[i], inClose[i], inVolume[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -1698,13 +1695,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = adx ( _state, inHigh[i], inLow[i], inClose[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -2104,13 +2100,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = adxr ( _state, inHigh[i], inLow[i], inClose[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -2438,13 +2433,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = apo ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -2852,14 +2846,14 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = aroon ( _state, inHigh[i], inLow[i], &outAroonDownVal, &outAroonUpVal );
          if ( retValue == RetCode.Success ) {
             outAroonDown[outIdx] = outAroonDownVal;
             outAroonUp[outIdx] = outAroonUpVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outAroonDown[outIdx] = NAN;
+            outAroonUp[outIdx] = NAN;
          } else {
             break;
          }
@@ -3241,13 +3235,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = aroonOsc ( _state, inHigh[i], inLow[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -3491,13 +3484,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = asin ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -3648,13 +3640,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = atan ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -3908,13 +3899,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = atr ( _state, inHigh[i], inLow[i], inClose[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -4171,13 +4161,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = avgPrice ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -4384,13 +4373,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = avgDev ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -4766,15 +4754,16 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = bbands ( _state, inReal[i], &outRealUpperBandVal, &outRealMiddleBandVal, &outRealLowerBandVal );
          if ( retValue == RetCode.Success ) {
             outRealUpperBand[outIdx] = outRealUpperBandVal;
             outRealMiddleBand[outIdx] = outRealMiddleBandVal;
             outRealLowerBand[outIdx] = outRealLowerBandVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outRealUpperBand[outIdx] = NAN;
+            outRealMiddleBand[outIdx] = NAN;
+            outRealLowerBand[outIdx] = NAN;
          } else {
             break;
          }
@@ -5204,13 +5193,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = beta ( _state, inReal0[i], inReal1[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -5511,13 +5499,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = bop ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -5757,13 +5744,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cci ( _state, inHigh[i], inLow[i], inClose[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -6034,13 +6020,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdl2Crows ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -6320,13 +6305,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdl3BlackCrows ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -6627,13 +6611,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdl3Inside ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -6951,13 +6934,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdl3LineStrike ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -7226,13 +7208,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdl3Outside ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -7561,13 +7542,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdl3StarsInSouth ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -8016,13 +7996,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdl3WhiteSoldiers ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -8474,13 +8453,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlAbandonedBaby ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -8972,13 +8950,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlAdvanceBlock ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -9423,13 +9400,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlBeltHold ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -9747,13 +9723,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlBreakaway ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -10050,13 +10025,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlClosingMarubozu ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -10371,13 +10345,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlConcealBabysWall ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -10682,13 +10655,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlCounterAttack ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -10996,13 +10968,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlDarkCloudCover ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -11255,13 +11226,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlDoji ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -11522,13 +11492,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlDojiStar ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -11824,13 +11793,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlDragonflyDoji ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -12107,13 +12075,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlEngulfing ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -12417,13 +12384,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlEveningDojiStar ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -12781,13 +12747,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlEveningStar ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -13121,13 +13086,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlGapSideSideWhite ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -13423,13 +13387,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlGravestoneDoji ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -13764,13 +13727,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlHammer ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -14152,13 +14114,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlHangingMan ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -14517,13 +14478,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlHarami ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -14843,13 +14803,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlHaramiCross ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -15139,13 +15098,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlHignWave ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -15448,13 +15406,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlHikkake ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -15810,13 +15767,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlHikkakeMod ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -16158,13 +16114,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlHomingPigeon ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -16502,13 +16457,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlIdentical3Crows ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -16843,13 +16797,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlInNeck ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -17168,13 +17121,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlInvertedHammer ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -17525,13 +17477,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlKicking ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -17890,13 +17841,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlKickingByLength ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -18215,13 +18165,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlLadderBottom ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -18502,13 +18451,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlLongLeggedDoji ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -18798,13 +18746,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlLongLine ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -19095,13 +19042,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlMarubozu ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -19379,13 +19325,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlMatchingLow ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -19718,13 +19663,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlMatHold ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -20098,13 +20042,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlMorningDojiStar ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -20462,13 +20405,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlMorningStar ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -20789,13 +20731,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlOnNeck ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -21091,13 +21032,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlPiercing ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -21410,13 +21350,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlRickshawMan ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -21786,13 +21725,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlRiseFall3Methods ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -22163,13 +22101,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlSeperatingLines ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -22515,13 +22452,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlShootingStar ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -22833,13 +22769,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlShortLine ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -23110,13 +23045,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlSpinningTop ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -23461,13 +23395,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlStalledPattern ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -23823,13 +23756,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlStickSandwhich ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -24124,13 +24056,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlTakuri ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -24462,13 +24393,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlTasukiGap ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -24765,13 +24695,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlThrusting ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -25074,13 +25003,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlTristar ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -25375,13 +25303,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlUnique3River ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -25691,13 +25618,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlUpsideGap2Crows ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -25982,13 +25908,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cdlXSideGap3Methods ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -26171,13 +26096,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = ceil ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -26492,13 +26416,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cmo ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -26873,13 +26796,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = correl ( _state, inReal0[i], inReal1[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -27108,13 +27030,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cos ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -27265,13 +27186,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = cosh ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -27488,13 +27408,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = dema ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -27711,13 +27630,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = div ( _state, inReal0[i], inReal1[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -28050,13 +27968,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = dx ( _state, inHigh[i], inLow[i], inClose[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -28451,13 +28368,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = ema ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -28675,13 +28591,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = exp ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -28832,13 +28747,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = floor ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -29188,13 +29102,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = htDcPeriod ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -29817,13 +29730,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = htDcPhase ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -30431,14 +30343,14 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = htPhasor ( _state, inReal[i], &outInPhaseVal, &outQuadratureVal );
          if ( retValue == RetCode.Success ) {
             outInPhase[outIdx] = outInPhaseVal;
             outQuadrature[outIdx] = outQuadratureVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInPhase[outIdx] = NAN;
+            outQuadrature[outIdx] = NAN;
          } else {
             break;
          }
@@ -31071,14 +30983,14 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = htSine ( _state, inReal[i], &outSineVal, &outLeadSineVal );
          if ( retValue == RetCode.Success ) {
             outSine[outIdx] = outSineVal;
             outLeadSine[outIdx] = outLeadSineVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outSine[outIdx] = NAN;
+            outLeadSine[outIdx] = NAN;
          } else {
             break;
          }
@@ -31725,13 +31637,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = htTrendline ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -32485,13 +32396,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = htTrendMode ( _state, inReal[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -33023,13 +32933,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = imi ( _state, inOpen[i], inClose[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -33340,13 +33249,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = kama ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -33655,13 +33563,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = linearReg ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -33934,13 +33841,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = linearRegAngle ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -34212,13 +34118,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = linearRegIntercept ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -34487,13 +34392,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = linearRegSlope ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -34698,13 +34602,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = ln ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -34855,13 +34758,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = log10 ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -35187,13 +35089,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = movingAverage ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -35769,15 +35670,16 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = macd ( _state, inReal[i], &outMACDVal, &outMACDSignalVal, &outMACDHistVal );
          if ( retValue == RetCode.Success ) {
             outMACD[outIdx] = outMACDVal;
             outMACDSignal[outIdx] = outMACDSignalVal;
             outMACDHist[outIdx] = outMACDHistVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outMACD[outIdx] = NAN;
+            outMACDSignal[outIdx] = NAN;
+            outMACDHist[outIdx] = NAN;
          } else {
             break;
          }
@@ -36258,15 +36160,16 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = macdExt ( _state, inReal[i], &outMACDVal, &outMACDSignalVal, &outMACDHistVal );
          if ( retValue == RetCode.Success ) {
             outMACD[outIdx] = outMACDVal;
             outMACDSignal[outIdx] = outMACDSignalVal;
             outMACDHist[outIdx] = outMACDHistVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outMACD[outIdx] = NAN;
+            outMACDSignal[outIdx] = NAN;
+            outMACDHist[outIdx] = NAN;
          } else {
             break;
          }
@@ -36563,15 +36466,16 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = macdFix ( _state, inReal[i], &outMACDVal, &outMACDSignalVal, &outMACDHistVal );
          if ( retValue == RetCode.Success ) {
             outMACD[outIdx] = outMACDVal;
             outMACDSignal[outIdx] = outMACDSignalVal;
             outMACDHist[outIdx] = outMACDHistVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outMACD[outIdx] = NAN;
+            outMACDSignal[outIdx] = NAN;
+            outMACDHist[outIdx] = NAN;
          } else {
             break;
          }
@@ -37017,14 +36921,14 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = mama ( _state, inReal[i], &outMAMAVal, &outFAMAVal );
          if ( retValue == RetCode.Success ) {
             outMAMA[outIdx] = outMAMAVal;
             outFAMA[outIdx] = outFAMAVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outMAMA[outIdx] = NAN;
+            outFAMA[outIdx] = NAN;
          } else {
             break;
          }
@@ -37508,13 +37412,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = movingAverageVariablePeriod ( _state, inReal[i], inPeriods[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -37802,13 +37705,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = max ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -38072,13 +37974,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = maxIndex ( _state, inReal[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -38292,13 +38193,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = medPrice ( _state, inHigh[i], inLow[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -38623,13 +38523,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = mfi ( _state, inHigh[i], inLow[i], inClose[i], inVolume[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -38958,13 +38857,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = midPoint ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -39201,13 +39099,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = midPrice ( _state, inHigh[i], inLow[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -39453,13 +39350,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = min ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -39723,13 +39619,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = minIndex ( _state, inReal[i], &outIntegerVal );
          if ( retValue == RetCode.Success ) {
             outInteger[outIdx] = outIntegerVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outInteger[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -40026,14 +39921,14 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = minMax ( _state, inReal[i], &outMinVal, &outMaxVal );
          if ( retValue == RetCode.Success ) {
             outMin[outIdx] = outMinVal;
             outMax[outIdx] = outMaxVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outMin[outIdx] = NAN;
+            outMax[outIdx] = NAN;
          } else {
             break;
          }
@@ -40360,14 +40255,14 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = minMaxIndex ( _state, inReal[i], &outMinIdxVal, &outMaxIdxVal );
          if ( retValue == RetCode.Success ) {
             outMinIdx[outIdx] = outMinIdxVal;
             outMaxIdx[outIdx] = outMaxIdxVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outMinIdx[outIdx] = Integer.MAX_VALUE ;
+            outMaxIdx[outIdx] = Integer.MAX_VALUE ;
          } else {
             break;
          }
@@ -40802,13 +40697,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = minusDI ( _state, inHigh[i], inLow[i], inClose[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -41259,13 +41153,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = minusDM ( _state, inHigh[i], inLow[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -41560,13 +41453,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = mom ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -41738,13 +41630,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = mult ( _state, inReal0[i], inReal1[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -42011,13 +41902,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = natr ( _state, inHigh[i], inLow[i], inClose[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -42290,13 +42180,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = nvi ( _state, inClose[i], inVolume[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -42490,13 +42379,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = obv ( _state, inClose[i], inVolume[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -42858,13 +42746,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = plusDI ( _state, inHigh[i], inLow[i], inClose[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -43315,13 +43202,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = plusDM ( _state, inHigh[i], inLow[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -43600,13 +43486,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = ppo ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -43802,13 +43687,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = pvi ( _state, inClose[i], inVolume[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -43996,13 +43880,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = pvt ( _state, inClose[i], inVolume[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -44204,13 +44087,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = roc ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -44420,13 +44302,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = rocP ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -44636,13 +44517,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = rocR ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -44852,13 +44732,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = rocR100 ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -45197,13 +45076,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = rsi ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -45742,13 +45620,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = sar ( _state, inHigh[i], inLow[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -46493,13 +46370,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = sarExt ( _state, inHigh[i], inLow[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -46927,13 +46803,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = sin ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -47084,13 +46959,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = sinh ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -47297,13 +47171,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = sma ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -47500,13 +47373,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = sqrt ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -47761,13 +47633,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = stdDev ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -48246,14 +48117,14 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = stoch ( _state, inHigh[i], inLow[i], inClose[i], &outSlowKVal, &outSlowDVal );
          if ( retValue == RetCode.Success ) {
             outSlowK[outIdx] = outSlowKVal;
             outSlowD[outIdx] = outSlowDVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outSlowK[outIdx] = NAN;
+            outSlowD[outIdx] = NAN;
          } else {
             break;
          }
@@ -48782,14 +48653,14 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = stochF ( _state, inHigh[i], inLow[i], inClose[i], &outFastKVal, &outFastDVal );
          if ( retValue == RetCode.Success ) {
             outFastK[outIdx] = outFastKVal;
             outFastD[outIdx] = outFastDVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outFastK[outIdx] = NAN;
+            outFastD[outIdx] = NAN;
          } else {
             break;
          }
@@ -49182,14 +49053,14 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = stochRsi ( _state, inReal[i], &outFastKVal, &outFastDVal );
          if ( retValue == RetCode.Success ) {
             outFastK[outIdx] = outFastKVal;
             outFastD[outIdx] = outFastDVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outFastK[outIdx] = NAN;
+            outFastD[outIdx] = NAN;
          } else {
             break;
          }
@@ -49435,13 +49306,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = sub ( _state, inReal0[i], inReal1[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -49639,13 +49509,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = sum ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -50052,13 +49921,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = t3 ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -50370,13 +50238,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = tan ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -50527,13 +50394,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = tanh ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -50766,13 +50632,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = tema ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -51045,13 +50910,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = trueRange ( _state, inHigh[i], inLow[i], inClose[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -51391,13 +51255,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = trima ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -51764,13 +51627,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = trix ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -52083,13 +51945,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = tsf ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -52307,13 +52168,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = typPrice ( _state, inHigh[i], inLow[i], inClose[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -52656,13 +52516,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = ultOsc ( _state, inHigh[i], inLow[i], inClose[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -53049,13 +52908,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = variance ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -53287,13 +53145,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = wclPrice ( _state, inHigh[i], inLow[i], inClose[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -53595,13 +53452,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = willR ( _state, inHigh[i], inLow[i], inClose[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
@@ -53915,13 +53771,12 @@ public class Core {
       int retValue;
       int outIdx = 0;
       outBegIdx.value = startIdx;
-      for (int i = startIdx; i <= endIdx; ++i) {
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
          retValue = wma ( _state, inReal[i], &outRealVal );
          if ( retValue == RetCode.Success ) {
             outReal[outIdx] = outRealVal;
-            outIdx++;
          } else if ( retValue == RetCode.NeedMoreData ) {
-            continue;
+            outReal[outIdx] = NAN;
          } else {
             break;
          }
