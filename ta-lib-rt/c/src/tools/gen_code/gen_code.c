@@ -3132,7 +3132,7 @@ void printFunc( FILE *out,
           printIndent( out, indent );
           fprintf( out, "\n");
           printIndent( out, indent );
-          fprintf( out, "for (int i = startIdx; i <= endIdx; ++i) {\n");
+          fprintf( out, "for (int i = startIdx; i <= endIdx; ++i, outIdx++) {\n");
           printIndent( out, indent );
           fprintf( out, "   retValue = TA_%s_State( _state", funcName);
           for( i = 0; i < funcInfo->nbInput; i++ ) {
@@ -3174,12 +3174,20 @@ void printFunc( FILE *out,
              printIndent( out, indent );
              fprintf( out, "      %s[outIdx] = %s%s;\n", outputParamInfo->paramName, outputParamInfo->paramName, "Val");
           }
-          printIndent( out, indent );
-          fprintf( out, "      outIdx++;\n");
+
           printIndent( out, indent );
           fprintf( out, "   } else if ( retValue == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) {\n");
-          printIndent( out, indent );
-          fprintf( out, "      continue;\n");
+
+          for( i = 0; i < funcInfo->nbOutput; i++ ) {
+             retCode = TA_GetOutputParameterInfo( funcInfo->handle, i, &outputParamInfo );
+             if( retCode != TA_SUCCESS ) {
+                printf( "[%s] invalid 'output' information (%d)\n", funcName, i );
+                return;
+             }
+             printIndent( out, indent );
+             fprintf( out, "      %s[outIdx] = %s;\n", outputParamInfo->paramName, outputParamInfo->type == TA_Output_Real ? "NAN" : "INT_MAX");
+          }
+
           printIndent( out, indent );
           fprintf( out, "   } else {\n");
           printIndent( out, indent );
