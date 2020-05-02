@@ -577,6 +577,94 @@ double diffP, diffM;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
+/* Generated */ Core::RetCode Core::PlusDMBatchState( struct TA_PlusDM_State* _state,
+/* Generated */                                     int startIdx,
+/* Generated */                                     int endIdx,
+/* Generated */                                     cli::array<double>^ inHigh,
+/* Generated */                                     cli::array<double>^ inLow,
+/* Generated */                                     [Out]int%    outBegIdx,
+/* Generated */                                     [Out]int%    outNBElement,
+/* Generated */                                     cli::array<double>^  outReal )
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public RetCode plusDMBatchState( struct TA_plusDM_State* _state,
+/* Generated */                                int startIdx,
+/* Generated */                                int endIdx,
+/* Generated */                                double       inHigh[],
+/* Generated */                                double       inLow[],
+/* Generated */                                MInteger     outBegIdx,
+/* Generated */                                MInteger     outNBElement,
+/* Generated */                                double        outReal[] )
+/* Generated */ #else
+/* Generated */ TA_LIB_API TA_RetCode TA_PLUS_DM_BatchState( struct TA_PLUS_DM_State* _state,
+/* Generated */                                                       int startIdx,
+/* Generated */                                                       int endIdx,
+/* Generated */                                                       const double inHigh[],
+/* Generated */                                                       const double inLow[],
+/* Generated */                                                       int          *outBegIdx,
+/* Generated */                                                       int          *outNBElement,
+/* Generated */                                                       double        outReal[] )
+/* Generated */ #endif
+/**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
+
+{
+  /* insert local variable here */
+
+/**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_OVERWRITE_BATCH_STATE_CODE
+/* Generated */ 
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    /* Verify required price component. */
+/* Generated */    if(!inHigh||!inLow)
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #endif /* !defined(_JAVA)*/
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    if( !outReal )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #endif /* !defined(_JAVA) */
+/* Generated */    /* Make sure there is still something to evaluate. */
+/* Generated */    if( startIdx > endIdx )
+/* Generated */    {
+/* Generated */       VALUE_HANDLE_DEREF_TO_ZERO(outBegIdx);
+/* Generated */       VALUE_HANDLE_DEREF_TO_ZERO(outNBElement);
+/* Generated */       return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+/* Generated */    }
+/* Generated */    
+/* Generated */    
+/* Generated */    double outRealVal;
+/* Generated */    int retValue;
+/* Generated */    
+/* Generated */    int outIdx = 0;
+/* Generated */    VALUE_HANDLE_DEREF(outBegIdx)  = startIdx;
+/* Generated */    
+/* Generated */    for (int i = startIdx; i <= endIdx; ++i) {
+/* Generated */       retValue = TA_PLUS_DM_State( _state, inHigh[i], inLow[i], &outRealVal );
+/* Generated */       if ( retValue == ENUM_VALUE(RetCode,TA_SUCCESS,Success) ) {
+/* Generated */          outReal[outIdx] = outRealVal;
+/* Generated */          outIdx++;
+/* Generated */       } else if ( retValue == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) {
+/* Generated */          continue;
+/* Generated */       } else {
+/* Generated */          break;
+/* Generated */        }
+/* Generated */    }
+/* Generated */    
+/* Generated */    VALUE_HANDLE_DEREF(outNBElement) = outIdx;
+/* Generated */ #endif /* TA_OVERWRITE_BATCH_STATE_CODE */
+/* Generated */ 
+/**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
+
+  /* insert batch state code here. */
+  return retValue;
+}
+
+/**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #if defined( _MANAGED )
 /* Generated */ Core::RetCode Core::PlusDMStateFree( struct TA_PlusDM_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )

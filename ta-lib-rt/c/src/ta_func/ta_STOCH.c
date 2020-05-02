@@ -788,6 +788,105 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
+/* Generated */ Core::RetCode Core::StochBatchState( struct TA_Stoch_State* _state,
+/* Generated */                                    int startIdx,
+/* Generated */                                    int endIdx,
+/* Generated */                                    cli::array<double>^ inHigh,
+/* Generated */                                    cli::array<double>^ inLow,
+/* Generated */                                    cli::array<double>^ inClose,
+/* Generated */                                    [Out]int%    outBegIdx,
+/* Generated */                                    [Out]int%    outNBElement,
+/* Generated */                                    cli::array<double>^  outSlowK,
+/* Generated */                                    cli::array<double>^  outSlowD )
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public RetCode stochBatchState( struct TA_stoch_State* _state,
+/* Generated */                               int startIdx,
+/* Generated */                               int endIdx,
+/* Generated */                               double       inHigh[],
+/* Generated */                               double       inLow[],
+/* Generated */                               double       inClose[],
+/* Generated */                               MInteger     outBegIdx,
+/* Generated */                               MInteger     outNBElement,
+/* Generated */                               double        outSlowK[],
+/* Generated */                               double        outSlowD[] )
+/* Generated */ #else
+/* Generated */ TA_LIB_API TA_RetCode TA_STOCH_BatchState( struct TA_STOCH_State* _state,
+/* Generated */                                                     int startIdx,
+/* Generated */                                                     int endIdx,
+/* Generated */                                                     const double inHigh[],
+/* Generated */                                                     const double inLow[],
+/* Generated */                                                     const double inClose[],
+/* Generated */                                                     int          *outBegIdx,
+/* Generated */                                                     int          *outNBElement,
+/* Generated */                                                     double        outSlowK[],
+/* Generated */                                                     double        outSlowD[] )
+/* Generated */ #endif
+/**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
+
+{
+  /* insert local variable here */
+
+/**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_OVERWRITE_BATCH_STATE_CODE
+/* Generated */ 
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    /* Verify required price component. */
+/* Generated */    if(!inHigh||!inLow||!inClose)
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #endif /* !defined(_JAVA)*/
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    if( !outSlowK )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    if( !outSlowD )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #endif /* !defined(_JAVA) */
+/* Generated */    /* Make sure there is still something to evaluate. */
+/* Generated */    if( startIdx > endIdx )
+/* Generated */    {
+/* Generated */       VALUE_HANDLE_DEREF_TO_ZERO(outBegIdx);
+/* Generated */       VALUE_HANDLE_DEREF_TO_ZERO(outNBElement);
+/* Generated */       return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+/* Generated */    }
+/* Generated */    
+/* Generated */    
+/* Generated */    double outSlowKVal;
+/* Generated */    double outSlowDVal;
+/* Generated */    int retValue;
+/* Generated */    
+/* Generated */    int outIdx = 0;
+/* Generated */    VALUE_HANDLE_DEREF(outBegIdx)  = startIdx;
+/* Generated */    
+/* Generated */    for (int i = startIdx; i <= endIdx; ++i) {
+/* Generated */       retValue = TA_STOCH_State( _state, inHigh[i], inLow[i], inClose[i], &outSlowKVal, &outSlowDVal );
+/* Generated */       if ( retValue == ENUM_VALUE(RetCode,TA_SUCCESS,Success) ) {
+/* Generated */          outSlowK[outIdx] = outSlowKVal;
+/* Generated */          outSlowD[outIdx] = outSlowDVal;
+/* Generated */          outIdx++;
+/* Generated */       } else if ( retValue == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) {
+/* Generated */          continue;
+/* Generated */       } else {
+/* Generated */          break;
+/* Generated */        }
+/* Generated */    }
+/* Generated */    
+/* Generated */    VALUE_HANDLE_DEREF(outNBElement) = outIdx;
+/* Generated */ #endif /* TA_OVERWRITE_BATCH_STATE_CODE */
+/* Generated */ 
+/**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
+
+  /* insert batch state code here. */
+  return retValue;
+}
+
+/**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #if defined( _MANAGED )
 /* Generated */ Core::RetCode Core::StochStateFree( struct TA_Stoch_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )

@@ -63,6 +63,12 @@
 ;
 /* Generated */ unsigned int TA_ACCBANDS_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_ACCBANDS_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_ACCBANDS_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_ACCBANDS_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -81,6 +87,12 @@
 /* Generated */ unsigned int TA_ACOS_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_ACOS_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_ACOS_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_ACOS_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -101,6 +113,12 @@
 ;
 /* Generated */ unsigned int TA_AD_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_AD_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_AD_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_AD_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -119,6 +137,12 @@
 /* Generated */ unsigned int TA_ADD_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_ADD_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_ADD_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_ADD_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -139,6 +163,12 @@
 ;
 /* Generated */ unsigned int TA_ADOSC_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_ADOSC_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_ADOSC_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_ADOSC_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -157,6 +187,12 @@
 /* Generated */ unsigned int TA_ADX_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_ADX_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_ADX_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_ADX_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -177,6 +213,12 @@
 ;
 /* Generated */ unsigned int TA_ADXR_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_ADXR_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_ADXR_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_ADXR_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -195,6 +237,12 @@
 /* Generated */ unsigned int TA_APO_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_APO_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_APO_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_APO_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -215,6 +263,12 @@
 ;
 /* Generated */ unsigned int TA_AROON_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_AROON_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_AROON_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_AROON_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -233,6 +287,12 @@
 /* Generated */ unsigned int TA_AROONOSC_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_AROONOSC_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_AROONOSC_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_AROONOSC_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -253,6 +313,12 @@
 ;
 /* Generated */ unsigned int TA_ASIN_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_ASIN_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_ASIN_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_ASIN_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -271,6 +337,12 @@
 /* Generated */ unsigned int TA_ATAN_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_ATAN_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_ATAN_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_ATAN_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -291,6 +363,12 @@
 ;
 /* Generated */ unsigned int TA_ATR_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_ATR_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_ATR_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_ATR_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -309,6 +387,12 @@
 /* Generated */ unsigned int TA_AVGPRICE_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_AVGPRICE_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_AVGPRICE_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_AVGPRICE_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -329,6 +413,12 @@
 ;
 /* Generated */ unsigned int TA_AVGDEV_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_AVGDEV_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_AVGDEV_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_AVGDEV_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -347,6 +437,12 @@
 /* Generated */ unsigned int TA_BBANDS_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_BBANDS_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_BBANDS_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_BBANDS_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -367,6 +463,12 @@
 ;
 /* Generated */ unsigned int TA_BETA_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_BETA_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_BETA_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_BETA_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -385,6 +487,12 @@
 /* Generated */ unsigned int TA_BOP_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_BOP_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_BOP_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_BOP_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -405,6 +513,12 @@
 ;
 /* Generated */ unsigned int TA_CCI_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CCI_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CCI_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CCI_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -423,6 +537,12 @@
 /* Generated */ unsigned int TA_CDL2CROWS_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDL2CROWS_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDL2CROWS_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDL2CROWS_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -443,6 +563,12 @@
 ;
 /* Generated */ unsigned int TA_CDL3BLACKCROWS_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDL3BLACKCROWS_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDL3BLACKCROWS_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDL3BLACKCROWS_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -461,6 +587,12 @@
 /* Generated */ unsigned int TA_CDL3INSIDE_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDL3INSIDE_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDL3INSIDE_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDL3INSIDE_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -481,6 +613,12 @@
 ;
 /* Generated */ unsigned int TA_CDL3LINESTRIKE_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDL3LINESTRIKE_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDL3LINESTRIKE_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDL3LINESTRIKE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -499,6 +637,12 @@
 /* Generated */ unsigned int TA_CDL3OUTSIDE_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDL3OUTSIDE_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDL3OUTSIDE_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDL3OUTSIDE_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -519,6 +663,12 @@
 ;
 /* Generated */ unsigned int TA_CDL3STARSINSOUTH_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDL3STARSINSOUTH_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDL3STARSINSOUTH_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDL3STARSINSOUTH_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -537,6 +687,12 @@
 /* Generated */ unsigned int TA_CDL3WHITESOLDIERS_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDL3WHITESOLDIERS_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDL3WHITESOLDIERS_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDL3WHITESOLDIERS_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -557,6 +713,12 @@
 ;
 /* Generated */ unsigned int TA_CDLABANDONEDBABY_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLABANDONEDBABY_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLABANDONEDBABY_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLABANDONEDBABY_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -575,6 +737,12 @@
 /* Generated */ unsigned int TA_CDLADVANCEBLOCK_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLADVANCEBLOCK_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLADVANCEBLOCK_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLADVANCEBLOCK_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -595,6 +763,12 @@
 ;
 /* Generated */ unsigned int TA_CDLBELTHOLD_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLBELTHOLD_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLBELTHOLD_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLBELTHOLD_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -613,6 +787,12 @@
 /* Generated */ unsigned int TA_CDLBREAKAWAY_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLBREAKAWAY_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLBREAKAWAY_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLBREAKAWAY_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -633,6 +813,12 @@
 ;
 /* Generated */ unsigned int TA_CDLCLOSINGMARUBOZU_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLCLOSINGMARUBOZU_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLCLOSINGMARUBOZU_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLCLOSINGMARUBOZU_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -651,6 +837,12 @@
 /* Generated */ unsigned int TA_CDLCONCEALBABYSWALL_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLCONCEALBABYSWALL_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLCONCEALBABYSWALL_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLCONCEALBABYSWALL_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -671,6 +863,12 @@
 ;
 /* Generated */ unsigned int TA_CDLCOUNTERATTACK_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLCOUNTERATTACK_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLCOUNTERATTACK_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLCOUNTERATTACK_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -689,6 +887,12 @@
 /* Generated */ unsigned int TA_CDLDARKCLOUDCOVER_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLDARKCLOUDCOVER_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLDARKCLOUDCOVER_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLDARKCLOUDCOVER_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -709,6 +913,12 @@
 ;
 /* Generated */ unsigned int TA_CDLDOJI_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLDOJI_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLDOJI_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLDOJI_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -727,6 +937,12 @@
 /* Generated */ unsigned int TA_CDLDOJISTAR_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLDOJISTAR_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLDOJISTAR_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLDOJISTAR_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -747,6 +963,12 @@
 ;
 /* Generated */ unsigned int TA_CDLDRAGONFLYDOJI_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLDRAGONFLYDOJI_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLDRAGONFLYDOJI_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLDRAGONFLYDOJI_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -765,6 +987,12 @@
 /* Generated */ unsigned int TA_CDLENGULFING_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLENGULFING_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLENGULFING_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLENGULFING_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -785,6 +1013,12 @@
 ;
 /* Generated */ unsigned int TA_CDLEVENINGDOJISTAR_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLEVENINGDOJISTAR_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLEVENINGDOJISTAR_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLEVENINGDOJISTAR_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -803,6 +1037,12 @@
 /* Generated */ unsigned int TA_CDLEVENINGSTAR_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLEVENINGSTAR_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLEVENINGSTAR_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLEVENINGSTAR_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -823,6 +1063,12 @@
 ;
 /* Generated */ unsigned int TA_CDLGAPSIDESIDEWHITE_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLGAPSIDESIDEWHITE_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLGAPSIDESIDEWHITE_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLGAPSIDESIDEWHITE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -841,6 +1087,12 @@
 /* Generated */ unsigned int TA_CDLGRAVESTONEDOJI_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLGRAVESTONEDOJI_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLGRAVESTONEDOJI_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLGRAVESTONEDOJI_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -861,6 +1113,12 @@
 ;
 /* Generated */ unsigned int TA_CDLHAMMER_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLHAMMER_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLHAMMER_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLHAMMER_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -879,6 +1137,12 @@
 /* Generated */ unsigned int TA_CDLHANGINGMAN_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLHANGINGMAN_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLHANGINGMAN_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLHANGINGMAN_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -899,6 +1163,12 @@
 ;
 /* Generated */ unsigned int TA_CDLHARAMI_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLHARAMI_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLHARAMI_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLHARAMI_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -917,6 +1187,12 @@
 /* Generated */ unsigned int TA_CDLHARAMICROSS_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLHARAMICROSS_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLHARAMICROSS_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLHARAMICROSS_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -937,6 +1213,12 @@
 ;
 /* Generated */ unsigned int TA_CDLHIGHWAVE_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLHIGHWAVE_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLHIGHWAVE_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLHIGHWAVE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -955,6 +1237,12 @@
 /* Generated */ unsigned int TA_CDLHIKKAKE_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLHIKKAKE_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLHIKKAKE_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLHIKKAKE_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -975,6 +1263,12 @@
 ;
 /* Generated */ unsigned int TA_CDLHIKKAKEMOD_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLHIKKAKEMOD_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLHIKKAKEMOD_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLHIKKAKEMOD_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -993,6 +1287,12 @@
 /* Generated */ unsigned int TA_CDLHOMINGPIGEON_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLHOMINGPIGEON_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLHOMINGPIGEON_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLHOMINGPIGEON_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -1013,6 +1313,12 @@
 ;
 /* Generated */ unsigned int TA_CDLIDENTICAL3CROWS_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLIDENTICAL3CROWS_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLIDENTICAL3CROWS_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLIDENTICAL3CROWS_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -1031,6 +1337,12 @@
 /* Generated */ unsigned int TA_CDLINNECK_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLINNECK_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLINNECK_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLINNECK_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -1051,6 +1363,12 @@
 ;
 /* Generated */ unsigned int TA_CDLINVERTEDHAMMER_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLINVERTEDHAMMER_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLINVERTEDHAMMER_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLINVERTEDHAMMER_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -1069,6 +1387,12 @@
 /* Generated */ unsigned int TA_CDLKICKING_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLKICKING_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLKICKING_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLKICKING_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -1089,6 +1413,12 @@
 ;
 /* Generated */ unsigned int TA_CDLKICKINGBYLENGTH_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLKICKINGBYLENGTH_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLKICKINGBYLENGTH_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLKICKINGBYLENGTH_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -1107,6 +1437,12 @@
 /* Generated */ unsigned int TA_CDLLADDERBOTTOM_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLLADDERBOTTOM_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLLADDERBOTTOM_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLLADDERBOTTOM_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -1127,6 +1463,12 @@
 ;
 /* Generated */ unsigned int TA_CDLLONGLEGGEDDOJI_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLLONGLEGGEDDOJI_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLLONGLEGGEDDOJI_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLLONGLEGGEDDOJI_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -1145,6 +1487,12 @@
 /* Generated */ unsigned int TA_CDLLONGLINE_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLLONGLINE_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLLONGLINE_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLLONGLINE_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -1165,6 +1513,12 @@
 ;
 /* Generated */ unsigned int TA_CDLMARUBOZU_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLMARUBOZU_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLMARUBOZU_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLMARUBOZU_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -1183,6 +1537,12 @@
 /* Generated */ unsigned int TA_CDLMATCHINGLOW_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLMATCHINGLOW_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLMATCHINGLOW_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLMATCHINGLOW_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -1203,6 +1563,12 @@
 ;
 /* Generated */ unsigned int TA_CDLMATHOLD_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLMATHOLD_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLMATHOLD_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLMATHOLD_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -1221,6 +1587,12 @@
 /* Generated */ unsigned int TA_CDLMORNINGDOJISTAR_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLMORNINGDOJISTAR_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLMORNINGDOJISTAR_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLMORNINGDOJISTAR_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -1241,6 +1613,12 @@
 ;
 /* Generated */ unsigned int TA_CDLMORNINGSTAR_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLMORNINGSTAR_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLMORNINGSTAR_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLMORNINGSTAR_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -1259,6 +1637,12 @@
 /* Generated */ unsigned int TA_CDLONNECK_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLONNECK_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLONNECK_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLONNECK_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -1279,6 +1663,12 @@
 ;
 /* Generated */ unsigned int TA_CDLPIERCING_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLPIERCING_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLPIERCING_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLPIERCING_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -1297,6 +1687,12 @@
 /* Generated */ unsigned int TA_CDLRICKSHAWMAN_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLRICKSHAWMAN_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLRICKSHAWMAN_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLRICKSHAWMAN_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -1317,6 +1713,12 @@
 ;
 /* Generated */ unsigned int TA_CDLRISEFALL3METHODS_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLRISEFALL3METHODS_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLRISEFALL3METHODS_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLRISEFALL3METHODS_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -1335,6 +1737,12 @@
 /* Generated */ unsigned int TA_CDLSEPARATINGLINES_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLSEPARATINGLINES_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLSEPARATINGLINES_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLSEPARATINGLINES_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -1355,6 +1763,12 @@
 ;
 /* Generated */ unsigned int TA_CDLSHOOTINGSTAR_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLSHOOTINGSTAR_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLSHOOTINGSTAR_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLSHOOTINGSTAR_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -1373,6 +1787,12 @@
 /* Generated */ unsigned int TA_CDLSHORTLINE_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLSHORTLINE_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLSHORTLINE_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLSHORTLINE_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -1393,6 +1813,12 @@
 ;
 /* Generated */ unsigned int TA_CDLSPINNINGTOP_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLSPINNINGTOP_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLSPINNINGTOP_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLSPINNINGTOP_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -1411,6 +1837,12 @@
 /* Generated */ unsigned int TA_CDLSTALLEDPATTERN_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLSTALLEDPATTERN_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLSTALLEDPATTERN_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLSTALLEDPATTERN_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -1431,6 +1863,12 @@
 ;
 /* Generated */ unsigned int TA_CDLSTICKSANDWICH_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLSTICKSANDWICH_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLSTICKSANDWICH_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLSTICKSANDWICH_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -1449,6 +1887,12 @@
 /* Generated */ unsigned int TA_CDLTAKURI_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLTAKURI_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLTAKURI_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLTAKURI_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -1469,6 +1913,12 @@
 ;
 /* Generated */ unsigned int TA_CDLTASUKIGAP_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLTASUKIGAP_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLTASUKIGAP_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLTASUKIGAP_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -1487,6 +1937,12 @@
 /* Generated */ unsigned int TA_CDLTHRUSTING_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLTHRUSTING_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLTHRUSTING_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLTHRUSTING_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -1507,6 +1963,12 @@
 ;
 /* Generated */ unsigned int TA_CDLTRISTAR_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLTRISTAR_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLTRISTAR_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLTRISTAR_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -1525,6 +1987,12 @@
 /* Generated */ unsigned int TA_CDLUNIQUE3RIVER_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLUNIQUE3RIVER_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLUNIQUE3RIVER_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLUNIQUE3RIVER_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -1545,6 +2013,12 @@
 ;
 /* Generated */ unsigned int TA_CDLUPSIDEGAP2CROWS_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CDLUPSIDEGAP2CROWS_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CDLUPSIDEGAP2CROWS_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLUPSIDEGAP2CROWS_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -1563,6 +2037,12 @@
 /* Generated */ unsigned int TA_CDLXSIDEGAP3METHODS_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CDLXSIDEGAP3METHODS_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CDLXSIDEGAP3METHODS_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CDLXSIDEGAP3METHODS_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -1583,6 +2063,12 @@
 ;
 /* Generated */ unsigned int TA_CEIL_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CEIL_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CEIL_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CEIL_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -1601,6 +2087,12 @@
 /* Generated */ unsigned int TA_CMO_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CMO_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_CMO_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_CMO_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -1621,6 +2113,12 @@
 ;
 /* Generated */ unsigned int TA_CORREL_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_CORREL_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_CORREL_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_CORREL_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -1639,6 +2137,12 @@
 /* Generated */ unsigned int TA_COS_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_COS_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_COS_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_COS_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -1659,6 +2163,12 @@
 ;
 /* Generated */ unsigned int TA_COSH_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_COSH_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_COSH_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_COSH_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -1677,6 +2187,12 @@
 /* Generated */ unsigned int TA_DEMA_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_DEMA_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_DEMA_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_DEMA_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -1697,6 +2213,12 @@
 ;
 /* Generated */ unsigned int TA_DIV_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_DIV_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_DIV_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_DIV_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -1715,6 +2237,12 @@
 /* Generated */ unsigned int TA_DX_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_DX_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_DX_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_DX_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -1735,6 +2263,12 @@
 ;
 /* Generated */ unsigned int TA_EMA_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_EMA_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_EMA_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_EMA_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -1753,6 +2287,12 @@
 /* Generated */ unsigned int TA_EXP_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_EXP_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_EXP_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_EXP_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -1773,6 +2313,12 @@
 ;
 /* Generated */ unsigned int TA_FLOOR_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_FLOOR_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_FLOOR_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_FLOOR_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -1791,6 +2337,12 @@
 /* Generated */ unsigned int TA_HT_DCPERIOD_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_HT_DCPERIOD_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_HT_DCPERIOD_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_HT_DCPERIOD_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -1811,6 +2363,12 @@
 ;
 /* Generated */ unsigned int TA_HT_DCPHASE_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_HT_DCPHASE_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_HT_DCPHASE_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_HT_DCPHASE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -1829,6 +2387,12 @@
 /* Generated */ unsigned int TA_HT_PHASOR_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_HT_PHASOR_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_HT_PHASOR_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_HT_PHASOR_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -1849,6 +2413,12 @@
 ;
 /* Generated */ unsigned int TA_HT_SINE_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_HT_SINE_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_HT_SINE_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_HT_SINE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -1867,6 +2437,12 @@
 /* Generated */ unsigned int TA_HT_TRENDLINE_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_HT_TRENDLINE_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_HT_TRENDLINE_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_HT_TRENDLINE_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -1887,6 +2463,12 @@
 ;
 /* Generated */ unsigned int TA_HT_TRENDMODE_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_HT_TRENDMODE_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_HT_TRENDMODE_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_HT_TRENDMODE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -1905,6 +2487,12 @@
 /* Generated */ unsigned int TA_IMI_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_IMI_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_IMI_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_IMI_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -1925,6 +2513,12 @@
 ;
 /* Generated */ unsigned int TA_KAMA_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_KAMA_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_KAMA_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_KAMA_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -1943,6 +2537,12 @@
 /* Generated */ unsigned int TA_LINEARREG_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_LINEARREG_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_LINEARREG_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_LINEARREG_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -1963,6 +2563,12 @@
 ;
 /* Generated */ unsigned int TA_LINEARREG_ANGLE_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_LINEARREG_ANGLE_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_LINEARREG_ANGLE_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_LINEARREG_ANGLE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -1981,6 +2587,12 @@
 /* Generated */ unsigned int TA_LINEARREG_INTERCEPT_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_LINEARREG_INTERCEPT_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_LINEARREG_INTERCEPT_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_LINEARREG_INTERCEPT_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2001,6 +2613,12 @@
 ;
 /* Generated */ unsigned int TA_LINEARREG_SLOPE_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_LINEARREG_SLOPE_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_LINEARREG_SLOPE_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_LINEARREG_SLOPE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -2019,6 +2637,12 @@
 /* Generated */ unsigned int TA_LN_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_LN_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_LN_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_LN_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2039,6 +2663,12 @@
 ;
 /* Generated */ unsigned int TA_LOG10_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_LOG10_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_LOG10_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_LOG10_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -2057,6 +2687,12 @@
 /* Generated */ unsigned int TA_MA_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_MA_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_MA_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_MA_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2077,6 +2713,12 @@
 ;
 /* Generated */ unsigned int TA_MACD_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_MACD_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_MACD_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_MACD_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -2095,6 +2737,12 @@
 /* Generated */ unsigned int TA_MACDEXT_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_MACDEXT_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_MACDEXT_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_MACDEXT_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2115,6 +2763,12 @@
 ;
 /* Generated */ unsigned int TA_MACDFIX_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_MACDFIX_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_MACDFIX_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_MACDFIX_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -2133,6 +2787,12 @@
 /* Generated */ unsigned int TA_MAMA_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_MAMA_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_MAMA_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_MAMA_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2153,6 +2813,12 @@
 ;
 /* Generated */ unsigned int TA_MAVP_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_MAVP_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_MAVP_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_MAVP_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -2171,6 +2837,12 @@
 /* Generated */ unsigned int TA_MAX_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_MAX_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_MAX_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_MAX_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2191,6 +2863,12 @@
 ;
 /* Generated */ unsigned int TA_MAXINDEX_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_MAXINDEX_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_MAXINDEX_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_MAXINDEX_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -2209,6 +2887,12 @@
 /* Generated */ unsigned int TA_MEDPRICE_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_MEDPRICE_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_MEDPRICE_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_MEDPRICE_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2229,6 +2913,12 @@
 ;
 /* Generated */ unsigned int TA_MFI_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_MFI_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_MFI_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_MFI_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -2247,6 +2937,12 @@
 /* Generated */ unsigned int TA_MIDPOINT_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_MIDPOINT_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_MIDPOINT_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_MIDPOINT_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2267,6 +2963,12 @@
 ;
 /* Generated */ unsigned int TA_MIDPRICE_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_MIDPRICE_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_MIDPRICE_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_MIDPRICE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -2285,6 +2987,12 @@
 /* Generated */ unsigned int TA_MIN_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_MIN_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_MIN_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_MIN_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2305,6 +3013,12 @@
 ;
 /* Generated */ unsigned int TA_MININDEX_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_MININDEX_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_MININDEX_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_MININDEX_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -2323,6 +3037,12 @@
 /* Generated */ unsigned int TA_MINMAX_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_MINMAX_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_MINMAX_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_MINMAX_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2343,6 +3063,12 @@
 ;
 /* Generated */ unsigned int TA_MINMAXINDEX_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_MINMAXINDEX_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_MINMAXINDEX_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_MINMAXINDEX_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -2361,6 +3087,12 @@
 /* Generated */ unsigned int TA_MINUS_DI_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_MINUS_DI_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_MINUS_DI_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_MINUS_DI_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2381,6 +3113,12 @@
 ;
 /* Generated */ unsigned int TA_MINUS_DM_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_MINUS_DM_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_MINUS_DM_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_MINUS_DM_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -2399,6 +3137,12 @@
 /* Generated */ unsigned int TA_MOM_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_MOM_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_MOM_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_MOM_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2419,6 +3163,12 @@
 ;
 /* Generated */ unsigned int TA_MULT_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_MULT_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_MULT_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_MULT_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -2437,6 +3187,12 @@
 /* Generated */ unsigned int TA_NATR_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_NATR_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_NATR_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_NATR_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2457,6 +3213,12 @@
 ;
 /* Generated */ unsigned int TA_NVI_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_NVI_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_NVI_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_NVI_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -2475,6 +3237,12 @@
 /* Generated */ unsigned int TA_OBV_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_OBV_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_OBV_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_OBV_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2495,6 +3263,12 @@
 ;
 /* Generated */ unsigned int TA_PLUS_DI_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_PLUS_DI_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_PLUS_DI_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_PLUS_DI_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -2513,6 +3287,12 @@
 /* Generated */ unsigned int TA_PLUS_DM_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_PLUS_DM_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_PLUS_DM_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_PLUS_DM_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2533,6 +3313,12 @@
 ;
 /* Generated */ unsigned int TA_PPO_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_PPO_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_PPO_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_PPO_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -2551,6 +3337,12 @@
 /* Generated */ unsigned int TA_PVI_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_PVI_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_PVI_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_PVI_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2571,6 +3363,12 @@
 ;
 /* Generated */ unsigned int TA_PVT_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_PVT_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_PVT_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_PVT_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -2589,6 +3387,12 @@
 /* Generated */ unsigned int TA_ROC_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_ROC_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_ROC_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_ROC_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2609,6 +3413,12 @@
 ;
 /* Generated */ unsigned int TA_ROCP_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_ROCP_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_ROCP_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_ROCP_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -2627,6 +3437,12 @@
 /* Generated */ unsigned int TA_ROCR_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_ROCR_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_ROCR_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_ROCR_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2647,6 +3463,12 @@
 ;
 /* Generated */ unsigned int TA_ROCR100_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_ROCR100_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_ROCR100_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_ROCR100_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -2665,6 +3487,12 @@
 /* Generated */ unsigned int TA_RSI_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_RSI_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_RSI_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_RSI_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2685,6 +3513,12 @@
 ;
 /* Generated */ unsigned int TA_SAR_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_SAR_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_SAR_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_SAR_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -2703,6 +3537,12 @@
 /* Generated */ unsigned int TA_SAREXT_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_SAREXT_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_SAREXT_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_SAREXT_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2723,6 +3563,12 @@
 ;
 /* Generated */ unsigned int TA_SIN_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_SIN_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_SIN_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_SIN_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -2741,6 +3587,12 @@
 /* Generated */ unsigned int TA_SINH_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_SINH_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_SINH_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_SINH_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2761,6 +3613,12 @@
 ;
 /* Generated */ unsigned int TA_SMA_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_SMA_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_SMA_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_SMA_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -2779,6 +3637,12 @@
 /* Generated */ unsigned int TA_SQRT_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_SQRT_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_SQRT_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_SQRT_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2799,6 +3663,12 @@
 ;
 /* Generated */ unsigned int TA_STDDEV_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_STDDEV_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_STDDEV_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_STDDEV_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -2817,6 +3687,12 @@
 /* Generated */ unsigned int TA_STOCH_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_STOCH_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_STOCH_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_STOCH_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2837,6 +3713,12 @@
 ;
 /* Generated */ unsigned int TA_STOCHF_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_STOCHF_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_STOCHF_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_STOCHF_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -2855,6 +3737,12 @@
 /* Generated */ unsigned int TA_STOCHRSI_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_STOCHRSI_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_STOCHRSI_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_STOCHRSI_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2875,6 +3763,12 @@
 ;
 /* Generated */ unsigned int TA_SUB_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_SUB_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_SUB_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_SUB_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -2893,6 +3787,12 @@
 /* Generated */ unsigned int TA_SUM_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_SUM_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_SUM_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_SUM_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2913,6 +3813,12 @@
 ;
 /* Generated */ unsigned int TA_T3_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_T3_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_T3_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_T3_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -2931,6 +3837,12 @@
 /* Generated */ unsigned int TA_TAN_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_TAN_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_TAN_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_TAN_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2951,6 +3863,12 @@
 ;
 /* Generated */ unsigned int TA_TANH_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_TANH_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_TANH_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_TANH_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -2969,6 +3887,12 @@
 /* Generated */ unsigned int TA_TEMA_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_TEMA_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_TEMA_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_TEMA_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -2989,6 +3913,12 @@
 ;
 /* Generated */ unsigned int TA_TRANGE_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_TRANGE_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_TRANGE_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_TRANGE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -3007,6 +3937,12 @@
 /* Generated */ unsigned int TA_TRIMA_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_TRIMA_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_TRIMA_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_TRIMA_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -3027,6 +3963,12 @@
 ;
 /* Generated */ unsigned int TA_TRIX_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_TRIX_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_TRIX_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_TRIX_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -3045,6 +3987,12 @@
 /* Generated */ unsigned int TA_TSF_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_TSF_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_TSF_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_TSF_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -3065,6 +4013,12 @@
 ;
 /* Generated */ unsigned int TA_TYPPRICE_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_TYPPRICE_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_TYPPRICE_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_TYPPRICE_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -3083,6 +4037,12 @@
 /* Generated */ unsigned int TA_ULTOSC_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_ULTOSC_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_ULTOSC_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_ULTOSC_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -3103,6 +4063,12 @@
 ;
 /* Generated */ unsigned int TA_VAR_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_VAR_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_VAR_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_VAR_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -3121,6 +4087,12 @@
 /* Generated */ unsigned int TA_WCLPRICE_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_WCLPRICE_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_WCLPRICE_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_WCLPRICE_FramePPSF( const TA_ParamHolderPriv *params )
 ;
@@ -3141,6 +4113,12 @@
 ;
 /* Generated */ unsigned int TA_WILLR_FramePPS( const TA_ParamHolderPriv *params )
 ;
+/* Generated */ unsigned int TA_WILLR_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
 /* Generated */ unsigned int TA_WILLR_FramePPSF( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_WILLR_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
@@ -3159,6 +4137,12 @@
 /* Generated */ unsigned int TA_WMA_FramePPSI( const TA_ParamHolderPriv *params )
 ;
 /* Generated */ unsigned int TA_WMA_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_WMA_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
 ;
 /* Generated */ unsigned int TA_WMA_FramePPSF( const TA_ParamHolderPriv *params )
 ;

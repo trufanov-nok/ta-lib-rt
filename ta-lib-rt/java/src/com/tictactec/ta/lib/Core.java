@@ -339,6 +339,48 @@ public class Core {
       retCode3 = sma ( (struct sma *) _state.value .stateSMA3, tempReal2, outRealLowerBand );
       return retCode1 | retCode2 | retCode3;
    }
+   public RetCode accbandsBatchState( struct TA_accbands_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outRealUpperBand[],
+      double outRealMiddleBand[],
+      double outRealLowerBand[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealUpperBandVal;
+      double outRealMiddleBandVal;
+      double outRealLowerBandVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = accbands ( _state, inHigh[i], inLow[i], inClose[i], &outRealUpperBandVal, &outRealMiddleBandVal, &outRealLowerBandVal );
+         if ( retValue == RetCode.Success ) {
+            outRealUpperBand[outIdx] = outRealUpperBandVal;
+            outRealMiddleBand[outIdx] = outRealMiddleBandVal;
+            outRealLowerBand[outIdx] = outRealLowerBandVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode accbandsStateFree( struct TA_accbands_State** _state )
    {
       TA_RetCode retCode;
@@ -554,6 +596,40 @@ public class Core {
       outReal.value = Math.acos (inReal);
       return RetCode.Success ;
    }
+   public RetCode acosBatchState( struct TA_acos_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = acos ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode acosStateFree( struct TA_acos_State** _state )
    {
       if (_state == NULL)
@@ -707,6 +783,43 @@ public class Core {
       outReal.value = _state.value .ad;
       return RetCode.Success ;
    }
+   public RetCode adBatchState( struct TA_ad_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      double inVolume[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = ad ( _state, inHigh[i], inLow[i], inClose[i], inVolume[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode adStateFree( struct TA_ad_State** _state )
    {
       if (_state == NULL)
@@ -852,6 +965,41 @@ public class Core {
          return RetCode.NeedMoreData ; }
       outReal.value = inReal0 + inReal1;
       return RetCode.Success ;
+   }
+   public RetCode addBatchState( struct TA_add_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal0[],
+      double inReal1[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = add ( _state, inReal0[i], inReal1[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode addStateFree( struct TA_add_State** _state )
    {
@@ -1065,6 +1213,43 @@ public class Core {
          return RetCode.NeedMoreData ;
       outReal.value = _state.value .fastEMA - _state.value .slowEMA;
       return RetCode.Success ;
+   }
+   public RetCode adOscBatchState( struct TA_adOsc_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      double inVolume[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = adOsc ( _state, inHigh[i], inLow[i], inClose[i], inVolume[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode adOscStateFree( struct TA_adOsc_State** _state )
    {
@@ -1491,6 +1676,42 @@ public class Core {
       outReal.value = _state.value .prevADX;
       return RetCode.Success ;
    }
+   public RetCode adxBatchState( struct TA_adx_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = adx ( _state, inHigh[i], inLow[i], inClose[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode adxStateFree( struct TA_adx_State** _state )
    {
       if (_state == NULL)
@@ -1861,6 +2082,42 @@ public class Core {
       }
       return RetCode.Success ;
    }
+   public RetCode adxrBatchState( struct TA_adxr_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = adxr ( _state, inHigh[i], inLow[i], inClose[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode adxrStateFree( struct TA_adxr_State** _state )
    {
       RetCode retCode;
@@ -2160,6 +2417,40 @@ public class Core {
       } else
          outReal.value = fastMA - slowMA;
       return RetCode.Success ;
+   }
+   public RetCode apoBatchState( struct TA_apo_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = apo ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode apoStateFree( struct TA_apo_State** _state )
    {
@@ -2538,6 +2829,44 @@ public class Core {
       outAroonDown.value = _state.value .factor* _state.value .lowest_exp;
       return RetCode.Success ;
    }
+   public RetCode aroonBatchState( struct TA_aroon_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outAroonDown[],
+      double outAroonUp[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outAroonDownVal;
+      double outAroonUpVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = aroon ( _state, inHigh[i], inLow[i], &outAroonDownVal, &outAroonUpVal );
+         if ( retValue == RetCode.Success ) {
+            outAroonDown[outIdx] = outAroonDownVal;
+            outAroonUp[outIdx] = outAroonUpVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode aroonStateFree( struct TA_aroon_State** _state )
    {
       if (_state == NULL)
@@ -2891,6 +3220,41 @@ public class Core {
       outReal.value = _state.value .factor*( _state.value .highest_exp - _state.value .lowest_exp);
       return RetCode.Success ;
    }
+   public RetCode aroonOscBatchState( struct TA_aroonOsc_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = aroonOsc ( _state, inHigh[i], inLow[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode aroonOscStateFree( struct TA_aroonOsc_State** _state )
    {
       if (_state == NULL)
@@ -3107,6 +3471,40 @@ public class Core {
       outReal.value = Math.asin (inReal);
       return RetCode.Success ;
    }
+   public RetCode asinBatchState( struct TA_asin_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = asin ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode asinStateFree( struct TA_asin_State** _state )
    {
       if (_state == NULL)
@@ -3229,6 +3627,40 @@ public class Core {
          return RetCode.NeedMoreData ; }
       outReal.value = Math.atan (inReal);
       return RetCode.Success ;
+   }
+   public RetCode atanBatchState( struct TA_atan_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = atan ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode atanStateFree( struct TA_atan_State** _state )
    {
@@ -3453,6 +3885,42 @@ public class Core {
          return RetCode.NeedMoreData ;
       outReal.value = _state.value .prevATR;
       return RetCode.Success ;
+   }
+   public RetCode atrBatchState( struct TA_atr_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = atr ( _state, inHigh[i], inLow[i], inClose[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode atrStateFree( struct TA_atr_State** _state )
    {
@@ -3680,6 +4148,43 @@ public class Core {
       outReal.value = ( inHigh + inLow + inClose + inOpen) / 4;
       return RetCode.Success ;
    }
+   public RetCode avgPriceBatchState( struct TA_avgPrice_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = avgPrice ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode avgPriceStateFree( struct TA_avgPrice_State** _state )
    {
       if (_state == NULL)
@@ -3858,6 +4363,40 @@ public class Core {
       }
       outReal.value = temp / _state.value .optInTimePeriod;
       return RetCode.Success ;
+   }
+   public RetCode avgDevBatchState( struct TA_avgDev_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = avgDev ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode avgDevStateFree( struct TA_avgDev_State** _state )
    {
@@ -4202,6 +4741,46 @@ public class Core {
          outRealLowerBand.value = tempReal2 - (tempReal * _state.value .optInNbDevDn);
       }
       return RetCode.Success ;
+   }
+   public RetCode bbandsBatchState( struct TA_bbands_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outRealUpperBand[],
+      double outRealMiddleBand[],
+      double outRealLowerBand[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealUpperBandVal;
+      double outRealMiddleBandVal;
+      double outRealLowerBandVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = bbands ( _state, inReal[i], &outRealUpperBandVal, &outRealMiddleBandVal, &outRealLowerBandVal );
+         if ( retValue == RetCode.Success ) {
+            outRealUpperBand[outIdx] = outRealUpperBandVal;
+            outRealMiddleBand[outIdx] = outRealMiddleBandVal;
+            outRealLowerBand[outIdx] = outRealLowerBandVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode bbandsStateFree( struct TA_bbands_State** _state )
    {
@@ -4604,6 +5183,41 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inReal1 = inReal1 ;
       return RetCode.Success ;
    }
+   public RetCode betaBatchState( struct TA_beta_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal0[],
+      double inReal1[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = beta ( _state, inReal0[i], inReal1[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode betaStateFree( struct TA_beta_State** _state )
    {
       if (_state == NULL)
@@ -4874,6 +5488,43 @@ public class Core {
          outReal.value = (inClose - inOpen)/tempReal;
       return RetCode.Success ;
    }
+   public RetCode bopBatchState( struct TA_bop_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = bop ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode bopStateFree( struct TA_bop_State** _state )
    {
       if (_state == NULL)
@@ -5083,6 +5734,42 @@ public class Core {
          outReal.value = 0.0;
       { struct TA_CCI_STATE_CIRCBUF * buf = (struct TA_CCI_STATE_CIRCBUF *) _state.value .circBuf; if(buf->idx < buf->size-1) buf->idx++; else buf->idx = 0;} ;
       return RetCode.Success ;
+   }
+   public RetCode cciBatchState( struct TA_cci_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cci ( _state, inHigh[i], inLow[i], inClose[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cciStateFree( struct TA_cci_State** _state )
    {
@@ -5323,6 +6010,43 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdl2CrowsBatchState( struct TA_cdl2Crows_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdl2Crows ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdl2CrowsStateFree( struct TA_cdl2Crows_State** _state )
    {
@@ -5572,6 +6296,43 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdl3BlackCrowsBatchState( struct TA_cdl3BlackCrows_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdl3BlackCrows ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdl3BlackCrowsStateFree( struct TA_cdl3BlackCrows_State** _state )
    {
@@ -5842,6 +6603,43 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdl3InsideBatchState( struct TA_cdl3Inside_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdl3Inside ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdl3InsideStateFree( struct TA_cdl3Inside_State** _state )
    {
@@ -6130,6 +6928,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdl3LineStrikeBatchState( struct TA_cdl3LineStrike_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdl3LineStrike ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdl3LineStrikeStateFree( struct TA_cdl3LineStrike_State** _state )
    {
       if (_state == NULL)
@@ -6367,6 +7202,43 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inLow = inLow ;
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       return RetCode.Success ;
+   }
+   public RetCode cdl3OutsideBatchState( struct TA_cdl3Outside_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdl3Outside ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdl3OutsideStateFree( struct TA_cdl3Outside_State** _state )
    {
@@ -6665,6 +7537,43 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdl3StarsInSouthBatchState( struct TA_cdl3StarsInSouth_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdl3StarsInSouth ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdl3StarsInSouthStateFree( struct TA_cdl3StarsInSouth_State** _state )
    {
@@ -7083,6 +7992,43 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdl3WhiteSoldiersBatchState( struct TA_cdl3WhiteSoldiers_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdl3WhiteSoldiers ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdl3WhiteSoldiersStateFree( struct TA_cdl3WhiteSoldiers_State** _state )
    {
@@ -7504,6 +8450,43 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdlAbandonedBabyBatchState( struct TA_cdlAbandonedBaby_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlAbandonedBaby ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdlAbandonedBabyStateFree( struct TA_cdlAbandonedBaby_State** _state )
    {
@@ -7966,6 +8949,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlAdvanceBlockBatchState( struct TA_cdlAdvanceBlock_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlAdvanceBlock ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlAdvanceBlockStateFree( struct TA_cdlAdvanceBlock_State** _state )
    {
       if (_state == NULL)
@@ -8380,6 +9400,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlBeltHoldBatchState( struct TA_cdlBeltHold_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlBeltHold ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlBeltHoldStateFree( struct TA_cdlBeltHold_State** _state )
    {
       if (_state == NULL)
@@ -8667,6 +9724,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlBreakawayBatchState( struct TA_cdlBreakaway_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlBreakaway ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlBreakawayStateFree( struct TA_cdlBreakaway_State** _state )
    {
       if (_state == NULL)
@@ -8932,6 +10026,43 @@ public class Core {
       }
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdlClosingMarubozuBatchState( struct TA_cdlClosingMarubozu_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlClosingMarubozu ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdlClosingMarubozuStateFree( struct TA_cdlClosingMarubozu_State** _state )
    {
@@ -9217,6 +10348,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlConcealBabysWallBatchState( struct TA_cdlConcealBabysWall_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlConcealBabysWall ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlConcealBabysWallStateFree( struct TA_cdlConcealBabysWall_State** _state )
    {
       if (_state == NULL)
@@ -9490,6 +10658,43 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdlCounterAttackBatchState( struct TA_cdlCounterAttack_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlCounterAttack ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdlCounterAttackStateFree( struct TA_cdlCounterAttack_State** _state )
    {
@@ -9768,6 +10973,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlDarkCloudCoverBatchState( struct TA_cdlDarkCloudCover_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlDarkCloudCover ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlDarkCloudCoverStateFree( struct TA_cdlDarkCloudCover_State** _state )
    {
       if (_state == NULL)
@@ -9989,6 +11231,43 @@ public class Core {
       }
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdlDojiBatchState( struct TA_cdlDoji_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlDoji ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdlDojiStateFree( struct TA_cdlDoji_State** _state )
    {
@@ -10219,6 +11498,43 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdlDojiStarBatchState( struct TA_cdlDojiStar_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlDojiStar ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdlDojiStarStateFree( struct TA_cdlDojiStar_State** _state )
    {
@@ -10485,6 +11801,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlDragonflyDojiBatchState( struct TA_cdlDragonflyDoji_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlDragonflyDoji ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlDragonflyDojiStateFree( struct TA_cdlDragonflyDoji_State** _state )
    {
       if (_state == NULL)
@@ -10730,6 +12083,43 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inLow = inLow ;
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       return RetCode.Success ;
+   }
+   public RetCode cdlEngulfingBatchState( struct TA_cdlEngulfing_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlEngulfing ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdlEngulfingStateFree( struct TA_cdlEngulfing_State** _state )
    {
@@ -11003,6 +12393,43 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdlEveningDojiStarBatchState( struct TA_cdlEveningDojiStar_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlEveningDojiStar ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdlEveningDojiStarStateFree( struct TA_cdlEveningDojiStar_State** _state )
    {
@@ -11331,6 +12758,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlEveningStarBatchState( struct TA_cdlEveningStar_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlEveningStar ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlEveningStarStateFree( struct TA_cdlEveningStar_State** _state )
    {
       if (_state == NULL)
@@ -11634,6 +13098,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlGapSideSideWhiteBatchState( struct TA_cdlGapSideSideWhite_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlGapSideSideWhite ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlGapSideSideWhiteStateFree( struct TA_cdlGapSideSideWhite_State** _state )
    {
       if (_state == NULL)
@@ -11898,6 +13399,43 @@ public class Core {
       }
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdlGravestoneDojiBatchState( struct TA_cdlGravestoneDoji_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlGravestoneDoji ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdlGravestoneDojiStateFree( struct TA_cdlGravestoneDoji_State** _state )
    {
@@ -12202,6 +13740,43 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdlHammerBatchState( struct TA_cdlHammer_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlHammer ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdlHammerStateFree( struct TA_cdlHammer_State** _state )
    {
@@ -12554,6 +14129,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlHangingManBatchState( struct TA_cdlHangingMan_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlHangingMan ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlHangingManStateFree( struct TA_cdlHangingMan_State** _state )
    {
       if (_state == NULL)
@@ -12882,6 +14494,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlHaramiBatchState( struct TA_cdlHarami_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlHarami ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlHaramiStateFree( struct TA_cdlHarami_State** _state )
    {
       if (_state == NULL)
@@ -13171,6 +14820,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlHaramiCrossBatchState( struct TA_cdlHaramiCross_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlHaramiCross ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlHaramiCrossStateFree( struct TA_cdlHaramiCross_State** _state )
    {
       if (_state == NULL)
@@ -13429,6 +15115,43 @@ public class Core {
       }
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdlHignWaveBatchState( struct TA_cdlHignWave_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlHignWave ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdlHignWaveStateFree( struct TA_cdlHignWave_State** _state )
    {
@@ -13701,6 +15424,43 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdlHikkakeBatchState( struct TA_cdlHikkake_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlHikkake ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdlHikkakeStateFree( struct TA_cdlHikkake_State** _state )
    {
@@ -14027,6 +15787,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlHikkakeModBatchState( struct TA_cdlHikkakeMod_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlHikkakeMod ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlHikkakeModStateFree( struct TA_cdlHikkakeMod_State** _state )
    {
       if (_state == NULL)
@@ -14338,6 +16135,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlHomingPigeonBatchState( struct TA_cdlHomingPigeon_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlHomingPigeon ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlHomingPigeonStateFree( struct TA_cdlHomingPigeon_State** _state )
    {
       if (_state == NULL)
@@ -14645,6 +16479,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlIdentical3CrowsBatchState( struct TA_cdlIdentical3Crows_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlIdentical3Crows ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlIdentical3CrowsStateFree( struct TA_cdlIdentical3Crows_State** _state )
    {
       if (_state == NULL)
@@ -14949,6 +16820,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlInNeckBatchState( struct TA_cdlInNeck_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlInNeck ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlInNeckStateFree( struct TA_cdlInNeck_State** _state )
    {
       if (_state == NULL)
@@ -15236,6 +17144,43 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdlInvertedHammerBatchState( struct TA_cdlInvertedHammer_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlInvertedHammer ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdlInvertedHammerStateFree( struct TA_cdlInvertedHammer_State** _state )
    {
@@ -15556,6 +17501,43 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdlKickingBatchState( struct TA_cdlKicking_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlKicking ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdlKickingStateFree( struct TA_cdlKicking_State** _state )
    {
@@ -15885,6 +17867,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlKickingByLengthBatchState( struct TA_cdlKickingByLength_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlKickingByLength ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlKickingByLengthStateFree( struct TA_cdlKickingByLength_State** _state )
    {
       if (_state == NULL)
@@ -16173,6 +18192,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlLadderBottomBatchState( struct TA_cdlLadderBottom_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlLadderBottom ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlLadderBottomStateFree( struct TA_cdlLadderBottom_State** _state )
    {
       if (_state == NULL)
@@ -16422,6 +18478,43 @@ public class Core {
       }
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdlLongLeggedDojiBatchState( struct TA_cdlLongLeggedDoji_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlLongLeggedDoji ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdlLongLeggedDojiStateFree( struct TA_cdlLongLeggedDoji_State** _state )
    {
@@ -16681,6 +18774,43 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdlLongLineBatchState( struct TA_cdlLongLine_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlLongLine ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdlLongLineStateFree( struct TA_cdlLongLine_State** _state )
    {
@@ -16942,6 +19072,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlMarubozuBatchState( struct TA_cdlMarubozu_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlMarubozu ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlMarubozuStateFree( struct TA_cdlMarubozu_State** _state )
    {
       if (_state == NULL)
@@ -17188,6 +19355,43 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdlMatchingLowBatchState( struct TA_cdlMatchingLow_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlMatchingLow ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdlMatchingLowStateFree( struct TA_cdlMatchingLow_State** _state )
    {
@@ -17490,6 +19694,43 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdlMatHoldBatchState( struct TA_cdlMatHold_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlMatHold ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdlMatHoldStateFree( struct TA_cdlMatHold_State** _state )
    {
@@ -17834,6 +20075,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlMorningDojiStarBatchState( struct TA_cdlMorningDojiStar_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlMorningDojiStar ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlMorningDojiStarStateFree( struct TA_cdlMorningDojiStar_State** _state )
    {
       if (_state == NULL)
@@ -18161,6 +20439,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlMorningStarBatchState( struct TA_cdlMorningStar_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlMorningStar ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlMorningStarStateFree( struct TA_cdlMorningStar_State** _state )
    {
       if (_state == NULL)
@@ -18451,6 +20766,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlOnNeckBatchState( struct TA_cdlOnNeck_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlOnNeck ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlOnNeckStateFree( struct TA_cdlOnNeck_State** _state )
    {
       if (_state == NULL)
@@ -18715,6 +21067,43 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdlPiercingBatchState( struct TA_cdlPiercing_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlPiercing ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdlPiercingStateFree( struct TA_cdlPiercing_State** _state )
    {
@@ -18997,6 +21386,43 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdlRickshawManBatchState( struct TA_cdlRickshawMan_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlRickshawMan ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdlRickshawManStateFree( struct TA_cdlRickshawMan_State** _state )
    {
@@ -19336,6 +21762,43 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdlRiseFall3MethodsBatchState( struct TA_cdlRiseFall3Methods_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlRiseFall3Methods ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdlRiseFall3MethodsStateFree( struct TA_cdlRiseFall3Methods_State** _state )
    {
@@ -19677,6 +22140,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlSeperatingLinesBatchState( struct TA_cdlSeperatingLines_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlSeperatingLines ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlSeperatingLinesStateFree( struct TA_cdlSeperatingLines_State** _state )
    {
       if (_state == NULL)
@@ -19992,6 +22492,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlShootingStarBatchState( struct TA_cdlShootingStar_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlShootingStar ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlShootingStarStateFree( struct TA_cdlShootingStar_State** _state )
    {
       if (_state == NULL)
@@ -20273,6 +22810,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlShortLineBatchState( struct TA_cdlShortLine_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlShortLine ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlShortLineStateFree( struct TA_cdlShortLine_State** _state )
    {
       if (_state == NULL)
@@ -20512,6 +23086,43 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdlSpinningTopBatchState( struct TA_cdlSpinningTop_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlSpinningTop ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdlSpinningTopStateFree( struct TA_cdlSpinningTop_State** _state )
    {
@@ -20826,6 +23437,43 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdlStalledPatternBatchState( struct TA_cdlStalledPattern_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlStalledPattern ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdlStalledPatternStateFree( struct TA_cdlStalledPattern_State** _state )
    {
@@ -21152,6 +23800,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlStickSandwhichBatchState( struct TA_cdlStickSandwhich_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlStickSandwhich ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlStickSandwhichStateFree( struct TA_cdlStickSandwhich_State** _state )
    {
       if (_state == NULL)
@@ -21415,6 +24100,43 @@ public class Core {
       }
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdlTakuriBatchState( struct TA_cdlTakuri_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlTakuri ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdlTakuriStateFree( struct TA_cdlTakuri_State** _state )
    {
@@ -21717,6 +24439,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlTasukiGapBatchState( struct TA_cdlTasukiGap_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlTasukiGap ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlTasukiGapStateFree( struct TA_cdlTasukiGap_State** _state )
    {
       if (_state == NULL)
@@ -21982,6 +24741,43 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdlThrustingBatchState( struct TA_cdlThrusting_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlThrusting ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdlThrustingStateFree( struct TA_cdlThrusting_State** _state )
    {
@@ -22255,6 +25051,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlTristarBatchState( struct TA_cdlTristar_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlTristar ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlTristarStateFree( struct TA_cdlTristar_State** _state )
    {
       if (_state == NULL)
@@ -22518,6 +25351,43 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode cdlUnique3RiverBatchState( struct TA_cdlUnique3River_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlUnique3River ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cdlUnique3RiverStateFree( struct TA_cdlUnique3River_State** _state )
    {
@@ -22798,6 +25668,43 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       return RetCode.Success ;
    }
+   public RetCode cdlUpsideGap2CrowsBatchState( struct TA_cdlUpsideGap2Crows_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlUpsideGap2Crows ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlUpsideGap2CrowsStateFree( struct TA_cdlUpsideGap2Crows_State** _state )
    {
       if (_state == NULL)
@@ -23052,6 +25959,43 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       return RetCode.Success ;
    }
+   public RetCode cdlXSideGap3MethodsBatchState( struct TA_cdlXSideGap3Methods_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cdlXSideGap3Methods ( _state, inOpen[i], inHigh[i], inLow[i], inClose[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cdlXSideGap3MethodsStateFree( struct TA_cdlXSideGap3Methods_State** _state )
    {
       if (_state == NULL)
@@ -23206,6 +26150,40 @@ public class Core {
          return RetCode.NeedMoreData ; }
       outReal.value = Math.ceil (inReal);
       return RetCode.Success ;
+   }
+   public RetCode ceilBatchState( struct TA_ceil_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = ceil ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode ceilStateFree( struct TA_ceil_State** _state )
    {
@@ -23493,6 +26471,40 @@ public class Core {
       else
          outReal.value = 0.0;
       return RetCode.Success ;
+   }
+   public RetCode cmoBatchState( struct TA_cmo_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cmo ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode cmoStateFree( struct TA_cmo_State** _state )
    {
@@ -23840,6 +26852,41 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inReal1 = inReal1 ;
       return RetCode.Success ;
    }
+   public RetCode correlBatchState( struct TA_correl_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal0[],
+      double inReal1[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = correl ( _state, inReal0[i], inReal1[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode correlStateFree( struct TA_correl_State** _state )
    {
       if (_state == NULL)
@@ -24041,6 +27088,40 @@ public class Core {
       outReal.value = Math.cos (inReal);
       return RetCode.Success ;
    }
+   public RetCode cosBatchState( struct TA_cos_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cos ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode cosStateFree( struct TA_cos_State** _state )
    {
       if (_state == NULL)
@@ -24163,6 +27244,40 @@ public class Core {
          return RetCode.NeedMoreData ; }
       outReal.value = Math.cosh (inReal);
       return RetCode.Success ;
+   }
+   public RetCode coshBatchState( struct TA_cosh_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = cosh ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode coshStateFree( struct TA_cosh_State** _state )
    {
@@ -24353,6 +27468,40 @@ public class Core {
       outReal.value = (2.0*ema) - ema2;
       return RetCode.Success ;
    }
+   public RetCode demaBatchState( struct TA_dema_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = dema ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode demaStateFree( struct TA_dema_State** _state )
    {
       int res = ema ((struct ema **)& _state.value .value .state_EMA);
@@ -24540,6 +27689,41 @@ public class Core {
          return RetCode.NeedMoreData ; }
       outReal.value = inReal0 / inReal1;
       return RetCode.Success ;
+   }
+   public RetCode divBatchState( struct TA_div_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal0[],
+      double inReal1[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = div ( _state, inReal0[i], inReal1[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode divStateFree( struct TA_div_State** _state )
    {
@@ -24843,6 +28027,42 @@ public class Core {
       else
          outReal.value = _state.value .prevOutReal;
       return RetCode.Success ;
+   }
+   public RetCode dxBatchState( struct TA_dx_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = dx ( _state, inHigh[i], inLow[i], inClose[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode dxStateFree( struct TA_dx_State** _state )
    {
@@ -25211,6 +28431,40 @@ public class Core {
       outReal.value = _state.value .prevMA;
       return RetCode.Success ;
    }
+   public RetCode emaBatchState( struct TA_ema_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = ema ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode emaStateFree( struct TA_ema_State** _state )
    {
       if (_state == NULL)
@@ -25401,6 +28655,40 @@ public class Core {
       outReal.value = Math.exp (inReal);
       return RetCode.Success ;
    }
+   public RetCode expBatchState( struct TA_exp_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = exp ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode expStateFree( struct TA_exp_State** _state )
    {
       if (_state == NULL)
@@ -25523,6 +28811,40 @@ public class Core {
          return RetCode.NeedMoreData ; }
       outReal.value = Math.floor (inReal);
       return RetCode.Success ;
+   }
+   public RetCode floorBatchState( struct TA_floor_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = floor ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode floorStateFree( struct TA_floor_State** _state )
    {
@@ -25845,6 +29167,40 @@ public class Core {
          outReal.value = _state.value .smoothPeriod;
          return RetCode.Success ;
       }
+   }
+   public RetCode htDcPeriodBatchState( struct TA_htDcPeriod_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = htDcPeriod ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode htDcPeriodStateFree( struct TA_htDcPeriod_State** _state )
    {
@@ -26441,6 +29797,40 @@ public class Core {
          return RetCode.Success ;
       }
    }
+   public RetCode htDcPhaseBatchState( struct TA_htDcPhase_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = htDcPhase ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode htDcPhaseStateFree( struct TA_htDcPhase_State** _state )
    {
       { if ( _state.value .value .detrender != NULL) { free ( _state.value .value .detrender); _state.value .value .detrender = NULL; } } ;
@@ -27018,6 +30408,43 @@ public class Core {
       else {
          return RetCode.Success ;
       }
+   }
+   public RetCode htPhasorBatchState( struct TA_htPhasor_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outInPhase[],
+      double outQuadrature[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outInPhaseVal;
+      double outQuadratureVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = htPhasor ( _state, inReal[i], &outInPhaseVal, &outQuadratureVal );
+         if ( retValue == RetCode.Success ) {
+            outInPhase[outIdx] = outInPhaseVal;
+            outQuadrature[outIdx] = outQuadratureVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode htPhasorStateFree( struct TA_htPhasor_State** _state )
    {
@@ -27621,6 +31048,43 @@ public class Core {
          return RetCode.Success ;
       }
       return RetCode.Success ;
+   }
+   public RetCode htSineBatchState( struct TA_htSine_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outSine[],
+      double outLeadSine[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outSineVal;
+      double outLeadSineVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = htSine ( _state, inReal[i], &outSineVal, &outLeadSineVal );
+         if ( retValue == RetCode.Success ) {
+            outSine[outIdx] = outSineVal;
+            outLeadSine[outIdx] = outLeadSineVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode htSineStateFree( struct TA_htSine_State** _state )
    {
@@ -28240,6 +31704,40 @@ public class Core {
          return RetCode.Success ;
       }
       return RetCode.Success ;
+   }
+   public RetCode htTrendlineBatchState( struct TA_htTrendline_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = htTrendline ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode htTrendlineStateFree( struct TA_htTrendline_State** _state )
    {
@@ -28967,6 +32465,40 @@ public class Core {
       }
       return RetCode.Success ;
    }
+   public RetCode htTrendModeBatchState( struct TA_htTrendMode_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = htTrendMode ( _state, inReal[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode htTrendModeStateFree( struct TA_htTrendMode_State** _state )
    {
       { if ( _state.value .value .detrender != NULL) { free ( _state.value .value .detrender); _state.value .value .detrender = NULL; } } ;
@@ -29470,6 +33002,41 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       return RetCode.Success ;
    }
+   public RetCode imiBatchState( struct TA_imi_State* _state,
+      int startIdx,
+      int endIdx,
+      double inOpen[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = imi ( _state, inOpen[i], inClose[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode imiStateFree( struct TA_imi_State** _state )
    {
       if (_state == NULL)
@@ -29753,6 +33320,40 @@ public class Core {
       outReal.value = _state.value .prevKAMA;
       return RetCode.Success ;
    }
+   public RetCode kamaBatchState( struct TA_kama_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = kama ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode kamaStateFree( struct TA_kama_State** _state )
    {
       if (_state == NULL)
@@ -30034,6 +33635,40 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
    }
+   public RetCode linearRegBatchState( struct TA_linearReg_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = linearReg ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode linearRegStateFree( struct TA_linearReg_State** _state )
    {
       if (_state == NULL)
@@ -30279,6 +33914,40 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
    }
+   public RetCode linearRegAngleBatchState( struct TA_linearRegAngle_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = linearRegAngle ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode linearRegAngleStateFree( struct TA_linearRegAngle_State** _state )
    {
       if (_state == NULL)
@@ -30523,6 +34192,40 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
    }
+   public RetCode linearRegInterceptBatchState( struct TA_linearRegIntercept_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = linearRegIntercept ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode linearRegInterceptStateFree( struct TA_linearRegIntercept_State** _state )
    {
       if (_state == NULL)
@@ -30764,6 +34467,40 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
    }
+   public RetCode linearRegSlopeBatchState( struct TA_linearRegSlope_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = linearRegSlope ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode linearRegSlopeStateFree( struct TA_linearRegSlope_State** _state )
    {
       if (_state == NULL)
@@ -30941,6 +34678,40 @@ public class Core {
       outReal.value = Math.log (inReal);
       return RetCode.Success ;
    }
+   public RetCode lnBatchState( struct TA_ln_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = ln ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode lnStateFree( struct TA_ln_State** _state )
    {
       if (_state == NULL)
@@ -31063,6 +34834,40 @@ public class Core {
          return RetCode.NeedMoreData ; }
       outReal.value = Math.log10 (inReal);
       return RetCode.Success ;
+   }
+   public RetCode log10BatchState( struct TA_log10_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = log10 ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode log10StateFree( struct TA_log10_State** _state )
    {
@@ -31360,6 +35165,40 @@ public class Core {
          default:
             retValue = RetCode.BadParam ;
       }
+      return retValue;
+   }
+   public RetCode movingAverageBatchState( struct TA_movingAverage_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = movingAverage ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
       return retValue;
    }
    public RetCode movingAverageStateFree( struct TA_movingAverage_State** _state )
@@ -31906,6 +35745,46 @@ public class Core {
       outMACDHist.value = outMACD.value - outMACDSignal.value ;
       return (retCode1 | retCode2 | retCode3);
    }
+   public RetCode macdBatchState( struct TA_macd_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outMACD[],
+      double outMACDSignal[],
+      double outMACDHist[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outMACDVal;
+      double outMACDSignalVal;
+      double outMACDHistVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = macd ( _state, inReal[i], &outMACDVal, &outMACDSignalVal, &outMACDHistVal );
+         if ( retValue == RetCode.Success ) {
+            outMACD[outIdx] = outMACDVal;
+            outMACDSignal[outIdx] = outMACDSignalVal;
+            outMACDHist[outIdx] = outMACDHistVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode macdStateFree( struct TA_macd_State** _state )
    {
       RetCode retCode;
@@ -32355,6 +36234,46 @@ public class Core {
       outMACDHist.value = outMACD.value - outMACDSignal.value ;
       return (retCode1 | retCode2 | retCode3);
    }
+   public RetCode macdExtBatchState( struct TA_macdExt_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outMACD[],
+      double outMACDSignal[],
+      double outMACDHist[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outMACDVal;
+      double outMACDSignalVal;
+      double outMACDHistVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = macdExt ( _state, inReal[i], &outMACDVal, &outMACDSignalVal, &outMACDHistVal );
+         if ( retValue == RetCode.Success ) {
+            outMACD[outIdx] = outMACDVal;
+            outMACDSignal[outIdx] = outMACDSignalVal;
+            outMACDHist[outIdx] = outMACDHistVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode macdExtStateFree( struct TA_macdExt_State** _state )
    {
       RetCode retCode;
@@ -32619,6 +36538,46 @@ public class Core {
       double *outMACDHist )
    {
       return macd ( (struct macd *) _state, inReal, outMACD, outMACDSignal, outMACDHist );
+   }
+   public RetCode macdFixBatchState( struct TA_macdFix_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outMACD[],
+      double outMACDSignal[],
+      double outMACDHist[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outMACDVal;
+      double outMACDSignalVal;
+      double outMACDHistVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = macdFix ( _state, inReal[i], &outMACDVal, &outMACDSignalVal, &outMACDHistVal );
+         if ( retValue == RetCode.Success ) {
+            outMACD[outIdx] = outMACDVal;
+            outMACDSignal[outIdx] = outMACDSignalVal;
+            outMACDHist[outIdx] = outMACDHistVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode macdFixStateFree( struct TA_macdFix_State** _state )
    {
@@ -33035,6 +36994,43 @@ public class Core {
          return RetCode.NeedMoreData ;
       else
          return RetCode.Success ;
+   }
+   public RetCode mamaBatchState( struct TA_mama_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outMAMA[],
+      double outFAMA[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outMAMAVal;
+      double outFAMAVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = mama ( _state, inReal[i], &outMAMAVal, &outFAMAVal );
+         if ( retValue == RetCode.Success ) {
+            outMAMA[outIdx] = outMAMAVal;
+            outFAMA[outIdx] = outFAMAVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode mamaStateFree( struct TA_mama_State** _state )
    {
@@ -33491,6 +37487,41 @@ public class Core {
       ma_state->optInTimePeriod = period;
       return movingAverage ( ma_state, inReal, outReal );
    }
+   public RetCode movingAverageVariablePeriodBatchState( struct TA_movingAverageVariablePeriod_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      double inPeriods[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = movingAverageVariablePeriod ( _state, inReal[i], inPeriods[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode movingAverageVariablePeriodStateFree( struct TA_movingAverageVariablePeriod_State** _state )
    {
       movingAverage ((struct movingAverage **)& _state.value .value .MAState);
@@ -33751,6 +37782,40 @@ public class Core {
       outReal.value = _state.value .max;
       return RetCode.Success ;
    }
+   public RetCode maxBatchState( struct TA_max_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = max ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode maxStateFree( struct TA_max_State** _state )
    {
       if (_state == NULL)
@@ -33987,6 +38052,40 @@ public class Core {
       outInteger.value = _state.value .maxIdx;
       return RetCode.Success ;
    }
+   public RetCode maxIndexBatchState( struct TA_maxIndex_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = maxIndex ( _state, inReal[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode maxIndexStateFree( struct TA_maxIndex_State** _state )
    {
       if (_state == NULL)
@@ -34171,6 +38270,41 @@ public class Core {
          return RetCode.NeedMoreData ; }
       outReal.value = (inHigh+inLow)/2.0;
       return RetCode.Success ;
+   }
+   public RetCode medPriceBatchState( struct TA_medPrice_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = medPrice ( _state, inHigh[i], inLow[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode medPriceStateFree( struct TA_medPrice_State** _state )
    {
@@ -34465,6 +38599,43 @@ public class Core {
       else
          outReal.value = 100.0*( _state.value .posSumMF/tempValue1);
       return RetCode.Success ;
+   }
+   public RetCode mfiBatchState( struct TA_mfi_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      double inVolume[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = mfi ( _state, inHigh[i], inLow[i], inClose[i], inVolume[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode mfiStateFree( struct TA_mfi_State** _state )
    {
@@ -34767,6 +38938,40 @@ public class Core {
       outReal.value = ( _state.value .highest+ _state.value .lowest)/2.0;
       return RetCode.Success ;
    }
+   public RetCode midPointBatchState( struct TA_midPoint_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = midPoint ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode midPointStateFree( struct TA_midPoint_State** _state )
    {
       if (_state == NULL)
@@ -34974,6 +39179,41 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       outReal.value = ( _state.value .highest+ _state.value .lowest)/2.0;
       return RetCode.Success ;
+   }
+   public RetCode midPriceBatchState( struct TA_midPrice_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = midPrice ( _state, inHigh[i], inLow[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode midPriceStateFree( struct TA_midPrice_State** _state )
    {
@@ -35192,6 +39432,40 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       outReal.value = _state.value .min;
       return RetCode.Success ;
+   }
+   public RetCode minBatchState( struct TA_min_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = min ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode minStateFree( struct TA_min_State** _state )
    {
@@ -35428,6 +39702,40 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
       outInteger.value = _state.value .minIdx;
       return RetCode.Success ;
+   }
+   public RetCode minIndexBatchState( struct TA_minIndex_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outInteger[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outIntegerVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = minIndex ( _state, inReal[i], &outIntegerVal );
+         if ( retValue == RetCode.Success ) {
+            outInteger[outIdx] = outIntegerVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode minIndexStateFree( struct TA_minIndex_State** _state )
    {
@@ -35695,6 +40003,43 @@ public class Core {
       outMin.value = _state.value .min;
       outMax.value = _state.value .max;
       return RetCode.Success ;
+   }
+   public RetCode minMaxBatchState( struct TA_minMax_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outMin[],
+      double outMax[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outMinVal;
+      double outMaxVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = minMax ( _state, inReal[i], &outMinVal, &outMaxVal );
+         if ( retValue == RetCode.Success ) {
+            outMin[outIdx] = outMinVal;
+            outMax[outIdx] = outMaxVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode minMaxStateFree( struct TA_minMax_State** _state )
    {
@@ -35992,6 +40337,43 @@ public class Core {
       outMaxIdx.value = _state.value .maxIdx;
       outMinIdx.value = _state.value .minIdx;
       return RetCode.Success ;
+   }
+   public RetCode minMaxIndexBatchState( struct TA_minMaxIndex_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      int outMinIdx[],
+      int outMaxIdx[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      int outMinIdxVal;
+      int outMaxIdxVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = minMaxIndex ( _state, inReal[i], &outMinIdxVal, &outMaxIdxVal );
+         if ( retValue == RetCode.Success ) {
+            outMinIdx[outIdx] = outMinIdxVal;
+            outMaxIdx[outIdx] = outMaxIdxVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode minMaxIndexStateFree( struct TA_minMaxIndex_State** _state )
    {
@@ -36397,6 +40779,42 @@ public class Core {
       else
          outReal.value = 0.0;
       return RetCode.Success ;
+   }
+   public RetCode minusDIBatchState( struct TA_minusDI_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = minusDI ( _state, inHigh[i], inLow[i], inClose[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode minusDIStateFree( struct TA_minusDI_State** _state )
    {
@@ -36820,6 +41238,41 @@ public class Core {
       outReal.value = _state.value .prevMinusDM;
       return RetCode.Success ;
    }
+   public RetCode minusDMBatchState( struct TA_minusDM_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = minusDM ( _state, inHigh[i], inLow[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode minusDMStateFree( struct TA_minusDM_State** _state )
    {
       if (_state == NULL)
@@ -37087,6 +41540,40 @@ public class Core {
       outReal.value = inReal - temp;
       return RetCode.Success ;
    }
+   public RetCode momBatchState( struct TA_mom_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = mom ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode momStateFree( struct TA_mom_State** _state )
    {
       if (_state == NULL)
@@ -37229,6 +41716,41 @@ public class Core {
          return RetCode.NeedMoreData ; }
       outReal.value = inReal0*inReal1;
       return RetCode.Success ;
+   }
+   public RetCode multBatchState( struct TA_mult_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal0[],
+      double inReal1[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = mult ( _state, inReal0[i], inReal1[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode multStateFree( struct TA_mult_State** _state )
    {
@@ -37466,6 +41988,42 @@ public class Core {
          outReal.value = ( _state.value .prevATR/inClose)*100.0;
       else outReal.value = 0.;
       return RetCode.Success ;
+   }
+   public RetCode natrBatchState( struct TA_natr_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = natr ( _state, inHigh[i], inLow[i], inClose[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode natrStateFree( struct TA_natr_State** _state )
    {
@@ -37711,6 +42269,41 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inVolume = inVolume ;
       return RetCode.Success ;
    }
+   public RetCode nviBatchState( struct TA_nvi_State* _state,
+      int startIdx,
+      int endIdx,
+      double inClose[],
+      double inVolume[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = nvi ( _state, inClose[i], inVolume[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode nviStateFree( struct TA_nvi_State** _state )
    {
       if (_state == NULL)
@@ -37875,6 +42468,41 @@ public class Core {
       outReal.value = _state.value .prevOBV;
       _state.value .prevReal = inClose;
       return RetCode.Success ;
+   }
+   public RetCode obvBatchState( struct TA_obv_State* _state,
+      int startIdx,
+      int endIdx,
+      double inClose[],
+      double inVolume[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = obv ( _state, inClose[i], inVolume[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode obvStateFree( struct TA_obv_State** _state )
    {
@@ -38207,6 +42835,42 @@ public class Core {
       else
          outReal.value = 0.0;
       return RetCode.Success ;
+   }
+   public RetCode plusDIBatchState( struct TA_plusDI_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = plusDI ( _state, inHigh[i], inLow[i], inClose[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode plusDIStateFree( struct TA_plusDI_State** _state )
    {
@@ -38630,6 +43294,41 @@ public class Core {
       outReal.value = _state.value .prevPlusDM;
       return RetCode.Success ;
    }
+   public RetCode plusDMBatchState( struct TA_plusDM_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = plusDM ( _state, inHigh[i], inLow[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode plusDMStateFree( struct TA_plusDM_State** _state )
    {
       if (_state == NULL)
@@ -38881,6 +43580,40 @@ public class Core {
    {
       return apo ((struct apo *)_state, inReal, outReal);
    }
+   public RetCode ppoBatchState( struct TA_ppo_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = ppo ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode ppoStateFree( struct TA_ppo_State** _state )
    {
       return apo ((struct apo **)_state);
@@ -39048,6 +43781,41 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inVolume = inVolume ;
       return RetCode.Success ;
    }
+   public RetCode pviBatchState( struct TA_pvi_State* _state,
+      int startIdx,
+      int endIdx,
+      double inClose[],
+      double inVolume[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = pvi ( _state, inClose[i], inVolume[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode pviStateFree( struct TA_pvi_State** _state )
    {
       if (_state == NULL)
@@ -39206,6 +43974,41 @@ public class Core {
       outReal.value = _state.value .prevPVT;
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       return RetCode.Success ;
+   }
+   public RetCode pvtBatchState( struct TA_pvt_State* _state,
+      int startIdx,
+      int endIdx,
+      double inClose[],
+      double inVolume[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = pvt ( _state, inClose[i], inVolume[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode pvtStateFree( struct TA_pvt_State** _state )
    {
@@ -39380,6 +44183,40 @@ public class Core {
       outReal.value = (tempReal!=0.0)?((inReal / tempReal)-1.0)*100.0 : 0.0;
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
+   }
+   public RetCode rocBatchState( struct TA_roc_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = roc ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode rocStateFree( struct TA_roc_State** _state )
    {
@@ -39563,6 +44400,40 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
    }
+   public RetCode rocPBatchState( struct TA_rocP_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = rocP ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode rocPStateFree( struct TA_rocP_State** _state )
    {
       if (_state == NULL)
@@ -39745,6 +44616,40 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
    }
+   public RetCode rocRBatchState( struct TA_rocR_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = rocR ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode rocRStateFree( struct TA_rocR_State** _state )
    {
       if (_state == NULL)
@@ -39926,6 +44831,40 @@ public class Core {
       outReal.value = (tempReal!=0.0)? (inReal/tempReal)*100.0 : 0.0;
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
+   }
+   public RetCode rocR100BatchState( struct TA_rocR100_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = rocR100 ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode rocR100StateFree( struct TA_rocR100_State** _state )
    {
@@ -40237,6 +45176,40 @@ public class Core {
       else
          outReal.value = 0.0;
       return RetCode.Success ;
+   }
+   public RetCode rsiBatchState( struct TA_rsi_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = rsi ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode rsiStateFree( struct TA_rsi_State** _state )
    {
@@ -40747,6 +45720,41 @@ public class Core {
          }
       }
       return RetCode.Success ;
+   }
+   public RetCode sarBatchState( struct TA_sar_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = sar ( _state, inHigh[i], inLow[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode sarStateFree( struct TA_sar_State** _state )
    {
@@ -41464,6 +46472,41 @@ public class Core {
       }
       return RetCode.Success ;
    }
+   public RetCode sarExtBatchState( struct TA_sarExt_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = sarExt ( _state, inHigh[i], inLow[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode sarExtStateFree( struct TA_sarExt_State** _state )
    {
       if ( _state.value .value .optInStartValue == 0)
@@ -41864,6 +46907,40 @@ public class Core {
       outReal.value = Math.sin (inReal);
       return RetCode.Success ;
    }
+   public RetCode sinBatchState( struct TA_sin_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = sin ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode sinStateFree( struct TA_sin_State** _state )
    {
       if (_state == NULL)
@@ -41986,6 +47063,40 @@ public class Core {
          return RetCode.NeedMoreData ; }
       outReal.value = Math.sinh (inReal);
       return RetCode.Success ;
+   }
+   public RetCode sinhBatchState( struct TA_sinh_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = sinh ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode sinhStateFree( struct TA_sinh_State** _state )
    {
@@ -42166,6 +47277,40 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
    }
+   public RetCode smaBatchState( struct TA_sma_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = sma ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode smaStateFree( struct TA_sma_State** _state )
    {
       if (_state == NULL)
@@ -42334,6 +47479,40 @@ public class Core {
          return RetCode.NeedMoreData ; }
       outReal.value = Math.sqrt (inReal);
       return RetCode.Success ;
+   }
+   public RetCode sqrtBatchState( struct TA_sqrt_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = sqrt ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode sqrtStateFree( struct TA_sqrt_State** _state )
    {
@@ -42561,6 +47740,40 @@ public class Core {
             outReal.value = (double)0.0;
       }
       return RetCode.Success ;
+   }
+   public RetCode stdDevBatchState( struct TA_stdDev_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = stdDev ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode stdDevStateFree( struct TA_stdDev_State** _state )
    {
@@ -43008,6 +48221,45 @@ public class Core {
       if( retCode != RetCode.Success ) return retCode;
       outSlowD.value = temp;
       return RetCode.Success ;
+   }
+   public RetCode stochBatchState( struct TA_stoch_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outSlowK[],
+      double outSlowD[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outSlowKVal;
+      double outSlowDVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = stoch ( _state, inHigh[i], inLow[i], inClose[i], &outSlowKVal, &outSlowDVal );
+         if ( retValue == RetCode.Success ) {
+            outSlowK[outIdx] = outSlowKVal;
+            outSlowD[outIdx] = outSlowDVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode stochStateFree( struct TA_stoch_State** _state )
    {
@@ -43506,6 +48758,45 @@ public class Core {
       outFastD.value = temp;
       return RetCode.Success ;
    }
+   public RetCode stochFBatchState( struct TA_stochF_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outFastK[],
+      double outFastD[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outFastKVal;
+      double outFastDVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = stochF ( _state, inHigh[i], inLow[i], inClose[i], &outFastKVal, &outFastDVal );
+         if ( retValue == RetCode.Success ) {
+            outFastK[outIdx] = outFastKVal;
+            outFastD[outIdx] = outFastDVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode stochFStateFree( struct TA_stochF_State** _state )
    {
       TA_RetCode retCode;
@@ -43869,6 +49160,43 @@ public class Core {
       if (retCode != RetCode.Success ) return retCode;
       return RetCode.Success ;
    }
+   public RetCode stochRsiBatchState( struct TA_stochRsi_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outFastK[],
+      double outFastD[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outFastKVal;
+      double outFastDVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = stochRsi ( _state, inReal[i], &outFastKVal, &outFastDVal );
+         if ( retValue == RetCode.Success ) {
+            outFastK[outIdx] = outFastKVal;
+            outFastD[outIdx] = outFastDVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode stochRsiStateFree( struct TA_stochRsi_State** _state )
    {
       TA_RetCode retCode;
@@ -44086,6 +49414,41 @@ public class Core {
       outReal.value = inReal0-inReal1;
       return RetCode.Success ;
    }
+   public RetCode subBatchState( struct TA_sub_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal0[],
+      double inReal1[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = sub ( _state, inReal0[i], inReal1[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode subStateFree( struct TA_sub_State** _state )
    {
       if (_state == NULL)
@@ -44255,6 +49618,40 @@ public class Core {
          outReal.value = inReal;
          return RetCode.Success ;
       }
+   }
+   public RetCode sumBatchState( struct TA_sum_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = sum ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode sumStateFree( struct TA_sum_State** _state )
    {
@@ -44635,6 +50032,40 @@ public class Core {
       outReal.value = _state.value .c1* _state.value .e6+ _state.value .c2* _state.value .e5+ _state.value .c3* _state.value .e4+ _state.value .c4* _state.value .e3;
       return RetCode.Success ;
    }
+   public RetCode t3BatchState( struct TA_t3_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = t3 ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode t3StateFree( struct TA_t3_State** _state )
    {
       if (_state == NULL)
@@ -44919,6 +50350,40 @@ public class Core {
       outReal.value = Math.tan (inReal);
       return RetCode.Success ;
    }
+   public RetCode tanBatchState( struct TA_tan_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = tan ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode tanStateFree( struct TA_tan_State** _state )
    {
       if (_state == NULL)
@@ -45041,6 +50506,40 @@ public class Core {
          return RetCode.NeedMoreData ; }
       outReal.value = Math.tanh (inReal);
       return RetCode.Success ;
+   }
+   public RetCode tanhBatchState( struct TA_tanh_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = tanh ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode tanhStateFree( struct TA_tanh_State** _state )
    {
@@ -45246,6 +50745,40 @@ public class Core {
          return retCode;
       outReal.value = (3.0*ema) - (3.0*ema2) + ema3;
       return RetCode.Success ;
+   }
+   public RetCode temaBatchState( struct TA_tema_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = tema ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode temaStateFree( struct TA_tema_State** _state )
    {
@@ -45489,6 +51022,42 @@ public class Core {
       outReal.value = greatest;
       ( _state.value .memory+_cur_idx).value .inClose = inClose ;
       return RetCode.Success ;
+   }
+   public RetCode trueRangeBatchState( struct TA_trueRange_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = trueRange ( _state, inHigh[i], inLow[i], inClose[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode trueRangeStateFree( struct TA_trueRange_State** _state )
    {
@@ -45801,6 +51370,40 @@ public class Core {
       }
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
+   }
+   public RetCode trimaBatchState( struct TA_trima_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = trima ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode trimaStateFree( struct TA_trima_State** _state )
    {
@@ -46141,6 +51744,40 @@ public class Core {
       outReal.value = tempReal;
       return RetCode.Success ;
    }
+   public RetCode trixBatchState( struct TA_trix_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = trix ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode trixStateFree( struct TA_trix_State** _state )
    {
       TA_RetCode retCode;
@@ -46426,6 +52063,40 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
    }
+   public RetCode tsfBatchState( struct TA_tsf_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = tsf ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode tsfStateFree( struct TA_tsf_State** _state )
    {
       if (_state == NULL)
@@ -46613,6 +52284,42 @@ public class Core {
          return RetCode.NeedMoreData ; }
       outReal.value = ( inHigh + inLow + inClose ) / 3.0;
       return RetCode.Success ;
+   }
+   public RetCode typPriceBatchState( struct TA_typPrice_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = typPrice ( _state, inHigh[i], inLow[i], inClose[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode typPriceStateFree( struct TA_typPrice_State** _state )
    {
@@ -46926,6 +52633,42 @@ public class Core {
       if ( _state.value .mem_size > _state.value .mem_index - 1 )
          return RetCode.NeedMoreData ;
       return RetCode.Success ;
+   }
+   public RetCode ultOscBatchState( struct TA_ultOsc_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = ultOsc ( _state, inHigh[i], inLow[i], inClose[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode ultOscStateFree( struct TA_ultOsc_State** _state )
    {
@@ -47286,6 +53029,40 @@ public class Core {
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
    }
+   public RetCode varianceBatchState( struct TA_variance_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = variance ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
    public RetCode varianceStateFree( struct TA_variance_State** _state )
    {
       if (_state == NULL)
@@ -47487,6 +53264,42 @@ public class Core {
          return RetCode.NeedMoreData ; }
       outReal.value = ( inHigh + inLow + (inClose*2.0) ) / 4.0;
       return RetCode.Success ;
+   }
+   public RetCode wclPriceBatchState( struct TA_wclPrice_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = wclPrice ( _state, inHigh[i], inLow[i], inClose[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode wclPriceStateFree( struct TA_wclPrice_State** _state )
    {
@@ -47759,6 +53572,42 @@ public class Core {
       else
          outReal.value = 0.0;
       return RetCode.Success ;
+   }
+   public RetCode willRBatchState( struct TA_willR_State* _state,
+      int startIdx,
+      int endIdx,
+      double inHigh[],
+      double inLow[],
+      double inClose[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = willR ( _state, inHigh[i], inLow[i], inClose[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode willRStateFree( struct TA_willR_State** _state )
    {
@@ -48045,6 +53894,40 @@ public class Core {
       _state.value .periodSub -= ( _state.value .memory+_cur_idx).value .inReal ;
       ( _state.value .memory+_cur_idx).value .inReal = inReal ;
       return RetCode.Success ;
+   }
+   public RetCode wmaBatchState( struct TA_wma_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i) {
+         retValue = wma ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+            outIdx++;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            continue;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
    }
    public RetCode wmaStateFree( struct TA_wma_State** _state )
    {

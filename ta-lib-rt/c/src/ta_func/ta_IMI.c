@@ -384,6 +384,94 @@ double tempClose, tempOpen;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
+/* Generated */ Core::RetCode Core::ImiBatchState( struct TA_Imi_State* _state,
+/* Generated */                                  int startIdx,
+/* Generated */                                  int endIdx,
+/* Generated */                                  cli::array<double>^ inOpen,
+/* Generated */                                  cli::array<double>^ inClose,
+/* Generated */                                  [Out]int%    outBegIdx,
+/* Generated */                                  [Out]int%    outNBElement,
+/* Generated */                                  cli::array<double>^  outReal )
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public RetCode imiBatchState( struct TA_imi_State* _state,
+/* Generated */                             int startIdx,
+/* Generated */                             int endIdx,
+/* Generated */                             double       inOpen[],
+/* Generated */                             double       inClose[],
+/* Generated */                             MInteger     outBegIdx,
+/* Generated */                             MInteger     outNBElement,
+/* Generated */                             double        outReal[] )
+/* Generated */ #else
+/* Generated */ TA_LIB_API TA_RetCode TA_IMI_BatchState( struct TA_IMI_State* _state,
+/* Generated */                                                   int startIdx,
+/* Generated */                                                   int endIdx,
+/* Generated */                                                   const double inOpen[],
+/* Generated */                                                   const double inClose[],
+/* Generated */                                                   int          *outBegIdx,
+/* Generated */                                                   int          *outNBElement,
+/* Generated */                                                   double        outReal[] )
+/* Generated */ #endif
+/**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
+
+{
+  /* insert local variable here */
+
+/**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_OVERWRITE_BATCH_STATE_CODE
+/* Generated */ 
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    /* Verify required price component. */
+/* Generated */    if(!inOpen||!inClose)
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #endif /* !defined(_JAVA)*/
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    if( !outReal )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #endif /* !defined(_JAVA) */
+/* Generated */    /* Make sure there is still something to evaluate. */
+/* Generated */    if( startIdx > endIdx )
+/* Generated */    {
+/* Generated */       VALUE_HANDLE_DEREF_TO_ZERO(outBegIdx);
+/* Generated */       VALUE_HANDLE_DEREF_TO_ZERO(outNBElement);
+/* Generated */       return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+/* Generated */    }
+/* Generated */    
+/* Generated */    
+/* Generated */    double outRealVal;
+/* Generated */    int retValue;
+/* Generated */    
+/* Generated */    int outIdx = 0;
+/* Generated */    VALUE_HANDLE_DEREF(outBegIdx)  = startIdx;
+/* Generated */    
+/* Generated */    for (int i = startIdx; i <= endIdx; ++i) {
+/* Generated */       retValue = TA_IMI_State( _state, inOpen[i], inClose[i], &outRealVal );
+/* Generated */       if ( retValue == ENUM_VALUE(RetCode,TA_SUCCESS,Success) ) {
+/* Generated */          outReal[outIdx] = outRealVal;
+/* Generated */          outIdx++;
+/* Generated */       } else if ( retValue == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) {
+/* Generated */          continue;
+/* Generated */       } else {
+/* Generated */          break;
+/* Generated */        }
+/* Generated */    }
+/* Generated */    
+/* Generated */    VALUE_HANDLE_DEREF(outNBElement) = outIdx;
+/* Generated */ #endif /* TA_OVERWRITE_BATCH_STATE_CODE */
+/* Generated */ 
+/**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
+
+  /* insert batch state code here. */
+  return retValue;
+}
+
+/**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #if defined( _MANAGED )
 /* Generated */ Core::RetCode Core::ImiStateFree( struct TA_Imi_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )

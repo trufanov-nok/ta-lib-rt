@@ -616,6 +616,104 @@
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
+/* Generated */ Core::RetCode Core::BbandsBatchState( struct TA_Bbands_State* _state,
+/* Generated */                                     int startIdx,
+/* Generated */                                     int endIdx,
+/* Generated */                                     cli::array<double>^ inReal,
+/* Generated */                                     [Out]int%    outBegIdx,
+/* Generated */                                     [Out]int%    outNBElement,
+/* Generated */                                     cli::array<double>^  outRealUpperBand,
+/* Generated */                                     cli::array<double>^  outRealMiddleBand,
+/* Generated */                                     cli::array<double>^  outRealLowerBand )
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public RetCode bbandsBatchState( struct TA_bbands_State* _state,
+/* Generated */                                int startIdx,
+/* Generated */                                int endIdx,
+/* Generated */                                double       inReal[],
+/* Generated */                                MInteger     outBegIdx,
+/* Generated */                                MInteger     outNBElement,
+/* Generated */                                double        outRealUpperBand[],
+/* Generated */                                double        outRealMiddleBand[],
+/* Generated */                                double        outRealLowerBand[] )
+/* Generated */ #else
+/* Generated */ TA_LIB_API TA_RetCode TA_BBANDS_BatchState( struct TA_BBANDS_State* _state,
+/* Generated */                                                      int startIdx,
+/* Generated */                                                      int endIdx,
+/* Generated */                                                      const double inReal[],
+/* Generated */                                                      int          *outBegIdx,
+/* Generated */                                                      int          *outNBElement,
+/* Generated */                                                      double        outRealUpperBand[],
+/* Generated */                                                      double        outRealMiddleBand[],
+/* Generated */                                                      double        outRealLowerBand[] )
+/* Generated */ #endif
+/**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
+
+{
+  /* insert local variable here */
+
+/**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_OVERWRITE_BATCH_STATE_CODE
+/* Generated */ 
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    #endif /* !defined(_JAVA)*/
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    if( !outRealUpperBand )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    if( !outRealMiddleBand )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    if( !outRealLowerBand )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #endif /* !defined(_JAVA) */
+/* Generated */    /* Make sure there is still something to evaluate. */
+/* Generated */    if( startIdx > endIdx )
+/* Generated */    {
+/* Generated */       VALUE_HANDLE_DEREF_TO_ZERO(outBegIdx);
+/* Generated */       VALUE_HANDLE_DEREF_TO_ZERO(outNBElement);
+/* Generated */       return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+/* Generated */    }
+/* Generated */    
+/* Generated */    
+/* Generated */    double outRealUpperBandVal;
+/* Generated */    double outRealMiddleBandVal;
+/* Generated */    double outRealLowerBandVal;
+/* Generated */    int retValue;
+/* Generated */    
+/* Generated */    int outIdx = 0;
+/* Generated */    VALUE_HANDLE_DEREF(outBegIdx)  = startIdx;
+/* Generated */    
+/* Generated */    for (int i = startIdx; i <= endIdx; ++i) {
+/* Generated */       retValue = TA_BBANDS_State( _state, inReal[i], &outRealUpperBandVal, &outRealMiddleBandVal, &outRealLowerBandVal );
+/* Generated */       if ( retValue == ENUM_VALUE(RetCode,TA_SUCCESS,Success) ) {
+/* Generated */          outRealUpperBand[outIdx] = outRealUpperBandVal;
+/* Generated */          outRealMiddleBand[outIdx] = outRealMiddleBandVal;
+/* Generated */          outRealLowerBand[outIdx] = outRealLowerBandVal;
+/* Generated */          outIdx++;
+/* Generated */       } else if ( retValue == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) {
+/* Generated */          continue;
+/* Generated */       } else {
+/* Generated */          break;
+/* Generated */        }
+/* Generated */    }
+/* Generated */    
+/* Generated */    VALUE_HANDLE_DEREF(outNBElement) = outIdx;
+/* Generated */ #endif /* TA_OVERWRITE_BATCH_STATE_CODE */
+/* Generated */ 
+/**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
+
+  /* insert batch state code here. */
+  return retValue;
+}
+
+/**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #if defined( _MANAGED )
 /* Generated */ Core::RetCode Core::BbandsStateFree( struct TA_Bbands_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )

@@ -684,6 +684,104 @@ double slowMA, fastMA;
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
+/* Generated */ Core::RetCode Core::MacdExtBatchState( struct TA_MacdExt_State* _state,
+/* Generated */                                      int startIdx,
+/* Generated */                                      int endIdx,
+/* Generated */                                      cli::array<double>^ inReal,
+/* Generated */                                      [Out]int%    outBegIdx,
+/* Generated */                                      [Out]int%    outNBElement,
+/* Generated */                                      cli::array<double>^  outMACD,
+/* Generated */                                      cli::array<double>^  outMACDSignal,
+/* Generated */                                      cli::array<double>^  outMACDHist )
+/* Generated */ #elif defined( _JAVA )
+/* Generated */ public RetCode macdExtBatchState( struct TA_macdExt_State* _state,
+/* Generated */                                 int startIdx,
+/* Generated */                                 int endIdx,
+/* Generated */                                 double       inReal[],
+/* Generated */                                 MInteger     outBegIdx,
+/* Generated */                                 MInteger     outNBElement,
+/* Generated */                                 double        outMACD[],
+/* Generated */                                 double        outMACDSignal[],
+/* Generated */                                 double        outMACDHist[] )
+/* Generated */ #else
+/* Generated */ TA_LIB_API TA_RetCode TA_MACDEXT_BatchState( struct TA_MACDEXT_State* _state,
+/* Generated */                                                       int startIdx,
+/* Generated */                                                       int endIdx,
+/* Generated */                                                       const double inReal[],
+/* Generated */                                                       int          *outBegIdx,
+/* Generated */                                                       int          *outNBElement,
+/* Generated */                                                       double        outMACD[],
+/* Generated */                                                       double        outMACDSignal[],
+/* Generated */                                                       double        outMACDHist[] )
+/* Generated */ #endif
+/**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
+
+{
+  /* insert local variable here */
+
+/**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #ifndef TA_OVERWRITE_BATCH_STATE_CODE
+/* Generated */ 
+/* Generated */    if (_state == NULL)
+/* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    if( !inReal ) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    #endif /* !defined(_JAVA)*/
+/* Generated */    #if !defined(_JAVA)
+/* Generated */    if( !outMACD )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    if( !outMACDSignal )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    if( !outMACDHist )
+/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */ 
+/* Generated */    #endif /* !defined(_JAVA) */
+/* Generated */    /* Make sure there is still something to evaluate. */
+/* Generated */    if( startIdx > endIdx )
+/* Generated */    {
+/* Generated */       VALUE_HANDLE_DEREF_TO_ZERO(outBegIdx);
+/* Generated */       VALUE_HANDLE_DEREF_TO_ZERO(outNBElement);
+/* Generated */       return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+/* Generated */    }
+/* Generated */    
+/* Generated */    
+/* Generated */    double outMACDVal;
+/* Generated */    double outMACDSignalVal;
+/* Generated */    double outMACDHistVal;
+/* Generated */    int retValue;
+/* Generated */    
+/* Generated */    int outIdx = 0;
+/* Generated */    VALUE_HANDLE_DEREF(outBegIdx)  = startIdx;
+/* Generated */    
+/* Generated */    for (int i = startIdx; i <= endIdx; ++i) {
+/* Generated */       retValue = TA_MACDEXT_State( _state, inReal[i], &outMACDVal, &outMACDSignalVal, &outMACDHistVal );
+/* Generated */       if ( retValue == ENUM_VALUE(RetCode,TA_SUCCESS,Success) ) {
+/* Generated */          outMACD[outIdx] = outMACDVal;
+/* Generated */          outMACDSignal[outIdx] = outMACDSignalVal;
+/* Generated */          outMACDHist[outIdx] = outMACDHistVal;
+/* Generated */          outIdx++;
+/* Generated */       } else if ( retValue == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) {
+/* Generated */          continue;
+/* Generated */       } else {
+/* Generated */          break;
+/* Generated */        }
+/* Generated */    }
+/* Generated */    
+/* Generated */    VALUE_HANDLE_DEREF(outNBElement) = outIdx;
+/* Generated */ #endif /* TA_OVERWRITE_BATCH_STATE_CODE */
+/* Generated */ 
+/**** END GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
+
+  /* insert batch state code here. */
+  return retValue;
+}
+
+/**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
+/* Generated */ 
+/* Generated */ #if defined( _MANAGED )
 /* Generated */ Core::RetCode Core::MacdExtStateFree( struct TA_MacdExt_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
