@@ -1417,7 +1417,7 @@ TA_RetCode TA_GetCallFuncBatchStateFuncPtr(const TA_FuncInfo *param, TA_BatchSta
     if (func == NULL)
         return TA_BAD_PARAM;
 
-    TA_BatchStateFunc f;
+    TA_FrameBatchStateFunction f;
     GET_PRIVATE_FUNC_BY_FUN_INFO(param, batch_state_func, f);
     *func = (TA_BatchStateFunc) f;
 
