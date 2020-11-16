@@ -8312,8 +8312,6 @@ struct TA_MIDPOINT_State {
                          size_t mem_size;
                          size_t mem_index;
                          struct TA_MIDPOINT_Data* memory;
-                         double       highest;
-                         double       lowest;
                          int           optInTimePeriod; /* From 2 to 100000 */
                          };
 

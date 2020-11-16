@@ -38812,29 +38812,33 @@ public class Core {
       _state.value .value .mem_index = 0;
       _state.value .value .optInTimePeriod = optInTimePeriod;
       _state.value .value .mem_size = midPointLookback (optInTimePeriod );
-      _state.value .value .memory = NULL;
+      if ( _state.value .value .mem_size > 0)
+         _state.value .value .memory = TA_Calloc( _state.value .value .mem_size , sizeof(struct TA_MIDPOINT_Data));
+      else
+         _state.value .value .memory = NULL;
       return RetCode.Success ;
    }
    public RetCode midPointState( struct TA_midPoint_State* _state,
       double inReal,
       double *outReal )
    {
+      double lowest, highest, tmp;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
-      if ( ( _state.value .mem_index == 1) )
+      if ( _state.value .mem_size > _state.value .mem_index - 1 ) {
+         ( _state.value .memory+_cur_idx).value .inReal = inReal ;
+         return RetCode.NeedMoreData ; }
+      lowest = ( _state.value .memory+0).value .inReal ;
+      highest = lowest;
+      for (size_t i = 1; i < _state.value .mem_size ; ++i)
       {
-         _state.value .highest = inReal;
-         _state.value .lowest = inReal;
-      } else {
-         if( _state.value .lowest > inReal )
-            _state.value .lowest = inReal;
-         if( _state.value .highest < inReal )
-            _state.value .highest = inReal;
+         tmp = ( _state.value .memory+i).value .inReal ;
+         if( tmp < lowest ) lowest = tmp;
+         else if( tmp > highest) highest = tmp;
       }
-      if ( _state.value .mem_size > _state.value .mem_index - 1 ) return RetCode.NeedMoreData ;
-      outReal.value = ( _state.value .highest+ _state.value .lowest)/2.0;
+      outReal.value = (highest+lowest)/2.0;
       return RetCode.Success ;
    }
    public RetCode midPointBatchState( struct TA_midPoint_State* _state,
@@ -38898,10 +38902,6 @@ public class Core {
          if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
       io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
       if (io_res < 1) return RetCode.IOFailed ;
-      io_res = fwrite(& _state.value .highest,sizeof( _state.value .highest),1,_file);
-      if (io_res < 1) return RetCode.IOFailed ;
-      io_res = fwrite(& _state.value .lowest,sizeof( _state.value .lowest),1,_file);
-      if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }
    public RetCode midPointStateLoad( struct TA_midPoint_State** _state,
@@ -38924,10 +38924,6 @@ public class Core {
          io_res = fread( _state.value .value .memory,sizeof(struct TA_MIDPOINT_Data), _state.value .value .mem_size,_file);
          if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
       io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
-      if (io_res < 1) return RetCode.IOFailed ;
-      io_res = fread(& _state.value .value .highest,sizeof( _state.value .value .highest),1,_file);
-      if (io_res < 1) return RetCode.IOFailed ;
-      io_res = fread(& _state.value .value .lowest,sizeof( _state.value .value .lowest),1,_file);
       if (io_res < 1) return RetCode.IOFailed ;
       return 0;
    }

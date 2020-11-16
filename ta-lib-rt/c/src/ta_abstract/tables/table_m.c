@@ -661,14 +661,7 @@ static const TA_OptInputParameterInfo *TA_MIDPOINT_OptInputs[] =
   NULL
 };
 
-const TA_InputParameterInfo TA_MIDPOINT_DEF_UI_STRUCT_PARAM_1 =
-                                  { TA_Input_Real, "highest", 0 };
-const TA_InputParameterInfo TA_MIDPOINT_DEF_UI_STRUCT_PARAM_2 =
-                                  { TA_Input_Real, "lowest", 0 };
-
 static const TA_InputParameterInfo *TA_MIDPOINT_StructParams[] = {
-    &TA_MIDPOINT_DEF_UI_STRUCT_PARAM_1,
-    &TA_MIDPOINT_DEF_UI_STRUCT_PARAM_2,
     NULL };
 
 DEF_FUNCTION( MIDPOINT,                         /* name */

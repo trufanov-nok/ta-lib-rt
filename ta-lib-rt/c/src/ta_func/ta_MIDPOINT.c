@@ -272,7 +272,7 @@
 
 {
    /* insert local variable here */
-   #define TA_MIDPOINT_SUPPRESS_MEMORY_ALLOCATION
+
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -323,7 +323,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-   #define TA_MIDPOINT_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+   double lowest, highest, tmp;
+   size_t idx;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -350,20 +351,19 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA dunc code here. */
-   if (FIRST_LAUNCH)
+
+
+   lowest = inReal;
+   highest = lowest;
+   FOR_ALL_MEM(idx)
    {
-        STATE.highest = inReal;
-        STATE.lowest = inReal;
-   } else {
-   if(    STATE.lowest > inReal )
-          STATE.lowest = inReal;
-   if(    STATE.highest < inReal )
-          STATE.highest = inReal;
+       tmp = MEM_IDX_NS(inReal, idx);
+       if( tmp < lowest ) lowest = tmp;
+       else if( tmp > highest) highest = tmp;
    }
 
-   if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
-
-   VALUE_HANDLE_DEREF(outReal) = (   STATE.highest+   STATE.lowest)/2.0;
+   PUSH_TO_MEM(inReal,inReal);
+   VALUE_HANDLE_DEREF(outReal) = (highest+lowest)/2.0;
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
@@ -522,10 +522,6 @@
 /* Generated */    if (io_res < (int) STATE.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); }
 /* Generated */    io_res = fwrite(&STATE.optInTimePeriod,sizeof(STATE.optInTimePeriod),1,_file);
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
-/* Generated */    io_res = fwrite(&STATE.highest,sizeof(STATE.highest),1,_file);
-/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
-/* Generated */    io_res = fwrite(&STATE.lowest,sizeof(STATE.lowest),1,_file);
-/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -575,10 +571,6 @@
 /* Generated */    io_res = fread(STATE_P.memory,sizeof(struct TA_MIDPOINT_Data),STATE_P.mem_size,_file);
 /* Generated */    if (io_res < (int) STATE_P.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); } 
 /* Generated */    io_res = fread(&STATE_P.optInTimePeriod,sizeof(STATE_P.optInTimePeriod),1,_file);
-/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
-/* Generated */    io_res = fread(&STATE_P.highest,sizeof(STATE_P.highest),1,_file);
-/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
-/* Generated */    io_res = fread(&STATE_P.lowest,sizeof(STATE_P.lowest),1,_file);
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
