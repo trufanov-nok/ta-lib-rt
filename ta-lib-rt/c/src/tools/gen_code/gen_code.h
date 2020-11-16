@@ -154,24 +154,6 @@ typedef struct
 } FileHandle;
 
 
-FileHandle *gOutFunc_H;        /* For "ta_func.h"  */
-FileHandle *gOutFrame_H;       /* For "ta_frame.h" */
-FileHandle *gOutFrame_C;       /* For "ta_frame.c" */
-FileHandle *gOutGroupIdx_C;    /* For "ta_group_idx.c" */
-FileHandle *gOutFunc_C;        /* For "ta_x.c" where 'x' is TA function name. */
-FileHandle *gOutRetCode_C;     /* For "ta_retcode.c" */
-FileHandle *gOutRetCode_CSV;   /* For "ta_retcode.csv" */
-FileHandle *gOutFuncList_TXT;  /* For "ta_func_list.txt" */
-FileHandle *gOutDefs_H;        /* For "ta_defs.h" */
-FileHandle *gOutFunc_SWG;      /* For SWIG */
-FileHandle *gOutFunc_XML;      /* For "ta_func_api.xml" */
-FileHandle *gOutFuncAPI_C;     /* For "ta_func_api.c" */
-FileHandle *gOutMakefile_AM;   /* For "Makefile.am" */
-
-FileHandle *gOutCore_Java;       /* For Core.Java */
-FileHandle *gOutJavaDefs_H;      /* For "java_defs.h" */
-FileHandle *gOutFunc_Annotation; /* For "CoreAnnotated.java" */
-
 #ifdef _MSC_VER
 /* The following files are generated only on Windows platform. */
 FileHandle *gOutDotNet_H;      /* For .NET interface file */
@@ -345,21 +327,12 @@ void convertFileToCArray( FILE *in, FILE *out );
 
 void ReplaceReservedXmlCharacters(const char *input, char *output );
 
-char gToOpen[BUFFER_SIZE];
-char gTempBuf[BUFFER_SIZE];
-char gTempBuf2[BUFFER_SIZE];
-char gTempBuf3[BUFFER_SIZE];
-char gTempBufForPrint[BUFFER_SIZE];
-char gTempDoubleToStr[200];
-
 /* Because Microsoft and Borland does not display
  * the value of a double in the same way (%e), this
  * function attempts to eliminate difference. This
  * is done to avoid annoying difference with CVS.
  */
 const char *doubleToStr( double value );
-
-const char *gCurrentGroupName;
 
 int genCode(int argc, char* argv[]);
 
