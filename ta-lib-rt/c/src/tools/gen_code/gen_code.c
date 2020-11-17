@@ -2360,71 +2360,88 @@ void printFunc( FILE *out,
 
             if( validationCode )
             {
-               printIndent( out, indent );
-               fprintf( out, "/* Verify required price component. */\n" );
-               printIndent( out, indent );
-               fprintf( out, "if(" );
+                if (!stateFuncSignature) {
+                    printIndent( out, indent );
+                    fprintf( out, "/* Verify required price component. */\n" );
+                    printIndent( out, indent );
+                    fprintf( out, "if(" );
+                }
                k = 0;
                if( inputParamInfo->flags & TA_IN_PRICE_TIMESTAMP )
                {
-                  k++;
-                  fprintf( out, "!inTimestamp%s", k != j? "||":")");
-                  if (stateFuncSignature)
-                      nbInputArgsBufferLen = sprintf(((char *)nbInputArgsBuffer)+nbInputArgsBufferLen, "%s%s", (nbInputArgsBufferLen)?",":"", "inTimestamp") + nbInputArgsBufferLen;
+                   if (stateFuncSignature) {
+                       nbInputArgsBufferLen = sprintf(((char *)nbInputArgsBuffer)+nbInputArgsBufferLen, "%s%s", (nbInputArgsBufferLen)?",":"", "inTimestamp") + nbInputArgsBufferLen;
+                   } else {
+                       k++;
+                       fprintf( out, "!inTimestamp%s", k != j? "||":")");
+                   }
                }
 
                if( inputParamInfo->flags & TA_IN_PRICE_OPEN )
                {
-                  k++;
-                  fprintf( out, "!inOpen%s", k != j? "||":")");
-                  if (stateFuncSignature)
-                      nbInputArgsBufferLen = sprintf(((char *)nbInputArgsBuffer)+nbInputArgsBufferLen, "%s%s ", (nbInputArgsBufferLen)?",":"", "inOpen") + nbInputArgsBufferLen;
+                   if (stateFuncSignature) {
+                       nbInputArgsBufferLen = sprintf(((char *)nbInputArgsBuffer)+nbInputArgsBufferLen, "%s%s ", (nbInputArgsBufferLen)?",":"", "inOpen") + nbInputArgsBufferLen;
+                   } else {
+                       k++;
+                       fprintf( out, "!inOpen%s", k != j? "||":")");
+                   }
                }
                
                if( inputParamInfo->flags & TA_IN_PRICE_HIGH )
                {
-                  k++;
-                  fprintf( out, "!inHigh%s", k != j? "||":")");
-                  if (stateFuncSignature)
-                      nbInputArgsBufferLen = sprintf(((char *)nbInputArgsBuffer)+nbInputArgsBufferLen, "%s%s ", (nbInputArgsBufferLen)?",":"", "inHigh") + nbInputArgsBufferLen;
+                   if (stateFuncSignature) {
+                       nbInputArgsBufferLen = sprintf(((char *)nbInputArgsBuffer)+nbInputArgsBufferLen, "%s%s ", (nbInputArgsBufferLen)?",":"", "inHigh") + nbInputArgsBufferLen;
+                   } else {
+                       k++;
+                       fprintf( out, "!inHigh%s", k != j? "||":")");
+                   }
                }
 
                if( inputParamInfo->flags & TA_IN_PRICE_LOW )
                {
-                  k++;
-                  fprintf( out, "!inLow%s", k != j? "||":")");
-                  if (stateFuncSignature)
-                      nbInputArgsBufferLen = sprintf(((char *)nbInputArgsBuffer)+nbInputArgsBufferLen, "%s%s ", (nbInputArgsBufferLen)?",":"", "inLow") + nbInputArgsBufferLen;
+                   if (stateFuncSignature) {
+                       nbInputArgsBufferLen = sprintf(((char *)nbInputArgsBuffer)+nbInputArgsBufferLen, "%s%s ", (nbInputArgsBufferLen)?",":"", "inLow") + nbInputArgsBufferLen;
+                   } else {
+                       k++;
+                       fprintf( out, "!inLow%s", k != j? "||":")");
+                   }
                }
 
                if( inputParamInfo->flags & TA_IN_PRICE_CLOSE )
                {
-                  k++;
-                  fprintf( out, "!inClose%s", k != j? "||":")");
-                  if (stateFuncSignature)
-                      nbInputArgsBufferLen = sprintf(((char *)nbInputArgsBuffer)+nbInputArgsBufferLen, "%s%s ", (nbInputArgsBufferLen)?",":"", "inClose") + nbInputArgsBufferLen;
+                   if (stateFuncSignature) {
+                       nbInputArgsBufferLen = sprintf(((char *)nbInputArgsBuffer)+nbInputArgsBufferLen, "%s%s ", (nbInputArgsBufferLen)?",":"", "inClose") + nbInputArgsBufferLen;
+                   } else {
+                       k++;
+                       fprintf( out, "!inClose%s", k != j? "||":")");
+                   }
                }
 
                if( inputParamInfo->flags & TA_IN_PRICE_VOLUME )
                {
-                  k++;
-                  fprintf( out, "!inVolume%s", k != j? "||":")");
-                  if (stateFuncSignature)
-                      nbInputArgsBufferLen = sprintf(((char *)nbInputArgsBuffer)+nbInputArgsBufferLen, "%s%s ", (nbInputArgsBufferLen)?",":"", "inVolume") + nbInputArgsBufferLen;
+                   if (stateFuncSignature) {
+                       nbInputArgsBufferLen = sprintf(((char *)nbInputArgsBuffer)+nbInputArgsBufferLen, "%s%s ", (nbInputArgsBufferLen)?",":"", "inVolume") + nbInputArgsBufferLen;
+                   } else {
+                       k++;
+                       fprintf( out, "!inVolume%s", k != j? "||":")");
+                   }
                }
 
                if( inputParamInfo->flags & TA_IN_PRICE_OPENINTEREST )
                {
-                  k++;
-                  fprintf( out, "!inOpenInterest%s", k != j? "||":")");
-                  if (stateFuncSignature)
-                      nbInputArgsBufferLen = sprintf(((char *)nbInputArgsBuffer)+nbInputArgsBufferLen, "%s%s ", (nbInputArgsBufferLen)?",":"", "inOpenInterest") + nbInputArgsBufferLen;
+                   if (stateFuncSignature) {
+                       nbInputArgsBufferLen = sprintf(((char *)nbInputArgsBuffer)+nbInputArgsBufferLen, "%s%s ", (nbInputArgsBufferLen)?",":"", "inOpenInterest") + nbInputArgsBufferLen;
+                   } else {
+                       k++;
+                       fprintf( out, "!inOpenInterest%s", k != j? "||":")");
+                   }
                }
-
-               fprintf( out, "\n" );
-               printIndent( out, indent );
-               fprintf( out, "   return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);\n" );
-               print( out, "\n" );
+               if (!stateFuncSignature) {
+                   fprintf( out, "\n" );
+                   printIndent( out, indent );
+                   fprintf( out, "   return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);\n" );
+                   print( out, "\n" );
+               }
             }
             else
             {

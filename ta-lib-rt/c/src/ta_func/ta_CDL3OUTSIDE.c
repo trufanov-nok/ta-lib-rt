@@ -323,10 +323,6 @@ int i1, i2;
 /* Generated */    if (_state == NULL)
 /* Generated */          return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    #if !defined(_JAVA)
-/* Generated */    /* Verify required price component. */
-/* Generated */    if(!inOpen||!inHigh||!inLow||!inClose)
-/* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */ 
 /* Generated */    #endif /* !defined(_JAVA)*/
 /* Generated */    size_t _cur_idx = STATE.mem_index++;
 /* Generated */    if (MEM_SIZE > 0) _cur_idx %= MEM_SIZE;
