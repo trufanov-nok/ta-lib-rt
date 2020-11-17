@@ -440,7 +440,7 @@ TA_RetCode TA_PREFIX(INT_VAR)( int    startIdx,
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
-   /* insert state based TA dunc code here. */
+   /* insert state based TA func code here. */
    if (FIRST_LAUNCH)
     {
         STATE.periodTotal1 = 0.;

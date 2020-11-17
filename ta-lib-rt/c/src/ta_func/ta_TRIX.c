@@ -418,7 +418,7 @@
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
-   /* insert state based TA dunc code here. */
+   /* insert state based TA func code here. */
    retCode = FUNCTION_CALL_STATE(EMA)( (struct TA_EMA_State*)  STATE.stateEMA1, inReal, &tempReal );
    if( retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
    retCode = FUNCTION_CALL_STATE(EMA)( (struct TA_EMA_State*)  STATE.stateEMA2, tempReal, &tempReal );

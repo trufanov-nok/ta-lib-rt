@@ -453,7 +453,7 @@
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
-   /* insert state based TA dunc code here. */
+   /* insert state based TA func code here. */
                 retCode = FUNCTION_CALL_STATE(EMA)( STATE.state_EMA, inReal, &ema );
                 if( retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success) )
                     return retCode;

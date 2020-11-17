@@ -411,7 +411,7 @@ double lastValue, sum, avg;
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
-   /* insert state based TA dunc code here. */
+   /* insert state based TA func code here. */
    lastValue = (inHigh+inLow+inClose) / 3.0;
 
    STATE.theAverage += lastValue;

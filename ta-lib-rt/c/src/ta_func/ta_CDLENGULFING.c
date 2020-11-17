@@ -347,7 +347,7 @@
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
-   /* insert state based TA dunc code here. */
+   /* insert state based TA func code here. */
           i1 = GET_LOCAL_IDX(-1);
           if( ( TA_CANDLECOLOR_STATE_CUR() == 1 && TA_CANDLECOLOR_STATE_IDX(i1) == -1 &&            // white engulfs black
                 ( ( inClose >= MEM_IDX_NS(inOpen,i1) && inOpen < MEM_IDX_NS(inClose,i1) ) ||

@@ -588,7 +588,7 @@ int res1, res2;
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
-   /* insert state based TA dunc code here. */
+   /* insert state based TA func code here. */
    res1 = FUNCTION_CALL_STATE(MA)((struct TA_MA_State*) STATE.fastMAState, inReal, &fastMA);
    res2 = FUNCTION_CALL_STATE(MA)((struct TA_MA_State*) STATE.slowMAState, inReal, &slowMA);
 

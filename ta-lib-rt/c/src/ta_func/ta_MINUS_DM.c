@@ -510,7 +510,7 @@ double diffP, diffM;
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
-   /* insert state based TA dunc code here. */
+   /* insert state based TA func code here. */
         if (FIRST_LAUNCH)
          {
           STATE.prevMinusDM = 0.0;

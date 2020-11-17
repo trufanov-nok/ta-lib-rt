@@ -459,7 +459,7 @@ double tempReal,tempReal1,tempReal2;
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
-   /* insert state based TA dunc code here. */
+   /* insert state based TA func code here. */
    tempReal = inHigh+inLow;
    if( !TA_IS_ZERO(tempReal) )
     {

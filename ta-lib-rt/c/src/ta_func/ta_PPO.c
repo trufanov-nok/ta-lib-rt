@@ -372,7 +372,7 @@ return FUNCTION_CALL_STATE_INIT(INT_PO)((struct TA_APO_State**)_state, optInFast
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
-   /* insert state based TA dunc code here. */
+   /* insert state based TA func code here. */
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 #endif

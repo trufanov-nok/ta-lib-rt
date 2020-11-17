@@ -491,7 +491,7 @@ ENUM_DECLARATION(RetCode) retValue;
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
-   /* insert state based TA dunc code here. */
+   /* insert state based TA func code here. */
    if( STATE.optInTimePeriod == 1 )
         {
           VALUE_HANDLE_DEREF(outReal) = inReal;

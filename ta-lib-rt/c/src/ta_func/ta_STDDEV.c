@@ -455,7 +455,7 @@ void TA_PREFIX(INT_stddev_using_precalc_ma)( const INPUT_TYPE *inReal,
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
-   /* insert state based TA dunc code here. */
+   /* insert state based TA func code here. */
             retCode = FUNCTION_CALL_STATE(VAR)( STATE.var_state, inReal, outReal );
 
             if( retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success) )

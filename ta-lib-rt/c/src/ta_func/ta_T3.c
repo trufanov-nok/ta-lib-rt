@@ -465,7 +465,7 @@
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
-   /* insert state based TA dunc code here. */
+   /* insert state based TA func code here. */
    _cur_idx = STATE.mem_index -1;
    if (FIRST_LAUNCH)
    {

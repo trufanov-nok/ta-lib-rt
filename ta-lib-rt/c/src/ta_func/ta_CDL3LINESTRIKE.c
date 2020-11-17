@@ -375,7 +375,7 @@ unsigned int i1,i2,i3;
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
-   /* insert state based TA dunc code here. */
+   /* insert state based TA func code here. */
 
         if (FIRST_LAUNCH)
            {

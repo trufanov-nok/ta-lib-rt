@@ -496,7 +496,7 @@ TA_RetCode retCode;
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
-   /* insert state based TA dunc code here. */
+   /* insert state based TA func code here. */
    retCode = FUNCTION_CALL_STATE(RSI)( (struct TA_RSI_State*) STATE.stateRSI, inReal, &tempReal );
    if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
    retCode = FUNCTION_CALL_STATE(STOCHF)( (struct TA_STOCHF_State*) STATE.stateSTOCHF, tempReal, tempReal, tempReal, outFastK, outFastD );

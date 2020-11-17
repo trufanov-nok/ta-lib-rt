@@ -353,7 +353,7 @@
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
-   /* insert state based TA dunc code here. */
+   /* insert state based TA func code here. */
    temp = POP_FROM_MEM(inReal); // must use temp var
    PUSH_TO_MEM(inReal, inReal); // as push writes to same idx as pop reads
    VALUE_HANDLE_DEREF(outReal) = inReal - temp;

@@ -456,7 +456,7 @@
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
-   /* insert state based TA dunc code here. */
+   /* insert state based TA func code here. */
 
    if (inPeriods > STATE.optInMaxPeriod) period = STATE.optInMaxPeriod;
    else if(inPeriods < STATE.optInMinPeriod) period = STATE.optInMinPeriod;

@@ -346,7 +346,7 @@ int i1,i2;
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
-   /* insert state based TA dunc code here. */
+   /* insert state based TA func code here. */
                 i1 = GET_LOCAL_IDX(-1);
                 i2 = GET_LOCAL_IDX(-2);
 

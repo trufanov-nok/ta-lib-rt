@@ -613,7 +613,7 @@ DEFINE_HILBERT_VARIABLES_STRUCT(MAMA)
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
-   /* insert state based TA dunc code here. */
+   /* insert state based TA func code here. */
 //   struct TA_MAMA_HILBERT_STRUCT* refdetrender = (struct TA_MAMA_HILBERT_STRUCT*) _state->detrender;
 //   struct TA_MAMA_HILBERT_STRUCT* refQ1 = (struct TA_MAMA_HILBERT_STRUCT*) _state->Q1;
 //   struct TA_MAMA_HILBERT_STRUCT* refjI = (struct TA_MAMA_HILBERT_STRUCT*) _state->jI;

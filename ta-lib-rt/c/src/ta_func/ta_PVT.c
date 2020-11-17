@@ -290,7 +290,7 @@
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
-   /* insert state based TA dunc code here. */
+   /* insert state based TA func code here. */
 
    STATE.prevPVT += inVolume * (inClose / POP_FROM_MEM(inClose) - 1.0);
    VALUE_HANDLE_DEREF(outReal) = STATE.prevPVT;

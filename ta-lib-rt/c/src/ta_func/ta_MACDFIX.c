@@ -335,7 +335,7 @@ return FUNCTION_CALL_STATE_INIT(INT_MACD)((struct TA_MACD_State**) _state,
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
-   /* insert state based TA dunc code here. */
+   /* insert state based TA func code here. */
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 #endif

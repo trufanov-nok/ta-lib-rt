@@ -357,7 +357,7 @@ double tempReal;
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
-   /* insert state based TA dunc code here. */
+   /* insert state based TA func code here. */
    tempReal = POP_FROM_MEM(inReal);
    VALUE_HANDLE_DEREF(outReal) = (tempReal!=0.0)?(inReal-tempReal)/tempReal : 0.0;
    PUSH_TO_MEM(inReal,inReal);

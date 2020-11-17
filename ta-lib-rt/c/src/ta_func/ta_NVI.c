@@ -293,7 +293,7 @@ int outIdx;
 /* Generated */ 
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
-   /* insert state based TA dunc code here. */
+   /* insert state based TA func code here. */
 
    if (inVolume < POP_FROM_MEM(inVolume))
       STATE.prevNVI *= inClose / POP_FROM_MEM(inClose);
