@@ -40,7 +40,7 @@
  */
 #define MAJOR "0"
 #define MINOR "8"
-#define BUILD "0"
+#define BUILD "1"
 #define EXTRA "alpha"
 
 /* Nothing to modify below this line. */
