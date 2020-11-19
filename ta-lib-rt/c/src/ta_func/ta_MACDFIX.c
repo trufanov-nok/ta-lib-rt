@@ -91,7 +91,7 @@
 /**** END GENCODE SECTION 1 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-
+ int tempInteger;
 /**** START GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
 /* Generated */    /* min/max are checked for optInSignalPeriod. */
@@ -110,8 +110,10 @@
     * (must also account for the initial data consume 
     *  by the fix 26 period EMA).
     */
-   return   LOOKBACK_CALL(EMA)( 26 )
-          + LOOKBACK_CALL(EMA)( optInSignalPeriod );
+   tempInteger = LOOKBACK_CALL(EMA)( optInSignalPeriod );
+   if (tempInteger < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+
+   return   LOOKBACK_CALL(EMA)( 26 ) + tempInteger;
 }
 
 /**** START GENCODE SECTION 3 - DO NOT DELETE THIS LINE ****/

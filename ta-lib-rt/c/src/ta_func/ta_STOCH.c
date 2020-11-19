@@ -97,7 +97,7 @@
 /**** END GENCODE SECTION 1 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-   int retValue;
+   int retValue, tempInteger;
 
 /**** START GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -142,10 +142,14 @@
    retValue = (optInFastK_Period - 1);
          
    /* Add the smoothing being done for %K slow */
-   retValue += LOOKBACK_CALL(MA)( optInSlowK_Period, optInSlowK_MAType );  
+   tempInteger = LOOKBACK_CALL(MA)( optInSlowK_Period, optInSlowK_MAType );
+   if (tempInteger < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+   retValue += tempInteger;
 
    /* Add the smoothing being done for %D slow. */
-   retValue += LOOKBACK_CALL(MA)( optInSlowD_Period, optInSlowD_MAType );
+   tempInteger = LOOKBACK_CALL(MA)( optInSlowD_Period, optInSlowD_MAType );
+   if (tempInteger < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+   retValue += tempInteger;
 
    return retValue;
 }
@@ -339,7 +343,9 @@
    /* Identify the lookback needed. */
    lookbackK      = optInFastK_Period-1;
    lookbackKSlow  = LOOKBACK_CALL(MA)( optInSlowK_Period, optInSlowK_MAType );
+   if (lookbackKSlow < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
    lookbackDSlow  = LOOKBACK_CALL(MA)( optInSlowD_Period, optInSlowD_MAType );
+   if (lookbackDSlow < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
    lookbackTotal  = lookbackK + lookbackDSlow + lookbackKSlow;
 
    /* Move up the start index if there is not

@@ -98,7 +98,7 @@
 /**** END GENCODE SECTION 1 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-   int tempInteger;
+   int tempInteger, tempInteger2;
 
 /**** START GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -142,8 +142,12 @@
        optInFastPeriod = tempInteger;
    }
 
-   return   LOOKBACK_CALL(EMA)( optInSlowPeriod   )
-          + LOOKBACK_CALL(EMA)( optInSignalPeriod );
+   tempInteger = LOOKBACK_CALL(EMA)( optInSlowPeriod );
+   if (tempInteger < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+   tempInteger2 = LOOKBACK_CALL(EMA)( optInSignalPeriod );
+   if (tempInteger2 < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+
+   return tempInteger + tempInteger2;
 }
 
 
@@ -400,13 +404,16 @@ TA_RetCode TA_PREFIX(INT_MACD)( int    startIdx,
       k2 = (double)0.15; /* Fix 12 */
    }
 
-   lookbackSignal = LOOKBACK_CALL(EMA)( optInSignalPeriod_2 ); 
-
    /* Move up the start index if there is not
     * enough initial data.
     */
-   lookbackTotal =  lookbackSignal;
-   lookbackTotal += LOOKBACK_CALL(EMA)( optInSlowPeriod );
+   lookbackTotal = LOOKBACK_CALL(EMA)( optInSlowPeriod );
+   if (lookbackTotal < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+
+   lookbackSignal = LOOKBACK_CALL(EMA)( optInSignalPeriod_2 );
+   if (lookbackSignal < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+
+   lookbackTotal += lookbackSignal;
 
    if( startIdx < lookbackTotal )
       startIdx = lookbackTotal;
@@ -739,6 +746,7 @@ k2 = (double)0.15; /* Fix 12 */
   ENUM_DECLARATION(RetCode) retCode2;
   ENUM_DECLARATION(RetCode) retCode3;
   double slowEMA, fastEMA;
+  int tempInteger, tempInteger2;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -774,7 +782,11 @@ k2 = (double)0.15; /* Fix 12 */
 
           if (FIRST_LAUNCH)
            {
-             STATE.fastEMADelay = LOOKBACK_CALL(EMA)( STATE.optInSlowPeriod ) -  LOOKBACK_CALL(EMA)( STATE.optInFastPeriod );
+             tempInteger = LOOKBACK_CALL(EMA)( STATE.optInSlowPeriod );
+             if (tempInteger < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+             tempInteger2 = LOOKBACK_CALL(EMA)( STATE.optInFastPeriod );
+             if (tempInteger2 < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+             STATE.fastEMADelay = tempInteger -  tempInteger2;
            }
           /* Calculate the slow EMA.  */
 

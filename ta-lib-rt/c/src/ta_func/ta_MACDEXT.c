@@ -147,12 +147,16 @@
 
    /* Find the MA with the largest lookback */
    lookbackLargest = LOOKBACK_CALL(MA)( optInFastPeriod, optInFastMAType );
+   if (lookbackLargest < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
    tempInteger     = LOOKBACK_CALL(MA)( optInSlowPeriod, optInSlowMAType );
+   if (tempInteger < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
    if( tempInteger > lookbackLargest )
       lookbackLargest = tempInteger;
 
    /* Add to the largest MA lookback the signal line lookback */
-   return lookbackLargest + LOOKBACK_CALL(MA)( optInSignalPeriod, optInSignalMAType );
+   tempInteger = LOOKBACK_CALL(MA)( optInSignalPeriod, optInSignalMAType );
+   if (tempInteger < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+   return lookbackLargest + tempInteger;
 }
 
 /**** START GENCODE SECTION 3 - DO NOT DELETE THIS LINE ****/
@@ -335,12 +339,16 @@
 
    /* Find the MA with the largest lookback */
    lookbackLargest = LOOKBACK_CALL(MA)( optInFastPeriod, optInFastMAType );
+   if (lookbackLargest < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
    tempInteger     = LOOKBACK_CALL(MA)( optInSlowPeriod, optInSlowMAType );
+   if (tempInteger < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
    if( tempInteger > lookbackLargest )
       lookbackLargest = tempInteger;
 
    /* Add the lookback needed for the signal line */
-   lookbackSignal = LOOKBACK_CALL(MA)( optInSignalPeriod, optInSignalMAType ); 
+   lookbackSignal = LOOKBACK_CALL(MA)( optInSignalPeriod, optInSignalMAType );
+   if (lookbackSignal < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+
    lookbackTotal  = lookbackSignal+lookbackLargest;
 
    /* Move up the start index if there is not
@@ -606,6 +614,7 @@ ENUM_DECLARATION(RetCode) retCode;
  ENUM_DECLARATION(RetCode) retCode2;
  ENUM_DECLARATION(RetCode) retCode3;
 double slowMA, fastMA;
+int tempInteger, tempInteger2;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -640,7 +649,13 @@ double slowMA, fastMA;
    /* insert state based TA func code here. */
         if (FIRST_LAUNCH)
          {
-           STATE.fastMADelay = abs( LOOKBACK_CALL(MA)( STATE.optInSlowPeriod, STATE.optInSlowMAType ) -  LOOKBACK_CALL(MA)( STATE.optInFastPeriod, STATE.optInFastMAType ) );
+           tempInteger = LOOKBACK_CALL(MA)( STATE.optInSlowPeriod, STATE.optInSlowMAType );
+           if (tempInteger < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+
+           tempInteger2 = LOOKBACK_CALL(MA)( STATE.optInFastPeriod, STATE.optInFastMAType );
+           if (tempInteger2 < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+
+           STATE.fastMADelay = abs( tempInteger - tempInteger2 );
          }
 
         /* Calculate the slow MA.  */

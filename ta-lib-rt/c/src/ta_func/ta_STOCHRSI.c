@@ -46,7 +46,7 @@
  *  120802 MF   Template creation.
  *  101103 PP   Initial creation of code.
  *  112603 MF   Add independent control to the RSI period.
- *  020605 AA   Fix #1117656. NULL pointer assignement.
+ *  020605 AA   Fix #1117656. NULL pointer assignment.
  */
 
 /**** START GENCODE SECTION 1 - DO NOT DELETE THIS LINE ****/
@@ -99,7 +99,7 @@
 /**** END GENCODE SECTION 1 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-   int retValue;
+   int retValue, tempInteger;
 
 /**** START GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -132,9 +132,12 @@
 /**** END GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
 
    /* insert lookback code here. */
-   retValue = LOOKBACK_CALL(RSI)( optInTimePeriod ) + LOOKBACK_CALL(STOCHF)( optInFastK_Period, optInFastD_Period, optInFastD_MAType );
+   retValue = LOOKBACK_CALL(RSI)( optInTimePeriod );
+   if (retValue < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+   tempInteger = LOOKBACK_CALL(STOCHF)( optInFastK_Period, optInFastD_Period, optInFastD_MAType );
+   if (tempInteger < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 
-   return retValue;
+   return retValue + tempInteger;
 }
 
 /**** START GENCODE SECTION 3 - DO NOT DELETE THIS LINE ****/
@@ -278,7 +281,7 @@
     * The TA-Lib version offer flexibility beyond what is explain
     * in the Stock&Commodities article.
     *
-    * To calculate the "Unsmoothed stochastic RSI" with symetry like 
+    * To calculate the "Unsmoothed stochastic RSI" with symmetry like
     * explain in the article, keep the optInTimePeriod and optInFastK_Period
     * equal. Example:
     *        
@@ -299,7 +302,9 @@
 
    /* Adjust startIdx to account for the lookback period. */
    lookbackSTOCHF  = LOOKBACK_CALL(STOCHF)( optInFastK_Period, optInFastD_Period, optInFastD_MAType );
+   if (lookbackSTOCHF < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
    lookbackTotal   = LOOKBACK_CALL(RSI)( optInTimePeriod ) + lookbackSTOCHF;
+   if (lookbackTotal < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 
    if( startIdx < lookbackTotal )
       startIdx = lookbackTotal;

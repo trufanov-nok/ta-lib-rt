@@ -95,7 +95,7 @@
 /**** END GENCODE SECTION 1 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-   int retValue;
+   int retValue, tempInteger;
 
 /**** START GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -127,7 +127,9 @@
    retValue = (optInFastK_Period - 1);
          
    /* Add the smoothing being done for Fast-D */
-   retValue += LOOKBACK_CALL(MA)( optInFastD_Period, optInFastD_MAType );
+   tempInteger = LOOKBACK_CALL(MA)( optInFastD_Period, optInFastD_MAType );
+   if (tempInteger < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+   retValue += tempInteger;
 
    return retValue;
 }
@@ -299,6 +301,7 @@
    /* Identify the lookback needed. */
    lookbackK      = optInFastK_Period-1;
    lookbackFastD  = LOOKBACK_CALL(MA)( optInFastD_Period, optInFastD_MAType );
+   if (lookbackFastD < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
    lookbackTotal  = lookbackK + lookbackFastD;
 
    /* Move up the start index if there is not
