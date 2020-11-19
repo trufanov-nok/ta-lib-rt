@@ -79,13 +79,13 @@
 /* Generated */ #define INPUT_TYPE   double
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::WmaLookback( int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ int Core::WmaLookback( int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int wmaLookback( int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ public int wmaLookback( int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_WMA_Lookback( int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ TA_LIB_API int TA_WMA_Lookback( int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 1 - DO NOT DELETE THIS LINE ****/
@@ -97,7 +97,7 @@
 /* Generated */    /* min/max are checked for optInTimePeriod. */
 /* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInTimePeriod = 30;
-/* Generated */    else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+/* Generated */    else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
 /* Generated */       return -1;
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
@@ -116,7 +116,7 @@
  * 
  * Optional Parameters
  * -------------------
- * optInTimePeriod:(From 2 to 100000)
+ * optInTimePeriod:(From 1 to 100000)
  *    Number of period
  * 
  * 
@@ -126,7 +126,7 @@
 /* Generated */ enum class Core::RetCode Core::Wma( int    startIdx,
 /* Generated */                                     int    endIdx,
 /* Generated */                                     SubArray<double>^ inReal,
-/* Generated */                                     int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                     int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                     [Out]int%    outBegIdx,
 /* Generated */                                     [Out]int%    outNBElement,
 /* Generated */                                     SubArray<double>^  outReal )
@@ -134,7 +134,7 @@
 /* Generated */ enum class Core::RetCode Core::Wma( int    startIdx,
 /* Generated */                                     int    endIdx,
 /* Generated */                                     cli::array<double>^ inReal,
-/* Generated */                                     int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                     int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                     [Out]int%    outBegIdx,
 /* Generated */                                     [Out]int%    outNBElement,
 /* Generated */                                     cli::array<double>^  outReal )
@@ -142,7 +142,7 @@
 /* Generated */ public RetCode wma( int    startIdx,
 /* Generated */                     int    endIdx,
 /* Generated */                     double       inReal[],
-/* Generated */                     int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                     int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                     MInteger     outBegIdx,
 /* Generated */                     MInteger     outNBElement,
 /* Generated */                     double        outReal[] )
@@ -150,7 +150,7 @@
 /* Generated */ TA_LIB_API TA_RetCode TA_WMA( int    startIdx,
 /* Generated */                               int    endIdx,
 /* Generated */                                          const double inReal[],
-/* Generated */                                          int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                          int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                          int          *outBegIdx,
 /* Generated */                                          int          *outNBElement,
 /* Generated */                                          double        outReal[] )
@@ -182,7 +182,7 @@
 /* Generated */    /* min/max are checked for optInTimePeriod. */
 /* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInTimePeriod = 30;
-/* Generated */    else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+/* Generated */    else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    #if !defined(_JAVA)
@@ -315,15 +315,15 @@
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ Core::RetCode Core::WmaStateInit( struct TA_Wma_State** _state,
-/* Generated */                                 int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */                                 int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ public RetCode wmaStateInit( struct TA_wma_State** _state,
-/* Generated */                            int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */                            int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #else
 /* Generated */ TA_LIB_API TA_RetCode TA_WMA_StateInit( struct TA_WMA_State** _state,
-/* Generated */                                                  int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */                                                  int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -340,7 +340,7 @@
 /* Generated */    /* min/max are checked for optInTimePeriod. */
 /* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInTimePeriod = 30;
-/* Generated */    else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+/* Generated */    else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    STATE = TA_Calloc(1, sizeof(struct TA_WMA_State));
@@ -681,7 +681,7 @@
 /* Generated */ enum class Core::RetCode Core::Wma( int    startIdx,
 /* Generated */                                     int    endIdx,
 /* Generated */                                     SubArray<float>^ inReal,
-/* Generated */                                     int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                     int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                     [Out]int%    outBegIdx,
 /* Generated */                                     [Out]int%    outNBElement,
 /* Generated */                                     SubArray<double>^  outReal )
@@ -689,7 +689,7 @@
 /* Generated */ enum class Core::RetCode Core::Wma( int    startIdx,
 /* Generated */                                     int    endIdx,
 /* Generated */                                     cli::array<float>^ inReal,
-/* Generated */                                     int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                     int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                     [Out]int%    outBegIdx,
 /* Generated */                                     [Out]int%    outNBElement,
 /* Generated */                                     cli::array<double>^  outReal )
@@ -697,7 +697,7 @@
 /* Generated */ public RetCode wma( int    startIdx,
 /* Generated */                     int    endIdx,
 /* Generated */                     float        inReal[],
-/* Generated */                     int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                     int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                     MInteger     outBegIdx,
 /* Generated */                     MInteger     outNBElement,
 /* Generated */                     double        outReal[] )
@@ -705,7 +705,7 @@
 /* Generated */ TA_RetCode TA_S_WMA( int    startIdx,
 /* Generated */                      int    endIdx,
 /* Generated */                      const float  inReal[],
-/* Generated */                      int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                      int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                      int          *outBegIdx,
 /* Generated */                      int          *outNBElement,
 /* Generated */                      double        outReal[] )

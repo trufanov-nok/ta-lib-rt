@@ -83,15 +83,15 @@
 /* Generated */ #define INPUT_TYPE   double
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::T3Lookback( int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */ int Core::T3Lookback( int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                     double        optInVFactor )  /* From 0 to 1 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int t3Lookback( int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */ public int t3Lookback( int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                      double        optInVFactor )  /* From 0 to 1 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_T3_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */ TA_LIB_API int TA_T3_Lookback( int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                         double        optInVFactor )  /* From 0 to 1 */
 /* Generated */ 
 /* Generated */ #endif
@@ -104,7 +104,7 @@
 /* Generated */    /* min/max are checked for optInTimePeriod. */
 /* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInTimePeriod = 5;
-/* Generated */    else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+/* Generated */    else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
 /* Generated */       return -1;
 /* Generated */ 
 /* Generated */    if( optInVFactor == TA_REAL_DEFAULT )
@@ -129,7 +129,7 @@
  * 
  * Optional Parameters
  * -------------------
- * optInTimePeriod:(From 2 to 100000)
+ * optInTimePeriod:(From 1 to 100000)
  *    Number of period
  * 
  * optInVFactor:(From 0 to 1)
@@ -142,7 +142,7 @@
 /* Generated */ enum class Core::RetCode Core::T3( int    startIdx,
 /* Generated */                                    int    endIdx,
 /* Generated */                                    SubArray<double>^ inReal,
-/* Generated */                                    int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                    int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                    double        optInVFactor, /* From 0 to 1 */
 /* Generated */                                    [Out]int%    outBegIdx,
 /* Generated */                                    [Out]int%    outNBElement,
@@ -151,7 +151,7 @@
 /* Generated */ enum class Core::RetCode Core::T3( int    startIdx,
 /* Generated */                                    int    endIdx,
 /* Generated */                                    cli::array<double>^ inReal,
-/* Generated */                                    int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                    int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                    double        optInVFactor, /* From 0 to 1 */
 /* Generated */                                    [Out]int%    outBegIdx,
 /* Generated */                                    [Out]int%    outNBElement,
@@ -160,7 +160,7 @@
 /* Generated */ public RetCode t3( int    startIdx,
 /* Generated */                    int    endIdx,
 /* Generated */                    double       inReal[],
-/* Generated */                    int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                    int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                    double        optInVFactor, /* From 0 to 1 */
 /* Generated */                    MInteger     outBegIdx,
 /* Generated */                    MInteger     outNBElement,
@@ -169,7 +169,7 @@
 /* Generated */ TA_LIB_API TA_RetCode TA_T3( int    startIdx,
 /* Generated */                              int    endIdx,
 /* Generated */                                         const double inReal[],
-/* Generated */                                         int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                         int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                         double        optInVFactor, /* From 0 to 1 */
 /* Generated */                                         int          *outBegIdx,
 /* Generated */                                         int          *outNBElement,
@@ -202,7 +202,7 @@
 /* Generated */    /* min/max are checked for optInTimePeriod. */
 /* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInTimePeriod = 5;
-/* Generated */    else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+/* Generated */    else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    if( optInVFactor == TA_REAL_DEFAULT )
@@ -364,17 +364,17 @@
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ Core::RetCode Core::T3StateInit( struct TA_T3_State** _state,
-/* Generated */                                int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                double        optInVFactor )  /* From 0 to 1 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ public RetCode t3StateInit( struct TA_t3_State** _state,
-/* Generated */                           int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                           int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                           double        optInVFactor )  /* From 0 to 1 */
 /* Generated */ 
 /* Generated */ #else
 /* Generated */ TA_LIB_API TA_RetCode TA_T3_StateInit( struct TA_T3_State** _state,
-/* Generated */                                                 int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                                 int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                                 double        optInVFactor )  /* From 0 to 1 */
 /* Generated */ 
 /* Generated */ #endif
@@ -392,7 +392,7 @@
 /* Generated */    /* min/max are checked for optInTimePeriod. */
 /* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInTimePeriod = 5;
-/* Generated */    else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+/* Generated */    else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    if( optInVFactor == TA_REAL_DEFAULT )
@@ -874,7 +874,7 @@
 /* Generated */ enum class Core::RetCode Core::T3( int    startIdx,
 /* Generated */                                    int    endIdx,
 /* Generated */                                    SubArray<float>^ inReal,
-/* Generated */                                    int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                    int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                    double        optInVFactor, /* From 0 to 1 */
 /* Generated */                                    [Out]int%    outBegIdx,
 /* Generated */                                    [Out]int%    outNBElement,
@@ -883,7 +883,7 @@
 /* Generated */ enum class Core::RetCode Core::T3( int    startIdx,
 /* Generated */                                    int    endIdx,
 /* Generated */                                    cli::array<float>^ inReal,
-/* Generated */                                    int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                    int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                    double        optInVFactor, /* From 0 to 1 */
 /* Generated */                                    [Out]int%    outBegIdx,
 /* Generated */                                    [Out]int%    outNBElement,
@@ -892,7 +892,7 @@
 /* Generated */ public RetCode t3( int    startIdx,
 /* Generated */                    int    endIdx,
 /* Generated */                    float        inReal[],
-/* Generated */                    int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                    int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                    double        optInVFactor, /* From 0 to 1 */
 /* Generated */                    MInteger     outBegIdx,
 /* Generated */                    MInteger     outNBElement,
@@ -901,7 +901,7 @@
 /* Generated */ TA_RetCode TA_S_T3( int    startIdx,
 /* Generated */                     int    endIdx,
 /* Generated */                     const float  inReal[],
-/* Generated */                     int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                     int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                     double        optInVFactor, /* From 0 to 1 */
 /* Generated */                     int          *outBegIdx,
 /* Generated */                     int          *outNBElement,

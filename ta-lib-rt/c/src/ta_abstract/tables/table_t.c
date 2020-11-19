@@ -75,7 +75,7 @@ static const TA_OutputParameterInfo   *TA_T3_Outputs[]   =
 };
 
 static const TA_OptInputParameterInfo *TA_T3_OptInputs[] =
-{ &TA_DEF_UI_TimePeriod_5_MINIMUM2,
+{ &TA_DEF_UI_TimePeriod_5,
   &TA_DEF_UI_VFactor,
   NULL
 };
@@ -156,7 +156,7 @@ static const TA_OutputParameterInfo   *TA_TEMA_Outputs[]   =
 };
 
 static const TA_OptInputParameterInfo *TA_TEMA_OptInputs[] =
-{ &TA_DEF_UI_TimePeriod_30_MINIMUM2,
+{ &TA_DEF_UI_TimePeriod_30,
   NULL
 };
 
@@ -220,7 +220,7 @@ static const TA_OutputParameterInfo   *TA_TRIMA_Outputs[]   =
 };
 
 static const TA_OptInputParameterInfo *TA_TRIMA_OptInputs[] =
-{ &TA_DEF_UI_TimePeriod_30_MINIMUM2,
+{ &TA_DEF_UI_TimePeriod_30,
   NULL
 };
 

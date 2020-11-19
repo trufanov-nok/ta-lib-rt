@@ -6160,7 +6160,7 @@ TA_RetCode TA_COSH_StateLoad( struct TA_COSH_State** _state,
  * 
  * Optional Parameters
  * -------------------
- * optInTimePeriod:(From 2 to 100000)
+ * optInTimePeriod:(From 1 to 100000)
  *    Number of period
  * 
  * 
@@ -6168,12 +6168,12 @@ TA_RetCode TA_COSH_StateLoad( struct TA_COSH_State** _state,
 TA_RetCode TA_DEMA( int           START_IDX,
                     int           END_IDX,
                     const double *IN_ARRAY /* inReal */,
-                    int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                    int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
                     int          *BEG_IDX,
                     int          *OUT_SIZE,
                     double       *OUT_ARRAY /* outReal */ );
 
-int TA_DEMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+int TA_DEMA_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 struct TA_DEMA_Data {
@@ -6185,12 +6185,12 @@ struct TA_DEMA_State {
                      struct TA_DEMA_Data* memory;
                      void*        state_EMA;
                      void*        state_EMA2;
-                     int           optInTimePeriod; /* From 2 to 100000 */
+                     int           optInTimePeriod; /* From 1 to 100000 */
                      };
 
 
 TA_RetCode TA_DEMA_StateInit( struct TA_DEMA_State** _state,
-                            int           optInTimePeriod );  /* From 2 to 100000 */
+                            int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 TA_RetCode TA_DEMA_State( struct TA_DEMA_State* _state,
@@ -6361,7 +6361,7 @@ TA_RetCode TA_DX_StateLoad( struct TA_DX_State** _state,
  * 
  * Optional Parameters
  * -------------------
- * optInTimePeriod:(From 2 to 100000)
+ * optInTimePeriod:(From 1 to 100000)
  *    Number of period
  * 
  * 
@@ -6369,12 +6369,12 @@ TA_RetCode TA_DX_StateLoad( struct TA_DX_State** _state,
 TA_RetCode TA_EMA( int           START_IDX,
                    int           END_IDX,
                    const double *IN_ARRAY /* inReal */,
-                   int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                   int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
                    int          *BEG_IDX,
                    int          *OUT_SIZE,
                    double       *OUT_ARRAY /* outReal */ );
 
-int TA_EMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+int TA_EMA_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 struct TA_EMA_Data {
@@ -6388,12 +6388,12 @@ struct TA_EMA_State {
                     double       tempSum;
                     double       preprRes;
                     double       optInK_1;
-                    int           optInTimePeriod; /* From 2 to 100000 */
+                    int           optInTimePeriod; /* From 1 to 100000 */
                     };
 
 
 TA_RetCode TA_EMA_StateInit( struct TA_EMA_State** _state,
-                           int           optInTimePeriod );  /* From 2 to 100000 */
+                           int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 TA_RetCode TA_EMA_State( struct TA_EMA_State* _state,
@@ -7082,7 +7082,7 @@ TA_RetCode TA_IMI_StateLoad( struct TA_IMI_State** _state,
  * 
  * Optional Parameters
  * -------------------
- * optInTimePeriod:(From 2 to 100000)
+ * optInTimePeriod:(From 1 to 100000)
  *    Number of period
  * 
  * 
@@ -7090,12 +7090,12 @@ TA_RetCode TA_IMI_StateLoad( struct TA_IMI_State** _state,
 TA_RetCode TA_KAMA( int           START_IDX,
                     int           END_IDX,
                     const double *IN_ARRAY /* inReal */,
-                    int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                    int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
                     int          *BEG_IDX,
                     int          *OUT_SIZE,
                     double       *OUT_ARRAY /* outReal */ );
 
-int TA_KAMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+int TA_KAMA_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 struct TA_KAMA_Data {
@@ -7109,12 +7109,12 @@ struct TA_KAMA_State {
                      double       yestReal;
                      double       prevKAMA;
                      double       trailingValue;
-                     int           optInTimePeriod; /* From 2 to 100000 */
+                     int           optInTimePeriod; /* From 1 to 100000 */
                      };
 
 
 TA_RetCode TA_KAMA_StateInit( struct TA_KAMA_State** _state,
-                            int           optInTimePeriod );  /* From 2 to 100000 */
+                            int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 TA_RetCode TA_KAMA_State( struct TA_KAMA_State* _state,
@@ -10122,7 +10122,7 @@ TA_RetCode TA_SINH_StateLoad( struct TA_SINH_State** _state,
  * 
  * Optional Parameters
  * -------------------
- * optInTimePeriod:(From 2 to 100000)
+ * optInTimePeriod:(From 1 to 100000)
  *    Number of period
  * 
  * 
@@ -10130,12 +10130,12 @@ TA_RetCode TA_SINH_StateLoad( struct TA_SINH_State** _state,
 TA_RetCode TA_SMA( int           START_IDX,
                    int           END_IDX,
                    const double *IN_ARRAY /* inReal */,
-                   int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                   int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
                    int          *BEG_IDX,
                    int          *OUT_SIZE,
                    double       *OUT_ARRAY /* outReal */ );
 
-int TA_SMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+int TA_SMA_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 struct TA_SMA_Data {
@@ -10146,12 +10146,12 @@ struct TA_SMA_State {
                     size_t mem_index;
                     struct TA_SMA_Data* memory;
                     double       periodTotal;
-                    int           optInTimePeriod; /* From 2 to 100000 */
+                    int           optInTimePeriod; /* From 1 to 100000 */
                     };
 
 
 TA_RetCode TA_SMA_StateInit( struct TA_SMA_State** _state,
-                           int           optInTimePeriod );  /* From 2 to 100000 */
+                           int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 TA_RetCode TA_SMA_State( struct TA_SMA_State* _state,
@@ -10707,7 +10707,7 @@ TA_RetCode TA_SUM_StateLoad( struct TA_SUM_State** _state,
  * 
  * Optional Parameters
  * -------------------
- * optInTimePeriod:(From 2 to 100000)
+ * optInTimePeriod:(From 1 to 100000)
  *    Number of period
  * 
  * optInVFactor:(From 0 to 1)
@@ -10718,13 +10718,13 @@ TA_RetCode TA_SUM_StateLoad( struct TA_SUM_State** _state,
 TA_RetCode TA_T3( int           START_IDX,
                   int           END_IDX,
                   const double *IN_ARRAY /* inReal */,
-                  int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                  int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
                   double        OPT_REAL /* optInVFactor */, /* From 0 to 1 */
                   int          *BEG_IDX,
                   int          *OUT_SIZE,
                   double       *OUT_ARRAY /* outReal */ );
 
-int TA_T3_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
+int TA_T3_Lookback( int           optInTimePeriod, /* From 1 to 100000 */
                   double        optInVFactor );  /* From 0 to 1 */
 
 
@@ -10749,13 +10749,13 @@ struct TA_T3_State {
                    double       c4;
                    double       tempReal;
                    int          firstOutput;
-                   int           optInTimePeriod; /* From 2 to 100000 */
+                   int           optInTimePeriod; /* From 1 to 100000 */
                    double        optInVFactor; /* From 0 to 1 */
                    };
 
 
 TA_RetCode TA_T3_StateInit( struct TA_T3_State** _state,
-                          int           optInTimePeriod, /* From 2 to 100000 */
+                          int           optInTimePeriod, /* From 1 to 100000 */
                           double        optInVFactor );  /* From 0 to 1 */
 
 
@@ -10899,7 +10899,7 @@ TA_RetCode TA_TANH_StateLoad( struct TA_TANH_State** _state,
  * 
  * Optional Parameters
  * -------------------
- * optInTimePeriod:(From 2 to 100000)
+ * optInTimePeriod:(From 1 to 100000)
  *    Number of period
  * 
  * 
@@ -10907,12 +10907,12 @@ TA_RetCode TA_TANH_StateLoad( struct TA_TANH_State** _state,
 TA_RetCode TA_TEMA( int           START_IDX,
                     int           END_IDX,
                     const double *IN_ARRAY /* inReal */,
-                    int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                    int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
                     int          *BEG_IDX,
                     int          *OUT_SIZE,
                     double       *OUT_ARRAY /* outReal */ );
 
-int TA_TEMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+int TA_TEMA_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 struct TA_TEMA_Data {
@@ -10925,12 +10925,12 @@ struct TA_TEMA_State {
                      void*        state_EMA;
                      void*        state_EMA2;
                      void*        state_EMA3;
-                     int           optInTimePeriod; /* From 2 to 100000 */
+                     int           optInTimePeriod; /* From 1 to 100000 */
                      };
 
 
 TA_RetCode TA_TEMA_StateInit( struct TA_TEMA_State** _state,
-                            int           optInTimePeriod );  /* From 2 to 100000 */
+                            int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 TA_RetCode TA_TEMA_State( struct TA_TEMA_State* _state,
@@ -11027,7 +11027,7 @@ TA_RetCode TA_TRANGE_StateLoad( struct TA_TRANGE_State** _state,
  * 
  * Optional Parameters
  * -------------------
- * optInTimePeriod:(From 2 to 100000)
+ * optInTimePeriod:(From 1 to 100000)
  *    Number of period
  * 
  * 
@@ -11035,12 +11035,12 @@ TA_RetCode TA_TRANGE_StateLoad( struct TA_TRANGE_State** _state,
 TA_RetCode TA_TRIMA( int           START_IDX,
                      int           END_IDX,
                      const double *IN_ARRAY /* inReal */,
-                     int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                     int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
                      int          *BEG_IDX,
                      int          *OUT_SIZE,
                      double       *OUT_ARRAY /* outReal */ );
 
-int TA_TRIMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+int TA_TRIMA_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 struct TA_TRIMA_Data {
@@ -11055,12 +11055,12 @@ struct TA_TRIMA_State {
                       double       numeratorAdd;
                       double       factor;
                       int          middleIdx;
-                      int           optInTimePeriod; /* From 2 to 100000 */
+                      int           optInTimePeriod; /* From 1 to 100000 */
                       };
 
 
 TA_RetCode TA_TRIMA_StateInit( struct TA_TRIMA_State** _state,
-                             int           optInTimePeriod );  /* From 2 to 100000 */
+                             int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 TA_RetCode TA_TRIMA_State( struct TA_TRIMA_State* _state,
@@ -11597,7 +11597,7 @@ TA_RetCode TA_WILLR_StateLoad( struct TA_WILLR_State** _state,
  * 
  * Optional Parameters
  * -------------------
- * optInTimePeriod:(From 2 to 100000)
+ * optInTimePeriod:(From 1 to 100000)
  *    Number of period
  * 
  * 
@@ -11605,12 +11605,12 @@ TA_RetCode TA_WILLR_StateLoad( struct TA_WILLR_State** _state,
 TA_RetCode TA_WMA( int           START_IDX,
                    int           END_IDX,
                    const double *IN_ARRAY /* inReal */,
-                   int           OPT_INT /* optInTimePeriod */, /* From 2 to 100000 */
+                   int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
                    int          *BEG_IDX,
                    int          *OUT_SIZE,
                    double       *OUT_ARRAY /* outReal */ );
 
-int TA_WMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+int TA_WMA_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 struct TA_WMA_Data {
@@ -11623,12 +11623,12 @@ struct TA_WMA_State {
                     double       periodSum;
                     double       periodSub;
                     double       divider;
-                    int           optInTimePeriod; /* From 2 to 100000 */
+                    int           optInTimePeriod; /* From 1 to 100000 */
                     };
 
 
 TA_RetCode TA_WMA_StateInit( struct TA_WMA_State** _state,
-                           int           optInTimePeriod );  /* From 2 to 100000 */
+                           int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 TA_RetCode TA_WMA_State( struct TA_WMA_State* _state,

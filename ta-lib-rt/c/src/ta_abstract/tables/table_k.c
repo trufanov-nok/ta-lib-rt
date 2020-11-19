@@ -62,7 +62,7 @@ static const TA_OutputParameterInfo   *TA_KAMA_Outputs[]   =
 };
 
 static const TA_OptInputParameterInfo *TA_KAMA_OptInputs[] =
-{ &TA_DEF_UI_TimePeriod_30_MINIMUM2,
+{ &TA_DEF_UI_TimePeriod_30,
   NULL
 };
 

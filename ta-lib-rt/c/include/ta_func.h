@@ -12021,7 +12021,7 @@ FILE* _file )
  * 
  * Optional Parameters
  * -------------------
- * optInTimePeriod:(From 2 to 100000)
+ * optInTimePeriod:(From 1 to 100000)
  *    Number of period
  * 
  * 
@@ -12029,7 +12029,7 @@ FILE* _file )
 TA_LIB_API TA_RetCode TA_DEMA( int    startIdx,
                                int    endIdx,
                                           const double inReal[],
-                                          int           optInTimePeriod, /* From 2 to 100000 */
+                                          int           optInTimePeriod, /* From 1 to 100000 */
                                           int          *outBegIdx,
                                           int          *outNBElement,
                                           double        outReal[] );
@@ -12037,12 +12037,12 @@ TA_LIB_API TA_RetCode TA_DEMA( int    startIdx,
 TA_LIB_API TA_RetCode TA_S_DEMA( int    startIdx,
                                  int    endIdx,
                                             const float  inReal[],
-                                            int           optInTimePeriod, /* From 2 to 100000 */
+                                            int           optInTimePeriod, /* From 1 to 100000 */
                                             int          *outBegIdx,
                                             int          *outNBElement,
                                             double        outReal[] );
 
-TA_LIB_API int TA_DEMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+TA_LIB_API int TA_DEMA_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 struct TA_DEMA_Data {
@@ -12054,12 +12054,12 @@ struct TA_DEMA_State {
                      struct TA_DEMA_Data* memory;
                      void*        state_EMA;
                      void*        state_EMA2;
-                     int           optInTimePeriod; /* From 2 to 100000 */
+                     int           optInTimePeriod; /* From 1 to 100000 */
                      };
 
 
 TA_LIB_API TA_RetCode TA_DEMA_StateInit( struct TA_DEMA_State** _state,
-                                                  int           optInTimePeriod );  /* From 2 to 100000 */
+                                                  int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 TA_LIB_API TA_RetCode TA_DEMA_State( struct TA_DEMA_State* _state,
@@ -12089,7 +12089,7 @@ TA_LIB_API TA_RetCode TA_DEMA_StateLoad( struct TA_DEMA_State** _state,
 /* Generated */ static TA_RetCode TA_DEMA_StateTest( int    startIdx,
 /* Generated */                                      int    endIdx,
 /* Generated */                                      const double inReal[],
-/* Generated */                                      int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                      int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                      int          *outBegIdx,
 /* Generated */                                      int          *outNBElement,
 /* Generated */                                      double        outReal[],
@@ -12421,7 +12421,7 @@ FILE* _file )
  * 
  * Optional Parameters
  * -------------------
- * optInTimePeriod:(From 2 to 100000)
+ * optInTimePeriod:(From 1 to 100000)
  *    Number of period
  * 
  * 
@@ -12429,7 +12429,7 @@ FILE* _file )
 TA_LIB_API TA_RetCode TA_EMA( int    startIdx,
                               int    endIdx,
                                          const double inReal[],
-                                         int           optInTimePeriod, /* From 2 to 100000 */
+                                         int           optInTimePeriod, /* From 1 to 100000 */
                                          int          *outBegIdx,
                                          int          *outNBElement,
                                          double        outReal[] );
@@ -12437,12 +12437,12 @@ TA_LIB_API TA_RetCode TA_EMA( int    startIdx,
 TA_LIB_API TA_RetCode TA_S_EMA( int    startIdx,
                                 int    endIdx,
                                            const float  inReal[],
-                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           int           optInTimePeriod, /* From 1 to 100000 */
                                            int          *outBegIdx,
                                            int          *outNBElement,
                                            double        outReal[] );
 
-TA_LIB_API int TA_EMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+TA_LIB_API int TA_EMA_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 struct TA_EMA_Data {
@@ -12456,12 +12456,12 @@ struct TA_EMA_State {
                     double       tempSum;
                     double       preprRes;
                     double       optInK_1;
-                    int           optInTimePeriod; /* From 2 to 100000 */
+                    int           optInTimePeriod; /* From 1 to 100000 */
                     };
 
 
 TA_LIB_API TA_RetCode TA_EMA_StateInit( struct TA_EMA_State** _state,
-                                                 int           optInTimePeriod );  /* From 2 to 100000 */
+                                                 int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 TA_LIB_API TA_RetCode TA_EMA_State( struct TA_EMA_State* _state,
@@ -12491,7 +12491,7 @@ TA_LIB_API TA_RetCode TA_EMA_StateLoad( struct TA_EMA_State** _state,
 /* Generated */ static TA_RetCode TA_EMA_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
 /* Generated */                                     const double inReal[],
-/* Generated */                                     int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                     int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
 /* Generated */                                     double        outReal[],
@@ -13784,7 +13784,7 @@ FILE* _file )
  * 
  * Optional Parameters
  * -------------------
- * optInTimePeriod:(From 2 to 100000)
+ * optInTimePeriod:(From 1 to 100000)
  *    Number of period
  * 
  * 
@@ -13792,7 +13792,7 @@ FILE* _file )
 TA_LIB_API TA_RetCode TA_KAMA( int    startIdx,
                                int    endIdx,
                                           const double inReal[],
-                                          int           optInTimePeriod, /* From 2 to 100000 */
+                                          int           optInTimePeriod, /* From 1 to 100000 */
                                           int          *outBegIdx,
                                           int          *outNBElement,
                                           double        outReal[] );
@@ -13800,12 +13800,12 @@ TA_LIB_API TA_RetCode TA_KAMA( int    startIdx,
 TA_LIB_API TA_RetCode TA_S_KAMA( int    startIdx,
                                  int    endIdx,
                                             const float  inReal[],
-                                            int           optInTimePeriod, /* From 2 to 100000 */
+                                            int           optInTimePeriod, /* From 1 to 100000 */
                                             int          *outBegIdx,
                                             int          *outNBElement,
                                             double        outReal[] );
 
-TA_LIB_API int TA_KAMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+TA_LIB_API int TA_KAMA_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 struct TA_KAMA_Data {
@@ -13819,12 +13819,12 @@ struct TA_KAMA_State {
                      double       yestReal;
                      double       prevKAMA;
                      double       trailingValue;
-                     int           optInTimePeriod; /* From 2 to 100000 */
+                     int           optInTimePeriod; /* From 1 to 100000 */
                      };
 
 
 TA_LIB_API TA_RetCode TA_KAMA_StateInit( struct TA_KAMA_State** _state,
-                                                  int           optInTimePeriod );  /* From 2 to 100000 */
+                                                  int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 TA_LIB_API TA_RetCode TA_KAMA_State( struct TA_KAMA_State* _state,
@@ -13854,7 +13854,7 @@ TA_LIB_API TA_RetCode TA_KAMA_StateLoad( struct TA_KAMA_State** _state,
 /* Generated */ static TA_RetCode TA_KAMA_StateTest( int    startIdx,
 /* Generated */                                      int    endIdx,
 /* Generated */                                      const double inReal[],
-/* Generated */                                      int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                      int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                      int          *outBegIdx,
 /* Generated */                                      int          *outNBElement,
 /* Generated */                                      double        outReal[],
@@ -19763,7 +19763,7 @@ FILE* _file )
  * 
  * Optional Parameters
  * -------------------
- * optInTimePeriod:(From 2 to 100000)
+ * optInTimePeriod:(From 1 to 100000)
  *    Number of period
  * 
  * 
@@ -19771,7 +19771,7 @@ FILE* _file )
 TA_LIB_API TA_RetCode TA_SMA( int    startIdx,
                               int    endIdx,
                                          const double inReal[],
-                                         int           optInTimePeriod, /* From 2 to 100000 */
+                                         int           optInTimePeriod, /* From 1 to 100000 */
                                          int          *outBegIdx,
                                          int          *outNBElement,
                                          double        outReal[] );
@@ -19779,12 +19779,12 @@ TA_LIB_API TA_RetCode TA_SMA( int    startIdx,
 TA_LIB_API TA_RetCode TA_S_SMA( int    startIdx,
                                 int    endIdx,
                                            const float  inReal[],
-                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           int           optInTimePeriod, /* From 1 to 100000 */
                                            int          *outBegIdx,
                                            int          *outNBElement,
                                            double        outReal[] );
 
-TA_LIB_API int TA_SMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+TA_LIB_API int TA_SMA_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 struct TA_SMA_Data {
@@ -19795,12 +19795,12 @@ struct TA_SMA_State {
                     size_t mem_index;
                     struct TA_SMA_Data* memory;
                     double       periodTotal;
-                    int           optInTimePeriod; /* From 2 to 100000 */
+                    int           optInTimePeriod; /* From 1 to 100000 */
                     };
 
 
 TA_LIB_API TA_RetCode TA_SMA_StateInit( struct TA_SMA_State** _state,
-                                                 int           optInTimePeriod );  /* From 2 to 100000 */
+                                                 int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 TA_LIB_API TA_RetCode TA_SMA_State( struct TA_SMA_State* _state,
@@ -19830,7 +19830,7 @@ TA_LIB_API TA_RetCode TA_SMA_StateLoad( struct TA_SMA_State** _state,
 /* Generated */ static TA_RetCode TA_SMA_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
 /* Generated */                                     const double inReal[],
-/* Generated */                                     int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                     int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
 /* Generated */                                     double        outReal[],
@@ -20895,7 +20895,7 @@ FILE* _file )
  * 
  * Optional Parameters
  * -------------------
- * optInTimePeriod:(From 2 to 100000)
+ * optInTimePeriod:(From 1 to 100000)
  *    Number of period
  * 
  * optInVFactor:(From 0 to 1)
@@ -20906,7 +20906,7 @@ FILE* _file )
 TA_LIB_API TA_RetCode TA_T3( int    startIdx,
                              int    endIdx,
                                         const double inReal[],
-                                        int           optInTimePeriod, /* From 2 to 100000 */
+                                        int           optInTimePeriod, /* From 1 to 100000 */
                                         double        optInVFactor, /* From 0 to 1 */
                                         int          *outBegIdx,
                                         int          *outNBElement,
@@ -20915,13 +20915,13 @@ TA_LIB_API TA_RetCode TA_T3( int    startIdx,
 TA_LIB_API TA_RetCode TA_S_T3( int    startIdx,
                                int    endIdx,
                                           const float  inReal[],
-                                          int           optInTimePeriod, /* From 2 to 100000 */
+                                          int           optInTimePeriod, /* From 1 to 100000 */
                                           double        optInVFactor, /* From 0 to 1 */
                                           int          *outBegIdx,
                                           int          *outNBElement,
                                           double        outReal[] );
 
-TA_LIB_API int TA_T3_Lookback( int           optInTimePeriod, /* From 2 to 100000 */
+TA_LIB_API int TA_T3_Lookback( int           optInTimePeriod, /* From 1 to 100000 */
                                         double        optInVFactor );  /* From 0 to 1 */
 
 
@@ -20946,13 +20946,13 @@ struct TA_T3_State {
                    double       c4;
                    double       tempReal;
                    int          firstOutput;
-                   int           optInTimePeriod; /* From 2 to 100000 */
+                   int           optInTimePeriod; /* From 1 to 100000 */
                    double        optInVFactor; /* From 0 to 1 */
                    };
 
 
 TA_LIB_API TA_RetCode TA_T3_StateInit( struct TA_T3_State** _state,
-                                                int           optInTimePeriod, /* From 2 to 100000 */
+                                                int           optInTimePeriod, /* From 1 to 100000 */
                                                 double        optInVFactor );  /* From 0 to 1 */
 
 
@@ -20983,7 +20983,7 @@ TA_LIB_API TA_RetCode TA_T3_StateLoad( struct TA_T3_State** _state,
 /* Generated */ static TA_RetCode TA_T3_StateTest( int    startIdx,
 /* Generated */                                    int    endIdx,
 /* Generated */                                    const double inReal[],
-/* Generated */                                    int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                    int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                    double        optInVFactor, /* From 0 to 1 */
 /* Generated */                                    int          *outBegIdx,
 /* Generated */                                    int          *outNBElement,
@@ -21280,7 +21280,7 @@ FILE* _file )
  * 
  * Optional Parameters
  * -------------------
- * optInTimePeriod:(From 2 to 100000)
+ * optInTimePeriod:(From 1 to 100000)
  *    Number of period
  * 
  * 
@@ -21288,7 +21288,7 @@ FILE* _file )
 TA_LIB_API TA_RetCode TA_TEMA( int    startIdx,
                                int    endIdx,
                                           const double inReal[],
-                                          int           optInTimePeriod, /* From 2 to 100000 */
+                                          int           optInTimePeriod, /* From 1 to 100000 */
                                           int          *outBegIdx,
                                           int          *outNBElement,
                                           double        outReal[] );
@@ -21296,12 +21296,12 @@ TA_LIB_API TA_RetCode TA_TEMA( int    startIdx,
 TA_LIB_API TA_RetCode TA_S_TEMA( int    startIdx,
                                  int    endIdx,
                                             const float  inReal[],
-                                            int           optInTimePeriod, /* From 2 to 100000 */
+                                            int           optInTimePeriod, /* From 1 to 100000 */
                                             int          *outBegIdx,
                                             int          *outNBElement,
                                             double        outReal[] );
 
-TA_LIB_API int TA_TEMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+TA_LIB_API int TA_TEMA_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 struct TA_TEMA_Data {
@@ -21314,12 +21314,12 @@ struct TA_TEMA_State {
                      void*        state_EMA;
                      void*        state_EMA2;
                      void*        state_EMA3;
-                     int           optInTimePeriod; /* From 2 to 100000 */
+                     int           optInTimePeriod; /* From 1 to 100000 */
                      };
 
 
 TA_LIB_API TA_RetCode TA_TEMA_StateInit( struct TA_TEMA_State** _state,
-                                                  int           optInTimePeriod );  /* From 2 to 100000 */
+                                                  int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 TA_LIB_API TA_RetCode TA_TEMA_State( struct TA_TEMA_State* _state,
@@ -21349,7 +21349,7 @@ TA_LIB_API TA_RetCode TA_TEMA_StateLoad( struct TA_TEMA_State** _state,
 /* Generated */ static TA_RetCode TA_TEMA_StateTest( int    startIdx,
 /* Generated */                                      int    endIdx,
 /* Generated */                                      const double inReal[],
-/* Generated */                                      int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                      int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                      int          *outBegIdx,
 /* Generated */                                      int          *outNBElement,
 /* Generated */                                      double        outReal[],
@@ -21540,7 +21540,7 @@ FILE* _file )
  * 
  * Optional Parameters
  * -------------------
- * optInTimePeriod:(From 2 to 100000)
+ * optInTimePeriod:(From 1 to 100000)
  *    Number of period
  * 
  * 
@@ -21548,7 +21548,7 @@ FILE* _file )
 TA_LIB_API TA_RetCode TA_TRIMA( int    startIdx,
                                 int    endIdx,
                                            const double inReal[],
-                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           int           optInTimePeriod, /* From 1 to 100000 */
                                            int          *outBegIdx,
                                            int          *outNBElement,
                                            double        outReal[] );
@@ -21556,12 +21556,12 @@ TA_LIB_API TA_RetCode TA_TRIMA( int    startIdx,
 TA_LIB_API TA_RetCode TA_S_TRIMA( int    startIdx,
                                   int    endIdx,
                                              const float  inReal[],
-                                             int           optInTimePeriod, /* From 2 to 100000 */
+                                             int           optInTimePeriod, /* From 1 to 100000 */
                                              int          *outBegIdx,
                                              int          *outNBElement,
                                              double        outReal[] );
 
-TA_LIB_API int TA_TRIMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+TA_LIB_API int TA_TRIMA_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 struct TA_TRIMA_Data {
@@ -21576,12 +21576,12 @@ struct TA_TRIMA_State {
                       double       numeratorAdd;
                       double       factor;
                       int          middleIdx;
-                      int           optInTimePeriod; /* From 2 to 100000 */
+                      int           optInTimePeriod; /* From 1 to 100000 */
                       };
 
 
 TA_LIB_API TA_RetCode TA_TRIMA_StateInit( struct TA_TRIMA_State** _state,
-                                                   int           optInTimePeriod );  /* From 2 to 100000 */
+                                                   int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 TA_LIB_API TA_RetCode TA_TRIMA_State( struct TA_TRIMA_State* _state,
@@ -21611,7 +21611,7 @@ TA_LIB_API TA_RetCode TA_TRIMA_StateLoad( struct TA_TRIMA_State** _state,
 /* Generated */ static TA_RetCode TA_TRIMA_StateTest( int    startIdx,
 /* Generated */                                       int    endIdx,
 /* Generated */                                       const double inReal[],
-/* Generated */                                       int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                       int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                       int          *outBegIdx,
 /* Generated */                                       int          *outNBElement,
 /* Generated */                                       double        outReal[],
@@ -22648,7 +22648,7 @@ FILE* _file )
  * 
  * Optional Parameters
  * -------------------
- * optInTimePeriod:(From 2 to 100000)
+ * optInTimePeriod:(From 1 to 100000)
  *    Number of period
  * 
  * 
@@ -22656,7 +22656,7 @@ FILE* _file )
 TA_LIB_API TA_RetCode TA_WMA( int    startIdx,
                               int    endIdx,
                                          const double inReal[],
-                                         int           optInTimePeriod, /* From 2 to 100000 */
+                                         int           optInTimePeriod, /* From 1 to 100000 */
                                          int          *outBegIdx,
                                          int          *outNBElement,
                                          double        outReal[] );
@@ -22664,12 +22664,12 @@ TA_LIB_API TA_RetCode TA_WMA( int    startIdx,
 TA_LIB_API TA_RetCode TA_S_WMA( int    startIdx,
                                 int    endIdx,
                                            const float  inReal[],
-                                           int           optInTimePeriod, /* From 2 to 100000 */
+                                           int           optInTimePeriod, /* From 1 to 100000 */
                                            int          *outBegIdx,
                                            int          *outNBElement,
                                            double        outReal[] );
 
-TA_LIB_API int TA_WMA_Lookback( int           optInTimePeriod );  /* From 2 to 100000 */
+TA_LIB_API int TA_WMA_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 struct TA_WMA_Data {
@@ -22682,12 +22682,12 @@ struct TA_WMA_State {
                     double       periodSum;
                     double       periodSub;
                     double       divider;
-                    int           optInTimePeriod; /* From 2 to 100000 */
+                    int           optInTimePeriod; /* From 1 to 100000 */
                     };
 
 
 TA_LIB_API TA_RetCode TA_WMA_StateInit( struct TA_WMA_State** _state,
-                                                 int           optInTimePeriod );  /* From 2 to 100000 */
+                                                 int           optInTimePeriod );  /* From 1 to 100000 */
 
 
 TA_LIB_API TA_RetCode TA_WMA_State( struct TA_WMA_State* _state,
@@ -22717,7 +22717,7 @@ TA_LIB_API TA_RetCode TA_WMA_StateLoad( struct TA_WMA_State** _state,
 /* Generated */ static TA_RetCode TA_WMA_StateTest( int    startIdx,
 /* Generated */                                     int    endIdx,
 /* Generated */                                     const double inReal[],
-/* Generated */                                     int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                     int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                     int          *outBegIdx,
 /* Generated */                                     int          *outNBElement,
 /* Generated */                                     double        outReal[],

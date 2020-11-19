@@ -79,13 +79,13 @@
 /* Generated */ #define INPUT_TYPE   double
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::EmaLookback( int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ int Core::EmaLookback( int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int emaLookback( int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ public int emaLookback( int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_EMA_Lookback( int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */ TA_LIB_API int TA_EMA_Lookback( int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 1 - DO NOT DELETE THIS LINE ****/
@@ -97,7 +97,7 @@
 /* Generated */    /* min/max are checked for optInTimePeriod. */
 /* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInTimePeriod = 30;
-/* Generated */    else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+/* Generated */    else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
 /* Generated */       return -1;
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
@@ -116,7 +116,7 @@
  * 
  * Optional Parameters
  * -------------------
- * optInTimePeriod:(From 2 to 100000)
+ * optInTimePeriod:(From 1 to 100000)
  *    Number of period
  * 
  * 
@@ -126,7 +126,7 @@
 /* Generated */ enum class Core::RetCode Core::Ema( int    startIdx,
 /* Generated */                                     int    endIdx,
 /* Generated */                                     SubArray<double>^ inReal,
-/* Generated */                                     int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                     int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                     [Out]int%    outBegIdx,
 /* Generated */                                     [Out]int%    outNBElement,
 /* Generated */                                     SubArray<double>^  outReal )
@@ -134,7 +134,7 @@
 /* Generated */ enum class Core::RetCode Core::Ema( int    startIdx,
 /* Generated */                                     int    endIdx,
 /* Generated */                                     cli::array<double>^ inReal,
-/* Generated */                                     int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                     int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                     [Out]int%    outBegIdx,
 /* Generated */                                     [Out]int%    outNBElement,
 /* Generated */                                     cli::array<double>^  outReal )
@@ -142,7 +142,7 @@
 /* Generated */ public RetCode ema( int    startIdx,
 /* Generated */                     int    endIdx,
 /* Generated */                     double       inReal[],
-/* Generated */                     int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                     int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                     MInteger     outBegIdx,
 /* Generated */                     MInteger     outNBElement,
 /* Generated */                     double        outReal[] )
@@ -150,7 +150,7 @@
 /* Generated */ TA_LIB_API TA_RetCode TA_EMA( int    startIdx,
 /* Generated */                               int    endIdx,
 /* Generated */                                          const double inReal[],
-/* Generated */                                          int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                          int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                          int          *outBegIdx,
 /* Generated */                                          int          *outNBElement,
 /* Generated */                                          double        outReal[] )
@@ -175,7 +175,7 @@
 /* Generated */    /* min/max are checked for optInTimePeriod. */
 /* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInTimePeriod = 30;
-/* Generated */    else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+/* Generated */    else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    #if !defined(_JAVA)
@@ -360,15 +360,15 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
 /* Generated */ Core::RetCode Core::EmaStateInit( struct TA_Ema_State** _state,
-/* Generated */                                 int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */                                 int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
 /* Generated */ public RetCode emaStateInit( struct TA_ema_State** _state,
-/* Generated */                            int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */                            int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #else
 /* Generated */ TA_LIB_API TA_RetCode TA_EMA_StateInit( struct TA_EMA_State** _state,
-/* Generated */                                                  int           optInTimePeriod )  /* From 2 to 100000 */
+/* Generated */                                                  int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
@@ -387,7 +387,7 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 /* Generated */    /* min/max are checked for optInTimePeriod. */
 /* Generated */    if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
 /* Generated */       optInTimePeriod = 30;
-/* Generated */    else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+/* Generated */    else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    STATE = TA_Calloc(1, sizeof(struct TA_EMA_State));
@@ -433,7 +433,7 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
     /* min/max are checked for optInTimePeriod. */
     if( (int)optInTimePeriod == TA_INTEGER_DEFAULT )
        optInTimePeriod = 30;
-    else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+    else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
        return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 
     STATE = TA_Calloc(1, sizeof(struct TA_EMA_State));
@@ -786,7 +786,7 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 /* Generated */ enum class Core::RetCode Core::Ema( int    startIdx,
 /* Generated */                                     int    endIdx,
 /* Generated */                                     SubArray<float>^ inReal,
-/* Generated */                                     int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                     int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                     [Out]int%    outBegIdx,
 /* Generated */                                     [Out]int%    outNBElement,
 /* Generated */                                     SubArray<double>^  outReal )
@@ -794,7 +794,7 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 /* Generated */ enum class Core::RetCode Core::Ema( int    startIdx,
 /* Generated */                                     int    endIdx,
 /* Generated */                                     cli::array<float>^ inReal,
-/* Generated */                                     int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                                     int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                                     [Out]int%    outBegIdx,
 /* Generated */                                     [Out]int%    outNBElement,
 /* Generated */                                     cli::array<double>^  outReal )
@@ -802,7 +802,7 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 /* Generated */ public RetCode ema( int    startIdx,
 /* Generated */                     int    endIdx,
 /* Generated */                     float        inReal[],
-/* Generated */                     int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                     int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                     MInteger     outBegIdx,
 /* Generated */                     MInteger     outNBElement,
 /* Generated */                     double        outReal[] )
@@ -810,7 +810,7 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 /* Generated */ TA_RetCode TA_S_EMA( int    startIdx,
 /* Generated */                      int    endIdx,
 /* Generated */                      const float  inReal[],
-/* Generated */                      int           optInTimePeriod, /* From 2 to 100000 */
+/* Generated */                      int           optInTimePeriod, /* From 1 to 100000 */
 /* Generated */                      int          *outBegIdx,
 /* Generated */                      int          *outNBElement,
 /* Generated */                      double        outReal[] )

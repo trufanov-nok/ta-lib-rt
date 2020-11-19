@@ -27274,7 +27274,7 @@ public class Core {
    {
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return -1;
       return emaLookback ( optInTimePeriod ) * 2;
    }
@@ -27301,7 +27301,7 @@ public class Core {
          return RetCode.OutOfRangeEndIndex ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       outNBElement.value = 0 ;
       outBegIdx.value = 0 ;
@@ -27355,7 +27355,7 @@ public class Core {
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       _state.value = TA_Calloc(1, sizeof(struct dema ));
       _state.value .value .mem_index = 0;
@@ -28210,7 +28210,7 @@ public class Core {
    {
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return -1;
       return optInTimePeriod - 1 + (this.unstablePeriod[FuncUnstId.Ema.ordinal()]) ;
    }
@@ -28228,7 +28228,7 @@ public class Core {
          return RetCode.OutOfRangeEndIndex ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       return TA_INT_EMA ( startIdx, endIdx, inReal,
          optInTimePeriod,
@@ -33058,7 +33058,7 @@ public class Core {
    {
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return -1;
       return optInTimePeriod + (this.unstablePeriod[FuncUnstId.Kama.ordinal()]) ;
    }
@@ -33083,7 +33083,7 @@ public class Core {
          return RetCode.OutOfRangeEndIndex ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       outBegIdx.value = 0 ;
       outNBElement.value = 0 ;
@@ -33164,7 +33164,7 @@ public class Core {
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       _state.value = TA_Calloc(1, sizeof(struct kama ));
       _state.value .value .mem_index = 0;
@@ -47046,7 +47046,7 @@ public class Core {
    {
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return -1;
       return optInTimePeriod - 1;
    }
@@ -47064,7 +47064,7 @@ public class Core {
          return RetCode.OutOfRangeEndIndex ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       return TA_INT_SMA ( startIdx, endIdx,
          inReal, optInTimePeriod,
@@ -47116,7 +47116,7 @@ public class Core {
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       _state.value = TA_Calloc(1, sizeof(struct sma ));
       _state.value .value .mem_index = 0;
@@ -49631,7 +49631,7 @@ public class Core {
    {
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 5;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return -1;
       if( optInVFactor == (-4e+37) )
          optInVFactor = 7.000000e-1;
@@ -49660,7 +49660,7 @@ public class Core {
          return RetCode.OutOfRangeEndIndex ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 5;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       if( optInVFactor == (-4e+37) )
          optInVFactor = 7.000000e-1;
@@ -49765,7 +49765,7 @@ public class Core {
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 5;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       if( optInVFactor == (-4e+37) )
          optInVFactor = 7.000000e-1;
@@ -50482,7 +50482,7 @@ public class Core {
       int retValue;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return -1;
       retValue = emaLookback ( optInTimePeriod );
       return retValue * 3;
@@ -50513,7 +50513,7 @@ public class Core {
          return RetCode.OutOfRangeEndIndex ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       outNBElement.value = 0 ;
       outBegIdx.value = 0 ;
@@ -50571,7 +50571,7 @@ public class Core {
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       _state.value = TA_Calloc(1, sizeof(struct tema ));
       _state.value .value .mem_index = 0;
@@ -51021,7 +51021,7 @@ public class Core {
    {
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return -1;
       return optInTimePeriod-1;
    }
@@ -51045,7 +51045,7 @@ public class Core {
          return RetCode.OutOfRangeEndIndex ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       lookbackTotal = (optInTimePeriod-1);
       if( startIdx < lookbackTotal )
@@ -51154,7 +51154,7 @@ public class Core {
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       _state.value = TA_Calloc(1, sizeof(struct trima ));
       _state.value .value .mem_index = 0;
@@ -53634,7 +53634,7 @@ public class Core {
    {
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return -1;
       return optInTimePeriod - 1;
    }
@@ -53655,7 +53655,7 @@ public class Core {
          return RetCode.OutOfRangeEndIndex ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       lookbackTotal = optInTimePeriod-1;
       if( startIdx < lookbackTotal )
@@ -53708,7 +53708,7 @@ public class Core {
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       _state.value = TA_Calloc(1, sizeof(struct wma ));
       _state.value .value .mem_index = 0;
