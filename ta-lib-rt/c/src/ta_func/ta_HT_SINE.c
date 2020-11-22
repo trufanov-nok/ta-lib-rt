@@ -980,7 +980,7 @@ else {
             SAVE_HILBERT_VARIABLES_STRUCT(HT_SINE,Q1)
             SAVE_HILBERT_VARIABLES_STRUCT(HT_SINE,jI)
             SAVE_HILBERT_VARIABLES_STRUCT(HT_SINE,jQ)
-            CIRCBUF_STRUCT_SAVE(HT_SINE, circBuf)
+            CIRCBUF_STRUCT_SAVE(HT_SINE, circBuf, double)
    return 0;
 }
 

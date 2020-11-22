@@ -812,8 +812,8 @@ DEFINE_CIRCBUF_STRUCT(ULTOSC, double)
 /**** END GENCODE SECTION 12 - DO NOT DELETE THIS LINE ****/
 
    /* insert state save code here. */   
-            CIRCBUF_STRUCT_SAVE(ULTOSC, periodA)
-            CIRCBUF_STRUCT_SAVE(ULTOSC, periodB)
+            CIRCBUF_STRUCT_SAVE(ULTOSC, periodA, double)
+            CIRCBUF_STRUCT_SAVE(ULTOSC, periodB, double)
    return 0;
 }
 

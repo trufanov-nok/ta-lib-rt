@@ -620,7 +620,7 @@ double lastValue, sum, avg;
 /**** END GENCODE SECTION 12 - DO NOT DELETE THIS LINE ****/
 
    /* insert state save code here. */   
-      CIRCBUF_STRUCT_SAVE(CCI, circBuf)
+      CIRCBUF_STRUCT_SAVE(CCI, circBuf, double)
 
    return 0;
 }

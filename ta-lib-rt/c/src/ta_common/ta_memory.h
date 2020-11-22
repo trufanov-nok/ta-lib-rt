@@ -406,7 +406,7 @@
         STATE_P.var = NULL; } \
         }
 
-#define CIRCBUF_STRUCT_SAVE(taFunc, var) {\
+#define CIRCBUF_STRUCT_SAVE(taFunc, var, type) {\
     int io_circbuf_res; \
     struct TA_##taFunc##_STATE_CIRCBUF* str_circbuf = STATE.var; \
     io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); \
@@ -414,7 +414,7 @@
     io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); \
     if (io_circbuf_res < 0) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); \
     if (str_circbuf->size > 0) { \
-    io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); \
+    io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(type),str_circbuf->size,_file); \
     if (io_circbuf_res < str_circbuf->size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); }\
     }
 
@@ -429,6 +429,6 @@
     struct TA_##taFunc##_STATE_CIRCBUF* str_circbuf = STATE_P.var;  \
     str_circbuf->idx = circbuf_idx; \
     if (str_circbuf->size > 0) { \
-    io_circbuf_res = fread(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); \
+    io_circbuf_res = fread(str_circbuf->circbuf,sizeof(type),str_circbuf->size,_file); \
     if (io_circbuf_res < str_circbuf->size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); }\
     }

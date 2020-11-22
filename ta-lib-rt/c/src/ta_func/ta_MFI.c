@@ -730,7 +730,7 @@ DEFINE_CIRCBUF_STRUCT(MFI, MoneyFlow)
 /**** END GENCODE SECTION 12 - DO NOT DELETE THIS LINE ****/
 
    /* insert state save code here. */   
-            CIRCBUF_STRUCT_SAVE(MFI, mflow)
+            CIRCBUF_STRUCT_SAVE(MFI, mflow, MoneyFlow)
    return 0;
 }
 
