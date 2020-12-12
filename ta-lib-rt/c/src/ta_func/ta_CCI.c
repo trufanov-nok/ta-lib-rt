@@ -276,7 +276,7 @@
       /* And finally, the CCI... */
       tempReal = lastValue-theAverage;
 
-      if( (tempReal != 0.0) && (tempReal2 != 0.0) )
+      if( (!TA_IS_ZERO(tempReal)) && (!TA_IS_ZERO(tempReal2)) )
       {
          outReal[outIdx++] = tempReal/(0.015*(tempReal2/optInTimePeriod));
       }
@@ -436,7 +436,7 @@ double lastValue, sum, avg;
 
    lastValue -= avg;
 
-   if( (std_fabs(lastValue) > 1e-13) && (std_fabs(sum) > 1e-13) )
+   if( (!TA_IS_ZERO(lastValue)) && (!TA_IS_ZERO(sum)) )
    {
       VALUE_HANDLE_DEREF(outReal) = lastValue/(0.015*(sum/STATE.optInTimePeriod));
    }
