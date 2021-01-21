@@ -35,7 +35,9 @@ INCLUDEPATH += ./../../../../../include \
 
 SOURCES += \
     ../../../../../src/tools/gen_code/gen_code.c \
+    ../../../../../src/tools/gen_code/print_utils.c \
     ../../../../../src/tools/gen_code/print_funcs.c \
+    ../../../../../src/tools/gen_code/print_funcs_xml.c \
     ../../../../../src/ta_abstract/ta_abstract.c \
     ../../../../../src/ta_abstract/ta_def_ui.c \
     ../../../../../src/ta_abstract/tables/table_a.c \

@@ -77,7 +77,9 @@
  */
 
 #include "gen_code.h"
+#include "print_utils.h"
 #include "print_funcs.h"
+#include "print_funcs_xml.h"
 
 
 FileHandle *gOutFunc_H;        /* For "ta_func.h"  */
@@ -103,7 +105,6 @@ char gTempBuf[BUFFER_SIZE];
 char gTempBuf2[BUFFER_SIZE];
 char gTempBuf3[BUFFER_SIZE];
 char gTempBufForPrint[BUFFER_SIZE];
-char gTempDoubleToStr[200];
 
 const char *gCurrentGroupName;
 
@@ -251,7 +252,7 @@ int main(int argc, char* argv[])
 /* The following I/O function allows to manipulate
  * more easily files.
  *
- * When opening the file, the caller can specifiy a
+ * When opening the file, the caller can specify a
  * path relative to the position of the binary.
  * That is: ta-lib\c\bin
  *
@@ -799,11 +800,11 @@ int genCode(int argc, char* argv[])
    /* Leave empty line for Makefile.am */
    fprintf( gOutMakefile_AM->file, "\n" );
 
-   /* Seperate generation of xml description file */
+   /* Separate generation of xml description file */
    fprintf(gOutFunc_XML->file, "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n");
-   fprintf(gOutFunc_XML->file, "<FinancialFunctions>\n");
+   fprintf(gOutFunc_XML->file, "<FinancialFunctionGroups version=\"TA-Lib RT %s\">\n", TA_GetVersionString());
    retCode = TA_ForEachFunc( doForEachFunctionXml, NULL );
-   fprintf(gOutFunc_XML->file, "</FinancialFunctions>\n");
+   fprintf(gOutFunc_XML->file, "</FinancialFunctionGroups>\n");
 
    /* Append some "hard coded" prototype for ta_func */
    appendToFunc( gOutFunc_H->file );
@@ -984,403 +985,11 @@ unsigned int forEachGroup( TA_ForEachGroup forEachGroupFunc,
    return i;
 }
 
-/* Replaces reserved xml characters with the appropriate escape sequence. */
-void ReplaceReservedXmlCharacters(const char *input, char *output )
-{
-	char *currentPosition;
-	char tempString[8*1024];
-
-	if((input == NULL) || (output == NULL))
-	{
-		return;
-	}
-
-	strcpy(output, input);
-
-	/*Replace '&' with "&amp;"
-	 *Note1: '&' has to be processed first as otherwise we replace the
-	 *       '&' in the escaped characters.
-	 *Note2: We assume that the input string does not have any escaped
-	 *       characters already.
-     */
-	currentPosition = output;
-	while((currentPosition = strchr(currentPosition, '&')) != NULL)
-	{
-		tempString[0] = '\0';
-		if(strlen(currentPosition) > 1)
-		{
-			strcpy(tempString, currentPosition+1);
-		}
-		sprintf(currentPosition, "&amp;%s", tempString);
-	}
-
-	/* Replace '<' with "&lt;" */
-	currentPosition = output;
-	while((currentPosition = strchr(currentPosition, '<')) != NULL)
-	{
-		tempString[0] = '\0';
-		if(strlen(currentPosition) > 1)
-		{
-			strcpy(tempString, currentPosition+1);
-		}
-		sprintf(currentPosition, "&lt;%s", tempString);
-	}
-
-	/* Replace '>' with "&gt;" */
-	currentPosition = output;
-	while((currentPosition = strchr(currentPosition, '>')) != NULL)
-	{
-		tempString[0] = '\0';
-		if(strlen(currentPosition) > 1)
-		{
-			strcpy(tempString, currentPosition+1);
-		}
-		sprintf(currentPosition, "&gt;%s", tempString);
-	}
-
-    /* Replace ''' with "&apos;" */
-	currentPosition = output;
-	while((currentPosition = strchr(currentPosition, '\'')) != NULL)
-	{
-		tempString[0] = '\0';
-		if(strlen(currentPosition) > 1)
-		{
-			strcpy(tempString, currentPosition+1);
-		}
-		sprintf(currentPosition, "&apos;%s", tempString);
-	}
-
-	/* Replace '"' with "&quot;" */
-	currentPosition = output;
-	while((currentPosition = strchr(currentPosition, '"')) != NULL)
-	{
-		tempString[0] = '\0';
-		if(strlen(currentPosition) > 1)
-		{
-			strcpy(tempString, currentPosition+1);
-		}
-		sprintf(currentPosition, "&quot;%s", tempString);
-	}
-}
-
 void doForEachFunctionXml(const TA_FuncInfo *funcInfo,
 								 void *opaqueData)
 {
-    TA_RetCode retCode;
-	const TA_InputParameterInfo *inputInfo;
-	const TA_OptInputParameterInfo *optInputInfo;
-	const TA_OutputParameterInfo *outputInfo;
-	char tempString[8*1024];
-	unsigned int i;
-
     (void)opaqueData;
-
-	/* General stuff about function */
-	fprintf(gOutFunc_XML->file, "	<!-- %s -->\n", funcInfo->name);
-	fprintf(gOutFunc_XML->file, "	<FinancialFunction>\n");
-    fprintf(gOutFunc_XML->file, "		<Abbreviation>%s</Abbreviation>\n", (funcInfo->name == NULL)? "" : funcInfo->name);
-    fprintf(gOutFunc_XML->file, "		<CamelCaseName>%s</CamelCaseName>\n", (funcInfo->camelCaseName == NULL)? "" : funcInfo->camelCaseName);
-	ReplaceReservedXmlCharacters(funcInfo->hint, tempString);
-    fprintf(gOutFunc_XML->file, "		<ShortDescription>%s</ShortDescription>\n", (funcInfo->hint == NULL)? "" : tempString);
-    fprintf(gOutFunc_XML->file, "		<GroupId>%s</GroupId>\n", funcInfo->group);
-
-	/* Optional function flags */
-	if(funcInfo->flags & (TA_FUNC_FLG_OVERLAP | TA_FUNC_FLG_VOLUME | TA_FUNC_FLG_CANDLESTICK | TA_FUNC_FLG_UNST_PER))
-	{
-	    fprintf(gOutFunc_XML->file, "		<Flags>\n");
-		if(funcInfo->flags & TA_FUNC_FLG_OVERLAP)
-		{
-			fprintf(gOutFunc_XML->file, "			<Flag>Overlap</Flag>\n");
-		}
-		if(funcInfo->flags & TA_FUNC_FLG_VOLUME)
-		{
-			fprintf(gOutFunc_XML->file, "			<Flag>Volume</Flag>\n");
-		}
-		if(funcInfo->flags & TA_FUNC_FLG_CANDLESTICK)
-		{
-			fprintf(gOutFunc_XML->file, "			<Flag>Candlestick</Flag>\n");
-		}
-		if(funcInfo->flags & TA_FUNC_FLG_UNST_PER)
-		{
-			fprintf(gOutFunc_XML->file, "			<Flag>Unstable Period</Flag>\n");
-		}
-		
-	    fprintf(gOutFunc_XML->file, "		</Flags>\n");
-	}
-
-
-	/* Required input arguments */
-    fprintf(gOutFunc_XML->file, "		<RequiredInputArguments>\n");
-	for(i=0; i<funcInfo->nbInput; i++)
-	{
-		retCode = TA_GetInputParameterInfo( funcInfo->handle, i, &inputInfo);
-
-        if( retCode != TA_SUCCESS )
-        {
-           printf( "Error in TA_GetInputParameterInfo (%d)\n", retCode );
-           return;
-        }
-
-		if(inputInfo->type == TA_Input_Price)
-		{
-			if(inputInfo->flags & TA_IN_PRICE_OPEN)
-			{
-				fprintf(gOutFunc_XML->file, "			<RequiredInputArgument>\n");
-				fprintf(gOutFunc_XML->file, "				<Type>Open</Type>\n");
-				fprintf(gOutFunc_XML->file, "				<Name>Open</Name>\n");
-				fprintf(gOutFunc_XML->file, "			</RequiredInputArgument>\n");
-			}
-			if(inputInfo->flags & TA_IN_PRICE_HIGH)
-			{
-				fprintf(gOutFunc_XML->file, "			<RequiredInputArgument>\n");
-				fprintf(gOutFunc_XML->file, "				<Type>High</Type>\n");
-				fprintf(gOutFunc_XML->file, "				<Name>High</Name>\n");
-				fprintf(gOutFunc_XML->file, "			</RequiredInputArgument>\n");
-			}
-			if(inputInfo->flags & TA_IN_PRICE_LOW)
-			{
-				fprintf(gOutFunc_XML->file, "			<RequiredInputArgument>\n");
-				fprintf(gOutFunc_XML->file, "				<Type>Low</Type>\n");
-				fprintf(gOutFunc_XML->file, "				<Name>Low</Name>\n");
-				fprintf(gOutFunc_XML->file, "			</RequiredInputArgument>\n");
-			}
-			if(inputInfo->flags & TA_IN_PRICE_CLOSE)
-			{
-				fprintf(gOutFunc_XML->file, "			<RequiredInputArgument>\n");
-				fprintf(gOutFunc_XML->file, "				<Type>Close</Type>\n");
-				fprintf(gOutFunc_XML->file, "				<Name>Close</Name>\n");
-				fprintf(gOutFunc_XML->file, "			</RequiredInputArgument>\n");
-			}
-			if(inputInfo->flags & TA_IN_PRICE_VOLUME)
-			{
-				fprintf(gOutFunc_XML->file, "			<RequiredInputArgument>\n");
-				fprintf(gOutFunc_XML->file, "				<Type>Volume</Type>\n");
-				fprintf(gOutFunc_XML->file, "				<Name>Volume</Name>\n");
-				fprintf(gOutFunc_XML->file, "			</RequiredInputArgument>\n");
-			}
-			if(inputInfo->flags & TA_IN_PRICE_OPENINTEREST)
-			{
-				fprintf(gOutFunc_XML->file, "			<RequiredInputArgument>\n");
-				fprintf(gOutFunc_XML->file, "				<Type>Open Interest</Type>\n");
-				fprintf(gOutFunc_XML->file, "				<Name>Open Interest</Name>\n");
-				fprintf(gOutFunc_XML->file, "			</RequiredInputArgument>\n");
-			}
-			if(inputInfo->flags & TA_IN_PRICE_TIMESTAMP)
-			{
-				fprintf(gOutFunc_XML->file, "			<RequiredInputArgument>\n");
-				fprintf(gOutFunc_XML->file, "				<Type>Timestamp</Type>\n");
-				fprintf(gOutFunc_XML->file, "				<Name>Timestamp</Name>\n");
-				fprintf(gOutFunc_XML->file, "			</RequiredInputArgument>\n");
-			}
-		}
-		else
-		{
-			fprintf(gOutFunc_XML->file, "			<RequiredInputArgument>\n");
-			if(inputInfo->type == TA_Input_Real)
-			{
-				fprintf(gOutFunc_XML->file, "				<Type>Double Array</Type>\n");
-			}
-			else if(inputInfo->type == TA_Input_Integer)
-			{
-				fprintf(gOutFunc_XML->file, "				<Type>Integer Array</Type>\n");
-			}
-			else
-			{
-				printf("Unknown input type detected.\n");
-			}
-			fprintf(gOutFunc_XML->file, "				<Name>%s</Name>\n", inputInfo->paramName);
-			fprintf(gOutFunc_XML->file, "			</RequiredInputArgument>\n");
-		}
-	}
-    fprintf(gOutFunc_XML->file, "		</RequiredInputArguments>\n");
-
-	/* Optional input arguments */
-	if(funcInfo->nbOptInput > 0)
-	{
-
-		fprintf(gOutFunc_XML->file, "		<OptionalInputArguments>\n");
-		for(i=0; i<funcInfo->nbOptInput; i++)
-		{
-			retCode = TA_GetOptInputParameterInfo( funcInfo->handle, i, &optInputInfo );
-
-            if( retCode != TA_SUCCESS )
-            {
-               printf( "Error in TA_GetOptInputParameterInfo (%d)\n", retCode );
-               return;
-            }
-
-			fprintf(gOutFunc_XML->file, "			<OptionalInputArgument>\n");
-			fprintf(gOutFunc_XML->file, "				<Name>%s</Name>\n", optInputInfo->displayName);
-			ReplaceReservedXmlCharacters(optInputInfo->hint, tempString);
-			fprintf(gOutFunc_XML->file, "				<ShortDescription>%s</ShortDescription>\n", (optInputInfo->hint == NULL)? "" : tempString);
-			if(optInputInfo->flags != 0)
-			{
-				fprintf(gOutFunc_XML->file, "				<Flags>\n");
-
-				if(optInputInfo->flags & TA_OPTIN_IS_PERCENT)
-				{
-					fprintf(gOutFunc_XML->file, "					<Flag>Percent</Flag>\n");
-				}
-				if(optInputInfo->flags & TA_OPTIN_IS_DEGREE)
-				{
-					fprintf(gOutFunc_XML->file, "					<Flag>Degree</Flag>\n");
-				}
-				if(optInputInfo->flags & TA_OPTIN_IS_CURRENCY)
-				{
-					fprintf(gOutFunc_XML->file, "					<Flag>Currency</Flag>\n");
-				}
-				if(optInputInfo->flags & TA_OPTIN_ADVANCED)
-				{
-					fprintf(gOutFunc_XML->file, "					<Flag>Advanced</Flag>\n");
-				}
-
-				fprintf(gOutFunc_XML->file, "				</Flags>\n");
-			}
-
-			if(optInputInfo->type == TA_OptInput_RealRange)
-			{
-				TA_RealRange *doubleRange;
-					
-				doubleRange= (TA_RealRange*)optInputInfo->dataSet;
-				fprintf(gOutFunc_XML->file, "				<Type>Double</Type>\n");
-				fprintf(gOutFunc_XML->file, "				<Range>\n");
-				fprintf(gOutFunc_XML->file, "					<Minimum>%s</Minimum>\n", doubleToStr(doubleRange->min));
-				fprintf(gOutFunc_XML->file, "					<Maximum>%s</Maximum>\n", doubleToStr(doubleRange->max));
-				fprintf(gOutFunc_XML->file, "					<Precision>%d</Precision>\n", doubleRange->precision);
-				fprintf(gOutFunc_XML->file, "					<SuggestedStart>%s</SuggestedStart>\n", doubleToStr(doubleRange->suggested_start));
-				fprintf(gOutFunc_XML->file, "					<SuggestedEnd>%s</SuggestedEnd>\n", doubleToStr(doubleRange->suggested_end));
-				fprintf(gOutFunc_XML->file, "					<SuggestedIncrement>%s</SuggestedIncrement>\n", doubleToStr(doubleRange->suggested_increment));
-				fprintf(gOutFunc_XML->file, "				</Range>\n");
-				fprintf(gOutFunc_XML->file, "				<DefaultValue>%s</DefaultValue>\n", doubleToStr(optInputInfo->defaultValue));
-			}
-			else if(optInputInfo->type == TA_OptInput_IntegerRange)
-			{
-				TA_IntegerRange *integerRange;
-				
-				integerRange = (TA_IntegerRange*)optInputInfo->dataSet;
-				fprintf(gOutFunc_XML->file, "				<Type>Integer</Type>\n");
-				fprintf(gOutFunc_XML->file, "				<Range>\n");
-				fprintf(gOutFunc_XML->file, "					<Minimum>%d</Minimum>\n", integerRange->min);
-				fprintf(gOutFunc_XML->file, "					<Maximum>%d</Maximum>\n", integerRange->max);
-				fprintf(gOutFunc_XML->file, "					<SuggestedStart>%d</SuggestedStart>\n", integerRange->max);
-				fprintf(gOutFunc_XML->file, "					<SuggestedEnd>%d</SuggestedEnd>\n", integerRange->max);
-				fprintf(gOutFunc_XML->file, "					<SuggestedIncrement>%d</SuggestedIncrement>\n", integerRange->max);
-				fprintf(gOutFunc_XML->file, "				</Range>\n");
-				fprintf(gOutFunc_XML->file, "				<DefaultValue>%d</DefaultValue>\n", (int)optInputInfo->defaultValue);
-			}
-			else if(optInputInfo->type == TA_OptInput_IntegerList)
-			{
-				TA_IntegerList *intList;
-					
-				intList = (TA_IntegerList*) optInputInfo->dataSet;
-				fprintf(gOutFunc_XML->file, "				<Type>MA Type</Type>\n");
-				fprintf(gOutFunc_XML->file, "				<DefaultValue>%d</DefaultValue>\n", (int)optInputInfo->defaultValue);
-				if( intList != (TA_IntegerList*) TA_DEF_UI_MA_Method.dataSet )
-				{
-					printf("Integer lists are not supported.\n");
-				}
-			}
-			else
-			{
-				printf("Unknown optional input type detected.\n");
-			}
-
-			fprintf(gOutFunc_XML->file, "			</OptionalInputArgument>\n");
-		}
-		fprintf(gOutFunc_XML->file, "		</OptionalInputArguments>\n");
-	}
-
-	/* Output arguments */
-	fprintf(gOutFunc_XML->file, "		<OutputArguments>\n");
-	for(i=0; i<funcInfo->nbOutput; i++)
-	{
-		retCode = TA_GetOutputParameterInfo( funcInfo->handle, i, &outputInfo );
-
-        if( retCode != TA_SUCCESS )
-        {
-           printf( "Error in TA_GetOutputParameterInfo (%d)\n", retCode );
-           return;
-        }
-
-		fprintf(gOutFunc_XML->file, "			<OutputArgument>\n");
-		if(outputInfo->type == TA_Output_Integer)
-		{
-			fprintf(gOutFunc_XML->file, "				<Type>Integer Array</Type>\n");
-		}
-		else if(outputInfo->type == TA_Output_Real)
-		{
-			fprintf(gOutFunc_XML->file, "				<Type>Double Array</Type>\n");
-		}
-		else
-		{
-			printf("Unknown output type detected.\n");
-		}
-		fprintf(gOutFunc_XML->file, "				<Name>%s</Name>\n", outputInfo->paramName);
-		if(outputInfo->flags != 0)
-		{
-			fprintf(gOutFunc_XML->file, "				<Flags>\n");
-
-			if(outputInfo->flags & TA_OUT_LINE)
-			{
-				fprintf(gOutFunc_XML->file, "					<Flag>Line</Flag>\n");
-			}
-			if(outputInfo->flags & TA_OUT_DOT_LINE)
-			{
-				fprintf(gOutFunc_XML->file, "					<Flag>Dotted Line</Flag>\n");
-			}
-			if(outputInfo->flags & TA_OUT_DASH_LINE)
-			{
-				fprintf(gOutFunc_XML->file, "					<Flag>Dashed Line</Flag>\n");
-			}
-			if(outputInfo->flags & TA_OUT_DOT)
-			{
-				fprintf(gOutFunc_XML->file, "					<Flag>Dots</Flag>\n");
-			}
-			if(outputInfo->flags & TA_OUT_HISTO)
-			{
-				fprintf(gOutFunc_XML->file, "					<Flag>Histogram</Flag>\n");
-			}
-			if(outputInfo->flags & TA_OUT_PATTERN_BOOL)
-			{
-				fprintf(gOutFunc_XML->file, "					<Flag>Pattern Bool</Flag>\n");
-			}
-			if(outputInfo->flags & TA_OUT_PATTERN_BULL_BEAR)
-			{
-				fprintf(gOutFunc_XML->file, "					<Flag>Pattern Bull Bear</Flag>\n");
-			}
-			if(outputInfo->flags & TA_OUT_PATTERN_STRENGTH)
-			{
-				fprintf(gOutFunc_XML->file, "					<Flag>Pattern Strength</Flag>\n");
-			}
-			if(outputInfo->flags & TA_OUT_POSITIVE)
-			{
-				fprintf(gOutFunc_XML->file, "					<Flag>Positive</Flag>\n");
-			}
-			if(outputInfo->flags & TA_OUT_NEGATIVE)
-			{
-				fprintf(gOutFunc_XML->file, "					<Flag>Negative</Flag>\n");
-			}
-			if(outputInfo->flags & TA_OUT_ZERO)
-			{
-				fprintf(gOutFunc_XML->file, "					<Flag>Zero</Flag>\n");
-			}
-			if(outputInfo->flags & TA_OUT_UPPER_LIMIT)
-			{
-				fprintf(gOutFunc_XML->file, "					<Flag>Upper Limit</Flag>\n");
-			}
-			if(outputInfo->flags & TA_OUT_LOWER_LIMIT)
-			{
-				fprintf(gOutFunc_XML->file, "					<Flag>Lower Limit</Flag>\n");
-			}
-
-			fprintf(gOutFunc_XML->file, "				</Flags>\n");
-		}
-		fprintf(gOutFunc_XML->file, "			</OutputArgument>\n");
-	}
-	fprintf(gOutFunc_XML->file, "		</OutputArguments>\n");
-    fprintf(gOutFunc_XML->file, "	</FinancialFunction>\n");
-	fprintf(gOutFunc_XML->file, "\n");
-	fprintf(gOutFunc_XML->file, "\n");
+    print_xml(gOutFunc_XML->file, funcInfo);
 }
 
 void doForEachFunctionPhase1( const TA_FuncInfo *funcInfo,
@@ -4722,96 +4331,7 @@ gen_retcode_exit:
    return retValue; /* Success. */
 }
 
-const char *doubleToStr( double value )
-{
-   int length;
-   int i, outIdx;
-   sprintf( gTempDoubleToStr, "%e", value );
 
-   /* Remove extra "0" added by Microsoft in the
-    * exponential part.
-    */
-   length = (int)strlen( gTempDoubleToStr );
-   outIdx = 0;
-   for( i=0; i < length; i++ )
-   {
-      /* Will skip two leading zero in the exponent */
-      if( (i >= 2) &&
-          (toupper(gTempDoubleToStr[i-2]) == 'E') &&
-          ((gTempDoubleToStr[i-1] == '+')||(gTempDoubleToStr[i-1] == '-')) &&
-          (gTempDoubleToStr[i] == '0') &&
-          (gTempDoubleToStr[i+1] == '0') &&
-          (isdigit(gTempDoubleToStr[i+2])) )
-      {
-         i++;
-         continue;
-      }
-
-      /* Will skip one leading zero in the exponent */
-      if( (i >= 2) &&
-          (toupper(gTempDoubleToStr[i-2]) == 'E') &&
-          ((gTempDoubleToStr[i-1] == '+')||(gTempDoubleToStr[i-1] == '-')) &&
-          (gTempDoubleToStr[i] == '0') &&
-          (isdigit(gTempDoubleToStr[i+1])))
-      {
-         continue;
-      }
-
-      gTempDoubleToStr[outIdx++] = gTempDoubleToStr[i];
-   }
-   gTempDoubleToStr[outIdx] = '\0';
-
-   return gTempDoubleToStr;
-}
-
-void cnvtToUpperCase( char *str )
-{
-   char c;
-
-   if( !str ) return;
-
-   c = *str; 
-   while( c != '\0' )
-   {
-      *str = (char)toupper(c);
-      str++;
-      c = *str;
-   }      
-}
-
-char *trimWhitespace( char *str )
-{
-   int i;
-
-   if( !str ) return str;
-
-   while( isspace(*str) ) str++;
-   if( *str == '\0' ) return str;
-
-   for( i=(int)strlen(str)-1; i >= 0; i-- )
-   {
-      if( !isspace(str[i]) )
-         return str;
-      str[i] = '\0';      
-   }
-
-   return str;
-}
-
-void cnvtChar( char *str, char from, char to )
-{
-   char c;
-
-   if( !str ) return;
-   
-   c = *str;
-   while( c != '\0' )
-   {
-      if( c == from ) *str = to;
-      str++;
-      c = *str;
-   }
-}
 
 #ifdef _MSC_VER
 void printExcelGlueCode( FILE *out, const TA_FuncInfo *funcInfo )
@@ -4872,7 +4392,7 @@ void extractTALogic( FILE *inFile, FILE *outFile )
    #define START_DELIMITATOR "/**** END GENCODE SECTION 3"
    #define STOP_DELIMITATOR  "/**** START GENCODE SECTION 5"
 
-   /* Find the begining of the function */
+   /* Find the beginning of the function */
    while( fgets( gTempBuf, BUFFER_SIZE, inFile ) )
    {
       length = (int)strlen(gTempBuf);
@@ -5074,10 +4594,10 @@ void appendToFunc( FILE *out )
 {
    fprintf( out, "\n" );
    fprintf( out, "/* Some TA functions takes a certain amount of input data\n" );
-   fprintf( out, " * before stabilizing and outputing meaningful data. This is\n" );
+   fprintf( out, " * before stabilizing and outputting meaningful data. This is\n" );
    fprintf( out, " * a behavior pertaining to the algo of some TA functions and\n" );
    fprintf( out, " * is not particular to the TA-Lib implementation.\n" );
-   fprintf( out, " * TA-Lib allows you to automatically strip off these unstabl\n" );
+   fprintf( out, " * TA-Lib allows you to automatically strip off these unstable\n" );
    fprintf( out, " * data from your output and from any internal processing.\n" );
    fprintf( out, " * (See documentation for more info)\n" );
    fprintf( out, " *\n" );
@@ -5098,7 +4618,7 @@ void appendToFunc( FILE *out )
    fprintf( out, "unsigned int TA_GetUnstablePeriod( TA_FuncUnstId id );\n" );
    fprintf( out, "\n" );
    fprintf( out, "/* You can change slightly the behavior of the TA functions\n" );
-   fprintf( out, " * by requesting compatibiliy with some existing software.\n" );
+   fprintf( out, " * by requesting compatibility with some existing software.\n" );
    fprintf( out, " *\n" );
    fprintf( out, " * By default, the behavior is as close as the original \n" );
    fprintf( out, " * author of the TA functions intend it to be.\n" );
@@ -5370,7 +4890,7 @@ void printJavaFunctionAnnotation(const TA_FuncInfo *funcInfo)
     
 
 	/*
-	 * Anotate Input parameters
+     * Annotate Input parameters
 	 */
 	for(i=0; i<funcInfo->nbInput; i++)
 	{

@@ -59,8 +59,6 @@ TA_RetCode listInputParameters(char* buf, const TA_FuncInfo *funcInfo, char* sep
 }
 
 
-#include "print_funcs.h"
-
 TA_RetCode listOptInputParameters(char* buf, const TA_FuncInfo *funcInfo, char* separator, char* postfix)
 {
  unsigned int i, buf_idx = 0;
