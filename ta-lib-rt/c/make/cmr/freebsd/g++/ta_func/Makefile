@@ -160,10 +160,13 @@ SOURCES =	../../../../../src/ta_func/ta_utility.c \
 		../../../../../src/ta_func/ta_MOM.c \
 		../../../../../src/ta_func/ta_MULT.c \
 		../../../../../src/ta_func/ta_NATR.c \
+		../../../../../src/ta_func/ta_NVI.c \
 		../../../../../src/ta_func/ta_OBV.c \
 		../../../../../src/ta_func/ta_PLUS_DI.c \
 		../../../../../src/ta_func/ta_PLUS_DM.c \
 		../../../../../src/ta_func/ta_PPO.c \
+		../../../../../src/ta_func/ta_PVI.c \
+		../../../../../src/ta_func/ta_PVT.c \
 		../../../../../src/ta_func/ta_ROC.c \
 		../../../../../src/ta_func/ta_ROCP.c \
 		../../../../../src/ta_func/ta_ROCR.c \
@@ -322,10 +325,13 @@ OBJECTS =	../../../../../temp/cmr/ta_utility.o \
 		../../../../../temp/cmr/ta_MOM.o \
 		../../../../../temp/cmr/ta_MULT.o \
 		../../../../../temp/cmr/ta_NATR.o \
+		../../../../../temp/cmr/ta_NVI.o \
 		../../../../../temp/cmr/ta_OBV.o \
 		../../../../../temp/cmr/ta_PLUS_DI.o \
 		../../../../../temp/cmr/ta_PLUS_DM.o \
 		../../../../../temp/cmr/ta_PPO.o \
+		../../../../../temp/cmr/ta_PVI.o \
+		../../../../../temp/cmr/ta_PVT.o \
 		../../../../../temp/cmr/ta_ROC.o \
 		../../../../../temp/cmr/ta_ROCP.o \
 		../../../../../temp/cmr/ta_ROCR.o \
@@ -791,6 +797,9 @@ clean:
 ../../../../../temp/cmr/ta_NATR.o: ../../../../../src/ta_func/ta_NATR.c
 	$(CC) -c $(CFLAGS) $(INCPATH) -o ../../../../../temp/cmr/ta_NATR.o ../../../../../src/ta_func/ta_NATR.c
 
+../../../../../temp/cmr/ta_NVI.o: ../../../../../src/ta_func/ta_NVI.c
+	$(CC) -c $(CFLAGS) $(INCPATH) -o ../../../../../temp/cmr/ta_NVI.o ../../../../../src/ta_func/ta_NVI.c
+
 ../../../../../temp/cmr/ta_OBV.o: ../../../../../src/ta_func/ta_OBV.c
 	$(CC) -c $(CFLAGS) $(INCPATH) -o ../../../../../temp/cmr/ta_OBV.o ../../../../../src/ta_func/ta_OBV.c
 
@@ -802,6 +811,12 @@ clean:
 
 ../../../../../temp/cmr/ta_PPO.o: ../../../../../src/ta_func/ta_PPO.c
 	$(CC) -c $(CFLAGS) $(INCPATH) -o ../../../../../temp/cmr/ta_PPO.o ../../../../../src/ta_func/ta_PPO.c
+
+../../../../../temp/cmr/ta_PVI.o: ../../../../../src/ta_func/ta_PVI.c
+	$(CC) -c $(CFLAGS) $(INCPATH) -o ../../../../../temp/cmr/ta_PVI.o ../../../../../src/ta_func/ta_PVI.c
+
+../../../../../temp/cmr/ta_PVT.o: ../../../../../src/ta_func/ta_PVT.c
+	$(CC) -c $(CFLAGS) $(INCPATH) -o ../../../../../temp/cmr/ta_PVT.o ../../../../../src/ta_func/ta_PVT.c
 
 ../../../../../temp/cmr/ta_ROC.o: ../../../../../src/ta_func/ta_ROC.c
 	$(CC) -c $(CFLAGS) $(INCPATH) -o ../../../../../temp/cmr/ta_ROC.o ../../../../../src/ta_func/ta_ROC.c
