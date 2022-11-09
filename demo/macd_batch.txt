@@ -1,0 +1,17 @@
+Result for day #33 outMACD: 4.273859 outMACDSignal: 5.671647 outMACDHist: -1.397788
+Result for day #34 outMACD: 4.345092 outMACDSignal: 5.406336 outMACDHist: -1.061244
+Result for day #35 outMACD: 4.395259 outMACDSignal: 5.204121 outMACDHist: -0.808861
+Result for day #36 outMACD: 4.328635 outMACDSignal: 5.029024 outMACDHist: -0.700388
+Result for day #37 outMACD: 4.393831 outMACDSignal: 4.901985 outMACDHist: -0.508154
+Result for day #38 outMACD: 4.484981 outMACDSignal: 4.818584 outMACDHist: -0.333603
+Result for day #39 outMACD: 4.581865 outMACDSignal: 4.771241 outMACDHist: -0.189375
+Result for day #40 outMACD: 4.761112 outMACDSignal: 4.769215 outMACDHist: -0.008103
+Result for day #41 outMACD: 5.416065 outMACDSignal: 4.898585 outMACDHist: 0.517480
+Result for day #42 outMACD: 6.109990 outMACDSignal: 5.140866 outMACDHist: 0.969124
+Result for day #43 outMACD: 6.871214 outMACDSignal: 5.486936 outMACDHist: 1.384278
+Result for day #44 outMACD: 7.464296 outMACDSignal: 5.882408 outMACDHist: 1.581888
+Result for day #45 outMACD: 8.092786 outMACDSignal: 6.324483 outMACDHist: 1.768303
+Result for day #46 outMACD: 8.441914 outMACDSignal: 6.747970 outMACDHist: 1.693945
+Result for day #47 outMACD: 8.687049 outMACDSignal: 7.135785 outMACDHist: 1.551264
+Result for day #48 outMACD: 8.831961 outMACDSignal: 7.475021 outMACDHist: 1.356940
+Result for day #49 outMACD: 9.085758 outMACDSignal: 7.797168 outMACDHist: 1.288590
