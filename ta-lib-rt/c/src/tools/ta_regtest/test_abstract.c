@@ -196,7 +196,7 @@ ErrorNumber test_abstract( void )
     * and as at least 500 characters (less is guaranteed bad...)
     */
    xmlArray = TA_FunctionDescriptionXML();
-   for( i=0; i < 1000000; i++ )
+   for( i=0; i < 2000000; i++ )
    {
       if( xmlArray[i] == 0x0 )
          break;
@@ -208,7 +208,7 @@ ErrorNumber test_abstract( void )
       return TA_ABS_TST_FAIL_FUNCTION_DESC_SMALL;
    }
 
-   if( i == 1000000 )
+   if( i == 2000000 )
    {
       printf( "TA_FunctionDescriptionXML failed. Size too large (missing null?).\n" );
       return TA_ABS_TST_FAIL_FUNCTION_DESC_LARGE;
