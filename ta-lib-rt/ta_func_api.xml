@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<FinancialFunctionGroups version="TA-Lib RT 0.8.1-alpha (Nov 22 2020 06:42:11)">
+<FinancialFunctionGroups version="TA-Lib RT 0.8.1-alpha (Nov 12 2022 18:50:58)">
 	<!-- ACCBANDS -->
 	<FinancialFunctionGroup>
 		<Abbreviation>ACCBANDS</Abbreviation>
@@ -47037,6 +47037,293 @@
 							<SuggestedIncrement>100000</SuggestedIncrement>
 						</Range>
 						<DefaultValue>14</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+		</Functions>
+	</FinancialFunctionGroup>
+
+
+	<!-- WLMA -->
+	<FinancialFunctionGroup>
+		<Abbreviation>WLMA</Abbreviation>
+		<CamelCaseName>Wlma</CamelCaseName>
+		<ShortDescription>Wilders Moving Average</ShortDescription>
+		<GroupId>Overlap Studies</GroupId>
+		<Flags>
+			<Flag>Overlap</Flag>
+			<Flag>Unstable Period</Flag>
+		</Flags>
+		<StateMemory>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>inReal</Name>
+			</StateMemoryField>
+		</StateMemory>
+		<State>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_size</Name>
+			</StateField>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_index</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>memory</Name>
+			</StateField>
+			<StateField>
+				<Type>Double</Type>
+				<Name>prevMA</Name>
+			</StateField>
+			<StateField>
+				<Type>Double</Type>
+				<Name>tempSum</Name>
+			</StateField>
+			<StateField>
+				<Type>Double</Type>
+				<Name>preprRes</Name>
+			</StateField>
+			<StateField>
+				<Type>Double</Type>
+				<Name>optInK_1</Name>
+			</StateField>
+		</State>
+		<Functions>
+			<Function>
+				<Name>TA_WLMA_Lookback</Name>
+				<Type>Lookback</Type>
+				<ReturnValue>Integer</ReturnValue>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_WLMA</Name>
+				<Type>Regular</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double Array</Type>
+						<Name>inReal</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outReal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_WLMA_StateInit</Name>
+				<Type>StateInit</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_WLMA_State</Name>
+				<Type>State</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>inReal</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outReal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_WLMA_BatchState</Name>
+				<Type>BatchState</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double Array</Type>
+						<Name>inReal</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outReal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_WLMA_StateFree</Name>
+				<Type>StateFree</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_WLMA_StateLoad</Name>
+				<Type>StateLoad</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_WLMA_StateSave</Name>
+				<Type>StateSave</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
 					</OptionalInputArgument>
 				</OptionalInputArguments>
 			</Function>

@@ -211,6 +211,7 @@ extern const TA_FuncDef TA_DEF_ULTOSC;
 extern const TA_FuncDef TA_DEF_VAR;
 extern const TA_FuncDef TA_DEF_WCLPRICE;
 extern const TA_FuncDef TA_DEF_WILLR;
+extern const TA_FuncDef TA_DEF_WLMA;
 extern const TA_FuncDef TA_DEF_WMA;
 
 const TA_FuncDef *TA_PerGroupFunc_0[] = {
@@ -265,6 +266,7 @@ const TA_FuncDef *TA_PerGroupFunc_2[] = {
 &TA_DEF_T3,
 &TA_DEF_TEMA,
 &TA_DEF_TRIMA,
+&TA_DEF_WLMA,
 &TA_DEF_WMA,
 NULL };
 #define SIZE_GROUP_2 ((sizeof(TA_PerGroupFunc_2)/sizeof(const TA_FuncDef *))-1)

@@ -73,6 +73,34 @@ TA_RetCode TA_INT_EMA_StateInit( struct TA_EMA_State** _state,
                           double optInK_1);
 #endif
 
+/* Calculate a Wilders Moving Average.
+ * This is an internal version, parameter are assumed validated.
+ * (startIdx and endIdx cannot be -1).
+ */
+#if !defined( _MANAGED ) && !defined( _JAVA )
+TA_RetCode TA_INT_WLMA( int           startIdx,
+                        int           endIdx,
+                        const double *inReal,
+                        int           optInTimePeriod,
+                        double        optInK_1,
+                        int          *outBegIdx,
+                        int          *outNBElement,
+                        double       *outReal );
+
+TA_RetCode TA_S_INT_WLMA( int          startIdx,
+                          int          endIdx,
+                          const float *inReal,
+                          int          optInTimePeriod,
+                          double       optInK_1,
+                          int         *outBegIdx,
+                          int         *outNBElement,
+                          double      *outReal );
+
+TA_RetCode TA_INT_WLMA_StateInit( struct TA_WLMA_State** _state,
+                           int           optInTimePeriod,
+                           double optInK_1);
+#endif
+
 /* Calculate a MACD
  * This is an internal version, parameter are assumed validated.
  * (startIdx and endIdx cannot be -1).
@@ -389,6 +417,14 @@ void TA_S_INT_stddev_using_precalc_ma( const float  *inReal,
  * Useful to calculate the 'k' for TA_INT_EMA().
  */
 #define PER_TO_K( per ) ((double)2.0 / ((double)(per + 1)))
+
+/* Convert a period into the equivalent k:
+ *
+ *    k = 1 / period
+ *
+ * Useful to calculate the 'k' for TA_INT_WLMA().
+ */
+#define PER_TO_WILDERS_K( per ) ((double)1.0 / (double)(per))
 
 /* Math Constants and Functions */
 #define PI 3.14159265358979323846

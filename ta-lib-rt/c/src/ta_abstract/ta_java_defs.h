@@ -853,6 +853,11 @@
 #define TA_WILLR_StateInit willR
 #define TA_WILLR_State willR
 #define TA_WILLR_StateFree willR
+#define TA_WLMA_Lookback wlmaLookback
+#define TA_WLMA wlma
+#define TA_WLMA_StateInit wlma
+#define TA_WLMA_State wlma
+#define TA_WLMA_StateFree wlma
 #define TA_WMA_Lookback wmaLookback
 #define TA_WMA wma
 #define TA_WMA_StateInit wma

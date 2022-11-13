@@ -36,14 +36,16 @@
  *  Initial  Name/description
  *  -------------------------------------------------------------------
  *  MF       Mario Fortier
+ *  AT       Alexander Trufanov
  *
  *
  * Change history:
  *
  *  MMDDYY BY   Description
  *  -------------------------------------------------------------------
- *  112400 MF   Template creation.
- *  052603 MF   Adapt code to compile with .NET Managed C++
+ *  112400 MF   [EMA] Template creation.
+ *  052603 MF   [EMA] Adapt code to compile with .NET Managed C++
+ *  111222 AT   Convert EMA to WLMA (replace PER_TO_K with PER_TO_WILDERS_K)
  *
  */
 
@@ -79,13 +81,13 @@
 /* Generated */ #define INPUT_TYPE   double
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ int Core::EmaLookback( int           optInTimePeriod )  /* From 1 to 100000 */
+/* Generated */ int Core::WlmaLookback( int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public int emaLookback( int           optInTimePeriod )  /* From 1 to 100000 */
+/* Generated */ public int wlmaLookback( int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API int TA_EMA_Lookback( int           optInTimePeriod )  /* From 1 to 100000 */
+/* Generated */ TA_LIB_API int TA_WLMA_Lookback( int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 1 - DO NOT DELETE THIS LINE ****/
@@ -104,12 +106,12 @@
 /**** END GENCODE SECTION 2 - DO NOT DELETE THIS LINE ****/
 
    /* insert lookback code here. */
-   return optInTimePeriod - 1 + TA_GLOBALS_UNSTABLE_PERIOD(TA_FUNC_UNST_EMA,Ema);
+   return optInTimePeriod - 1 + TA_GLOBALS_UNSTABLE_PERIOD(TA_FUNC_UNST_WLMA,Wlma);
 }
 
 /**** START GENCODE SECTION 3 - DO NOT DELETE THIS LINE ****/
 /*
- * TA_EMA - Exponential Moving Average
+ * TA_WLMA - Wilders Moving Average
  * 
  * Input  = double
  * Output = double
@@ -123,37 +125,37 @@
  */
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED ) && defined( USE_SUBARRAY )
-/* Generated */ enum class Core::RetCode Core::Ema( int    startIdx,
-/* Generated */                                     int    endIdx,
-/* Generated */                                     SubArray<double>^ inReal,
-/* Generated */                                     int           optInTimePeriod, /* From 1 to 100000 */
-/* Generated */                                     [Out]int%    outBegIdx,
-/* Generated */                                     [Out]int%    outNBElement,
-/* Generated */                                     SubArray<double>^  outReal )
+/* Generated */ enum class Core::RetCode Core::Wlma( int    startIdx,
+/* Generated */                                      int    endIdx,
+/* Generated */                                      SubArray<double>^ inReal,
+/* Generated */                                      int           optInTimePeriod, /* From 1 to 100000 */
+/* Generated */                                      [Out]int%    outBegIdx,
+/* Generated */                                      [Out]int%    outNBElement,
+/* Generated */                                      SubArray<double>^  outReal )
 /* Generated */ #elif defined( _MANAGED )
-/* Generated */ enum class Core::RetCode Core::Ema( int    startIdx,
-/* Generated */                                     int    endIdx,
-/* Generated */                                     cli::array<double>^ inReal,
-/* Generated */                                     int           optInTimePeriod, /* From 1 to 100000 */
-/* Generated */                                     [Out]int%    outBegIdx,
-/* Generated */                                     [Out]int%    outNBElement,
-/* Generated */                                     cli::array<double>^  outReal )
+/* Generated */ enum class Core::RetCode Core::Wlma( int    startIdx,
+/* Generated */                                      int    endIdx,
+/* Generated */                                      cli::array<double>^ inReal,
+/* Generated */                                      int           optInTimePeriod, /* From 1 to 100000 */
+/* Generated */                                      [Out]int%    outBegIdx,
+/* Generated */                                      [Out]int%    outNBElement,
+/* Generated */                                      cli::array<double>^  outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public RetCode ema( int    startIdx,
-/* Generated */                     int    endIdx,
-/* Generated */                     double       inReal[],
-/* Generated */                     int           optInTimePeriod, /* From 1 to 100000 */
-/* Generated */                     MInteger     outBegIdx,
-/* Generated */                     MInteger     outNBElement,
-/* Generated */                     double        outReal[] )
+/* Generated */ public RetCode wlma( int    startIdx,
+/* Generated */                      int    endIdx,
+/* Generated */                      double       inReal[],
+/* Generated */                      int           optInTimePeriod, /* From 1 to 100000 */
+/* Generated */                      MInteger     outBegIdx,
+/* Generated */                      MInteger     outNBElement,
+/* Generated */                      double        outReal[] )
 /* Generated */ #else
-/* Generated */ TA_LIB_API TA_RetCode TA_EMA( int    startIdx,
-/* Generated */                               int    endIdx,
-/* Generated */                                          const double inReal[],
-/* Generated */                                          int           optInTimePeriod, /* From 1 to 100000 */
-/* Generated */                                          int          *outBegIdx,
-/* Generated */                                          int          *outNBElement,
-/* Generated */                                          double        outReal[] )
+/* Generated */ TA_LIB_API TA_RetCode TA_WLMA( int    startIdx,
+/* Generated */                                int    endIdx,
+/* Generated */                                           const double inReal[],
+/* Generated */                                           int           optInTimePeriod, /* From 1 to 100000 */
+/* Generated */                                           int          *outBegIdx,
+/* Generated */                                           int          *outNBElement,
+/* Generated */                                           double        outReal[] )
 /* Generated */ #endif
 /**** END GENCODE SECTION 3 - DO NOT DELETE THIS LINE ****/
 {
@@ -189,10 +191,10 @@
 
    /* Insert TA function code here. */
 
-   /* Simply call the internal implementation of the EMA. */
-   return FUNCTION_CALL(INT_EMA)( startIdx, endIdx, inReal, 
+   /* Simply call the internal implementation of the WLMA. */
+   return FUNCTION_CALL(INT_WLMA)( startIdx, endIdx, inReal, 
                                   optInTimePeriod,
-                                  PER_TO_K( optInTimePeriod ),
+                                  PER_TO_WILDERS_K( optInTimePeriod ),
                                   outBegIdx, outNBElement, outReal );
 }
 
@@ -206,15 +208,15 @@
  *
  * The optInK_1 and optInTimePeriod are usually tightly coupled:
  *
- *    optInK_1  = 2 / (optInTimePeriod + 1).
+ *    optInK_1  = 1 / optInTimePeriod.
  *
  * These values are going to be related by this equation 99.9% of the
  * time... but there is some exception, this is why both must be provided.
  *
- * The macro PER_TO_K is equivalent to the above formula.
+ * The macro PER_TO_WILDERS_K is equivalent to the above formula.
  */
 #if defined( _MANAGED ) && defined( USE_SUBARRAY )
- enum class Core::RetCode Core::TA_INT_EMA( int            startIdx,
+ enum class Core::RetCode Core::TA_INT_WLMA( int            startIdx,
                                             int           endIdx, 
                                             SubArray<double>^     inReal,
                                             int           optInTimePeriod,
@@ -223,7 +225,7 @@
                                             [Out]int% outNBElement,
                                             SubArray<double>^ outReal )
 #elif defined( _MANAGED )
- enum class Core::RetCode Core::TA_INT_EMA( int           startIdx,
+ enum class Core::RetCode Core::TA_INT_WLMA( int           startIdx,
                                             int           endIdx,
 								            cli::array<INPUT_TYPE>^ inReal,
                                             int           optInTimePeriod,
@@ -232,21 +234,21 @@
                                             [Out]int% outNBElement,
                                             cli::array<double>^ outReal )
 #elif defined( _JAVA )
-public RetCode TA_INT_EMA( int               startIdx,
+public RetCode TA_INT_WLMA( int               startIdx,
                            int               endIdx,
                            INPUT_TYPE      []inReal,
                            int               optInTimePeriod, /* From 1 to TA_INTEGER_MAX */
-                           double            optInK_1,          /* Ratio for calculation of EMA. */
+                           double            optInK_1,          /* Ratio for calculation of WLMA. */
                            MInteger          outBegIdx,
                            MInteger          outNBElement,
                            double          []outReal )
 
 #else
-TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
+TA_RetCode TA_PREFIX(INT_WLMA)( int               startIdx,
                                int               endIdx,
                                const INPUT_TYPE *inReal,
                                int               optInTimePeriod, /* From 1 to TA_INTEGER_MAX */
-                               double            optInK_1,          /* Ratio for calculation of EMA. */
+                               double            optInK_1,          /* Ratio for calculation of WLMA. */
                                int              *outBegIdx,
                                int              *outNBElement,
                                double           *outReal )
@@ -255,15 +257,10 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
    double tempReal, prevMA;
    int i, today, outIdx, lookbackTotal;
 
-   /* Ususally, optInK_1 = 2 / (optInTimePeriod + 1),
-    * but sometime there is exception. This
-    * is why both value are parameters.
-    */
-
    /* Identify the minimum number of price bar needed
     * to calculate at least one output.
     */
-   lookbackTotal = LOOKBACK_CALL(EMA)( optInTimePeriod );
+   lookbackTotal = LOOKBACK_CALL(WLMA)( optInTimePeriod );
 
    /* Move up the start index if there is not
     * enough initial data.
@@ -280,10 +277,10 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
    }
    VALUE_HANDLE_DEREF(outBegIdx) = startIdx;
 
-   /* Do the EMA calculation using tight loops. */
+   /* Do the WLMA calculation using tight loops. */
    
-   /* The first EMA is calculated differently. It
-    * then become the seed for subsequent EMA.
+   /* The first WLMA is calculated differently. It
+    * then become the seed for subsequent WLMA.
     *
     * The algorithm for this seed vary widely.
     * Only 3 are implemented here:
@@ -327,7 +324,7 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
        */
    }
 
-   /* At this point, prevMA is the first EMA (the seed for
+   /* At this point, prevMA is the first WLMA (the seed for
     * the rest).
     * 'today' keep track of where the processing is within the
     * input.
@@ -359,23 +356,23 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 /**** START GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ Core::RetCode Core::EmaStateInit( struct TA_Ema_State** _state,
-/* Generated */                                 int           optInTimePeriod )  /* From 1 to 100000 */
+/* Generated */ Core::RetCode Core::WlmaStateInit( struct TA_Wlma_State** _state,
+/* Generated */                                  int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public RetCode emaStateInit( struct TA_ema_State** _state,
-/* Generated */                            int           optInTimePeriod )  /* From 1 to 100000 */
+/* Generated */ public RetCode wlmaStateInit( struct TA_wlma_State** _state,
+/* Generated */                             int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API TA_RetCode TA_EMA_StateInit( struct TA_EMA_State** _state,
-/* Generated */                                                  int           optInTimePeriod )  /* From 1 to 100000 */
+/* Generated */ TA_LIB_API TA_RetCode TA_WLMA_StateInit( struct TA_WLMA_State** _state,
+/* Generated */                                                   int           optInTimePeriod )  /* From 1 to 100000 */
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 5 - DO NOT DELETE THIS LINE ****/
 
 {
    /* insert local variable here */
-   return TA_INT_EMA_StateInit(_state, optInTimePeriod, PER_TO_K( optInTimePeriod ));
+   return TA_INT_WLMA_StateInit(_state, optInTimePeriod, PER_TO_WILDERS_K( optInTimePeriod ));
 
 #ifdef SUPPRESS_CODE_BLOCK_BELOW
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
@@ -390,13 +387,13 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 /* Generated */    else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
-/* Generated */    STATE = TA_Calloc(1, sizeof(struct TA_EMA_State));
+/* Generated */    STATE = TA_Calloc(1, sizeof(struct TA_WLMA_State));
 /* Generated */    STATE_P.mem_index = 0;
 /* Generated */    STATE_P.optInTimePeriod = optInTimePeriod;
-/* Generated */    MEM_SIZE_P = TA_EMA_Lookback(optInTimePeriod );
-/* Generated */    #ifndef TA_EMA_SUPPRESS_MEMORY_ALLOCATION
+/* Generated */    MEM_SIZE_P = TA_WLMA_Lookback(optInTimePeriod );
+/* Generated */    #ifndef TA_WLMA_SUPPRESS_MEMORY_ALLOCATION
 /* Generated */    if (MEM_SIZE_P > 0)
-/* Generated */          MEM_P = TA_Calloc(MEM_SIZE_P, sizeof(struct TA_EMA_Data));
+/* Generated */          MEM_P = TA_Calloc(MEM_SIZE_P, sizeof(struct TA_WLMA_Data));
 /* Generated */    else
 /* Generated */    #endif
 /* Generated */          MEM_P = NULL;/* Generated */ 
@@ -408,17 +405,17 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 
 
  #if defined( _MANAGED )
- int Core::TA_INT_EMA_StateInit( struct TA_Ema_State** _state,
+ int Core::TA_INT_WLMA_StateInit( struct TA_Wlma_State** _state,
                        int           optInTimePeriod,
                          double optInK_1)
 
  #elif defined( _JAVA )
- public int TA_INT_EMA_StateInit( struct TA_ema_State** _state,
+ public int TA_INT_WLMA_StateInit( struct TA_ema_State** _state,
                         int           optInTimePeriod,
                           double optInK_1)
 
  #else
- TA_RetCode TA_INT_EMA_StateInit( struct TA_EMA_State** _state,
+ TA_RetCode TA_INT_WLMA_StateInit( struct TA_WLMA_State** _state,
                                            int           optInTimePeriod,
                                            double optInK_1)
 
@@ -436,11 +433,11 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
     else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
        return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 
-    STATE = TA_Calloc(1, sizeof(struct TA_EMA_State));
+    STATE = TA_Calloc(1, sizeof(struct TA_WLMA_State));
     STATE_P.mem_index = 0;
     STATE_P.optInTimePeriod = optInTimePeriod;
     STATE_P.optInK_1 = optInK_1;
-    MEM_SIZE_P = TA_EMA_Lookback(optInTimePeriod );
+    MEM_SIZE_P = TA_WLMA_Lookback(optInTimePeriod );
     MEM_P = NULL;
  #endif /* TA_FUNC_NO_RANGE_CHECK */
 
@@ -450,22 +447,22 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 /**** START GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ Core::RetCode Core::EmaState( struct TA_Ema_State* _state,
-/* Generated */                             cli::array<double>^ inReal,
-/* Generated */                             cli::array<double>^  *outReal )
+/* Generated */ Core::RetCode Core::WlmaState( struct TA_Wlma_State* _state,
+/* Generated */                              cli::array<double>^ inReal,
+/* Generated */                              cli::array<double>^  *outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public RetCode emaState( struct TA_ema_State* _state,
-/* Generated */                        double       inReal,
-/* Generated */                        double        *outReal )
+/* Generated */ public RetCode wlmaState( struct TA_wlma_State* _state,
+/* Generated */                         double       inReal,
+/* Generated */                         double        *outReal )
 /* Generated */ #else
-/* Generated */ TA_LIB_API TA_RetCode TA_EMA_State( struct TA_EMA_State* _state,
-/* Generated */                                              const double inReal,
-/* Generated */                                              double        *outReal )
+/* Generated */ TA_LIB_API TA_RetCode TA_WLMA_State( struct TA_WLMA_State* _state,
+/* Generated */                                               const double inReal,
+/* Generated */                                               double        *outReal )
 /* Generated */ #endif
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-  #define TA_EMA_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+  #define TA_WLMA_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -477,7 +474,7 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 /* Generated */    size_t _cur_idx = STATE.mem_index++;
 /* Generated */    if (MEM_SIZE > 0) _cur_idx %= MEM_SIZE;
 /* Generated */    UNUSED_VARIABLE(_cur_idx); // in case PUSH\POP methods won't be used
-/* Generated */    #ifndef TA_EMA_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
+/* Generated */    #ifndef TA_WLMA_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /* Generated */    if (NEED_MORE_DATA) {
 /* Generated */          PUSH_TO_MEM(inReal,inReal);
 /* Generated */    return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData); }
@@ -545,29 +542,29 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ Core::RetCode Core::EmaBatchState( struct TA_Ema_State* _state,
-/* Generated */                                  int startIdx,
-/* Generated */                                  int endIdx,
-/* Generated */                                  cli::array<double>^ inReal,
-/* Generated */                                  [Out]int%    outBegIdx,
-/* Generated */                                  [Out]int%    outNBElement,
-/* Generated */                                  cli::array<double>^  outReal )
+/* Generated */ Core::RetCode Core::WlmaBatchState( struct TA_Wlma_State* _state,
+/* Generated */                                   int startIdx,
+/* Generated */                                   int endIdx,
+/* Generated */                                   cli::array<double>^ inReal,
+/* Generated */                                   [Out]int%    outBegIdx,
+/* Generated */                                   [Out]int%    outNBElement,
+/* Generated */                                   cli::array<double>^  outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public RetCode emaBatchState( struct TA_ema_State* _state,
-/* Generated */                             int startIdx,
-/* Generated */                             int endIdx,
-/* Generated */                             double       inReal[],
-/* Generated */                             MInteger     outBegIdx,
-/* Generated */                             MInteger     outNBElement,
-/* Generated */                             double        outReal[] )
+/* Generated */ public RetCode wlmaBatchState( struct TA_wlma_State* _state,
+/* Generated */                              int startIdx,
+/* Generated */                              int endIdx,
+/* Generated */                              double       inReal[],
+/* Generated */                              MInteger     outBegIdx,
+/* Generated */                              MInteger     outNBElement,
+/* Generated */                              double        outReal[] )
 /* Generated */ #else
-/* Generated */ TA_LIB_API TA_RetCode TA_EMA_BatchState( struct TA_EMA_State* _state,
-/* Generated */                                                   int startIdx,
-/* Generated */                                                   int endIdx,
-/* Generated */                                                   const double inReal[],
-/* Generated */                                                   int          *outBegIdx,
-/* Generated */                                                   int          *outNBElement,
-/* Generated */                                                   double        outReal[] )
+/* Generated */ TA_LIB_API TA_RetCode TA_WLMA_BatchState( struct TA_WLMA_State* _state,
+/* Generated */                                                    int startIdx,
+/* Generated */                                                    int endIdx,
+/* Generated */                                                    const double inReal[],
+/* Generated */                                                    int          *outBegIdx,
+/* Generated */                                                    int          *outNBElement,
+/* Generated */                                                    double        outReal[] )
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 
@@ -604,7 +601,7 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 /* Generated */    VALUE_HANDLE_DEREF(outBegIdx)  = startIdx;
 /* Generated */    
 /* Generated */    for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
-/* Generated */       retValue = TA_EMA_State( _state, inReal[i], &outRealVal );
+/* Generated */       retValue = TA_WLMA_State( _state, inReal[i], &outRealVal );
 /* Generated */       if ( retValue == ENUM_VALUE(RetCode,TA_SUCCESS,Success) ) {
 /* Generated */          outReal[outIdx] = outRealVal;
 /* Generated */       } else if ( retValue == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) {
@@ -626,13 +623,13 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ Core::RetCode Core::EmaStateFree( struct TA_Ema_State** _state )
+/* Generated */ Core::RetCode Core::WlmaStateFree( struct TA_Wlma_State** _state )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public RetCode emaStateFree( struct TA_ema_State** _state )
+/* Generated */ public RetCode wlmaStateFree( struct TA_wlma_State** _state )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API TA_RetCode TA_EMA_StateFree( struct TA_EMA_State** _state )
+/* Generated */ TA_LIB_API TA_RetCode TA_WLMA_StateFree( struct TA_WLMA_State** _state )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -660,16 +657,16 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 /**** START GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ Core::RetCode Core::EmaStateSave( struct TA_Ema_State* _state,
-/* Generated */                                 FILE* _file )
+/* Generated */ Core::RetCode Core::WlmaStateSave( struct TA_Wlma_State* _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public RetCode emaStateSave( struct TA_ema_State* _state,
-/* Generated */                            FILE* _file )
+/* Generated */ public RetCode wlmaStateSave( struct TA_wlma_State* _state,
+/* Generated */                             FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API TA_RetCode TA_EMA_StateSave( struct TA_EMA_State* _state,
-/* Generated */                                                  FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_WLMA_StateSave( struct TA_WLMA_State* _state,
+/* Generated */                                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 11 - DO NOT DELETE THIS LINE ****/
@@ -693,7 +690,7 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 /* Generated */    memory_allocated = STATE.memory != NULL;
 /* Generated */    io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
-/* Generated */    if (memory_allocated && STATE.mem_size > 0) { io_res = fwrite(STATE.memory,sizeof(struct TA_EMA_Data),STATE.mem_size,_file);
+/* Generated */    if (memory_allocated && STATE.mem_size > 0) { io_res = fwrite(STATE.memory,sizeof(struct TA_WLMA_Data),STATE.mem_size,_file);
 /* Generated */    if (io_res < (int) STATE.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); }
 /* Generated */    io_res = fwrite(&STATE.optInTimePeriod,sizeof(STATE.optInTimePeriod),1,_file);
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
@@ -717,16 +714,16 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 /**** START GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #if defined( _MANAGED )
-/* Generated */ Core::RetCode Core::EmaStateLoad( struct TA_Ema_State** _state,
-/* Generated */                                 FILE* _file )
+/* Generated */ Core::RetCode Core::WlmaStateLoad( struct TA_Wlma_State** _state,
+/* Generated */                                  FILE* _file )
 /* Generated */ 
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public RetCode emaStateLoad( struct TA_ema_State** _state,
-/* Generated */                            FILE* _file )
+/* Generated */ public RetCode wlmaStateLoad( struct TA_wlma_State** _state,
+/* Generated */                             FILE* _file )
 /* Generated */ 
 /* Generated */ #else
-/* Generated */ TA_LIB_API TA_RetCode TA_EMA_StateLoad( struct TA_EMA_State** _state,
-/* Generated */                                                  FILE* _file )
+/* Generated */ TA_LIB_API TA_RetCode TA_WLMA_StateLoad( struct TA_WLMA_State** _state,
+/* Generated */                                                   FILE* _file )
 /* Generated */ 
 /* Generated */ #endif
 /**** END GENCODE SECTION 13 - DO NOT DELETE THIS LINE ****/
@@ -742,7 +739,7 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */    if (state_is_null) return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 /* Generated */    if (STATE != NULL) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-/* Generated */    STATE = TA_Calloc(1, sizeof(struct TA_EMA_State));
+/* Generated */    STATE = TA_Calloc(1, sizeof(struct TA_WLMA_State));
 /* Generated */    io_res = fread(&STATE_P.mem_index,sizeof(STATE_P.mem_index),1,_file);
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */    io_res = fread(&STATE_P.mem_size,sizeof(STATE_P.mem_size),1,_file);
@@ -750,8 +747,8 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 /* Generated */    int memory_allocated;
 /* Generated */    io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
-/* Generated */    if (STATE_P.mem_size > 0 && memory_allocated) { STATE_P.memory = TA_Calloc(STATE_P.mem_size, sizeof(struct TA_EMA_Data));
-/* Generated */    io_res = fread(STATE_P.memory,sizeof(struct TA_EMA_Data),STATE_P.mem_size,_file);
+/* Generated */    if (STATE_P.mem_size > 0 && memory_allocated) { STATE_P.memory = TA_Calloc(STATE_P.mem_size, sizeof(struct TA_WLMA_Data));
+/* Generated */    io_res = fread(STATE_P.memory,sizeof(struct TA_WLMA_Data),STATE_P.mem_size,_file);
 /* Generated */    if (io_res < (int) STATE_P.mem_size) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed); } 
 /* Generated */    io_res = fread(&STATE_P.optInTimePeriod,sizeof(STATE_P.optInTimePeriod),1,_file);
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
@@ -783,37 +780,37 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 /* Generated */ #undef   INPUT_TYPE
 /* Generated */ #define  INPUT_TYPE float
 /* Generated */ #if defined( _MANAGED ) && defined( USE_SUBARRAY )
-/* Generated */ enum class Core::RetCode Core::Ema( int    startIdx,
-/* Generated */                                     int    endIdx,
-/* Generated */                                     SubArray<float>^ inReal,
-/* Generated */                                     int           optInTimePeriod, /* From 1 to 100000 */
-/* Generated */                                     [Out]int%    outBegIdx,
-/* Generated */                                     [Out]int%    outNBElement,
-/* Generated */                                     SubArray<double>^  outReal )
+/* Generated */ enum class Core::RetCode Core::Wlma( int    startIdx,
+/* Generated */                                      int    endIdx,
+/* Generated */                                      SubArray<float>^ inReal,
+/* Generated */                                      int           optInTimePeriod, /* From 1 to 100000 */
+/* Generated */                                      [Out]int%    outBegIdx,
+/* Generated */                                      [Out]int%    outNBElement,
+/* Generated */                                      SubArray<double>^  outReal )
 /* Generated */ #elif defined( _MANAGED )
-/* Generated */ enum class Core::RetCode Core::Ema( int    startIdx,
-/* Generated */                                     int    endIdx,
-/* Generated */                                     cli::array<float>^ inReal,
-/* Generated */                                     int           optInTimePeriod, /* From 1 to 100000 */
-/* Generated */                                     [Out]int%    outBegIdx,
-/* Generated */                                     [Out]int%    outNBElement,
-/* Generated */                                     cli::array<double>^  outReal )
+/* Generated */ enum class Core::RetCode Core::Wlma( int    startIdx,
+/* Generated */                                      int    endIdx,
+/* Generated */                                      cli::array<float>^ inReal,
+/* Generated */                                      int           optInTimePeriod, /* From 1 to 100000 */
+/* Generated */                                      [Out]int%    outBegIdx,
+/* Generated */                                      [Out]int%    outNBElement,
+/* Generated */                                      cli::array<double>^  outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public RetCode ema( int    startIdx,
-/* Generated */                     int    endIdx,
-/* Generated */                     float        inReal[],
-/* Generated */                     int           optInTimePeriod, /* From 1 to 100000 */
-/* Generated */                     MInteger     outBegIdx,
-/* Generated */                     MInteger     outNBElement,
-/* Generated */                     double        outReal[] )
-/* Generated */ #else
-/* Generated */ TA_RetCode TA_S_EMA( int    startIdx,
+/* Generated */ public RetCode wlma( int    startIdx,
 /* Generated */                      int    endIdx,
-/* Generated */                      const float  inReal[],
+/* Generated */                      float        inReal[],
 /* Generated */                      int           optInTimePeriod, /* From 1 to 100000 */
-/* Generated */                      int          *outBegIdx,
-/* Generated */                      int          *outNBElement,
+/* Generated */                      MInteger     outBegIdx,
+/* Generated */                      MInteger     outNBElement,
 /* Generated */                      double        outReal[] )
+/* Generated */ #else
+/* Generated */ TA_RetCode TA_S_WLMA( int    startIdx,
+/* Generated */                       int    endIdx,
+/* Generated */                       const float  inReal[],
+/* Generated */                       int           optInTimePeriod, /* From 1 to 100000 */
+/* Generated */                       int          *outBegIdx,
+/* Generated */                       int          *outNBElement,
+/* Generated */                       double        outReal[] )
 /* Generated */ #endif
 /* Generated */ {
 /* Generated */  #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -833,16 +830,16 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 /* Generated */        return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */     #endif 
 /* Generated */  #endif 
-/* Generated */    return FUNCTION_CALL(INT_EMA)( startIdx, endIdx, inReal, 
+/* Generated */    return FUNCTION_CALL(INT_WLMA)( startIdx, endIdx, inReal, 
 /* Generated */                                   optInTimePeriod,
-/* Generated */                                   PER_TO_K( optInTimePeriod ),
+/* Generated */                                   PER_TO_WILDERS_K( optInTimePeriod ),
 /* Generated */                                   outBegIdx, outNBElement, outReal );
 /* Generated */ }
 /* Generated */ #if defined( _MANAGED ) && defined( USE_SUBARRAY ) && defined(USE_SINGLE_PRECISION_INPUT)
 /* Generated */   // No INT function
 /* Generated */ #else
 /* Generated */ #if defined( _MANAGED ) && defined( USE_SUBARRAY )
-/* Generated */  enum class Core::RetCode Core::TA_INT_EMA( int            startIdx,
+/* Generated */  enum class Core::RetCode Core::TA_INT_WLMA( int            startIdx,
 /* Generated */                                             int           endIdx, 
 /* Generated */                                             SubArray<double>^     inReal,
 /* Generated */                                             int           optInTimePeriod,
@@ -851,7 +848,7 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 /* Generated */                                             [Out]int% outNBElement,
 /* Generated */                                             SubArray<double>^ outReal )
 /* Generated */ #elif defined( _MANAGED )
-/* Generated */  enum class Core::RetCode Core::TA_INT_EMA( int           startIdx,
+/* Generated */  enum class Core::RetCode Core::TA_INT_WLMA( int           startIdx,
 /* Generated */                                             int           endIdx,
 /* Generated */ 								            cli::array<INPUT_TYPE>^ inReal,
 /* Generated */                                             int           optInTimePeriod,
@@ -860,7 +857,7 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 /* Generated */                                             [Out]int% outNBElement,
 /* Generated */                                             cli::array<double>^ outReal )
 /* Generated */ #elif defined( _JAVA )
-/* Generated */ public RetCode TA_INT_EMA( int               startIdx,
+/* Generated */ public RetCode TA_INT_WLMA( int               startIdx,
 /* Generated */                            int               endIdx,
 /* Generated */                            INPUT_TYPE      []inReal,
 /* Generated */                            int               optInTimePeriod, 
@@ -869,7 +866,7 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 /* Generated */                            MInteger          outNBElement,
 /* Generated */                            double          []outReal )
 /* Generated */ #else
-/* Generated */ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
+/* Generated */ TA_RetCode TA_PREFIX(INT_WLMA)( int               startIdx,
 /* Generated */                                int               endIdx,
 /* Generated */                                const INPUT_TYPE *inReal,
 /* Generated */                                int               optInTimePeriod, 
@@ -881,7 +878,7 @@ TA_RetCode TA_PREFIX(INT_EMA)( int               startIdx,
 /* Generated */ {
 /* Generated */    double tempReal, prevMA;
 /* Generated */    int i, today, outIdx, lookbackTotal;
-/* Generated */    lookbackTotal = LOOKBACK_CALL(EMA)( optInTimePeriod );
+/* Generated */    lookbackTotal = LOOKBACK_CALL(WLMA)( optInTimePeriod );
 /* Generated */    if( startIdx < lookbackTotal )
 /* Generated */       startIdx = lookbackTotal;
 /* Generated */    if( startIdx > endIdx )
