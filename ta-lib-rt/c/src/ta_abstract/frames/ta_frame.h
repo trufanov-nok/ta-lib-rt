@@ -4126,6 +4126,31 @@
 /* Generated */ unsigned int TA_WILLR_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
 ;
 
+/* Generated */ TA_RetCode TA_WLMA_FramePP( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
+/* Generated */ unsigned int TA_WLMA_FramePPLB( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_WLMA_FramePPSI( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_WLMA_FramePPS( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_WLMA_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+;
+/* Generated */ unsigned int TA_WLMA_FramePPSF( const TA_ParamHolderPriv *params )
+;
+/* Generated */ unsigned int TA_WLMA_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+;
+/* Generated */ unsigned int TA_WLMA_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+;
+
 /* Generated */ TA_RetCode TA_WMA_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,

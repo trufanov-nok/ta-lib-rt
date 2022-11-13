@@ -358,6 +358,68 @@ static TA_Test tableTest[] =
    { 1, TA_ANY_MA_TEST, 0, 0, 251, 14, TA_MAType_TEMA, TA_COMPATIBILITY_METASTOCK, TA_SUCCESS,   0,  84.721, 39, 252-39 }, /* First Value */
    { 0, TA_ANY_MA_TEST, 0, 0, 251, 14, TA_MAType_TEMA, TA_COMPATIBILITY_METASTOCK, TA_SUCCESS,   1,  84.089, 39, 252-39 },
    { 0, TA_ANY_MA_TEST, 0, 0, 251, 14, TA_MAType_TEMA, TA_COMPATIBILITY_METASTOCK, TA_SUCCESS, 252-40, 108.418, 39, 252-39 }, /* Last Value */
+
+    /*******************************/
+    /*   WLMA TEST - Classic        */
+    /*******************************/
+
+    /* No output value. */
+    { 0, TA_ANY_MA_TEST, 0, 1, 1,  14, TA_MAType_WLMA, TA_COMPATIBILITY_DEFAULT, TA_SUCCESS, 0, 0, 0, 0},
+ #ifndef TA_FUNC_NO_RANGE_CHECK
+    { 0, TA_ANY_MA_TEST, 0, 0, 251,  0, TA_MAType_WLMA, TA_COMPATIBILITY_DEFAULT, TA_BAD_PARAM, 0, 0, 0, 0 },
+ #endif
+
+    /* Misc tests: period 2, 10 */
+    { 1, TA_ANY_MA_TEST, 0, 0, 251,  2, TA_MAType_WLMA, TA_COMPATIBILITY_DEFAULT, TA_SUCCESS,   0,  93.15, 1, 251 }, /* First Value */
+    { 0, TA_ANY_MA_TEST, 0, 0, 251,  2, TA_MAType_WLMA, TA_COMPATIBILITY_DEFAULT, TA_SUCCESS,   1,  93.76, 1, 251 },
+    { 0, TA_ANY_MA_TEST, 0, 0, 251,  2, TA_MAType_WLMA, TA_COMPATIBILITY_DEFAULT, TA_SUCCESS, 250, 108.43, 1, 251 }, /* Last Value */
+
+    { 1, TA_ANY_MA_TEST, 0, 0, 251,  10, TA_MAType_WLMA, TA_COMPATIBILITY_DEFAULT, TA_SUCCESS,    0,  93.22,  9, 243 }, /* First Value */
+    { 0, TA_ANY_MA_TEST, 0, 0, 251,  10, TA_MAType_WLMA, TA_COMPATIBILITY_DEFAULT, TA_SUCCESS,    1,  93.51,  9, 243 },
+    { 0, TA_ANY_MA_TEST, 0, 0, 251,  10, TA_MAType_WLMA, TA_COMPATIBILITY_DEFAULT, TA_SUCCESS,   20,  87.91,  9, 243 },
+    { 0, TA_ANY_MA_TEST, 0, 0, 251,  10, TA_MAType_WLMA, TA_COMPATIBILITY_DEFAULT, TA_SUCCESS,  242, 108.60,  9, 243 }, /* Last Value */
+
+    /*******************************/
+    /*   WLMA TEST - Metastock      */
+    /*******************************/
+
+
+    /* No output value. */
+    { 0, TA_ANY_MA_TEST, 0, 1, 1,  14, TA_MAType_WLMA, TA_COMPATIBILITY_METASTOCK, TA_SUCCESS, 0, 0, 0, 0},
+ #ifndef TA_FUNC_NO_RANGE_CHECK
+    { 0, TA_ANY_MA_TEST, 0, 0, 251,  0, TA_MAType_WLMA, TA_COMPATIBILITY_METASTOCK, TA_BAD_PARAM, 0, 0, 0, 0 },
+ #endif
+
+    /* Test with 1 unstable price bar. Test for period 2, 10 */
+    { 1, TA_ANY_MA_TEST, 1, 0, 251,  2, TA_MAType_WLMA, TA_COMPATIBILITY_METASTOCK, TA_SUCCESS,   0,  93.76, 1+1, 251-1 }, /* First Value */
+    { 0, TA_ANY_MA_TEST, 1, 0, 251,  2, TA_MAType_WLMA, TA_COMPATIBILITY_METASTOCK, TA_SUCCESS,   1,  94.43, 1+1, 251-1 },
+    { 0, TA_ANY_MA_TEST, 1, 0, 251,  2, TA_MAType_WLMA, TA_COMPATIBILITY_METASTOCK, TA_SUCCESS, 250-1, 108.43, 1+1, 251-1 }, /* Last Value */
+
+    { 1, TA_ANY_MA_TEST, 1, 0, 251,  10, TA_MAType_WLMA, TA_COMPATIBILITY_METASTOCK, TA_SUCCESS,    0,  92.84,  9+1, 243-1 }, /* First Value */
+    { 0, TA_ANY_MA_TEST, 1, 0, 251,  10, TA_MAType_WLMA, TA_COMPATIBILITY_METASTOCK, TA_SUCCESS,    1,  93.28,  9+1, 243-1 },
+    { 0, TA_ANY_MA_TEST, 1, 0, 251,  10, TA_MAType_WLMA, TA_COMPATIBILITY_METASTOCK, TA_SUCCESS,   20,  87.56,  9+1, 243-1 },
+    { 0, TA_ANY_MA_TEST, 1, 0, 251,  10, TA_MAType_WLMA, TA_COMPATIBILITY_METASTOCK, TA_SUCCESS, 242-1, 108.60,  9+1, 243-1 }, /* Last Value */
+
+    /* Test with 2 unstable price bar. Test for period 2, 10 */
+    { 0, TA_ANY_MA_TEST, 2, 0, 251,  2, TA_MAType_WLMA, TA_COMPATIBILITY_METASTOCK, TA_SUCCESS,   0,  94.43, 1+2, 251-2 }, /* First Value */
+    { 0, TA_ANY_MA_TEST, 2, 0, 251,  2, TA_MAType_WLMA, TA_COMPATIBILITY_METASTOCK, TA_SUCCESS,   1,  94.11, 1+2, 251-2 },
+    { 0, TA_ANY_MA_TEST, 2, 0, 251,  2, TA_MAType_WLMA, TA_COMPATIBILITY_METASTOCK, TA_SUCCESS, 250-2, 108.43, 1+2, 251-2 }, /* Last Value */
+
+    { 0, TA_ANY_MA_TEST, 2, 0, 251,  10, TA_MAType_WLMA, TA_COMPATIBILITY_METASTOCK, TA_SUCCESS,    0,  93.28,  9+2, 243-2 }, /* First Value */
+    { 0, TA_ANY_MA_TEST, 2, 0, 251,  10, TA_MAType_WLMA, TA_COMPATIBILITY_METASTOCK, TA_SUCCESS,    1,  93.80,  9+2, 243-2 },
+    { 0, TA_ANY_MA_TEST, 2, 0, 251,  10, TA_MAType_WLMA, TA_COMPATIBILITY_METASTOCK, TA_SUCCESS,   20,  87.51,  9+2, 243-2 },
+    { 0, TA_ANY_MA_TEST, 2, 0, 251,  10, TA_MAType_WLMA, TA_COMPATIBILITY_METASTOCK, TA_SUCCESS,  242-2, 108.60,  9+2, 243-2 }, /* Last Value */
+
+    /* Last 3 value with 1 unstable, period 10 */
+    { 0, TA_ANY_MA_TEST, 1, 249, 251,  10, TA_MAType_WLMA, TA_COMPATIBILITY_METASTOCK, TA_SUCCESS,   1, 108.68, 249, 3 },
+    { 0, TA_ANY_MA_TEST, 1, 249, 251,  10, TA_MAType_WLMA, TA_COMPATIBILITY_METASTOCK, TA_SUCCESS,   2, 108.60, 249, 3 },
+
+    /* Last 3 value with 2 unstable, period 10 */
+    { 0, TA_ANY_MA_TEST, 2, 249, 251,  10, TA_MAType_WLMA, TA_COMPATIBILITY_METASTOCK, TA_SUCCESS,   2, 108.60, 249, 3 },
+
+    /* Last 3 value with 3 unstable, period 10 */
+    { 0, TA_ANY_MA_TEST, 3, 249, 251,  10, TA_MAType_WLMA, TA_COMPATIBILITY_METASTOCK, TA_SUCCESS,   2, 108.60, 249, 3 },
+
 };
 
 #define NB_TEST (sizeof(tableTest)/sizeof(TA_Test))
@@ -388,11 +450,6 @@ ErrorNumber test_func_ma( TA_History *history )
          return retValue;
       }
 
-      if (i == 94)
-      {//truf
-          --i;
-          ++i;
-      }
       retValue = do_test_ma_state( history, &tableTest[i], 0 );
       if( retValue != 0 )
       {
@@ -568,6 +625,9 @@ static ErrorNumber do_test_ma_state( const TA_History *history,
    case TA_MAType_T3:
       retCode = TA_SetUnstablePeriod( TA_FUNC_UNST_T3, test->unstablePeriod );
       break;
+   case TA_MAType_WLMA:
+      retCode = TA_SetUnstablePeriod( TA_FUNC_UNST_WLMA, test->unstablePeriod );
+      break;
    default:
       retCode = TA_SUCCESS;
       break;
@@ -614,11 +674,6 @@ static ErrorNumber do_test_ma_state( const TA_History *history,
       }
       else
       {
-          if (test->optInMAType_1 == 1)
-          {
-              int g = 0; //truf
-              g++;
-          }
          retCode = TA_MA_StateTest( test->startIdx,
                           test->endIdx,
                           gBuffer[0].in,
@@ -709,6 +764,9 @@ static ErrorNumber do_test_ma( const TA_History *history,
       break;
    case TA_MAType_T3:
       retCode = TA_SetUnstablePeriod( TA_FUNC_UNST_T3, test->unstablePeriod );
+      break;
+   case TA_MAType_WLMA:
+      retCode = TA_SetUnstablePeriod( TA_FUNC_UNST_WLMA, test->unstablePeriod );
       break;
    default:
       retCode = TA_SUCCESS;
@@ -917,6 +975,10 @@ static ErrorNumber do_test_ma( const TA_History *history,
       case TA_MAType_T3:
          temp = TA_T3_Lookback( test->optInTimePeriod, 0.7 );
          break;
+
+      case TA_MAType_WLMA:
+         temp = TA_WLMA_Lookback( test->optInTimePeriod );
+         break;
    
       default:
          return TA_TEST_TFRR_BAD_MA_TYPE;
@@ -964,6 +1026,11 @@ static ErrorNumber do_test_ma( const TA_History *history,
          errNb = doRangeTest( rangeTestFunction, 
                               TA_FUNC_UNST_MAMA,
                               (void *)&testParam, 2, 0 );
+         break;
+      case TA_MAType_WLMA:
+         errNb = doRangeTest( rangeTestFunction,
+                              TA_FUNC_UNST_WLMA,
+                              (void *)&testParam, 1, 0 );
          break;
       default:
          errNb = doRangeTest( rangeTestFunction, 

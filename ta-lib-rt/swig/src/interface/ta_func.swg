@@ -11590,6 +11590,73 @@ TA_RetCode TA_WILLR_StateLoad( struct TA_WILLR_State** _state,
 
 
 /*
+ * TA_WLMA - Wilders Moving Average
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_WLMA( int           START_IDX,
+                    int           END_IDX,
+                    const double *IN_ARRAY /* inReal */,
+                    int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                    int          *BEG_IDX,
+                    int          *OUT_SIZE,
+                    double       *OUT_ARRAY /* outReal */ );
+
+int TA_WLMA_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+struct TA_WLMA_Data {
+                    double       inReal;
+                    };
+struct TA_WLMA_State {
+                     size_t mem_size;
+                     size_t mem_index;
+                     struct TA_WLMA_Data* memory;
+                     double       prevMA;
+                     double       tempSum;
+                     double       preprRes;
+                     double       optInK_1;
+                     int           optInTimePeriod; /* From 1 to 100000 */
+                     };
+
+
+TA_RetCode TA_WLMA_StateInit( struct TA_WLMA_State** _state,
+                            int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+TA_RetCode TA_WLMA_State( struct TA_WLMA_State* _state,
+                        const double inReal,
+                        double        *outReal );
+
+TA_RetCode TA_WLMA_BatchState( struct TA_WLMA_State* _state,
+                             int startIdx,
+                             int endIdx,
+                             const double inReal[],
+                             int          *outBegIdx,
+                             int          *outNBElement,
+                             double        outReal[] );
+
+TA_RetCode TA_WLMA_StateFree( struct TA_WLMA_State** _state );
+
+
+TA_RetCode TA_WLMA_StateSave( struct TA_WLMA_State* _state,
+                            FILE* _file );
+
+
+TA_RetCode TA_WLMA_StateLoad( struct TA_WLMA_State** _state,
+                            FILE* _file );
+
+
+
+/*
  * TA_WMA - Weighted Moving Average
  * 
  * Input  = double
@@ -11656,10 +11723,10 @@ TA_RetCode TA_WMA_StateLoad( struct TA_WMA_State** _state,
 
 
 /* Some TA functions takes a certain amount of input data
- * before stabilizing and outputing meaningful data. This is
+ * before stabilizing and outputting meaningful data. This is
  * a behavior pertaining to the algo of some TA functions and
  * is not particular to the TA-Lib implementation.
- * TA-Lib allows you to automatically strip off these unstabl
+ * TA-Lib allows you to automatically strip off these unstable
  * data from your output and from any internal processing.
  * (See documentation for more info)
  *
@@ -11680,7 +11747,7 @@ TA_RetCode TA_SetUnstablePeriod( TA_FuncUnstId id,
 unsigned int TA_GetUnstablePeriod( TA_FuncUnstId id );
 
 /* You can change slightly the behavior of the TA functions
- * by requesting compatibiliy with some existing software.
+ * by requesting compatibility with some existing software.
  *
  * By default, the behavior is as close as the original 
  * author of the TA functions intend it to be.

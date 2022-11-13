@@ -5653,7 +5653,7 @@ public class Core {
          for( j=0; j < optInTimePeriod; j++ )
             tempReal2 += Math.abs (circBuffer[j]-theAverage);
          tempReal = lastValue-theAverage;
-         if( (tempReal != 0.0) && (tempReal2 != 0.0) )
+         if( (! (((- (0.00000000000001) )<tempReal)&&(tempReal< (0.00000000000001) )) ) && (! (((- (0.00000000000001) )<tempReal2)&&(tempReal2< (0.00000000000001) )) ) )
          {
             outReal[outIdx++] = tempReal/(0.015*(tempReal2/optInTimePeriod));
          }
@@ -5713,7 +5713,7 @@ public class Core {
       sum += Math.abs (lastValue - avg);
       (*( ((struct TA_CCI_STATE_CIRCBUF *) _state.value .circBuf)->circbuf + ((struct TA_CCI_STATE_CIRCBUF *) _state.value .circBuf)->idx )) = lastValue;
       lastValue -= avg;
-      if( ( Math.abs (lastValue) > 1e-13) && ( Math.abs (sum) > 1e-13) )
+      if( (! (((- (0.00000000000001) )<lastValue)&&(lastValue< (0.00000000000001) )) ) && (! (((- (0.00000000000001) )<sum)&&(sum< (0.00000000000001) )) ) )
       {
          outReal.value = lastValue/(0.015*(sum/ _state.value .optInTimePeriod));
       }
@@ -5788,7 +5788,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       io_res = fwrite(& _state.value .theAverage,sizeof( _state.value .theAverage),1,_file);
       if (io_res < 1) return RetCode.IOFailed ;
-      { int io_circbuf_res; struct TA_CCI_STATE_CIRCBUF * str_circbuf = _state.value .circBuf; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      { int io_circbuf_res; struct TA_CCI_STATE_CIRCBUF * str_circbuf = _state.value .circBuf; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(double),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
       return 0;
    }
    public RetCode cciStateLoad( struct TA_cci_State** _state,
@@ -5814,7 +5814,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       io_res = fread(& _state.value .value .theAverage,sizeof( _state.value .value .theAverage),1,_file);
       if (io_res < 1) return RetCode.IOFailed ;
-      { int io_circbuf_res; int circbuf_idx; int circbuf_size; if ( _state.value .value .circBuf != NULL) return RetCode.BadParam ; io_circbuf_res = fread(&circbuf_idx,sizeof(circbuf_idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fread(&circbuf_size,sizeof(circbuf_size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; { _state.value .value .circBuf = calloc(1, sizeof(struct TA_CCI_STATE_CIRCBUF )); if ( _state.value .value .circBuf == NULL) return RetCode.AllocErr ; struct TA_CCI_STATE_CIRCBUF * buf = (struct TA_CCI_STATE_CIRCBUF *) _state.value .value .circBuf; buf->idx = 0; buf->size = circbuf_size; buf->circbuf = calloc(circbuf_size, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} struct TA_CCI_STATE_CIRCBUF * str_circbuf = _state.value .value .circBuf; str_circbuf->idx = circbuf_idx; if (str_circbuf->size > 0) { io_circbuf_res = fread(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      { int io_circbuf_res; int circbuf_idx; int circbuf_size; if ( _state.value .value .circBuf != NULL) return RetCode.BadParam ; io_circbuf_res = fread(&circbuf_idx,sizeof(circbuf_idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fread(&circbuf_size,sizeof(circbuf_size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; { _state.value .value .circBuf = calloc(1, sizeof(struct TA_CCI_STATE_CIRCBUF )); if ( _state.value .value .circBuf == NULL) return RetCode.AllocErr ; struct TA_CCI_STATE_CIRCBUF * buf = (struct TA_CCI_STATE_CIRCBUF *) _state.value .value .circBuf; buf->idx = 0; buf->size = circbuf_size; buf->circbuf = calloc(circbuf_size, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} struct TA_CCI_STATE_CIRCBUF * str_circbuf = _state.value .value .circBuf; str_circbuf->idx = circbuf_idx; if (str_circbuf->size > 0) { io_circbuf_res = fread(str_circbuf->circbuf,sizeof(double),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
       return 0;
    }
    public RetCode cci( int startIdx,
@@ -5871,7 +5871,7 @@ public class Core {
          for( j=0; j < optInTimePeriod; j++ )
             tempReal2 += Math.abs (circBuffer[j]-theAverage);
          tempReal = lastValue-theAverage;
-         if( (tempReal != 0.0) && (tempReal2 != 0.0) )
+         if( (! (((- (0.00000000000001) )<tempReal)&&(tempReal< (0.00000000000001) )) ) && (! (((- (0.00000000000001) )<tempReal2)&&(tempReal2< (0.00000000000001) )) ) )
          {
             outReal[outIdx++] = tempReal/(0.015*(tempReal2/optInTimePeriod));
          }
@@ -27512,7 +27512,7 @@ public class Core {
          return RetCode.OutOfRangeEndIndex ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       outNBElement.value = 0 ;
       outBegIdx.value = 0 ;
@@ -28295,7 +28295,7 @@ public class Core {
          return RetCode.BadParam ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       _state.value = TA_Calloc(1, sizeof(struct ema ));
       _state.value .value .mem_index = 0;
@@ -28464,7 +28464,7 @@ public class Core {
          return RetCode.OutOfRangeEndIndex ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       return TA_INT_EMA ( startIdx, endIdx, inReal,
          optInTimePeriod,
@@ -29816,7 +29816,7 @@ public class Core {
       { if ( _state.value .Q1 == NULL) return RetCode.BadParam ; if (fwrite( _state.value .Q1,sizeof(struct TA_HT_DCPHASE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
       { if ( _state.value .jI == NULL) return RetCode.BadParam ; if (fwrite( _state.value .jI,sizeof(struct TA_HT_DCPHASE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
       { if ( _state.value .jQ == NULL) return RetCode.BadParam ; if (fwrite( _state.value .jQ,sizeof(struct TA_HT_DCPHASE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
-      { int io_circbuf_res; struct TA_HT_DCPHASE_STATE_CIRCBUF * str_circbuf = _state.value .circBuf; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      { int io_circbuf_res; struct TA_HT_DCPHASE_STATE_CIRCBUF * str_circbuf = _state.value .circBuf; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(double),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
       return 0;
    }
    public RetCode htDcPhaseStateLoad( struct TA_htDcPhase_State** _state,
@@ -29880,7 +29880,7 @@ public class Core {
       { if ( _state.value .value .Q1 != NULL) return RetCode.BadParam ; { _state.value .value .Q1 = calloc(1, sizeof(struct TA_HT_DCPHASE_HILBERT_STRUCT )); if ( _state.value .value .Q1 == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .Q1,sizeof(struct TA_HT_DCPHASE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
       { if ( _state.value .value .jI != NULL) return RetCode.BadParam ; { _state.value .value .jI = calloc(1, sizeof(struct TA_HT_DCPHASE_HILBERT_STRUCT )); if ( _state.value .value .jI == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .jI,sizeof(struct TA_HT_DCPHASE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
       { if ( _state.value .value .jQ != NULL) return RetCode.BadParam ; { _state.value .value .jQ = calloc(1, sizeof(struct TA_HT_DCPHASE_HILBERT_STRUCT )); if ( _state.value .value .jQ == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .jQ,sizeof(struct TA_HT_DCPHASE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
-      { int io_circbuf_res; int circbuf_idx; int circbuf_size; if ( _state.value .value .circBuf != NULL) return RetCode.BadParam ; io_circbuf_res = fread(&circbuf_idx,sizeof(circbuf_idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fread(&circbuf_size,sizeof(circbuf_size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; { _state.value .value .circBuf = calloc(1, sizeof(struct TA_HT_DCPHASE_STATE_CIRCBUF )); if ( _state.value .value .circBuf == NULL) return RetCode.AllocErr ; struct TA_HT_DCPHASE_STATE_CIRCBUF * buf = (struct TA_HT_DCPHASE_STATE_CIRCBUF *) _state.value .value .circBuf; buf->idx = 0; buf->size = circbuf_size; buf->circbuf = calloc(circbuf_size, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} struct TA_HT_DCPHASE_STATE_CIRCBUF * str_circbuf = _state.value .value .circBuf; str_circbuf->idx = circbuf_idx; if (str_circbuf->size > 0) { io_circbuf_res = fread(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      { int io_circbuf_res; int circbuf_idx; int circbuf_size; if ( _state.value .value .circBuf != NULL) return RetCode.BadParam ; io_circbuf_res = fread(&circbuf_idx,sizeof(circbuf_idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fread(&circbuf_size,sizeof(circbuf_size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; { _state.value .value .circBuf = calloc(1, sizeof(struct TA_HT_DCPHASE_STATE_CIRCBUF )); if ( _state.value .value .circBuf == NULL) return RetCode.AllocErr ; struct TA_HT_DCPHASE_STATE_CIRCBUF * buf = (struct TA_HT_DCPHASE_STATE_CIRCBUF *) _state.value .value .circBuf; buf->idx = 0; buf->size = circbuf_size; buf->circbuf = calloc(circbuf_size, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} struct TA_HT_DCPHASE_STATE_CIRCBUF * str_circbuf = _state.value .value .circBuf; str_circbuf->idx = circbuf_idx; if (str_circbuf->size > 0) { io_circbuf_res = fread(str_circbuf->circbuf,sizeof(double),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
       return 0;
    }
    public RetCode htDcPhase( int startIdx,
@@ -31073,7 +31073,7 @@ public class Core {
       { if ( _state.value .Q1 == NULL) return RetCode.BadParam ; if (fwrite( _state.value .Q1,sizeof(struct TA_HT_SINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
       { if ( _state.value .jI == NULL) return RetCode.BadParam ; if (fwrite( _state.value .jI,sizeof(struct TA_HT_SINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
       { if ( _state.value .jQ == NULL) return RetCode.BadParam ; if (fwrite( _state.value .jQ,sizeof(struct TA_HT_SINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
-      { int io_circbuf_res; struct TA_HT_SINE_STATE_CIRCBUF * str_circbuf = _state.value .circBuf; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      { int io_circbuf_res; struct TA_HT_SINE_STATE_CIRCBUF * str_circbuf = _state.value .circBuf; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(double),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
       return 0;
    }
    public RetCode htSineStateLoad( struct TA_htSine_State** _state,
@@ -31139,7 +31139,7 @@ public class Core {
       { if ( _state.value .value .Q1 != NULL) return RetCode.BadParam ; { _state.value .value .Q1 = calloc(1, sizeof(struct TA_HT_SINE_HILBERT_STRUCT )); if ( _state.value .value .Q1 == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .Q1,sizeof(struct TA_HT_SINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
       { if ( _state.value .value .jI != NULL) return RetCode.BadParam ; { _state.value .value .jI = calloc(1, sizeof(struct TA_HT_SINE_HILBERT_STRUCT )); if ( _state.value .value .jI == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .jI,sizeof(struct TA_HT_SINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
       { if ( _state.value .value .jQ != NULL) return RetCode.BadParam ; { _state.value .value .jQ = calloc(1, sizeof(struct TA_HT_SINE_HILBERT_STRUCT )); if ( _state.value .value .jQ == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .jQ,sizeof(struct TA_HT_SINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
-      { int io_circbuf_res; int circbuf_idx; int circbuf_size; if ( _state.value .value .circBuf != NULL) return RetCode.BadParam ; io_circbuf_res = fread(&circbuf_idx,sizeof(circbuf_idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fread(&circbuf_size,sizeof(circbuf_size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; { _state.value .value .circBuf = calloc(1, sizeof(struct TA_HT_SINE_STATE_CIRCBUF )); if ( _state.value .value .circBuf == NULL) return RetCode.AllocErr ; struct TA_HT_SINE_STATE_CIRCBUF * buf = (struct TA_HT_SINE_STATE_CIRCBUF *) _state.value .value .circBuf; buf->idx = 0; buf->size = circbuf_size; buf->circbuf = calloc(circbuf_size, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} struct TA_HT_SINE_STATE_CIRCBUF * str_circbuf = _state.value .value .circBuf; str_circbuf->idx = circbuf_idx; if (str_circbuf->size > 0) { io_circbuf_res = fread(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      { int io_circbuf_res; int circbuf_idx; int circbuf_size; if ( _state.value .value .circBuf != NULL) return RetCode.BadParam ; io_circbuf_res = fread(&circbuf_idx,sizeof(circbuf_idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fread(&circbuf_size,sizeof(circbuf_size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; { _state.value .value .circBuf = calloc(1, sizeof(struct TA_HT_SINE_STATE_CIRCBUF )); if ( _state.value .value .circBuf == NULL) return RetCode.AllocErr ; struct TA_HT_SINE_STATE_CIRCBUF * buf = (struct TA_HT_SINE_STATE_CIRCBUF *) _state.value .value .circBuf; buf->idx = 0; buf->size = circbuf_size; buf->circbuf = calloc(circbuf_size, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} struct TA_HT_SINE_STATE_CIRCBUF * str_circbuf = _state.value .value .circBuf; str_circbuf->idx = circbuf_idx; if (str_circbuf->size > 0) { io_circbuf_res = fread(str_circbuf->circbuf,sizeof(double),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
       return 0;
    }
    public RetCode htSine( int startIdx,
@@ -31725,7 +31725,7 @@ public class Core {
       { if ( _state.value .Q1 == NULL) return RetCode.BadParam ; if (fwrite( _state.value .Q1,sizeof(struct TA_HT_TRENDLINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
       { if ( _state.value .jI == NULL) return RetCode.BadParam ; if (fwrite( _state.value .jI,sizeof(struct TA_HT_TRENDLINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
       { if ( _state.value .jQ == NULL) return RetCode.BadParam ; if (fwrite( _state.value .jQ,sizeof(struct TA_HT_TRENDLINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
-      { int io_circbuf_res; struct TA_HT_TRENDLINE_STATE_CIRCBUF * str_circbuf = _state.value .circBuf; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      { int io_circbuf_res; struct TA_HT_TRENDLINE_STATE_CIRCBUF * str_circbuf = _state.value .circBuf; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(double),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
       return 0;
    }
    public RetCode htTrendlineStateLoad( struct TA_htTrendline_State** _state,
@@ -31791,7 +31791,7 @@ public class Core {
       { if ( _state.value .value .Q1 != NULL) return RetCode.BadParam ; { _state.value .value .Q1 = calloc(1, sizeof(struct TA_HT_TRENDLINE_HILBERT_STRUCT )); if ( _state.value .value .Q1 == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .Q1,sizeof(struct TA_HT_TRENDLINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
       { if ( _state.value .value .jI != NULL) return RetCode.BadParam ; { _state.value .value .jI = calloc(1, sizeof(struct TA_HT_TRENDLINE_HILBERT_STRUCT )); if ( _state.value .value .jI == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .jI,sizeof(struct TA_HT_TRENDLINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
       { if ( _state.value .value .jQ != NULL) return RetCode.BadParam ; { _state.value .value .jQ = calloc(1, sizeof(struct TA_HT_TRENDLINE_HILBERT_STRUCT )); if ( _state.value .value .jQ == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .jQ,sizeof(struct TA_HT_TRENDLINE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
-      { int io_circbuf_res; int circbuf_idx; int circbuf_size; if ( _state.value .value .circBuf != NULL) return RetCode.BadParam ; io_circbuf_res = fread(&circbuf_idx,sizeof(circbuf_idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fread(&circbuf_size,sizeof(circbuf_size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; { _state.value .value .circBuf = calloc(1, sizeof(struct TA_HT_TRENDLINE_STATE_CIRCBUF )); if ( _state.value .value .circBuf == NULL) return RetCode.AllocErr ; struct TA_HT_TRENDLINE_STATE_CIRCBUF * buf = (struct TA_HT_TRENDLINE_STATE_CIRCBUF *) _state.value .value .circBuf; buf->idx = 0; buf->size = circbuf_size; buf->circbuf = calloc(circbuf_size, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} struct TA_HT_TRENDLINE_STATE_CIRCBUF * str_circbuf = _state.value .value .circBuf; str_circbuf->idx = circbuf_idx; if (str_circbuf->size > 0) { io_circbuf_res = fread(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      { int io_circbuf_res; int circbuf_idx; int circbuf_size; if ( _state.value .value .circBuf != NULL) return RetCode.BadParam ; io_circbuf_res = fread(&circbuf_idx,sizeof(circbuf_idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fread(&circbuf_size,sizeof(circbuf_size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; { _state.value .value .circBuf = calloc(1, sizeof(struct TA_HT_TRENDLINE_STATE_CIRCBUF )); if ( _state.value .value .circBuf == NULL) return RetCode.AllocErr ; struct TA_HT_TRENDLINE_STATE_CIRCBUF * buf = (struct TA_HT_TRENDLINE_STATE_CIRCBUF *) _state.value .value .circBuf; buf->idx = 0; buf->size = circbuf_size; buf->circbuf = calloc(circbuf_size, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} struct TA_HT_TRENDLINE_STATE_CIRCBUF * str_circbuf = _state.value .value .circBuf; str_circbuf->idx = circbuf_idx; if (str_circbuf->size > 0) { io_circbuf_res = fread(str_circbuf->circbuf,sizeof(double),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
       return 0;
    }
    public RetCode htTrendline( int startIdx,
@@ -32498,7 +32498,7 @@ public class Core {
       { if ( _state.value .Q1 == NULL) return RetCode.BadParam ; if (fwrite( _state.value .Q1,sizeof(struct TA_HT_TRENDMODE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
       { if ( _state.value .jI == NULL) return RetCode.BadParam ; if (fwrite( _state.value .jI,sizeof(struct TA_HT_TRENDMODE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
       { if ( _state.value .jQ == NULL) return RetCode.BadParam ; if (fwrite( _state.value .jQ,sizeof(struct TA_HT_TRENDMODE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
-      { int io_circbuf_res; struct TA_HT_TRENDMODE_STATE_CIRCBUF * str_circbuf = _state.value .circBuf; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      { int io_circbuf_res; struct TA_HT_TRENDMODE_STATE_CIRCBUF * str_circbuf = _state.value .circBuf; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(double),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
       return 0;
    }
    public RetCode htTrendModeStateLoad( struct TA_htTrendMode_State** _state,
@@ -32578,7 +32578,7 @@ public class Core {
       { if ( _state.value .value .Q1 != NULL) return RetCode.BadParam ; { _state.value .value .Q1 = calloc(1, sizeof(struct TA_HT_TRENDMODE_HILBERT_STRUCT )); if ( _state.value .value .Q1 == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .Q1,sizeof(struct TA_HT_TRENDMODE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
       { if ( _state.value .value .jI != NULL) return RetCode.BadParam ; { _state.value .value .jI = calloc(1, sizeof(struct TA_HT_TRENDMODE_HILBERT_STRUCT )); if ( _state.value .value .jI == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .jI,sizeof(struct TA_HT_TRENDMODE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
       { if ( _state.value .value .jQ != NULL) return RetCode.BadParam ; { _state.value .value .jQ = calloc(1, sizeof(struct TA_HT_TRENDMODE_HILBERT_STRUCT )); if ( _state.value .value .jQ == NULL) return RetCode.AllocErr ; } if (fread( _state.value .value .jQ,sizeof(struct TA_HT_TRENDMODE_HILBERT_STRUCT ),1,_file) < 1) return RetCode.IOFailed ; }
-      { int io_circbuf_res; int circbuf_idx; int circbuf_size; if ( _state.value .value .circBuf != NULL) return RetCode.BadParam ; io_circbuf_res = fread(&circbuf_idx,sizeof(circbuf_idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fread(&circbuf_size,sizeof(circbuf_size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; { _state.value .value .circBuf = calloc(1, sizeof(struct TA_HT_TRENDMODE_STATE_CIRCBUF )); if ( _state.value .value .circBuf == NULL) return RetCode.AllocErr ; struct TA_HT_TRENDMODE_STATE_CIRCBUF * buf = (struct TA_HT_TRENDMODE_STATE_CIRCBUF *) _state.value .value .circBuf; buf->idx = 0; buf->size = circbuf_size; buf->circbuf = calloc(circbuf_size, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} struct TA_HT_TRENDMODE_STATE_CIRCBUF * str_circbuf = _state.value .value .circBuf; str_circbuf->idx = circbuf_idx; if (str_circbuf->size > 0) { io_circbuf_res = fread(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      { int io_circbuf_res; int circbuf_idx; int circbuf_size; if ( _state.value .value .circBuf != NULL) return RetCode.BadParam ; io_circbuf_res = fread(&circbuf_idx,sizeof(circbuf_idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fread(&circbuf_size,sizeof(circbuf_size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; { _state.value .value .circBuf = calloc(1, sizeof(struct TA_HT_TRENDMODE_STATE_CIRCBUF )); if ( _state.value .value .circBuf == NULL) return RetCode.AllocErr ; struct TA_HT_TRENDMODE_STATE_CIRCBUF * buf = (struct TA_HT_TRENDMODE_STATE_CIRCBUF *) _state.value .value .circBuf; buf->idx = 0; buf->size = circbuf_size; buf->circbuf = calloc(circbuf_size, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} struct TA_HT_TRENDMODE_STATE_CIRCBUF * str_circbuf = _state.value .value .circBuf; str_circbuf->idx = circbuf_idx; if (str_circbuf->size > 0) { io_circbuf_res = fread(str_circbuf->circbuf,sizeof(double),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
       return 0;
    }
    public RetCode htTrendMode( int startIdx,
@@ -33352,7 +33352,7 @@ public class Core {
          return RetCode.OutOfRangeEndIndex ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       outBegIdx.value = 0 ;
       outNBElement.value = 0 ;
@@ -34881,6 +34881,9 @@ public class Core {
          case T3 :
             retValue = t3Lookback ( optInTimePeriod, 0.7 );
          break;
+         case Wlma :
+            retValue = wlmaLookback ( optInTimePeriod );
+         break;
          default:
             retValue = 0;
       }
@@ -34956,6 +34959,10 @@ public class Core {
             optInTimePeriod, 0.7,
             outBegIdx, outNBElement, outReal );
          break;
+         case Wlma :
+            retCode = wlma ( startIdx, endIdx, inReal, optInTimePeriod,
+            outBegIdx, outNBElement, outReal );
+         break;
          default:
             retCode = RetCode.BadParam ;
          break;
@@ -35013,6 +35020,9 @@ public class Core {
          case T3 :
             retValue = t3 ( (struct t3 **) & _state.value .value .ta_state, optInTimePeriod, 0.7 );
          break;
+         case Wlma :
+            retValue = wlma ( (struct wlma **) & _state.value .value .ta_state, optInTimePeriod );
+         break;
          default:
             retValue = RetCode.BadParam ;
       }
@@ -35063,6 +35073,9 @@ public class Core {
          break;
          case T3 :
             retValue = t3 ( (struct t3 *) _state.value .ta_state, inReal, outReal );
+         break;
+         case Wlma :
+            retValue = wlma ( (struct wlma *) _state.value .ta_state, inReal, outReal );
          break;
          default:
             retValue = RetCode.BadParam ;
@@ -35136,6 +35149,9 @@ public class Core {
             case T3 :
                retValue = t3 ( (struct t3 **) & _state.value .value .ta_state);
             break;
+            case Wlma :
+               retValue = wlma ( (struct wlma **) & _state.value .value .ta_state);
+            break;
             default:
                retValue = RetCode.BadParam ;
          }
@@ -35203,6 +35219,9 @@ public class Core {
             case T3 :
                retValue = TA_T3_StateSave ( (struct t3 *) _state.value .ta_state, _file);
             break;
+            case WLma :
+               retValue = TA_WLMA_StateSave ( (struct wlma *) _state.value .ta_state, _file);
+            break;
             default:
                retValue = RetCode.BadParam ;
          }
@@ -35262,6 +35281,9 @@ public class Core {
             break;
             case T3 :
                retValue = TA_T3_StateLoad ( (struct t3 **) & _state.value .value .ta_state, _file);
+            break;
+            case Wlma :
+               retValue = TA_WLMA_StateLoad ( (struct wlma **) & _state.value .value .ta_state, _file);
             break;
             default:
                retValue = RetCode.BadParam ;
@@ -35339,6 +35361,10 @@ public class Core {
             optInTimePeriod, 0.7,
             outBegIdx, outNBElement, outReal );
          break;
+         case Wlma :
+            retCode = wlma ( startIdx, endIdx, inReal, optInTimePeriod,
+            outBegIdx, outNBElement, outReal );
+         break;
          default:
             retCode = RetCode.BadParam ;
          break;
@@ -35350,7 +35376,7 @@ public class Core {
       int optInSlowPeriod,
       int optInSignalPeriod )
    {
-      int tempInteger;
+      int tempInteger, tempInteger2;
       if( (int)optInFastPeriod == ( Integer.MIN_VALUE ) )
          optInFastPeriod = 12;
       else if( ((int)optInFastPeriod < 2) || ((int)optInFastPeriod > 100000) )
@@ -35369,8 +35395,11 @@ public class Core {
          optInSlowPeriod = optInFastPeriod;
          optInFastPeriod = tempInteger;
       }
-      return emaLookback ( optInSlowPeriod )
-         + emaLookback ( optInSignalPeriod );
+      tempInteger = emaLookback ( optInSlowPeriod );
+      if (tempInteger < 0) return RetCode.BadParam ;
+      tempInteger2 = emaLookback ( optInSignalPeriod );
+      if (tempInteger2 < 0) return RetCode.BadParam ;
+      return tempInteger + tempInteger2;
    }
    public RetCode macd( int startIdx,
       int endIdx,
@@ -35453,9 +35482,11 @@ public class Core {
          optInFastPeriod = 12;
          k2 = (double)0.15;
       }
+      lookbackTotal = emaLookback ( optInSlowPeriod );
+      if (lookbackTotal < 0) return RetCode.BadParam ;
       lookbackSignal = emaLookback ( optInSignalPeriod_2 );
-      lookbackTotal = lookbackSignal;
-      lookbackTotal += emaLookback ( optInSlowPeriod );
+      if (lookbackSignal < 0) return RetCode.BadParam ;
+      lookbackTotal += lookbackSignal;
       if( startIdx < lookbackTotal )
          startIdx = lookbackTotal;
       if( startIdx > endIdx )
@@ -35617,13 +35648,18 @@ public class Core {
       RetCode retCode2;
       RetCode retCode3;
       double slowEMA, fastEMA;
+      int tempInteger, tempInteger2;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
       if ( ( _state.value .mem_index == 1) )
       {
-         _state.value .fastEMADelay = emaLookback ( _state.value .optInSlowPeriod ) - emaLookback ( _state.value .optInFastPeriod );
+         tempInteger = emaLookback ( _state.value .optInSlowPeriod );
+         if (tempInteger < 0) return RetCode.BadParam ;
+         tempInteger2 = emaLookback ( _state.value .optInFastPeriod );
+         if (tempInteger2 < 0) return RetCode.BadParam ;
+         _state.value .fastEMADelay = tempInteger - tempInteger2;
       }
       retCode1 = ema ( _state.value .slowEMAState, inReal, &slowEMA );
       if( retCode1 != RetCode.Success &&
@@ -35854,9 +35890,11 @@ public class Core {
          optInFastPeriod = 12;
          k2 = (double)0.15;
       }
+      lookbackTotal = emaLookback ( optInSlowPeriod );
+      if (lookbackTotal < 0) return RetCode.BadParam ;
       lookbackSignal = emaLookback ( optInSignalPeriod_2 );
-      lookbackTotal = lookbackSignal;
-      lookbackTotal += emaLookback ( optInSlowPeriod );
+      if (lookbackSignal < 0) return RetCode.BadParam ;
+      lookbackTotal += lookbackSignal;
       if( startIdx < lookbackTotal )
          startIdx = lookbackTotal;
       if( startIdx > endIdx )
@@ -35934,10 +35972,14 @@ public class Core {
       else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
          return -1;
       lookbackLargest = movingAverageLookback ( optInFastPeriod, optInFastMAType );
+      if (lookbackLargest < 0) return RetCode.BadParam ;
       tempInteger = movingAverageLookback ( optInSlowPeriod, optInSlowMAType );
+      if (tempInteger < 0) return RetCode.BadParam ;
       if( tempInteger > lookbackLargest )
          lookbackLargest = tempInteger;
-      return lookbackLargest + movingAverageLookback ( optInSignalPeriod, optInSignalMAType );
+      tempInteger = movingAverageLookback ( optInSignalPeriod, optInSignalMAType );
+      if (tempInteger < 0) return RetCode.BadParam ;
+      return lookbackLargest + tempInteger;
    }
    public RetCode macdExt( int startIdx,
       int endIdx,
@@ -35988,10 +36030,13 @@ public class Core {
          optInFastMAType = tempMAType;
       }
       lookbackLargest = movingAverageLookback ( optInFastPeriod, optInFastMAType );
+      if (lookbackLargest < 0) return RetCode.BadParam ;
       tempInteger = movingAverageLookback ( optInSlowPeriod, optInSlowMAType );
+      if (tempInteger < 0) return RetCode.BadParam ;
       if( tempInteger > lookbackLargest )
          lookbackLargest = tempInteger;
       lookbackSignal = movingAverageLookback ( optInSignalPeriod, optInSignalMAType );
+      if (lookbackSignal < 0) return RetCode.BadParam ;
       lookbackTotal = lookbackSignal+lookbackLargest;
       if( startIdx < lookbackTotal )
          startIdx = lookbackTotal;
@@ -36107,13 +36152,18 @@ public class Core {
       RetCode retCode2;
       RetCode retCode3;
       double slowMA, fastMA;
+      int tempInteger, tempInteger2;
       if (_state == NULL)
          return RetCode.BadParam ;
       size_t _cur_idx = _state.value .mem_index++;
       if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
       if ( ( _state.value .mem_index == 1) )
       {
-         _state.value .fastMADelay = abs( movingAverageLookback ( _state.value .optInSlowPeriod, _state.value .optInSlowMAType ) - movingAverageLookback ( _state.value .optInFastPeriod, _state.value .optInFastMAType ) );
+         tempInteger = movingAverageLookback ( _state.value .optInSlowPeriod, _state.value .optInSlowMAType );
+         if (tempInteger < 0) return RetCode.BadParam ;
+         tempInteger2 = movingAverageLookback ( _state.value .optInFastPeriod, _state.value .optInFastMAType );
+         if (tempInteger2 < 0) return RetCode.BadParam ;
+         _state.value .fastMADelay = abs( tempInteger - tempInteger2 );
       }
       retCode1 = movingAverage ( _state.value .slowMAState, inReal, &slowMA );
       if( retCode1 != RetCode.Success &&
@@ -36324,10 +36374,13 @@ public class Core {
          optInFastMAType = tempMAType;
       }
       lookbackLargest = movingAverageLookback ( optInFastPeriod, optInFastMAType );
+      if (lookbackLargest < 0) return RetCode.BadParam ;
       tempInteger = movingAverageLookback ( optInSlowPeriod, optInSlowMAType );
+      if (tempInteger < 0) return RetCode.BadParam ;
       if( tempInteger > lookbackLargest )
          lookbackLargest = tempInteger;
       lookbackSignal = movingAverageLookback ( optInSignalPeriod, optInSignalMAType );
+      if (lookbackSignal < 0) return RetCode.BadParam ;
       lookbackTotal = lookbackSignal+lookbackLargest;
       if( startIdx < lookbackTotal )
          startIdx = lookbackTotal;
@@ -36391,12 +36444,14 @@ public class Core {
    /* Generated */
    public int macdFixLookback( int optInSignalPeriod )
    {
+      int tempInteger;
       if( (int)optInSignalPeriod == ( Integer.MIN_VALUE ) )
          optInSignalPeriod = 9;
       else if( ((int)optInSignalPeriod < 1) || ((int)optInSignalPeriod > 100000) )
          return -1;
-      return emaLookback ( 26 )
-         + emaLookback ( optInSignalPeriod );
+      tempInteger = emaLookback ( optInSignalPeriod );
+      if (tempInteger < 0) return RetCode.BadParam ;
+      return emaLookback ( 26 ) + tempInteger;
    }
    public RetCode macdFix( int startIdx,
       int endIdx,
@@ -38571,7 +38626,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       io_res = fwrite(& _state.value .negSumMF,sizeof( _state.value .negSumMF),1,_file);
       if (io_res < 1) return RetCode.IOFailed ;
-      { int io_circbuf_res; struct TA_MFI_STATE_CIRCBUF * str_circbuf = _state.value .mflow; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      { int io_circbuf_res; struct TA_MFI_STATE_CIRCBUF * str_circbuf = _state.value .mflow; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(MoneyFlow),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
       return 0;
    }
    public RetCode mfiStateLoad( struct TA_mfi_State** _state,
@@ -38601,7 +38656,7 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       io_res = fread(& _state.value .value .negSumMF,sizeof( _state.value .value .negSumMF),1,_file);
       if (io_res < 1) return RetCode.IOFailed ;
-      { int io_circbuf_res; int circbuf_idx; int circbuf_size; if ( _state.value .value .mflow != NULL) return RetCode.BadParam ; io_circbuf_res = fread(&circbuf_idx,sizeof(circbuf_idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fread(&circbuf_size,sizeof(circbuf_size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; { _state.value .value .mflow = calloc(1, sizeof(struct TA_MFI_STATE_CIRCBUF )); if ( _state.value .value .mflow == NULL) return RetCode.AllocErr ; struct TA_MFI_STATE_CIRCBUF * buf = (struct TA_MFI_STATE_CIRCBUF *) _state.value .value .mflow; buf->idx = 0; buf->size = circbuf_size; buf->circbuf = calloc(circbuf_size, sizeof(MoneyFlow)); if (!buf->circbuf) return RetCode.AllocErr ;} struct TA_MFI_STATE_CIRCBUF * str_circbuf = _state.value .value .mflow; str_circbuf->idx = circbuf_idx; if (str_circbuf->size > 0) { io_circbuf_res = fread(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      { int io_circbuf_res; int circbuf_idx; int circbuf_size; if ( _state.value .value .mflow != NULL) return RetCode.BadParam ; io_circbuf_res = fread(&circbuf_idx,sizeof(circbuf_idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fread(&circbuf_size,sizeof(circbuf_size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; { _state.value .value .mflow = calloc(1, sizeof(struct TA_MFI_STATE_CIRCBUF )); if ( _state.value .value .mflow == NULL) return RetCode.AllocErr ; struct TA_MFI_STATE_CIRCBUF * buf = (struct TA_MFI_STATE_CIRCBUF *) _state.value .value .mflow; buf->idx = 0; buf->size = circbuf_size; buf->circbuf = calloc(circbuf_size, sizeof(MoneyFlow)); if (!buf->circbuf) return RetCode.AllocErr ;} struct TA_MFI_STATE_CIRCBUF * str_circbuf = _state.value .value .mflow; str_circbuf->idx = circbuf_idx; if (str_circbuf->size > 0) { io_circbuf_res = fread(str_circbuf->circbuf,sizeof(MoneyFlow),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
       return 0;
    }
    public RetCode mfi( int startIdx,
@@ -47254,7 +47309,7 @@ public class Core {
          return RetCode.OutOfRangeEndIndex ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       return TA_INT_SMA ( startIdx, endIdx,
          inReal, optInTimePeriod,
@@ -47805,7 +47860,7 @@ public class Core {
       MAType optInSlowK_MAType, int optInSlowD_Period,
       MAType optInSlowD_MAType )
    {
-      int retValue;
+      int retValue, tempInteger;
       if( (int)optInFastK_Period == ( Integer.MIN_VALUE ) )
          optInFastK_Period = 5;
       else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
@@ -47819,8 +47874,12 @@ public class Core {
       else if( ((int)optInSlowD_Period < 1) || ((int)optInSlowD_Period > 100000) )
          return -1;
       retValue = (optInFastK_Period - 1);
-      retValue += movingAverageLookback ( optInSlowK_Period, optInSlowK_MAType );
-      retValue += movingAverageLookback ( optInSlowD_Period, optInSlowD_MAType );
+      tempInteger = movingAverageLookback ( optInSlowK_Period, optInSlowK_MAType );
+      if (tempInteger < 0) return RetCode.BadParam ;
+      retValue += tempInteger;
+      tempInteger = movingAverageLookback ( optInSlowD_Period, optInSlowD_MAType );
+      if (tempInteger < 0) return RetCode.BadParam ;
+      retValue += tempInteger;
       return retValue;
    }
    public RetCode stoch( int startIdx,
@@ -47860,7 +47919,9 @@ public class Core {
          return RetCode.BadParam ;
       lookbackK = optInFastK_Period-1;
       lookbackKSlow = movingAverageLookback ( optInSlowK_Period, optInSlowK_MAType );
+      if (lookbackKSlow < 0) return RetCode.BadParam ;
       lookbackDSlow = movingAverageLookback ( optInSlowD_Period, optInSlowD_MAType );
+      if (lookbackDSlow < 0) return RetCode.BadParam ;
       lookbackTotal = lookbackK + lookbackDSlow + lookbackKSlow;
       if( startIdx < lookbackTotal )
          startIdx = lookbackTotal;
@@ -48268,7 +48329,9 @@ public class Core {
          return RetCode.BadParam ;
       lookbackK = optInFastK_Period-1;
       lookbackKSlow = movingAverageLookback ( optInSlowK_Period, optInSlowK_MAType );
+      if (lookbackKSlow < 0) return RetCode.BadParam ;
       lookbackDSlow = movingAverageLookback ( optInSlowD_Period, optInSlowD_MAType );
+      if (lookbackDSlow < 0) return RetCode.BadParam ;
       lookbackTotal = lookbackK + lookbackDSlow + lookbackKSlow;
       if( startIdx < lookbackTotal )
          startIdx = lookbackTotal;
@@ -48368,7 +48431,7 @@ public class Core {
       int optInFastD_Period,
       MAType optInFastD_MAType )
    {
-      int retValue;
+      int retValue, tempInteger;
       if( (int)optInFastK_Period == ( Integer.MIN_VALUE ) )
          optInFastK_Period = 5;
       else if( ((int)optInFastK_Period < 1) || ((int)optInFastK_Period > 100000) )
@@ -48378,7 +48441,9 @@ public class Core {
       else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
          return -1;
       retValue = (optInFastK_Period - 1);
-      retValue += movingAverageLookback ( optInFastD_Period, optInFastD_MAType );
+      tempInteger = movingAverageLookback ( optInFastD_Period, optInFastD_MAType );
+      if (tempInteger < 0) return RetCode.BadParam ;
+      retValue += tempInteger;
       return retValue;
    }
    public RetCode stochF( int startIdx,
@@ -48413,6 +48478,7 @@ public class Core {
          return RetCode.BadParam ;
       lookbackK = optInFastK_Period-1;
       lookbackFastD = movingAverageLookback ( optInFastD_Period, optInFastD_MAType );
+      if (lookbackFastD < 0) return RetCode.BadParam ;
       lookbackTotal = lookbackK + lookbackFastD;
       if( startIdx < lookbackTotal )
          startIdx = lookbackTotal;
@@ -48785,6 +48851,7 @@ public class Core {
          return RetCode.BadParam ;
       lookbackK = optInFastK_Period-1;
       lookbackFastD = movingAverageLookback ( optInFastD_Period, optInFastD_MAType );
+      if (lookbackFastD < 0) return RetCode.BadParam ;
       lookbackTotal = lookbackK + lookbackFastD;
       if( startIdx < lookbackTotal )
          startIdx = lookbackTotal;
@@ -48881,7 +48948,7 @@ public class Core {
       int optInFastD_Period,
       MAType optInFastD_MAType )
    {
-      int retValue;
+      int retValue, tempInteger;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 14;
       else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
@@ -48894,8 +48961,11 @@ public class Core {
          optInFastD_Period = 3;
       else if( ((int)optInFastD_Period < 1) || ((int)optInFastD_Period > 100000) )
          return -1;
-      retValue = rsiLookback ( optInTimePeriod ) + stochFLookback ( optInFastK_Period, optInFastD_Period, optInFastD_MAType );
-      return retValue;
+      retValue = rsiLookback ( optInTimePeriod );
+      if (retValue < 0) return RetCode.BadParam ;
+      tempInteger = stochFLookback ( optInFastK_Period, optInFastD_Period, optInFastD_MAType );
+      if (tempInteger < 0) return RetCode.BadParam ;
+      return retValue + tempInteger;
    }
    public RetCode stochRsi( int startIdx,
       int endIdx,
@@ -48933,7 +49003,9 @@ public class Core {
       outBegIdx.value = 0 ;
       outNBElement.value = 0 ;
       lookbackSTOCHF = stochFLookback ( optInFastK_Period, optInFastD_Period, optInFastD_MAType );
+      if (lookbackSTOCHF < 0) return RetCode.BadParam ;
       lookbackTotal = rsiLookback ( optInTimePeriod ) + lookbackSTOCHF;
+      if (lookbackTotal < 0) return RetCode.BadParam ;
       if( startIdx < lookbackTotal )
          startIdx = lookbackTotal;
       if( startIdx > endIdx )
@@ -49183,7 +49255,9 @@ public class Core {
       outBegIdx.value = 0 ;
       outNBElement.value = 0 ;
       lookbackSTOCHF = stochFLookback ( optInFastK_Period, optInFastD_Period, optInFastD_MAType );
+      if (lookbackSTOCHF < 0) return RetCode.BadParam ;
       lookbackTotal = rsiLookback ( optInTimePeriod ) + lookbackSTOCHF;
+      if (lookbackTotal < 0) return RetCode.BadParam ;
       if( startIdx < lookbackTotal )
          startIdx = lookbackTotal;
       if( startIdx > endIdx )
@@ -50067,7 +50141,7 @@ public class Core {
          return RetCode.OutOfRangeEndIndex ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 5;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       if( optInVFactor == (-4e+37) )
          optInVFactor = 7.000000e-1;
@@ -50746,7 +50820,7 @@ public class Core {
          return RetCode.OutOfRangeEndIndex ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       outNBElement.value = 0 ;
       outBegIdx.value = 0 ;
@@ -51360,7 +51434,7 @@ public class Core {
          return RetCode.OutOfRangeEndIndex ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       lookbackTotal = (optInTimePeriod-1);
       if( startIdx < lookbackTotal )
@@ -52580,8 +52654,8 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       io_res = fwrite(& _state.value .gap1,sizeof( _state.value .gap1),1,_file);
       if (io_res < 1) return RetCode.IOFailed ;
-      { int io_circbuf_res; struct TA_ULTOSC_STATE_CIRCBUF * str_circbuf = _state.value .periodA; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
-      { int io_circbuf_res; struct TA_ULTOSC_STATE_CIRCBUF * str_circbuf = _state.value .periodB; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      { int io_circbuf_res; struct TA_ULTOSC_STATE_CIRCBUF * str_circbuf = _state.value .periodA; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(double),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      { int io_circbuf_res; struct TA_ULTOSC_STATE_CIRCBUF * str_circbuf = _state.value .periodB; io_circbuf_res = fwrite(&str_circbuf->idx,sizeof(str_circbuf->idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fwrite(&str_circbuf->size,sizeof(str_circbuf->size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; if (str_circbuf->size > 0) { io_circbuf_res = fwrite(str_circbuf->circbuf,sizeof(double),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
       return 0;
    }
    public RetCode ultOscStateLoad( struct TA_ultOsc_State** _state,
@@ -52627,8 +52701,8 @@ public class Core {
       if (io_res < 1) return RetCode.IOFailed ;
       io_res = fread(& _state.value .value .gap1,sizeof( _state.value .value .gap1),1,_file);
       if (io_res < 1) return RetCode.IOFailed ;
-      { int io_circbuf_res; int circbuf_idx; int circbuf_size; if ( _state.value .value .periodA != NULL) return RetCode.BadParam ; io_circbuf_res = fread(&circbuf_idx,sizeof(circbuf_idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fread(&circbuf_size,sizeof(circbuf_size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; { _state.value .value .periodA = calloc(1, sizeof(struct TA_ULTOSC_STATE_CIRCBUF )); if ( _state.value .value .periodA == NULL) return RetCode.AllocErr ; struct TA_ULTOSC_STATE_CIRCBUF * buf = (struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .value .periodA; buf->idx = 0; buf->size = circbuf_size; buf->circbuf = calloc(circbuf_size, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} struct TA_ULTOSC_STATE_CIRCBUF * str_circbuf = _state.value .value .periodA; str_circbuf->idx = circbuf_idx; if (str_circbuf->size > 0) { io_circbuf_res = fread(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
-      { int io_circbuf_res; int circbuf_idx; int circbuf_size; if ( _state.value .value .periodB != NULL) return RetCode.BadParam ; io_circbuf_res = fread(&circbuf_idx,sizeof(circbuf_idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fread(&circbuf_size,sizeof(circbuf_size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; { _state.value .value .periodB = calloc(1, sizeof(struct TA_ULTOSC_STATE_CIRCBUF )); if ( _state.value .value .periodB == NULL) return RetCode.AllocErr ; struct TA_ULTOSC_STATE_CIRCBUF * buf = (struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .value .periodB; buf->idx = 0; buf->size = circbuf_size; buf->circbuf = calloc(circbuf_size, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} struct TA_ULTOSC_STATE_CIRCBUF * str_circbuf = _state.value .value .periodB; str_circbuf->idx = circbuf_idx; if (str_circbuf->size > 0) { io_circbuf_res = fread(str_circbuf->circbuf,sizeof(str_circbuf->circbuf),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      { int io_circbuf_res; int circbuf_idx; int circbuf_size; if ( _state.value .value .periodA != NULL) return RetCode.BadParam ; io_circbuf_res = fread(&circbuf_idx,sizeof(circbuf_idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fread(&circbuf_size,sizeof(circbuf_size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; { _state.value .value .periodA = calloc(1, sizeof(struct TA_ULTOSC_STATE_CIRCBUF )); if ( _state.value .value .periodA == NULL) return RetCode.AllocErr ; struct TA_ULTOSC_STATE_CIRCBUF * buf = (struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .value .periodA; buf->idx = 0; buf->size = circbuf_size; buf->circbuf = calloc(circbuf_size, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} struct TA_ULTOSC_STATE_CIRCBUF * str_circbuf = _state.value .value .periodA; str_circbuf->idx = circbuf_idx; if (str_circbuf->size > 0) { io_circbuf_res = fread(str_circbuf->circbuf,sizeof(double),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
+      { int io_circbuf_res; int circbuf_idx; int circbuf_size; if ( _state.value .value .periodB != NULL) return RetCode.BadParam ; io_circbuf_res = fread(&circbuf_idx,sizeof(circbuf_idx),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; io_circbuf_res = fread(&circbuf_size,sizeof(circbuf_size),1,_file); if (io_circbuf_res < 0) return RetCode.IOFailed ; { _state.value .value .periodB = calloc(1, sizeof(struct TA_ULTOSC_STATE_CIRCBUF )); if ( _state.value .value .periodB == NULL) return RetCode.AllocErr ; struct TA_ULTOSC_STATE_CIRCBUF * buf = (struct TA_ULTOSC_STATE_CIRCBUF *) _state.value .value .periodB; buf->idx = 0; buf->size = circbuf_size; buf->circbuf = calloc(circbuf_size, sizeof(double)); if (!buf->circbuf) return RetCode.AllocErr ;} struct TA_ULTOSC_STATE_CIRCBUF * str_circbuf = _state.value .value .periodB; str_circbuf->idx = circbuf_idx; if (str_circbuf->size > 0) { io_circbuf_res = fread(str_circbuf->circbuf,sizeof(double),str_circbuf->size,_file); if (io_circbuf_res < str_circbuf->size) return RetCode.IOFailed ; } }
       return 0;
    }
    public RetCode ultOsc( int startIdx,
@@ -53630,6 +53704,319 @@ public class Core {
       return RetCode.Success ;
    }
    /* Generated */
+   public int wlmaLookback( int optInTimePeriod )
+   {
+      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return -1;
+      return optInTimePeriod - 1 + (this.unstablePeriod[FuncUnstId.Wlma.ordinal()]) ;
+   }
+   public RetCode wlma( int startIdx,
+      int endIdx,
+      double inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return TA_INT_WLMA ( startIdx, endIdx, inReal,
+         optInTimePeriod,
+         ((double)1.0 / (double)(optInTimePeriod)) ,
+         outBegIdx, outNBElement, outReal );
+   }
+   public RetCode TA_INT_WLMA( int startIdx,
+      int endIdx,
+      double []inReal,
+      int optInTimePeriod,
+      double optInK_1,
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double []outReal )
+   {
+      double tempReal, prevMA;
+      int i, today, outIdx, lookbackTotal;
+      lookbackTotal = wlmaLookback ( optInTimePeriod );
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      outBegIdx.value = startIdx;
+      if( (this.compatibility) == Compatibility.Default )
+      {
+         today = startIdx-lookbackTotal;
+         i = optInTimePeriod;
+         tempReal = 0.0;
+         while( i-- > 0 )
+            tempReal += inReal[today++];
+         prevMA = tempReal / optInTimePeriod;
+      }
+      else
+      {
+         prevMA = inReal[0];
+         today = 1;
+      }
+      while( today <= startIdx )
+         prevMA = ((inReal[today++]-prevMA)*optInK_1) + prevMA;
+      outReal[0] = prevMA;
+      outIdx = 1;
+      while( today <= endIdx )
+      {
+         prevMA = ((inReal[today++]-prevMA)*optInK_1) + prevMA;
+         outReal[outIdx++] = prevMA;
+      }
+      outNBElement.value = outIdx;
+      return RetCode.Success ;
+   }
+   public RetCode wlmaStateInit( struct TA_wlma_State** _state,
+      int optInTimePeriod )
+   {
+      return TA_INT_WLMA_StateInit(_state, optInTimePeriod, ((double)1.0 / (double)(optInTimePeriod)) );
+   }
+   public int TA_INT_WLMA_StateInit( struct TA_ema_State** _state,
+      int optInTimePeriod,
+      double optInK_1)
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct wlma ));
+      _state.value .value .mem_index = 0;
+      _state.value .value .optInTimePeriod = optInTimePeriod;
+      _state.value .value .optInK_1 = optInK_1;
+      _state.value .value .mem_size = wlmaLookback (optInTimePeriod );
+      _state.value .value .memory = NULL;
+      return RetCode.Success ;
+   }
+   public RetCode wlmaState( struct TA_wlma_State* _state,
+      double inReal,
+      double *outReal )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      size_t _cur_idx = _state.value .mem_index++;
+      if ( _state.value .mem_size > 0) _cur_idx %= _state.value .mem_size ;
+      if ( ( _state.value .mem_index == 1) )
+      {
+         _state.value .prevMA = 0.;
+         _state.value .tempSum = 0.;
+      }
+      if( (this.compatibility) == Compatibility.Default )
+      {
+         if ((int) _state.value .mem_index-1 < _state.value .optInTimePeriod)
+         {
+            _state.value .tempSum += inReal;
+            if ((int) _state.value .mem_index == _state.value .optInTimePeriod)
+            {
+               _state.value .prevMA = _state.value .tempSum / _state.value .optInTimePeriod;
+               if (!( _state.value .mem_size > _state.value .mem_index - 1 ))
+               {
+                  outReal.value = _state.value .prevMA;
+                  return RetCode.Success ;
+               }
+            } else
+               return RetCode.NeedMoreData ;
+         }
+      }
+      else {
+         if ( ( _state.value .mem_index == 1) )
+         {
+            _state.value .prevMA = inReal;
+            return RetCode.NeedMoreData ;
+         }
+      }
+      _state.value .prevMA = ((inReal- _state.value .prevMA) * _state.value .optInK_1 ) + _state.value .prevMA;
+      if ( _state.value .mem_size > _state.value .mem_index - 1 )
+         return RetCode.NeedMoreData ;
+      outReal.value = _state.value .prevMA;
+      return RetCode.Success ;
+   }
+   public RetCode wlmaBatchState( struct TA_wlma_State* _state,
+      int startIdx,
+      int endIdx,
+      double inReal[],
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      double outRealVal;
+      int retValue;
+      int outIdx = 0;
+      outBegIdx.value = startIdx;
+      for (int i = startIdx; i <= endIdx; ++i, outIdx++) {
+         retValue = wlma ( _state, inReal[i], &outRealVal );
+         if ( retValue == RetCode.Success ) {
+            outReal[outIdx] = outRealVal;
+         } else if ( retValue == RetCode.NeedMoreData ) {
+            outReal[outIdx] = NAN;
+         } else {
+            break;
+         }
+      }
+      outNBElement.value = outIdx;
+      return retValue;
+   }
+   public RetCode wlmaStateFree( struct TA_wlma_State** _state )
+   {
+      if (_state == NULL)
+         return RetCode.BadParam ;
+      if ( _state.value != NULL) {
+         if ( _state.value .value .memory != NULL) TA_Free( _state.value .value .memory );
+         TA_Free( _state.value ); _state.value = NULL;}
+      return RetCode.Success ;
+   }
+   public RetCode wlmaStateSave( struct TA_wlma_State* _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null; state_is_null = (_state == NULL);
+      io_res = fwrite(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      io_res = fwrite(& _state.value .mem_index,sizeof( _state.value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .mem_size,sizeof( _state.value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      memory_allocated = _state.value .memory != NULL;
+      io_res = fwrite(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (memory_allocated && _state.value .mem_size > 0) { io_res = fwrite( _state.value .memory,sizeof(struct TA_WLMA_Data), _state.value .mem_size,_file);
+         if (io_res < (int) _state.value .mem_size) return RetCode.IOFailed ; }
+      io_res = fwrite(& _state.value .optInTimePeriod,sizeof( _state.value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .prevMA,sizeof( _state.value .prevMA),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .tempSum,sizeof( _state.value .tempSum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .preprRes,sizeof( _state.value .preprRes),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fwrite(& _state.value .optInK_1,sizeof( _state.value .optInK_1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public RetCode wlmaStateLoad( struct TA_wlma_State** _state,
+      FILE* _file )
+   {
+      int io_res; int state_is_null;
+      io_res = fread(&state_is_null,sizeof(state_is_null),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if (state_is_null) return RetCode.Success ;
+      if ( _state.value != NULL) return RetCode.BadParam ;
+      _state.value = TA_Calloc(1, sizeof(struct wlma ));
+      io_res = fread(& _state.value .value .mem_index,sizeof( _state.value .value .mem_index),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .mem_size,sizeof( _state.value .value .mem_size),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      int memory_allocated;
+      io_res = fread(&memory_allocated,sizeof(memory_allocated),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      if ( _state.value .value .mem_size > 0 && memory_allocated) { _state.value .value .memory = TA_Calloc( _state.value .value .mem_size, sizeof(struct TA_WLMA_Data));
+         io_res = fread( _state.value .value .memory,sizeof(struct TA_WLMA_Data), _state.value .value .mem_size,_file);
+         if (io_res < (int) _state.value .value .mem_size) return RetCode.IOFailed ; }
+      io_res = fread(& _state.value .value .optInTimePeriod,sizeof( _state.value .value .optInTimePeriod),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .prevMA,sizeof( _state.value .value .prevMA),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .tempSum,sizeof( _state.value .value .tempSum),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .preprRes,sizeof( _state.value .value .preprRes),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      io_res = fread(& _state.value .value .optInK_1,sizeof( _state.value .value .optInK_1),1,_file);
+      if (io_res < 1) return RetCode.IOFailed ;
+      return 0;
+   }
+   public RetCode wlma( int startIdx,
+      int endIdx,
+      float inReal[],
+      int optInTimePeriod,
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double outReal[] )
+   {
+      if( startIdx < 0 )
+         return RetCode.OutOfRangeStartIndex ;
+      if( (endIdx < 0) || (endIdx < startIdx))
+         return RetCode.OutOfRangeEndIndex ;
+      if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
+         optInTimePeriod = 30;
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
+         return RetCode.BadParam ;
+      return TA_INT_WLMA ( startIdx, endIdx, inReal,
+         optInTimePeriod,
+         ((double)1.0 / (double)(optInTimePeriod)) ,
+         outBegIdx, outNBElement, outReal );
+   }
+   public RetCode TA_INT_WLMA( int startIdx,
+      int endIdx,
+      float []inReal,
+      int optInTimePeriod,
+      double optInK_1,
+      MInteger outBegIdx,
+      MInteger outNBElement,
+      double []outReal )
+   {
+      double tempReal, prevMA;
+      int i, today, outIdx, lookbackTotal;
+      lookbackTotal = wlmaLookback ( optInTimePeriod );
+      if( startIdx < lookbackTotal )
+         startIdx = lookbackTotal;
+      if( startIdx > endIdx )
+      {
+         outBegIdx.value = 0 ;
+         outNBElement.value = 0 ;
+         return RetCode.Success ;
+      }
+      outBegIdx.value = startIdx;
+      if( (this.compatibility) == Compatibility.Default )
+      {
+         today = startIdx-lookbackTotal;
+         i = optInTimePeriod;
+         tempReal = 0.0;
+         while( i-- > 0 )
+            tempReal += inReal[today++];
+         prevMA = tempReal / optInTimePeriod;
+      }
+      else
+      {
+         prevMA = inReal[0];
+         today = 1;
+      }
+      while( today <= startIdx )
+         prevMA = ((inReal[today++]-prevMA)*optInK_1) + prevMA;
+      outReal[0] = prevMA;
+      outIdx = 1;
+      while( today <= endIdx )
+      {
+         prevMA = ((inReal[today++]-prevMA)*optInK_1) + prevMA;
+         outReal[outIdx++] = prevMA;
+      }
+      outNBElement.value = outIdx;
+      return RetCode.Success ;
+   }
+   /* Generated */
    public int wmaLookback( int optInTimePeriod )
    {
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
@@ -53866,7 +54253,7 @@ public class Core {
          return RetCode.OutOfRangeEndIndex ;
       if( (int)optInTimePeriod == ( Integer.MIN_VALUE ) )
          optInTimePeriod = 30;
-      else if( ((int)optInTimePeriod < 2) || ((int)optInTimePeriod > 100000) )
+      else if( ((int)optInTimePeriod < 1) || ((int)optInTimePeriod > 100000) )
          return RetCode.BadParam ;
       lookbackTotal = optInTimePeriod-1;
       if( startIdx < lookbackTotal )

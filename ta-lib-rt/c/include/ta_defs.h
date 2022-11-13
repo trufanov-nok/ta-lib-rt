@@ -294,7 +294,8 @@ ENUM_BEGIN( MAType )
    ENUM_DEFINE( TA_MAType_TRIMA, Trima ) =5,
    ENUM_DEFINE( TA_MAType_KAMA,  Kama  ) =6,
    ENUM_DEFINE( TA_MAType_MAMA,  Mama  ) =7,
-   ENUM_DEFINE( TA_MAType_T3,    T3    ) =8
+   ENUM_DEFINE( TA_MAType_T3,    T3    ) =8,
+   ENUM_DEFINE( TA_MAType_WLMA,  Wlma  ) =9
 ENUM_END( MAType )
 
 
@@ -325,6 +326,7 @@ ENUM_END( MAType )
 /* Generated */     /* 021 */  ENUM_DEFINE( TA_FUNC_UNST_RSI, Rsi),
 /* Generated */     /* 022 */  ENUM_DEFINE( TA_FUNC_UNST_STOCHRSI, StochRsi),
 /* Generated */     /* 023 */  ENUM_DEFINE( TA_FUNC_UNST_T3, T3),
+/* Generated */     /* 024 */  ENUM_DEFINE( TA_FUNC_UNST_WLMA, Wlma),
 /* Generated */                ENUM_DEFINE( TA_FUNC_UNST_ALL, FuncUnstAll),
 /* Generated */                ENUM_DEFINE( TA_FUNC_UNST_NONE, FuncUnstNone) = -1
 /* Generated */ ENUM_END( FuncUnstId )

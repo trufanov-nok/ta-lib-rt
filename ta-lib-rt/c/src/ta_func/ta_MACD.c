@@ -1281,9 +1281,11 @@ TA_RetCode retCode;
 /* Generated */       optInFastPeriod = 12;
 /* Generated */       k2 = (double)0.15; 
 /* Generated */    }
-/* Generated */    lookbackSignal = LOOKBACK_CALL(EMA)( optInSignalPeriod_2 ); 
-/* Generated */    lookbackTotal =  lookbackSignal;
-/* Generated */    lookbackTotal += LOOKBACK_CALL(EMA)( optInSlowPeriod );
+/* Generated */    lookbackTotal = LOOKBACK_CALL(EMA)( optInSlowPeriod );
+/* Generated */    if (lookbackTotal < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    lookbackSignal = LOOKBACK_CALL(EMA)( optInSignalPeriod_2 );
+/* Generated */    if (lookbackSignal < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+/* Generated */    lookbackTotal += lookbackSignal;
 /* Generated */    if( startIdx < lookbackTotal )
 /* Generated */       startIdx = lookbackTotal;
 /* Generated */    if( startIdx > endIdx )

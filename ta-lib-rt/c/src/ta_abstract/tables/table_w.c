@@ -115,6 +115,52 @@ DEF_FUNCTION( WILLR,                         /* name */
              );
 /* WILLR END */
 
+/* WLMA BEGIN */
+static const TA_InputParameterInfo    *TA_WLMA_Inputs[]    =
+{
+  &TA_DEF_UI_Input_Real,
+  NULL
+};
+
+static const TA_OutputParameterInfo   *TA_WLMA_Outputs[]   =
+{
+  &TA_DEF_UI_Output_Real,
+  NULL
+};
+
+static const TA_OptInputParameterInfo *TA_WLMA_OptInputs[] =
+{ &TA_DEF_UI_TimePeriod_30,
+  NULL
+};
+
+const TA_InputParameterInfo TA_WLMA_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Real, "prevMA", 0 };
+
+const TA_InputParameterInfo TA_WLMA_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "tempSum", 0 };
+
+const TA_InputParameterInfo TA_WLMA_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "preprRes", 0 };
+
+const TA_InputParameterInfo TA_WLMA_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Real, "optInK_1", 0 };
+
+static const TA_InputParameterInfo *TA_WLMA_StructParams[] = {
+    &TA_WLMA_DEF_UI_STRUCT_PARAM_1,
+    &TA_WLMA_DEF_UI_STRUCT_PARAM_2,
+    &TA_WLMA_DEF_UI_STRUCT_PARAM_3,
+    &TA_WLMA_DEF_UI_STRUCT_PARAM_4,
+    NULL };
+
+DEF_FUNCTION( WLMA,                         /* name */
+              TA_GroupId_OverlapStudies,    /* groupId */
+              "Wilders Moving Average",     /* hint */
+              "Wlma",                       /* CamelCase name */
+              TA_FUNC_FLG_OVERLAP|TA_FUNC_FLG_UNST_PER /* flags */
+             );
+/* WLMA END */
+
+
 /* WMA BEGIN */
 static const TA_InputParameterInfo    *TA_WMA_Inputs[]    =
 {
@@ -164,6 +210,7 @@ const TA_FuncDef *TA_DEF_TableW[] =
 {
    ADD_TO_TABLE(WCLPRICE),
    ADD_TO_TABLE(WILLR),
+   ADD_TO_TABLE(WLMA),
    ADD_TO_TABLE(WMA),
    NULL
 };

@@ -516,7 +516,8 @@ static const TA_IntegerDataPair TA_MA_TypeDataPair[] =
    {5,"TRIMA"},
    {6,"KAMA" },
    {7,"MAMA" },
-   {8,"T3"}
+   {8,"T3"},
+   {9,"WLMA"},
    /*{...,"Linear Regression"}*/
 };
 

@@ -153,6 +153,7 @@ SET(ta-lib-rt_CSOURCES
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_CDLDOJISTAR.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_CDLHOMINGPIGEON.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_EMA.c
+        ${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_WLMA.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_COS.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_SAREXT.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_LN.c

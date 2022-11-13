@@ -22641,6 +22641,138 @@ FILE* _file )
 /* Generated */ #endif
 
 /*
+ * TA_WLMA - Wilders Moving Average
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_LIB_API TA_RetCode TA_WLMA( int    startIdx,
+                               int    endIdx,
+                                          const double inReal[],
+                                          int           optInTimePeriod, /* From 1 to 100000 */
+                                          int          *outBegIdx,
+                                          int          *outNBElement,
+                                          double        outReal[] );
+
+TA_LIB_API TA_RetCode TA_S_WLMA( int    startIdx,
+                                 int    endIdx,
+                                            const float  inReal[],
+                                            int           optInTimePeriod, /* From 1 to 100000 */
+                                            int          *outBegIdx,
+                                            int          *outNBElement,
+                                            double        outReal[] );
+
+TA_LIB_API int TA_WLMA_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+struct TA_WLMA_Data {
+                               double       inReal;
+                               };
+struct TA_WLMA_State {
+                     size_t mem_size;
+                     size_t mem_index;
+                     struct TA_WLMA_Data* memory;
+                     double       prevMA;
+                     double       tempSum;
+                     double       preprRes;
+                     double       optInK_1;
+                     int           optInTimePeriod; /* From 1 to 100000 */
+                     };
+
+
+TA_LIB_API TA_RetCode TA_WLMA_StateInit( struct TA_WLMA_State** _state,
+                                                  int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+TA_LIB_API TA_RetCode TA_WLMA_State( struct TA_WLMA_State* _state,
+                                              const double inReal,
+                                              double        *outReal );
+
+TA_LIB_API TA_RetCode TA_WLMA_BatchState( struct TA_WLMA_State* _state,
+                                                   int startIdx,
+                                                   int endIdx,
+                                                   const double inReal[],
+                                                   int          *outBegIdx,
+                                                   int          *outNBElement,
+                                                   double        outReal[] );
+
+TA_LIB_API TA_RetCode TA_WLMA_StateFree( struct TA_WLMA_State** _state );
+
+
+TA_LIB_API TA_RetCode TA_WLMA_StateSave( struct TA_WLMA_State* _state,
+                                                  FILE* _file );
+
+
+TA_LIB_API TA_RetCode TA_WLMA_StateLoad( struct TA_WLMA_State** _state,
+                                                  FILE* _file );
+
+
+/* Generated */ #ifdef TEST_STATE_FUNCS
+/* Generated */ static TA_RetCode TA_WLMA_StateTest( int    startIdx,
+/* Generated */                                      int    endIdx,
+/* Generated */                                      const double inReal[],
+/* Generated */                                      int           optInTimePeriod, /* From 1 to 100000 */
+/* Generated */                                      int          *outBegIdx,
+/* Generated */                                      int          *outNBElement,
+/* Generated */                                      double        outReal[],
+FILE* _file )
+/* Generated */ {
+/* Generated */  TA_RetCode res = TA_WLMA(startIdx, endIdx, inReal, optInTimePeriod, outBegIdx, outNBElement, outReal );
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return ENUM_VALUE(RetCode,TA_SUCCESS,Success); //Din't compare exceptional cases
+/* Generated */  struct TA_WLMA_State* state;
+/* Generated */  res = TA_WLMA_StateInit(&state, optInTimePeriod);
+/* Generated */  if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */  int i, lookback;
+/* Generated */  lookback = TA_WLMA_Lookback(optInTimePeriod);
+/* Generated */  int res_start = 0;
+/* Generated */  i = ( startIdx <= lookback )? lookback: startIdx;
+/* Generated */  if (i <= endIdx) {
+/* Generated */  i -= lookback;
+/* Generated */  #ifdef TEST_WHOLE_DATA_WLMA
+/* Generated */    i = 0;
+/* Generated */  #endif
+/* Generated */  int first_iteration;
+/* Generated */  first_iteration = 1;
+/* Generated */  while (i <= endIdx)
+/* Generated */    {
+/* Generated */     if (_file != NULL && !first_iteration ) {
+/* Generated */      first_iteration = 0;
+/* Generated */      if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */      res = TA_WLMA_StateFree(&state);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */      state = NULL;
+/* Generated */      res = TA_WLMA_StateLoad(&state, _file);
+/* Generated */      if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return res;
+/* Generated */     }
+/* Generated */     double outReal_local;
+/* Generated */     res = TA_WLMA_State(state, inReal[i], &outReal_local);
+/* Generated */     if (_file != NULL) {
+/* Generated */         if (fseek(_file, 0, SEEK_SET) != 0) return ENUM_VALUE(RetCode,TA_IO_FAILED, IOFailed);
+/* Generated */         int io_res;
+/* Generated */         io_res = TA_WLMA_StateSave(state, _file);
+/* Generated */         if (io_res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return io_res;
+/* Generated */     }
+/* Generated */     if (i++ < startIdx) continue;
+/* Generated */     if (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) {
+/* Generated */       if (res == ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData) ) continue;
+/* Generated */          else break; }
+/* Generated */     if(fabs(outReal[res_start] - outReal_local) > 1e-6) {res = ENUM_VALUE(RetCode,TA_INTERNAL_ERROR, InternalError); break;}
+/* Generated */ ++res_start;
+/* Generated */    }
+/* Generated */  }
+/* Generated */  TA_RetCode r = TA_WLMA_StateFree(&state);
+/* Generated */ return (res != ENUM_VALUE(RetCode,TA_SUCCESS,Success))?res:r;
+/* Generated */ }
+/* Generated */ #endif
+
+/*
  * TA_WMA - Weighted Moving Average
  * 
  * Input  = double
@@ -22772,10 +22904,10 @@ FILE* _file )
 /* Generated */ #endif
 
 /* Some TA functions takes a certain amount of input data
- * before stabilizing and outputing meaningful data. This is
+ * before stabilizing and outputting meaningful data. This is
  * a behavior pertaining to the algo of some TA functions and
  * is not particular to the TA-Lib implementation.
- * TA-Lib allows you to automatically strip off these unstabl
+ * TA-Lib allows you to automatically strip off these unstable
  * data from your output and from any internal processing.
  * (See documentation for more info)
  *
@@ -22796,7 +22928,7 @@ TA_RetCode TA_SetUnstablePeriod( TA_FuncUnstId id,
 unsigned int TA_GetUnstablePeriod( TA_FuncUnstId id );
 
 /* You can change slightly the behavior of the TA functions
- * by requesting compatibiliy with some existing software.
+ * by requesting compatibility with some existing software.
  *
  * By default, the behavior is as close as the original 
  * author of the TA functions intend it to be.

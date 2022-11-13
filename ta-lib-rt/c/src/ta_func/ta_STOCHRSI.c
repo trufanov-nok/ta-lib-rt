@@ -124,7 +124,7 @@
 /* Generated */    #if !defined(_MANAGED) && !defined(_JAVA)
 /* Generated */    if( (int)optInFastD_MAType == TA_INTEGER_DEFAULT )
 /* Generated */       optInFastD_MAType = (TA_MAType)0;
-/* Generated */    else if( ((int)optInFastD_MAType < 0) || ((int)optInFastD_MAType > 8) )
+/* Generated */    else if( ((int)optInFastD_MAType < 0) || ((int)optInFastD_MAType > 9) )
 /* Generated */       return -1;
 /* Generated */ 
 /* Generated */    #endif /* !defined(_MANAGED) && !defined(_JAVA)*/
@@ -254,7 +254,7 @@
 /* Generated */    #if !defined(_MANAGED) && !defined(_JAVA)
 /* Generated */    if( (int)optInFastD_MAType == TA_INTEGER_DEFAULT )
 /* Generated */       optInFastD_MAType = (TA_MAType)0;
-/* Generated */    else if( ((int)optInFastD_MAType < 0) || ((int)optInFastD_MAType > 8) )
+/* Generated */    else if( ((int)optInFastD_MAType < 0) || ((int)optInFastD_MAType > 9) )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    #endif /* !defined(_MANAGED) && !defined(_JAVA)*/
@@ -418,7 +418,7 @@ TA_RetCode retCode;
 /* Generated */    #if !defined(_MANAGED) && !defined(_JAVA)
 /* Generated */    if( (int)optInFastD_MAType == TA_INTEGER_DEFAULT )
 /* Generated */       optInFastD_MAType = (TA_MAType)0;
-/* Generated */    else if( ((int)optInFastD_MAType < 0) || ((int)optInFastD_MAType > 8) )
+/* Generated */    else if( ((int)optInFastD_MAType < 0) || ((int)optInFastD_MAType > 9) )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    #endif /* !defined(_MANAGED) && !defined(_JAVA)*/
@@ -847,7 +847,7 @@ TA_RetCode retCode;
 /* Generated */     #if !defined(_MANAGED) && !defined(_JAVA)
 /* Generated */     if( (int)optInFastD_MAType == TA_INTEGER_DEFAULT )
 /* Generated */        optInFastD_MAType = (TA_MAType)0;
-/* Generated */     else if( ((int)optInFastD_MAType < 0) || ((int)optInFastD_MAType > 8) )
+/* Generated */     else if( ((int)optInFastD_MAType < 0) || ((int)optInFastD_MAType > 9) )
 /* Generated */        return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */     #endif 
 /* Generated */     #if !defined(_JAVA)
@@ -860,7 +860,9 @@ TA_RetCode retCode;
 /* Generated */    VALUE_HANDLE_DEREF_TO_ZERO(outBegIdx);
 /* Generated */    VALUE_HANDLE_DEREF_TO_ZERO(outNBElement);
 /* Generated */    lookbackSTOCHF  = LOOKBACK_CALL(STOCHF)( optInFastK_Period, optInFastD_Period, optInFastD_MAType );
+/* Generated */    if (lookbackSTOCHF < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    lookbackTotal   = LOOKBACK_CALL(RSI)( optInTimePeriod ) + lookbackSTOCHF;
+/* Generated */    if (lookbackTotal < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    if( startIdx < lookbackTotal )
 /* Generated */       startIdx = lookbackTotal;
 /* Generated */    if( startIdx > endIdx )

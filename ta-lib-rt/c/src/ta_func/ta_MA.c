@@ -107,7 +107,7 @@
 /* Generated */    #if !defined(_MANAGED) && !defined(_JAVA)
 /* Generated */    if( (int)optInMAType == TA_INTEGER_DEFAULT )
 /* Generated */       optInMAType = (TA_MAType)0;
-/* Generated */    else if( ((int)optInMAType < 0) || ((int)optInMAType > 8) )
+/* Generated */    else if( ((int)optInMAType < 0) || ((int)optInMAType > 9) )
 /* Generated */       return -1;
 /* Generated */ 
 /* Generated */    #endif /* !defined(_MANAGED) && !defined(_JAVA)*/
@@ -155,6 +155,10 @@
 
    case ENUM_CASE(MAType, TA_MAType_T3, T3):
       retValue = LOOKBACK_CALL(T3)( optInTimePeriod, 0.7 );
+      break;
+
+   case ENUM_CASE(MAType, TA_MAType_WLMA, Wlma):
+      retValue = LOOKBACK_CALL(WLMA)( optInTimePeriod );
       break;
 
    default:
@@ -246,7 +250,7 @@
 /* Generated */    #if !defined(_MANAGED) && !defined(_JAVA)
 /* Generated */    if( (int)optInMAType == TA_INTEGER_DEFAULT )
 /* Generated */       optInMAType = (TA_MAType)0;
-/* Generated */    else if( ((int)optInMAType < 0) || ((int)optInMAType > 8) )
+/* Generated */    else if( ((int)optInMAType < 0) || ((int)optInMAType > 9) )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    #endif /* !defined(_MANAGED) && !defined(_JAVA)*/
@@ -330,6 +334,11 @@
                                    outBegIdx, outNBElement, outReal );
       break;
 
+   case ENUM_CASE(MAType, TA_MAType_WLMA, Wlma):
+      retCode = FUNCTION_CALL(WLMA)( startIdx, endIdx, inReal, optInTimePeriod,
+                                     outBegIdx, outNBElement, outReal );
+      break;
+
    default: 
       retCode = ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
       break;
@@ -374,7 +383,7 @@ ENUM_DECLARATION(RetCode) retValue;
 /* Generated */    #if !defined(_MANAGED) && !defined(_JAVA)
 /* Generated */    if( (int)optInMAType == TA_INTEGER_DEFAULT )
 /* Generated */       optInMAType = (TA_MAType)0;
-/* Generated */    else if( ((int)optInMAType < 0) || ((int)optInMAType > 8) )
+/* Generated */    else if( ((int)optInMAType < 0) || ((int)optInMAType > 9) )
 /* Generated */       return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */ 
 /* Generated */    #endif /* !defined(_MANAGED) && !defined(_JAVA)*/
@@ -437,6 +446,10 @@ ENUM_DECLARATION(RetCode) retValue;
 
                 case ENUM_CASE(MAType, TA_MAType_T3, T3):
                    retValue = FUNCTION_CALL_STATE_INIT(T3)( (struct TA_T3_State**) &STATE_P.ta_state, optInTimePeriod, 0.7 );
+                   break;
+
+                case ENUM_CASE(MAType, TA_MAType_WLMA, Wlma):
+                   retValue = FUNCTION_CALL_STATE_INIT(WLMA)( (struct TA_WLMA_State**)  &STATE_P.ta_state, optInTimePeriod );
                    break;
 
                 default:
@@ -537,6 +550,10 @@ case ENUM_CASE(MAType, TA_MAType_MAMA, Mama ):
 
 case ENUM_CASE(MAType, TA_MAType_T3, T3):
    retValue = FUNCTION_CALL_STATE(T3)( (struct TA_T3_State*) STATE.ta_state, inReal, outReal );
+   break;
+
+case ENUM_CASE(MAType, TA_MAType_WLMA, Wlma):
+   retValue = FUNCTION_CALL_STATE(WLMA)( (struct TA_WLMA_State*) STATE.ta_state, inReal, outReal );
    break;
 
 default:
@@ -685,6 +702,10 @@ if( STATE_P.optInTimePeriod != 1 )
         retValue = FUNCTION_CALL_STATE_FREE(T3)( (struct TA_T3_State**) &STATE_P.ta_state);
         break;
 
+    case ENUM_CASE(MAType, TA_MAType_WLMA, Wlma):
+        retValue = FUNCTION_CALL_STATE_FREE(WLMA)( (struct TA_WLMA_State**)  &STATE_P.ta_state);
+        break;
+
     default:
         retValue = ENUM_VALUE(RetCode,TA_BAD_PARAM, BadParam);
     }
@@ -807,6 +828,10 @@ ENUM_DECLARATION(RetCode) retValue;
                         retValue = FUNCTION_CALL_STATE_SAVE(T3)( (struct TA_T3_State*) STATE.ta_state, _file);
                         break;
 
+                    case ENUM_CASE(MAType, TA_MAType_WLMA, WLma):
+                        retValue = FUNCTION_CALL_STATE_SAVE(WLMA)( (struct TA_WLMA_State*) STATE.ta_state, _file);
+                        break;
+
                     default:
                         retValue = ENUM_VALUE(RetCode,TA_BAD_PARAM, BadParam);
                     }
@@ -908,6 +933,10 @@ ENUM_DECLARATION(RetCode) retValue;
                         retValue = FUNCTION_CALL_STATE_LOAD(T3)( (struct TA_T3_State**) &STATE_P.ta_state, _file);
                         break;
 
+                    case ENUM_CASE(MAType, TA_MAType_WLMA, Wlma):
+                        retValue = FUNCTION_CALL_STATE_LOAD(WLMA)( (struct TA_WLMA_State**)  &STATE_P.ta_state, _file);
+                        break;
+
                     default:
                         retValue = ENUM_VALUE(RetCode,TA_BAD_PARAM, BadParam);
                     }
@@ -979,7 +1008,7 @@ ENUM_DECLARATION(RetCode) retValue;
 /* Generated */     #if !defined(_MANAGED) && !defined(_JAVA)
 /* Generated */     if( (int)optInMAType == TA_INTEGER_DEFAULT )
 /* Generated */        optInMAType = (TA_MAType)0;
-/* Generated */     else if( ((int)optInMAType < 0) || ((int)optInMAType > 8) )
+/* Generated */     else if( ((int)optInMAType < 0) || ((int)optInMAType > 9) )
 /* Generated */        return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */     #endif 
 /* Generated */     #if !defined(_JAVA)
@@ -1041,6 +1070,10 @@ ENUM_DECLARATION(RetCode) retValue;
 /* Generated */       retCode = FUNCTION_CALL(T3)( startIdx, endIdx, inReal,
 /* Generated */                                    optInTimePeriod, 0.7,
 /* Generated */                                    outBegIdx, outNBElement, outReal );
+/* Generated */       break;
+/* Generated */    case ENUM_CASE(MAType, TA_MAType_WLMA, Wlma):
+/* Generated */       retCode = FUNCTION_CALL(WLMA)( startIdx, endIdx, inReal, optInTimePeriod,
+/* Generated */                                      outBegIdx, outNBElement, outReal );
 /* Generated */       break;
 /* Generated */    default: 
 /* Generated */       retCode = ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);

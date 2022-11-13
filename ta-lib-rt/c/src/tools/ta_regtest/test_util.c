@@ -567,7 +567,7 @@ static ErrorNumber doRangeTestForOneOutput( RangeTestFunction testFunction,
 
    showFeedback();
 
-   /* Caculate the whole range. This is going
+   /* Calculate the whole range. This is going
     * to be the reference for all subsequent test.
     */
    refBuffer = (TA_Real *)TA_Malloc( MAX_RANGE_SIZE * sizeof( TA_Real ) );
@@ -607,7 +607,7 @@ static ErrorNumber doRangeTestForOneOutput( RangeTestFunction testFunction,
    }
 
    /* When calculating for the whole range, the lookback and the
-    * refOutBeg are supppose to be equal.
+    * refOutBeg are supposed to be equal.
     */
    if( refLookback != refOutBeg )
    {

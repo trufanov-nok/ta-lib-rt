@@ -10980,6 +10980,64 @@
 /* Generated */                       outNBElement, 
 /* Generated */                       params->out[0].data.outReal /*  outReal */ );
 /* Generated */ }
+/* Generated */ TA_RetCode TA_WLMA_FramePP( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_WLMA(/* Generated */              startIdx,
+/* Generated */              endIdx,
+/* Generated */              params->in[0].data.inReal, /* inReal */
+/* Generated */              params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */              outBegIdx, 
+/* Generated */              outNBElement, 
+/* Generated */              params->out[0].data.outReal /*  outReal */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_WLMA_FramePPLB( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_WLMA_Lookback(params->optIn[0].data.optInInteger /* optInTimePeriod*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_WLMA_FramePPSI( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_WLMA_StateInit( (struct TA_WLMA_State**) &params->_state,
+/* Generated */                      params->optIn[0].data.optInInteger /* optInTimePeriod*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_WLMA_FramePPS( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_WLMA_State( *(struct TA_WLMA_State**) &params->_state,
+/* Generated */                      *params->in[0].data.inReal, /* inReal */
+/* Generated */                      params->out[0].data.outReal /*  *outReal */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_WLMA_FramePPSF( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_WLMA_StateFree( (struct TA_WLMA_State**) &params->_state
+ );
+/* Generated */ }
+/* Generated */ unsigned int TA_WLMA_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_WLMA_StateSave( *(struct TA_WLMA_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_WLMA_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_WLMA_StateLoad( (struct TA_WLMA_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_WLMA_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_WLMA_BatchState( *(struct TA_WLMA_State**) &params->_state,
+/* Generated */                      startIdx,
+/* Generated */                      endIdx,
+/* Generated */                      params->in[0].data.inReal, /* inReal */
+/* Generated */                      outBegIdx, 
+/* Generated */                      outNBElement, 
+/* Generated */                      params->out[0].data.outReal /*  outReal */ );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_WMA_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,

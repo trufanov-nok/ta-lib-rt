@@ -116,6 +116,7 @@ SOURCES += \
     ../../../../../src/ta_func/ta_DIV.c \
     ../../../../../src/ta_func/ta_DX.c \
     ../../../../../src/ta_func/ta_EMA.c \
+    ../../../../../src/ta_func/ta_WLMA.c \
     ../../../../../src/ta_func/ta_EXP.c \
     ../../../../../src/ta_func/ta_FLOOR.c \
     ../../../../../src/ta_func/ta_HT_DCPERIOD.c \

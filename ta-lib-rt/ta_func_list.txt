@@ -161,4 +161,5 @@ ULTOSC              Ultimate Oscillator
 VAR                 Variance
 WCLPRICE            Weighted Close Price
 WILLR               Williams' %R
+WLMA                Wilders Moving Average
 WMA                 Weighted Moving Average

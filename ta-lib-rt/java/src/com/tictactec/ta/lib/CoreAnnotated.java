@@ -554,8 +554,8 @@ public RetCode apo(
             @IntegerList(
                     paramName    = "optInMAType",
                     defaultValue = 0,
-                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8 },
-                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3" }
+                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3", "WLMA" }
             )
             MAType optInMAType,
             MInteger     outBegIdx,
@@ -1051,8 +1051,8 @@ public RetCode bbands(
             @IntegerList(
                     paramName    = "optInMAType",
                     defaultValue = 0,
-                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8 },
-                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3" }
+                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3", "WLMA" }
             )
             MAType optInMAType,
             MInteger     outBegIdx,
@@ -5638,8 +5638,8 @@ public RetCode movingAverage(
             @IntegerList(
                     paramName    = "optInMAType",
                     defaultValue = 0,
-                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8 },
-                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3" }
+                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3", "WLMA" }
             )
             MAType optInMAType,
             MInteger     outBegIdx,
@@ -5835,8 +5835,8 @@ public RetCode macdExt(
             @IntegerList(
                     paramName    = "optInFastMAType",
                     defaultValue = 0,
-                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8 },
-                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3" }
+                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3", "WLMA" }
             )
             MAType optInFastMAType,
             @OptInputParameterInfo(
@@ -5866,8 +5866,8 @@ public RetCode macdExt(
             @IntegerList(
                     paramName    = "optInSlowMAType",
                     defaultValue = 0,
-                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8 },
-                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3" }
+                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3", "WLMA" }
             )
             MAType optInSlowMAType,
             @OptInputParameterInfo(
@@ -5897,8 +5897,8 @@ public RetCode macdExt(
             @IntegerList(
                     paramName    = "optInSignalMAType",
                     defaultValue = 0,
-                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8 },
-                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3" }
+                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3", "WLMA" }
             )
             MAType optInSignalMAType,
             MInteger     outBegIdx,
@@ -6177,8 +6177,8 @@ public RetCode movingAverageVariablePeriod(
             @IntegerList(
                     paramName    = "optInMAType",
                     defaultValue = 0,
-                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8 },
-                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3" }
+                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3", "WLMA" }
             )
             MAType optInMAType,
             MInteger     outBegIdx,
@@ -7378,8 +7378,8 @@ public RetCode ppo(
             @IntegerList(
                     paramName    = "optInMAType",
                     defaultValue = 0,
-                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8 },
-                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3" }
+                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3", "WLMA" }
             )
             MAType optInMAType,
             MInteger     outBegIdx,
@@ -8415,8 +8415,8 @@ public RetCode stoch(
             @IntegerList(
                     paramName    = "optInSlowK_MAType",
                     defaultValue = 0,
-                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8 },
-                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3" }
+                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3", "WLMA" }
             )
             MAType optInSlowK_MAType,
             @OptInputParameterInfo(
@@ -8446,8 +8446,8 @@ public RetCode stoch(
             @IntegerList(
                     paramName    = "optInSlowD_MAType",
                     defaultValue = 0,
-                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8 },
-                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3" }
+                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3", "WLMA" }
             )
             MAType optInSlowD_MAType,
             MInteger     outBegIdx,
@@ -8555,8 +8555,8 @@ public RetCode stochF(
             @IntegerList(
                     paramName    = "optInFastD_MAType",
                     defaultValue = 0,
-                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8 },
-                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3" }
+                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3", "WLMA" }
             )
             MAType optInFastD_MAType,
             MInteger     outBegIdx,
@@ -8679,8 +8679,8 @@ public RetCode stochRsi(
             @IntegerList(
                     paramName    = "optInFastD_MAType",
                     defaultValue = 0,
-                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8 },
-                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3" }
+                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3", "WLMA" }
             )
             MAType optInFastD_MAType,
             MInteger     outBegIdx,
@@ -9592,6 +9592,65 @@ public RetCode willR(
         inHigh ,
         inLow ,
         inClose ,
+        optInTimePeriod,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
+public int wlmaLookback(
+        int optInTimePeriod) {
+    return super.wlmaLookback(
+        optInTimePeriod); }
+
+@FuncInfo(
+        name  = "WLMA",
+        group = "Overlap Studies",
+        flags = 150994944,
+        nbInput    = 1,
+        nbOptInput = 1,
+        nbOutput   = 1
+)
+public RetCode wlma(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inReal",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal[],
+            @OptInputParameterInfo(
+                paramName    = "optInTimePeriod",
+                displayName  = "Time Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInTimePeriod",
+                    defaultValue = 30,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInTimePeriod,
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.wlma (
+        startIdx,
+        endIdx,
+        inReal,
         optInTimePeriod,
         outBegIdx,
         outNBElement,
