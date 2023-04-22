@@ -7,6 +7,7 @@
 # This is free and unencumbered software released into the public domain.
 
 set(WIN32 Windows)
+set(CMAKE_CROSSCOMPILING, a)
 set(CMAKE_SYSTEM_NAME Windows)
 set(TOOLCHAIN_PREFIX x86_64-w64-mingw32)
 
