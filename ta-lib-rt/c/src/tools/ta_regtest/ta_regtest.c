@@ -68,7 +68,6 @@
 
 #include "ta_test_priv.h"
 #include "ta_test_func.h"
-#include "ta_utility.h"
 
 /**** External functions declarations. ****/
 /* None */
@@ -110,7 +109,7 @@ int main( int argc, char **argv )
 #ifdef TEST_SAVE_LOAD_STATE
    _tmp_state_file = tmpfile();
    if (_tmp_state_file == NULL)
-   return;
+   return TA_TEST_CANT_OPEN_TEMP_FILE;
 #endif
 
    ErrorNumber retValue;
