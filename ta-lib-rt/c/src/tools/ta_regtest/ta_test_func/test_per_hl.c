@@ -613,6 +613,9 @@ static ErrorNumber do_test( const TA_History *history,
       retCode = TA_INTERNAL_ERROR(135);
    }
 
+   if (retCode != TA_SUCCESS)
+       return TA_REGTEST_RESULT_IS_NOT_SUCCESS;
+
    /* Check that the other input were preserved. */
    errNb = checkDataSame( gBuffer[0].in, history->high, history->nbBars );
    if( errNb != TA_TEST_PASS )

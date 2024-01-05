@@ -399,6 +399,8 @@ static TA_RetCode do_call( const TA_Test *test,
    TA_RetCode retCode;
    TA_Real *dummyBuffer1, *dummyBuffer2;
 
+   *outBegIdx = *outNbElement = 0;
+
    if( test->theFunction != TA_ACCBANDS_TEST )
    {
 	   dummyBuffer1 = NULL;

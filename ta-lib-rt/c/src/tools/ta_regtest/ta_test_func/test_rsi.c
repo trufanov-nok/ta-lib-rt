@@ -296,8 +296,6 @@ static ErrorNumber do_test( const TA_History *history,
    const TA_FuncHandle *funcHandle;
    const TA_FuncInfo *funcInfo;
    TA_ParamHolder *params;
-   
-   retCode = TA_SUCCESS;
 
    /* Set to NAN all the elements of the gBuffers.  */
    clearAllBuffers();
@@ -317,6 +315,8 @@ static ErrorNumber do_test( const TA_History *history,
    case TA_CMO_TEST:
       retCode = TA_SetUnstablePeriod( TA_FUNC_UNST_CMO, test->unstablePeriod );
       break;
+   default:
+      retCode = TA_SUCCESS;
    }
 
    if( retCode != TA_SUCCESS )
@@ -521,8 +521,6 @@ static ErrorNumber do_test_state( const TA_History *history,
    TA_Integer outBegIdx;
    TA_Integer outNbElement;
 
-   retCode = TA_SUCCESS;
-
    /* Set to NAN all the elements of the gBuffers.  */
    clearAllBuffers();
 
@@ -541,6 +539,8 @@ static ErrorNumber do_test_state( const TA_History *history,
    case TA_CMO_TEST:
       retCode = TA_SetUnstablePeriod( TA_FUNC_UNST_CMO, test->unstablePeriod );
       break;
+   default:
+      retCode = TA_SUCCESS;
    }
 
    if( retCode != TA_SUCCESS )

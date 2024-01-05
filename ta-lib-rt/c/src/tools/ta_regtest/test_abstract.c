@@ -618,7 +618,6 @@ static ErrorNumber callAndProfile( const char *funcName, ProfilingType type )
    nbProfiledCallLocal = 0;
    timeInProfiledCallLocal = 0.0;
    worstProfiledCallLocal = 0.0;
-   nbInnerLoop = nbOuterLoop = stepSize = inputSize = 0;
 
    switch( type )
    {
@@ -664,6 +663,8 @@ static ErrorNumber callAndProfile( const char *funcName, ProfilingType type )
 	   stepSize = 100;
 	   inputSize = 100;
 	   break;
+   default:
+       nbInnerLoop = nbOuterLoop = stepSize = inputSize = 0;
    }
 
    retCode = TA_GetFuncHandle( funcName, &handle );

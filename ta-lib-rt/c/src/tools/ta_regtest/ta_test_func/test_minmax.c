@@ -350,6 +350,7 @@ static TA_RetCode rangeTestFunction( TA_Integer    startIdx,
       break;
    default:
       TA_Free( dummyBufferReal );
+      TA_Free( dummyBufferInt );
       return TA_BAD_PARAM;
    }
 

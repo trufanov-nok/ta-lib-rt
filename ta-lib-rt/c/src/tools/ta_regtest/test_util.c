@@ -736,7 +736,10 @@ static ErrorNumber doRangeTestFixSize( RangeTestFunction testFunction,
    outputBufferInt = (TA_Integer *)TA_Malloc( (fixSize+2) * sizeof( TA_Integer ) );
 
    if( !outputBufferInt )
+   {
+      TA_Free( outputBuffer );
       return TA_TESTUTIL_DRT_ALLOC_ERR;
+   }
 
    if( !refBufferInt )
    {

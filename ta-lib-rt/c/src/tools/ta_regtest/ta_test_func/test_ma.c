@@ -648,10 +648,10 @@ static ErrorNumber do_test_ma_state( const TA_History *history,
       /* Will be use as reference */
       TA_MEDPRICE( 0, history->nbBars-1, history->high, history->low,
                    &outBegIdx, &outNbElement, gBuffer[2].in );
-      referenceInput = gBuffer[2].in;
+      // referenceInput = gBuffer[2].in;
    }
-   else
-      referenceInput = history->close;
+   // else
+      // referenceInput = history->close;
 
 
 
