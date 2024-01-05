@@ -577,7 +577,6 @@ static ErrorNumber do_test_state( const TA_History *history,
 
    CLEAR_EXPECTED_VALUE(0);
 
-   retCode = TA_TEST_PASS;
 
    /* Make a simple first call. */
    switch( test->theFunction )

@@ -254,7 +254,7 @@ static TA_RetCode rangeTestFunction( TA_Integer    startIdx,
          intBuffer[varSize+1] = POST_SENTINEL; \
       }
 
-      size = endIdx-startIdx+1; \
+      size = endIdx-startIdx+1;
       ALLOC_INT_BUFFER(size);
       retCode = TA_HT_TRENDMODE( startIdx,
                                  endIdx,
@@ -381,6 +381,7 @@ static ErrorNumber do_test_state( const TA_History *history,
    intBuffer[varSize+1] = POST_SENTINEL; \
 }
 
+       size = test->endIdx - test->startIdx+1;
        ALLOC_INT_BUFFER(size);
        retCode = TA_HT_TRENDMODE_StateTest( test->startIdx,
                                   test->endIdx,

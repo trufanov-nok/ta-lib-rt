@@ -53,11 +53,9 @@
 
 /**** Headers ****/
 #include <stdio.h>
-#include <string.h>
 
 #include "ta_test_priv.h"
 #include "ta_test_func.h"
-#include "ta_utility.h"
 
 /**** External functions declarations. ****/
 /* None */
@@ -202,6 +200,7 @@ static TA_RetCode rangeTestFunction( TA_Integer    startIdx,
                          outNbElement,
                          outputBuffer );
       *lookback = TA_TRIX_Lookback( testParam->test->optInTimePeriod );
+      break;
    default:
       retCode = TA_INTERNAL_ERROR(131);
    } 

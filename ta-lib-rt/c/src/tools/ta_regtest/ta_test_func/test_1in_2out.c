@@ -507,10 +507,10 @@ static ErrorNumber do_test_state( const TA_History *history,
       TA_MEDPRICE( 0, history->nbBars-1, history->high, history->low,
                    &outBegIdx, &outNbElement, gBuffer[2].in );
 
-      referenceInput = gBuffer[2].in;
+      // referenceInput = gBuffer[2].in;
       break;
    default:
-      referenceInput = history->close;
+      // referenceInput = history->close;
    }
 
    /* Make a simple first call. */

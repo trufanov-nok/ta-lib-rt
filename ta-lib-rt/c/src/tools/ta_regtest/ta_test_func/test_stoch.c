@@ -254,8 +254,6 @@ static TA_RetCode rangeTestFunction( TA_Integer   startIdx,
   (void)outputBufferInt;
 
   *isOutputInteger = 0;
-
-  retCode = TA_NOT_SUPPORTED;
   
   testParam = (TA_RangeTestParam *)opaqueData;   
 
@@ -375,6 +373,8 @@ static TA_RetCode rangeTestFunction( TA_Integer   startIdx,
                             testParam->test->optInPeriod_2,
                             (TA_MAType)testParam->test->optInMAType_2 );
       break;
+   default:
+      retCode = TA_NOT_SUPPORTED;
    }
 
    TA_Free( dummyOutput );
@@ -390,8 +390,6 @@ static ErrorNumber do_test( const TA_History *history,
    TA_Integer outBegIdx;
    TA_Integer outNbElement;
    TA_RangeTestParam testParam;
-
-   retCode = TA_NOT_SUPPORTED;
 
    /* Set to NAN all the elements of the gBuffers.  */
    clearAllBuffers();
@@ -460,7 +458,12 @@ static ErrorNumber do_test( const TA_History *history,
                              gBuffer[0].out0, 
                              gBuffer[0].out1 );
       break;
-   }                       
+   default:
+      retCode = TA_NOT_SUPPORTED;
+   }
+
+   if (retCode != TA_SUCCESS)
+       return TA_REGTEST_RESULT_IS_NOT_SUCCESS;
 
    errNb = checkDataSame( gBuffer[0].in, history->high,history->nbBars );
    if( errNb != TA_TEST_PASS )
@@ -806,8 +809,6 @@ static ErrorNumber do_test_state( const TA_History *history,
    TA_Integer outBegIdx;
    TA_Integer outNbElement;
 
-   retCode = TA_TEST_PASS;
-
    /* Set to NAN all the elements of the gBuffers.  */
    clearAllBuffers();
 
@@ -824,13 +825,15 @@ static ErrorNumber do_test_state( const TA_History *history,
    {
    case TA_MAType_EMA:
       retCode = TA_SetUnstablePeriod( TA_FUNC_UNST_EMA, test->unstablePeriod );
-      if( retCode != TA_SUCCESS )
-         return TA_TEST_TFRR_SETUNSTABLE_PERIOD_FAIL;
       break;
    default:
       /* No unstable period for other methods. */
+      retCode = TA_SUCCESS;
       break;
    }
+
+   if( retCode != TA_SUCCESS )
+       return TA_TEST_TFRR_SETUNSTABLE_PERIOD_FAIL;
 
    /* Make a simple first call. */
    switch( test->testId )
