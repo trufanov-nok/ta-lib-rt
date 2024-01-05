@@ -383,7 +383,7 @@ DEFINE_CIRCBUF_STRUCT(CCI, double)
    /* insert local variable here */
 #define TA_CCI_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 int i;
-double lastValue, sum, avg;
+double lastValue, sum, theAverage;
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -414,8 +414,6 @@ double lastValue, sum, avg;
    /* insert state based TA func code here. */
    lastValue = (inHigh+inLow+inClose) / 3.0;
 
-   STATE.theAverage += lastValue;
-
    if (NEED_MORE_DATA)
    {
         CIRCBUF_STRUCT_CURRENT_EL(CCI, circBuf) = lastValue;
@@ -423,18 +421,22 @@ double lastValue, sum, avg;
         return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
    }
 
-   sum = 0;
-   avg = STATE.theAverage / STATE.optInTimePeriod;
-
-   STATE.theAverage -= CIRCBUF_STRUCT_CURRENT_EL(CCI, circBuf);
-
+   /* Calculate the average for the whole period. */
+   theAverage = 0;
    for( i=0; i < CIRCBUF_STRUCT_SIZE(CCI, circBuf); i++ )
-      sum += std_fabs(CIRCBUF_STRUCT_EL(CCI, circBuf, i) - avg);
-   sum += std_fabs(lastValue - avg);
+       theAverage += CIRCBUF_STRUCT_EL(CCI, circBuf, i);
+   theAverage += lastValue;
+   theAverage /= STATE.optInTimePeriod;
+
+
+   sum = 0;
+   for( i=0; i < CIRCBUF_STRUCT_SIZE(CCI, circBuf); i++ )
+      sum += std_fabs(CIRCBUF_STRUCT_EL(CCI, circBuf, i) - theAverage);
+   sum += std_fabs(lastValue - theAverage);
 
    CIRCBUF_STRUCT_CURRENT_EL(CCI, circBuf) = lastValue;
 
-   lastValue -= avg;
+   lastValue -= theAverage;
 
    if( (!TA_IS_ZERO(lastValue)) && (!TA_IS_ZERO(sum)) )
    {
