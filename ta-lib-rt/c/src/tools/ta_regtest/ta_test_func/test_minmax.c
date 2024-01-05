@@ -57,7 +57,6 @@
 
 #include "ta_test_priv.h"
 #include "ta_test_func.h"
-#include "ta_utility.h"
 #include "ta_memory.h"
 
 /**** External functions declarations. ****/
@@ -114,6 +113,8 @@ typedef struct
 /**** Local functions declarations.    ****/
 static ErrorNumber do_test( const TA_History *history,
                             const TA_Test *test );
+static ErrorNumber do_test_state( const TA_History *history,
+                                 const TA_Test *test );
 
 static TA_RetCode referenceMin( TA_Integer    startIdx,
                                 TA_Integer    endIdx,
@@ -274,6 +275,13 @@ ErrorNumber test_func_minmax( TA_History *history )
          printf( "%s Failed Test #%d (Code=%d)\n", __FILE__,
                  i, retValue );
          return retValue;
+      }
+
+      retValue = do_test_state( history, &tableTest[i] );
+      if( retValue != 0 )
+      {
+          printf( "Failed State Test #%d (Code=%d)\n", i, retValue );
+          return retValue;
       }
    }
 
@@ -548,6 +556,97 @@ static ErrorNumber do_test( const TA_History *history,
    return TA_TEST_PASS;
 }
 
+static ErrorNumber do_test_state( const TA_History *history,
+                                 const TA_Test *test )
+{
+    TA_RetCode retCode;
+    TA_Integer outBegIdx;
+    TA_Integer outNbElement;
+
+    /* Set to NAN all the elements of the gBuffers.  */
+    clearAllBuffers();
+
+    /* Build the input. */
+    setInputBuffer( 0, history->open, history->nbBars );
+    setInputBuffer( 1, history->open, history->nbBars );
+
+    CLEAR_EXPECTED_VALUE(0);
+
+    /* Make a simple first call. */
+    if( test->theFunction == TA_MIN_TEST )
+    {
+        retCode = TA_MIN_StateTest(test->startIdx,
+                         test->endIdx,
+                         gBuffer[0].in,
+                         test->optInTimePeriod,
+                         &outBegIdx,
+                         &outNbElement,
+                         gBuffer[0].out0,
+                         _tmp_state_file);
+    }
+    else if( test->theFunction == TA_MAX_TEST )
+    {
+        retCode = TA_MAX_StateTest( test->startIdx,
+                         test->endIdx,
+                         gBuffer[0].in,
+                         test->optInTimePeriod,
+                         &outBegIdx,
+                         &outNbElement,
+                         gBuffer[0].out0,
+                         _tmp_state_file);
+    }
+    else if( test->theFunction == TA_MINMAX_TEST )
+    {
+        retCode = TA_MINMAX_StateTest( test->startIdx,
+                                   test->endIdx,
+                                   gBuffer[0].in,
+                                   test->optInTimePeriod,
+                                   &outBegIdx,
+                                   &outNbElement,
+                                   gBuffer[0].out0,
+                                   gBuffer[0].out1,
+                                   _tmp_state_file);
+    }
+    else if( test->theFunction == TA_MININDEX_TEST )
+    {
+        TA_Integer buf[300];
+        retCode = TA_MININDEX_StateTest( test->startIdx,
+                                      test->endIdx,
+                                      gBuffer[0].in,
+                                      test->optInTimePeriod,
+                                      &outBegIdx,
+                                      &outNbElement,
+                                      buf,
+                                      _tmp_state_file);
+    }
+    else if( test->theFunction == TA_MAXINDEX_TEST )
+    {
+        TA_Integer buf[300];
+        retCode = TA_MAXINDEX_StateTest( test->startIdx,
+                                        test->endIdx,
+                                        gBuffer[0].in,
+                                        test->optInTimePeriod,
+                                        &outBegIdx,
+                                        &outNbElement,
+                                        buf,
+                                        _tmp_state_file);
+    }
+    else if( test->theFunction == TA_MAXINDEX_TEST )
+    {
+        TA_Integer buf[300];
+        TA_Integer buf2[300];
+        retCode = TA_MINMAXINDEX_StateTest( test->startIdx,
+                                        test->endIdx,
+                                        gBuffer[0].in,
+                                        test->optInTimePeriod,
+                                        &outBegIdx,
+                                        &outNbElement,
+                                        buf, buf2,
+                                        _tmp_state_file);
+    }
+
+    return (retCode == TA_SUCCESS) ? TA_TEST_PASS : TA_REGTEST_RESULT_IS_NOT_SUCCESS;
+}
 
 /* These reference functions were the original non-optimized
  * version of TA_MIN and TA_MAX.
