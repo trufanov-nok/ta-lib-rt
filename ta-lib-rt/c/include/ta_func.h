@@ -38,6 +38,7 @@
 #endif
 
 #include <stdio.h> // for Save\Load state funcs
+#include <math.h>  // suppress warnings
 
 /* This header contains the prototype of all the Technical Analysis
  * function provided by TA-LIB.
