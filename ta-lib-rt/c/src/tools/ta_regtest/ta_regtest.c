@@ -262,7 +262,6 @@ static ErrorNumber testTAFunction_ALL( void )
       printf( "done.\n" ); \
       fflush(stdout); \
       }
-   DO_TEST( test_candlestick,   "All Candlesticks" ); //temporary moved first for debugging - truf
 
    DO_TEST( test_func_1in_1out, "MATH,VECTOR,DCPERIOD/PHASE,TRENDLINE/MODE" );   
    DO_TEST( test_func_ma,       "All Moving Averages" );
@@ -285,6 +284,7 @@ static ErrorNumber testTAFunction_ALL( void )
    DO_TEST( test_func_stddev,   "STDDEV,VAR" );
    DO_TEST( test_func_avgdev,   "AVGDEV" );
    DO_TEST( test_func_bbands,   "BBANDS" );
+   DO_TEST( test_candlestick,   "All Candlesticks" );
 
    return TA_TEST_PASS; /* All tests succeeded. */
 }
