@@ -72,7 +72,7 @@ const TA_InputParameterInfo TA_CCI_DEF_UI_STRUCT_PARAM_2 =
                                   { TA_Input_Real, "theAverage", 0 };
 static const TA_InputParameterInfo *TA_CCI_StructParams[] = {
     &TA_CCI_DEF_UI_STRUCT_PARAM_1,
-    &TA_CCI_DEF_UI_STRUCT_PARAM_2,
+    &TA_CCI_DEF_UI_STRUCT_PARAM_2, // TODO: not really used anymore, may be deleted [truf]
     NULL };
 
 DEF_FUNCTION( CCI,                         /* name */
