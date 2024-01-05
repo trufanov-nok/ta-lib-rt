@@ -15,6 +15,7 @@ IF(TA_LIB_RT_VERSION_EXTRA)
 ENDIF(TA_LIB_RT_VERSION_EXTRA)
 
 OPTION(TA_LIB_RT_ENABLE_C "Enable C library" ON)
+OPTION(TA_LIB_RT_BUILD_REGTEST_C "Build regtest tool" OFF)
 OPTION(TA_LIB_RT_ENABLE_GEN_CODE "Enable the gen_code utility (only needed by when adding new functions to the Ta-Lib)" OFF)
 OPTION(TA_LIB_RT_ENABLE_DOTNET "Enable .NET bindings" OFF)
 OPTION(TA_LIB_RT_ENABLE_EXCEL "Enable Excel bindings" OFF)
@@ -80,6 +81,10 @@ CONFIGURE_FILE(${ta-lib-rt_SOURCE_DIR}/c/include/ta_config.h.cmake ${ta-lib-rt_S
 IF(TA_LIB_RT_ENABLE_C)
 	ADD_SUBDIRECTORY(c)
 ENDIF(TA_LIB_RT_ENABLE_C)
+
+IF(TA_LIB_RT_BUILD_REGTEST_C)
+	include(CTest)
+ENDIF(TA_LIB_RT_BUILD_REGTEST_C)
 
 IF(TA_LIB_RT_ENABLE_DOTNET)
 	MESSAGE(SEND_ERROR "Not yet implemented")
