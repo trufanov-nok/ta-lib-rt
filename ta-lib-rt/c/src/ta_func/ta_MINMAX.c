@@ -311,7 +311,6 @@
 
 {
    /* insert local variable here */
-   #define TA_MINMAX_SUPPRESS_MEMORY_ALLOCATION
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -365,6 +364,9 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
+    TA_Real val;
+    int i, j;
+    int find_min, find_max;
   #define TA_MINMAX_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
@@ -395,23 +397,60 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA func code here. */
-if (FIRST_LAUNCH)
-{
-     STATE.min = inReal;
-     STATE.max = inReal;
-} else {
-if(    STATE.min > inReal )
-       STATE.min = inReal;
-if(    STATE.max < inReal )
-       STATE.max = inReal;
-}
 
-if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+    if (FIRST_LAUNCH) {
+        STATE.max = STATE.min = inReal;
+        STATE.maxIdx = STATE.minIdx = _cur_idx;
+    } else if (STATE.min >= inReal) {
+        STATE.min = inReal;
+        STATE.minIdx = _cur_idx;
+    } else if (STATE.max <= inReal) {
+        STATE.max = inReal;
+        STATE.maxIdx = _cur_idx;
+    }
 
-VALUE_HANDLE_DEREF(outMin) =    STATE.min;
-VALUE_HANDLE_DEREF(outMax) =    STATE.max;
+    if (NEED_MORE_DATA) {
+        PUSH_TO_MEM(inReal,inReal);
+        return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+    } else {
 
-return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
+        find_min = STATE.minIdx < STATE.mem_index - MEM_SIZE;
+        find_max = STATE.maxIdx < STATE.mem_index - MEM_SIZE;
+
+        if (find_min || find_max) {
+
+            if (find_min) {
+                STATE.minIdx = STATE.mem_index;
+                STATE.min = inReal;
+            }
+            if (find_max) {
+                STATE.maxIdx = STATE.mem_index;
+                STATE.max = inReal;
+            }
+
+            FOR_ALL_MEM(i) {
+                val = MEM_IDX_NS(inReal, i);
+                if (find_min && STATE.min > val) {
+                    STATE.minIdx = i < _cur_idx ? STATE.mem_index - (_cur_idx - i)
+                                                : STATE.mem_index - _cur_idx - (MEM_SIZE - i);
+                    STATE.min = val;
+                }
+                if (find_max && STATE.max < val) {
+                    STATE.maxIdx = i < _cur_idx ? STATE.mem_index - (_cur_idx - i)
+                                                : STATE.mem_index - _cur_idx - (MEM_SIZE - i);
+                    STATE.max = val;
+                }
+            }
+
+        }
+
+    }
+
+    PUSH_TO_MEM(inReal,inReal);
+    VALUE_HANDLE_DEREF(outMin) = STATE.min;
+    VALUE_HANDLE_DEREF(outMax) = STATE.max;
+
+    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
 
 /**** START GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
@@ -580,7 +619,11 @@ return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */    io_res = fwrite(&STATE.min,sizeof(STATE.min),1,_file);
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.minIdx,sizeof(STATE.minIdx),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */    io_res = fwrite(&STATE.max,sizeof(STATE.max),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fwrite(&STATE.maxIdx,sizeof(STATE.maxIdx),1,_file);
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
@@ -634,7 +677,11 @@ return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */    io_res = fread(&STATE_P.min,sizeof(STATE_P.min),1,_file);
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.minIdx,sizeof(STATE_P.minIdx),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */    io_res = fread(&STATE_P.max,sizeof(STATE_P.max),1,_file);
+/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
+/* Generated */    io_res = fread(&STATE_P.maxIdx,sizeof(STATE_P.maxIdx),1,_file);
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */

@@ -643,6 +643,8 @@ static ErrorNumber do_test_state( const TA_History *history,
                                         &outNbElement,
                                         buf, buf2,
                                         _tmp_state_file);
+    } else {
+        retCode = TA_SUCCESS;
     }
 
     return (retCode == TA_SUCCESS) ? TA_TEST_PASS : TA_REGTEST_RESULT_IS_NOT_SUCCESS;
