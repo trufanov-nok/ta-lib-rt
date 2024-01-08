@@ -787,7 +787,7 @@ double lastValue, sum, theAverage;
 /* Generated */       for( j=0; j < optInTimePeriod; j++ )
 /* Generated */          tempReal2 += std_fabs(circBuffer[j]-theAverage);
 /* Generated */       tempReal = lastValue-theAverage;
-/* Generated */       if( (tempReal != 0.0) && (tempReal2 != 0.0) )
+/* Generated */       if( (!TA_IS_ZERO(tempReal)) && (!TA_IS_ZERO(tempReal2)) )
 /* Generated */       {
 /* Generated */          outReal[outIdx++] = tempReal/(0.015*(tempReal2/optInTimePeriod));
 /* Generated */       }
