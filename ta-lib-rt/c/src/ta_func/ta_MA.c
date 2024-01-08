@@ -709,12 +709,10 @@ if( STATE_P.optInTimePeriod != 1 )
     default:
         retValue = ENUM_VALUE(RetCode,TA_BAD_PARAM, BadParam);
     }
-} else {
-    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
-}
 
-if (retValue != ENUM_VALUE(RetCode,TA_SUCCESS,Success))
-    return retValue;
+    if (retValue != ENUM_VALUE(RetCode,TA_SUCCESS,Success))
+        return retValue;
+}
 
 /**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 

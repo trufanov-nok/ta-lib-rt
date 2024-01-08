@@ -756,7 +756,7 @@ static ErrorNumber do_test_state( const TA_History *history,
 {
    TA_RangeTestParam testParam;
    ErrorNumber errNb;
-   TA_RetCode retCode;
+   TA_RetCode retCode = TA_SUCCESS;
 
    (void)test;
 

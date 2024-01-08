@@ -581,18 +581,16 @@ double tempReal, tempATR;
 /**** END GENCODE SECTION 9 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
-        if( STATE_P.optInTimePeriod <= 1 )
-        {
-           /* No smoothing needed. Just do a TRANGE. */
-           return FUNCTION_CALL_STATE_FREE(TRANGE)( (struct TA_TRANGE_State**) &STATE_P.StateTRANGE);
-        }
 
         TA_RetCode retCode;
 
         retCode = FUNCTION_CALL_STATE_FREE(TRANGE)( (struct TA_TRANGE_State**) &STATE_P.StateTRANGE );
         if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
-        else retCode = FUNCTION_CALL_STATE_FREE(SMA)( (struct TA_SMA_State**) &STATE_P.StateSMA );
-        if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+
+        if( STATE_P.optInTimePeriod > 1 ) {
+            retCode = FUNCTION_CALL_STATE_FREE(SMA)( (struct TA_SMA_State**) &STATE_P.StateSMA );
+            if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
+        }
 
 /**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
