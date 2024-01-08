@@ -372,9 +372,10 @@ int i1;
                  STATE.gapBodyLong = MEM_SIZE - STATE.periodBodyLong;
            }
 
+        i1 = GET_LOCAL_IDX(-1);
+
         if (!(NEED_MORE_DATA))
         {
-
             if( TA_CANDLECOLOR_STATE_IDX(i1) == -1 &&                                                        // 1st: black
                 TA_REALBODY_STATE_IDX(i1) > TA_CANDLEAVERAGE_STATE_IDX( BodyLong, STATE.BodyLongPeriodTotal, i1 ) &&     //      long
                 TA_CANDLECOLOR_STATE_CUR() == 1 &&                                                           // 2nd: white
