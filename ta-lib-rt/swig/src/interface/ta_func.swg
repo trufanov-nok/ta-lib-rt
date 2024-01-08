@@ -8046,6 +8046,7 @@ struct TA_MAX_State {
                     size_t mem_index;
                     struct TA_MAX_Data* memory;
                     double       max;
+                    int          maxIdx;
                     int           optInTimePeriod; /* From 2 to 100000 */
                     };
 
@@ -8111,7 +8112,6 @@ struct TA_MAXINDEX_State {
                          struct TA_MAXINDEX_Data* memory;
                          double       max;
                          int          maxIdx;
-                         int          currentIdx;
                          int           optInTimePeriod; /* From 2 to 100000 */
                          };
 
@@ -8443,6 +8443,7 @@ struct TA_MIN_State {
                     size_t mem_index;
                     struct TA_MIN_Data* memory;
                     double       min;
+                    int          minIdx;
                     int           optInTimePeriod; /* From 2 to 100000 */
                     };
 
@@ -8508,7 +8509,6 @@ struct TA_MININDEX_State {
                          struct TA_MININDEX_Data* memory;
                          double       min;
                          int          minIdx;
-                         int          currentIdx;
                          int           optInTimePeriod; /* From 2 to 100000 */
                          };
 
@@ -8574,7 +8574,9 @@ struct TA_MINMAX_State {
                        size_t mem_index;
                        struct TA_MINMAX_Data* memory;
                        double       min;
+                       int          minIdx;
                        double       max;
+                       int          maxIdx;
                        int           optInTimePeriod; /* From 2 to 100000 */
                        };
 
@@ -8645,7 +8647,6 @@ struct TA_MINMAXINDEX_State {
                             double       max;
                             int          minIdx;
                             int          maxIdx;
-                            int          currentIdx;
                             int           optInTimePeriod; /* From 2 to 100000 */
                             };
 

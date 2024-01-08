@@ -279,7 +279,6 @@
 
 {
    /* insert local variable here */
-   #define TA_MININDEX_SUPPRESS_MEMORY_ALLOCATION
 /**** START GENCODE SECTION 6 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
 /* Generated */ #ifndef TA_FUNC_NO_RANGE_CHECK
@@ -330,6 +329,8 @@
 /**** END GENCODE SECTION 7 - DO NOT DELETE THIS LINE ****/
 {
    /* insert local variable here */
+    TA_Real val;
+    int i, j;
    #define TA_MININDEX_SUPPRESS_EXIT_ON_NOT_ENOUGH_DATA
 /**** START GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 /* Generated */ 
@@ -357,25 +358,52 @@
 /**** END GENCODE SECTION 8 - DO NOT DELETE THIS LINE ****/
 
    /* insert state based TA func code here. */
- if (FIRST_LAUNCH)
-  {
-      STATE.min = inReal;
-      STATE.minIdx = 0;
-      STATE.currentIdx = 0;
-  } else
-        ++    STATE.currentIdx;
 
- if(    STATE.min > inReal )
- {
+    if (FIRST_LAUNCH || STATE.min >= inReal) {
         STATE.min = inReal;
-        STATE.minIdx =    STATE.currentIdx;
- } else
-     if(    STATE.min == inReal )
-            STATE.minIdx =    STATE.currentIdx;
+        STATE.minIdx = STATE.mem_index;
+    }
 
- if (NEED_MORE_DATA) return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+    if (NEED_MORE_DATA) {
+        PUSH_TO_MEM(inReal,inReal);
+        return ENUM_VALUE(RetCode,TA_NEED_MORE_DATA,NeedMoreData);
+    } else {
+        if (STATE.minIdx < STATE.mem_index - MEM_SIZE) { // find new min
 
- VALUE_HANDLE_DEREF(outInteger) =    STATE.minIdx;
+            STATE.minIdx = STATE.mem_index;
+            STATE.min = inReal;
+
+            for (i = _cur_idx; i < MEM_SIZE; i++) {
+                val = MEM_IDX_NS(inReal, i);
+                if (STATE.min > val) {
+                    STATE.minIdx = STATE.mem_index - _cur_idx - (MEM_SIZE - i);
+                    STATE.min = val;
+                }
+            }
+
+            for (i = 0; i < _cur_idx; i++) {
+                val = MEM_IDX_NS(inReal, i);
+                if (STATE.min > val) {
+                    STATE.minIdx = STATE.mem_index - (_cur_idx - i);
+                    STATE.min = val;
+                }
+            }
+
+            // FOR_ALL_MEM(i) {
+            //     val = MEM_IDX_NS(inReal, i);
+            //     if (STATE.min > val) {
+            //         STATE.minIdx = i < _cur_idx ? STATE.mem_index - (_cur_idx - i)
+            //                                     : STATE.mem_index - _cur_idx - (MEM_SIZE - i);
+            //         STATE.min = val;
+            //     }
+            // }
+
+        }
+
+    }
+
+    PUSH_TO_MEM(inReal,inReal);
+    VALUE_HANDLE_DEREF(outInteger) = STATE.minIdx-1;
 
  return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 }
@@ -539,8 +567,6 @@
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */    io_res = fwrite(&STATE.minIdx,sizeof(STATE.minIdx),1,_file);
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
-/* Generated */    io_res = fwrite(&STATE.currentIdx,sizeof(STATE.currentIdx),1,_file);
-/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -594,8 +620,6 @@
 /* Generated */    io_res = fread(&STATE_P.min,sizeof(STATE_P.min),1,_file);
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */    io_res = fread(&STATE_P.minIdx,sizeof(STATE_P.minIdx),1,_file);
-/* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
-/* Generated */    io_res = fread(&STATE_P.currentIdx,sizeof(STATE_P.currentIdx),1,_file);
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<FinancialFunctionGroups version="TA-Lib RT 0.8.1-alpha (Nov 12 2022 18:50:58)">
+<FinancialFunctionGroups version="TA-Lib RT 0.8.1-alpha (Jan  7 2024 21:58:08)">
 	<!-- ACCBANDS -->
 	<FinancialFunctionGroup>
 		<Abbreviation>ACCBANDS</Abbreviation>
@@ -31608,6 +31608,10 @@
 				<Type>Double</Type>
 				<Name>max</Name>
 			</StateField>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>maxIdx</Name>
+			</StateField>
 		</State>
 		<Functions>
 			<Function>
@@ -31882,10 +31886,6 @@
 			<StateField>
 				<Type>Integer</Type>
 				<Name>maxIdx</Name>
-			</StateField>
-			<StateField>
-				<Type>Integer</Type>
-				<Name>currentIdx</Name>
 			</StateField>
 		</State>
 		<Functions>
@@ -33262,6 +33262,10 @@
 				<Type>Double</Type>
 				<Name>min</Name>
 			</StateField>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>minIdx</Name>
+			</StateField>
 		</State>
 		<Functions>
 			<Function>
@@ -33536,10 +33540,6 @@
 			<StateField>
 				<Type>Integer</Type>
 				<Name>minIdx</Name>
-			</StateField>
-			<StateField>
-				<Type>Integer</Type>
-				<Name>currentIdx</Name>
 			</StateField>
 		</State>
 		<Functions>
@@ -33816,8 +33816,16 @@
 				<Name>min</Name>
 			</StateField>
 			<StateField>
+				<Type>Integer</Type>
+				<Name>minIdx</Name>
+			</StateField>
+			<StateField>
 				<Type>Double</Type>
 				<Name>max</Name>
+			</StateField>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>maxIdx</Name>
 			</StateField>
 		</State>
 		<Functions>
@@ -34122,10 +34130,6 @@
 			<StateField>
 				<Type>Integer</Type>
 				<Name>maxIdx</Name>
-			</StateField>
-			<StateField>
-				<Type>Integer</Type>
-				<Name>currentIdx</Name>
 			</StateField>
 		</State>
 		<Functions>
