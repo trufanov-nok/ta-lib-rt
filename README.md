@@ -1,4 +1,5 @@
 # TA-Lib RT
+[![Build Status](https://github.com/trufanov-nok/ta-lib-rt/workflows/CMake%20on%20multiple%20platforms/badge.svg)](https://github.com/trufanov-nok/ta-lib-rt/actions/workflows/cmake-multi-platform.yml)   
 **TA-Lib RT** (**R**eal **T**ime) is a fork of [TA-Lib](http://ta-lib.org) that provides additional API for incremental calculation of indicators without reprocessing whole data. Binary compatibility with original code is possible but isn't provided in this release.
 
 In a nutshell each indicator function ( for example: `int TA_[MYINDICATOR](indexArguments, dataArguments, optArguments, outArguments);` ) got 5 more additional functions. 3 main functions:
