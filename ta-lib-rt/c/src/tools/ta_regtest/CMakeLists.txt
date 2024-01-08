@@ -39,7 +39,13 @@ SET(ta_regtest_CSOURCES
 
 ADD_EXECUTABLE(ta_regtest  ${ta_regtest_CSOURCES})
 add_dependencies(ta_regtest ta-lib-rt)
+
+if (WIN32)
+target_link_libraries(ta_regtest ta-lib-rt_a)
+else()
 target_link_libraries(ta_regtest ta-lib-rt m)
+endif(WIN32)
+
 link_directories(ta_regtest ${ta-lib-rt_BINARY_DIR}/lib)
 
 ADD_TEST(NAME "regtest" COMMAND ta_regtest)
