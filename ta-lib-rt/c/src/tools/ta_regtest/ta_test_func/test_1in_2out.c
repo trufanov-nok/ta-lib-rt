@@ -511,6 +511,7 @@ static ErrorNumber do_test_state( const TA_History *history,
       break;
    default:
       // referenceInput = history->close;
+      break;
    }
 
    /* Make a simple first call. */
